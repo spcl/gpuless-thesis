@@ -3,7 +3,7 @@
 #SBATCH --account="g34"
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=lutobler@student.ethz.ch
-#SBATCH --time=00:45:00
+#SBATCH --time=00:10:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-core=1
 #SBATCH --ntasks-per-node=1
