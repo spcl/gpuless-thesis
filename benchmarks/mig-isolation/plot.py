@@ -8,24 +8,18 @@ with open(fname, 'r') as f:
     lines = f.readlines()
 lines = [x.rstrip() for x in lines]
 
-cols = ['config', 'action', 'bandwidth']
+cols = ['config', 'action', 'rate', 'avg', 'min', 'max']
 data = pd.DataFrame(columns=cols)
 
 for i in range(0, len(lines)):
     vs = lines[i].split(',')
-    vss = [
-            [vs[0], 'copy', float(vs[1])],
-            [vs[0], 'scale', float(vs[2])],
-            [vs[0], 'add', float(vs[3])],
-            [vs[0], 'triad', float(vs[4])],
-            ]
-    # vss = vs[0:1] + list(map(float, vs[1:]))
+    vss = [ [vs[0], vs[1], float(vs[2]), float(vs[3]), float(vs[4]), float(vs[5])] ]
     df = pd.DataFrame(vss, columns=cols)
     data = data.append(df, ignore_index=True)
 
 sns.set(rc={"figure.figsize": (9, 6)})
 sns.set_theme(style='whitegrid')
-ax = sns.barplot(x='bandwidth',
+ax = sns.barplot(x='rate',
                  y='config',
                  hue='action',
                  orient='h',

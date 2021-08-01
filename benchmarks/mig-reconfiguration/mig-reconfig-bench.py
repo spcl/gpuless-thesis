@@ -11,7 +11,7 @@ def cmd_prt(command):
 n_runs = 300
 device = 3
 home = os.environ['HOME']
-out_dir = f'{home}/bench-results'
+out_dir = f'{home}/runs/bench-results'
 date = cmd('date --iso-8601=seconds')
 out_file = f'{out_dir}/mig-reconfig-bench-{date}.out'
 

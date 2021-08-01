@@ -1,5 +1,4 @@
 import os
-import time
 import subprocess
 
 def cmd(command):
@@ -9,43 +8,44 @@ def cmd(command):
 def cmd_prt(command):
     os.system(command)
 
+device = 3
+home = os.environ['HOME']
+out_dir = f'{home}/runs/bench-results'
+date = cmd('date --iso-8601=seconds')
+out_file = f'{out_dir}/mig-isolation-bench-{date}.out'
+out = []
+
+filter_id1 = ' | head -n1 | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
+filter_ids = ' | grep "created GPU instance" | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
+
 def get_gpuid(dev):
     cmd = f'nvidia-smi -L | grep "GPU {dev}:" | sed -rn "s/.*GPU-([a-f0-9-]*).*/\\1/p"'
     p = subprocess.Popen(['bash', '-c', cmd], stdout=subprocess.PIPE)
     output, error = p.communicate()
     return output.decode('ascii').rstrip()
 
+def create_partitions(partitions):
+    i = cmd(f'sudo nvidia-smi mig -i {device} -cgi {partitions} -C {filter_ids}')
+    ids = i.split('\n')
+    for k, v in enumerate(ids):
+        ids[k] = v.rstrip()
+    return ids
+
 def read_stream_output(ident, stream_out):
     lines = stream_out.split('\n')
-    r = {}
+    ls = []
     for l in lines:
         s = l.split()
         if len(s) < 2:
             continue
-        if s[0] is not None and s[0] == 'Copy:':
-            r['copy'] = float(s[1])
-        if s[0] is not None and s[0] == 'Scale:':
-            r['scale'] = float(s[1])
-        if s[0] is not None and s[0] == 'Add:':
-            r['add'] = float(s[1])
-        if s[0] is not None and s[0] == 'Triad:':
-            r['triad'] = float(s[1])
-    return f'{ident},{r["copy"]},{r["scale"]},{r["add"]},{r["triad"]}\n'
-
-# n_runs = 1
-device = 3
-home = os.environ['HOME']
-out_dir = f'{home}/bench-results'
-# out_dir = 'results'
-date = cmd('date --iso-8601=seconds')
-out_file = f'{out_dir}/mig-isolation-bench-{date}.out'
-out = []
-
-filter_id = ' | head -n1 | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
+        if s[0] is not None and s[0] in ['Copy:', 'Scale:', 'Add:', 'Triad:']:
+            print(s)
+            ls.append(f'{ident},{s[0][0:-1]},{s[1]},{s[2]},{s[3]},{s[4]}\n')
+    return ls
 
 # bandwidth no MIG (full GPU)
-r = cmd('CUDA_VISIBLE_DEVICES=3 ./cuda-stream/stream')
-out.append(read_stream_output('full', r))
+r = cmd(f'CUDA_VISIBLE_DEVICES={device} ./cuda-stream/stream')
+out += read_stream_output('full', r)
 print(r)
 
 gpu_uuid = get_gpuid(device)
@@ -55,73 +55,70 @@ print(f'GPU {device}: {gpu_uuid}')
 cmd(f'sudo nvidia-smi -i {device} -mig 1')
 cmd(f'sudo nvidia-smi mig -i {device} -dgi')
 
-###
-### using one partition in isolation
-###
+##
+## using one partition in isolation
+##
 
 # bandwidth 1g, in isolation
-i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 19 -C {filter_id}')
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 19 -C {filter_id1}')
 r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-out.append(read_stream_output('1g isolated', r))
+out += read_stream_output('1g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # bandwidth 2g, in isolation
-i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 14 -C {filter_id}')
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 14 -C {filter_id1}')
 r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-out.append(read_stream_output('2g isolated', r))
+out += read_stream_output('2g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # bandwidth 3g, in isolation
-i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 9 -C {filter_id}')
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 9 -C {filter_id1}')
 r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-out.append(read_stream_output('3g isolated', r))
+out += read_stream_output('3g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # bandwidth 4g, in isolation
-i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 5 -C {filter_id}')
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 5 -C {filter_id1}')
 r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-out.append(read_stream_output('4g isolated', r))
+out += read_stream_output('4g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # bandwidth 7g, in isolation
-i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 0 -C {filter_id}')
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 0 -C {filter_id1}')
 r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-out.append(read_stream_output('7g isolated', r))
+out += read_stream_output('7g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
-###
-### using all partitions at the same time
-###
+##
+## using all partitions at the same time
+##
 
-# bandwidth 1g, other partitions used
-# i = cmd_prt(f'sudo nvidia-smi mig -i {device} -cgi 19,14,5 -C {filter_id}')
-# r = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
-# cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/1/0 ./cuda-stream/stream')
-# cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/1/0 ./cuda-stream/stream')
-# out.append(read_stream_output('1g full', r))
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
+# bandwidth 1g+2g+4g
+ids = create_partitions('19,14,5')
+print(f'ids: {ids}')
+r1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[0]}/0 ./cuda-stream/stream')
+r2 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[1]}/0 ./cuda-stream/stream')
+r4 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[2]}/0 ./cuda-stream/stream')
+out += read_stream_output('1g full', r1)
+out += read_stream_output('2g full', r2)
+out += read_stream_output('4g full', r4)
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
-# # bandwidth 2g, other partitions used
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
-
-# # bandwidth 3g, other partitions used
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
-
-# # bandwidth 4g, other partitions used
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
-
-# # bandwidth 7g, other partitions used
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
-# cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
+# bandwidth 3g+3g+1g
+ids = create_partitions('9,9')
+print(f'ids: {ids}')
+r3_1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[0]}/0 ./cuda-stream/stream')
+r3_2 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[1]}/0 ./cuda-stream/stream')
+out += read_stream_output('3g full', r3_1)
+out += read_stream_output('3g full', r3_2)
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # disable MIG
 cmd_prt(f'sudo nvidia-smi -i {device} -mig 0')
