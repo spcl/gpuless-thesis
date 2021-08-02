@@ -23,17 +23,16 @@ for i in range(0, len(lines)):
             df = pd.DataFrame([[(i-1)//2 + 1, v * 1000, 'destroy']], columns=cols)
             mig_reconfig = mig_reconfig.append(df, ignore_index=True)
 
-
-sns.set(rc={"figure.figsize" : (8.5, 8)})
+sns.set(rc={"figure.figsize": (8.5, 8)})
 sns.set_theme(style='whitegrid')
 ax = sns.barplot(x='time',
-                  y='profile',
-                  hue='action',
-                  orient='h',
-                  capsize=0.15,
-                  ci='sd',
-                  errwidth=1.5,
-                  data=mig_reconfig)
+                 y='profile',
+                 hue='action',
+                 orient='h',
+                 capsize=0.15,
+                 ci='sd',
+                 errwidth=1.5,
+                 data=mig_reconfig)
 ax.set_xlabel('Time [ms]')
 ax.set_ylabel('Profile', rotation='horizontal')
 ax.yaxis.set_label_coords(-0.06, 1.01)

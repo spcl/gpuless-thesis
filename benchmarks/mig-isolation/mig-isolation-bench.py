@@ -45,7 +45,7 @@ def read_stream_output(ident, stream_out):
 
 # bandwidth no MIG (full GPU)
 r = cmd(f'CUDA_VISIBLE_DEVICES={device} ./cuda-stream/stream')
-out += read_stream_output('full', r)
+out += read_stream_output('no partition', r)
 print(r)
 
 gpu_uuid = get_gpuid(device)
@@ -55,9 +55,9 @@ print(f'GPU {device}: {gpu_uuid}')
 cmd(f'sudo nvidia-smi -i {device} -mig 1')
 cmd(f'sudo nvidia-smi mig -i {device} -dgi')
 
-##
-## using one partition in isolation
-##
+#
+# using one partition in isolation
+#
 
 # bandwidth 1g, in isolation
 i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 19 -C {filter_id1}')
@@ -94,29 +94,61 @@ out += read_stream_output('7g isolated', r)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
-##
-## using all partitions at the same time
-##
+#
+# using all partitions at the same time
+#
 
 # bandwidth 1g+2g+4g
 ids = create_partitions('19,14,5')
-print(f'ids: {ids}')
+# print(f'ids: {ids}')
 r1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[0]}/0 ./cuda-stream/stream')
 r2 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[1]}/0 ./cuda-stream/stream')
 r4 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[2]}/0 ./cuda-stream/stream')
-out += read_stream_output('1g full', r1)
-out += read_stream_output('2g full', r2)
-out += read_stream_output('4g full', r4)
+out += read_stream_output('1g concurrent', r1)
+out += read_stream_output('2g concurrent', r2)
+out += read_stream_output('4g concurrent', r4)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
 # bandwidth 3g+3g+1g
 ids = create_partitions('9,9')
-print(f'ids: {ids}')
+# print(f'ids: {ids}')
 r3_1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[0]}/0 ./cuda-stream/stream')
 r3_2 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{ids[1]}/0 ./cuda-stream/stream')
-out += read_stream_output('3g full', r3_1)
-out += read_stream_output('3g full', r3_2)
+out += read_stream_output('3g concurrent', r3_1)
+out += read_stream_output('3g concurrent', r3_2)
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
+
+#
+# bandwidth for compute instances
+#
+
+# bandwidth 1c
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 0 {filter_id1}')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -gi {i} -cci 0')
+r1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 ./cuda-stream/stream')
+out += read_stream_output('1c isolated', r1)
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
+
+# bandwidth 1c+1c+1c+1c+1c+1c+1c
+i = cmd(f'sudo nvidia-smi mig -i {device} -cgi 0 {filter_id1}')
+cmd_prt(f'sudo nvidia-smi mig -i {device} -gi {i} -cci 0,0,0,0,0,0,0')
+r1 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/0 nsys profile ./cuda-stream/stream')
+r2 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/1 ./cuda-stream/stream')
+r3 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/2 ./cuda-stream/stream')
+r4 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/3 ./cuda-stream/stream')
+r5 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/4 ./cuda-stream/stream')
+r6 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/5 ./cuda-stream/stream')
+r7 = cmd(f'CUDA_VISIBLE_DEVICES=MIG-GPU-{gpu_uuid}/{i}/6 ./cuda-stream/stream')
+out += read_stream_output('1c concurrent', r1)
+out += read_stream_output('1c concurrent', r2)
+out += read_stream_output('1c concurrent', r3)
+out += read_stream_output('1c concurrent', r4)
+out += read_stream_output('1c concurrent', r5)
+out += read_stream_output('1c concurrent', r6)
+out += read_stream_output('1c concurrent', r7)
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dci')
 cmd_prt(f'sudo nvidia-smi mig -i {device} -dgi')
 
