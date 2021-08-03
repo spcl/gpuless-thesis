@@ -30,11 +30,12 @@ ax = sns.barplot(x='time',
                  hue='action',
                  orient='h',
                  capsize=0.15,
-                 ci='sd',
+                 ci=95,
                  errwidth=1.5,
                  data=mig_reconfig)
 ax.set_xlabel('Time [ms]')
 ax.set_ylabel('Profile', rotation='horizontal')
 ax.yaxis.set_label_coords(-0.06, 1.01)
 ax.legend(loc='upper right')
+ax.set_title('MIG reconfiguration time for all available configurations\n300 runs, 95% confidence')
 ax.figure.savefig(f'results/{os.path.basename(fname)}.pdf')
