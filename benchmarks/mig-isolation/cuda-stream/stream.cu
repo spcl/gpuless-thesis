@@ -17,7 +17,7 @@
   Further modifications by: Ben Cumming, CSCS; Andreas Herten (JSC/FZJ)
 */
 
-#define NTIMES 2000
+#define NTIMES 1000
 
 #include <string>
 #include <vector>
@@ -189,21 +189,25 @@ int main(int argc, char** argv)
         STREAM_Copy<real><<<dimGrid,dimBlock>>>(d_a, d_c, N);
         cudaThreadSynchronize();
         times[0][k]= mysecond() -  times[0][k];
+        printf("copy,%f\n", times[0][k]);
 
         times[1][k]= mysecond();
         STREAM_Scale<real><<<dimGrid,dimBlock>>>(d_b, d_c, scalar,  N);
         cudaThreadSynchronize();
         times[1][k]= mysecond() -  times[1][k];
+        printf("scale,%f\n", times[1][k]);
 
         times[2][k]= mysecond();
         STREAM_Add<real><<<dimGrid,dimBlock>>>(d_a, d_b, d_c,  N);
         cudaThreadSynchronize();
         times[2][k]= mysecond() -  times[2][k];
+        printf("add,%f\n", times[2][k]);
 
         times[3][k]= mysecond();
         STREAM_Triad<real><<<dimGrid,dimBlock>>>(d_b, d_c, d_a, scalar,  N);
         cudaThreadSynchronize();
         times[3][k]= mysecond() -  times[3][k];
+        printf("triad,%f\n", times[3][k]);
     }
 
     /*  --- SUMMARY --- */
