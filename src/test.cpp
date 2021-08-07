@@ -60,7 +60,7 @@ int main() {
                                    N, 1, 1,
                                    1, 1, 1,
                                    0, 0, args, 0));
-
+    checkCudaErrors(cuCtxSynchronize());
     checkCudaErrors(cuMemcpyDtoH(h_c, d_c, sizeof(float) * N));
 
     assert(h_c[0] == 1);

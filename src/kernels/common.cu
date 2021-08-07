@@ -6,3 +6,8 @@ vadd(const float *a, const float *b, float *c, int n)
         c[i] = a[i] + b[i];
     }
 }
+
+extern "C" __global__ void
+noop()
+{
+}

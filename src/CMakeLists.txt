@@ -19,6 +19,10 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/kernels
     )
 
-add_executable(test test.cc)
+add_executable(test test.cpp)
 target_link_libraries(test CUDA::cuda_driver)
 add_dependencies(test fatbins)
+
+add_executable(bench bench.cpp)
+# target_include_directories(bench PUBLIC CUDAToolkit_INCLUDE_DIRS)
+target_link_libraries(bench CUDA::cudart CUDA::cuda_driver)

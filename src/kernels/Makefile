@@ -4,7 +4,7 @@ CFLAGS=-arch=compute_80 \
 	   -code=compute_80 \
 	   --fatbin \
 	   -odir=$(ODIR)
-FBIN=$(ODIR)/vadd.fatbin
+FBIN=$(ODIR)/common.fatbin
 
 all: fatbin
 fatbin: $(FBIN)
