@@ -6,7 +6,7 @@ find_package(CUDAToolkit)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -Wextra -g")
 
 set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
@@ -23,6 +23,11 @@ add_executable(test test.cpp)
 target_link_libraries(test CUDA::cuda_driver)
 add_dependencies(test fatbins)
 
-add_executable(bench bench.cpp)
-# target_include_directories(bench PUBLIC CUDAToolkit_INCLUDE_DIRS)
-target_link_libraries(bench CUDA::cudart CUDA::cuda_driver)
+add_executable(benchmark-local benchmark-local.cpp)
+target_link_libraries(benchmark-local CUDA::cudart CUDA::cuda_driver)
+
+add_executable(benchmark-tcp benchmark-tcp.cpp)
+target_link_libraries(benchmark-tcp CUDA::cudart CUDA::cuda_driver)
+
+add_executable(server-tcp server-tcp.cpp)
+target_link_libraries(server-tcp CUDA::cudart CUDA::cuda_driver)
