@@ -115,5 +115,5 @@ df_c_concurrent = df_c_concurrent.sort_values('order')
 
 bw_plot('gi-isolation', df_g_isolated, 'MIG GPU instances in isolation (STREAM benchmark)\nNVIDIA A100, n=1000, size=2^27, 95% confidence')
 bw_plot('gi-concurrent', df_g_concurrent, 'MIG GPU instances under concurrent load (STREAM benchmark)\n1g+2g+4g or 3g+3g configuration vs. isolated performance\nNVIDIA A100, n=1000, size=2^27, 95% confidence')
-bw_plot('ci-isolation', df_c_isolated, 'MIG compute instances in isolation (STREAM benchmark)\nComput instances inside 7g GPU instance vs. isolated GPU instances of the same size\nNVIDIA A100, n=1000, size=2^27, 95% confidence')
+bw_plot('ci-isolation', df_c_isolated, 'MIG compute instances in isolation (STREAM benchmark)\nCompute instances inside 7g GPU instance vs. isolated GPU instances of the same size\nNVIDIA A100, n=1000, size=2^27, 95% confidence')
 bw_plot('ci-concurrent', df_c_concurrent, 'MIG compute instances under concurrent load (STREAM benchmark)\n1c+3c+3c configuration vs. compute instances in isolation\nNVIDIA A100, n=1000, size=2^27, 95% confidence')
