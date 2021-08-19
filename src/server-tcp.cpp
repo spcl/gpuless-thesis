@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include <algorithm>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -36,18 +37,18 @@ void handle_allocate(std::vector<uint8_t> &buf, std::vector<uint8_t> &answer) {
         buffer_sizes.push_back(s);
     }
 
-    std::cout << "allocating buffers: ";
-    for (const auto &s : buffer_sizes) {
-        std::cout << s << " ";
-    }
-    std::cout << std::endl;
+    // std::cout << "allocating buffers: ";
+    // for (const auto &s : buffer_sizes) {
+    //     std::cout << s << " ";
+    // }
+    // std::cout << std::endl;
 
     // init cuda
     checkCudaErrors(cuInit(0));
     checkCudaErrors(cuDeviceGet(&cu_device, 0));
-    char name[256];
-    checkCudaErrors(cuDeviceGetName(name, 256, cu_device));
-    std::cout << "Using device: " << name << std::endl;
+    // char name[256];
+    // checkCudaErrors(cuDeviceGetName(name, 256, cu_device));
+    // std::cout << "Using device: " << name << std::endl;
     checkCudaErrors(cuCtxCreate(&cu_context, 0, cu_device));
 
     // cuda malloc
@@ -125,8 +126,8 @@ void handle_execute(std::vector<uint8_t> &buf, std::vector<uint8_t> &answer) {
         }
     }
 
-    printf("launching kernel: %s on grid(%d,%d,%d), block(%d,%d,%d)\n",
-            kernel, dimGrid.x, dimGrid.y, dimGrid.z, dimBlock.x, dimBlock.y, dimBlock.z);
+    // printf("launching kernel: %s on grid(%d,%d,%d), block(%d,%d,%d)\n",
+    //         kernel, dimGrid.x, dimGrid.y, dimGrid.z, dimBlock.x, dimBlock.y, dimBlock.z);
     checkCudaErrors(cuLaunchKernel(cu_function,
                                    dimGrid.x, dimGrid.y, dimGrid.z,
                                    dimBlock.x, dimBlock.y, dimBlock.z,
@@ -166,7 +167,12 @@ void handle_request(int socket_fd) {
     recv(socket_fd, &req_len, sizeof(req_len), 0);
 
     std::vector<uint8_t> buf(req_len);
-    recv(socket_fd, buf.data(), req_len, 0);
+    size_t bytes_read = 0;
+    do {
+        void *dst = buf.data() + bytes_read;
+        size_t read_len = std::min(65536UL, req_len - bytes_read);
+        bytes_read += recv(socket_fd, dst, read_len, 0);
+    } while (bytes_read < req_len);
 
     std::vector<uint8_t> answer;
 
@@ -174,16 +180,16 @@ void handle_request(int socket_fd) {
     uint8_t type = read_value<uint8_t>(&next_object);
 
     if (type == gpuless::REQ_TYPE_ALLOCATE) {
-        std::cout << "allocate request" << std::endl;
+        // std::cout << "allocate request" << std::endl;
         handle_allocate(buf, answer);
     } else if (type == gpuless::REQ_TYPE_DEALLOCATE) {
-        std::cout << "deallocate request" << std::endl;
+        // std::cout << "deallocate request" << std::endl;
         handle_deallocate(answer);
     } else if (type == gpuless::REQ_TYPE_EXECUTE) {
-        std::cout << "execute request" << std::endl;
+        // std::cout << "execute request" << std::endl;
         handle_execute(buf, answer);
     } else {
-        std::cout << "invalid request" << std::endl;
+        // std::cout << "invalid request" << std::endl;
     }
 
     size_t ans_len = answer.size();
@@ -220,8 +226,8 @@ int main() {
     sockaddr remote_addr;
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(s, &remote_addr, &remote_addrlen))) {
-        const char *ip = inet_ntoa(((sockaddr_in *) &remote_addr)->sin_addr);
-        std::cout << "connection from " << ip << std::endl;
+        // const char *ip = inet_ntoa(((sockaddr_in *) &remote_addr)->sin_addr);
+        // std::cout << "connection from " << ip << std::endl;
         handle_request(s_new);
         close(s_new);
     }

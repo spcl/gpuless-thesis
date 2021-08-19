@@ -5,8 +5,6 @@
 
 #include "executor_tcp.hpp"
 
-const int RUNS = 10;
-
 void test_vadd_tcp(char *ip) {
     const int N = 1024;
 
@@ -48,22 +46,29 @@ void test_vadd_tcp(char *ip) {
     std::cout << d << " ms" << std::endl;
 
     float *c_ = (float *) c.data;
-    assert(c_[0] == 1);
-    assert(c_[1] == 3);
-    assert(c_[2] == 5);
-    assert(c_[3] == 7);
-    assert(c_[4] == 9);
+    assert(c_[0] - 1.0 < 1e-6);
+    assert(c_[1] - 3.0 < 1e-6);
+    assert(c_[2] - 5.0 < 1e-6);
+    assert(c_[3] - 7.0 < 1e-6);
+    assert(c_[4] - 9.0 < 1e-6);
 
     // free memory on remote host
     exec.deallocate();
 }
 
-void bench_rtt(char *ip, size_t size) {
-    for (int i = 0; i < RUNS; i++) {
+void bench_rtt(char *ip, size_t size, int n_runs) {
+    for (int i = 0; i < n_runs; i++) {
         gpuless::executor_tcp exec;
-        gpuless::buffer_tcp b(size);
+        gpuless::buffer_tcp b(size * sizeof(float));
         std::vector<gpuless::buffer_tcp*> buffers { &b };
         exec.allocate(ip, 8001, "../kernels/build/common.fatbin", buffers);
+
+        ((float *) b.data)[0] = 0.1;
+        ((float *) b.data)[1] = 0.2;
+        ((float *) b.data)[2] = 0.3;
+        ((float *) b.data)[size-1] = 0.1;
+        ((float *) b.data)[size-2] = 0.2;
+        ((float *) b.data)[size-3] = 0.3;
 
         std::vector<gpuless::kernel_arg> args {
             gpuless::executor_tcp::pointer_argument(buffers[0],
@@ -76,21 +81,29 @@ void bench_rtt(char *ip, size_t size) {
         exec.execute("noop_arg", dim3(1), dim3(1), args);
         auto e = std::chrono::high_resolution_clock::now();
         auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000.0;
-        std::cout << d << " ms" << std::endl;
+        std::cout << d << std::endl;
+
+        assert(((float *) b.data)[0] - 0.1 < 1e-6);
+        assert(((float *) b.data)[1] - 0.2 < 1e-6);
+        assert(((float *) b.data)[2] - 0.3 < 1e-6);
+        assert(((float *) b.data)[size-1] - 0.1 < 1e-6);
+        assert(((float *) b.data)[size-2] - 0.2 < 1e-6);
+        assert(((float *) b.data)[size-3] - 0.3 < 1e-6);
 
         exec.deallocate();
     }
 }
 
 int main(int argc, char **argv) {
-    if (argc != 3) {
+    if (argc != 4) {
         std::cout << "wrong number of arguments" << std::endl;
         return 1;
     }
 
-    size_t size = atol(argv[1]);
-    char *ip = argv[2];
-    bench_rtt(ip, size);
+    int n_runs = atoi(argv[1]);
+    size_t size = atol(argv[2]);
+    char *ip = argv[3];
+    bench_rtt(ip, size, n_runs);
 
     // test_vadd_tcp();
 
