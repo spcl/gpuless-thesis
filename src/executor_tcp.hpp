@@ -108,7 +108,6 @@ private:
     bool load_cuda_bin(const char *fname) {
         std::ifstream input(fname, std::ios::binary);
         this->cuda_bin = std::vector<uint8_t>(std::istreambuf_iterator<char>(input), {});
-        std::cout << "CUDA binary size: " << this->cuda_bin.size() << std::endl; // dbg
         return true;
     }
 
@@ -134,10 +133,15 @@ private:
         // read answer length
         size_t ans_len;
         recv(sock, &ans_len, sizeof(len), 0);
-        output.resize(ans_len);
 
         // read answer data
-        recv(sock, output.data(), ans_len, 0);
+        output.resize(ans_len);
+        size_t bytes_read = 0;
+        do {
+            void *dst = output.data() + bytes_read;
+            size_t read_len = std::min(65536UL, ans_len - bytes_read);
+            bytes_read += recv(sock, dst, read_len, 0);
+        } while (bytes_read < ans_len);
 
         close(sock);
         return true;
