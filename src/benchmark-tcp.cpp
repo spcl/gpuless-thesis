@@ -7,7 +7,7 @@
 
 const int RUNS = 10;
 
-void test_vadd_tcp() {
+void test_vadd_tcp(char *ip) {
     const int N = 1024;
 
     gpuless::executor_tcp exec;
@@ -20,7 +20,7 @@ void test_vadd_tcp() {
     };
 
     // allocate memory on remote host
-    exec.allocate("127.0.0.1", 8001, "../kernels/build/common.fatbin", buffers);
+    exec.allocate(ip, 8001, "../kernels/build/common.fatbin", buffers);
 
     for (int i = 0; i < N; i++) {
         ((float *) a.data)[i] = i;
@@ -58,13 +58,12 @@ void test_vadd_tcp() {
     exec.deallocate();
 }
 
-void bench_rtt(size_t size) {
-    // const int mb = 1048576 * 2;
+void bench_rtt(char *ip, size_t size) {
     for (int i = 0; i < RUNS; i++) {
         gpuless::executor_tcp exec;
         gpuless::buffer_tcp b(size);
         std::vector<gpuless::buffer_tcp*> buffers { &b };
-        exec.allocate("127.0.0.1", 8001, "../kernels/build/common.fatbin", buffers);
+        exec.allocate(ip, 8001, "../kernels/build/common.fatbin", buffers);
 
         std::vector<gpuless::kernel_arg> args {
             gpuless::executor_tcp::pointer_argument(buffers[0],
@@ -84,9 +83,14 @@ void bench_rtt(size_t size) {
 }
 
 int main(int argc, char **argv) {
-    (void) argc;
+    if (argc != 3) {
+        std::cout << "wrong number of arguments" << std::endl;
+        return 1;
+    }
+
     size_t size = atol(argv[1]);
-    bench_rtt(size);
+    char *ip = argv[2];
+    bench_rtt(ip, size);
 
     // test_vadd_tcp();
 
