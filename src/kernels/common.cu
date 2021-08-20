@@ -8,7 +8,7 @@ vadd(const float *a, const float *b, float *c, int n)
 }
 
 extern "C" __global__ void
-noop_arg(const float *b)
+noop_arg(float *b)
 {
 }
 

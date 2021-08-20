@@ -33,5 +33,7 @@ n_runs=$1
 ip=$2
 
 for s in "${sizes[@]}"; do
-    ./benchmark-tcp ${n_runs} ${s} ${ip} > ../bench-tcp-rtt-${n_runs}-${s}-ms.log
+    # ./benchmark-tcp ${n_runs} ${s} ${ip} > ../bench-tcp-rtt-${n_runs}-${s}-ms.log
+    # ./benchmark-tcp ${n_runs} ${s} ${ip} > ../bench-local-rtt-${n_runs}-${s}-ms.log
+    ./benchmark-local ${n_runs} ${s} > ../bench-no-net-rtt-${n_runs}-${s}-ms.log
 done

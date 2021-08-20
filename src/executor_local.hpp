@@ -21,8 +21,14 @@ public:
 
     buffer_local(size_t size, bool copy_to_device, bool copy_to_host)
         : size(size), copy_to_device(copy_to_device), copy_to_host(copy_to_host) {
-        this->host = malloc(this->size);
-        checkCudaErrors(cuMemAlloc(&this->device, this->size));
+        this->host = malloc(size);
+        checkCudaErrors(cuMemAlloc(&this->device, size));
+    }
+
+    ~buffer_local() {
+        if (host) {
+            free(host);
+        }
     }
 };
 
@@ -30,9 +36,10 @@ class executor_local {
 private:
     CUdevice device;
     CUcontext context;
-    CUmodule module;
+    CUmodule cu_module;
 
-    std::vector<buffer_local> buffers;
+    const char *cuda_bin_fname = nullptr;
+    std::vector<buffer_local*> buffers;
 
 public:
     executor_local() {};
@@ -40,27 +47,30 @@ public:
         cuCtxDestroy(this->context);
     };
 
+
     bool allocate(const char *fname) {
         checkCudaErrors(cuInit(0));
         checkCudaErrors(cuDeviceGet(&this->device, 0));
         checkCudaErrors(cuCtxCreate(&this->context, 0, device));
-        checkCudaErrors(cuModuleLoad(&this->module, fname));
+        this->cuda_bin_fname = fname;
         return true;
     }
 
-    bool register_buffer(buffer_local buffer) {
+    bool register_buffer(buffer_local *buffer) {
         this->buffers.push_back(buffer);
         return true;
     }
 
     template<typename... Ts>
-    bool execute(const char *kernel, dim3 dimGrid, dim3 dimBlock, Ts... args) {
+    bool execute(const char *kernel, dim3 dimGrid, dim3 dimBlock, Ts&... args) {
+        checkCudaErrors(cuModuleLoad(&this->cu_module, this->cuda_bin_fname));
+
         CUfunction function;
-        checkCudaErrors(cuModuleGetFunction(&function, this->module, kernel));
+        checkCudaErrors(cuModuleGetFunction(&function, this->cu_module, kernel));
 
         for (auto& b : buffers) {
-            if (b.copy_to_device) {
-                cuMemcpyHtoD(b.device, b.host, b.size);
+            if (b->copy_to_device) {
+                cuMemcpyHtoD(b->device, b->host, b->size);
             }
         }
 
@@ -73,8 +83,8 @@ public:
         checkCudaErrors(cuCtxSynchronize());
 
         for (auto& b : buffers) {
-            if (b.copy_to_host) {
-                cuMemcpyDtoH(b.host, b.device, b.size);
+            if (b->copy_to_host) {
+                cuMemcpyDtoH(b->host, b->device, b->size);
             }
         }
 
