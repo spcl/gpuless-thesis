@@ -52,11 +52,11 @@ ax = sns.lineplot(x="input_size", y="time", hue="method", data=data)
 
 trs = ax.get_xaxis_transform()
 ax.axvline(x=2**20, color='green', linestyle='--') # 1 MB
-ax.text(2**20 + 2**24, 0.6, '1 MiB', transform=trs, color='green')
+ax.text(2**20 + 2**24, 0.73, '1 MiB', transform=trs, color='green')
 ax.axvline(x=2**20*256, color='green', linestyle='--') # 256 MB
-ax.text(2**20*256 + 2**24, 0.6, '256 MiB', transform=trs, color='green')
+ax.text(2**20*256 + 2**24, 0.73, '256 MiB', transform=trs, color='green')
 ax.axvline(x=2**30, color='green', linestyle='--') # 1 GB
-ax.text(2**30 + 2**24, 0.6, '1 GiB', transform=trs, color='green')
+ax.text(2**30 + 2**24, 0.73, '1 GiB', transform=trs, color='green')
 
 ax.set_xlabel('Data transfer size [bytes]')
 ax.set_ylabel('RTT [ms]', rotation='horizontal')
