@@ -1,20 +1,22 @@
 #ifndef __UTILS_HPP__
 #define __UTILS_HPP__
 
+#include <sstream>
+#include <iostream>
+
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 #include <cuda.h>
 
-namespace gpuless {
+#include "manager/manager.hpp"
 
 #define checkCudaErrors(err) __checkCudaErrors(err, __FILE__, __LINE__)
-void __checkCudaErrors(CUresult r, const char *file, const int line) {
-    if (r != CUDA_SUCCESS) {
-        const char *msg;
-        cuGetErrorName(r, &msg);
-        std::cout << "cuda error in " << file << "(" << line << "):"
-            << std::endl << msg << std::endl;
-    }
-}
+void __checkCudaErrors(CUresult r, const char *file, const int line);
 
-} // namespace gpuless
+std::vector<uint8_t> recv_buffer(int socket_fd);
+void send_buffer(int socket_fd, const uint8_t *buf, size_t len);
 
 #endif // __UTILS_HPP__

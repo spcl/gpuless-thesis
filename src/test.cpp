@@ -63,11 +63,11 @@ int main() {
     checkCudaErrors(cuCtxSynchronize());
     checkCudaErrors(cuMemcpyDtoH(h_c, d_c, sizeof(float) * N));
 
-    assert(h_c[0] == 1);
-    assert(h_c[1] == 3);
-    assert(h_c[2] == 5);
-    assert(h_c[3] == 7);
-    assert(h_c[4] == 9);
+    assert(abs(h_c[0] - 1.0) < 1e-6);
+    assert(abs(h_c[1] - 3.0) < 1e-6);
+    assert(abs(h_c[2] - 5.0) < 1e-6);
+    assert(abs(h_c[3] - 7.0) < 1e-6);
+    assert(abs(h_c[4] - 9.0) < 1e-6);
 
     checkCudaErrors(cuMemFree(d_a));
     checkCudaErrors(cuMemFree(d_b));

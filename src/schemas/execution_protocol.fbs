@@ -1,0 +1,47 @@
+namespace gpuless.execution;
+
+enum Status : byte {
+    OK,
+    FAILURE
+}
+
+table KernelArgument {
+    id:string;
+    flags:int32;
+    buffer:[uint8];
+}
+
+struct Dim3 {
+    x:uint64;
+    y:uint64;
+    z:uint64;
+}
+
+table ExecutionRequest {
+    kernel:string;
+    cuda_bin:[uint8];
+    arguments:[KernelArgument];
+    dim_grid:Dim3;
+    dim_block:Dim3;
+}
+
+table ReturnBuffer {
+    id:string;
+    buffer:[uint8];
+}
+
+table ExecutionAnswer {
+    status:Status;
+    return_buffers:[ReturnBuffer];
+}
+
+union Message {
+    ExecutionRequest,
+    ExecutionAnswer
+}
+
+table ProtocolMessage {
+    message: Message;
+}
+
+root_type ProtocolMessage;

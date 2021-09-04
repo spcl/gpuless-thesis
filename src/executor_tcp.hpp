@@ -168,7 +168,6 @@ public:
         };
     }
 
-
     bool allocate(const char *ip,
                   const short port,
                   const char *cuda_bin_fname,
