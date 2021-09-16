@@ -1,3 +1,5 @@
+include "cudevice_attributes.fbs";
+
 namespace gpuless.execution;
 
 enum Status : byte {
@@ -35,9 +37,24 @@ table ExecutionAnswer {
     return_buffers:[ReturnBuffer];
 }
 
+table CUdeviceAttributeValue {
+    attribute:CUdeviceAttribute;
+    value:int32;
+}
+
+table AttributesAnswer {
+    status:Status;
+    attributes:[CUdeviceAttributeValue];
+}
+
+table AttributesRequest {
+}
+
 union Message {
     ExecutionRequest,
-    ExecutionAnswer
+    ExecutionAnswer,
+    AttributesRequest,
+    AttributesAnswer
 }
 
 table ProtocolMessage {

@@ -20,20 +20,41 @@ extern const bool DEBUG;
 CUdevice cu_device;
 CUcontext cu_context;
 
-void handle_request(int socket_fd) {
-    using namespace gpuless::execution;
-    flatbuffers::FlatBufferBuilder builder;
+using namespace gpuless::execution;
 
-    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
-    auto execution_request_msg = GetProtocolMessage(buffer.data());
-    auto fb_args = execution_request_msg->message_as_ExecutionRequest()->arguments();
-    auto cuda_bin = execution_request_msg->message_as_ExecutionRequest()->cuda_bin()->data();
-    auto kernel = execution_request_msg->message_as_ExecutionRequest()->kernel()->data();
-    auto dim_grid = execution_request_msg->message_as_ExecutionRequest()->dim_grid();
-    auto dim_block = execution_request_msg->message_as_ExecutionRequest()->dim_block();
+void handle_attribute_request(int socket_fd, const gpuless::execution::ProtocolMessage *msg) {
+    (void) msg;
+    flatbuffers::FlatBufferBuilder builder;
+    std::vector<flatbuffers::Offset<CUdeviceAttributeValue>> attribute_values;
+
+    for (int i = 1; i < CUdevice_attribute::CU_DEVICE_ATTRIBUTE_MAX; i++) {
+        int32_t result;
+        checkCudaErrors(cuDeviceGetAttribute(&result, static_cast<CUdevice_attribute>(i), cu_device));
+        auto av = CreateCUdeviceAttributeValue(builder, static_cast<CUdeviceAttribute>(i), result);
+        attribute_values.push_back(av);
+    }
+
+    auto attributes_answer_msg = CreateProtocolMessage(
+        builder,
+        Message_AttributesAnswer,
+        CreateAttributesAnswer(builder, Status_OK, builder.CreateVector(attribute_values)).Union());
+    builder.Finish(attributes_answer_msg);
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+}
+
+void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMessage *msg) {
+    flatbuffers::FlatBufferBuilder builder;
+    auto fb_args = msg->message_as_ExecutionRequest()->arguments();
+    auto cuda_bin = msg->message_as_ExecutionRequest()->cuda_bin()->data();
+    auto kernel = msg->message_as_ExecutionRequest()->kernel()->data();
+    auto dim_grid = msg->message_as_ExecutionRequest()->dim_grid();
+    auto dim_block = msg->message_as_ExecutionRequest()->dim_block();
 
     if (DEBUG) {
         printf("executing \"%s\"\n", kernel);
+        printf("grid(%ld,%ld,%ld), block(%ld,%ld,%ld)\n", dim_grid->x(),
+               dim_grid->y(), dim_grid->z(), dim_block->x(), dim_block->y(),
+               dim_block->z());
     }
 
     std::vector<CUdeviceptr> cu_device_buffers(fb_args->size());
@@ -102,12 +123,28 @@ void handle_request(int socket_fd) {
         CreateExecutionAnswer(builder, Status_OK, builder.CreateVector(return_buffers)).Union());
     builder.Finish(execution_answer_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+
+    if (DEBUG) {
+        printf("finished executing \"%s\"\n", kernel);
+    }
+}
+
+void handle_request(int socket_fd) {
+    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
+    auto msg = GetProtocolMessage(buffer.data());
+    if (msg->message_type() == Message_ExecutionRequest) {
+        handle_execute_request(socket_fd, msg);
+    } else if (msg->message_type() == Message_AttributesRequest) {
+        handle_attribute_request(socket_fd, msg);
+    } else {
+        std::cerr << "invalid request" << std::endl;
+    }
 }
 
 void manage_device(int device, uint16_t port) {
     // initialize gpu device
     checkCudaErrors(cuInit(device));
-    checkCudaErrors(cuDeviceGet(&cu_device, 0));
+    checkCudaErrors(cuDeviceGet(&cu_device, device));
     char name[256];
     checkCudaErrors(cuDeviceGetName(name, 256, cu_device));
     std::cout << "initialized device: " << name << std::endl;

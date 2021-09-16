@@ -6,6 +6,8 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+#include "cudevice_attributes_generated.h"
+
 namespace gpuless {
 namespace execution {
 
@@ -22,6 +24,15 @@ struct ReturnBufferBuilder;
 
 struct ExecutionAnswer;
 struct ExecutionAnswerBuilder;
+
+struct CUdeviceAttributeValue;
+struct CUdeviceAttributeValueBuilder;
+
+struct AttributesAnswer;
+struct AttributesAnswerBuilder;
+
+struct AttributesRequest;
+struct AttributesRequestBuilder;
 
 struct ProtocolMessage;
 struct ProtocolMessageBuilder;
@@ -60,31 +71,37 @@ enum Message : uint8_t {
   Message_NONE = 0,
   Message_ExecutionRequest = 1,
   Message_ExecutionAnswer = 2,
+  Message_AttributesRequest = 3,
+  Message_AttributesAnswer = 4,
   Message_MIN = Message_NONE,
-  Message_MAX = Message_ExecutionAnswer
+  Message_MAX = Message_AttributesAnswer
 };
 
-inline const Message (&EnumValuesMessage())[3] {
+inline const Message (&EnumValuesMessage())[5] {
   static const Message values[] = {
     Message_NONE,
     Message_ExecutionRequest,
-    Message_ExecutionAnswer
+    Message_ExecutionAnswer,
+    Message_AttributesRequest,
+    Message_AttributesAnswer
   };
   return values;
 }
 
 inline const char * const *EnumNamesMessage() {
-  static const char * const names[4] = {
+  static const char * const names[6] = {
     "NONE",
     "ExecutionRequest",
     "ExecutionAnswer",
+    "AttributesRequest",
+    "AttributesAnswer",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameMessage(Message e) {
-  if (flatbuffers::IsOutRange(e, Message_NONE, Message_ExecutionAnswer)) return "";
+  if (flatbuffers::IsOutRange(e, Message_NONE, Message_AttributesAnswer)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesMessage()[index];
 }
@@ -99,6 +116,14 @@ template<> struct MessageTraits<gpuless::execution::ExecutionRequest> {
 
 template<> struct MessageTraits<gpuless::execution::ExecutionAnswer> {
   static const Message enum_value = Message_ExecutionAnswer;
+};
+
+template<> struct MessageTraits<gpuless::execution::AttributesRequest> {
+  static const Message enum_value = Message_AttributesRequest;
+};
+
+template<> struct MessageTraits<gpuless::execution::AttributesAnswer> {
+  static const Message enum_value = Message_AttributesAnswer;
 };
 
 bool VerifyMessage(flatbuffers::Verifier &verifier, const void *obj, Message type);
@@ -443,6 +468,150 @@ inline flatbuffers::Offset<ExecutionAnswer> CreateExecutionAnswerDirect(
       return_buffers__);
 }
 
+struct CUdeviceAttributeValue FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef CUdeviceAttributeValueBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_ATTRIBUTE = 4,
+    VT_VALUE = 6
+  };
+  CUdeviceAttribute attribute() const {
+    return static_cast<CUdeviceAttribute>(GetField<int32_t>(VT_ATTRIBUTE, 0));
+  }
+  int32_t value() const {
+    return GetField<int32_t>(VT_VALUE, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, VT_ATTRIBUTE) &&
+           VerifyField<int32_t>(verifier, VT_VALUE) &&
+           verifier.EndTable();
+  }
+};
+
+struct CUdeviceAttributeValueBuilder {
+  typedef CUdeviceAttributeValue Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_attribute(CUdeviceAttribute attribute) {
+    fbb_.AddElement<int32_t>(CUdeviceAttributeValue::VT_ATTRIBUTE, static_cast<int32_t>(attribute), 0);
+  }
+  void add_value(int32_t value) {
+    fbb_.AddElement<int32_t>(CUdeviceAttributeValue::VT_VALUE, value, 0);
+  }
+  explicit CUdeviceAttributeValueBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<CUdeviceAttributeValue> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<CUdeviceAttributeValue>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<CUdeviceAttributeValue> CreateCUdeviceAttributeValue(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    CUdeviceAttribute attribute = CUdeviceAttribute_FLATBUFFER_DEFAULT_VALUE,
+    int32_t value = 0) {
+  CUdeviceAttributeValueBuilder builder_(_fbb);
+  builder_.add_value(value);
+  builder_.add_attribute(attribute);
+  return builder_.Finish();
+}
+
+struct AttributesAnswer FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef AttributesAnswerBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_STATUS = 4,
+    VT_ATTRIBUTES = 6
+  };
+  gpuless::execution::Status status() const {
+    return static_cast<gpuless::execution::Status>(GetField<int8_t>(VT_STATUS, 0));
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>> *attributes() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>> *>(VT_ATTRIBUTES);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int8_t>(verifier, VT_STATUS) &&
+           VerifyOffset(verifier, VT_ATTRIBUTES) &&
+           verifier.VerifyVector(attributes()) &&
+           verifier.VerifyVectorOfTables(attributes()) &&
+           verifier.EndTable();
+  }
+};
+
+struct AttributesAnswerBuilder {
+  typedef AttributesAnswer Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_status(gpuless::execution::Status status) {
+    fbb_.AddElement<int8_t>(AttributesAnswer::VT_STATUS, static_cast<int8_t>(status), 0);
+  }
+  void add_attributes(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>>> attributes) {
+    fbb_.AddOffset(AttributesAnswer::VT_ATTRIBUTES, attributes);
+  }
+  explicit AttributesAnswerBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<AttributesAnswer> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<AttributesAnswer>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<AttributesAnswer> CreateAttributesAnswer(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    gpuless::execution::Status status = gpuless::execution::Status_OK,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>>> attributes = 0) {
+  AttributesAnswerBuilder builder_(_fbb);
+  builder_.add_attributes(attributes);
+  builder_.add_status(status);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<AttributesAnswer> CreateAttributesAnswerDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    gpuless::execution::Status status = gpuless::execution::Status_OK,
+    const std::vector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>> *attributes = nullptr) {
+  auto attributes__ = attributes ? _fbb.CreateVector<flatbuffers::Offset<gpuless::execution::CUdeviceAttributeValue>>(*attributes) : 0;
+  return gpuless::execution::CreateAttributesAnswer(
+      _fbb,
+      status,
+      attributes__);
+}
+
+struct AttributesRequest FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef AttributesRequestBuilder Builder;
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct AttributesRequestBuilder {
+  typedef AttributesRequest Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  explicit AttributesRequestBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<AttributesRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<AttributesRequest>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<AttributesRequest> CreateAttributesRequest(
+    flatbuffers::FlatBufferBuilder &_fbb) {
+  AttributesRequestBuilder builder_(_fbb);
+  return builder_.Finish();
+}
+
 struct ProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef ProtocolMessageBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -462,6 +631,12 @@ struct ProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const gpuless::execution::ExecutionAnswer *message_as_ExecutionAnswer() const {
     return message_type() == gpuless::execution::Message_ExecutionAnswer ? static_cast<const gpuless::execution::ExecutionAnswer *>(message()) : nullptr;
   }
+  const gpuless::execution::AttributesRequest *message_as_AttributesRequest() const {
+    return message_type() == gpuless::execution::Message_AttributesRequest ? static_cast<const gpuless::execution::AttributesRequest *>(message()) : nullptr;
+  }
+  const gpuless::execution::AttributesAnswer *message_as_AttributesAnswer() const {
+    return message_type() == gpuless::execution::Message_AttributesAnswer ? static_cast<const gpuless::execution::AttributesAnswer *>(message()) : nullptr;
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<uint8_t>(verifier, VT_MESSAGE_TYPE) &&
@@ -477,6 +652,14 @@ template<> inline const gpuless::execution::ExecutionRequest *ProtocolMessage::m
 
 template<> inline const gpuless::execution::ExecutionAnswer *ProtocolMessage::message_as<gpuless::execution::ExecutionAnswer>() const {
   return message_as_ExecutionAnswer();
+}
+
+template<> inline const gpuless::execution::AttributesRequest *ProtocolMessage::message_as<gpuless::execution::AttributesRequest>() const {
+  return message_as_AttributesRequest();
+}
+
+template<> inline const gpuless::execution::AttributesAnswer *ProtocolMessage::message_as<gpuless::execution::AttributesAnswer>() const {
+  return message_as_AttributesAnswer();
 }
 
 struct ProtocolMessageBuilder {
@@ -521,6 +704,14 @@ inline bool VerifyMessage(flatbuffers::Verifier &verifier, const void *obj, Mess
     }
     case Message_ExecutionAnswer: {
       auto ptr = reinterpret_cast<const gpuless::execution::ExecutionAnswer *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Message_AttributesRequest: {
+      auto ptr = reinterpret_cast<const gpuless::execution::AttributesRequest *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Message_AttributesAnswer: {
+      auto ptr = reinterpret_cast<const gpuless::execution::AttributesAnswer *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return true;

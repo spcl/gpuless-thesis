@@ -43,7 +43,7 @@ struct buffer_tcp {
     }
 };
 
-struct kernel_arg {
+struct kernel_argument {
     int32_t flags;
     size_t  length;
     void    *data;
@@ -151,8 +151,8 @@ public:
     executor_tcp() {}
     ~executor_tcp() {}
 
-    static kernel_arg pointer_argument(const buffer_tcp *buffer, int32_t flags) {
-        return kernel_arg {
+    static kernel_argument pointer_argument(const buffer_tcp *buffer, int32_t flags) {
+        return kernel_argument {
             flags | KERNEL_ARG_POINTER,
             buffer->size,
             buffer->data,
@@ -160,8 +160,8 @@ public:
     }
 
     template<typename T>
-    static kernel_arg value_argument(T* data, int32_t flags) {
-        return kernel_arg {
+    static kernel_argument value_argument(T* data, int32_t flags) {
+        return kernel_argument {
             flags | KERNEL_ARG_VALUE,
             sizeof(*data),
             (void *) data,
@@ -206,7 +206,7 @@ public:
     bool execute(const char *kernel,
                  dim3 dimGrid,
                  dim3 dimBlock,
-                 std::vector<kernel_arg> &args) {
+                 std::vector<kernel_argument> &args) {
 
         std::vector<uint8_t> buf;
         append_buffer_value(buf, &REQ_TYPE_EXECUTE);

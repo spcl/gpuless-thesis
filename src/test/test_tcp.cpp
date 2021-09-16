@@ -17,10 +17,10 @@ int main(int argc, char **argv) {
     }
 
     gpuless::executor::executor_tcp exec;
-    exec.init(IP, PORT, CUDA_BIN, gpuless::manager::instance_profile::NO_MIG);
-    // std::cout << "executor_tcp initialized" << std::endl;
+    exec.init(IP, PORT, gpuless::manager::instance_profile::NO_MIG);
+    exec.set_cuda_code_file(CUDA_BIN);
 
-    std::vector<kernel_arg> args {
+    std::vector<kernel_argument> args {
         gpuless::executor::pointer_arg("a", sizeof(float) * size, KERNEL_ARG_COPY_TO_DEVICE),
         gpuless::executor::pointer_arg("b", sizeof(float) * size, KERNEL_ARG_COPY_TO_DEVICE),
         gpuless::executor::pointer_arg("c", sizeof(float) * size, KERNEL_ARG_COPY_TO_HOST),
@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     float *b = (float *) args[1].buffer.data();
     float *c = (float *) args[2].buffer.data();
 
-    for (size_t i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         a[i] = i;
         b[i] = i+1;
         c[i] = 0;

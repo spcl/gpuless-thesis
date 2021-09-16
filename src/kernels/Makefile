@@ -1,20 +1,19 @@
 CC=nvcc
 ODIR=build
 CFLAGS=-arch=compute_80 \
-	   -code=compute_80 \
-	   --fatbin \
+	   -code=sm_80 \
+	   -cubin \
 	   -odir=$(ODIR)
-FBIN=$(ODIR)/common.fatbin
+FBIN=$(ODIR)/common.cubin
 
-all: fatbin
-fatbin: $(FBIN)
+all: $(FBIN)
 
 $(ODIR):
 	@mkdir -p $(ODIR)
 
-$(ODIR)/%.fatbin: %.cu $(ODIR)
+$(ODIR)/%.cubin: %.cu $(ODIR)
 	$(CC) $(CFLAGS) -o $@ $<
 
 .PHONY: clean
 clean:
-	rm -f $(ODIR)/*.fatbin
+	rm -f $(ODIR)/*.fatbin $(ODIR)/*.cubin

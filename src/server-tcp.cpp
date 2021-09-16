@@ -93,11 +93,11 @@ void handle_execute(std::vector<uint8_t> &buf, std::vector<uint8_t> &answer) {
 
     // input data
     size_t n_args = read_value<size_t>(&next_object);
-    gpuless::kernel_arg kernel_args[n_args];
+    gpuless::kernel_argument kernel_args[n_args];
     for (size_t i = 0; i < n_args; i++) {
         int32_t flags = read_value<int32_t>(&next_object);
         size_t data_len = *next_object;
-        kernel_args[i] = gpuless::kernel_arg {
+        kernel_args[i] = gpuless::kernel_argument {
             flags,
             data_len,
             (void *) (next_object + 1),

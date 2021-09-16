@@ -26,7 +26,7 @@ void test_vadd_tcp(char *ip) {
         ((float *) c.data)[i] = 0;
     }
 
-    std::vector<gpuless::kernel_arg> args {
+    std::vector<gpuless::kernel_argument> args {
         gpuless::executor_tcp::pointer_argument(buffers[0],
                 gpuless::KERNEL_ARG_POINTER | gpuless::KERNEL_ARG_COPY_TO_DEVICE),
         gpuless::executor_tcp::pointer_argument(buffers[1],
@@ -70,7 +70,7 @@ void bench_rtt(char *ip, size_t size, int n_runs) {
         ((float *) b.data)[size-2] = 0.2;
         ((float *) b.data)[size-3] = 0.3;
 
-        std::vector<gpuless::kernel_arg> args {
+        std::vector<gpuless::kernel_argument> args {
             gpuless::executor_tcp::pointer_argument(buffers[0],
                     gpuless::KERNEL_ARG_POINTER
                         | gpuless::KERNEL_ARG_COPY_TO_DEVICE
