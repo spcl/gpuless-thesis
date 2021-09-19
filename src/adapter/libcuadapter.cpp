@@ -327,7 +327,7 @@ CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX,
                                                   KERNEL_ARG_COPY_TO_HOST,
                                               it->second);
                 }
-            } else {  // otherwise it has to be a value
+            } else { // otherwise it has to be a value
                 std::vector<uint8_t> value_data(p.size);
                 memcpy(value_data.data(), input_param, p.size);
                 std::string id = "buf" + i;
@@ -395,7 +395,7 @@ CUresult CUDAAPI cu_default_function() {
 
 cudaError_t CUDARTAPI cudaMalloc(void **devPtr, size_t size) {
     HIJACK_FN_PROLOGUE();
-    cuMemAlloc_v2((CUdeviceptr *) devPtr, size);
+    cuMemAlloc_v2((CUdeviceptr *)devPtr, size);
     return cudaSuccess;
 }
 
@@ -470,7 +470,7 @@ void CUDARTAPI __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
 
 void CUDARTAPI __cudaUnregisterFatBinary(void **fatCubinHandle) {
     HIJACK_FN_PROLOGUE();
-    (void) fatCubinHandle;
+    (void)fatCubinHandle;
     exec.deallocate(); // TODO: call this at a more suitable place
 }
 
@@ -501,7 +501,7 @@ CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
                                   int cudaVersion, cuuint64_t flags) {
     static fnCuGetProcAddress real_func =
         (fnCuGetProcAddress)real_dlsym(RTLD_NEXT, __func__);
-    dbgprintf("%s(%s)\n", __func__, symbol); 
+    dbgprintf("%s(%s)\n", __func__, symbol);
 
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuInit);
@@ -552,4 +552,4 @@ void *dlsym(void *handle, const char *symbol) {
     return (real_dlsym(handle, symbol));
 }
 
-}  // extern "C"
+} // extern "C"

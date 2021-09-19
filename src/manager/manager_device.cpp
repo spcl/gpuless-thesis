@@ -1,18 +1,18 @@
 #include <iostream>
-#include <vector>
 #include <sstream>
+#include <vector>
 
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#include "manager_device.hpp"
-#include "../utils.hpp"
 #include "../schemas/execution_protocol_generated.h"
+#include "../utils.hpp"
+#include "manager_device.hpp"
 
 extern const int BACKLOG;
 extern const bool DEBUG;
@@ -22,27 +22,32 @@ CUcontext cu_context;
 
 using namespace gpuless::execution;
 
-void handle_attribute_request(int socket_fd, const gpuless::execution::ProtocolMessage *msg) {
-    (void) msg;
+void handle_attribute_request(int socket_fd,
+                              const gpuless::execution::ProtocolMessage *msg) {
+    (void)msg;
     flatbuffers::FlatBufferBuilder builder;
     std::vector<flatbuffers::Offset<CUdeviceAttributeValue>> attribute_values;
 
     for (int i = 1; i < CUdevice_attribute::CU_DEVICE_ATTRIBUTE_MAX; i++) {
         int32_t result;
-        checkCudaErrors(cuDeviceGetAttribute(&result, static_cast<CUdevice_attribute>(i), cu_device));
-        auto av = CreateCUdeviceAttributeValue(builder, static_cast<CUdeviceAttribute>(i), result);
+        checkCudaErrors(cuDeviceGetAttribute(
+            &result, static_cast<CUdevice_attribute>(i), cu_device));
+        auto av = CreateCUdeviceAttributeValue(
+            builder, static_cast<CUdeviceAttribute>(i), result);
         attribute_values.push_back(av);
     }
 
     auto attributes_answer_msg = CreateProtocolMessage(
-        builder,
-        Message_AttributesAnswer,
-        CreateAttributesAnswer(builder, Status_OK, builder.CreateVector(attribute_values)).Union());
+        builder, Message_AttributesAnswer,
+        CreateAttributesAnswer(builder, Status_OK,
+                               builder.CreateVector(attribute_values))
+            .Union());
     builder.Finish(attributes_answer_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 }
 
-void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMessage *msg) {
+void handle_execute_request(int socket_fd,
+                            const gpuless::execution::ProtocolMessage *msg) {
     flatbuffers::FlatBufferBuilder builder;
     auto fb_args = msg->message_as_ExecutionRequest()->arguments();
     auto cuda_bin = msg->message_as_ExecutionRequest()->cuda_bin()->data();
@@ -65,13 +70,14 @@ void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMes
     checkCudaErrors(cuModuleLoadData(&cu_module, cuda_bin));
     checkCudaErrors(cuModuleGetFunction(&cu_function, cu_module, kernel));
 
-    std::vector<void*> args(fb_args->size(), nullptr);
+    std::vector<void *> args(fb_args->size(), nullptr);
     for (size_t i = 0; i < fb_args->size(); i++) {
         auto a = fb_args->Get(i);
 
         // allocate memory on the device
         if (a->flags() & KERNEL_ARG_POINTER) {
-            checkCudaErrors(cuMemAlloc(&cu_device_buffers[i], a->buffer()->size()));
+            checkCudaErrors(
+                cuMemAlloc(&cu_device_buffers[i], a->buffer()->size()));
         }
 
         // copy memory to device
@@ -83,17 +89,16 @@ void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMes
 
         // construct kernel argument array
         if (a->flags() & KERNEL_ARG_POINTER) {
-            args[i] = (void *) &cu_device_buffers[i];
+            args[i] = (void *)&cu_device_buffers[i];
         } else {
-            args[i] = (void *) a->buffer()->data();
+            args[i] = (void *)a->buffer()->data();
         }
     }
 
     // execute kernel
-    checkCudaErrors(cuLaunchKernel(cu_function,
-                                   dim_grid->x(), dim_grid->y(), dim_grid->z(),
-                                   dim_block->x(), dim_block->y(), dim_block->z(),
-                                   0, 0, args.data(), 0));
+    checkCudaErrors(cuLaunchKernel(
+        cu_function, dim_grid->x(), dim_grid->y(), dim_grid->z(),
+        dim_block->x(), dim_block->y(), dim_block->z(), 0, 0, args.data(), 0));
     checkCudaErrors(cuCtxSynchronize());
 
     std::vector<flatbuffers::Offset<ReturnBuffer>> return_buffers;
@@ -102,10 +107,11 @@ void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMes
 
         // copy back memory from device
         if (a->flags() & KERNEL_ARG_COPY_TO_HOST) {
-            checkCudaErrors(cuMemcpyDtoH((void*) a->buffer()->data(),
+            checkCudaErrors(cuMemcpyDtoH((void *)a->buffer()->data(),
                                          cu_device_buffers[i],
                                          a->buffer()->size()));
-            auto v = builder.CreateVector(a->buffer()->data(), a->buffer()->size());
+            auto v =
+                builder.CreateVector(a->buffer()->data(), a->buffer()->size());
             auto s = builder.CreateString(a->id()->data());
             auto rb = CreateReturnBuffer(builder, s, v);
             return_buffers.push_back(rb);
@@ -118,9 +124,10 @@ void handle_execute_request(int socket_fd, const gpuless::execution::ProtocolMes
     }
 
     auto execution_answer_msg = CreateProtocolMessage(
-        builder,
-        Message_ExecutionAnswer,
-        CreateExecutionAnswer(builder, Status_OK, builder.CreateVector(return_buffers)).Union());
+        builder, Message_ExecutionAnswer,
+        CreateExecutionAnswer(builder, Status_OK,
+                              builder.CreateVector(return_buffers))
+            .Union());
     builder.Finish(execution_answer_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 
@@ -158,14 +165,14 @@ void manage_device(int device, uint16_t port) {
     }
 
     int opt = 1;
-    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (void *) &opt, sizeof(opt));
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (void *)&opt, sizeof(opt));
 
     sockaddr_in sa;
     sa.sin_family = AF_INET;
     sa.sin_addr.s_addr = INADDR_ANY;
     sa.sin_port = htons(port);
 
-    if (bind(s, (sockaddr *) &sa, sizeof(sa)) < 0) {
+    if (bind(s, (sockaddr *)&sa, sizeof(sa)) < 0) {
         std::cerr << "failed to bind socket" << std::endl;
         close(s);
         exit(EXIT_FAILURE);

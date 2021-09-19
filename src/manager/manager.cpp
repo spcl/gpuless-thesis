@@ -1,22 +1,22 @@
+#include <csignal>
 #include <iostream>
 #include <pthread.h>
-#include <csignal>
 #include <sys/wait.h>
 
+#include "../utils.hpp"
 #include "manager.hpp"
 #include "manager_device.hpp"
-#include "../utils.hpp"
 
 #include "../schemas/allocation_protocol_generated.h"
 
 using namespace gpuless::manager;
 
-extern const bool DEBUG  = true;
+extern const bool DEBUG = true;
 extern const int BACKLOG = 5;
 
 // nvidia (mig) devices: [device, profile id, session assignment]
 static std::mutex lock_devices;
-static std::vector<std::tuple<int,int,int>> devices = {
+static std::vector<std::tuple<int, int, int>> devices = {
     {0, NO_MIG, NO_SESSION_ASSIGNED},
 };
 
@@ -50,7 +50,8 @@ static int32_t assign_device(int32_t profile, int32_t session_id) {
     lock_devices.lock();
     int assigned_device = -1;
     for (size_t i = 0; i < devices.size(); i++) {
-        if (std::get<2>(devices[i]) == NO_SESSION_ASSIGNED && profile == std::get<1>(devices[i])) {
+        if (std::get<2>(devices[i]) == NO_SESSION_ASSIGNED &&
+            profile == std::get<1>(devices[i])) {
             std::get<2>(devices[i]) = session_id;
             assigned_device = i;
             break;
@@ -64,7 +65,7 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     int session_id = next_session_id++;
     if (DEBUG) {
         printf("allocation request for %d (session_id=%d)\n",
-                msg->message_as_AllocateRequest()->profile(), session_id);
+               msg->message_as_AllocateRequest()->profile(), session_id);
     }
 
     flatbuffers::FlatBufferBuilder builder;
@@ -72,16 +73,18 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     // offer a set of instances (all available instances)
     auto profiles = available_profiles();
     auto allocate_offer_msg = CreateProtocolMessage(
-        builder,
-        Message_AllocateOffer,
-        CreateAllocateOffer(builder, Status_OK, session_id, builder.CreateVector(profiles)).Union());
+        builder, Message_AllocateOffer,
+        CreateAllocateOffer(builder, Status_OK, session_id,
+                            builder.CreateVector(profiles))
+            .Union());
     builder.Finish(allocate_offer_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 
     // client selects a profile
     std::vector<uint8_t> buffer = recv_buffer(socket_fd);
     auto allocate_select_msg = GetProtocolMessage(buffer.data());
-    int32_t selected_profile = allocate_select_msg->message_as_AllocateSelect()->profile();
+    int32_t selected_profile =
+        allocate_select_msg->message_as_AllocateSelect()->profile();
 
     // send confirmation
     int32_t assigned_device = assign_device(selected_profile, session_id);
@@ -91,9 +94,9 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     inet_pton(AF_INET, "127.0.0.1", &ip);
     builder.Reset();
     auto allocate_confirm_msg = CreateProtocolMessage(
-        builder,
-        Message_AllocateConfirm,
-        CreateAllocateConfirm(builder, status, session_id, ip, MANAGER_PORT+1).Union());
+        builder, Message_AllocateConfirm,
+        CreateAllocateConfirm(builder, status, session_id, ip, MANAGER_PORT + 1)
+            .Union());
     builder.Finish(allocate_confirm_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 }
@@ -107,16 +110,15 @@ void handle_deallocate_request(int socket_fd, const ProtocolMessage *msg) {
     deallocate_session_devices(session_id);
     flatbuffers::FlatBufferBuilder builder;
     auto deallocate_confirm_msg = CreateProtocolMessage(
-        builder,
-        Message_DeallocateConfirm,
+        builder, Message_DeallocateConfirm,
         CreateDeallocateConfirm(builder, Status_OK, session_id).Union());
     builder.Finish(deallocate_confirm_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 }
 
 void *handle_request(void *arg) {
-    int socket_fd = *((int *) arg);
-    delete ((int *) arg);
+    int socket_fd = *((int *)arg);
+    delete ((int *)arg);
 
     // generic initial request from client
     std::vector<uint8_t> buffer = recv_buffer(socket_fd);
@@ -142,8 +144,8 @@ void sigint_handler(int signum) {
 }
 
 int main(int argc, char **argv) {
-    (void) argc;
-    (void) argv;
+    (void)argc;
+    (void)argv;
 
     signal(SIGINT, sigint_handler);
 
@@ -161,8 +163,8 @@ int main(int argc, char **argv) {
         }
 
         if (DEBUG) {
-            printf("managing device: %d (profile=%d,pid=%d,port=%d)\n",
-                   device, profile, pid, next_port);
+            printf("managing device: %d (profile=%d,pid=%d,port=%d)\n", device,
+                   profile, pid, next_port);
         }
         next_port++;
     }
@@ -175,14 +177,14 @@ int main(int argc, char **argv) {
     }
 
     int opt = 1;
-    setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, (void *) &opt, sizeof(opt));
+    setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, (void *)&opt, sizeof(opt));
 
     sockaddr_in sa;
     sa.sin_family = AF_INET;
     sa.sin_addr.s_addr = INADDR_ANY;
     sa.sin_port = htons(MANAGER_PORT);
 
-    if (bind(socket_fd, (sockaddr *) &sa, sizeof(sa)) < 0) {
+    if (bind(socket_fd, (sockaddr *)&sa, sizeof(sa)) < 0) {
         std::cerr << "failed to bind socket" << std::endl;
         close(socket_fd);
         exit(EXIT_FAILURE);
@@ -201,7 +203,7 @@ int main(int argc, char **argv) {
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(socket_fd, &remote_addr, &remote_addrlen))) {
         if (DEBUG) {
-            const char *ip = inet_ntoa(((sockaddr_in *) &remote_addr)->sin_addr);
+            const char *ip = inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr);
             std::cout << "manager: connection from " << ip << std::endl;
         }
 
@@ -213,5 +215,5 @@ int main(int argc, char **argv) {
     }
 
     close(socket_fd);
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

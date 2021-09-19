@@ -6,26 +6,25 @@
 #include <sstream>
 #include <vector>
 
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 namespace gpuless {
 namespace manager {
 
-const uint16_t MANAGER_PORT   = 8002;
+const uint16_t MANAGER_PORT = 8002;
 const int NO_SESSION_ASSIGNED = -1;
 
 enum instance_profile : int32_t {
-    NO_MIG     = 1000,
-    MIG_1g5gb  = 19,
+    NO_MIG = 1000,
+    MIG_1g5gb = 19,
     MIG_2g10gb = 14,
     MIG_3g20gb = 9,
     MIG_4g20gb = 5,
     MIG_7g40gb = 0,
 };
-
 
 } // namespace manager
 } // namespace gpuless

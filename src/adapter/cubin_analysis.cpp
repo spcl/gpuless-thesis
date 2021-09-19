@@ -1,12 +1,12 @@
-#include <iostream>
-#include <fstream>
-#include <filesystem>
 #include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <regex>
 
 #include "cubin_analysis.hpp"
 
-static std::string exec(const char* cmd) {
+static std::string exec(const char *cmd) {
     std::array<char, 128> buffer;
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
@@ -125,8 +125,8 @@ bool CubinAnalyzer::analyzeCode() {
     return true;
 }
 
-const std::map<std::string, std::vector<KParamInfo>>
-    &CubinAnalyzer::kernel_parameters() {
+const std::map<std::string, std::vector<KParamInfo>> &
+CubinAnalyzer::kernel_parameters() {
     return this->_kernel_parameters;
 }
 

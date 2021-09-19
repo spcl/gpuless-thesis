@@ -8,14 +8,14 @@
 extern const int BACKLOG;
 extern const bool DEBUG;
 
-const int32_t KERNEL_ARG_POINTER        = 1 << 0;
-const int32_t KERNEL_ARG_VALUE          = 1 << 1;
+const int32_t KERNEL_ARG_POINTER = 1 << 0;
+const int32_t KERNEL_ARG_VALUE = 1 << 1;
 const int32_t KERNEL_ARG_COPY_TO_DEVICE = 1 << 2;
-const int32_t KERNEL_ARG_COPY_TO_HOST   = 1 << 3;
+const int32_t KERNEL_ARG_COPY_TO_HOST = 1 << 3;
 
 struct kernel_argument {
-    std::string          id;
-    int32_t              flags;
+    std::string id;
+    int32_t flags;
     std::vector<uint8_t> buffer;
 
     kernel_argument() {}

@@ -1,10 +1,10 @@
 #ifndef __CUBIN_ANALYSIS_HPP__
 #define __CUBIN_ANALYSIS_HPP__
 
-#include <string>
-#include <map>
-#include <vector>
 #include <filesystem>
+#include <map>
+#include <string>
+#include <vector>
 
 const char ELF_MAGIC[4] = {0x7f, 'E', 'L', 'F'};
 
@@ -20,7 +20,7 @@ struct KParamInfo {
 };
 
 class CubinAnalyzer {
-private:
+  private:
     std::string cuda_binary_fname;
     CudaFileType file_type;
     std::map<std::string, std::vector<KParamInfo>> _kernel_parameters;
@@ -31,9 +31,9 @@ private:
     bool analyzePtx();
     bool analyzeCode();
 
-public:
+  public:
     bool analyze(const char *fname);
-    const std::map<std::string,std::vector<KParamInfo>> &kernel_parameters();
+    const std::map<std::string, std::vector<KParamInfo>> &kernel_parameters();
     const std::map<int, std::vector<uint8_t>> &arch_modules();
 };
 

@@ -6,33 +6,33 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#define LINK_CU_FUNCTION(symbol, f)    \
-    do {                               \
-        if (strcmp(symbol, #f) == 0) { \
-            *pfn = (void *)&f;         \
-            return CUDA_SUCCESS;       \
-        }                              \
+#define LINK_CU_FUNCTION(symbol, f)                                            \
+    do {                                                                       \
+        if (strcmp(symbol, #f) == 0) {                                         \
+            *pfn = (void *)&f;                                                 \
+            return CUDA_SUCCESS;                                               \
+        }                                                                      \
     } while (0)
 
-#define HIJACK_FN_PROLOGUE()           \
-    do {                               \
-        dbgprintf("%s()\n", __func__); \
-        if (!vdev_initialized) {       \
-            vdev_initialize();         \
-        }                              \
+#define HIJACK_FN_PROLOGUE()                                                   \
+    do {                                                                       \
+        dbgprintf("%s()\n", __func__);                                         \
+        if (!vdev_initialized) {                                               \
+            vdev_initialize();                                                 \
+        }                                                                      \
     } while (0)
 
-#define dbgprintf(str, ...)                              \
-    do {                                                 \
-        if (debug_print) {                               \
-            char prefix[] = "[libcuadapter] ";           \
-            size_t s = sizeof(prefix) + strlen(str);     \
-            char *dst = (char *)calloc(sizeof(char), s); \
-            strncpy(dst, prefix, sizeof(char) * s);      \
-            strncat(dst, str, sizeof(char) * s);         \
-            printf(dst, ##__VA_ARGS__);                  \
-            free(dst);                                   \
-        }                                                \
+#define dbgprintf(str, ...)                                                    \
+    do {                                                                       \
+        if (debug_print) {                                                     \
+            char prefix[] = "[libcuadapter] ";                                 \
+            size_t s = sizeof(prefix) + strlen(str);                           \
+            char *dst = (char *)calloc(sizeof(char), s);                       \
+            strncpy(dst, prefix, sizeof(char) * s);                            \
+            strncat(dst, str, sizeof(char) * s);                               \
+            printf(dst, ##__VA_ARGS__);                                        \
+            free(dst);                                                         \
+        }                                                                      \
     } while (0)
 
 struct CudaCallConfig {
@@ -61,4 +61,4 @@ extern "C" {
 void *__libc_dlopen_mode(const char *name, int mode);
 }
 
-#endif  // __LIBCUADAPTER_HPP__
+#endif // __LIBCUADAPTER_HPP__
