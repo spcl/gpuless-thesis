@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "utils.hpp"
 
 void __checkCudaErrors(CUresult r, const char *file, const int line) {
@@ -31,3 +33,26 @@ void send_buffer(int socket_fd, const uint8_t *buf, size_t len) {
         bytes_sent += send(socket_fd, src, n_send, 0);
     } while (bytes_sent < len);
 }
+
+void string_split(std::string const &str, const char delim,
+                  std::vector<std::string> &out) {
+    size_t start;
+    size_t end = 0;
+    while ((start = str.find_first_not_of(delim, end)) != std::string::npos) {
+        end = str.find(delim, start);
+        out.push_back(str.substr(start, end - start));
+    }
+}
+
+std::string string_rstrip(const std::string &str) {
+    auto it = str.rbegin();
+    for (; it != str.rend(); it++) {
+        if ((*it != '\n') && (*it != ' ')) {
+            break;
+        }
+    }
+    std::string s(it, str.rend());
+    std::reverse(s.begin(), s.end());
+    return s;
+}
+

@@ -19,22 +19,31 @@ struct KParamInfo {
     KParamInfo(int o, int s) : ordinal(o), size(s) {}
 };
 
+struct KFunction {
+    std::filesystem::path module_path;
+    std::vector<KParamInfo> parameters;
+};
+
 class CubinAnalyzer {
   private:
-    std::string cuda_binary_fname;
+    std::vector<std::string> cuda_binaries;
+
     CudaFileType file_type;
-    std::map<std::string, std::vector<KParamInfo>> _kernel_parameters;
-    std::map<int, std::vector<uint8_t>> _arch_modules;
+    std::map<std::string, KFunction> kernel_to_kfunction;
 
     bool fileIsElf(std::filesystem::path &p);
-    bool analyzeElf();
+    bool analyzeElf(std::string fname, int major_version, int minor_version);
+    bool analyzeSingleElf(const std::filesystem::path &path);
     bool analyzePtx();
-    bool analyzeCode();
 
   public:
-    bool analyze(const char *fname);
-    const std::map<std::string, std::vector<KParamInfo>> &kernel_parameters();
-    const std::map<int, std::vector<uint8_t>> &arch_modules();
+    CubinAnalyzer() = default;
+    bool analyze(std::vector<std::string> cuda_binaries, int major_version,
+                 int minor_version);
+
+    bool kernel_parameters(std::string &kernel,
+                           std::vector<KParamInfo> &params);
+    bool kernel_module(std::string &kernel, std::vector<uint8_t> &module_data);
 };
 
 #endif // __CUBIN_ANALYSIS_HPP__

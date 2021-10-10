@@ -30,6 +30,9 @@ kernel_argument pointer_arg(std::string &&id, size_t size, int32_t flags) {
     };
 }
 
+executor_tcp::executor_tcp()
+    : device_attributes(CUdevice_attribute::CU_DEVICE_ATTRIBUTE_MAX) {}
+
 bool executor_tcp::load_cuda_bin(const char *fname) {
     std::ifstream input(fname, std::ios::binary);
     this->cuda_bin =

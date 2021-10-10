@@ -6,7 +6,7 @@
 #include <vector>
 
 #define N 1024
-#define VADD_FATBIN "../kernels/build/common.cubin"
+#define VADD_FATBIN "../kernels/build/common.fatbin"
 #define checkCudaErrors(err) __checkCudaErrors(err, __FILE__, __LINE__)
 
 void __checkCudaErrors(CUresult r, const char *file, const int line) {

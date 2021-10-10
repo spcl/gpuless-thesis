@@ -49,8 +49,7 @@ class executor_tcp {
     bool query_device_attributes();
 
   public:
-    executor_tcp()
-        : device_attributes(CUdevice_attribute::CU_DEVICE_ATTRIBUTE_MAX) {}
+    executor_tcp();
 
     bool set_cuda_code(const void *data, size_t size);
     bool set_cuda_code_file(const char *fname);

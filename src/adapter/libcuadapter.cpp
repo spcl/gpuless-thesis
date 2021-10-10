@@ -11,23 +11,10 @@
 #include "../executors/executor_tcp.hpp"
 #include "../utils.hpp"
 #include "cubin_analysis.hpp"
-
-static char *cuda_binary = nullptr;
-static char *manager_ip = nullptr;
-static short manager_port = -1;
-
-static CUdeviceptr next_device_ptr = 1ULL;
-static CUfunction next_function_ptr = (CUfunction)1;
-
-static std::map<CUdeviceptr, std::vector<uint8_t>> device_buffers;
-static std::map<CUfunction, std::string> function_name;
-static std::map<void *, CUfunction> fn_ptr_to_cufunction;
+#include "cuda_vdev.hpp"
 
 static bool vdev_initialized = false;
-static gpuless::executor::executor_tcp exec;
-static CubinAnalyzer cubin_analyzer;
-
-bool debug_print = false;
+static bool debug_print = false;
 
 extern "C" {
 
@@ -37,111 +24,115 @@ static void *real_dlsym(void *handle, const char *symbol) {
     return (*internal_dlsym)(handle, symbol);
 }
 
-bool load_environment() {
-    cuda_binary = std::getenv("CUDA_BINARY");
-    if (cuda_binary == nullptr) {
-        std::cerr << "please set CUDA_BINARY environment variable" << std::endl;
-        return false;
-    }
-
-    manager_ip = std::getenv("MANAGER_IP");
-    if (manager_ip == nullptr) {
-        std::cerr << "please set MANAGER_IP environment variable" << std::endl;
-        return false;
-    }
-
-    char *manager_port_str = std::getenv("MANAGER_PORT");
-    if (manager_port_str == nullptr) {
-        std::cerr << "please set MANAGER_PORT environment variable"
-                  << std::endl;
-        return false;
-    }
-    manager_port = std::stoi(manager_port_str);
-
-    char *debug_print_str = std::getenv("DEBUG");
-    if (debug_print_str != nullptr) {
-        debug_print = true;
-    }
-
-    return true;
-}
-
 void vdev_remote_init() {
-    if (!exec.init(manager_ip, manager_port,
+    CudaVDev &vdev = CudaVDev::getInstance();
+    if (!vdev.executor.init(vdev.manager_ip, vdev.manager_port,
                    gpuless::manager::instance_profile::NO_MIG)) {
         dbgprintf("failed to initialize remote device\n");
     }
 }
 
 void vdev_initialize() {
-    load_environment();
+    CudaVDev &vdev = CudaVDev::getInstance();
+
+    // load environment variables
+    char *cuda_binary = std::getenv("CUDA_BINARY");
+    if (cuda_binary == nullptr) {
+        std::cerr << "please set CUDA_BINARY environment variable" << std::endl;
+    }
+
+    char *manager_ip = std::getenv("MANAGER_IP");
+    if (manager_ip == nullptr) {
+        std::cerr << "please set MANAGER_IP environment variable" << std::endl;
+    }
+
+    char *manager_port_str = std::getenv("MANAGER_PORT");
+    if (manager_port_str == nullptr) {
+        std::cerr << "please set MANAGER_PORT environment variable"
+                  << std::endl;
+    }
+    short manager_port = std::stoi(manager_port_str);
+
+    char *debug_print_str = std::getenv("DEBUG");
+    if (debug_print_str != nullptr) {
+        debug_print = true;
+    }
+
+    std::vector<std::string> cuda_binaries;
+    string_split(std::string(cuda_binary), ',', cuda_binaries);
+    vdev.initialize(cuda_binaries, manager_ip, manager_port);
     vdev_remote_init();
-    cubin_analyzer.analyze(cuda_binary);
 
     // load module code
     int compute_capability_major;
     int compute_capability_minor;
-    exec.get_device_attribute(
+    vdev.executor.get_device_attribute(
         &compute_capability_major,
         CUdevice_attribute::CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR);
-    exec.get_device_attribute(
+    vdev.executor.get_device_attribute(
         &compute_capability_minor,
         CUdevice_attribute::CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR);
 
-    auto binary_versions = cubin_analyzer.arch_modules();
-    bool suitable_code_found = false;
-    for (const auto &v : binary_versions) {
-        int major_minor = v.first;
-        int minor = major_minor % 10;
-        int major = major_minor / 10;
-        if (major == compute_capability_major &&
-            minor <= compute_capability_minor) {
-            exec.set_cuda_code(v.second.data(), v.second.size());
-            suitable_code_found = true;
-            break;
-        }
-    }
+    vdev.cubin_analyzer.analyze(cuda_binaries, compute_capability_major,
+                                compute_capability_minor);
 
-    if (!suitable_code_found) {
-        std::cerr << "no suitable code module found in CUDA_BINARY"
-                  << std::endl;
-    }
+    // auto binary_versions = cubin_analyzer.arch_modules();
+    // bool suitable_code_found = false;
+    // for (const auto &v : binary_versions) {
+    //     int major_minor = v.first;
+    //     int minor = major_minor % 10;
+    //     int major = major_minor / 10;
+    //     if (major == compute_capability_major &&
+    //         minor <= compute_capability_minor) {
+    //         exec.set_cuda_code(v.second.data(), v.second.size());
+    //         suitable_code_found = true;
+    //         break;
+    //     }
+    // }
+
+    // if (!suitable_code_found) {
+    //     std::cerr << "no suitable code module found in CUDA_BINARY"
+    //               << std::endl;
+    // }
 
     vdev_initialized = true;
 }
 
 CUfunction vdev_get_function(const char *name) {
-    CUfunction f = next_function_ptr;
-    function_name.emplace(std::make_pair(f, name));
-    next_function_ptr = (CUfunction)(((uint64_t)f) + 1);
+    CudaVDev &vdev = CudaVDev::getInstance();
+    CUfunction f = vdev.next_cufunction_ptr();
+    vdev.function_name.emplace(std::make_pair(f, name));
     return f;
 }
 
-CUdeviceptr vdev_alloc_buf(size_t size) {
-    CUdeviceptr p = next_device_ptr;
-    device_buffers.emplace(std::make_pair(p, std::vector<uint8_t>(size)));
-    next_device_ptr++;
-    return p;
-}
+// CUdeviceptr vdev_alloc_buf(size_t size) {
+//     CudaVDev &vdev = CudaVDev::getInstance();
+//     CUdeviceptr p = vdev.next_cudevice_ptr();
+//     vdev.device_buffers.emplace(std::make_pair(p, std::vector<uint8_t>(size)));
+//     return p;
+// }
 
 void vdev_free_buf(CUdeviceptr ptr) {
-    auto it = device_buffers.find(ptr);
-    if (it != device_buffers.end()) {
-        device_buffers.erase(it);
+    CudaVDev &vdev = CudaVDev::getInstance();
+    auto it = vdev.device_buffers.find(ptr);
+    if (it != vdev.device_buffers.end()) {
+        vdev.device_buffers.erase(it);
     }
 }
 
 void vdev_memcpy_htod(CUdeviceptr dst, const void *src, size_t size) {
-    auto it = device_buffers.find(dst);
-    if (it != device_buffers.end() && it->second.size() >= size) {
+    CudaVDev &vdev = CudaVDev::getInstance();
+    auto it = vdev.device_buffers.find(dst);
+    if (it != vdev.device_buffers.end() && it->second.size() >= size) {
         void *dst_raw = (void *)it->second.data();
         memcpy(dst_raw, src, size);
     }
 }
 
 void vdev_memcpy_dtoh(void *dst, CUdeviceptr src, size_t size) {
-    auto it = device_buffers.find(src);
-    if (it != device_buffers.end()) {
+    CudaVDev &vdev = CudaVDev::getInstance();
+    auto it = vdev.device_buffers.find(src);
+    if (it != vdev.device_buffers.end()) {
         void *src_raw = (void *)it->second.data();
         memcpy(dst, src_raw, size);
     }
@@ -164,14 +155,16 @@ CUresult cuDeviceGetAttribute(int *pi, CUdevice_attribute attrib,
                               CUdevice dev) {
     HIJACK_FN_PROLOGUE();
     (void)dev;
-    exec.get_device_attribute(pi, attrib);
+    CudaVDev &vdev = CudaVDev::getInstance();
+    vdev.executor.get_device_attribute(pi, attrib);
     return CUDA_SUCCESS;
 }
 
 CUresult CUDAAPI cuDevicePrimaryCtxRelease(CUdevice dev) {
     HIJACK_FN_PROLOGUE();
     (void)dev;
-    exec.deallocate();
+    CudaVDev &vdev = CudaVDev::getInstance();
+    vdev.executor.deallocate();
     return CUDA_SUCCESS;
 }
 
@@ -224,7 +217,8 @@ CUresult CUDAAPI cuGetExportTable(const void **ppExportTable,
 CUresult CUDAAPI cuModuleLoad(CUmodule *module, const char *fname) {
     HIJACK_FN_PROLOGUE();
     (void)module;
-    if (!exec.set_cuda_code_file(fname)) {
+    CudaVDev &vdev = CudaVDev::getInstance();
+    if (!vdev.executor.set_cuda_code_file(fname)) {
         dbgprintf("failed to load ptx file: %s\n", fname);
     }
     return CUDA_SUCCESS;
@@ -255,22 +249,22 @@ CUresult CUDAAPI cuModuleGetFunction(CUfunction *hfunc, CUmodule hmod,
 
 CUresult CUDAAPI cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize) {
     HIJACK_FN_PROLOGUE();
-    CUdeviceptr p = vdev_alloc_buf(bytesize);
-    *dptr = p;
+    *dptr = (CUdeviceptr) CudaVDev::getInstance().memAlloc(bytesize);
     return CUDA_SUCCESS;
 }
 
 CUresult CUDAAPI cuMemcpyHtoD_v2(CUdeviceptr dstDevice, const void *srcHost,
                                  size_t ByteCount) {
     HIJACK_FN_PROLOGUE();
-    vdev_memcpy_htod(dstDevice, srcHost, ByteCount);
+    CudaVDev::getInstance().memCpyHtoD(dstDevice, (void *)srcHost, ByteCount);
     return CUDA_SUCCESS;
 }
 
 CUresult CUDAAPI cuMemcpyDtoH_v2(void *dstHost, CUdeviceptr srcDevice,
                                  size_t ByteCount) {
     HIJACK_FN_PROLOGUE();
-    vdev_memcpy_dtoh(dstHost, srcDevice, ByteCount);
+    // vdev_memcpy_dtoh(dstHost, srcDevice, ByteCount);
+    CudaVDev::getInstance().memCpyDtoH((void *)dstHost, srcDevice, ByteCount);
     return CUDA_SUCCESS;
 }
 
@@ -284,30 +278,37 @@ CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX,
     (void)hStream;
     (void)extra;
     (void)sharedMemBytes;
-    std::string kernel = function_name.find(f)->second;
+    CudaVDev &vdev = CudaVDev::getInstance();
+
+    std::string kernel = vdev.function_name.find(f)->second;
     dim3 dimGrid(gridDimX, gridDimY, gridDimZ);
     dim3 dimBlock(blockDimX, blockDimY, blockDimZ);
 
     // TODO: support arguments passed in **extra
     if (kernelParams != nullptr) {
         // look up function name
-        auto fname_it = function_name.find(f);
-        if (fname_it == function_name.end()) {
+        auto fname_it = vdev.function_name.find(f);
+        if (fname_it == vdev.function_name.end()) {
             std::cerr << "unknown function" << std::endl;
             return CUDA_SUCCESS;
         }
         std::string fname = fname_it->second;
         dbgprintf("kernel: %s\n", fname.c_str());
 
-        // get the number and sizes of parameters from the analysis
-        auto kernel_params = cubin_analyzer.kernel_parameters();
+        // load the module code
+        std::vector<uint8_t> module_data;
+        if (!vdev.cubin_analyzer.kernel_module(fname, module_data)) {
+            std::cerr << "failed to load module" << std::endl;
+            return CUDA_SUCCESS;
+        }
+        vdev.executor.set_cuda_code(module_data.data(), module_data.size());
 
-        auto param_it = kernel_params.find(fname);
-        if (param_it == kernel_params.end()) {
+        // get the number and sizes of parameters from the analysis
+        std::vector<KParamInfo> params;
+        if (!vdev.cubin_analyzer.kernel_parameters(kernel, params)) {
             std::cerr << "failed to look up kernel parameters" << std::endl;
             return CUDA_SUCCESS;
         }
-        auto params = param_it->second;
 
         // build kernel argument vector for remote execution
         std::vector<kernel_argument> args(params.size());
@@ -318,14 +319,15 @@ CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX,
             // check if parameter is an allocated device pointer
             if (p.size == sizeof(CUdeviceptr)) {
                 auto device_ptr = *((CUdeviceptr *)input_param);
-                auto it = device_buffers.find(device_ptr);
-                if (it != device_buffers.end()) {
+                auto mem = vdev.buffer_from_ptr(device_ptr);
+                if (mem != nullptr) {
                     std::string id = "buf" + i;
                     args[i] = kernel_argument(id,
                                               KERNEL_ARG_POINTER |
                                                   KERNEL_ARG_COPY_TO_DEVICE |
                                                   KERNEL_ARG_COPY_TO_HOST,
-                                              it->second);
+                                              *mem);
+
                 }
             } else { // otherwise it has to be a value
                 std::vector<uint8_t> value_data(p.size);
@@ -335,7 +337,7 @@ CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX,
             }
         }
 
-        if (!exec.execute(kernel.c_str(), dimGrid, dimBlock, args)) {
+        if (!vdev.executor.execute(kernel.c_str(), dimGrid, dimBlock, args)) {
             std::cerr << "execution of " << kernel << " failed" << std::endl;
         }
 
@@ -347,13 +349,13 @@ CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX,
             // check if parameter is an allocated device pointer
             if (p.size == sizeof(CUdeviceptr)) {
                 auto device_ptr = *((CUdeviceptr *)input_param);
-                auto it = device_buffers.find(device_ptr);
-                if (it != device_buffers.end()) {
+                auto mem = vdev.buffer_from_ptr(device_ptr);
+                if (mem != nullptr) {
                     std::string id = "buf" + i;
                     for (const auto &a : args) {
                         if (a.id == id) {
-                            it->second.insert(it->second.begin(),
-                                              a.buffer.begin(), a.buffer.end());
+                            mem->insert(mem->begin(), a.buffer.begin(),
+                                        a.buffer.end());
                         }
                     }
                 }
@@ -372,7 +374,7 @@ CUresult CUDAAPI cuCtxSynchronize(void) {
 CUresult CUDAAPI cuCtxDestroy_v2(CUcontext ctx) {
     HIJACK_FN_PROLOGUE();
     (void)ctx;
-    exec.deallocate();
+    CudaVDev::getInstance().executor.deallocate();
     return CUDA_SUCCESS;
 }
 
@@ -418,6 +420,15 @@ cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src, size_t count,
     return cudaSuccess;
 }
 
+cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src, size_t count,
+                                      enum cudaMemcpyKind kind,
+                                      cudaStream_t stream) {
+    HIJACK_FN_PROLOGUE();
+    (void)stream;
+    cudaMemcpy(dst, src, count, kind);
+    return cudaSuccess;
+}
+
 cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim,
                                        dim3 blockDim, void **args,
                                        size_t sharedMem, cudaStream_t stream) {
@@ -425,8 +436,10 @@ cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim,
     dbgprintf("grid(%ld,%ld,%ld), block(%ld,%ld,%ld)\n", gridDim.x, gridDim.y,
               gridDim.z, blockDim.x, blockDim.y, blockDim.z);
 
-    auto it = fn_ptr_to_cufunction.find((void *)func);
-    if (it == fn_ptr_to_cufunction.end()) {
+    CudaVDev &vdev = CudaVDev::getInstance();
+
+    auto it = vdev.fn_ptr_to_cufunction.find((void *)func);
+    if (it == vdev.fn_ptr_to_cufunction.end()) {
         dbgprintf("no funtion at %p registered\n", func);
         return cudaSuccess;
     }
@@ -471,11 +484,28 @@ void CUDARTAPI __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
 void CUDARTAPI __cudaUnregisterFatBinary(void **fatCubinHandle) {
     HIJACK_FN_PROLOGUE();
     (void)fatCubinHandle;
-    exec.deallocate(); // TODO: call this at a more suitable place
+    CudaVDev::getInstance().executor.deallocate(); // TODO: call this at a more suitable place
 }
 
 cudaError_t CUDARTAPI cudaGetLastError(void) {
     HIJACK_FN_PROLOGUE();
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaGetDevice(int *device) {
+    HIJACK_FN_PROLOGUE();
+    *device = 0;
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaSetDevice(int device) {
+    (void) device;
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaGetDeviceCount(int *count) {
+    HIJACK_FN_PROLOGUE();
+    *count = 1;
     return cudaSuccess;
 }
 
@@ -493,8 +523,49 @@ void CUDARTAPI __cudaRegisterFunction(void **fatCubinHandle,
     (void)gDim;
     (void)wSize;
     CUfunction f = vdev_get_function(deviceName);
-    fn_ptr_to_cufunction.emplace(std::make_pair((void *)deviceFun, f));
-    fn_ptr_to_cufunction.emplace(std::make_pair((void *)hostFun, f));
+    std::cout << deviceName << std::endl;
+    CudaVDev &vdev = CudaVDev::getInstance();
+    vdev.fn_ptr_to_cufunction.emplace(std::make_pair((void *)deviceFun, f));
+    vdev.fn_ptr_to_cufunction.emplace(std::make_pair((void *)hostFun, f));
+}
+
+cudaError_t CUDARTAPI cudaGetDeviceProperties(struct cudaDeviceProp *prop, int device) {
+    HIJACK_FN_PROLOGUE();
+    (void) device;
+    CudaVDev &vdev = CudaVDev::getInstance();
+    *prop = vdev.getDeviceProperties();
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaStreamIsCapturing(
+    cudaStream_t stream, enum cudaStreamCaptureStatus *pCaptureStatus) {
+    HIJACK_FN_PROLOGUE();
+    (void)stream;
+    *pCaptureStatus = cudaStreamCaptureStatus::cudaStreamCaptureStatusNone;
+    // *pCaptureStatus = cudaStreamCaptureStatus::cudaStreamCaptureStatusActive;
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaStreamSynchronize(cudaStream_t stream) {
+    HIJACK_FN_PROLOGUE();
+    (void) stream;
+    return cudaSuccess;
+}
+
+
+cudaError_t CUDARTAPI cudaThreadExchangeStreamCaptureMode(enum cudaStreamCaptureMode *mode) {
+    HIJACK_FN_PROLOGUE();
+    (void) mode;
+    return cudaSuccess;
+}
+
+cudaError_t CUDARTAPI cudaStreamGetCaptureInfo(
+    cudaStream_t stream, enum cudaStreamCaptureStatus *pCaptureStatus,
+    unsigned long long *pId) {
+    (void) stream;
+    *pCaptureStatus = cudaStreamCaptureStatusNone;
+    *pId = 1;
+    return cudaSuccess;
 }
 
 CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
