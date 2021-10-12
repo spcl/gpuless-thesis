@@ -154,7 +154,6 @@ extern "C" void CUDARTAPI __cudaRegisterFunction(
     dim3 *bDim, dim3 *gDim, int *wSize) {
     static auto real_func =
         (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
-    //    printf("register: %s\n", deviceName);
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)deviceFun, deviceName));
     map.emplace(std::make_pair((void *)hostFun, deviceName));
@@ -381,10 +380,10 @@ extern "C" CUresult CUDAAPI cuModuleGetFunction(CUfunction *hfunc,
     static auto real_func =
         (decltype(&cuModuleGetFunction))real_dlsym(RTLD_NEXT, __func__);
 
+    auto err = real_func(hfunc, hmod, name);
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)*hfunc, name));
-
-    return real_func(hfunc, hmod, name);
+    return err;
 }
 
 extern "C" CUresult CUDAAPI cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize) {
