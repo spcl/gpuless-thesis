@@ -1,0 +1,62 @@
+cudaMalloc(D0 (0x7f306c200000), 400000 bytes)
+
+cudaMalloc(D1 (0x7f306c600000), 400000 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f306c200000) <- H0(0x7f3096314010), 400000 bytes) [time: 0.357 ms]
+
+cudaMalloc(D2 (0x7f306ca00000), 400000 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f306ca00000) <- H1(0x7f3095f13010), 400000 bytes) [time: 0.326 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.009 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.009 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.008 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.009 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.009 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.01 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.011 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.012 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.012 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.012 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.016 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.019 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.021 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.024 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.023 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.023 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.024 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.023 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.023 ms]
+
+cuLaunchKernel(calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)) [time: 0.023 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x7f3095b12010) <- D1(0x7f306c600000), 400000 bytes) [time: 1.873 ms]
+
