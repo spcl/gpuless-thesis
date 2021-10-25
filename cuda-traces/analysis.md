@@ -1,7 +1,7 @@
 # Analysis
 
 | Application | Kernel launches | Unique Kernels | cudaMalloc | Copy H2D | Copy D2D | Copy D2H | CUDA API time | Total time
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | hotspot.log | 25 | 1 | 3 | 2 | 0 | 1 | 3.615 ms | 35.202 ms |
 | dwt2d.log | 10 | 4 | 12 | 1 | 9 | 3 | 1.417 ms | 47.409 ms |
 | srad2.log | 4 | 2 | 6 | 2 | 0 | 2 | 5.609 ms | 52.25 ms |
