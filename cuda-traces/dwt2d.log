@@ -1,70 +1,70 @@
 cudaMallocHost()
 
-cudaMalloc(D0 (0x7fdd5c800000), 400000 bytes)
+cudaMalloc(D0 (0x7f0ed0800000), 400000 bytes)
 
-cudaMalloc(D1 (0x7fdd5cc00000), 400000 bytes)
+cudaMalloc(D1 (0x7f0ed0c00000), 400000 bytes)
 
-cudaMalloc(D2 (0x7fdd5d000000), 400000 bytes)
+cudaMalloc(D2 (0x7f0ed1000000), 400000 bytes)
 
-cudaMalloc(D3 (0x7fdd5d400000), 400000 bytes)
+cudaMalloc(D3 (0x7f0ed1400000), 400000 bytes)
 
-cudaMalloc(D4 (0x7fdd5d800000), 400000 bytes)
+cudaMalloc(D4 (0x7f0ed1800000), 400000 bytes)
 
-cudaMalloc(D5 (0x7fdd5dc00000), 400000 bytes)
+cudaMalloc(D5 (0x7f0ed1c00000), 400000 bytes)
 
-cudaMalloc(D6 (0x7fdd5f000000), 400000 bytes)
+cudaMalloc(D6 (0x7f0ed3000000), 400000 bytes)
 
-cudaMalloc(D7 (0x7fdd5f400000), 300000 bytes)
+cudaMalloc(D7 (0x7f0ed3400000), 300000 bytes)
 
-cudaMemcpy(cudaMemcpyHostToDevice) D7(0x7fdd5f400000) <- H0(0x7fdd5c400000), 300000 bytes) [time: 0.276 ms]
+cudaMemcpy(cudaMemcpyHostToDevice) D7(0x7f0ed3400000) <- H0(0x7f0ed0400000), 300000 bytes) [time: 0.263 ms, acc_time: 0.263 ms]
 
-cuLaunchKernel(void c_CopySrcToComponents<int>(int*, int*, int*, unsigned char*, int)) [time: 0.009 ms]
+cuLaunchKernel(void c_CopySrcToComponents<int>(int*, int*, int*, unsigned char*, int)) [time: 0.01 ms, acc_time: 0.273 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D4), 4194304 bytes) [time: 0.008 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D4), 4194304 bytes) [time: 0.009 ms, acc_time: 0.282 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.009 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.29 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D4 <- D0), 1048576 bytes) [time: 0.007 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D4 <- D0), 1048576 bytes) [time: 0.008 ms, acc_time: 0.298 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.008 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.306 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D4 <- D0), 262144 bytes) [time: 0.007 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D4 <- D0), 262144 bytes) [time: 0.007 ms, acc_time: 0.313 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.028 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.009 ms, acc_time: 0.322 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D5), 4194304 bytes) [time: 0.008 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D5), 4194304 bytes) [time: 0.009 ms, acc_time: 0.331 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.008 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.339 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D5 <- D2), 1048576 bytes) [time: 0.007 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D5 <- D2), 1048576 bytes) [time: 0.007 ms, acc_time: 0.346 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.008 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.354 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D5 <- D2), 262144 bytes) [time: 0.007 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D5 <- D2), 262144 bytes) [time: 0.007 ms, acc_time: 0.361 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.008 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.369 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D6), 4194304 bytes) [time: 0.008 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D1 <- D6), 4194304 bytes) [time: 0.008 ms, acc_time: 0.377 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.008 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)) [time: 0.009 ms, acc_time: 0.386 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D6 <- D3), 1048576 bytes) [time: 0.009 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D6 <- D3), 1048576 bytes) [time: 0.008 ms, acc_time: 0.394 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.009 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)) [time: 0.012 ms, acc_time: 0.406 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToDevice) D6 <- D3), 262144 bytes) [time: 0.008 ms]
+cudaMemcpy(cudaMemcpyDeviceToDevice) D6 <- D3), 262144 bytes) [time: 0.009 ms, acc_time: 0.415 ms]
 
-cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.01 ms]
-
-cudaMallocHost()
-
-cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7fdd5f400000) <- D0(0x7fdd5c800000), 400000 bytes) [time: 0.337 ms]
+cuLaunchKernel(void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)) [time: 0.008 ms, acc_time: 0.423 ms]
 
 cudaMallocHost()
 
-cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7fdd5f400000) <- D2(0x7fdd5d000000), 400000 bytes) [time: 0.332 ms]
+cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f0ed3400000) <- D0(0x7f0ed0800000), 400000 bytes) [time: 0.334 ms, acc_time: 0.757 ms]
 
 cudaMallocHost()
 
-cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7fdd5f400000) <- D3(0x7fdd5d400000), 400000 bytes) [time: 0.331 ms]
+cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f0ed3400000) <- D2(0x7f0ed1000000), 400000 bytes) [time: 0.332 ms, acc_time: 1.089 ms]
+
+cudaMallocHost()
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f0ed3400000) <- D3(0x7f0ed1400000), 400000 bytes) [time: 0.328 ms, acc_time: 1.417 ms]
 

@@ -1,28 +1,28 @@
-cudaMalloc(D0 (0x7fb3c2200000), 1000000 bytes)
+cudaMalloc(D0 (0x7f0266200000), 1000000 bytes)
 
-cudaMalloc(D1 (0x7fb3c5000000), 1000000 bytes)
+cudaMalloc(D1 (0x7f026f000000), 1000000 bytes)
 
-cudaMalloc(D2 (0x7fb3bc000000), 1000000 bytes)
+cudaMalloc(D2 (0x7f0260000000), 1000000 bytes)
 
-cudaMalloc(D3 (0x7fb3bd000000), 1000000 bytes)
+cudaMalloc(D3 (0x7f0261000000), 1000000 bytes)
 
-cudaMalloc(D4 (0x7fb3ba000000), 1000000 bytes)
+cudaMalloc(D4 (0x7f025e000000), 1000000 bytes)
 
-cudaMalloc(D5 (0x7fb3bb000000), 1000000 bytes)
+cudaMalloc(D5 (0x7f025f000000), 1000000 bytes)
 
-cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7fb3c2200000) <- H0(0x7fb3e915f010), 1000000 bytes) [time: 1.48 ms]
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f0266200000) <- H0(0x7f02905f9010), 1000000 bytes) [time: 1.451 ms, acc_time: 1.451 ms]
 
-cuLaunchKernel(srad_cuda_1(float*, float*, float*, float*, float*, float*, int, int, float)) [time: 0.015 ms]
+cuLaunchKernel(srad_cuda_1(float*, float*, float*, float*, float*, float*, int, int, float)) [time: 0.012 ms, acc_time: 1.463 ms]
 
-cuLaunchKernel(srad_cuda_2(float*, float*, float*, float*, float*, float*, int, int, float, float)) [time: 0.01 ms]
+cuLaunchKernel(srad_cuda_2(float*, float*, float*, float*, float*, float*, int, int, float, float)) [time: 0.013 ms, acc_time: 1.476 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7fb3e915f010) <- D0(0x7fb3c2200000), 1000000 bytes) [time: 3.968 ms]
+cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7f02905f9010) <- D0(0x7f0266200000), 1000000 bytes) [time: 4.13 ms, acc_time: 5.606 ms]
 
-cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7fb3c2200000) <- H0(0x7fb3e915f010), 1000000 bytes) [time: 0.001 ms]
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f0266200000) <- H0(0x7f02905f9010), 1000000 bytes) [time: 0.001 ms, acc_time: 5.607 ms]
 
-cuLaunchKernel(srad_cuda_1(float*, float*, float*, float*, float*, float*, int, int, float)) [time: 0.001 ms]
+cuLaunchKernel(srad_cuda_1(float*, float*, float*, float*, float*, float*, int, int, float)) [time: 0 ms, acc_time: 5.607 ms]
 
-cuLaunchKernel(srad_cuda_2(float*, float*, float*, float*, float*, float*, int, int, float, float)) [time: 0 ms]
+cuLaunchKernel(srad_cuda_2(float*, float*, float*, float*, float*, float*, int, int, float, float)) [time: 0.001 ms, acc_time: 5.608 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7fb3e915f010) <- D0(0x7fb3c2200000), 1000000 bytes) [time: 0.001 ms]
+cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7f02905f9010) <- D0(0x7f0266200000), 1000000 bytes) [time: 0.001 ms, acc_time: 5.609 ms]
 
