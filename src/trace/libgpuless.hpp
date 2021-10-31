@@ -7,9 +7,17 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
+#define LINK_CU_FUNCTION(symbol, f)                                            \
+    do {                                                                       \
+        if (strcmp(symbol, #f) == 0) {                                         \
+            *pfn = (void *)&f;                                                 \
+            return CUDA_SUCCESS;                                               \
+        }                                                                      \
+    } while (0)
+
 #define HIJACK_FN_PROLOGUE()                                                   \
     do {                                                                       \
-        dbgprintf("%s()\n", __func__);                                         \
+        dbgprintf("%s() [pid=%d]\n", __func__, getpid());                      \
     } while (0)
 
 #define dbgprintf(str, ...)                                                    \
@@ -21,8 +29,17 @@
     } while (0)
 
 #define EXIT_NOT_IMPLEMENTED(fn)                                               \
-    std::cerr << "not implemented: " << fn << std::endl;                       \
-    std::exit(EXIT_FAILURE);
+    do {                                                                       \
+        std::cerr << "not implemented: " << fn << std::endl;                   \
+        std::exit(EXIT_FAILURE);                                               \
+    } while (0)
+
+#define EXIT_UNRECOVERABLE(msg)                                                \
+    do {                                                                       \
+        std::cerr << msg << std::endl;                                         \
+        std::cerr << "unrecoverable error, exiting" << std::endl;              \
+        std::exit(EXIT_FAILURE);                                               \
+    } while (0)
 
 struct CudaCallConfig {
     dim3 gridDim;

@@ -1,12 +1,5 @@
-#ifndef __TRACE_EXECUTOR_HPP__
-#define __TRACE_EXECUTOR_HPP__
-
-#include <memory>
-#include <cuda.h>
-#include <cuda_runtime.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
+#ifndef GPULESS_TRACEEXECUTOR_H
+#define GPULESS_TRACEEXECUTOR_H
 
 #include "../manager/manager.hpp"
 #include "../manager/manager_device.hpp"
@@ -16,24 +9,25 @@ namespace gpuless {
 namespace executor {
 
 class TraceExecutor {
-  private:
-    sockaddr_in manager_addr{};
-    sockaddr_in exec_addr{};
-
-    bool negotiateSession(manager::instance_profile profile);
+//  private:
+//    sockaddr_in managerAddr{};
+//    sockaddr_in execAddr{};
+//
+//    virtual bool
+//    negotiateSession(gpuless::manager::instance_profile profile) = 0;
 
   public:
-    TraceExecutor();
-    ~TraceExecutor();
+//    TraceExecutor() = default;
+//    ~TraceExecutor() = default;
 
-    bool init(const char *ip, const short port,
-              manager::instance_profile profile);
-    bool
-    synchronize(std::vector<std::shared_ptr<gpuless::CudaApiCall>> &callStack);
-    bool deallocate();
+    virtual bool init(const char *ip, const short port,
+                      gpuless::manager::instance_profile profile) = 0;
+    virtual bool synchronize(
+        std::vector<std::shared_ptr<gpuless::CudaApiCall>> &callStack) = 0;
+    virtual bool deallocate() = 0;
 };
 
 } // namespace executor
 } // namespace gpuless
 
-#endif // __TRACE_EXECUTOR_HPP__
+#endif // GPULESS_TRACEEXECUTOR_H

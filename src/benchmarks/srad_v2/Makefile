@@ -1,6 +1,6 @@
 include make.config
 
-CC := $(CUDA_DIR)/bin/nvcc --cudart shared
+CC := $(CUDA_DIR)/bin/nvcc --cudart shared -arch=sm_86
 
 INCLUDE := $(CUDA_DIR)/include
 

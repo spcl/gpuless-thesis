@@ -2,8 +2,9 @@
 
 namespace gpuless {
 
-CudaTrace::CudaTrace(executor::TraceExecutor &traceExecutor)
-    : trace_executor_(traceExecutor) {}
+CudaTrace::CudaTrace(std::shared_ptr<executor::TraceExecutor> trace_executor,
+                     CubinAnalyzer &cubin_analyzer)
+    : trace_executor_(trace_executor), cubin_analyzer_(cubin_analyzer) {}
 
 void CudaTrace::record(const std::shared_ptr<CudaApiCall>& cudaApiCall) {
     this->call_stack_.push_back(cudaApiCall);
@@ -22,8 +23,12 @@ const std::shared_ptr<CudaApiCall> &CudaTrace::historyTop() {
     return this->synchronized_history_.back();
 }
 
+const CubinAnalyzer &CudaTrace::cubinAnalyzer() {
+    return this->cubin_analyzer_;
+}
+
 void CudaTrace::synchronize() {
-    this->trace_executor_.synchronize(this->call_stack_);
+    this->trace_executor_->synchronize(this->call_stack_);
     this->markSynchronized();
 }
 

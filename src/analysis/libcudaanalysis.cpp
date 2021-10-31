@@ -25,6 +25,8 @@ const bool MAP_PTR_TO_IDENT = true;
 const int major_compute_version = 8;
 const int minor_compute_version = 6;
 
+static double acc_time = 0.0;
+
 extern "C" {
 void *__libc_dlsym(void *map, const char *name);
 }
@@ -120,17 +122,17 @@ CubinAnalyzer &getAnalyzer() {
 }
 
 extern "C" cudaError_t CUDARTAPI cudaMalloc(void **devPtr, size_t size) {
-    using T = cudaError_t (*)(void**, size_t);
+    using T = cudaError_t (*)(void **, size_t);
     static auto real_func = (T)real_dlsym(RTLD_NEXT, __func__);
     cudaError_t err = real_func(devPtr, size);
-    std::cerr << "cudaMalloc(" << addrToIdentDevice(*devPtr)
-              << " (" << std::hex << *devPtr << "), " << size << " bytes)"
-              << std::endl << std::endl;
+    std::cerr << "cudaMalloc(" << addrToIdentDevice(*devPtr) << " (" << std::hex
+              << *devPtr << "), " << size << " bytes)" << std::endl
+              << std::endl;
     return err;
 }
 
 extern "C" cudaError_t CUDARTAPI cudaMallocHost(void **ptr, size_t size) {
-    using T = cudaError_t (*)(void**, size_t);
+    using T = cudaError_t (*)(void **, size_t);
     static auto real_func = (T)real_dlsym(RTLD_NEXT, __func__);
     std::cerr << "cudaMallocHost()" << std::endl << std::endl;
     return real_func(ptr, size);
@@ -138,11 +140,11 @@ extern "C" cudaError_t CUDARTAPI cudaMallocHost(void **ptr, size_t size) {
 
 extern "C" cudaError_t CUDARTAPI cudaMallocAsync(void **devPtr, size_t size,
                                                  cudaStream_t hStream) {
-    using T = cudaError_t (*)(void**, size_t, cudaStream_t);
+    using T = cudaError_t (*)(void **, size_t, cudaStream_t);
     static auto real_func = (T)real_dlsym(RTLD_NEXT, __func__);
     cudaError_t err = real_func(devPtr, size, hStream);
-    std::cerr << "cudaMallocAsync(" << addrToIdentDevice(*devPtr)
-              << " (" << std::hex << *devPtr << "), " << size << " bytes"
+    std::cerr << "cudaMallocAsync(" << addrToIdentDevice(*devPtr) << " ("
+              << std::hex << *devPtr << "), " << size << " bytes"
               << ", stream " << ((uint64_t)hStream) << ")" << std::endl
               << std::endl;
     return err;
@@ -175,18 +177,21 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
         ss << "cudaMemcpyAsync(" << kind_str << ", ";
         ss << addrToIdentHost(dst) << "(" << std::hex << dst << ")"
            << " <- " << addrToIdentDevice((void *)src) << "(" << std::hex << src
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     } else if (kind == cudaMemcpyKind::cudaMemcpyHostToDevice) {
         kind_str = "cudaMemcpyHostToDevice";
         ss << "cudaMemcpyAsync(" << kind_str << ") ";
         ss << addrToIdentDevice(dst) << "(" << std::hex << dst << ")"
            << " <- " << addrToIdentHost((void *)src) << "(" << std::hex << src
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     } else if (kind == cudaMemcpyKind::cudaMemcpyDeviceToDevice) {
         kind_str = "cudaMemcpyDeviceToDevice";
         ss << "cudaMemcpyAsync(" << kind_str << ") ";
         ss << addrToIdentDevice(dst) << " <- " << addrToIdentDevice((void *)src)
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     }
 
     auto s = std::chrono::high_resolution_clock::now();
@@ -195,8 +200,9 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
     auto d =
         std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
         1000.0;
+    acc_time += d;
 
-    ss << " [time: " << d << " ms]" << std::endl;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
     std::cerr << ss.str() << std::endl;
 
     return err;
@@ -215,18 +221,21 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src,
         ss << "cudaMemcpy(" << kind_str << ", ";
         ss << addrToIdentHost(dst) << "(" << std::hex << dst << ")"
            << " <- " << addrToIdentDevice((void *)src) << "(" << std::hex << src
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     } else if (kind == cudaMemcpyKind::cudaMemcpyHostToDevice) {
         kind_str = "cudaMemcpyHostToDevice";
         ss << "cudaMemcpy(" << kind_str << ") ";
         ss << addrToIdentDevice(dst) << "(" << std::hex << dst << ")"
            << " <- " << addrToIdentHost((void *)src) << "(" << std::hex << src
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     } else if (kind == cudaMemcpyKind::cudaMemcpyDeviceToDevice) {
         kind_str = "cudaMemcpyDeviceToDevice";
         ss << "cudaMemcpy(" << kind_str << ") ";
         ss << addrToIdentDevice(dst) << " <- " << addrToIdentDevice((void *)src)
-           << ")" << ", " << count << " bytes)";
+           << ")"
+           << ", " << count << " bytes)";
     }
 
     auto s = std::chrono::high_resolution_clock::now();
@@ -235,16 +244,18 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src,
     auto d =
         std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
         1000.0;
+    acc_time += d;
 
-    ss << " [time: " << d << " ms]" << std::endl;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
     std::cerr << ss.str() << std::endl;
 
     return err;
 }
 
 // extern "C" cudaError_t CUDARTAPI cudaLaunchKernel(const void *func,
-//                                                   dim3 gridDim, dim3 blockDim,
-//                                                   void **args, size_t sharedMem,
+//                                                   dim3 gridDim, dim3
+//                                                   blockDim, void **args,
+//                                                   size_t sharedMem,
 //                                                   cudaStream_t stream) {
 //     static fnCudaLaunchKernel real_func =
 //         (fnCudaLaunchKernel)real_dlsym(RTLD_NEXT, __func__);
@@ -318,14 +329,28 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src,
 //     return err;
 // }
 
-extern "C" cudaError_t CUDARTAPI cudaStreamCreateWithFlags(
-        cudaStream_t *pStream, unsigned int flags) {
+extern "C" cudaError_t CUDARTAPI
+cudaStreamCreateWithFlags(cudaStream_t *pStream, unsigned int flags) {
     static auto real_func =
         (decltype(&cudaStreamCreateWithFlags))real_dlsym(RTLD_NEXT, __func__);
     std::cerr << "cudaStreamCreateWithFlags()" << std::endl;
     return real_func(pStream, flags);
 }
 
+extern "C" cudaError_t cudaStreamBeginCapture(cudaStream_t stream,
+                                   cudaStreamCaptureMode mode) {
+    static auto real_func =
+        (decltype(&cudaStreamBeginCapture))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cudaStreamBeginCapture()" << std::endl << std::endl;
+    return real_func(stream, mode);
+}
+
+extern "C" cudaError_t cudaStreamEndCapture(cudaStream_t stream, cudaGraph_t *pGraph) {
+    static auto real_func =
+        (decltype(&cudaStreamEndCapture))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cudaStreamEndCapture()" << std::endl << std::endl;
+    return real_func(stream, pGraph);
+}
 
 extern "C" CUresult CUDAAPI cuLaunchKernel(
     CUfunction f, unsigned int gridDimX, unsigned int gridDimY,
@@ -352,18 +377,19 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
 
     ss << ")";
 
-
     auto s = std::chrono::high_resolution_clock::now();
     auto err =
         real_func(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY,
-                blockDimZ, sharedMemBytes, hStream, kernelParams, extra);
+                  blockDimZ, sharedMemBytes, hStream, kernelParams, extra);
     auto e = std::chrono::high_resolution_clock::now();
-    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e - s)
-        .count() /
+    auto d =
+        std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
         1000.0;
-    ss << " [time: " << d << " ms]" << std::endl;
+    acc_time += d;
 
-    std::cerr << ss.str() << std::endl;;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
+    std::cerr << ss.str() << std::endl;
+
     return err;
 }
 
@@ -393,8 +419,9 @@ extern "C" CUresult CUDAAPI cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize) {
     return real_func(dptr, bytesize);
 }
 
-extern "C" CUresult CUDAAPI cuMemcpyDtoH_v2(void *dstHost, CUdeviceptr srcDevice,
-                                 size_t ByteCount) {
+extern "C" CUresult CUDAAPI cuMemcpyDtoH_v2(void *dstHost,
+                                            CUdeviceptr srcDevice,
+                                            size_t ByteCount) {
     static auto real_func =
         (decltype(&cuMemcpyDtoH_v2))real_dlsym(RTLD_NEXT, __func__);
     std::cerr << "cuMemcpyDtoH_v2" << std::endl << std::endl;
@@ -406,7 +433,8 @@ extern "C" CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
                                              cuuint64_t flags) {
     static auto real_func =
         (decltype(&cuGetProcAddress))real_dlsym(RTLD_NEXT, __func__);
-   // std::cerr << "cuGetProcAddress(" << symbol << ")" << std::endl << std::endl;
+    // std::cerr << "cuGetProcAddress(" << symbol << ")" << std::endl <<
+    // std::endl;
 
     LINK_CU_FUNCTION(symbol, cuLaunchKernel);
     LINK_CU_FUNCTION(symbol, cuModuleGetFunction);

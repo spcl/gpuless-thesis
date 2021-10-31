@@ -10,8 +10,7 @@
 #define kCHANNELS 3
 #define kTOP_K 3
 
-const char *file_name = "../benchmarks/800px-Porsche_991_silver_IAA.jpg";
-// const char *file_name = "../benchmarks/800px-Sardinian_Warbler.jpg";
+const char *file_name = "./800px-Porsche_991_silver_IAA.jpg";
 
 bool load_image(cv::Mat &image) {
     image = cv::imread(file_name);  // CV_8UC3
@@ -36,7 +35,7 @@ int recognition(cv::Mat &image) {
     if (!init) {
         try {
             // reuse model in warm functions
-            mod = torch::jit::load("../benchmarks/resnet50.pt");
+            mod = torch::jit::load("./resnet50.pt");
             init = true;
         }
         catch (const c10::Error& e) {

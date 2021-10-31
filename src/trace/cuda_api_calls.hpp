@@ -3,9 +3,12 @@
 
 #include <cstdint>
 #include <cuda_runtime.h>
-#include <vector>
 #include <string>
 #include <typeinfo>
+#include <vector>
+#include <iostream>
+
+#include "../adapter/cubin_analysis.hpp"
 
 namespace gpuless {
 
@@ -14,9 +17,7 @@ class CudaApiCall {
     virtual cudaError_t executeNative() = 0;
     virtual ~CudaApiCall() = default;
 
-    virtual std::string typeName() {
-        return typeid(*this).name();
-    }
+    virtual std::string typeName() { return typeid(*this).name(); }
 };
 
 /*
@@ -48,8 +49,19 @@ class CudaMemcpyD2H : public CudaApiCall {
     void *dst;
     const void *src;
     size_t size;
+    std::vector<uint8_t> buffer;
 
     CudaMemcpyD2H(void *dst, const void *src, size_t size);
+    cudaError_t executeNative() override;
+};
+
+class CudaMemcpyD2D : public CudaApiCall {
+  public:
+    void *dst;
+    const void *src;
+    size_t size;
+
+    CudaMemcpyD2D(void *dst, const void *src, size_t size);
     cudaError_t executeNative() override;
 };
 
@@ -58,8 +70,11 @@ class CudaMemcpyAsyncH2D : public CudaApiCall {
     void *dst;
     const void *src;
     size_t size;
+    cudaStream_t stream;
+    std::vector<uint8_t> buffer;
 
-    CudaMemcpyAsyncH2D(void *dst, const void *src, size_t size);
+    CudaMemcpyAsyncH2D(void *dst, const void *src, size_t size,
+                       cudaStream_t stream);
     cudaError_t executeNative() override;
 };
 
@@ -68,8 +83,31 @@ class CudaMemcpyAsyncD2H : public CudaApiCall {
     void *dst;
     const void *src;
     size_t size;
+    cudaStream_t stream;
+    std::vector<uint8_t> buffer;
 
-    CudaMemcpyAsyncD2H(void *dst, const void *src, size_t size);
+    CudaMemcpyAsyncD2H(void *dst, const void *src, size_t size,
+                       cudaStream_t stream);
+    cudaError_t executeNative() override;
+};
+
+class CudaMemcpyAsyncD2D : public CudaApiCall {
+  public:
+    void *dst;
+    const void *src;
+    size_t size;
+    cudaStream_t stream;
+
+    CudaMemcpyAsyncD2D(void *dst, const void *src, size_t size,
+                       cudaStream_t stream);
+    cudaError_t executeNative() override;
+};
+
+class CudaFree : public CudaApiCall {
+  public:
+    void *devPtr;
+
+    CudaFree(void *devPtr);
     cudaError_t executeNative() override;
 };
 
@@ -78,13 +116,25 @@ class CudaLaunchKernel : public CudaApiCall {
     const void *fnPtr;
     dim3 gridDim;
     dim3 blockDim;
-    void **args;
     size_t sharedMem;
     cudaStream_t stream;
 
+    std::vector<std::vector<uint8_t>> paramBuffers;
+    std::vector<KParamInfo> paramInfos;
+
     CudaLaunchKernel(const void *fnPtr, const dim3 &gridDim,
-                     const dim3 &blockDim, void **args, size_t sharedMem,
-                     cudaStream_t stream);
+                     const dim3 &blockDim, size_t sharedMem,
+                     cudaStream_t stream,
+                     std::vector<std::vector<uint8_t>> &paramBuffers,
+                     std::vector<KParamInfo> &paramInfos);
+    cudaError_t executeNative() override;
+};
+
+class CudaStreamSynchronize : public CudaApiCall {
+  public:
+    cudaStream_t stream;
+
+    CudaStreamSynchronize(cudaStream_t stream);
     cudaError_t executeNative() override;
 };
 
@@ -93,6 +143,7 @@ class CudaLaunchKernel : public CudaApiCall {
  */
 
 class PrivCudaPushCallConfiguration : public CudaApiCall {
+  public:
 };
 
 class PrivCudaPopCallConfiguration : public CudaApiCall {

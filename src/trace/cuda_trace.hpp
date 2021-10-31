@@ -8,22 +8,30 @@
 #include <string>
 #include <vector>
 
-#include "libgpuless.hpp"
+#include "../adapter/cubin_analysis.hpp"
 #include "cuda_api_calls.hpp"
+#include "libgpuless.hpp"
 #include "trace_executor.hpp"
+#include "trace_executor_local.hpp"
 
 namespace gpuless {
 
 class CudaTrace {
   private:
+    std::shared_ptr<executor::TraceExecutor> trace_executor_;
+    CubinAnalyzer &cubin_analyzer_;
+
     std::vector<std::shared_ptr<CudaApiCall>> synchronized_history_;
     std::vector<std::shared_ptr<CudaApiCall>> call_stack_;
-    executor::TraceExecutor trace_executor_;
     void markSynchronized();
 
   public:
+    CudaTrace(std::shared_ptr<executor::TraceExecutor> trace_executor,
+              CubinAnalyzer &cubin_analyzer);
+
     const std::shared_ptr<CudaApiCall> &historyTop();
-    CudaTrace(executor::TraceExecutor &traceExecutor);
+    const CubinAnalyzer &cubinAnalyzer();
+
     void record(const std::shared_ptr<CudaApiCall>& cudaApiCall);
     void synchronize();
 };

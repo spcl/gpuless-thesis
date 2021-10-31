@@ -21,7 +21,7 @@ void send_buffer(int socket_fd, const uint8_t *buf, size_t len);
 
 void string_split(std::string const &str, const char delim,
                   std::vector<std::string> &out);
-
 std::string string_rstrip(const std::string &str);
+std::string cpp_demangle(const std::string &str);
 
 #endif // __UTILS_HPP__

@@ -1,0 +1,3704 @@
+running: unit/simple
+
+[libgpuless] __cudaRegisterFatBinary()
+[libgpuless] __cudaRegisterFunction(vadd_obj)
+[libgpuless] __cudaRegisterFatBinaryEnd()
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+
+running: unit/objkernel
+
+[libgpuless] __cudaRegisterFatBinary()
+[libgpuless] __cudaRegisterFunction(vadd_obj)
+[libgpuless] __cudaRegisterFatBinaryEnd()
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+
+running: unit/manykernel
+
+[libgpuless] __cudaRegisterFatBinary()
+[libgpuless] __cudaRegisterFunction(vadd)
+[libgpuless] __cudaRegisterFatBinaryEnd()
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+
+running custom: hotspot
+running: run
+
+[libgpuless] __cudaRegisterFatBinary()
+[libgpuless] __cudaRegisterFunction(calculate_temp)
+[libgpuless] __cudaRegisterFatBinaryEnd()
+WG size of kernel = 16 X 16
+pyramidHeight: 2
+gridSize: [512, 512]
+border:[2, 2]
+blockGrid:[43, 43]
+targetBlock:[12, 12]
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+
+running custom: dwt2d
+running: run
+
+192.bmp.dwt.b
+192.bmp.dwt.g
+192.bmp.dwt.r
+autorun.sh
+common.h
+components.cu
+components.cu.o
+components.h
+data
+dwt2d
+dwt2d.log
+dwt.cu
+dwt_cuda
+dwt.cu.o
+dwt.h
+dwt_kernel.c.copy
+main.cu
+main.cu.o
+make.config
+Makefile
+README
+result.txt
+rgb.bmp.dwt.b
+rgb.bmp.dwt.g
+rgb.bmp.dwt.r
+run
+
+running custom: srad_v1
+running: run
+
+[libgpuless] __cudaRegisterFatBinary()
+[libgpuless] __cudaRegisterFunction(compress)
+[libgpuless] __cudaRegisterFunction(srad2)
+[libgpuless] __cudaRegisterFunction(srad)
+[libgpuless] __cudaRegisterFunction(reduce)
+[libgpuless] __cudaRegisterFunction(prepare)
+[libgpuless] __cudaRegisterFunction(extract)
+[libgpuless] __cudaRegisterFatBinaryEnd()
+The file was not opened for reading
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+[libgpuless] dlsym(cuGetProcAddress)
+[libgpuless] cuGetProcAddress(cuGetProcAddress)
+[libgpuless] cuGetProcAddress(cuGetProcAddress): symbol not implemented
+[libgpuless] cuGetProcAddress(cuInit)
+[libgpuless] cuGetProcAddress(cuInit): symbol not implemented
+[libgpuless] cuGetProcAddress(cuGetProcAddress)
+[libgpuless] cuGetProcAddress(cuGetProcAddress): symbol not implemented
+[libgpuless] dlsym(dladdr1)
+  0x7f8542200000
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f85422e0a00
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyHostToDevice
+[libgpuless]   0x7f85422e0a00 <- 0x55a4309c5760
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyH2DE
+  N7gpuless10CudaMallocE
+  0x7f85422e1200
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyHostToDevice
+[libgpuless]   0x7f85422e1200 <- 0x55a4309c5f40
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyH2DE
+  N7gpuless10CudaMallocE
+  0x7f85422e1a00
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyHostToDevice
+[libgpuless]   0x7f85422e1a00 <- 0x55a4309c6e50
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyH2DE
+  N7gpuless10CudaMallocE
+  0x7f85422e2200
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyHostToDevice
+[libgpuless]   0x7f85422e2200 <- 0x55a4309c6720
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyH2DE
+  N7gpuless10CudaMallocE
+  0x7f85422e2a00
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f8542400000
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f85424e0a00
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f8542600000
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f85426e0a00
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f8542800000
+[libgpuless] cudaMalloc()
+TraceExecutorLocal::synchronize
+  N7gpuless10CudaMallocE
+  0x7f85428e0a00
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyHostToDevice
+[libgpuless]   0x7f8542200000 <- 0x7f856a175010
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   extract
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyH2DE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   prepare
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   reduce
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa440 <- 0x7f85422e2a00
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7ffdd5cfa444 <- 0x7f8542400000
+TraceExecutorLocal::synchronize
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   srad2
+[libgpuless] __cudaPushCallConfiguration()
+[libgpuless] __cudaPopCallConfiguration()
+[libgpuless] cudaLaunchKernel()
+[libgpuless]   compress
+[libgpuless] cudaMemcpy()
+[libgpuless]   cudaMemcpyDeviceToHost
+[libgpuless]   0x7f856a175010 <- 0x7f8542200000
+TraceExecutorLocal::synchronize
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless16CudaLaunchKernelE
+  N7gpuless13CudaMemcpyD2HE
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+[libgpuless] cudaFree()
+Time spent in different stages of the application:
+ 0.000000000000 s,  0.000000000000 % : SETUP VARIABLES
+ 0.000004000000 s,  0.004270219710 % : READ COMMAND LINE PARAMETERS
+ 0.000007000000 s,  0.007472884376 % : READ IMAGE FROM FILE
+ 0.000440000003 s,  0.469724148512 % : RESIZE IMAGE
+ 0.066903002560 s, 71.422622680664 % : GPU DRIVER INIT, CPU/GPU SETUP, MEMORY ALLOCATION
+ 0.000250999990 s,  0.267956256866 % : COPY DATA TO CPU->GPU
+ 0.000008000000 s,  0.008540439419 % : EXTRACT IMAGE
+ 0.014604000375 s, 15.590570449829 % : COMPUTE
+ 0.000001000000 s,  0.001067554927 % : COMPRESS IMAGE
+ 0.000529000012 s,  0.564736545086 % : COPY DATA TO GPU->CPU
+ 0.010874000378 s, 11.608592033386 % : SAVE IMAGE INTO FILE
+ 0.000050999999 s,  0.054445296526 % : FREE MEMORY
+Total time:
+0.093671999872 s
+

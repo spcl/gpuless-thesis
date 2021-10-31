@@ -1,6 +1,7 @@
 #include <algorithm>
 
 #include "utils.hpp"
+#include "libiberty/demangle.h"
 
 void __checkCudaErrors(CUresult r, const char *file, const int line) {
     if (r != CUDA_SUCCESS) {
@@ -54,5 +55,10 @@ std::string string_rstrip(const std::string &str) {
     std::string s(it, str.rend());
     std::reverse(s.begin(), s.end());
     return s;
+}
+
+std::string cpp_demangle(const std::string &str) {
+    std::string demangled = cplus_demangle(str.c_str(), DMGL_NO_OPTS);
+    return demangled;
 }
 
