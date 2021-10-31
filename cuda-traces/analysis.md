@@ -7,6 +7,7 @@
 | srad2.log | 4 | 2 | 6 | 2 | 0 | 2 | 5.609 ms | 52.25 ms |
 | resnet50.log | 310 | 21 | 37 | 321 | 3 | 3 | 15.676 ms | 139.005 ms |
 | bert-squad.log | 714 | 22 | 74 | 397 | 1 | 3 | 132.906 ms | 531.512 ms |
+| 3d-unet-kits19.log | 6850 | 17 | 22 | 82 | 2700 | 2 | | |
 
 # Description
 
@@ -46,3 +47,9 @@ Image recognition using Resnet50.
 ## BERT
 
 BERT for usage with the Stanford Question Answering Dataset (SQUAD).
+
+## 3d-unet-kits19
+
+3D-UNet Model ([3D U-Net](https://arxiv.org/abs/1606.06650),
+[nnUNet](https://github.com/MIC-DKFZ/nnUNet)) performing [KiTS
+2019](https://kits19.grand-challenge.org/) kidney tumor segmentation task.

@@ -6,6 +6,7 @@ files=(
     srad2.log
     resnet50.log
     bert-squad.log
+    3d-unet-kits19.log
 )
 
 printf '| Application | Kernel launches | Unique Kernels | cudaMalloc | Copy H2D | Copy D2D | Copy D2H |\n'
