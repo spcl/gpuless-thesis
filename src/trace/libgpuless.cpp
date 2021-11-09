@@ -1,4 +1,5 @@
 
+#include <atomic>
 #include <cstdlib>
 #include <cstring>
 #include <memory>
@@ -6,45 +7,75 @@
 
 #include <cuda.h>
 #include <cuda_runtime.h>
+#include <fatbinary_section.h>
+#include <spdlog/cfg/env.h>
+#include <spdlog/spdlog.h>
 
-#include "../adapter/cubin_analysis.hpp"
+#include "cubin_analysis.hpp"
 #include "../utils.hpp"
 #include "cuda_trace.hpp"
 #include "dlsym_util.hpp"
 #include "libgpuless.hpp"
 #include "trace_executor_local.hpp"
 
+using namespace gpuless;
+
 const int CUDA_MAJOR_VERSION = 8;
 const int CUDA_MINOR_VERSION = 6;
 
 bool debug_print = true;
 
-using namespace gpuless::executor;
-using namespace gpuless;
-
 static std::stack<CudaCallConfig> cuda_call_config_stack;
+
+static void hijackInit() {
+    static bool initialized = false;
+    if (!initialized) {
+        // load log level from env variable SPDLOG_LEVEL
+        spdlog::cfg::load_env_levels();
+
+        initialized = true;
+    }
+}
 
 static std::map<const void *, std::string> &getSymbolMap() {
     static std::map<const void *, std::string> fnptr_to_symbol;
     return fnptr_to_symbol;
 }
 
+struct CudaRegisterState {
+    uint64_t current_fatbin_handle;
+    bool is_registering;
+};
+
+static CudaRegisterState &getCudaRegisterState() {
+    static CudaRegisterState state{0, false};
+    return state;
+}
+
+static uint64_t incrementFatbinCount() {
+    static std::atomic<uint64_t> ctr = 1;
+    return ctr++;
+}
+
 static void exitHandler();
 
-static CudaTrace &getCudaTrace() {
-    static auto traceExecutor = std::make_shared<TraceExecutorLocal>();
-    static CubinAnalyzer cubinAnalyzer;
-    static CudaTrace cudaTrace(traceExecutor, cubinAnalyzer);
+static std::shared_ptr<TraceExecutor> getTraceExecutor() {
+    static auto trace_executor = std::make_shared<TraceExecutorLocal>();
+    return trace_executor;
+}
 
-    static bool exit_handler_registerd = false;
-    if (!exit_handler_registerd) {
-        exit_handler_registerd = true;
-        std::atexit([]() {
-            exitHandler();
-        });
+static CudaTrace &getCudaTrace() {
+    static auto cuda_virtual_device = std::make_shared<CudaVirtualDevice>();
+    static CubinAnalyzer cubin_analyzer;
+    static CudaTrace cuda_trace(cubin_analyzer, cuda_virtual_device);
+
+    static bool exit_handler_registered = false;
+    if (!exit_handler_registered) {
+        exit_handler_registered = true;
+        std::atexit([]() { exitHandler(); });
     }
 
-    if (!cubinAnalyzer.isInitialized()) {
+    if (!cubin_analyzer.isInitialized()) {
         char *cuda_binary = std::getenv("CUDA_BINARY");
         if (cuda_binary == nullptr) {
             std::cerr << "please set CUDA_BINARY environment variable"
@@ -54,18 +85,19 @@ static CudaTrace &getCudaTrace() {
 
         std::vector<std::string> binaries;
         string_split(std::string(cuda_binary), ',', binaries);
-        dbgprintf("analyzing CUDA binaries (%s)\n", cuda_binary);
-        cubinAnalyzer.analyze(binaries, CUDA_MAJOR_VERSION, CUDA_MINOR_VERSION);
+        spdlog::info("Analyzing CUDA binaries ({})", cuda_binary);
+        cubin_analyzer.analyze(binaries, CUDA_MAJOR_VERSION,
+                               CUDA_MINOR_VERSION);
     }
 
-    return cudaTrace;
+    return cuda_trace;
 }
 
 static void exitHandler() {
-    dbgprintf("std::atexit()\n");
+    spdlog::debug("std::atexit()");
     // this does not work, because CUDA exit handler have already destructed
     // the drive runtime at std::atexit time
-//    getCudaTrace().synchronize();
+    //    getCudaTrace().synchronize();
 }
 
 extern "C" {
@@ -75,31 +107,34 @@ extern "C" {
  */
 
 cudaError_t cudaMalloc(void **devPtr, size_t size) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaMalloc>(size));
-    getCudaTrace().synchronize();
+    getTraceExecutor()->synchronize(getCudaTrace());
     *devPtr = std::static_pointer_cast<CudaMalloc>(getCudaTrace().historyTop())
                   ->devPtr;
-    printf("  %p\n", *devPtr);
+    //    printf("  %p\n", *devPtr);
     return cudaSuccess;
 }
 
 cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
                        enum cudaMemcpyKind kind) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     if (kind == cudaMemcpyHostToDevice) {
-        dbgprintf("  cudaMemcpyHostToDevice\n");
+        spdlog::info("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]",
+                     __func__, dst, src, getpid());
         getCudaTrace().record(std::make_shared<CudaMemcpyH2D>(dst, src, count));
-        dbgprintf("  %p <- %p\n", dst, src);
     } else if (kind == cudaMemcpyDeviceToHost) {
-        dbgprintf("  cudaMemcpyDeviceToHost\n");
+        spdlog::info("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]",
+                     __func__, dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyD2H>(dst, src, count);
         getCudaTrace().record(rec);
-        dbgprintf("  %p <- %p\n", dst, src);
-        getCudaTrace().synchronize();
+        getTraceExecutor()->synchronize(getCudaTrace());
         std::memcpy(dst, rec->buffer.data(), count);
     } else if (kind == cudaMemcpyDeviceToDevice) {
-        dbgprintf("  cudaMemcpyDeviceToDevice\n");
+        spdlog::info("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
+                     __func__, dst, src, getpid());
         getCudaTrace().record(std::make_shared<CudaMemcpyD2D>(dst, src, count));
     } else {
         EXIT_NOT_IMPLEMENTED("cudaMemcpyKind");
@@ -107,24 +142,31 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
     return cudaSuccess;
 }
 
-// TODO
 cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
                             enum cudaMemcpyKind kind, cudaStream_t stream) {
-    HIJACK_FN_PROLOGUE();
+    hijackInit();
+    //    HIJACK_FN_PROLOGUE();
     if (kind == cudaMemcpyHostToDevice) {
-        dbgprintf("  cudaMemcpyHostToDevice\n");
-        getCudaTrace().record(std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream));
-        dbgprintf("  %p <- %p\n", dst, src);
+        spdlog::info(
+            "{}() [cudaMemcpyHostToDevice, {} <- {}, stream={}, pid={}]",
+            __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
+        getCudaTrace().record(
+            std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream));
     } else if (kind == cudaMemcpyDeviceToHost) {
-        dbgprintf("  cudaMemcpyDeviceToHost\n");
-        auto rec = std::make_shared<CudaMemcpyAsyncD2H>(dst, src, count, stream);
+        spdlog::info(
+            "{}() [cudaMemcpyDeviceToHost, {} <- {}, stream={}, pid={}]",
+            __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
+        auto rec =
+            std::make_shared<CudaMemcpyAsyncD2H>(dst, src, count, stream);
         getCudaTrace().record(rec);
-        dbgprintf("  %p <- %p\n", dst, src);
-        getCudaTrace().synchronize();
+        getTraceExecutor()->synchronize(getCudaTrace());
         std::memcpy(dst, rec->buffer.data(), count);
     } else if (kind == cudaMemcpyDeviceToDevice) {
-        dbgprintf("  cudaMemcpyDeviceToDevice\n");
-        getCudaTrace().record(std::make_shared<CudaMemcpyAsyncD2D>(dst, src, count, stream));
+        spdlog::info(
+            "{}() [cudaMemcpyDeviceToDevice, {} <- {}, stream={}, pid={}]",
+            __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
+        getCudaTrace().record(
+            std::make_shared<CudaMemcpyAsyncD2D>(dst, src, count, stream));
     } else {
         EXIT_NOT_IMPLEMENTED("cudaMemcpyKind");
     }
@@ -134,6 +176,7 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
 cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
                              void **args, size_t sharedMem,
                              cudaStream_t stream) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
 
     auto it = getSymbolMap().find(func);
@@ -141,7 +184,7 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
         EXIT_UNRECOVERABLE("unknown function");
     }
     std::string &symbol = it->second;
-    dbgprintf("  %s\n", cpp_demangle(symbol).c_str());
+    spdlog::info("cudaLaunchKernel({})", cpp_demangle(symbol).c_str());
 
     std::vector<KParamInfo> paramInfos;
     const auto &analyzer = getCudaTrace().cubinAnalyzer();
@@ -156,26 +199,42 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
         std::memcpy(paramBuffers[i].data(), args[i], p.size * p.typeSize);
     }
 
+    auto &cuda_trace = getCudaTrace();
+    auto &vdev = cuda_trace.cudaVirtualDevice();
+    auto mod_id_it = vdev.symbol_to_module_id_map.find(symbol);
+    if (mod_id_it == vdev.symbol_to_module_id_map.end()) {
+        std::cerr << "function: "
+                  << " has unknown module" << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+
+    std::vector<uint64_t> required_cuda_modules{mod_id_it->second};
+    std::vector<std::string> required_function_symbols{symbol};
+
     getCudaTrace().record(std::make_shared<CudaLaunchKernel>(
-        func, gridDim, blockDim, sharedMem, stream, paramBuffers, paramInfos));
+        symbol, required_cuda_modules, required_function_symbols, func, gridDim,
+        blockDim, sharedMem, stream, paramBuffers, paramInfos));
     return cudaSuccess;
 }
 
 cudaError_t cudaFree(void *devPtr) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaFree>(devPtr));
-    // have to synchronize here until i find a way to hook the cuda exit handler
-    getCudaTrace().synchronize();
+    // have to synchronize here until I find a way to hook the cuda exit handler
+    getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 
 cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaStreamSynchronize>(stream));
     return cudaSuccess;
 }
 
 cudaError_t cudaThreadSynchronize(void) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     // TODO
     return cudaSuccess;
@@ -184,15 +243,32 @@ cudaError_t cudaThreadSynchronize(void) {
 // TODO
 cudaError_t cudaStreamCreateWithFlags(cudaStream_t *pStream,
                                       unsigned int flags) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     static auto real_func =
         (decltype(&cudaStreamCreateWithFlags))real_dlsym(RTLD_NEXT, __func__);
     return real_func(pStream, flags);
 }
 
+cudaError_t
+cudaStreamIsCapturing(cudaStream_t stream,
+                      enum cudaStreamCaptureStatus *pCaptureStatus) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    *pCaptureStatus = cudaStreamCaptureStatusNone;
+    //    *pCaptureStatus = cudaStreamCaptureStatusActive;
+    //    getCudaTrace().record(std::make_shared<CudaStreamIsCapturing>(stream));
+    //    getCudaTrace().synchronize();
+    //    auto t = std::static_pointer_cast<CudaStreamIsCapturing>(
+    //        getCudaTrace().historyTop());
+    //    *pCaptureStatus = t->cudaStreamCaptureStatus;
+    return cudaSuccess;
+}
+
 unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
                                      size_t sharedMem = 0,
                                      struct CUstream_st *stream = 0) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     cuda_call_config_stack.push({gridDim, blockDim, sharedMem, stream});
     return cudaSuccess;
@@ -200,6 +276,7 @@ unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
 
 cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
                                        size_t *sharedMem, void *stream) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     CudaCallConfig config = cuda_call_config_stack.top();
     cuda_call_config_stack.pop();
@@ -210,87 +287,127 @@ cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
     return cudaSuccess;
 }
 
-// TODO
 void **__cudaRegisterFatBinary(void *fatCubin) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
+    auto &state = getCudaRegisterState();
+    auto &vdev = getCudaTrace().cudaVirtualDevice();
 
-    //    std::vector<uint8_t> fatBinCWrapperCpy(sizeof(__fatBinC_Wrapper_t));
-    //    std::memcpy(fatBinCWrapperCpy.data(), fatCubin,
-    //    sizeof(__fatBinC_Wrapper_t));
+    uint64_t fatbin_id = incrementFatbinCount();
+    state.is_registering = true;
+    state.current_fatbin_handle = fatbin_id;
 
-    //    auto fatBinCWrapper = static_cast<__fatBinC_Wrapper_t *>(fatCubin);
-    //    const long long unsigned *data = fatBinCWrapper->data;
-    //    uint64_t imgSize = data[1];
+    vdev.module_id_to_fatbin_wrapper_map.emplace(
+        fatbin_id, *static_cast<__fatBinC_Wrapper_t *>(fatCubin));
 
-    //    std::cout << "sndGW=" << imgSize << std::endl;
-    //    std::cout << "xx=" << fatBinCWrapper->filename_or_fatbins <<
-    //    std::endl;
-
-    static auto real_func =
-        (decltype(&__cudaRegisterFatBinary))real_dlsym(RTLD_NEXT, __func__);
-    return real_func(fatCubin);
+    getCudaTrace().record(
+        std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
+    return reinterpret_cast<void **>(fatbin_id);
 }
 
-// TODO
 void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
-    static auto real_func =
-        (decltype(&__cudaRegisterFatBinaryEnd))real_dlsym(RTLD_NEXT, __func__);
-    return real_func(fatCubinHandle);
+
+    auto &state = getCudaRegisterState();
+    if (!state.is_registering) {
+        EXIT_UNRECOVERABLE("__cudaRegisterFatBinaryEnd called without a "
+                           "previous call to __cudaRegisterFatBinary");
+    }
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
+        state.current_fatbin_handle));
+    state.is_registering = false;
 }
 
-// TODO
 void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
                             char *deviceFun, const char *deviceName,
                             int thread_limit, uint3 *tid, uint3 *bid,
                             dim3 *bDim, dim3 *gDim, int *wSize) {
-    //    HIJACK_FN_PROLOGUE();
-    dbgprintf("%s(%s)\n", __func__, cpp_demangle(deviceName).c_str());
+    hijackInit();
+    spdlog::debug("{}({})", __func__, cpp_demangle(deviceName).c_str());
+
+    auto &state = getCudaRegisterState();
+    auto &vdev = getCudaTrace().cudaVirtualDevice();
+    if (!state.is_registering) {
+        EXIT_UNRECOVERABLE("__cudaRegisterFunction called without a "
+                           "previous call to __cudaRegisterFatBinary");
+    }
+
+    vdev.symbol_to_module_id_map.emplace(deviceName,
+                                         state.current_fatbin_handle);
+
     getSymbolMap().emplace(
         std::make_pair(static_cast<const void *>(hostFun), deviceName));
     getSymbolMap().emplace(
         std::make_pair(static_cast<const void *>(deviceFun), deviceName));
-    static auto real_func =
-        (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
-    real_func(fatCubinHandle, hostFun, deviceFun, deviceName, thread_limit, tid,
-              bid, bDim, gDim, wSize);
+
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
+        reinterpret_cast<uint64_t>(fatCubinHandle),
+        const_cast<void *>(reinterpret_cast<const void *>(hostFun)), deviceFun,
+        deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
 }
 
-//void __cudaUnregisterFatBinary(void **fatCubinHandle) {
-//    HIJACK_FN_PROLOGUE();
-//    (void)fatCubinHandle;
-//    getCudaTrace().synchronize();
-//}
+void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
+                       char *deviceAddress, const char *deviceName, int ext,
+                       size_t size, int constant, int global) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+
+    auto &state = getCudaRegisterState();
+    auto &vdev = getCudaTrace().cudaVirtualDevice();
+    if (!state.is_registering) {
+        EXIT_UNRECOVERABLE("__cudaRegisterVar called without a "
+                           "previous call to __cudaRegisterFatBinary");
+    }
+
+    vdev.global_var_to_module_id_map.emplace(deviceName,
+                                             state.current_fatbin_handle);
+
+    std::vector<uint64_t> required_cuda_modules{state.current_fatbin_handle};
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
+        required_cuda_modules, state.current_fatbin_handle, hostVar,
+        deviceAddress, deviceName, ext, size, constant, global));
+}
+
+void __cudaUnregisterFatBinary(void **fatCubinHandle) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    (void)fatCubinHandle;
+    // TODO
+}
 
 /*
  * CUDA driver API
  */
 
 CUresult cuDevicePrimaryCtxRelease(CUdevice dev) {
+    hijackInit();
     HIJACK_FN_PROLOGUE();
     (void)dev;
-    getCudaTrace().synchronize();
+    getTraceExecutor()->synchronize(getCudaTrace());
     return CUDA_SUCCESS;
 }
 
 CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
                           cuuint64_t flags) {
+    hijackInit();
     static auto real =
         (decltype(&cuGetProcAddress))real_dlsym(RTLD_NEXT, __func__);
-//    dbgprintf("%s(%s)\n", __func__, symbol);
 
+    spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxRelease_v2);
 
-//    if (strncmp(symbol, "cu", 2) == 0) {
-//        dbgprintf("cuGetProcAddress(%s): symbol not implemented\n", symbol);
-//    }
+    //    if (strncmp(symbol, "cu", 2) == 0) {
+    //        dbgprintf("cuGetProcAddress(%s): symbol not implemented\n",
+    //        symbol);
+    //    }
 
     return real(symbol, pfn, cudaVersion, flags);
 }
 
 void *dlsym(void *handle, const char *symbol) {
-    dbgprintf("dlsym(%s) [pid=%d]\n", symbol, getpid());
+    spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());
 
     // early out if not a CUDA driver symbol
     if (strncmp(symbol, "cu", 2) != 0) {
@@ -303,5 +420,4 @@ void *dlsym(void *handle, const char *symbol) {
 
     return real_dlsym(handle, symbol);
 }
-
 }

@@ -2,15 +2,16 @@ cmake_minimum_required(VERSION 3.17)
 project(gpuless)
 
 enable_language(CUDA)
-find_package(CUDAToolkit)
 
+find_package(CUDAToolkit)
 find_package(Torch REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(spdlog REQUIRED)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O0 -Wall -Wextra -Werror -Wno-unused-parameter -ggdb")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O0 -Wall -Wextra -Wno-unused-parameter -ggdb")
 
 set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
@@ -45,19 +46,21 @@ add_subdirectory(
 
 add_library(analysis SHARED
     analysis/libcudaanalysis.cpp
-    adapter/cubin_analysis.cpp
+    trace/cubin_analysis.cpp
     utils.cpp trace/trace_executor.hpp)
-target_link_libraries(analysis CUDA::cudart CUDA::cuda_driver)
+target_link_libraries(analysis spdlog::spdlog CUDA::cudart CUDA::cuda_driver)
 
 add_library(gpuless SHARED
     trace/libgpuless.cpp
     trace/cuda_trace.cpp
     trace/cuda_api_calls.cpp
+    trace/cuda_virtual_device.cpp
+    trace/cuda_virtual_device.cpp
     trace/trace_executor_local.cpp
     trace/dlsym_util.cpp
     utils.cpp
-    adapter/cubin_analysis.cpp)
-target_link_libraries(gpuless iberty CUDA::cuda_driver CUDA::cudart)
+    trace/cubin_analysis.cpp)
+target_link_libraries(gpuless spdlog::spdlog iberty CUDA::cuda_driver CUDA::cudart)
 
 add_custom_command(
     TARGET gpuless POST_BUILD

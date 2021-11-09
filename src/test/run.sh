@@ -6,6 +6,7 @@ basic_targets=(
     unit/simple
     unit/objkernel
     unit/manykernel
+    unit/manymodule
 )
 
 run_unit() {

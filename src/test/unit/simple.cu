@@ -4,7 +4,7 @@
 
 #define N 4096
 
-__global__ void vadd_obj(const float *a, const float *b, float *c, int n) {
+__global__ void vadd(const float *a, const float *b, float *c, int n) {
     int i = blockDim.x * blockIdx.x + threadIdx.x;
     if (i < n) {
         c[i] = a[i] + b[i];
@@ -28,7 +28,7 @@ int main() {
 
     cudaMemcpy(d_a, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, h_b, N * sizeof(float), cudaMemcpyHostToDevice);
-    vadd_obj<<<N, 1>>>(d_a, d_b, d_c, N);
+    vadd<<<N, 1>>>(d_a, d_b, d_c, N);
     cudaMemcpy(h_c, d_c, N * sizeof(float), cudaMemcpyDeviceToHost);
 
     assert(abs(h_c[0] - 0.0) < 1e-6);

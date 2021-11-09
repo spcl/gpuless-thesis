@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "../adapter/cubin_analysis.hpp"
+#include "../trace/cubin_analysis.hpp"
 #include "../utils.hpp"
 
 #define LINK_CU_FUNCTION(symbol, f)                                            \
@@ -156,6 +156,7 @@ extern "C" void CUDARTAPI __cudaRegisterFunction(
     dim3 *bDim, dim3 *gDim, int *wSize) {
     static auto real_func =
         (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "__cudaRegisterFunction(" << deviceName << ")" <<std::endl;
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)deviceFun, deviceName));
     map.emplace(std::make_pair((void *)hostFun, deviceName));
@@ -202,7 +203,8 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
         1000.0;
     acc_time += d;
 
-    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
+       << std::endl;
     std::cerr << ss.str() << std::endl;
 
     return err;
@@ -246,7 +248,8 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src,
         1000.0;
     acc_time += d;
 
-    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
+       << std::endl;
     std::cerr << ss.str() << std::endl;
 
     return err;
@@ -337,15 +340,38 @@ cudaStreamCreateWithFlags(cudaStream_t *pStream, unsigned int flags) {
     return real_func(pStream, flags);
 }
 
+extern "C" cudaError_t
+cudaStreamIsCapturing(cudaStream_t stream,
+                      enum cudaStreamCaptureStatus *pCaptureStatus) {
+    static auto real_func =
+        (decltype(&cudaStreamIsCapturing))real_dlsym(RTLD_NEXT, __func__);
+
+    auto s = std::chrono::high_resolution_clock::now();
+    auto err = real_func(stream, pCaptureStatus);
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d =
+        std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
+        1000.0;
+    acc_time += d;
+
+    std::cerr << "cudaStreamIsCapturing()";
+    std::cerr << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
+              << std::endl
+              << std::endl;
+
+    return err;
+}
+
 extern "C" cudaError_t cudaStreamBeginCapture(cudaStream_t stream,
-                                   cudaStreamCaptureMode mode) {
+                                              cudaStreamCaptureMode mode) {
     static auto real_func =
         (decltype(&cudaStreamBeginCapture))real_dlsym(RTLD_NEXT, __func__);
     std::cerr << "cudaStreamBeginCapture()" << std::endl << std::endl;
     return real_func(stream, mode);
 }
 
-extern "C" cudaError_t cudaStreamEndCapture(cudaStream_t stream, cudaGraph_t *pGraph) {
+extern "C" cudaError_t cudaStreamEndCapture(cudaStream_t stream,
+                                            cudaGraph_t *pGraph) {
     static auto real_func =
         (decltype(&cudaStreamEndCapture))real_dlsym(RTLD_NEXT, __func__);
     std::cerr << "cudaStreamEndCapture()" << std::endl << std::endl;
@@ -387,7 +413,8 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
         1000.0;
     acc_time += d;
 
-    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]" << std::endl;
+    ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
+       << std::endl;
     std::cerr << ss.str() << std::endl;
 
     return err;
@@ -396,16 +423,72 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
 extern "C" void **CUDARTAPI __cudaRegisterFatBinary(void *fatCubin) {
     static auto real_func =
         (decltype(&__cudaRegisterFatBinary))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "__cudaRegisterFatBinary()" << std::endl;
     return real_func(fatCubin);
 }
 
-extern "C" CUresult CUDAAPI cuModuleGetFunction(CUfunction *hfunc,
-                                                CUmodule hmod,
-                                                const char *name) {
-    (void)hmod;
+extern "C" CUresult cuModuleLoad(CUmodule *module, const char *fname) {
+    static auto real_func =
+        (decltype(&cuModuleLoad))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleLoad()" << std::endl;
+    return real_func(module, fname);
+}
+
+extern "C" CUresult cuModuleLoadData(CUmodule *module, const void *image) {
+    static auto real_func =
+        (decltype(&cuModuleLoadData))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleLoadData()" << std::endl;
+    return real_func(module, image);
+}
+
+extern "C" CUresult cuModuleLoadDataEx(CUmodule *module, const void *image,
+                                       unsigned int numOptions,
+                                       CUjit_option *options,
+                                       void **optionValues) {
+    static auto real_func =
+        (decltype(&cuModuleLoadDataEx))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleLoadDataEx()" << std::endl;
+    return real_func(module, image, numOptions, options, optionValues);
+}
+
+extern "C" CUresult cuModuleLoadFatBinary(CUmodule *module,
+                                          const void *fatCubin) {
+    static auto real_func =
+        (decltype(&cuModuleLoadFatBinary))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleLoadFatBinary()" << std::endl;
+    return real_func(module, fatCubin);
+}
+
+extern "C" CUresult cuModuleUnload(CUmodule hmod) {
+    static auto real_func =
+        (decltype(&cuModuleUnload))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleUnload()" << std::endl;
+    return real_func(hmod);
+}
+
+extern "C" CUresult cuModuleGetGlobal(CUdeviceptr *dptr, size_t *bytes,
+                                      CUmodule hmod, const char *name) {
+    static auto real_func =
+        (decltype(&cuModuleGetGlobal))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cuModuleGetGlobal(" << name << ")" << std::endl;
+    return real_func(dptr, bytes, hmod, name);
+}
+
+extern "C" void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
+                                  char *deviceAddress, const char *deviceName,
+                                  int ext, size_t size, int constant,
+                                  int global) {
+    static auto real_func =
+        (decltype(&__cudaRegisterVar))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "__cudaRegisterVar(" << deviceName << ")" << std::endl;
+    real_func(fatCubinHandle, hostVar, deviceAddress, deviceName, ext, size,
+              constant, global);
+}
+
+extern "C" CUresult cuModuleGetFunction(CUfunction *hfunc, CUmodule hmod,
+                                        const char *name) {
     static auto real_func =
         (decltype(&cuModuleGetFunction))real_dlsym(RTLD_NEXT, __func__);
-
     auto err = real_func(hfunc, hmod, name);
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)*hfunc, name));
@@ -441,6 +524,12 @@ extern "C" CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuMemAlloc_v2);
     LINK_CU_FUNCTION(symbol, cuMemcpyDtoH_v2);
+    LINK_CU_FUNCTION(symbol, cuModuleLoad);
+    LINK_CU_FUNCTION(symbol, cuModuleLoadData);
+    LINK_CU_FUNCTION(symbol, cuModuleLoadDataEx);
+    LINK_CU_FUNCTION(symbol, cuModuleLoadFatBinary);
+    LINK_CU_FUNCTION(symbol, cuModuleUnload);
+    LINK_CU_FUNCTION(symbol, cuModuleGetGlobal);
 
     return real_func(symbol, pfn, cudaVersion, flags);
 }

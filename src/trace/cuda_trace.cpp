@@ -1,12 +1,15 @@
 #include "cuda_trace.hpp"
 
+#include <utility>
+
 namespace gpuless {
 
-CudaTrace::CudaTrace(std::shared_ptr<executor::TraceExecutor> trace_executor,
-                     CubinAnalyzer &cubin_analyzer)
-    : trace_executor_(trace_executor), cubin_analyzer_(cubin_analyzer) {}
+CudaTrace::CudaTrace(CubinAnalyzer &cubin_analyzer,
+                     std::shared_ptr<CudaVirtualDevice> cuda_virtual_device)
+    : cubin_analyzer_(cubin_analyzer),
+      cuda_virtual_device_(std::move(cuda_virtual_device)) {}
 
-void CudaTrace::record(const std::shared_ptr<CudaApiCall>& cudaApiCall) {
+void CudaTrace::record(const std::shared_ptr<CudaApiCall> &cudaApiCall) {
     this->call_stack_.push_back(cudaApiCall);
 }
 
@@ -27,9 +30,16 @@ const CubinAnalyzer &CudaTrace::cubinAnalyzer() {
     return this->cubin_analyzer_;
 }
 
-void CudaTrace::synchronize() {
-    this->trace_executor_->synchronize(this->call_stack_);
-    this->markSynchronized();
+CudaVirtualDevice &CudaTrace::cudaVirtualDevice() {
+    return *this->cuda_virtual_device_;
 }
+std::vector<std::shared_ptr<CudaApiCall>> CudaTrace::callStack() {
+    return this->call_stack_;
+}
+
+//void CudaTrace::synchronize() {
+//    this->trace_executor_->synchronize(this->call_stack_);
+//    this->markSynchronized();
+//}
 
 } // namespace gpuless

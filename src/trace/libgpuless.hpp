@@ -17,15 +17,7 @@
 
 #define HIJACK_FN_PROLOGUE()                                                   \
     do {                                                                       \
-        dbgprintf("%s() [pid=%d]\n", __func__, getpid());                      \
-    } while (0)
-
-#define dbgprintf(str, ...)                                                    \
-    do {                                                                       \
-        if (debug_print) {                                                     \
-            printf("[libgpuless] ");                                           \
-            printf(str, ##__VA_ARGS__);                                        \
-        }                                                                      \
+        spdlog::info("{}() [pid={}]", __func__, getpid());                     \
     } while (0)
 
 #define EXIT_NOT_IMPLEMENTED(fn)                                               \
@@ -44,8 +36,8 @@
 struct CudaCallConfig {
     dim3 gridDim;
     dim3 blockDim;
-    size_t sharedMem;
-    struct CUstream_st *stream;
+    size_t sharedMem{};
+    struct CUstream_st *stream{};
 };
 
 #endif // __LIBGPULESS_HPP__

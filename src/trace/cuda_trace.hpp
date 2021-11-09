@@ -8,33 +8,34 @@
 #include <string>
 #include <vector>
 
-#include "../adapter/cubin_analysis.hpp"
+#include "cubin_analysis.hpp"
 #include "cuda_api_calls.hpp"
 #include "libgpuless.hpp"
-#include "trace_executor.hpp"
-#include "trace_executor_local.hpp"
 
 namespace gpuless {
 
 class CudaTrace {
   private:
-    std::shared_ptr<executor::TraceExecutor> trace_executor_;
     CubinAnalyzer &cubin_analyzer_;
+    std::shared_ptr<CudaVirtualDevice> cuda_virtual_device_;
 
     std::vector<std::shared_ptr<CudaApiCall>> synchronized_history_;
     std::vector<std::shared_ptr<CudaApiCall>> call_stack_;
-    void markSynchronized();
 
   public:
-    CudaTrace(std::shared_ptr<executor::TraceExecutor> trace_executor,
-              CubinAnalyzer &cubin_analyzer);
+    CudaTrace(CubinAnalyzer &cubin_analyzer,
+              std::shared_ptr<CudaVirtualDevice> cuda_virtual_device);
 
     const std::shared_ptr<CudaApiCall> &historyTop();
     const CubinAnalyzer &cubinAnalyzer();
+    CudaVirtualDevice &cudaVirtualDevice();
+    std::vector<std::shared_ptr<CudaApiCall>> callStack();
 
-    void record(const std::shared_ptr<CudaApiCall>& cudaApiCall);
-    void synchronize();
+    void record(const std::shared_ptr<CudaApiCall> &cudaApiCall);
+    void markSynchronized();
+//    void synchronize();
 };
 
 } // namespace gpuless
+
 #endif //  __TRACE_HPP__
