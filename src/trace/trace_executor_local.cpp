@@ -87,16 +87,16 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
             std::exit(EXIT_FAILURE);
         }
 
-        //        // tmp
-        //        static auto sync =
-        //        (decltype(&cudaStreamSynchronize))real_dlsym(
-        //            RTLD_NEXT, "cudaStreamSynchronize");
-        //        if ((err = sync(0)) != cudaSuccess) {
-        //            std::cerr << "    failed to execute call trace: "
-        //                      << cudaGetErrorString(err) << " (" << err << ")"
-        //                      << std::endl;
-        //            std::exit(EXIT_FAILURE);
-        //        }
+        // tmp
+        // static auto sync =
+        //     (decltype(&cudaStreamSynchronize))real_dlsym(
+        //             RTLD_NEXT, "cudaStreamSynchronize");
+        // if ((err = sync(0)) != cudaSuccess) {
+        //     std::cerr << "    failed to execute call trace: "
+        //         << cudaGetErrorString(err) << " (" << err << ")"
+        //         << std::endl;
+        //     std::exit(EXIT_FAILURE);
+        // }
     }
 
     cuda_trace.markSynchronized();

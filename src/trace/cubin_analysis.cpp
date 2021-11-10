@@ -7,6 +7,37 @@
 
 #include "cubin_analysis.hpp"
 
+std::map<std::string, PtxParameterType> &getStrToPtxParameterType() {
+    static std::map<std::string, PtxParameterType> map_ = {
+        {"s8", s8},     {"s16", s16},     {"s32", s32}, {"s64", s64},
+        {"u8", u8},     {"u16", u16},     {"u32", u32}, {"u64", u64},
+        {"f16", f16},   {"f16x2", f16x2}, {"f32", f32}, {"f64", f64},
+        {"b8", b8},     {"b16", b16},     {"b32", b32}, {"b64", b64},
+        {"pred", pred},
+    };
+    return map_;
+}
+
+std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr() {
+    static std::map<PtxParameterType, std::string> map_ = {
+        {s8, "s8"},     {s16, "s16"},     {s32, "s32"}, {s64, "s64"},
+        {u8, "u8"},     {u16, "u16"},     {u32, "u32"}, {u64, "u64"},
+        {f16, "f16"},   {f16x2, "f16x2"}, {f32, "f32"}, {f64, "f64"},
+        {b8, "b8"},     {b16, "b16"},     {b32, "b32"}, {b64, "b64"},
+        {pred, "pred"},
+    };
+    return map_;
+}
+
+std::map<PtxParameterType, int> &getPtxParameterTypeToSize() {
+    static std::map<PtxParameterType, int> map_ = {
+        {s8, 1},  {s16, 2}, {s32, 4}, {s64, 8},   {u8, 1},   {u16, 2},
+        {u32, 4}, {u64, 8}, {f16, 2}, {f16x2, 4}, {f32, 4},  {f64, 8},
+        {b8, 1},  {b16, 2}, {b32, 4}, {b64, 8},   {pred, 0},
+    };
+    return map_;
+}
+
 static std::string exec(const char *cmd) {
     std::array<char, 128> buffer;
     std::string result;
@@ -24,16 +55,16 @@ bool CubinAnalyzer::isInitialized() { return this->initialized_; }
 
 PtxParameterType
 CubinAnalyzer::ptxParameterTypeFromString(const std::string &str) {
-    auto it = str_to_ptx_paramter_type.find(str);
-    if (it == str_to_ptx_paramter_type.end()) {
+    auto it = getStrToPtxParameterType().find(str);
+    if (it == getStrToPtxParameterType().end()) {
         return PtxParameterType::invalid;
     }
     return it->second;
 }
 
 int CubinAnalyzer::byteSizePtxParameterType(PtxParameterType type) {
-    auto it = ptx_paramter_type_to_size.find(type);
-    if (it == ptx_paramter_type_to_size.end()) {
+    auto it = getPtxParameterTypeToSize().find(type);
+    if (it == getPtxParameterTypeToSize().end()) {
         return -1;
     }
     return it->second;

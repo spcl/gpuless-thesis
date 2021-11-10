@@ -27,18 +27,9 @@ enum PtxParameterType {
     invalid, // invalid type for signaling errors
 };
 
-static std::map<std::string, PtxParameterType> str_to_ptx_paramter_type = {
-    {"s8", s8},   {"s16", s16},   {"s32", s32}, {"s64", s64}, {"u8", u8},
-    {"u16", u16}, {"u32", u32},   {"u64", u64}, {"f16", f16}, {"f16x2", f16x2},
-    {"f32", f32}, {"f64", f64},   {"b8", b8},   {"b16", b16}, {"b32", b32},
-    {"b64", b64}, {"pred", pred},
-};
-
-static std::map<PtxParameterType, int> ptx_paramter_type_to_size = {
-    {s8, 1},  {s16, 2}, {s32, 4}, {s64, 8},   {u8, 1},   {u16, 2},
-    {u32, 4}, {u64, 8}, {f16, 2}, {f16x2, 4}, {f32, 4},  {f64, 8},
-    {b8, 1},  {b16, 2}, {b32, 4}, {b64, 8},   {pred, 0},
-};
+std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
+std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr();
+std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
 
 struct KParamInfo {
     std::string paramName;

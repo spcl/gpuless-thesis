@@ -10,6 +10,7 @@
 #define LINK_CU_FUNCTION(symbol, f)                                            \
     do {                                                                       \
         if (strcmp(symbol, #f) == 0) {                                         \
+            spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());      \
             *pfn = (void *)&f;                                                 \
             return CUDA_SUCCESS;                                               \
         }                                                                      \
@@ -38,6 +39,11 @@ struct CudaCallConfig {
     dim3 blockDim;
     size_t sharedMem{};
     struct CUstream_st *stream{};
+};
+
+struct CudaRegisterState {
+    uint64_t current_fatbin_handle;
+    bool is_registering;
 };
 
 #endif // __LIBGPULESS_HPP__

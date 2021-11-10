@@ -2,6 +2,7 @@
 #include <cstring>
 #include <cuda_runtime.h>
 #include <dlfcn.h>
+#include <spdlog/spdlog.h>
 
 #include "cuda_api_calls.hpp"
 #include "dlsym_util.hpp"
@@ -153,8 +154,9 @@ cudaError_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
                     args.data(), nullptr);
 
     if (ret != CUDA_SUCCESS) {
-        std::cerr << "cuLaunchKernel() failed" << std::endl;
+        spdlog::error("cuLaunchKernel() failed");
     }
+
     return cudaSuccess;
 }
 std::vector<uint64_t> gpuless::CudaLaunchKernel::requiredCudaModuleIds() {
