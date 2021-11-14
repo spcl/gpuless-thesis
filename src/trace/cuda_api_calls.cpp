@@ -18,6 +18,16 @@ cudaError_t gpuless::CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
     return real(&this->devPtr, size);
 }
 
+void gpuless::CudaMalloc::appendToFBCudaApiCallList(
+    flatbuffers::FlatBufferBuilder &builder,
+    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+    auto api_call = CreateFBCudaMalloc(
+        builder, reinterpret_cast<uint64_t>(this->devPtr), this->size);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMalloc, api_call.Union());
+    api_calls.push_back(api_call_union);
+}
+
 /*
  * cudaMemcpyH2D
  */
@@ -33,6 +43,18 @@ cudaError_t gpuless::CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
                 cudaMemcpyHostToDevice);
 }
 
+void gpuless::CudaMemcpyH2D::appendToFBCudaApiCallList(
+    flatbuffers::FlatBufferBuilder &builder,
+    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+    auto api_call =
+        CreateFBCudaMemcpyH2D(builder, reinterpret_cast<uint64_t>(this->dst),
+                              reinterpret_cast<uint64_t>(this->src), this->size,
+                              builder.CreateVector(this->buffer));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyH2D, api_call.Union());
+    api_calls.push_back(api_call_union);
+}
+
 /*
  * cudaMemcpyD2H
  */
@@ -44,6 +66,18 @@ cudaError_t gpuless::CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->buffer.data(), this->src, this->size,
                 cudaMemcpyDeviceToHost);
+}
+
+void gpuless::CudaMemcpyD2H::appendToFBCudaApiCallList(
+    flatbuffers::FlatBufferBuilder &builder,
+    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+    auto api_call =
+        CreateFBCudaMemcpyD2H(builder, reinterpret_cast<uint64_t>(this->dst),
+                              reinterpret_cast<uint64_t>(this->src), this->size,
+                              builder.CreateVector(this->buffer));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyD2H, api_call.Union());
+    api_calls.push_back(api_call_union);
 }
 
 /*
@@ -118,6 +152,16 @@ cudaError_t gpuless::CudaFree::executeNative(CudaVirtualDevice &vdev) {
     return real(this->devPtr);
 }
 
+void gpuless::CudaFree::appendToFBCudaApiCallList(
+    flatbuffers::FlatBufferBuilder &builder,
+    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+    auto api_call =
+        CreateFBCudaFree(builder, reinterpret_cast<uint64_t>(this->devPtr));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaFree, api_call.Union());
+    api_calls.push_back(api_call_union);
+}
+
 /*
  * cudaLaunchKernel
  */
@@ -138,7 +182,7 @@ cudaError_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
 
     auto fn_reg_it = vdev.function_registry_.find(this->symbol);
     if (fn_reg_it == vdev.function_registry_.end()) {
-        std::cerr << "function not registerd: " << this->symbol << std::endl;
+        std::cerr << "function not registered: " << this->symbol << std::endl;
         std::exit(EXIT_FAILURE);
     }
 
@@ -159,12 +203,50 @@ cudaError_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
 
     return cudaSuccess;
 }
+
 std::vector<uint64_t> gpuless::CudaLaunchKernel::requiredCudaModuleIds() {
     return this->required_cuda_modules_;
 }
 
 std::vector<std::string> gpuless::CudaLaunchKernel::requiredFunctionSymbols() {
     return this->required_function_symbols_;
+}
+
+void gpuless::CudaLaunchKernel::appendToFBCudaApiCallList(
+    flatbuffers::FlatBufferBuilder &builder,
+    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+
+    std::vector<flatbuffers::Offset<flatbuffers::String>> fb_req_fns;
+    for (const auto &f : this->requiredFunctionSymbols()) {
+        fb_req_fns.push_back(builder.CreateString(f));
+    }
+    std::vector<flatbuffers::Offset<FBParamBuffer>> fb_param_buffers;
+    for (const auto &p : this->paramBuffers) {
+        fb_param_buffers.push_back(
+            CreateFBParamBuffer(builder, builder.CreateVector(p)));
+    }
+    std::vector<flatbuffers::Offset<FBParamInfo>> fb_param_infos;
+    for (const auto &p : this->paramInfos) {
+        fb_param_infos.push_back(
+            CreateFBParamInfo(builder, builder.CreateString(p.paramName),
+                              static_cast<FBPtxParameterType>(p.type),
+                              p.typeSize, p.align, p.size));
+    }
+
+    auto gdim = FBDim3{this->gridDim.x, this->gridDim.y, this->gridDim.z};
+    auto bdim = FBDim3{this->blockDim.x, this->blockDim.y, this->blockDim.z};
+
+    auto api_call = CreateFBCudaLaunchKernel(
+        builder, builder.CreateString(this->symbol),
+        builder.CreateVector(this->requiredCudaModuleIds()),
+        builder.CreateVector(fb_req_fns), &gdim, &bdim, this->sharedMem,
+        reinterpret_cast<uint64_t>(this->stream),
+        builder.CreateVector(fb_param_buffers),
+        builder.CreateVector(fb_param_infos));
+
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaLaunchKernel, api_call.Union());
+    api_calls.push_back(api_call_union);
 }
 
 /*
@@ -264,7 +346,8 @@ gpuless::PrivCudaRegisterVar::executeNative(CudaVirtualDevice &vdev) {
     }
     CUmodule mod = mod_id_it->second;
     CUdeviceptr device_ptr;
-    checkCudaErrors(cuModuleGetGlobal(&device_ptr, &this->size, mod, this->device_name.c_str()));
+    checkCudaErrors(cuModuleGetGlobal(&device_ptr, &this->size, mod,
+                                      this->device_name.c_str()));
     return cudaSuccess;
 }
 

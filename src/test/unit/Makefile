@@ -1,5 +1,9 @@
 CC=nvcc
-CCOPTS=-cudart shared -arch=sm_86
+# CCOPTS=-cudart shared -arch=sm_86
+CCOPTS=-cudart shared \
+	   -gencode arch=compute_86,code=sm_86 \
+	   -gencode arch=compute_70,code=sm_70
+
 TARGETS=manykernel \
 		objkernel \
 		simple \

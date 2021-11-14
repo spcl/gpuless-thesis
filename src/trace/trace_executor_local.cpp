@@ -16,14 +16,33 @@ bool TraceExecutorLocal::init(const char *ip, const short port,
 }
 
 bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
-    spdlog::info("TraceExecutorLocal::synchronize() [size={}]",
-                 cuda_trace.callStack().size());
+    this->synchronize_counter_++;
+    spdlog::info(
+        "TraceExecutorLocal::synchronize() [synchronize_counter={}, size={}]",
+        this->synchronize_counter_, cuda_trace.callStack().size());
 
-    auto &vdev = cuda_trace.cudaVirtualDevice();
-    vdev.initRealDevice();
+    auto &vdev = this->cuda_virtual_device_;
+    this->cuda_virtual_device_.initRealDevice();
 
-    // load modules and functions that are not loaded yet but required by the
-    // given trace
+    // synchronize the execution side virtual device with new mappings
+    // from the client
+    vdev.symbol_to_module_id_map.insert(
+        cuda_trace.getNewSymbolToModuleId().begin(),
+        cuda_trace.getNewSymbolToModuleId().end());
+    cuda_trace.getNewSymbolToModuleId().clear();
+
+    vdev.global_var_to_module_id_map.insert(
+        cuda_trace.getNewGlobalVarToModuleId().begin(),
+        cuda_trace.getNewGlobalVarToModuleId().end());
+    cuda_trace.getNewGlobalVarToModuleId().clear();
+
+    vdev.module_id_to_fatbin_data_map.insert(
+        cuda_trace.getNewModuleIdToFatbinDataMap().begin(),
+        cuda_trace.getNewModuleIdToFatbinDataMap().end());
+    cuda_trace.getNewModuleIdToFatbinDataMap().clear();
+
+    // load modules and functions that are not loaded yet but required by
+    // the given trace
     for (auto &apiCall : cuda_trace.callStack()) {
         std::vector<uint64_t> required_modules =
             apiCall->requiredCudaModuleIds();
@@ -34,19 +53,20 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
             spdlog::debug("Required module: {}", id);
             auto mod_reg_it = vdev.module_registry_.find(id);
             if (mod_reg_it == vdev.module_registry_.end()) {
-                auto fatbin_wrapper_it =
-                    vdev.module_id_to_fatbin_wrapper_map.find(id);
-                if (fatbin_wrapper_it ==
-                    vdev.module_id_to_fatbin_wrapper_map.end()) {
-                    std::cerr << "fatbin wrapper missing for module: " << id
-                              << std::endl;
+                auto mod_data_it = vdev.module_id_to_fatbin_data_map.find(id);
+                if (mod_data_it == vdev.module_id_to_fatbin_data_map.end()) {
+                    spdlog::error("fatbin data missing for module: {}", id);
                     std::exit(EXIT_FAILURE);
                 }
+
+                spdlog::debug("Loading module: {} [size={}]", id,
+                              mod_data_it->second.size());
+
+                void *fatbin_data_ptr = mod_data_it->second.data();
                 CUmodule mod;
-                checkCudaErrors(
-                    cuModuleLoadData(&mod, fatbin_wrapper_it->second.data));
+                checkCudaErrors(cuModuleLoadData(&mod, fatbin_data_ptr));
+//                checkCudaErrors(cuModuleLoadFatBinary(&mod, fatbin_data_ptr));
                 vdev.module_registry_.emplace(id, mod);
-                spdlog::debug("Module loaded: {}", id);
             }
         }
 
@@ -80,8 +100,7 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     for (auto &apiCall : cuda_trace.callStack()) {
         spdlog::debug("Executing: {}", apiCall->typeName());
         cudaError_t err;
-        if ((err = apiCall->executeNative(cuda_trace.cudaVirtualDevice())) !=
-            cudaSuccess) {
+        if ((err = apiCall->executeNative(vdev)) != cudaSuccess) {
             spdlog::error("Failed to execute call trace: {} ({})",
                           cudaGetErrorString(err), err);
             std::exit(EXIT_FAILURE);

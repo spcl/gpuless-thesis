@@ -1,0 +1,41 @@
+include "cuda_runtime_calls.fbs";
+// include "cuda_driver_calls.fbs";
+
+namespace gpuless;
+
+enum FBStatus : byte {
+    OK,
+    FAILURE
+}
+
+union FBCudaApiCallUnion {
+    FBCudaMalloc,
+    FBCudaMemcpyH2D,
+    FBCudaMemcpyD2H,
+    FBCudaLaunchKernel,
+    FBCudaFree
+}
+
+table FBCudaApiCall {
+    api_call:FBCudaApiCallUnion;
+}
+
+table FBTraceExecRequest {
+    trace:[FBCudaApiCall];
+}
+
+table FBTraceExecResponse {
+    status:FBStatus;
+}
+
+union FBMessage {
+    FBTraceExecRequest,
+    FBTraceExecResponse
+}
+
+table FBProtocolMessage {
+    message:FBMessage;
+}
+
+root_type FBProtocolMessage;
+

@@ -8,24 +8,30 @@
 #include <typeinfo>
 #include <vector>
 
+#include "../schemas/trace_execution_protocol_generated.h"
 #include "cubin_analysis.hpp"
 #include "cuda_virtual_device.hpp"
+#include "flatbuffers/flatbuffers.h"
 
 namespace gpuless {
 
 class CudaApiCall {
   public:
-    virtual cudaError_t executeNative(CudaVirtualDevice &vdev) = 0;
     virtual ~CudaApiCall() = default;
 
-    virtual std::vector<uint64_t> requiredCudaModuleIds() {
-        return std::vector<uint64_t>();
+    virtual cudaError_t executeNative(CudaVirtualDevice &vdev) = 0;
+
+    // serialize to flatbuffer object and append to list of serialized calls
+    // TODO: make pure virtual
+    virtual void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+        std::cerr << "appendToFBCudaApiCallList(): not implemented" << std::endl;
+        std::exit(EXIT_FAILURE);
     };
 
-    virtual std::vector<std::string> requiredFunctionSymbols() {
-        return std::vector<std::string>();
-    };
-
+    virtual std::vector<uint64_t> requiredCudaModuleIds() { return {}; };
+    virtual std::vector<std::string> requiredFunctionSymbols() { return {}; };
     virtual std::string typeName() { return typeid(*this).name(); }
 };
 
@@ -40,6 +46,10 @@ class CudaMalloc : public CudaApiCall {
 
     explicit CudaMalloc(size_t size);
     cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+
+    void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
 class CudaMemcpyH2D : public CudaApiCall {
@@ -51,6 +61,10 @@ class CudaMemcpyH2D : public CudaApiCall {
 
     CudaMemcpyH2D(void *dst, const void *src, size_t size);
     cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+
+    void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
 class CudaMemcpyD2H : public CudaApiCall {
@@ -62,6 +76,10 @@ class CudaMemcpyD2H : public CudaApiCall {
 
     CudaMemcpyD2H(void *dst, const void *src, size_t size);
     cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+
+    void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
 class CudaMemcpyD2D : public CudaApiCall {
@@ -118,6 +136,10 @@ class CudaFree : public CudaApiCall {
 
     CudaFree(void *devPtr);
     cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+
+    void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
 class CudaLaunchKernel : public CudaApiCall {
@@ -144,6 +166,11 @@ class CudaLaunchKernel : public CudaApiCall {
                      std::vector<KParamInfo> &paramInfos);
 
     cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+
+    void appendToFBCudaApiCallList(
+        flatbuffers::FlatBufferBuilder &builder,
+        std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
+
     std::vector<uint64_t> requiredCudaModuleIds() override;
     std::vector<std::string> requiredFunctionSymbols() override;
 };
@@ -222,7 +249,6 @@ class PrivCudaRegisterVar : public CudaApiCall {
     size_t size;
     int constant;
     int global;
-
 
     PrivCudaRegisterVar(std::vector<uint64_t> required_cuda_modules,
                         uint64_t clientHandleId, void *hostVar,

@@ -22,8 +22,6 @@ using namespace gpuless;
 const int CUDA_MAJOR_VERSION = 8;
 const int CUDA_MINOR_VERSION = 6;
 
-const bool debug_register_func = false;
-
 static void hijackInit() {
     static bool hijack_initialized = false;
     if (!hijack_initialized) {
@@ -62,10 +60,13 @@ static std::shared_ptr<TraceExecutor> getTraceExecutor() {
     return trace_executor;
 }
 
-static CudaTrace &getCudaTrace() {
-    static auto cuda_virtual_device = std::make_shared<CudaVirtualDevice>();
+static CubinAnalyzer &getCubinAnalyzer() {
     static CubinAnalyzer cubin_analyzer;
-    static CudaTrace cuda_trace(cubin_analyzer, cuda_virtual_device);
+    return cubin_analyzer;
+}
+
+static CudaTrace &getCudaTrace() {
+    static CudaTrace cuda_trace;
 
     static bool exit_handler_registered = false;
     if (!exit_handler_registered) {
@@ -73,7 +74,7 @@ static CudaTrace &getCudaTrace() {
         std::atexit([]() { exitHandler(); });
     }
 
-    if (!cubin_analyzer.isInitialized()) {
+    if (!getCubinAnalyzer().isInitialized()) {
         char *cuda_binary = std::getenv("CUDA_BINARY");
         if (cuda_binary == nullptr) {
             std::cerr << "please set CUDA_BINARY environment variable"
@@ -84,8 +85,8 @@ static CudaTrace &getCudaTrace() {
         std::vector<std::string> binaries;
         string_split(std::string(cuda_binary), ',', binaries);
         spdlog::info("Analyzing CUDA binaries ({})", cuda_binary);
-        cubin_analyzer.analyze(binaries, CUDA_MAJOR_VERSION,
-                               CUDA_MINOR_VERSION);
+        getCubinAnalyzer().analyze(binaries, CUDA_MAJOR_VERSION,
+                                   CUDA_MINOR_VERSION);
     }
 
     return cuda_trace;
@@ -186,7 +187,7 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     // spdlog::debug("")
 
     std::vector<KParamInfo> paramInfos;
-    const auto &analyzer = getCudaTrace().cubinAnalyzer();
+    const auto &analyzer = getCubinAnalyzer();
     if (!analyzer.kernel_parameters(symbol, paramInfos)) {
         EXIT_UNRECOVERABLE("unable to look up kernel parameter data");
     }
@@ -198,7 +199,7 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
         std::string type = getPtxParameterTypeToStr()[p.type];
         ss << type << "[" << p.size << "], ";
     }
-    ss << "]" << std::endl;
+    ss << "]";
     spdlog::debug(ss.str());
 
     std::vector<std::vector<uint8_t>> paramBuffers(paramInfos.size());
@@ -209,9 +210,10 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     }
 
     auto &cuda_trace = getCudaTrace();
-    auto &vdev = cuda_trace.cudaVirtualDevice();
-    auto mod_id_it = vdev.symbol_to_module_id_map.find(symbol);
-    if (mod_id_it == vdev.symbol_to_module_id_map.end()) {
+    //    auto &vdev = cuda_trace.cudaVirtualDevice();
+    auto &symbol_to_module_id_map = cuda_trace.symbolToModuleIdMap();
+    auto mod_id_it = symbol_to_module_id_map.find(symbol);
+    if (mod_id_it == symbol_to_module_id_map.end()) {
         spdlog::error("function in unknown module");
         std::exit(EXIT_FAILURE);
     }
@@ -222,7 +224,6 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     getCudaTrace().record(std::make_shared<CudaLaunchKernel>(
         symbol, required_cuda_modules, required_function_symbols, func, gridDim,
         blockDim, sharedMem, stream, paramBuffers, paramInfos));
-    getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 
@@ -302,24 +303,28 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
     HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
-    auto &vdev = getCudaTrace().cudaVirtualDevice();
 
     uint64_t fatbin_id = incrementFatbinCount();
     state.is_registering = true;
     state.current_fatbin_handle = fatbin_id;
 
-    vdev.module_id_to_fatbin_wrapper_map.emplace(
-        fatbin_id, *static_cast<__fatBinC_Wrapper_t *>(fatCubin));
+    auto wrapper = static_cast<__fatBinC_Wrapper_t *>(fatCubin);
+    const unsigned long long *data_ull = wrapper->data;
 
-    if (debug_register_func) {
-        static auto real =
-            (decltype(&__cudaRegisterFatBinary))real_dlsym(RTLD_NEXT, __func__);
-        return real(fatCubin);
-    } else {
-        getCudaTrace().record(
-            std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
-        return reinterpret_cast<void **>(fatbin_id);
-    }
+    // this seems to work. no idea why, this reverse engineering result first
+    // appears in dscuda (as far as i know)
+    size_t data_len = ((data_ull[1] - 1) / 8 + 1) * 8 + 16;
+
+    std::vector<uint8_t> data_cpy(data_len);
+    std::memcpy(data_cpy.data(), data_ull, data_len);
+
+    spdlog::debug("Recording Fatbin data [id={}, size={}, raw_size={}]",
+                  fatbin_id, data_len);
+
+    getCudaTrace().recordFatbinData(data_cpy, fatbin_id);
+    getCudaTrace().record(
+        std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
+    return reinterpret_cast<void **>(fatbin_id);
 }
 
 void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
@@ -333,14 +338,8 @@ void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
     }
     state.is_registering = false;
 
-    if (debug_register_func) {
-        static auto real = (decltype(&__cudaRegisterFatBinaryEnd))real_dlsym(
-            RTLD_NEXT, __func__);
-        real(fatCubinHandle);
-    } else {
-        getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
-            state.current_fatbin_handle));
-    }
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
+        state.current_fatbin_handle));
 }
 
 void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
@@ -348,17 +347,17 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
                             int thread_limit, uint3 *tid, uint3 *bid,
                             dim3 *bDim, dim3 *gDim, int *wSize) {
     hijackInit();
-    spdlog::debug("{}({})", __func__, cpp_demangle(deviceName).c_str());
+    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
 
     auto &state = getCudaRegisterState();
-    auto &vdev = getCudaTrace().cudaVirtualDevice();
+    //    auto &vdev = getCudaTrace().cudaVirtualDevice();
     if (!state.is_registering) {
         EXIT_UNRECOVERABLE("__cudaRegisterFunction called without a "
                            "previous call to __cudaRegisterFatBinary");
     }
 
-    vdev.symbol_to_module_id_map.emplace(deviceName,
-                                         state.current_fatbin_handle);
+    std::string symbol(deviceName);
+    getCudaTrace().recordSymbolMapEntry(symbol, state.current_fatbin_handle);
 
     getSymbolMap().emplace(
         std::make_pair(static_cast<const void *>(hostFun), deviceName));
@@ -366,17 +365,10 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
         std::make_pair(static_cast<const void *>(deviceFun), deviceName));
 
     // execute locally, not by trace recording for debug purposes
-    if (debug_register_func) {
-        static auto real =
-            (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
-        real(fatCubinHandle, hostFun, deviceFun, deviceName, thread_limit, tid,
-             bid, bDim, gDim, wSize);
-    } else {
-        getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
-            reinterpret_cast<uint64_t>(fatCubinHandle),
-            const_cast<void *>(reinterpret_cast<const void *>(hostFun)),
-            deviceFun, deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
-    }
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
+        reinterpret_cast<uint64_t>(fatCubinHandle),
+        const_cast<void *>(reinterpret_cast<const void *>(hostFun)), deviceFun,
+        deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
 }
 
 void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
@@ -386,27 +378,19 @@ void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
     HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
-    auto &vdev = getCudaTrace().cudaVirtualDevice();
     if (!state.is_registering) {
         EXIT_UNRECOVERABLE("__cudaRegisterVar called without a "
                            "previous call to __cudaRegisterFatBinary");
     }
 
-    vdev.global_var_to_module_id_map.emplace(deviceName,
-                                             state.current_fatbin_handle);
+    std::string symbol(deviceName);
+    getCudaTrace().recordGlobalVarMapEntry(symbol, state.current_fatbin_handle);
 
     std::vector<uint64_t> required_cuda_modules{state.current_fatbin_handle};
 
-    if (debug_register_func) {
-        static auto real =
-            (decltype(&__cudaRegisterVar))real_dlsym(RTLD_NEXT, __func__);
-        real(fatCubinHandle, hostVar, deviceAddress, deviceName, ext, size,
-             constant, global);
-    } else {
-        getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
-            required_cuda_modules, state.current_fatbin_handle, hostVar,
-            deviceAddress, deviceName, ext, size, constant, global));
-    }
+    getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
+        required_cuda_modules, state.current_fatbin_handle, hostVar,
+        deviceAddress, deviceName, ext, size, constant, global));
 }
 
 void __cudaUnregisterFatBinary(void **fatCubinHandle) {
@@ -431,16 +415,17 @@ CUresult cuDevicePrimaryCtxRelease(CUdevice dev) {
 CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
                           cuuint64_t flags) {
     hijackInit();
+    spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());
 
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxRelease_v2);
 
-//    if (strncmp(symbol, "cu", 2) == 0) {
-//        spdlog::debug("cuGetProcAddress({}): symbol not implemented", symbol);
-//        *pfn = nullptr;
-//    }
+    //    if (strncmp(symbol, "cu", 2) == 0) {
+    //        spdlog::debug("cuGetProcAddress({}): symbol not implemented",
+    //        symbol); *pfn = nullptr;
+    //    }
 
-//    return CUDA_SUCCESS;
+    //    return CUDA_SUCCESS;
 
     static auto real =
         (decltype(&cuGetProcAddress))real_dlsym(RTLD_NEXT, __func__);

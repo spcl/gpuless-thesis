@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(image-recogntion)
+project(image-recognition)
 
 find_package(Torch REQUIRED)
 find_package(OpenCV REQUIRED)

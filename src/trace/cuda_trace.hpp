@@ -1,5 +1,5 @@
-#ifndef __TRACE_HPP__
-#define __TRACE_HPP__
+#ifndef __CUDA_TRACE_HPP__
+#define __CUDA_TRACE_HPP__
 
 #include <cstring>
 #include <cuda_runtime.h>
@@ -16,26 +16,41 @@ namespace gpuless {
 
 class CudaTrace {
   private:
-    CubinAnalyzer &cubin_analyzer_;
-    std::shared_ptr<CudaVirtualDevice> cuda_virtual_device_;
-
     std::vector<std::shared_ptr<CudaApiCall>> synchronized_history_;
     std::vector<std::shared_ptr<CudaApiCall>> call_stack_;
 
+    // complete map of all registered symbols
+    std::map<std::string, uint64_t> symbol_to_module_id_;
+
+    // newly recorded mappings that need to be synchronized with the remote
+    // executor
+    std::vector<std::pair<std::string, uint64_t>> new_symbol_to_module_id_;
+    std::vector<std::pair<std::string, uint64_t>> new_global_var_to_module_id_;
+    std::vector<std::pair<uint64_t, std::vector<uint8_t>>>
+        new_module_id_to_fatbin_data_map_;
+
   public:
-    CudaTrace(CubinAnalyzer &cubin_analyzer,
-              std::shared_ptr<CudaVirtualDevice> cuda_virtual_device);
+    CudaTrace();
 
     const std::shared_ptr<CudaApiCall> &historyTop();
-    const CubinAnalyzer &cubinAnalyzer();
-    CudaVirtualDevice &cudaVirtualDevice();
     std::vector<std::shared_ptr<CudaApiCall>> callStack();
+
+    std::vector<std::pair<std::string, uint64_t>> &
+    getNewSymbolToModuleId();
+    std::vector<std::pair<std::string, uint64_t>> &
+    getNewGlobalVarToModuleId();
+    std::vector<std::pair<uint64_t, std::vector<uint8_t>>> &
+    getNewModuleIdToFatbinDataMap();
+    std::map<std::string, uint64_t> &symbolToModuleIdMap();
+
+    void recordFatbinData(std::vector<uint8_t> &data, uint64_t module_id);
+    void recordSymbolMapEntry(std::string &symbol, uint64_t module_id);
+    void recordGlobalVarMapEntry(std::string &symbol, uint64_t module_id);
 
     void record(const std::shared_ptr<CudaApiCall> &cudaApiCall);
     void markSynchronized();
-//    void synchronize();
 };
 
 } // namespace gpuless
 
-#endif //  __TRACE_HPP__
+#endif //  __CUDA_TRACE_HPP__

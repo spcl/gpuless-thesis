@@ -53,6 +53,7 @@ target_link_libraries(analysis spdlog::spdlog CUDA::cudart CUDA::cuda_driver)
 add_library(gpuless SHARED
     trace/libgpuless.cpp
     trace/cuda_trace.cpp
+    trace/cuda_trace_converter.cpp
     trace/cuda_api_calls.cpp
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp

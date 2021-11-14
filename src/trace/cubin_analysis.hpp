@@ -7,24 +7,24 @@
 #include <vector>
 
 enum PtxParameterType {
-    s8,
-    s16,
-    s32,
-    s64, // signed integers
-    u8,
-    u16,
-    u32,
-    u64, // unsigned integers
-    f16,
-    f16x2,
-    f32,
-    f64, // floating-point
-    b8,
-    b16,
-    b32,
-    b64,     // untyped bits
-    pred,    // predicate
-    invalid, // invalid type for signaling errors
+    s8 = 0,
+    s16 = 1,
+    s32 = 2,
+    s64 = 3, // signed integers
+    u8 = 4,
+    u16 = 5,
+    u32 = 6,
+    u64 = 7, // unsigned integers
+    f16 = 8,
+    f16x2 = 9,
+    f32 = 10,
+    f64 = 11, // floating-point
+    b8 = 12,
+    b16 = 13,
+    b32 = 14,
+    b64 = 15,     // untyped bits
+    pred = 16,    // predicate
+    invalid = 17, // invalid type for signaling errors
 };
 
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType();

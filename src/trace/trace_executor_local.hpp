@@ -17,6 +17,10 @@
 namespace gpuless {
 
 class TraceExecutorLocal final : public TraceExecutor {
+  private:
+    CudaVirtualDevice cuda_virtual_device_;
+    uint64_t synchronize_counter_ = 0;
+
   public:
     TraceExecutorLocal();
     ~TraceExecutorLocal();

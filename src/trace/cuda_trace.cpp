@@ -4,10 +4,7 @@
 
 namespace gpuless {
 
-CudaTrace::CudaTrace(CubinAnalyzer &cubin_analyzer,
-                     std::shared_ptr<CudaVirtualDevice> cuda_virtual_device)
-    : cubin_analyzer_(cubin_analyzer),
-      cuda_virtual_device_(std::move(cuda_virtual_device)) {}
+CudaTrace::CudaTrace() {}
 
 void CudaTrace::record(const std::shared_ptr<CudaApiCall> &cudaApiCall) {
     this->call_stack_.push_back(cudaApiCall);
@@ -26,20 +23,41 @@ const std::shared_ptr<CudaApiCall> &CudaTrace::historyTop() {
     return this->synchronized_history_.back();
 }
 
-const CubinAnalyzer &CudaTrace::cubinAnalyzer() {
-    return this->cubin_analyzer_;
-}
-
-CudaVirtualDevice &CudaTrace::cudaVirtualDevice() {
-    return *this->cuda_virtual_device_;
-}
 std::vector<std::shared_ptr<CudaApiCall>> CudaTrace::callStack() {
     return this->call_stack_;
 }
 
-//void CudaTrace::synchronize() {
-//    this->trace_executor_->synchronize(this->call_stack_);
-//    this->markSynchronized();
-//}
+void CudaTrace::recordFatbinData(std::vector<uint8_t> &data,
+                                 uint64_t module_id) {
+    this->new_module_id_to_fatbin_data_map_.emplace_back(module_id, data);
+}
+
+void CudaTrace::recordSymbolMapEntry(std::string &symbol, uint64_t module_id) {
+    this->new_symbol_to_module_id_.emplace_back(symbol, module_id);
+    this->symbol_to_module_id_.emplace(symbol, module_id);
+}
+
+void CudaTrace::recordGlobalVarMapEntry(std::string &symbol,
+                                        uint64_t module_id) {
+    this->new_global_var_to_module_id_.emplace_back(symbol, module_id);
+}
+std::map<std::string, uint64_t> &CudaTrace::symbolToModuleIdMap() {
+    return this->symbol_to_module_id_;
+}
+
+std::vector<std::pair<std::string, uint64_t>> &
+CudaTrace::getNewSymbolToModuleId() {
+    return new_symbol_to_module_id_;
+}
+
+std::vector<std::pair<std::string, uint64_t>> &
+CudaTrace::getNewGlobalVarToModuleId() {
+    return new_global_var_to_module_id_;
+}
+
+std::vector<std::pair<uint64_t, std::vector<uint8_t>>> &
+CudaTrace::getNewModuleIdToFatbinDataMap() {
+    return new_module_id_to_fatbin_data_map_;
+}
 
 } // namespace gpuless
