@@ -13,6 +13,12 @@ namespace gpuless {
 struct FBCudaApiCall;
 struct FBCudaApiCallBuilder;
 
+struct FBNewModule;
+struct FBNewModuleBuilder;
+
+struct FBNewFunction;
+struct FBNewFunctionBuilder;
+
 struct FBTraceExecRequest;
 struct FBTraceExecRequestBuilder;
 
@@ -257,19 +263,159 @@ inline flatbuffers::Offset<FBCudaApiCall> CreateFBCudaApiCall(
   return builder_.Finish();
 }
 
+struct FBNewModule FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBNewModuleBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_BUFFER = 4,
+    VT_MODULE_ID = 6
+  };
+  const flatbuffers::Vector<uint8_t> *buffer() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BUFFER);
+  }
+  uint64_t module_id() const {
+    return GetField<uint64_t>(VT_MODULE_ID, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_BUFFER) &&
+           verifier.VerifyVector(buffer()) &&
+           VerifyField<uint64_t>(verifier, VT_MODULE_ID) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBNewModuleBuilder {
+  typedef FBNewModule Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_buffer(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer) {
+    fbb_.AddOffset(FBNewModule::VT_BUFFER, buffer);
+  }
+  void add_module_id(uint64_t module_id) {
+    fbb_.AddElement<uint64_t>(FBNewModule::VT_MODULE_ID, module_id, 0);
+  }
+  explicit FBNewModuleBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBNewModule> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBNewModule>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBNewModule> CreateFBNewModule(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer = 0,
+    uint64_t module_id = 0) {
+  FBNewModuleBuilder builder_(_fbb);
+  builder_.add_module_id(module_id);
+  builder_.add_buffer(buffer);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBNewModule> CreateFBNewModuleDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const std::vector<uint8_t> *buffer = nullptr,
+    uint64_t module_id = 0) {
+  auto buffer__ = buffer ? _fbb.CreateVector<uint8_t>(*buffer) : 0;
+  return gpuless::CreateFBNewModule(
+      _fbb,
+      buffer__,
+      module_id);
+}
+
+struct FBNewFunction FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBNewFunctionBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_SYMBOL = 4,
+    VT_MODULE_ID = 6
+  };
+  const flatbuffers::String *symbol() const {
+    return GetPointer<const flatbuffers::String *>(VT_SYMBOL);
+  }
+  uint64_t module_id() const {
+    return GetField<uint64_t>(VT_MODULE_ID, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_SYMBOL) &&
+           verifier.VerifyString(symbol()) &&
+           VerifyField<uint64_t>(verifier, VT_MODULE_ID) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBNewFunctionBuilder {
+  typedef FBNewFunction Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_symbol(flatbuffers::Offset<flatbuffers::String> symbol) {
+    fbb_.AddOffset(FBNewFunction::VT_SYMBOL, symbol);
+  }
+  void add_module_id(uint64_t module_id) {
+    fbb_.AddElement<uint64_t>(FBNewFunction::VT_MODULE_ID, module_id, 0);
+  }
+  explicit FBNewFunctionBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBNewFunction> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBNewFunction>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBNewFunction> CreateFBNewFunction(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::String> symbol = 0,
+    uint64_t module_id = 0) {
+  FBNewFunctionBuilder builder_(_fbb);
+  builder_.add_module_id(module_id);
+  builder_.add_symbol(symbol);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBNewFunction> CreateFBNewFunctionDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const char *symbol = nullptr,
+    uint64_t module_id = 0) {
+  auto symbol__ = symbol ? _fbb.CreateString(symbol) : 0;
+  return gpuless::CreateFBNewFunction(
+      _fbb,
+      symbol__,
+      module_id);
+}
+
 struct FBTraceExecRequest FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBTraceExecRequestBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_TRACE = 4
+    VT_TRACE = 4,
+    VT_NEW_MODULES = 6,
+    VT_NEW_FUNCTIONS = 8
   };
   const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBCudaApiCall>> *trace() const {
     return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBCudaApiCall>> *>(VT_TRACE);
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewModule>> *new_modules() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewModule>> *>(VT_NEW_MODULES);
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewFunction>> *new_functions() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewFunction>> *>(VT_NEW_FUNCTIONS);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_TRACE) &&
            verifier.VerifyVector(trace()) &&
            verifier.VerifyVectorOfTables(trace()) &&
+           VerifyOffset(verifier, VT_NEW_MODULES) &&
+           verifier.VerifyVector(new_modules()) &&
+           verifier.VerifyVectorOfTables(new_modules()) &&
+           VerifyOffset(verifier, VT_NEW_FUNCTIONS) &&
+           verifier.VerifyVector(new_functions()) &&
+           verifier.VerifyVectorOfTables(new_functions()) &&
            verifier.EndTable();
   }
 };
@@ -280,6 +426,12 @@ struct FBTraceExecRequestBuilder {
   flatbuffers::uoffset_t start_;
   void add_trace(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBCudaApiCall>>> trace) {
     fbb_.AddOffset(FBTraceExecRequest::VT_TRACE, trace);
+  }
+  void add_new_modules(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewModule>>> new_modules) {
+    fbb_.AddOffset(FBTraceExecRequest::VT_NEW_MODULES, new_modules);
+  }
+  void add_new_functions(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewFunction>>> new_functions) {
+    fbb_.AddOffset(FBTraceExecRequest::VT_NEW_FUNCTIONS, new_functions);
   }
   explicit FBTraceExecRequestBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -294,32 +446,48 @@ struct FBTraceExecRequestBuilder {
 
 inline flatbuffers::Offset<FBTraceExecRequest> CreateFBTraceExecRequest(
     flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBCudaApiCall>>> trace = 0) {
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBCudaApiCall>>> trace = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewModule>>> new_modules = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<gpuless::FBNewFunction>>> new_functions = 0) {
   FBTraceExecRequestBuilder builder_(_fbb);
+  builder_.add_new_functions(new_functions);
+  builder_.add_new_modules(new_modules);
   builder_.add_trace(trace);
   return builder_.Finish();
 }
 
 inline flatbuffers::Offset<FBTraceExecRequest> CreateFBTraceExecRequestDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const std::vector<flatbuffers::Offset<gpuless::FBCudaApiCall>> *trace = nullptr) {
+    const std::vector<flatbuffers::Offset<gpuless::FBCudaApiCall>> *trace = nullptr,
+    const std::vector<flatbuffers::Offset<gpuless::FBNewModule>> *new_modules = nullptr,
+    const std::vector<flatbuffers::Offset<gpuless::FBNewFunction>> *new_functions = nullptr) {
   auto trace__ = trace ? _fbb.CreateVector<flatbuffers::Offset<gpuless::FBCudaApiCall>>(*trace) : 0;
+  auto new_modules__ = new_modules ? _fbb.CreateVector<flatbuffers::Offset<gpuless::FBNewModule>>(*new_modules) : 0;
+  auto new_functions__ = new_functions ? _fbb.CreateVector<flatbuffers::Offset<gpuless::FBNewFunction>>(*new_functions) : 0;
   return gpuless::CreateFBTraceExecRequest(
       _fbb,
-      trace__);
+      trace__,
+      new_modules__,
+      new_functions__);
 }
 
 struct FBTraceExecResponse FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBTraceExecResponseBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_STATUS = 4
+    VT_STATUS = 4,
+    VT_TRACE_TOP = 6
   };
   gpuless::FBStatus status() const {
     return static_cast<gpuless::FBStatus>(GetField<int8_t>(VT_STATUS, 0));
   }
+  const gpuless::FBCudaApiCall *trace_top() const {
+    return GetPointer<const gpuless::FBCudaApiCall *>(VT_TRACE_TOP);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<int8_t>(verifier, VT_STATUS) &&
+           VerifyOffset(verifier, VT_TRACE_TOP) &&
+           verifier.VerifyTable(trace_top()) &&
            verifier.EndTable();
   }
 };
@@ -330,6 +498,9 @@ struct FBTraceExecResponseBuilder {
   flatbuffers::uoffset_t start_;
   void add_status(gpuless::FBStatus status) {
     fbb_.AddElement<int8_t>(FBTraceExecResponse::VT_STATUS, static_cast<int8_t>(status), 0);
+  }
+  void add_trace_top(flatbuffers::Offset<gpuless::FBCudaApiCall> trace_top) {
+    fbb_.AddOffset(FBTraceExecResponse::VT_TRACE_TOP, trace_top);
   }
   explicit FBTraceExecResponseBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -344,8 +515,10 @@ struct FBTraceExecResponseBuilder {
 
 inline flatbuffers::Offset<FBTraceExecResponse> CreateFBTraceExecResponse(
     flatbuffers::FlatBufferBuilder &_fbb,
-    gpuless::FBStatus status = gpuless::FBStatus_OK) {
+    gpuless::FBStatus status = gpuless::FBStatus_OK,
+    flatbuffers::Offset<gpuless::FBCudaApiCall> trace_top = 0) {
   FBTraceExecResponseBuilder builder_(_fbb);
+  builder_.add_trace_top(trace_top);
   builder_.add_status(status);
   return builder_.Finish();
 }

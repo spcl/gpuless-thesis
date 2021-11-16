@@ -32,9 +32,7 @@ void gpuless::CudaMalloc::appendToFBCudaApiCallList(
  * cudaMemcpyH2D
  */
 gpuless::CudaMemcpyH2D::CudaMemcpyH2D(void *dst, const void *src, size_t size)
-    : dst(dst), src(src), size(size), buffer(size) {
-    std::memcpy(this->buffer.data(), src, size);
-}
+    : dst(dst), src(src), size(size), buffer(size) {}
 
 cudaError_t gpuless::CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
@@ -98,9 +96,7 @@ cudaError_t gpuless::CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
 gpuless::CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(void *dst, const void *src,
                                                 size_t size,
                                                 cudaStream_t stream)
-    : dst(dst), src(src), size(size), stream(stream), buffer(size) {
-    std::memcpy(this->buffer.data(), src, size);
-}
+    : dst(dst), src(src), size(size), stream(stream), buffer(size) {}
 
 cudaError_t
 gpuless::CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
@@ -198,7 +194,9 @@ cudaError_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
                     args.data(), nullptr);
 
     if (ret != CUDA_SUCCESS) {
-        spdlog::error("cuLaunchKernel() failed");
+        const char *err_str;
+        cuGetErrorString(ret, &err_str);
+        spdlog::error("cuLaunchKernel() failed: {}", err_str);
     }
 
     return cudaSuccess;
@@ -330,24 +328,25 @@ gpuless::PrivCudaRegisterVar::PrivCudaRegisterVar(
 
 cudaError_t
 gpuless::PrivCudaRegisterVar::executeNative(CudaVirtualDevice &vdev) {
-    auto globvar_mod_id_it =
-        vdev.global_var_to_module_id_map.find(this->device_name);
-    if (globvar_mod_id_it == vdev.global_var_to_module_id_map.end()) {
-        std::cerr << "global var in unknown module: " << this->device_name
-                  << std::endl;
-        std::exit(EXIT_FAILURE);
-    }
-
-    uint64_t mod_id = globvar_mod_id_it->second;
-    auto mod_id_it = vdev.module_registry_.find(globvar_mod_id_it->second);
-    if (mod_id_it == vdev.module_registry_.end()) {
-        std::cerr << "module not registered: " << mod_id << std::endl;
-        std::exit(EXIT_FAILURE);
-    }
-    CUmodule mod = mod_id_it->second;
-    CUdeviceptr device_ptr;
-    checkCudaErrors(cuModuleGetGlobal(&device_ptr, &this->size, mod,
-                                      this->device_name.c_str()));
+    //    auto globvar_mod_id_it =
+    //        vdev.global_var_to_module_id_map.find(this->device_name);
+    //    if (globvar_mod_id_it == vdev.global_var_to_module_id_map.end()) {
+    //        std::cerr << "global var in unknown module: " << this->device_name
+    //                  << std::endl;
+    //        std::exit(EXIT_FAILURE);
+    //    }
+    //
+    //    uint64_t mod_id = globvar_mod_id_it->second;
+    //    auto mod_id_it =
+    //    vdev.module_registry_.find(globvar_mod_id_it->second); if (mod_id_it
+    //    == vdev.module_registry_.end()) {
+    //        std::cerr << "module not registered: " << mod_id << std::endl;
+    //        std::exit(EXIT_FAILURE);
+    //    }
+    //    CUmodule mod = mod_id_it->second;
+    //    CUdeviceptr device_ptr;
+    //    checkCudaErrors(cuModuleGetGlobal(&device_ptr, &this->size, mod,
+    //                                      this->device_name.c_str()));
     return cudaSuccess;
 }
 

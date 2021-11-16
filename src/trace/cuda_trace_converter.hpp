@@ -9,8 +9,17 @@ namespace gpuless {
 
 class CudaTraceConverter {
   public:
-    void traceToExecRequest(CudaTrace &trace, std::vector<uint8_t> &buffer);
-    void execResponseToTrace(CudaTrace &trace, std::vector<uint8_t> &buffer);
+    static void traceToExecRequest(CudaTrace &cuda_trace,
+                                   flatbuffers::FlatBufferBuilder &builder);
+
+    static std::shared_ptr<CudaApiCall>
+    fbCudaApiCallDeserialize(const FBCudaApiCall *fb_cuda_api_call);
+
+    static std::vector<std::shared_ptr<CudaApiCall>>
+    execRequestToTrace(const FBTraceExecRequest *fb_trace_exec_request);
+
+    static std::shared_ptr<CudaApiCall>
+    execResponseToTopApiCall(const FBTraceExecResponse *fb_trace_exec_response);
 };
 
 } // namespace gpuless

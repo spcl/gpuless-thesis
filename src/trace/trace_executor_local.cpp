@@ -24,76 +24,68 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     auto &vdev = this->cuda_virtual_device_;
     this->cuda_virtual_device_.initRealDevice();
 
-    // synchronize the execution side virtual device with new mappings
-    // from the client
-    vdev.symbol_to_module_id_map.insert(
-        cuda_trace.getNewSymbolToModuleId().begin(),
-        cuda_trace.getNewSymbolToModuleId().end());
-    cuda_trace.getNewSymbolToModuleId().clear();
-
-    vdev.global_var_to_module_id_map.insert(
-        cuda_trace.getNewGlobalVarToModuleId().begin(),
-        cuda_trace.getNewGlobalVarToModuleId().end());
-    cuda_trace.getNewGlobalVarToModuleId().clear();
-
-    vdev.module_id_to_fatbin_data_map.insert(
-        cuda_trace.getNewModuleIdToFatbinDataMap().begin(),
-        cuda_trace.getNewModuleIdToFatbinDataMap().end());
-    cuda_trace.getNewModuleIdToFatbinDataMap().clear();
-
-    // load modules and functions that are not loaded yet but required by
-    // the given trace
+    std::set<uint64_t> required_modules;
+    std::set<std::string> required_functions;
     for (auto &apiCall : cuda_trace.callStack()) {
-        std::vector<uint64_t> required_modules =
-            apiCall->requiredCudaModuleIds();
-        std::vector<std::string> required_functions =
-            apiCall->requiredFunctionSymbols();
+        auto rmod_vec = apiCall->requiredCudaModuleIds();
+        required_modules.insert(rmod_vec.begin(), rmod_vec.end());
+        auto rfunc_vec = apiCall->requiredFunctionSymbols();
+        required_functions.insert(rfunc_vec.begin(), rfunc_vec.end());
+    }
 
-        for (auto id : required_modules) {
-            spdlog::debug("Required module: {}", id);
-            auto mod_reg_it = vdev.module_registry_.find(id);
-            if (mod_reg_it == vdev.module_registry_.end()) {
-                auto mod_data_it = vdev.module_id_to_fatbin_data_map.find(id);
-                if (mod_data_it == vdev.module_id_to_fatbin_data_map.end()) {
-                    spdlog::error("fatbin data missing for module: {}", id);
-                    std::exit(EXIT_FAILURE);
-                }
-
-                spdlog::debug("Loading module: {} [size={}]", id,
-                              mod_data_it->second.size());
-
-                void *fatbin_data_ptr = mod_data_it->second.data();
-                CUmodule mod;
-                checkCudaErrors(cuModuleLoadData(&mod, fatbin_data_ptr));
-//                checkCudaErrors(cuModuleLoadFatBinary(&mod, fatbin_data_ptr));
-                vdev.module_registry_.emplace(id, mod);
-            }
+    for (const auto &rmod_id : required_modules) {
+        auto it = cuda_trace.getModuleIdToFatbinResource().find(rmod_id);
+        if (it == cuda_trace.getModuleIdToFatbinResource().end()) {
+            spdlog::error("Required module {} unknown");
+            return false;
         }
 
-        for (auto &fn : required_functions) {
-            spdlog::debug("Required function: {}", fn);
-            auto fn_reg_it = vdev.function_registry_.find(fn);
-            if (fn_reg_it == vdev.function_registry_.end()) {
-                auto mod_for_sym_it = vdev.symbol_to_module_id_map.find(fn);
-                if (mod_for_sym_it == vdev.symbol_to_module_id_map.end()) {
-                    std::cerr << "unknown module for symbol: " << fn
-                              << std::endl;
-                    std::exit(EXIT_FAILURE);
-                }
-                uint64_t mod_id = mod_for_sym_it->second;
+        const void *resource_ptr = std::get<0>(it->second);
+        bool is_loaded = std::get<2>(it->second);
 
-                auto mod_reg_it = vdev.module_registry_.find(mod_id);
-                if (mod_reg_it == vdev.module_registry_.end()) {
-                    std::cerr << "module not previously registered: " << mod_id
-                              << std::endl;
-                    std::exit(EXIT_FAILURE);
-                }
-                CUfunction func;
-                checkCudaErrors(
-                    cuModuleGetFunction(&func, mod_reg_it->second, fn.c_str()));
-                vdev.function_registry_.emplace(fn, func);
-                spdlog::debug("Function loaded: {}", fn);
+        if (!is_loaded) {
+            CUmodule mod;
+            checkCudaErrors(cuModuleLoadData(&mod, resource_ptr));
+            vdev.module_registry_.emplace(rmod_id, mod);
+            std::get<2>(it->second) = true;
+            spdlog::debug("Loading module: {}", rmod_id);
+        }
+    }
+
+    for (const auto &rfunc : required_functions) {
+        auto it = cuda_trace.getSymbolToModuleId().find(rfunc);
+        if (it == cuda_trace.getSymbolToModuleId().end()) {
+            spdlog::error("Required function {} unknown");
+        }
+
+        auto t = it->second;
+        uint64_t module_id = std::get<0>(t);
+        bool fn_is_loaded = std::get<1>(t);
+
+        if (!fn_is_loaded) {
+            auto mod_it =
+                cuda_trace.getModuleIdToFatbinResource().find(module_id);
+            if (mod_it == cuda_trace.getModuleIdToFatbinResource().end()) {
+                spdlog::error("Unknown module {} for function", module_id,
+                              rfunc);
             }
+
+            bool module_is_loaded = std::get<2>(mod_it->second);
+            if (!module_is_loaded) {
+                spdlog::error("Module {} not previously loaded", module_id);
+            }
+
+            auto mod_reg_it = vdev.module_registry_.find(module_id);
+            if (mod_reg_it == vdev.module_registry_.end()) {
+                spdlog::error("Module {} not in registry", module_id);
+            }
+            CUmodule module = mod_reg_it->second;
+
+            CUfunction func;
+            checkCudaErrors(cuModuleGetFunction(&func, module, rfunc.c_str()));
+            vdev.function_registry_.emplace(rfunc, func);
+            std::get<1>(t) = true;
+            spdlog::debug("Function loaded: {}", rfunc);
         }
     }
 
@@ -105,17 +97,6 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
                           cudaGetErrorString(err), err);
             std::exit(EXIT_FAILURE);
         }
-
-        // tmp
-        // static auto sync =
-        //     (decltype(&cudaStreamSynchronize))real_dlsym(
-        //             RTLD_NEXT, "cudaStreamSynchronize");
-        // if ((err = sync(0)) != cudaSuccess) {
-        //     std::cerr << "    failed to execute call trace: "
-        //         << cudaGetErrorString(err) << " (" << err << ")"
-        //         << std::endl;
-        //     std::exit(EXIT_FAILURE);
-        // }
     }
 
     cuda_trace.markSynchronized();

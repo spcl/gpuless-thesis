@@ -9,18 +9,8 @@
 namespace gpuless {
 
 class TraceExecutor {
-    //  private:
-    //    sockaddr_in managerAddr{};
-    //    sockaddr_in execAddr{};
-    //
-    //    virtual bool
-    //    negotiateSession(gpuless::manager::instance_profile profile) = 0;
-
   public:
-    //    TraceExecutor() = default;
-    //    ~TraceExecutor() = default;
-
-    virtual bool init(const char *ip, const short port,
+    virtual bool init(const char *ip, short port,
                       gpuless::manager::instance_profile profile) = 0;
     virtual bool synchronize(gpuless::CudaTrace &cuda_trace) = 0;
     virtual bool deallocate() = 0;

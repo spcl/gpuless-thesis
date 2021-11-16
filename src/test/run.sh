@@ -14,7 +14,7 @@ run_unit() {
     target="$2"
     printf "running: ${target}\n\n"
     # SPDLOG_LEVEL=debug CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
-    CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
+    EXECUTOR_TYPE=local CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
     printf "\n"
 }
 

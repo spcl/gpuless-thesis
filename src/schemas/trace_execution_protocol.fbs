@@ -20,12 +20,25 @@ table FBCudaApiCall {
     api_call:FBCudaApiCallUnion;
 }
 
+table FBNewModule {
+    buffer:[uint8];
+    module_id:uint64;
+}
+
+table FBNewFunction {
+    symbol:string;
+    module_id:uint64;
+}
+
 table FBTraceExecRequest {
     trace:[FBCudaApiCall];
+    new_modules:[FBNewModule];
+    new_functions:[FBNewFunction];
 }
 
 table FBTraceExecResponse {
     status:FBStatus;
+    trace_top:FBCudaApiCall;
 }
 
 union FBMessage {

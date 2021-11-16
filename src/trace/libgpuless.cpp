@@ -16,6 +16,7 @@
 #include "dlsym_util.hpp"
 #include "libgpuless.hpp"
 #include "trace_executor_local.hpp"
+#include "trace_executor_tcp_client.hpp"
 
 using namespace gpuless;
 
@@ -56,7 +57,37 @@ static uint64_t incrementFatbinCount() {
 static void exitHandler();
 
 static std::shared_ptr<TraceExecutor> getTraceExecutor() {
-    static auto trace_executor = std::make_shared<TraceExecutorLocal>();
+    static std::shared_ptr<TraceExecutor> trace_executor;
+    static bool te_initialized = false;
+    if (!te_initialized) {
+        spdlog::info("Initializing trace executor");
+        te_initialized = true;
+        bool useTcp = true;
+        char *executor_type = std::getenv("EXECUTOR_TYPE");
+        if (executor_type != nullptr) {
+            std::string executor_type_str(executor_type);
+            if (executor_type_str == "local") {
+                useTcp = false;
+            } else if (executor_type_str == "tcp") {
+                useTcp = true;
+            } else {
+                useTcp = false;
+            }
+        }
+
+        if (useTcp) {
+            trace_executor = std::make_shared<TraceExecutorTcp>();
+            bool r = trace_executor->init("127.0.0.1", 8002,
+                                          manager::instance_profile::NO_MIG);
+            if (!r) {
+                spdlog::error("Failed to initialize TCP trace executor");
+                std::exit(EXIT_FAILURE);
+            }
+        } else {
+            trace_executor = std::make_shared<TraceExecutorLocal>();
+        }
+    }
+
     return trace_executor;
 }
 
@@ -112,7 +143,12 @@ cudaError_t cudaMalloc(void **devPtr, size_t size) {
     getTraceExecutor()->synchronize(getCudaTrace());
     *devPtr = std::static_pointer_cast<CudaMalloc>(getCudaTrace().historyTop())
                   ->devPtr;
-    //    printf("  %p\n", *devPtr);
+    return cudaSuccess;
+}
+
+cudaError_t cudaMallocHost(void **devPtr, size_t size) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
     return cudaSuccess;
 }
 
@@ -123,14 +159,19 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
     if (kind == cudaMemcpyHostToDevice) {
         spdlog::info("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
-        getCudaTrace().record(std::make_shared<CudaMemcpyH2D>(dst, src, count));
+        auto rec = std::make_shared<CudaMemcpyH2D>(dst, src, count);
+        std::memcpy(rec->buffer.data(), src, count);
+        getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
         spdlog::info("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyD2H>(dst, src, count);
         getCudaTrace().record(rec);
         getTraceExecutor()->synchronize(getCudaTrace());
-        std::memcpy(dst, rec->buffer.data(), count);
+
+        std::shared_ptr<CudaMemcpyD2H> top =
+            (const std::shared_ptr<CudaMemcpyD2H> &)getCudaTrace().historyTop();
+        std::memcpy(dst, top->buffer.data(), count);
     } else if (kind == cudaMemcpyDeviceToDevice) {
         spdlog::info("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
@@ -149,8 +190,9 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
         spdlog::info(
             "{}() [cudaMemcpyHostToDevice, {} <- {}, stream={}, pid={}]",
             __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
-        getCudaTrace().record(
-            std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream));
+        auto rec = std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream);
+        std::memcpy(rec->buffer.data(), src, count);
+        getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
         spdlog::info(
             "{}() [cudaMemcpyDeviceToHost, {} <- {}, stream={}, pid={}]",
@@ -210,15 +252,14 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     }
 
     auto &cuda_trace = getCudaTrace();
-    //    auto &vdev = cuda_trace.cudaVirtualDevice();
-    auto &symbol_to_module_id_map = cuda_trace.symbolToModuleIdMap();
+    auto &symbol_to_module_id_map = cuda_trace.getSymbolToModuleId();
     auto mod_id_it = symbol_to_module_id_map.find(symbol);
     if (mod_id_it == symbol_to_module_id_map.end()) {
         spdlog::error("function in unknown module");
         std::exit(EXIT_FAILURE);
     }
 
-    std::vector<uint64_t> required_cuda_modules{mod_id_it->second};
+    std::vector<uint64_t> required_cuda_modules{mod_id_it->second.first};
     std::vector<std::string> required_function_symbols{symbol};
 
     getCudaTrace().record(std::make_shared<CudaLaunchKernel>(
@@ -315,15 +356,17 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
     // appears in dscuda (as far as i know)
     size_t data_len = ((data_ull[1] - 1) / 8 + 1) * 8 + 16;
 
-    std::vector<uint8_t> data_cpy(data_len);
-    std::memcpy(data_cpy.data(), data_ull, data_len);
+    //    std::vector<uint8_t> data_cpy(data_len);
+    //    std::memcpy(data_cpy.data(), data_ull, data_len);
 
-    spdlog::debug("Recording Fatbin data [id={}, size={}, raw_size={}]",
-                  fatbin_id, data_len);
+    spdlog::debug("Recording Fatbin data [id={}, size={}]", fatbin_id,
+                  data_len);
 
-    getCudaTrace().recordFatbinData(data_cpy, fatbin_id);
-    getCudaTrace().record(
-        std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
+    void *resource_ptr =
+        reinterpret_cast<void *>(const_cast<unsigned long long *>(data_ull));
+    getCudaTrace().recordFatbinData(resource_ptr, data_len, fatbin_id);
+//    getCudaTrace().record(
+//        std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
     return reinterpret_cast<void **>(fatbin_id);
 }
 
@@ -338,8 +381,8 @@ void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
     }
     state.is_registering = false;
 
-    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
-        state.current_fatbin_handle));
+//    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
+//        state.current_fatbin_handle));
 }
 
 void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
@@ -364,11 +407,10 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
     getSymbolMap().emplace(
         std::make_pair(static_cast<const void *>(deviceFun), deviceName));
 
-    // execute locally, not by trace recording for debug purposes
-    getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
-        reinterpret_cast<uint64_t>(fatCubinHandle),
-        const_cast<void *>(reinterpret_cast<const void *>(hostFun)), deviceFun,
-        deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
+//    getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
+//        reinterpret_cast<uint64_t>(fatCubinHandle),
+//        const_cast<void *>(reinterpret_cast<const void *>(hostFun)), deviceFun,
+//        deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
 }
 
 void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
@@ -388,9 +430,9 @@ void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
 
     std::vector<uint64_t> required_cuda_modules{state.current_fatbin_handle};
 
-    getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
-        required_cuda_modules, state.current_fatbin_handle, hostVar,
-        deviceAddress, deviceName, ext, size, constant, global));
+//    getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
+//        required_cuda_modules, state.current_fatbin_handle, hostVar,
+//        deviceAddress, deviceName, ext, size, constant, global));
 }
 
 void __cudaUnregisterFatBinary(void **fatCubinHandle) {

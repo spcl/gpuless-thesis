@@ -19,31 +19,30 @@ class CudaTrace {
     std::vector<std::shared_ptr<CudaApiCall>> synchronized_history_;
     std::vector<std::shared_ptr<CudaApiCall>> call_stack_;
 
-    // complete map of all registered symbols
-    std::map<std::string, uint64_t> symbol_to_module_id_;
+    // map of all registered symbols
+    // symbol -> (module_id, is_loaded)
+    std::map<std::string, std::pair<uint64_t, bool>> symbol_to_module_id_;
 
-    // newly recorded mappings that need to be synchronized with the remote
-    // executor
-    std::vector<std::pair<std::string, uint64_t>> new_symbol_to_module_id_;
-    std::vector<std::pair<std::string, uint64_t>> new_global_var_to_module_id_;
-    std::vector<std::pair<uint64_t, std::vector<uint8_t>>>
-        new_module_id_to_fatbin_data_map_;
+    // map module ids to storage location and size of a fatbin module
+    // module_id -> (resource_ptr, size, is_loaded)
+    std::map<uint64_t, std::tuple<void *, uint64_t, bool>>
+        module_id_to_fatbin_resource_;
 
   public:
     CudaTrace();
 
     const std::shared_ptr<CudaApiCall> &historyTop();
+    void setHistoryTop(std::shared_ptr<CudaApiCall> top);
     std::vector<std::shared_ptr<CudaApiCall>> callStack();
 
-    std::vector<std::pair<std::string, uint64_t>> &
-    getNewSymbolToModuleId();
-    std::vector<std::pair<std::string, uint64_t>> &
-    getNewGlobalVarToModuleId();
-    std::vector<std::pair<uint64_t, std::vector<uint8_t>>> &
-    getNewModuleIdToFatbinDataMap();
-    std::map<std::string, uint64_t> &symbolToModuleIdMap();
+    std::map<std::string, std::pair<uint64_t, bool>> &getSymbolToModuleId();
+    std::map<uint64_t, std::tuple<void *, uint64_t, bool>> &
+    getModuleIdToFatbinResource();
 
-    void recordFatbinData(std::vector<uint8_t> &data, uint64_t module_id);
+    void
+    setCallStack(const std::vector<std::shared_ptr<CudaApiCall>> &callStack);
+
+    void recordFatbinData(void *data, uint64_t size, uint64_t module_id);
     void recordSymbolMapEntry(std::string &symbol, uint64_t module_id);
     void recordGlobalVarMapEntry(std::string &symbol, uint64_t module_id);
 

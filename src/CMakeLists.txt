@@ -40,6 +40,27 @@ add_executable(manager manager/manager.cpp manager/manager_device.cpp utils.cpp)
 add_dependencies(manager flatbuffer)
 target_link_libraries(manager iberty CUDA::cuda_driver boost_serialization pthread)
 
+add_executable(manager_trace
+    trace/manager/manager.cpp
+    trace/manager/manager_device.cpp
+    trace/cuda_trace.cpp
+    trace/cuda_trace_converter.cpp
+    trace/cuda_api_calls.cpp
+    trace/cuda_virtual_device.cpp
+    trace/cuda_virtual_device.cpp
+    trace/trace_executor_local.cpp
+    trace/trace_executor_tcp_client.cpp
+    trace/dlsym_util.cpp
+    utils.cpp)
+add_dependencies(manager_trace flatbuffer)
+target_link_libraries(manager_trace
+    spdlog::spdlog
+    iberty
+    CUDA::cudart
+    CUDA::cuda_driver
+    boost_serialization
+    pthread)
+
 add_subdirectory(
     ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
     ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
@@ -58,10 +79,15 @@ add_library(gpuless SHARED
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp
     trace/trace_executor_local.cpp
+    trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
     utils.cpp
     trace/cubin_analysis.cpp)
-target_link_libraries(gpuless spdlog::spdlog iberty CUDA::cuda_driver CUDA::cudart)
+target_link_libraries(gpuless
+    spdlog::spdlog
+    iberty
+    CUDA::cuda_driver
+    CUDA::cudart)
 
 add_custom_command(
     TARGET gpuless POST_BUILD
