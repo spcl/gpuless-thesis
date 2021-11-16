@@ -58,7 +58,6 @@ target_link_libraries(manager_trace
     iberty
     CUDA::cudart
     CUDA::cuda_driver
-    boost_serialization
     pthread)
 
 add_subdirectory(
