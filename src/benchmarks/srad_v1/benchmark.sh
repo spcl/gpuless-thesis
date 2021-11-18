@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-out_file="bench-srad_v1-$(date --iso-8601=seconds)"
-project_dir=$HOME/ethz/master/thesis/msc-lutobler-gpuless
+out_file="benchmark-srad_v1-$(date --iso-8601=seconds)"
+# project_dir=$HOME/ethz/master/thesis/msc-lutobler-gpuless
+project_dir=../../../
 manager_bin=$project_dir/src/build/manager_trace
-bench_dir=$project_dir/src/test/srad_v1
+bench_dir=$project_dir/src/benchmarks/srad_v1
 
 echo 'local native performance'
 pushd .
