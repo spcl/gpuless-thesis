@@ -3,7 +3,7 @@
 out_file="benchmark-srad_v1-$(date --iso-8601=seconds)"
 # project_dir=$HOME/ethz/master/thesis/msc-lutobler-gpuless
 project_dir=../../../
-manager_bin=$project_dir/src/build/manager_trace
+manager_bin=$project_dir/src/bin/manager_trace
 bench_dir=$project_dir/src/benchmarks/srad_v1
 
 if [[ "$1" == "local" ]]; then
