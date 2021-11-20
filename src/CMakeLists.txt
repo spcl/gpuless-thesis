@@ -4,9 +4,11 @@ project(gpuless)
 enable_language(CUDA)
 
 find_package(CUDAToolkit)
-find_package(Torch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(spdlog REQUIRED)
+# find_package(spdlog REQUIRED)
+# find_package(Torch REQUIRED)
+# find_package(OpenCV REQUIRED)
+
+include_directories(${CMAKE_SOURCE_DIR})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
@@ -58,7 +60,7 @@ add_executable(manager_trace
     utils.cpp)
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
-    spdlog::spdlog_header_only
+    # spdlog::spdlog_header_only
     iberty
     CUDA::cudart
     CUDA::cuda_driver
@@ -72,7 +74,10 @@ add_library(analysis SHARED
     analysis/libcudaanalysis.cpp
     trace/cubin_analysis.cpp
     utils.cpp trace/trace_executor.hpp)
-target_link_libraries(analysis spdlog::spdlog_header_only CUDA::cudart CUDA::cuda_driver)
+target_link_libraries(analysis
+    # spdlog::spdlog_header_only
+    CUDA::cudart
+    CUDA::cuda_driver)
 
 add_library(gpuless SHARED
     trace/libgpuless.cpp
@@ -88,7 +93,7 @@ add_library(gpuless SHARED
     utils.cpp
     trace/cubin_analysis.cpp trace/cudnn_api_calls.cpp)
 target_link_libraries(gpuless
-    spdlog::spdlog_header_only
+    # spdlog::spdlog_header_only
     iberty
     CUDA::cuda_driver
     CUDA::cudart)
