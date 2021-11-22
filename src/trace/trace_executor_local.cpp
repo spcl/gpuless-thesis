@@ -91,10 +91,10 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
 
     for (auto &apiCall : cuda_trace.callStack()) {
         spdlog::debug("Executing: {}", apiCall->typeName());
-        cudaError_t err;
-        if ((err = apiCall->executeNative(vdev)) != cudaSuccess) {
+        uint64_t err = apiCall->executeNative(vdev);
+        if (err != 0) {
             spdlog::error("Failed to execute call trace: {} ({})",
-                          cudaGetErrorString(err), err);
+                          apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
     }

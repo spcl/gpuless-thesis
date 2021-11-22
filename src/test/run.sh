@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-lib='/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/build/libgpuless.so'
+lib='/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/bin/libgpuless.so'
 
 basic_targets=(
     unit/simple
@@ -36,5 +36,5 @@ done
 
 # real benchmarks
 run_custom 'hotspot' 'run' 'hotspot'
-run_custom 'dwt2d' 'run' 'dwt2d'
+# run_custom 'dwt2d' 'run' 'dwt2d'
 run_custom 'srad' 'run' 'srad_v1'

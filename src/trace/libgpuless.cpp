@@ -10,7 +10,6 @@
 #include <spdlog/cfg/env.h>
 #include <spdlog/spdlog.h>
 
-#include "../utils.hpp"
 #include "cubin_analysis.hpp"
 #include "cuda_trace.hpp"
 #include "dlsym_util.hpp"
@@ -21,7 +20,10 @@
 using namespace gpuless;
 
 const int CUDA_MAJOR_VERSION = 8;
-const int CUDA_MINOR_VERSION = 6;
+const int CUDA_MINOR_VERSION = 0;
+
+short manager_port = 8002;
+std::string manager_ip = "127.0.0.1";
 
 static void hijackInit() {
     static bool hijack_initialized = false;
@@ -31,6 +33,16 @@ static void hijackInit() {
 
         // load log level from env variable SPDLOG_LEVEL
         spdlog::cfg::load_env_levels();
+
+        char *manager_port_env = std::getenv("MANAGER_PORT");
+        if (manager_port_env) {
+            manager_port = std::stoi(manager_port_env);
+        }
+
+        char *manager_ip_env = std::getenv("MANAGER_IP");
+        if (manager_ip_env) {
+            manager_ip = manager_ip_env;
+        }
     }
 }
 
@@ -56,7 +68,7 @@ static uint64_t incrementFatbinCount() {
 
 static void exitHandler();
 
-static std::shared_ptr<TraceExecutor> getTraceExecutor() {
+std::shared_ptr<TraceExecutor> getTraceExecutor() {
     static std::shared_ptr<TraceExecutor> trace_executor;
     static bool te_initialized = false;
     if (!te_initialized) {
@@ -77,7 +89,7 @@ static std::shared_ptr<TraceExecutor> getTraceExecutor() {
 
         if (useTcp) {
             trace_executor = std::make_shared<TraceExecutorTcp>();
-            bool r = trace_executor->init("127.0.0.1", 8002,
+            bool r = trace_executor->init(manager_ip.c_str(), manager_port,
                                           manager::instance_profile::NO_MIG);
             if (!r) {
                 spdlog::error("Failed to initialize TCP trace executor");
@@ -96,7 +108,7 @@ static CubinAnalyzer &getCubinAnalyzer() {
     return cubin_analyzer;
 }
 
-static CudaTrace &getCudaTrace() {
+CudaTrace &getCudaTrace() {
     static CudaTrace cuda_trace;
 
     static bool exit_handler_registered = false;
@@ -190,7 +202,8 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
         spdlog::info(
             "{}() [cudaMemcpyHostToDevice, {} <- {}, stream={}, pid={}]",
             __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
-        auto rec = std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream);
+        auto rec =
+            std::make_shared<CudaMemcpyAsyncH2D>(dst, src, count, stream);
         std::memcpy(rec->buffer.data(), src, count);
         getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
@@ -356,17 +369,12 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
     // appears in dscuda (as far as i know)
     size_t data_len = ((data_ull[1] - 1) / 8 + 1) * 8 + 16;
 
-    //    std::vector<uint8_t> data_cpy(data_len);
-    //    std::memcpy(data_cpy.data(), data_ull, data_len);
-
     spdlog::debug("Recording Fatbin data [id={}, size={}]", fatbin_id,
                   data_len);
 
     void *resource_ptr =
         reinterpret_cast<void *>(const_cast<unsigned long long *>(data_ull));
     getCudaTrace().recordFatbinData(resource_ptr, data_len, fatbin_id);
-//    getCudaTrace().record(
-//        std::make_shared<PrivCudaRegisterFatBinary>(fatbin_id));
     return reinterpret_cast<void **>(fatbin_id);
 }
 
@@ -381,8 +389,8 @@ void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
     }
     state.is_registering = false;
 
-//    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
-//        state.current_fatbin_handle));
+    //    getCudaTrace().record(std::make_shared<PrivCudaRegisterFatBinaryEnd>(
+    //        state.current_fatbin_handle));
 }
 
 void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
@@ -393,7 +401,6 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
     spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
 
     auto &state = getCudaRegisterState();
-    //    auto &vdev = getCudaTrace().cudaVirtualDevice();
     if (!state.is_registering) {
         EXIT_UNRECOVERABLE("__cudaRegisterFunction called without a "
                            "previous call to __cudaRegisterFatBinary");
@@ -406,11 +413,6 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
         std::make_pair(static_cast<const void *>(hostFun), deviceName));
     getSymbolMap().emplace(
         std::make_pair(static_cast<const void *>(deviceFun), deviceName));
-
-//    getCudaTrace().record(std::make_shared<PrivCudaRegisterFunction>(
-//        reinterpret_cast<uint64_t>(fatCubinHandle),
-//        const_cast<void *>(reinterpret_cast<const void *>(hostFun)), deviceFun,
-//        deviceName, thread_limit, tid, bid, bDim, gDim, wSize));
 }
 
 void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
@@ -429,10 +431,6 @@ void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
     getCudaTrace().recordGlobalVarMapEntry(symbol, state.current_fatbin_handle);
 
     std::vector<uint64_t> required_cuda_modules{state.current_fatbin_handle};
-
-//    getCudaTrace().record(std::make_shared<PrivCudaRegisterVar>(
-//        required_cuda_modules, state.current_fatbin_handle, hostVar,
-//        deviceAddress, deviceName, ext, size, constant, global));
 }
 
 void __cudaUnregisterFatBinary(void **fatCubinHandle) {
@@ -457,7 +455,7 @@ CUresult cuDevicePrimaryCtxRelease(CUdevice dev) {
 CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
                           cuuint64_t flags) {
     hijackInit();
-    spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());
+    spdlog::trace("{}({}) [pid={}]", __func__, symbol, getpid());
 
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxRelease_v2);
@@ -475,7 +473,7 @@ CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
 }
 
 void *dlsym(void *handle, const char *symbol) {
-    spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());
+    spdlog::trace("{}({}) [pid={}]", __func__, symbol, getpid());
 
     // early out if not a CUDA driver symbol
     if (strncmp(symbol, "cu", 2) != 0) {

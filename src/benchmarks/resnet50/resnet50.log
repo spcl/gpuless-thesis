@@ -1,0 +1,2484 @@
+cudaStreamIsCapturing() [time: 794.725 ms, acc_time: 794.725 ms]
+
+cudaMalloc(D0 (0x7f28c6e00000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D0(0x7f28c6e00000) <- H0(0x559845c5fd00), 9300 bytes) [time: 0.011 ms, acc_time: 794.736 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D1(0x7f28c6e09400) <- H1(0x55984585bf80), 100 bytes) [time: 0.004 ms, acc_time: 794.74 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D2(0x7f28c6e09600) <- H2(0x5598459ab400), 100 bytes) [time: 0.002 ms, acc_time: 794.742 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D3(0x7f28c6e09800) <- H3(0x55984583f900), 4000 bytes) [time: 0.003 ms, acc_time: 794.745 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D4(0x7f28c6e0d800) <- H4(0x559845843980), 100 bytes) [time: 0.002 ms, acc_time: 794.747 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D5(0x7f28c6e0da00) <- H5(0x5598459b3400), 100 bytes) [time: 0.002 ms, acc_time: 794.749 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D6(0x7f28c6e0dc00) <- H6(0x559845c69080), 24000 bytes) [time: 0.014 ms, acc_time: 794.763 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D7(0x7f28c6e31c00) <- H7(0x559845c5d000), 100 bytes) [time: 0.002 ms, acc_time: 794.765 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D8(0x7f28c6e31e00) <- H8(0x559845c5d540), 100 bytes) [time: 0.002 ms, acc_time: 794.767 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D9(0x7f28c6e32000) <- H9(0x559845c8d100), 10000 bytes) [time: 0.006 ms, acc_time: 794.773 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D10(0x7f28c6e42000) <- H10(0x559845c54340), 400 bytes) [time: 0.002 ms, acc_time: 794.775 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D11(0x7f28c6e42400) <- H11(0x5598458346c0), 400 bytes) [time: 0.002 ms, acc_time: 794.777 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D12(0x7f28c6e42800) <- H12(0x559845c9d180), 10000 bytes) [time: 0.006 ms, acc_time: 794.783 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D13(0x7f28c6e52800) <- H13(0x55984583dfc0), 400 bytes) [time: 0.002 ms, acc_time: 794.785 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D14(0x7f28c6e52c00) <- H14(0x559845c5b8c0), 400 bytes) [time: 0.002 ms, acc_time: 794.787 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D15(0x7f28c6e53000) <- H15(0x559845cad200), 10000 bytes) [time: 0.006 ms, acc_time: 794.793 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D16(0x7f28c6e63000) <- H16(0x559845c5f7c0), 100 bytes) [time: 0.002 ms, acc_time: 794.795 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D17(0x7f28c6e63200) <- H17(0x559845843ec0), 100 bytes) [time: 0.002 ms, acc_time: 794.797 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D18(0x7f28c6e63400) <- H18(0x559845cbd280), 24000 bytes) [time: 0.013 ms, acc_time: 794.81 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D19(0x7f28c6e87400) <- H19(0x559845845380), 100 bytes) [time: 0.002 ms, acc_time: 794.812 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D20(0x7f28c6e87600) <- H20(0x559845845840), 100 bytes) [time: 0.002 ms, acc_time: 794.814 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D21(0x7f28c6e87800) <- H21(0x559845ce1300), 10000 bytes) [time: 0.006 ms, acc_time: 794.82 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D22(0x7f28c6e97800) <- H22(0x559845c56340), 400 bytes) [time: 0.002 ms, acc_time: 794.822 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D23(0x7f28c6e97c00) <- H23(0x559845c568c0), 400 bytes) [time: 0.002 ms, acc_time: 794.824 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D24(0x7f28c6e98000) <- H24(0x559845cf1380), 10000 bytes) [time: 0.006 ms, acc_time: 794.83 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D25(0x7f28c6ea8000) <- H25(0x559845c58840), 100 bytes) [time: 0.002 ms, acc_time: 794.832 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D26(0x7f28c6ea8200) <- H26(0x559845c58c80), 100 bytes) [time: 0.002 ms, acc_time: 794.834 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D27(0x7f28c6ea8400) <- H27(0x559845d01400), 24000 bytes) [time: 0.012 ms, acc_time: 794.846 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D28(0x7f28c6ecc400) <- H28(0x559845c5a200), 100 bytes) [time: 0.002 ms, acc_time: 794.848 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D29(0x7f28c6ecc600) <- H29(0x559845c5a680), 100 bytes) [time: 0.002 ms, acc_time: 794.85 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D30(0x7f28c6ecc800) <- H30(0x559845d25480), 10000 bytes) [time: 0.006 ms, acc_time: 794.856 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D31(0x7f28c6edc800) <- H31(0x559845838780), 400 bytes) [time: 0.002 ms, acc_time: 794.858 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D32(0x7f28c6edcc00) <- H32(0x559845838c00), 400 bytes) [time: 0.002 ms, acc_time: 794.86 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D33(0x7f28c6edd000) <- H33(0x559845d35500), 20000 bytes) [time: 0.011 ms, acc_time: 794.871 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D34(0x7f28c6efd000) <- H34(0x55984583ac40), 200 bytes) [time: 0.002 ms, acc_time: 794.873 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D35(0x7f28c6efd200) <- H35(0x55984583b200), 200 bytes) [time: 0.002 ms, acc_time: 794.875 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D36(0x7f28c6efd400) <- H36(0x7f293941f040), 90000 bytes) [time: 0.038 ms, acc_time: 794.913 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D37(0x7f28c6f8d400) <- H37(0x55984583c9c0), 200 bytes) [time: 0.003 ms, acc_time: 794.916 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D38(0x7f28c6f8d600) <- H38(0x55984583cf80), 200 bytes) [time: 0.002 ms, acc_time: 794.918 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D39(0x7f28c6f8d800) <- H39(0x559845d55880), 40000 bytes) [time: 0.018 ms, acc_time: 794.936 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D40(0x7f28c6fcd800) <- H40(0x559845d95b40), 800 bytes) [time: 0.002 ms, acc_time: 794.938 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D41(0x7f28c6fce000) <- H41(0x559845d96640), 800 bytes) [time: 0.002 ms, acc_time: 794.94 ms]
+
+cudaStreamIsCapturing() [time: 0.001 ms, acc_time: 794.941 ms]
+
+cudaMalloc(D42 (0x7f28c7000000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D42(0x7f28c7000000) <- H42(0x7f29391ee040), 80000 bytes) [time: 0.036 ms, acc_time: 794.977 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D43(0x7f28c6fce800) <- H43(0x559845d989c0), 800 bytes) [time: 0.004 ms, acc_time: 794.981 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D44(0x7f28c6fcf000) <- H44(0x559845d99480), 800 bytes) [time: 0.002 ms, acc_time: 794.983 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D45(0x7f28c7080000) <- H45(0x559845d9b600), 40000 bytes) [time: 0.019 ms, acc_time: 795.002 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D46(0x7f28c6fcf800) <- H46(0x559845ddb900), 200 bytes) [time: 0.002 ms, acc_time: 795.004 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D47(0x7f28c6fcfa00) <- H47(0x559845ddbdc0), 200 bytes) [time: 0.002 ms, acc_time: 795.006 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D48(0x7f28c70c0000) <- H48(0x7f293915d040), 90000 bytes) [time: 0.038 ms, acc_time: 795.044 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D49(0x7f28c6fcfc00) <- H49(0x559845ddcf40), 200 bytes) [time: 0.003 ms, acc_time: 795.047 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D50(0x7f28c6fcfe00) <- H50(0x559845ddd440), 200 bytes) [time: 0.002 ms, acc_time: 795.049 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D51(0x7f28c7150000) <- H51(0x559845dde3c0), 40000 bytes) [time: 0.018 ms, acc_time: 795.067 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D52(0x7f28c6fd0000) <- H52(0x559845e1e680), 800 bytes) [time: 0.002 ms, acc_time: 795.069 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D53(0x7f28c6fd0800) <- H53(0x559845e1f180), 800 bytes) [time: 0.002 ms, acc_time: 795.071 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D54(0x7f28c7190000) <- H54(0x559845e21280), 40000 bytes) [time: 0.018 ms, acc_time: 795.089 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D55(0x7f28c6fd1000) <- H55(0x559845e61580), 200 bytes) [time: 0.002 ms, acc_time: 795.091 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D56(0x7f28c6fd1200) <- H56(0x559845e61a40), 200 bytes) [time: 0.002 ms, acc_time: 795.093 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 795.093 ms]
+
+cudaMalloc(D57 (0x7f28c7200000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D57(0x7f28c7200000) <- H57(0x7f29390cc040), 90000 bytes) [time: 0.038 ms, acc_time: 795.131 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D58(0x7f28c6fd1400) <- H58(0x559845e62c40), 200 bytes) [time: 0.004 ms, acc_time: 795.135 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D59(0x7f28c6fd1600) <- H59(0x559845e63100), 200 bytes) [time: 0.003 ms, acc_time: 795.138 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D60(0x7f28c7290000) <- H60(0x559845e64040), 40000 bytes) [time: 0.018 ms, acc_time: 795.156 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D61(0x7f28c6fd1800) <- H61(0x559845ea4300), 800 bytes) [time: 0.003 ms, acc_time: 795.159 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D62(0x7f28c6fd2000) <- H62(0x559845ea4e00), 800 bytes) [time: 0.002 ms, acc_time: 795.161 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D63(0x7f28c72d0000) <- H63(0x559845eaa340), 40000 bytes) [time: 0.023 ms, acc_time: 795.184 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D64(0x7f28c6fd2800) <- H64(0x55984583e5c0), 200 bytes) [time: 0.002 ms, acc_time: 795.186 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D65(0x7f28c6fd2a00) <- H65(0x559845eea3c0), 200 bytes) [time: 0.002 ms, acc_time: 795.188 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D66(0x7f28c7310000) <- H66(0x7f293903b040), 90000 bytes) [time: 0.048 ms, acc_time: 795.236 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D67(0x7f28c6fd2c00) <- H67(0x559845eeb480), 200 bytes) [time: 0.003 ms, acc_time: 795.239 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D68(0x7f28c6fd2e00) <- H68(0x559845eeb980), 200 bytes) [time: 0.002 ms, acc_time: 795.241 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D69(0x7f28c73a0000) <- H69(0x559845eec880), 40000 bytes) [time: 0.025 ms, acc_time: 795.266 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D70(0x7f28c73e0000) <- H70(0x559845f2cb80), 800 bytes) [time: 0.003 ms, acc_time: 795.269 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D71(0x7f28c73e0800) <- H71(0x559845f2d640), 800 bytes) [time: 0.002 ms, acc_time: 795.271 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 795.271 ms]
+
+cudaMalloc(D72 (0x7f28c7400000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D72(0x7f28c7400000) <- H72(0x7f2938fba040), 80000 bytes) [time: 0.046 ms, acc_time: 795.317 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D73(0x7f28c73e1000) <- H73(0x559845f2fa40), 400 bytes) [time: 0.004 ms, acc_time: 795.321 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D74(0x7f28c73e1400) <- H74(0x559845f30100), 400 bytes) [time: 0.002 ms, acc_time: 795.323 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 795.323 ms]
+
+cudaMalloc(D75 (0x7f28c4000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D75(0x7f28c4000000) <- H75(0x7f2938d79040), 240000 bytes) [time: 0.285 ms, acc_time: 795.608 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D76(0x7f28c73e1800) <- H76(0x559845f31880), 400 bytes) [time: 0.004 ms, acc_time: 795.612 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D77(0x7f28c73e1c00) <- H77(0x559845f31f80), 400 bytes) [time: 0.002 ms, acc_time: 795.614 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D78(0x7f28c7480000) <- H78(0x7f2938c78040), 100000 bytes) [time: 0.09 ms, acc_time: 795.704 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D79(0x7f28c73e2000) <- H79(0x559845f33740), 1000 bytes) [time: 0.004 ms, acc_time: 795.708 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D80(0x7f28c73e3000) <- H80(0x559845f34a40), 1000 bytes) [time: 0.002 ms, acc_time: 795.71 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D81(0x7f28c4240000) <- H81(0x7f2938a77040), 200000 bytes) [time: 0.197 ms, acc_time: 795.907 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D82(0x7f28c73e4000) <- H82(0x559845f385c0), 1000 bytes) [time: 0.004 ms, acc_time: 795.911 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D83(0x7f28c73e5000) <- H83(0x559845f39880), 1000 bytes) [time: 0.002 ms, acc_time: 795.913 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 795.913 ms]
+
+cudaMalloc(D84 (0x7f28c5400000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D84(0x7f28c5400000) <- H84(0x7f2938976040), 100000 bytes) [time: 0.091 ms, acc_time: 796.004 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D85(0x7f28c73e6000) <- H85(0x559845f3d500), 400 bytes) [time: 0.004 ms, acc_time: 796.008 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D86(0x7f28c73e6400) <- H86(0x559845f3dbc0), 400 bytes) [time: 0.003 ms, acc_time: 796.011 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D87(0x7f28c4440000) <- H87(0x7f2938735040), 240000 bytes) [time: 0.238 ms, acc_time: 796.249 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D88(0x7f28c73e6800) <- H88(0x559845f3f3c0), 400 bytes) [time: 0.004 ms, acc_time: 796.253 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D89(0x7f28c73e6c00) <- H89(0x559845f3fa80), 400 bytes) [time: 0.002 ms, acc_time: 796.255 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D90(0x7f28c5500000) <- H90(0x7f2938634040), 100000 bytes) [time: 0.07 ms, acc_time: 796.325 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D91(0x7f28c73e7000) <- H91(0x559845f41200), 1000 bytes) [time: 0.004 ms, acc_time: 796.329 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D92(0x7f28c73e8000) <- H92(0x559845f42500), 1000 bytes) [time: 0.002 ms, acc_time: 796.331 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 796.331 ms]
+
+cudaMalloc(D93 (0x7f28c5600000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D93(0x7f28c5600000) <- H93(0x7f2938533040), 100000 bytes) [time: 0.074 ms, acc_time: 796.405 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D94(0x7f28c73e9000) <- H94(0x559845f460c0), 400 bytes) [time: 0.004 ms, acc_time: 796.409 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D95(0x7f28c73e9400) <- H95(0x559845f467c0), 400 bytes) [time: 0.002 ms, acc_time: 796.411 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D96(0x7f28c4680000) <- H96(0x7f29382f2040), 240000 bytes) [time: 0.191 ms, acc_time: 796.602 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D97(0x7f28c73e9800) <- H97(0x559845f47f40), 400 bytes) [time: 0.004 ms, acc_time: 796.606 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D98(0x7f28c73e9c00) <- H98(0x559845f48600), 400 bytes) [time: 0.002 ms, acc_time: 796.608 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D99(0x7f28c5700000) <- H99(0x7f29381f1040), 100000 bytes) [time: 0.074 ms, acc_time: 796.682 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D100(0x7f28c73ea000) <- H100(0x559845f49e00), 1000 bytes) [time: 0.004 ms, acc_time: 796.686 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D101(0x7f28c73eb000) <- H101(0x559845f4b0c0), 1000 bytes) [time: 0.003 ms, acc_time: 796.689 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 796.689 ms]
+
+cudaMalloc(D102 (0x7f28c5800000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D102(0x7f28c5800000) <- H102(0x7f29380f0040), 100000 bytes) [time: 0.078 ms, acc_time: 796.767 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D103(0x7f28c73ec000) <- H103(0x559845f4ec40), 400 bytes) [time: 0.004 ms, acc_time: 796.771 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D104(0x7f28c73ec400) <- H104(0x559845f4f340), 400 bytes) [time: 0.002 ms, acc_time: 796.773 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D105(0x7f28c48c0000) <- H105(0x7f2937eaf040), 240000 bytes) [time: 0.191 ms, acc_time: 796.964 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D106(0x7f28c73ec800) <- H106(0x559845f50b00), 400 bytes) [time: 0.003 ms, acc_time: 796.967 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D107(0x7f28c73ecc00) <- H107(0x559845f51200), 400 bytes) [time: 0.002 ms, acc_time: 796.969 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D108(0x7f28c5900000) <- H108(0x7f2937dae040), 100000 bytes) [time: 0.067 ms, acc_time: 797.036 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D109(0x7f28c73ed000) <- H109(0x559845f52980), 1000 bytes) [time: 0.004 ms, acc_time: 797.04 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D110(0x7f28c73ee000) <- H110(0x559845f53c40), 1000 bytes) [time: 0.003 ms, acc_time: 797.043 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 797.043 ms]
+
+cudaMalloc(D111 (0x7f28c5a00000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D111(0x7f28c5a00000) <- H111(0x7f2937cad040), 100000 bytes) [time: 0.066 ms, acc_time: 797.109 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D112(0x7f28c73ef000) <- H112(0x559845f578c0), 400 bytes) [time: 0.004 ms, acc_time: 797.113 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D113(0x7f28c73ef400) <- H113(0x559845f57fc0), 400 bytes) [time: 0.003 ms, acc_time: 797.116 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D114(0x7f28c4b00000) <- H114(0x7f2937a6c040), 240000 bytes) [time: 0.175 ms, acc_time: 797.291 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D115(0x7f28c73ef800) <- H115(0x559845f59740), 400 bytes) [time: 0.003 ms, acc_time: 797.294 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D116(0x7f28c73efc00) <- H116(0x559845f59e00), 400 bytes) [time: 0.002 ms, acc_time: 797.296 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D117(0x7f28c5b00000) <- H117(0x7f293796b040), 100000 bytes) [time: 0.066 ms, acc_time: 797.362 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D118(0x7f28c73f0000) <- H118(0x559845f5b600), 1000 bytes) [time: 0.004 ms, acc_time: 797.366 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D119(0x7f28c73f1000) <- H119(0x559845f5c8c0), 1000 bytes) [time: 0.002 ms, acc_time: 797.368 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 797.368 ms]
+
+cudaMalloc(D120 (0x7f28c5c00000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D120(0x7f28c5c00000) <- H120(0x7f293786a040), 100000 bytes) [time: 0.075 ms, acc_time: 797.443 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D121(0x7f28c73f2000) <- H121(0x559845f60500), 400 bytes) [time: 0.004 ms, acc_time: 797.447 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D122(0x7f28c73f2400) <- H122(0x559845f60bc0), 400 bytes) [time: 0.002 ms, acc_time: 797.449 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D123(0x7f28c4d40000) <- H123(0x7f2937629040), 240000 bytes) [time: 0.176 ms, acc_time: 797.625 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D124(0x7f28c73f2800) <- H124(0x559845f623c0), 400 bytes) [time: 0.004 ms, acc_time: 797.629 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D125(0x7f28c73f2c00) <- H125(0x559845f62a80), 400 bytes) [time: 0.002 ms, acc_time: 797.631 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D126(0x7f28c5d00000) <- H126(0x7f2937528040), 100000 bytes) [time: 0.103 ms, acc_time: 797.734 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D127(0x7f28c73f3000) <- H127(0x559845f64200), 1000 bytes) [time: 0.004 ms, acc_time: 797.738 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D128(0x7f28c73f4000) <- H128(0x559845f65500), 1000 bytes) [time: 0.003 ms, acc_time: 797.741 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D129(0x7f28c4f80000) <- H129(0x7f2937327040), 200000 bytes) [time: 0.177 ms, acc_time: 797.918 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D130(0x7f28c73f5000) <- H130(0x559845ea96c0), 800 bytes) [time: 0.004 ms, acc_time: 797.922 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D131(0x7f28c73f5800) <- H131(0x559845f6e540), 800 bytes) [time: 0.002 ms, acc_time: 797.924 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 797.924 ms]
+
+cudaMalloc(D132 (0x7f28c2000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D132(0x7f28c2000000) <- H132(0x7f2936a26040), 900000 bytes) [time: 0.784 ms, acc_time: 798.708 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D133(0x7f28c73f6000) <- H133(0x559845837580), 800 bytes) [time: 0.004 ms, acc_time: 798.712 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D134(0x7f28c73f6800) <- H134(0x559845f72840), 800 bytes) [time: 0.002 ms, acc_time: 798.714 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D135(0x7f28c2900000) <- H135(0x7f2936625040), 400000 bytes) [time: 0.359 ms, acc_time: 799.073 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D136(0x7f28c73f7000) <- H136(0x559845f74780), 2000 bytes) [time: 0.004 ms, acc_time: 799.077 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D137(0x7f28c73f9000) <- H137(0x559845f76a80), 2000 bytes) [time: 0.003 ms, acc_time: 799.08 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 799.08 ms]
+
+cudaMalloc(D138 (0x7f28c0000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D138(0x7f28c0000000) <- H138(0x7f2935e24040), 800000 bytes) [time: 0.764 ms, acc_time: 799.844 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D139(0x7f28c73fb000) <- H139(0x559845f7d640), 2000 bytes) [time: 0.006 ms, acc_time: 799.85 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D140(0x7f28c73fd000) <- H140(0x559845f7f940), 2000 bytes) [time: 0.003 ms, acc_time: 799.853 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D141(0x7f28c2d00000) <- H141(0x7f2935a23040), 400000 bytes) [time: 0.334 ms, acc_time: 800.187 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D142(0x7f28c73ff000) <- H142(0x559845f86580), 800 bytes) [time: 0.004 ms, acc_time: 800.191 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D143(0x7f28c73ff800) <- H143(0x559845f87080), 800 bytes) [time: 0.002 ms, acc_time: 800.193 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D144(0x7f28c0800000) <- H144(0x7f2935122040), 900000 bytes) [time: 0.774 ms, acc_time: 800.967 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D145(0x7f28c6fd3000) <- H145(0x559845f89400), 800 bytes) [time: 0.004 ms, acc_time: 800.971 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D146(0x7f28c6fd3800) <- H146(0x559845f89ec0), 800 bytes) [time: 0.002 ms, acc_time: 800.973 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 800.973 ms]
+
+cudaMalloc(D147 (0x7f2936000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D147(0x7f2936000000) <- H147(0x7f2934d21040), 400000 bytes) [time: 0.33 ms, acc_time: 801.303 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D148(0x7f28c6fd4000) <- H148(0x559845f8c2c0), 2000 bytes) [time: 0.004 ms, acc_time: 801.307 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D149(0x7f28c6fd6000) <- H149(0x559845f8e580), 2000 bytes) [time: 0.003 ms, acc_time: 801.31 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D150(0x7f2936400000) <- H150(0x7f2934920040), 400000 bytes) [time: 0.327 ms, acc_time: 801.637 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D151(0x7f28c6fd8000) <- H151(0x559845f95600), 800 bytes) [time: 0.004 ms, acc_time: 801.641 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D152(0x7f28c6fd8800) <- H152(0x559845f960c0), 800 bytes) [time: 0.002 ms, acc_time: 801.643 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D153(0x7f2936800000) <- H153(0x7f293401f040), 900000 bytes) [time: 0.79 ms, acc_time: 802.433 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D154(0x7f28c6fd9000) <- H154(0x559845f98cc0), 800 bytes) [time: 0.004 ms, acc_time: 802.437 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D155(0x7f28c6fd9800) <- H155(0x559845f99700), 800 bytes) [time: 0.002 ms, acc_time: 802.439 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 802.439 ms]
+
+cudaMalloc(D156 (0x7f28be000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D156(0x7f28be000000) <- H156(0x7f2933c1e040), 400000 bytes) [time: 0.355 ms, acc_time: 802.794 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D157(0x7f28c6fda000) <- H157(0x559845f9c3c0), 2000 bytes) [time: 0.004 ms, acc_time: 802.798 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D158(0x7f28c6fdc000) <- H158(0x559845f9e500), 2000 bytes) [time: 0.003 ms, acc_time: 802.801 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D159(0x7f28be400000) <- H159(0x7f293344d040), 7d0000 bytes) [time: 0.68 ms, acc_time: 803.481 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D160(0x7f28c6fde000) <- H160(0x559845fa58c0), fa0 bytes) [time: 0.004 ms, acc_time: 803.485 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D161(0x7f28c6fdf000) <- H161(0x5598459b2780), 100 bytes) [time: 0.002 ms, acc_time: 803.487 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D162(0x7f28c6fdf200) <- H162(0x5598459b2d80), 100 bytes) [time: 0.002 ms, acc_time: 803.489 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D163(0x7f28c6fdf400) <- H163(0x55984582bc40), 8 bytes) [time: 0.002 ms, acc_time: 803.491 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D164(0x7f28c6fdf600) <- H164(0x559845834000), 100 bytes) [time: 0.002 ms, acc_time: 803.493 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D165(0x7f28c6fdf800) <- H165(0x559845c53640), 100 bytes) [time: 0.002 ms, acc_time: 803.495 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D166(0x7f28c6fdfa00) <- H166(0x55984585c100), 8 bytes) [time: 0.002 ms, acc_time: 803.497 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D167(0x7f28c6fdfc00) <- H167(0x55984583f4c0), 100 bytes) [time: 0.002 ms, acc_time: 803.499 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D168(0x7f28c6fdfe00) <- H168(0x559845846f80), 100 bytes) [time: 0.002 ms, acc_time: 803.501 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D169(0x7f28c6fe0000) <- H169(0x559845847340), 8 bytes) [time: 0.002 ms, acc_time: 803.503 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D170(0x7f28c6fe0200) <- H170(0x559845834b40), 400 bytes) [time: 0.002 ms, acc_time: 803.505 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D171(0x7f28c6fe0600) <- H171(0x559845c5c040), 400 bytes) [time: 0.002 ms, acc_time: 803.507 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D172(0x7f28c6fe0a00) <- H172(0x5598459b2cc0), 8 bytes) [time: 0.002 ms, acc_time: 803.509 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D173(0x7f28c6fe0c00) <- H173(0x559845c5e380), 400 bytes) [time: 0.002 ms, acc_time: 803.511 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D174(0x7f28c6fe1000) <- H174(0x559845c5ea00), 400 bytes) [time: 0.002 ms, acc_time: 803.513 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D175(0x7f28c6fe1400) <- H175(0x559845c5f040), 8 bytes) [time: 0.002 ms, acc_time: 803.515 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D176(0x7f28c6fe1600) <- H176(0x559845844340), 100 bytes) [time: 0.002 ms, acc_time: 803.517 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D177(0x7f28c6fe1800) <- H177(0x5598458446c0), 100 bytes) [time: 0.002 ms, acc_time: 803.519 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D178(0x7f28c6fe1a00) <- H178(0x559845844b00), 8 bytes) [time: 0.002 ms, acc_time: 803.521 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D179(0x7f28c6fe1c00) <- H179(0x559845845cc0), 100 bytes) [time: 0.002 ms, acc_time: 803.523 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D180(0x7f28c6fe1e00) <- H180(0x559845846040), 100 bytes) [time: 0.002 ms, acc_time: 803.525 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D181(0x7f28c6fe2000) <- H181(0x559845846480), 8 bytes) [time: 0.002 ms, acc_time: 803.527 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D182(0x7f28c6fe2200) <- H182(0x559845c57000), 400 bytes) [time: 0.002 ms, acc_time: 803.529 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D183(0x7f28c6fe2600) <- H183(0x559845c57700), 400 bytes) [time: 0.002 ms, acc_time: 803.531 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D184(0x7f28c6fe2a00) <- H184(0x559845c57e00), 8 bytes) [time: 0.002 ms, acc_time: 803.533 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D185(0x7f28c6fe2c00) <- H185(0x559845c59100), 100 bytes) [time: 0.002 ms, acc_time: 803.535 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D186(0x7f28c6fe2e00) <- H186(0x559845c59540), 100 bytes) [time: 0.002 ms, acc_time: 803.537 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D187(0x7f28c6fe3000) <- H187(0x559845c59940), 8 bytes) [time: 0.006 ms, acc_time: 803.543 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D188(0x7f28c6fe3200) <- H188(0x559845c5aac0), 100 bytes) [time: 0.002 ms, acc_time: 803.545 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D189(0x7f28c6fe3400) <- H189(0x559845c5aec0), 100 bytes) [time: 0.002 ms, acc_time: 803.547 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D190(0x7f28c6fe3600) <- H190(0x559845c5b2c0), 8 bytes) [time: 0.002 ms, acc_time: 803.549 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D191(0x7f28c6fe3800) <- H191(0x5598458393c0), 400 bytes) [time: 0.002 ms, acc_time: 803.551 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D192(0x7f28c6fe3c00) <- H192(0x559845839ac0), 400 bytes) [time: 0.002 ms, acc_time: 803.553 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D193(0x7f28c6fe4000) <- H193(0x55984583a200), 8 bytes) [time: 0.002 ms, acc_time: 803.555 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D194(0x7f28c6fe4200) <- H194(0x55984583b780), 200 bytes) [time: 0.002 ms, acc_time: 803.557 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D195(0x7f28c6fe4400) <- H195(0x55984583bc00), 200 bytes) [time: 0.002 ms, acc_time: 803.559 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D196(0x7f28c6fe4600) <- H196(0x55984583c140), 8 bytes) [time: 0.002 ms, acc_time: 803.561 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D197(0x7f28c6fe4800) <- H197(0x55984583d500), 200 bytes) [time: 0.002 ms, acc_time: 803.563 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D198(0x7f28c6fe4a00) <- H198(0x55984583d980), 200 bytes) [time: 0.002 ms, acc_time: 803.565 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D199(0x7f28c6fe4c00) <- H199(0x559845d55600), 8 bytes) [time: 0.002 ms, acc_time: 803.567 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D200(0x7f28c6fe4e00) <- H200(0x559845d97100), 800 bytes) [time: 0.002 ms, acc_time: 803.569 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D201(0x7f28c6fe5600) <- H201(0x559845d97b40), 800 bytes) [time: 0.002 ms, acc_time: 803.571 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D202(0x7f28c6fe5e00) <- H202(0x559845d98540), 8 bytes) [time: 0.002 ms, acc_time: 803.573 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D203(0x7f28c6fe6000) <- H203(0x559845d99f80), 800 bytes) [time: 0.002 ms, acc_time: 803.575 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D204(0x7f28c6fe6800) <- H204(0x559845d9a980), 800 bytes) [time: 0.002 ms, acc_time: 803.577 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D205(0x7f28c6fe7000) <- H205(0x559845d9b3c0), 8 bytes) [time: 0.002 ms, acc_time: 803.579 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D206(0x7f28c6fe7200) <- H206(0x559845ddc2c0), 200 bytes) [time: 0.002 ms, acc_time: 803.581 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D207(0x7f28c6fe7400) <- H207(0x559845ddc6c0), 200 bytes) [time: 0.002 ms, acc_time: 803.583 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D208(0x7f28c6fe7600) <- H208(0x559845ddcb00), 8 bytes) [time: 0.002 ms, acc_time: 803.585 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D209(0x7f28c6fe7800) <- H209(0x559845ddd900), 200 bytes) [time: 0.002 ms, acc_time: 803.587 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D210(0x7f28c6fe7a00) <- H210(0x559845dddd40), 200 bytes) [time: 0.002 ms, acc_time: 803.589 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D211(0x7f28c6fe7c00) <- H211(0x559845dde140), 8 bytes) [time: 0.002 ms, acc_time: 803.591 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D212(0x7f28c6fe7e00) <- H212(0x559845e1fc40), 800 bytes) [time: 0.002 ms, acc_time: 803.593 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D213(0x7f28c6fe8600) <- H213(0x559845e20680), 800 bytes) [time: 0.002 ms, acc_time: 803.595 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D214(0x7f28c6fe8e00) <- H214(0x559845e21080), 8 bytes) [time: 0.002 ms, acc_time: 803.597 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D215(0x7f28c6fe9000) <- H215(0x559845e61f40), 200 bytes) [time: 0.002 ms, acc_time: 803.599 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D216(0x7f28c6fe9200) <- H216(0x559845e62340), 200 bytes) [time: 0.002 ms, acc_time: 803.601 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D217(0x7f28c6fe9400) <- H217(0x559845e62780), 8 bytes) [time: 0.002 ms, acc_time: 803.603 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D218(0x7f28c6fe9600) <- H218(0x559845e63600), 200 bytes) [time: 0.002 ms, acc_time: 803.605 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D219(0x7f28c6fe9800) <- H219(0x559845e63a00), 200 bytes) [time: 0.002 ms, acc_time: 803.607 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D220(0x7f28c6fe9a00) <- H220(0x559845e63e40), 8 bytes) [time: 0.002 ms, acc_time: 803.609 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D221(0x7f28c6fe9c00) <- H221(0x559845ea58c0), 800 bytes) [time: 0.002 ms, acc_time: 803.611 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D222(0x7f28c6fea400) <- H222(0x5598458367c0), 800 bytes) [time: 0.002 ms, acc_time: 803.613 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D223(0x7f28c6feac00) <- H223(0x5598458372c0), 8 bytes) [time: 0.002 ms, acc_time: 803.615 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D224(0x7f28c6feae00) <- H224(0x559845eea780), 200 bytes) [time: 0.002 ms, acc_time: 803.617 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D225(0x7f28c6feb000) <- H225(0x559845eeabc0), 200 bytes) [time: 0.002 ms, acc_time: 803.619 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D226(0x7f28c6feb200) <- H226(0x559845eeafc0), 8 bytes) [time: 0.002 ms, acc_time: 803.621 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D227(0x7f28c6feb400) <- H227(0x559845eebe40), 200 bytes) [time: 0.002 ms, acc_time: 803.623 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D228(0x7f28c6feb600) <- H228(0x559845eec280), 200 bytes) [time: 0.002 ms, acc_time: 803.625 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D229(0x7f28c6feb800) <- H229(0x559845eec680), 8 bytes) [time: 0.002 ms, acc_time: 803.627 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D230(0x7f28c6feba00) <- H230(0x559845f2e140), 800 bytes) [time: 0.002 ms, acc_time: 803.629 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D231(0x7f28c6fec200) <- H231(0x559845f2eb40), 800 bytes) [time: 0.002 ms, acc_time: 803.631 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D232(0x7f28c6feca00) <- H232(0x559845f2f580), 8 bytes) [time: 0.002 ms, acc_time: 803.633 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D233(0x7f28c6fecc00) <- H233(0x559845f30800), 400 bytes) [time: 0.002 ms, acc_time: 803.635 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D234(0x7f28c6fed000) <- H234(0x559845f30e00), 400 bytes) [time: 0.002 ms, acc_time: 803.637 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D235(0x7f28c6fed400) <- H235(0x559845f31440), 8 bytes) [time: 0.002 ms, acc_time: 803.639 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D236(0x7f28c6fed600) <- H236(0x559845f32640), 400 bytes) [time: 0.002 ms, acc_time: 803.641 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D237(0x7f28c6feda00) <- H237(0x559845f32c80), 400 bytes) [time: 0.002 ms, acc_time: 803.643 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D238(0x7f28c6fede00) <- H238(0x559845f33280), 8 bytes) [time: 0.002 ms, acc_time: 803.645 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D239(0x7f28c6fee000) <- H239(0x559845f35d00), 1000 bytes) [time: 0.002 ms, acc_time: 803.647 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D240(0x7f28c6fef000) <- H240(0x559845f36f40), 1000 bytes) [time: 0.002 ms, acc_time: 803.649 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D241(0x7f28c6ff0000) <- H241(0x559845f38140), 8 bytes) [time: 0.002 ms, acc_time: 803.651 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D242(0x7f28c6ff0200) <- H242(0x559845f3ab80), 1000 bytes) [time: 0.002 ms, acc_time: 803.653 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D243(0x7f28c6ff1200) <- H243(0x559845f3bd80), 1000 bytes) [time: 0.002 ms, acc_time: 803.655 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D244(0x7f28c6ff2200) <- H244(0x559845f3cfc0), 8 bytes) [time: 0.002 ms, acc_time: 803.657 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D245(0x7f28c6ff2400) <- H245(0x559845f3e2c0), 400 bytes) [time: 0.002 ms, acc_time: 803.659 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D246(0x7f28c6ff2800) <- H246(0x559845f3e8c0), 400 bytes) [time: 0.002 ms, acc_time: 803.661 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D247(0x7f28c6ff2c00) <- H247(0x559845f3ef00), 8 bytes) [time: 0.002 ms, acc_time: 803.663 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D248(0x7f28c6ff2e00) <- H248(0x559845f40180), 400 bytes) [time: 0.002 ms, acc_time: 803.665 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D249(0x7f28c6ff3200) <- H249(0x559845f40780), 400 bytes) [time: 0.002 ms, acc_time: 803.667 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D250(0x7f28c6ff3600) <- H250(0x559845f40dc0), 8 bytes) [time: 0.002 ms, acc_time: 803.669 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D251(0x7f28c6ff3800) <- H251(0x559845f437c0), 1000 bytes) [time: 0.002 ms, acc_time: 803.671 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D252(0x7f28c6ff4800) <- H252(0x559845f44a00), 1000 bytes) [time: 0.002 ms, acc_time: 803.673 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D253(0x7f28c6ff5800) <- H253(0x559845f45c00), 8 bytes) [time: 0.002 ms, acc_time: 803.675 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D254(0x7f28c6ff5a00) <- H254(0x559845f46e80), 400 bytes) [time: 0.002 ms, acc_time: 803.677 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D255(0x7f28c6ff5e00) <- H255(0x559845f474c0), 400 bytes) [time: 0.002 ms, acc_time: 803.679 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D256(0x7f28c6ff6200) <- H256(0x559845f47ac0), 8 bytes) [time: 0.002 ms, acc_time: 803.681 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D257(0x7f28c6ff6400) <- H257(0x559845f48d00), 400 bytes) [time: 0.002 ms, acc_time: 803.683 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D258(0x7f28c6ff6800) <- H258(0x559845f49300), 400 bytes) [time: 0.002 ms, acc_time: 803.685 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D259(0x7f28c6ff6c00) <- H259(0x559845f49940), 8 bytes) [time: 0.002 ms, acc_time: 803.687 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D260(0x7f28c6ff6e00) <- H260(0x559845f4c3c0), 1000 bytes) [time: 0.002 ms, acc_time: 803.689 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D261(0x7f28c6ff7e00) <- H261(0x559845f4d5c0), 1000 bytes) [time: 0.002 ms, acc_time: 803.691 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D262(0x7f28c6ff8e00) <- H262(0x559845f4e800), 8 bytes) [time: 0.002 ms, acc_time: 803.693 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D263(0x7f28c6ff9000) <- H263(0x559845f4fa00), 400 bytes) [time: 0.002 ms, acc_time: 803.695 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D264(0x7f28c6ff9400) <- H264(0x559845f50040), 400 bytes) [time: 0.002 ms, acc_time: 803.697 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D265(0x7f28c6ff9800) <- H265(0x559845f50640), 8 bytes) [time: 0.002 ms, acc_time: 803.699 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D266(0x7f28c6ff9a00) <- H266(0x559845f518c0), 400 bytes) [time: 0.002 ms, acc_time: 803.701 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D267(0x7f28c6ff9e00) <- H267(0x559845f51f00), 400 bytes) [time: 0.002 ms, acc_time: 803.703 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D268(0x7f28c6ffa200) <- H268(0x559845f52500), 8 bytes) [time: 0.002 ms, acc_time: 803.705 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D269(0x7f28c6ffa400) <- H269(0x559845f54f40), 1000 bytes) [time: 0.002 ms, acc_time: 803.707 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D270(0x7f28c6ffb400) <- H270(0x559845f56140), 1000 bytes) [time: 0.002 ms, acc_time: 803.709 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D271(0x7f28c6ffc400) <- H271(0x559845f57380), 8 bytes) [time: 0.002 ms, acc_time: 803.711 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D272(0x7f28c6ffc600) <- H272(0x559845f58680), 400 bytes) [time: 0.002 ms, acc_time: 803.713 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D273(0x7f28c6ffca00) <- H273(0x559845f58cc0), 400 bytes) [time: 0.002 ms, acc_time: 803.715 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D274(0x7f28c6ffce00) <- H274(0x559845f592c0), 8 bytes) [time: 0.002 ms, acc_time: 803.717 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D275(0x7f28c6ffd000) <- H275(0x559845f5a500), 400 bytes) [time: 0.002 ms, acc_time: 803.719 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D276(0x7f28c6ffd400) <- H276(0x559845f5ab00), 400 bytes) [time: 0.002 ms, acc_time: 803.721 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D277(0x7f28c6ffd800) <- H277(0x559845f5b140), 8 bytes) [time: 0.002 ms, acc_time: 803.723 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D278(0x7f28c6ffda00) <- H278(0x559845f5dbc0), 1000 bytes) [time: 0.002 ms, acc_time: 803.725 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D279(0x7f28c6ffea00) <- H279(0x559845f5edc0), 1000 bytes) [time: 0.002 ms, acc_time: 803.727 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D280(0x7f28c6fffa00) <- H280(0x559845f60000), 8 bytes) [time: 0.002 ms, acc_time: 803.729 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D281(0x7f28c6fffc00) <- H281(0x559845f612c0), 400 bytes) [time: 0.002 ms, acc_time: 803.731 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D282(0x7f28c71d0000) <- H282(0x559845f618c0), 400 bytes) [time: 0.003 ms, acc_time: 803.734 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D283(0x7f28c71d0400) <- H283(0x559845f61f00), 8 bytes) [time: 0.002 ms, acc_time: 803.736 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D284(0x7f28c71d0600) <- H284(0x559845f63180), 400 bytes) [time: 0.002 ms, acc_time: 803.738 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D285(0x7f28c71d0a00) <- H285(0x559845f63780), 400 bytes) [time: 0.002 ms, acc_time: 803.74 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D286(0x7f28c71d0e00) <- H286(0x559845f63dc0), 8 bytes) [time: 0.002 ms, acc_time: 803.742 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D287(0x7f28c71d1000) <- H287(0x559845ea6680), 1000 bytes) [time: 0.002 ms, acc_time: 803.744 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D288(0x7f28c71d2000) <- H288(0x559845ea7940), 1000 bytes) [time: 0.002 ms, acc_time: 803.746 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D289(0x7f28c71d3000) <- H289(0x559845ea8bc0), 8 bytes) [time: 0.002 ms, acc_time: 803.748 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D290(0x7f28c71d3200) <- H290(0x559845f6ef40), 800 bytes) [time: 0.003 ms, acc_time: 803.751 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D291(0x7f28c71d3a00) <- H291(0x559845f6f980), 800 bytes) [time: 0.002 ms, acc_time: 803.753 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D292(0x7f28c71d4200) <- H292(0x559845f70380), 8 bytes) [time: 0.002 ms, acc_time: 803.755 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D293(0x7f28c71d4400) <- H293(0x559845f73080), 800 bytes) [time: 0.002 ms, acc_time: 803.757 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D294(0x7f28c71d4c00) <- H294(0x559845f73900), 800 bytes) [time: 0.002 ms, acc_time: 803.759 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D295(0x7f28c71d5400) <- H295(0x559845f74340), 8 bytes) [time: 0.002 ms, acc_time: 803.761 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D296(0x7f28c71d5600) <- H296(0x559845f78d40), 2000 bytes) [time: 0.003 ms, acc_time: 803.764 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D297(0x7f28c71d7600) <- H297(0x559845f7af80), 2000 bytes) [time: 0.003 ms, acc_time: 803.767 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D298(0x7f28c71d9600) <- H298(0x559845f7d180), 8 bytes) [time: 0.002 ms, acc_time: 803.769 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D299(0x7f28c71d9800) <- H299(0x559845f81c00), 2000 bytes) [time: 0.002 ms, acc_time: 803.771 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D300(0x7f28c71db800) <- H300(0x559845f83e40), 2000 bytes) [time: 0.002 ms, acc_time: 803.773 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D301(0x7f28c71dd800) <- H301(0x559845f86040), 8 bytes) [time: 0.002 ms, acc_time: 803.775 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D302(0x7f28c71dda00) <- H302(0x559845f87b40), 800 bytes) [time: 0.002 ms, acc_time: 803.777 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D303(0x7f28c71de200) <- H303(0x559845f88580), 800 bytes) [time: 0.002 ms, acc_time: 803.779 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D304(0x7f28c71dea00) <- H304(0x559845f88f80), 8 bytes) [time: 0.002 ms, acc_time: 803.781 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D305(0x7f28c71dec00) <- H305(0x559845f8a9c0), 800 bytes) [time: 0.002 ms, acc_time: 803.783 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D306(0x7f28c71df400) <- H306(0x559845f8b3c0), 800 bytes) [time: 0.002 ms, acc_time: 803.785 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D307(0x7f28c71dfc00) <- H307(0x559845f8be00), 8 bytes) [time: 0.002 ms, acc_time: 803.787 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D308(0x7f28c71dfe00) <- H308(0x559845f90880), 2000 bytes) [time: 0.003 ms, acc_time: 803.79 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D309(0x7f28c71e1e00) <- H309(0x559845f92a80), 2000 bytes) [time: 0.002 ms, acc_time: 803.792 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D310(0x7f28c71e3e00) <- H310(0x559845f94cc0), 8 bytes) [time: 0.002 ms, acc_time: 803.794 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D311(0x7f28c71e4000) <- H311(0x559845f96bc0), 800 bytes) [time: 0.002 ms, acc_time: 803.796 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D312(0x7f28c71e4800) <- H312(0x559845f975c0), 800 bytes) [time: 0.002 ms, acc_time: 803.798 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D313(0x7f28c71e5000) <- H313(0x559845f98000), 8 bytes) [time: 0.002 ms, acc_time: 803.8 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D314(0x7f28c71e5200) <- H314(0x559845f9a1c0), 800 bytes) [time: 0.002 ms, acc_time: 803.802 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D315(0x7f28c71e5a00) <- H315(0x559845f9ac00), 800 bytes) [time: 0.002 ms, acc_time: 803.804 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D316(0x7f28c71e6200) <- H316(0x559845f9b600), 8 bytes) [time: 0.002 ms, acc_time: 803.806 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D317(0x7f28c71e6400) <- H317(0x559845fa07c0), 2000 bytes) [time: 0.003 ms, acc_time: 803.809 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D318(0x7f28c71e8400) <- H318(0x559845fa2a00), 2000 bytes) [time: 0.005 ms, acc_time: 803.814 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D319(0x7f28c71ea400) <- H319(0x559845fa4c00), 8 bytes) [time: 0.002 ms, acc_time: 803.816 ms]
+
+cudaStreamIsCapturing() [time: 0.002 ms, acc_time: 803.818 ms]
+
+cudaMalloc(D320 (0x7f28bf400000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D320(0x7f28bf400000) <- H320(0x559845feeb80), 93000 bytes) [time: 0.042 ms, acc_time: 803.86 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.041 ms, acc_time: 803.901 ms]
+
+cudnnCreate()
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void convolve_common_engine_float_NHWC<float, float, 1024, 5, 5, 3, 3, 3, true, false, false, false, false>(int, int, int, float const*, float const*, int, float*, conv_kernel_common_params, unsigned long long, unsigned long, float, float, bool, float const*, float const*, bool)) [time: 0.015 ms, acc_time: 803.916 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.019 ms, acc_time: 803.935 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.01 ms, acc_time: 803.945 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nhwc<float, float>(float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.014 ms, acc_time: 803.959 ms]
+
+cudaStreamIsCapturing() [time: 0.002 ms, acc_time: 803.961 ms]
+
+cudaMalloc(D321 (0x7f2847c00000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void convolve_common_engine_float_NHWC<float, float, 1024, 5, 5, 3, 3, 3, true, false, false, false, false>(int, int, int, float const*, float const*, int, float*, conv_kernel_common_params, unsigned long long, unsigned long, float, float, bool, float const*, float const*, bool)) [time: 0.014 ms, acc_time: 803.975 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.01 ms, acc_time: 803.985 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.014 ms, acc_time: 803.999 ms]
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 804.002 ms]
+
+cudaMalloc(D322 (0x7f2847e00000), 200000 bytes)
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.015 ms, acc_time: 804.017 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.017 ms, acc_time: 804.034 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.012 ms, acc_time: 804.046 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.008 ms, acc_time: 804.054 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.021 ms, acc_time: 804.075 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.011 ms, acc_time: 804.086 ms]
+
+cudaStreamIsCapturing() [time: 0.002 ms, acc_time: 804.088 ms]
+
+cudaMalloc(D323 (0x7f2844000000), 1400000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 804.088 ms]
+
+cudaMalloc(D324 (0x7f2845400000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.014 ms, acc_time: 804.102 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 804.116 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4>(cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4::Params)) [time: 0.01 ms, acc_time: 804.126 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.015 ms, acc_time: 804.141 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.014 ms, acc_time: 804.155 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.012 ms, acc_time: 804.167 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4>(cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4::Params)) [time: 0.018 ms, acc_time: 804.185 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 804.205 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.021 ms, acc_time: 804.226 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 804.248 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.025 ms, acc_time: 804.273 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 804.295 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.024 ms, acc_time: 804.319 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 804.342 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.021 ms, acc_time: 804.363 ms]
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 804.366 ms]
+
+cudaMalloc(D325 (0x7f2845600000), 200000 bytes)
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 804.388 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 804.409 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 804.431 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 804.453 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.016 ms, acc_time: 804.469 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 804.491 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 804.494 ms]
+
+cudaMalloc(D326 (0x7f2845800000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 804.516 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 804.539 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4>(cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4::Params)) [time: 0.022 ms, acc_time: 804.561 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 804.584 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 804.606 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 804.628 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 804.65 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 804.672 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 804.694 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 804.717 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.021 ms, acc_time: 804.738 ms]
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 804.741 ms]
+
+cudaMalloc(D327 (0x7f2845a00000), 200000 bytes)
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.023 ms, acc_time: 804.764 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 804.787 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 804.809 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 804.831 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 804.851 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 804.873 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 804.876 ms]
+
+cudaMalloc(D328 (0x7f2845c00000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 804.899 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.025 ms, acc_time: 804.924 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4>(cutlass_tensorop_s1688fprop_optimized_tf32_128x128_16x4::Params)) [time: 0.023 ms, acc_time: 804.947 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 804.951 ms]
+
+cudaMalloc(D329 (0x7f2842000000), 1400000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 804.973 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.023 ms, acc_time: 804.996 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 805.016 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.024 ms, acc_time: 805.04 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 805.062 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.026 ms, acc_time: 805.088 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 805.111 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.027 ms, acc_time: 805.138 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.024 ms, acc_time: 805.162 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.024 ms, acc_time: 805.186 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 805.208 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 805.23 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.018 ms, acc_time: 805.248 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.016 ms, acc_time: 805.264 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.016 ms, acc_time: 805.28 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.017 ms, acc_time: 805.297 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.016 ms, acc_time: 805.313 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.017 ms, acc_time: 805.33 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.013 ms, acc_time: 805.343 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.016 ms, acc_time: 805.359 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.011 ms, acc_time: 805.37 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.018 ms, acc_time: 805.388 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.014 ms, acc_time: 805.402 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.016 ms, acc_time: 805.418 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.016 ms, acc_time: 805.434 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.016 ms, acc_time: 805.45 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.015 ms, acc_time: 805.465 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.016 ms, acc_time: 805.481 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.016 ms, acc_time: 805.497 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.013 ms, acc_time: 805.51 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.018 ms, acc_time: 805.528 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.02 ms, acc_time: 805.548 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.021 ms, acc_time: 805.569 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.025 ms, acc_time: 805.594 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.028 ms, acc_time: 805.622 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.02 ms, acc_time: 805.642 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.02 ms, acc_time: 805.662 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.019 ms, acc_time: 805.681 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 805.703 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.018 ms, acc_time: 805.721 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 805.741 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.02 ms, acc_time: 805.761 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.02 ms, acc_time: 805.781 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.02 ms, acc_time: 805.801 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.019 ms, acc_time: 805.82 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 805.84 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 805.862 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.02 ms, acc_time: 805.882 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.02 ms, acc_time: 805.902 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.019 ms, acc_time: 805.921 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 805.941 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 805.963 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 805.986 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 806.008 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.022 ms, acc_time: 806.03 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 806.052 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 806.074 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.023 ms, acc_time: 806.097 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 806.119 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.021 ms, acc_time: 806.14 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.021 ms, acc_time: 806.161 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.024 ms, acc_time: 806.185 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.023 ms, acc_time: 806.208 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 806.212 ms]
+
+cudaMalloc(D330 (0x7f2843400000), 200000 bytes)
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.023 ms, acc_time: 806.235 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 806.256 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 806.277 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.021 ms, acc_time: 806.298 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 806.321 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 806.343 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 806.366 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 806.388 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6>(cutlass_tensorop_s1688fprop_optimized_tf32_128x64_16x6::Params)) [time: 0.022 ms, acc_time: 806.41 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 806.43 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 806.452 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 806.474 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 806.496 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 806.518 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 806.54 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 806.562 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.024 ms, acc_time: 806.586 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 806.608 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 806.63 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 806.653 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.021 ms, acc_time: 806.674 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 806.678 ms]
+
+cudaMalloc(D331 (0x7f2843600000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.042 ms, acc_time: 806.72 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 806.742 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 806.764 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 806.786 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.022 ms, acc_time: 806.808 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 806.83 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 806.852 ms]
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 806.855 ms]
+
+cudaMalloc(D332 (0x7f2843800000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.024 ms, acc_time: 806.879 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 806.901 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.023 ms, acc_time: 806.924 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 806.947 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 806.97 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 806.992 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 807.014 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 807.036 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 807.058 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.023 ms, acc_time: 807.081 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.024 ms, acc_time: 807.105 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 807.127 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 807.149 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 807.171 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 807.194 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 807.216 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 807.238 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 807.26 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 807.264 ms]
+
+cudaMalloc(D333 (0x7f2843a00000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 807.286 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 807.308 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.024 ms, acc_time: 807.332 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.02 ms, acc_time: 807.352 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 807.375 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 807.397 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.024 ms, acc_time: 807.421 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 807.442 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 807.464 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 807.486 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 807.509 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.023 ms, acc_time: 807.532 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.025 ms, acc_time: 807.557 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 807.579 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 807.602 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.024 ms, acc_time: 807.626 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 807.648 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 807.67 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 807.674 ms]
+
+cudaMalloc(D334 (0x7f2843c00000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 807.697 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.023 ms, acc_time: 807.72 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.022 ms, acc_time: 807.742 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 807.765 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.025 ms, acc_time: 807.79 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.025 ms, acc_time: 807.815 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 807.837 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 807.859 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.021 ms, acc_time: 807.88 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 807.902 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 807.925 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 807.945 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 807.967 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 807.989 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.019 ms, acc_time: 808.008 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.021 ms, acc_time: 808.029 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 808.033 ms]
+
+cudaMalloc(D335 (0x7f2843e00000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 808.056 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.023 ms, acc_time: 808.079 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 808.101 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 808.123 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.022 ms, acc_time: 808.145 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.033 ms, acc_time: 808.178 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 808.201 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 808.223 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 808.243 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 808.264 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 808.287 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.025 ms, acc_time: 808.312 ms]
+
+cudaStreamIsCapturing() [time: 0.004 ms, acc_time: 808.316 ms]
+
+cudaMalloc(D336 (0x7f2845e00000), 200000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.021 ms, acc_time: 808.337 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 808.357 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.024 ms, acc_time: 808.381 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 808.403 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 808.424 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.022 ms, acc_time: 808.446 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 808.468 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 808.49 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 808.493 ms]
+
+cudaMalloc(D337 (0x7f2840000000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 808.515 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.041 ms, acc_time: 808.556 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.021 ms, acc_time: 808.577 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 808.599 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 808.622 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.021 ms, acc_time: 808.643 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.027 ms, acc_time: 808.67 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 808.691 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.02 ms, acc_time: 808.711 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.023 ms, acc_time: 808.734 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.023 ms, acc_time: 808.757 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.024 ms, acc_time: 808.781 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.023 ms, acc_time: 808.804 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.021 ms, acc_time: 808.825 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.025 ms, acc_time: 808.85 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10>(cutlass_tensorop_s1688fprop_optimized_tf32_64x64_16x10::Params)) [time: 0.023 ms, acc_time: 808.873 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 808.895 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.026 ms, acc_time: 808.921 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 808.924 ms]
+
+cudaMalloc(D338 (0x7f2840200000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 808.947 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 808.969 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.023 ms, acc_time: 808.992 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.021 ms, acc_time: 809.013 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 809.035 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.022 ms, acc_time: 809.057 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.023 ms, acc_time: 809.08 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.019 ms, acc_time: 809.099 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.022 ms, acc_time: 809.121 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.022 ms, acc_time: 809.143 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.021 ms, acc_time: 809.164 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.022 ms, acc_time: 809.186 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 809.208 ms]
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 809.211 ms]
+
+cudaMalloc(D339 (0x7f2840400000), 1400000 bytes)
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.022 ms, acc_time: 809.233 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 809.236 ms]
+
+cudaMalloc(D340 (0x7f283e000000), c00000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.023 ms, acc_time: 809.259 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.022 ms, acc_time: 809.281 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel) [time: 0.022 ms, acc_time: 809.303 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 809.323 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.022 ms, acc_time: 809.345 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 809.348 ms]
+
+cudaMalloc(D341 (0x7f283ec00000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.022 ms, acc_time: 809.37 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.02 ms, acc_time: 809.39 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.018 ms, acc_time: 809.408 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.016 ms, acc_time: 809.424 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.014 ms, acc_time: 809.438 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.012 ms, acc_time: 809.45 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.016 ms, acc_time: 809.466 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.014 ms, acc_time: 809.48 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.012 ms, acc_time: 809.492 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.016 ms, acc_time: 809.508 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.015 ms, acc_time: 809.523 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.013 ms, acc_time: 809.536 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 809.55 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.015 ms, acc_time: 809.565 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.009 ms, acc_time: 809.574 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.016 ms, acc_time: 809.59 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.011 ms, acc_time: 809.601 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.01 ms, acc_time: 809.611 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.014 ms, acc_time: 809.625 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.014 ms, acc_time: 809.639 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.014 ms, acc_time: 809.653 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel) [time: 0.016 ms, acc_time: 809.669 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.013 ms, acc_time: 809.682 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.017 ms, acc_time: 809.699 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.011 ms, acc_time: 809.71 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.016 ms, acc_time: 809.726 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.016 ms, acc_time: 809.742 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.012 ms, acc_time: 809.754 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.016 ms, acc_time: 809.77 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.012 ms, acc_time: 809.782 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 809.802 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudaStreamIsCapturing() [time: 0.003 ms, acc_time: 809.805 ms]
+
+cudaMalloc(D342 (0x7f283ee00000), 200000 bytes)
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.021 ms, acc_time: 809.826 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.03 ms, acc_time: 809.856 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.03 ms, acc_time: 809.886 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.029 ms, acc_time: 809.915 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.028 ms, acc_time: 809.943 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.029 ms, acc_time: 809.972 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::copy_device_to_device(at::TensorIterator&, bool)::{lambda()#3}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, OffsetCalculator<1, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.031 ms, acc_time: 810.003 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.029 ms, acc_time: 810.032 ms]
+
+cuLaunchKernel(void cudnn::ops::convertTensor_kernel<float, float, float, (cudnnKernelDataType_t)2>(float, float const*, float, float*, unsigned long)) [time: 0.027 ms, acc_time: 810.059 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel) [time: 0.027 ms, acc_time: 810.086 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.021 ms, acc_time: 810.107 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.02 ms, acc_time: 810.127 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnConvolutionForward()
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.023 ms, acc_time: 810.15 ms]
+
+cuLaunchKernel(void cudnn::cnn::kern_precompute_indices<false>(int*, int, int, int, int, int, int)) [time: 0.021 ms, acc_time: 810.171 ms]
+
+cuLaunchKernel(void precomputed_convolve_sgemm<float, 1024, 5, 5, 4, 3, 3, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, int*)) [time: 0.021 ms, acc_time: 810.192 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)0>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.019 ms, acc_time: 810.211 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() nbDims=4
+
+cudnnBatchNormalizationForwardInference()
+
+cuLaunchKernel(void cudnn::bn_fw_inf_1C11_kernel_NHWC<float, float, true, true>(float, float, cudnnTensorStruct, float const*, cudnnTensorStruct, float*, cudnnTensorStruct, float const*, float const*, float const*, float const*, float, int, int)) [time: 0.02 ms, acc_time: 810.231 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>)) [time: 0.021 ms, acc_time: 810.252 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.021 ms, acc_time: 810.273 ms]
+
+cuLaunchKernel(void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::MeanOps<float, float>, unsigned int, float, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float>, unsigned int, float, 4>)) [time: 0.022 ms, acc_time: 810.295 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D343 <- D160), 4000 bytes) [time: 0.023 ms, acc_time: 810.318 ms]
+
+cuLaunchKernel(void gemv2T_kernel_val<int, int, float, float, float, float, 128, 16, 4, 4, false, false, cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float>, float, float)) [time: 0.014 ms, acc_time: 810.332 ms]
+
+cuLaunchKernel(void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>::result_type*)) [time: 0.01 ms, acc_time: 810.342 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D344 <- D345), 8000 bytes) [time: 0.012 ms, acc_time: 810.354 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D346 <- D343), 4000 bytes) [time: 0.004 ms, acc_time: 810.358 ms]
+
+cuLaunchKernel(void at::native::bitonicSortKVInPlace<float, long, -2, -1, at::native::GTOp<float, true>, unsigned int, 1024>(at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, at::cuda::detail::TensorInfo<long, unsigned int>, unsigned int, at::native::GTOp<float, true>)) [time: 0.009 ms, acc_time: 810.367 ms]
+
+cuLaunchKernel(void (anonymous namespace)::softmax_warp_forward<float, float, float, 10, false>(float*, float const*, int, int, int)) [time: 0.014 ms, acc_time: 810.381 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToHost, H321(0x7fffad0593b8) <- D344(0x7f28c71ea600), 8 bytes) [time: 0.021 ms, acc_time: 810.402 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToHost, H321(0x7fffad0593b8) <- D347(0x7f28c75fe800), 4 bytes) [time: 0.007 ms, acc_time: 810.409 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToHost, H321(0x7fffad0593b8) <- D344(0x7f28c71ea600), 8 bytes) [time: 0.007 ms, acc_time: 810.416 ms]
+

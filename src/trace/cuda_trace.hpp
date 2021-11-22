@@ -10,7 +10,6 @@
 
 #include "cubin_analysis.hpp"
 #include "cuda_api_calls.hpp"
-#include "libgpuless.hpp"
 
 namespace gpuless {
 

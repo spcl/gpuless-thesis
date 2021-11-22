@@ -201,6 +201,7 @@ void CubinAnalyzer::storeAnalysisToCache(
 bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
                                int major_version, int minor_version) {
     auto tmp = std::filesystem::temp_directory_path() / "libgpuless";
+    spdlog::info("Using tmp directory: {}", tmp.string());
     if (std::filesystem::is_directory(tmp)) {
         std::filesystem::remove_all(tmp);
     }
@@ -214,8 +215,11 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
     std::filesystem::create_directory(tmp_ptx);
 
     std::string arch = std::to_string(major_version * 10 + minor_version);
-    std::string cmd = "cd " + tmp_ptx.string() + ";" + "cuobjdump -arch=sm_" +
-                      arch + " -xptx all " + tmp_bin.string();
+    //    std::string cmd = "cd " + tmp_ptx.string() + ";" + "cuobjdump
+    //    -arch=sm_" +
+    //                      arch + " -xptx all " + tmp_bin.string();
+    std::string cmd =
+        "cd " + tmp_ptx.string() + "; cuobjdump -xptx all " + tmp_bin.string();
     exec(cmd.c_str());
 
     for (const auto &d : std::filesystem::directory_iterator(tmp_ptx)) {
@@ -260,8 +264,7 @@ bool CubinAnalyzer::analyze(std::vector<std::string> cuda_binaries,
 
         // check if analysis is cached
         if (this->isCached(cbin)) {
-            spdlog::info("Loading analysis from cache for: {}",
-                         cbin);
+            spdlog::info("Loading analysis from cache for: {}", cbin);
             ret = this->loadAnalysisFromCache(cbin);
         } else {
             ret = this->analyzePtx(cbin, major_version, minor_version);

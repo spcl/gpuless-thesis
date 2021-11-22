@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+#include <cudnn.h>
+
 #include "../trace/cubin_analysis.hpp"
 #include "../utils.hpp"
 
@@ -156,7 +158,8 @@ extern "C" void CUDARTAPI __cudaRegisterFunction(
     dim3 *bDim, dim3 *gDim, int *wSize) {
     static auto real_func =
         (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "__cudaRegisterFunction(" << deviceName << ")" <<std::endl;
+    //    std::cerr << "__cudaRegisterFunction(" << deviceName << ")"
+    //    <<std::endl;
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)deviceFun, deviceName));
     map.emplace(std::make_pair((void *)hostFun, deviceName));
@@ -423,21 +426,21 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
 extern "C" void **CUDARTAPI __cudaRegisterFatBinary(void *fatCubin) {
     static auto real_func =
         (decltype(&__cudaRegisterFatBinary))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "__cudaRegisterFatBinary()" << std::endl;
+    //    std::cerr << "__cudaRegisterFatBinary()" << std::endl;
     return real_func(fatCubin);
 }
 
 extern "C" CUresult cuModuleLoad(CUmodule *module, const char *fname) {
     static auto real_func =
         (decltype(&cuModuleLoad))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "cuModuleLoad()" << std::endl;
+    //    std::cerr << "cuModuleLoad()" << std::endl;
     return real_func(module, fname);
 }
 
 extern "C" CUresult cuModuleLoadData(CUmodule *module, const void *image) {
     static auto real_func =
         (decltype(&cuModuleLoadData))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "cuModuleLoadData()" << std::endl;
+    //    std::cerr << "cuModuleLoadData()" << std::endl;
     return real_func(module, image);
 }
 
@@ -455,14 +458,14 @@ extern "C" CUresult cuModuleLoadFatBinary(CUmodule *module,
                                           const void *fatCubin) {
     static auto real_func =
         (decltype(&cuModuleLoadFatBinary))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "cuModuleLoadFatBinary()" << std::endl;
+    //    std::cerr << "cuModuleLoadFatBinary()" << std::endl;
     return real_func(module, fatCubin);
 }
 
 extern "C" CUresult cuModuleUnload(CUmodule hmod) {
     static auto real_func =
         (decltype(&cuModuleUnload))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "cuModuleUnload()" << std::endl;
+    //    std::cerr << "cuModuleUnload()" << std::endl;
     return real_func(hmod);
 }
 
@@ -470,7 +473,7 @@ extern "C" CUresult cuModuleGetGlobal(CUdeviceptr *dptr, size_t *bytes,
                                       CUmodule hmod, const char *name) {
     static auto real_func =
         (decltype(&cuModuleGetGlobal))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "cuModuleGetGlobal(" << name << ")" << std::endl;
+    //    std::cerr << "cuModuleGetGlobal(" << name << ")" << std::endl;
     return real_func(dptr, bytes, hmod, name);
 }
 
@@ -480,7 +483,7 @@ extern "C" void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
                                   int global) {
     static auto real_func =
         (decltype(&__cudaRegisterVar))real_dlsym(RTLD_NEXT, __func__);
-    std::cerr << "__cudaRegisterVar(" << deviceName << ")" << std::endl;
+    //    std::cerr << "__cudaRegisterVar(" << deviceName << ")" << std::endl;
     real_func(fatCubinHandle, hostVar, deviceAddress, deviceName, ext, size,
               constant, global);
 }
@@ -532,6 +535,77 @@ extern "C" CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
     LINK_CU_FUNCTION(symbol, cuModuleGetGlobal);
 
     return real_func(symbol, pfn, cudaVersion, flags);
+}
+
+extern "C" cudnnStatus_t cudnnCreate(cudnnHandle_t *handle) {
+    std::cerr << "cudnnCreate()" << std::endl << std::endl;
+    static auto real_func =
+        (decltype(&cudnnCreate))real_dlsym(RTLD_NEXT, __func__);
+    return real_func(handle);
+}
+
+extern "C" cudnnStatus_t
+cudnnCreateTensorDescriptor(cudnnTensorDescriptor_t *tensorDesc) {
+    std::cerr << "cudnnCreateTensorDescriptor()" << std::endl << std::endl;
+    static auto real_func =
+        (decltype(&cudnnCreateTensorDescriptor))real_dlsym(RTLD_NEXT, __func__);
+    return real_func(tensorDesc);
+}
+
+extern "C" cudnnStatus_t
+cudnnDeriveBNTensorDescriptor(cudnnTensorDescriptor_t derivedBnDesc,
+                              const cudnnTensorDescriptor_t xDesc,
+                              cudnnBatchNormMode_t mode) {
+    std::cerr << "cudnnDeriveBNTensorDescriptor()" << std::endl << std::endl;
+    static auto real_func =
+        (decltype(&cudnnDeriveBNTensorDescriptor))real_dlsym(RTLD_NEXT,
+                                                             __func__);
+    return real_func(derivedBnDesc, xDesc, mode);
+}
+
+extern "C" cudnnStatus_t
+cudnnConvolutionForward(cudnnHandle_t handle, const void *alpha,
+                        const cudnnTensorDescriptor_t xDesc, const void *x,
+                        const cudnnFilterDescriptor_t wDesc, const void *w,
+                        const cudnnConvolutionDescriptor_t convDesc,
+                        cudnnConvolutionFwdAlgo_t algo, void *workSpace,
+                        size_t workSpaceSizeInBytes, const void *beta,
+                        const cudnnTensorDescriptor_t yDesc, void *y) {
+
+    std::cerr << "cudnnConvolutionForward()" << std::endl << std::endl;
+    static auto real_func =
+        (decltype(&cudnnConvolutionForward))real_dlsym(RTLD_NEXT, __func__);
+    return real_func(handle, alpha, xDesc, x, wDesc, w, convDesc, algo,
+                     workSpace, workSpaceSizeInBytes, beta, yDesc, y);
+}
+
+extern "C" cudnnStatus_t
+cudnnSetTensorNdDescriptor(cudnnTensorDescriptor_t tensorDesc,
+                           cudnnDataType_t dataType, int nbDims,
+                           const int dimA[], const int strideA[]) {
+    static auto real_func =
+        (decltype(&cudnnSetTensorNdDescriptor))real_dlsym(RTLD_NEXT, __func__);
+    std::cerr << "cudnnSetTensorNdDescriptor() [nbDims=" << nbDims << "]"
+              << std::endl
+              << std::endl;
+    return real_func(tensorDesc, dataType, nbDims, dimA, strideA);
+}
+
+extern "C" cudnnStatus_t cudnnBatchNormalizationForwardInference(
+    cudnnHandle_t handle, cudnnBatchNormMode_t mode, const void *alpha,
+    const void *beta, const cudnnTensorDescriptor_t xDesc, const void *x,
+    const cudnnTensorDescriptor_t yDesc, void *y,
+    const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc, const void *bnScale,
+    const void *bnBias, const void *estimatedMean,
+    const void *estimatedVariance, double epsilon) {
+    static auto real_func =
+        (decltype(&cudnnBatchNormalizationForwardInference))real_dlsym(
+            RTLD_NEXT, __func__);
+    std::cerr << "cudnnBatchNormalizationForwardInference()" << std::endl
+              << std::endl;
+    return real_func(handle, mode, alpha, beta, xDesc, x, yDesc, y,
+                     bnScaleBiasMeanVarDesc, bnScale, bnBias, estimatedMean,
+                     estimatedVariance, epsilon);
 }
 
 extern "C" void *dlsym(void *handle, const char *symbol) {

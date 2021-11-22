@@ -71,7 +71,7 @@ void handle_execute_request(int socket_fd,
     for (auto &apiCall : cuda_trace.callStack()) {
         spdlog::debug("Executing: {}", apiCall->typeName());
         cudaError_t err;
-        if ((err = apiCall->executeNative(vdev)) != cudaSuccess) {
+        if ((err = static_cast<cudaError_t>(apiCall->executeNative(vdev))) != cudaSuccess) {
             spdlog::error("Failed to execute call trace: {} ({})",
                           cudaGetErrorString(err), err);
             std::exit(EXIT_FAILURE);

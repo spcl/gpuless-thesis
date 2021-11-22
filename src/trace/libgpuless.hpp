@@ -6,15 +6,21 @@
 
 #include <cuda.h>
 #include <cuda_runtime.h>
+#include <spdlog/spdlog.h>
+#include <unistd.h>
+
+#include "cuda_trace.hpp"
+#include "trace_executor.hpp"
 
 #define LINK_CU_FUNCTION(symbol, f)                                            \
     do {                                                                       \
         if (strcmp(symbol, #f) == 0) {                                         \
-            spdlog::debug("{}({}) [pid={}]", __func__, symbol, getpid());      \
             *pfn = (void *)&f;                                                 \
             return CUDA_SUCCESS;                                               \
         }                                                                      \
     } while (0)
+
+#define GET_REAL_FUNCTION(fn) (decltype(&fn))real_dlsym(RTLD_NEXT, #fn)
 
 #define HIJACK_FN_PROLOGUE()                                                   \
     do {                                                                       \
@@ -23,7 +29,7 @@
 
 #define EXIT_NOT_IMPLEMENTED(fn)                                               \
     do {                                                                       \
-        std::cerr << "not implemented: " << fn << std::endl;                   \
+        spdlog::error("not implemented: {}", fn);                              \
         std::exit(EXIT_FAILURE);                                               \
     } while (0)
 
@@ -45,5 +51,8 @@ struct CudaRegisterState {
     uint64_t current_fatbin_handle;
     bool is_registering;
 };
+
+gpuless::CudaTrace &getCudaTrace();
+std::shared_ptr<gpuless::TraceExecutor> getTraceExecutor();
 
 #endif // __LIBGPULESS_HPP__

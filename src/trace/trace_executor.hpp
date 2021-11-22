@@ -8,6 +8,8 @@
 
 namespace gpuless {
 
+class CudaTrace;
+
 class TraceExecutor {
   public:
     virtual bool init(const char *ip, short port,

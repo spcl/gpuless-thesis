@@ -19,9 +19,10 @@ class CudaApiCall {
   public:
     virtual ~CudaApiCall() = default;
 
-    virtual cudaError_t executeNative(CudaVirtualDevice &vdev) = 0;
+    virtual uint64_t executeNative(CudaVirtualDevice &vdev) = 0;
+    virtual std::string nativeErrorToString(uint64_t err) = 0;
 
-    // serialize to flatbuffer object and append to list of serialized calls
+        // serialize to flatbuffer object and append to list of serialized calls
     // TODO: make pure virtual
     virtual void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
@@ -29,6 +30,7 @@ class CudaApiCall {
         std::cerr << "appendToFBCudaApiCallList(): not implemented" << std::endl;
         std::exit(EXIT_FAILURE);
     };
+
 
     virtual std::vector<uint64_t> requiredCudaModuleIds() { return {}; };
     virtual std::vector<std::string> requiredFunctionSymbols() { return {}; };
@@ -39,20 +41,25 @@ class CudaApiCall {
  * Public CUDA API functions
  */
 
-class CudaMalloc : public CudaApiCall {
+class CudaRuntimeApiCall : public CudaApiCall {
+  public:
+    std::string nativeErrorToString(uint64_t err) override;
+};
+
+class CudaMalloc : public CudaRuntimeApiCall {
   public:
     void *devPtr;
     size_t size;
 
     explicit CudaMalloc(size_t size);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 
     void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
         std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
-class CudaMemcpyH2D : public CudaApiCall {
+class CudaMemcpyH2D : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
@@ -60,14 +67,14 @@ class CudaMemcpyH2D : public CudaApiCall {
     std::vector<uint8_t> buffer;
 
     CudaMemcpyH2D(void *dst, const void *src, size_t size);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 
     void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
         std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
-class CudaMemcpyD2H : public CudaApiCall {
+class CudaMemcpyD2H : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
@@ -75,24 +82,24 @@ class CudaMemcpyD2H : public CudaApiCall {
     std::vector<uint8_t> buffer;
 
     CudaMemcpyD2H(void *dst, const void *src, size_t size);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 
     void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
         std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
-class CudaMemcpyD2D : public CudaApiCall {
+class CudaMemcpyD2D : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
     size_t size;
 
     CudaMemcpyD2D(void *dst, const void *src, size_t size);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class CudaMemcpyAsyncH2D : public CudaApiCall {
+class CudaMemcpyAsyncH2D : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
@@ -102,10 +109,10 @@ class CudaMemcpyAsyncH2D : public CudaApiCall {
 
     CudaMemcpyAsyncH2D(void *dst, const void *src, size_t size,
                        cudaStream_t stream);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class CudaMemcpyAsyncD2H : public CudaApiCall {
+class CudaMemcpyAsyncD2H : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
@@ -115,10 +122,10 @@ class CudaMemcpyAsyncD2H : public CudaApiCall {
 
     CudaMemcpyAsyncD2H(void *dst, const void *src, size_t size,
                        cudaStream_t stream);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class CudaMemcpyAsyncD2D : public CudaApiCall {
+class CudaMemcpyAsyncD2D : public CudaRuntimeApiCall {
   public:
     void *dst;
     const void *src;
@@ -127,22 +134,22 @@ class CudaMemcpyAsyncD2D : public CudaApiCall {
 
     CudaMemcpyAsyncD2D(void *dst, const void *src, size_t size,
                        cudaStream_t stream);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class CudaFree : public CudaApiCall {
+class CudaFree : public CudaRuntimeApiCall {
   public:
     void *devPtr;
 
     CudaFree(void *devPtr);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 
     void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
         std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) override;
 };
 
-class CudaLaunchKernel : public CudaApiCall {
+class CudaLaunchKernel : public CudaRuntimeApiCall {
   public:
     std::string symbol;
     std::vector<uint64_t> required_cuda_modules_;
@@ -165,7 +172,7 @@ class CudaLaunchKernel : public CudaApiCall {
                      std::vector<std::vector<uint8_t>> &paramBuffers,
                      std::vector<KParamInfo> &paramInfos);
 
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 
     void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
@@ -175,48 +182,48 @@ class CudaLaunchKernel : public CudaApiCall {
     std::vector<std::string> requiredFunctionSymbols() override;
 };
 
-class CudaStreamSynchronize : public CudaApiCall {
+class CudaStreamSynchronize : public CudaRuntimeApiCall {
   public:
     cudaStream_t stream;
 
     CudaStreamSynchronize(cudaStream_t stream);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class CudaStreamIsCapturing : public CudaApiCall {
+class CudaStreamIsCapturing : public CudaRuntimeApiCall {
   public:
     cudaStream_t stream;
     enum cudaStreamCaptureStatus cudaStreamCaptureStatus;
 
     CudaStreamIsCapturing(cudaStream_t stream);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
 /*
  * Private CUDA API functions
  */
 
-class PrivCudaRegisterFatBinary : public CudaApiCall {
+class PrivCudaRegisterFatBinary : public CudaRuntimeApiCall {
   public:
     uint64_t client_handle_id;
 
     PrivCudaRegisterFatBinary(uint64_t client_handle_id);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class PrivCudaRegisterFatBinaryEnd : public CudaApiCall {
+class PrivCudaRegisterFatBinaryEnd : public CudaRuntimeApiCall {
   public:
     uint64_t client_handle_id;
 
     PrivCudaRegisterFatBinaryEnd(uint64_t client_handle_id);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class PrivCudaUnregisterFatBinary : public CudaApiCall {
+class PrivCudaUnregisterFatBinary : public CudaRuntimeApiCall {
   public:
 };
 
-class PrivCudaRegisterFunction : public CudaApiCall {
+class PrivCudaRegisterFunction : public CudaRuntimeApiCall {
   public:
     uint64_t client_handle_id;
     void *host_fn_ptr;
@@ -233,10 +240,10 @@ class PrivCudaRegisterFunction : public CudaApiCall {
                              void *deviceFnPtr, const std::string &fnName,
                              int threadLimit, uint3 *tid, uint3 *bid,
                              dim3 *blockDim, dim3 *gridDim, int *wSize);
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
 };
 
-class PrivCudaRegisterVar : public CudaApiCall {
+class PrivCudaRegisterVar : public CudaRuntimeApiCall {
   private:
     std::vector<uint64_t> required_cuda_modules_;
 
@@ -255,7 +262,7 @@ class PrivCudaRegisterVar : public CudaApiCall {
                         void *deviceAddress, std::string deviceName, int ext,
                         size_t size, int constant, int global);
 
-    cudaError_t executeNative(CudaVirtualDevice &vdev) override;
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
     std::vector<uint64_t> requiredCudaModuleIds() override;
 };
 

@@ -1,0 +1,16 @@
+cudnnBatchNormalizationForwardInference@libcudnn.so.8
+cudnnConvolutionForward@libcudnn.so.8
+cudnnCreateConvolutionDescriptor@libcudnn.so.8
+cudnnCreateFilterDescriptor@libcudnn.so.8
+cudnnCreate@libcudnn.so.8
+cudnnCreateTensorDescriptor@libcudnn.so.8
+cudnnDestroyConvolutionDescriptor@libcudnn.so.8
+cudnnDestroyFilterDescriptor@libcudnn.so.8
+cudnnDestroyTensorDescriptor@libcudnn.so.8
+cudnnGetConvolutionForwardAlgorithm_v7@libcudnn.so.8
+cudnnSetConvolutionGroupCount@libcudnn.so.8
+cudnnSetConvolutionMathType@libcudnn.so.8
+cudnnSetConvolutionNdDescriptor@libcudnn.so.8
+cudnnSetFilterNdDescriptor@libcudnn.so.8
+cudnnSetStream@libcudnn.so.8
+cudnnSetTensorNdDescriptor@libcudnn.so.8

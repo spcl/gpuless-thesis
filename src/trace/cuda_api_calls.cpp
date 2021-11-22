@@ -1,5 +1,4 @@
 #include "iostream"
-#include <cstring>
 #include <cuda_runtime.h>
 #include <dlfcn.h>
 #include <spdlog/spdlog.h>
@@ -7,12 +6,18 @@
 #include "cuda_api_calls.hpp"
 #include "dlsym_util.hpp"
 
+std::string gpuless::CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
+    auto str = "[cudart] " +
+               std::string(cudaGetErrorString(static_cast<cudaError_t>(err)));
+    return str;
+}
+
 /*
  * cudaMalloc
  */
 gpuless::CudaMalloc::CudaMalloc(size_t size) : devPtr(nullptr), size(size) {}
 
-cudaError_t gpuless::CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMalloc<void>))real_dlsym(RTLD_NEXT, "cudaMalloc");
     return real(&this->devPtr, size);
@@ -34,7 +39,7 @@ void gpuless::CudaMalloc::appendToFBCudaApiCallList(
 gpuless::CudaMemcpyH2D::CudaMemcpyH2D(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size), buffer(size) {}
 
-cudaError_t gpuless::CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->dst, this->buffer.data(), this->size,
@@ -59,7 +64,7 @@ void gpuless::CudaMemcpyH2D::appendToFBCudaApiCallList(
 gpuless::CudaMemcpyD2H::CudaMemcpyD2H(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size), buffer(size) {}
 
-cudaError_t gpuless::CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->buffer.data(), this->src, this->size,
@@ -84,7 +89,7 @@ void gpuless::CudaMemcpyD2H::appendToFBCudaApiCallList(
 gpuless::CudaMemcpyD2D::CudaMemcpyD2D(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size) {}
 
-cudaError_t gpuless::CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice);
@@ -98,8 +103,7 @@ gpuless::CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(void *dst, const void *src,
                                                 cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream), buffer(size) {}
 
-cudaError_t
-gpuless::CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->dst, this->buffer.data(), this->size,
@@ -114,8 +118,7 @@ gpuless::CudaMemcpyAsyncD2H::CudaMemcpyAsyncD2H(void *dst, const void *src,
                                                 cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream), buffer(size) {}
 
-cudaError_t
-gpuless::CudaMemcpyAsyncD2H::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyAsyncD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->buffer.data(), this->src, this->size,
@@ -130,8 +133,7 @@ gpuless::CudaMemcpyAsyncD2D::CudaMemcpyAsyncD2D(void *dst, const void *src,
                                                 cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream) {}
 
-cudaError_t
-gpuless::CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice,
@@ -143,7 +145,7 @@ gpuless::CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
  */
 gpuless::CudaFree::CudaFree(void *devPtr) : devPtr(devPtr) {}
 
-cudaError_t gpuless::CudaFree::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaFree::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaFree))real_dlsym(RTLD_NEXT, "cudaFree");
     return real(this->devPtr);
 }
@@ -172,7 +174,7 @@ gpuless::CudaLaunchKernel::CudaLaunchKernel(
       gridDim(gridDim), blockDim(blockDim), sharedMem(sharedMem),
       stream(stream), paramBuffers(paramBuffers), paramInfos(paramInfos) {}
 
-cudaError_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
+uint64_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cuLaunchKernel))real_dlsym(RTLD_NEXT, "cuLaunchKernel");
 
@@ -253,7 +255,7 @@ void gpuless::CudaLaunchKernel::appendToFBCudaApiCallList(
 gpuless::CudaStreamSynchronize::CudaStreamSynchronize(cudaStream_t stream)
     : stream(stream) {}
 
-cudaError_t
+uint64_t
 gpuless::CudaStreamSynchronize::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaStreamSynchronize))real_dlsym(
         RTLD_NEXT, "cudaStreamSynchronize");
@@ -266,7 +268,7 @@ gpuless::CudaStreamSynchronize::executeNative(CudaVirtualDevice &vdev) {
 gpuless::CudaStreamIsCapturing::CudaStreamIsCapturing(cudaStream_t stream)
     : stream(stream), cudaStreamCaptureStatus(cudaStreamCaptureStatusNone) {}
 
-cudaError_t
+uint64_t
 gpuless::CudaStreamIsCapturing::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaStreamIsCapturing))real_dlsym(
         RTLD_NEXT, "cudaStreamIsCapturing");
@@ -280,7 +282,7 @@ gpuless::PrivCudaRegisterFatBinary::PrivCudaRegisterFatBinary(
     uint64_t client_handle_id)
     : client_handle_id(client_handle_id) {}
 
-cudaError_t
+uint64_t
 gpuless::PrivCudaRegisterFatBinary::executeNative(CudaVirtualDevice &vdev) {
     return cudaSuccess;
 }
@@ -292,7 +294,7 @@ gpuless::PrivCudaRegisterFatBinaryEnd::PrivCudaRegisterFatBinaryEnd(
     uint64_t client_handle_id)
     : client_handle_id(client_handle_id) {}
 
-cudaError_t
+uint64_t
 gpuless::PrivCudaRegisterFatBinaryEnd::executeNative(CudaVirtualDevice &vdev) {
     return cudaSuccess;
 }
@@ -309,7 +311,7 @@ gpuless::PrivCudaRegisterFunction::PrivCudaRegisterFunction(
       tid(tid), bid(bid), block_dim(blockDim), grid_dim(gridDim), wSize(wSize) {
 }
 
-cudaError_t
+uint64_t
 gpuless::PrivCudaRegisterFunction::executeNative(CudaVirtualDevice &vdev) {
     return cudaSuccess;
 }
@@ -326,27 +328,7 @@ gpuless::PrivCudaRegisterVar::PrivCudaRegisterVar(
       device_address(deviceAddress), device_name(std::move(deviceName)),
       ext(ext), size(size), constant(constant), global(global) {}
 
-cudaError_t
-gpuless::PrivCudaRegisterVar::executeNative(CudaVirtualDevice &vdev) {
-    //    auto globvar_mod_id_it =
-    //        vdev.global_var_to_module_id_map.find(this->device_name);
-    //    if (globvar_mod_id_it == vdev.global_var_to_module_id_map.end()) {
-    //        std::cerr << "global var in unknown module: " << this->device_name
-    //                  << std::endl;
-    //        std::exit(EXIT_FAILURE);
-    //    }
-    //
-    //    uint64_t mod_id = globvar_mod_id_it->second;
-    //    auto mod_id_it =
-    //    vdev.module_registry_.find(globvar_mod_id_it->second); if (mod_id_it
-    //    == vdev.module_registry_.end()) {
-    //        std::cerr << "module not registered: " << mod_id << std::endl;
-    //        std::exit(EXIT_FAILURE);
-    //    }
-    //    CUmodule mod = mod_id_it->second;
-    //    CUdeviceptr device_ptr;
-    //    checkCudaErrors(cuModuleGetGlobal(&device_ptr, &this->size, mod,
-    //                                      this->device_name.c_str()));
+uint64_t gpuless::PrivCudaRegisterVar::executeNative(CudaVirtualDevice &vdev) {
     return cudaSuccess;
 }
 

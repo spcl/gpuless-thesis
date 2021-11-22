@@ -1,6 +1,6 @@
 include make.config
 
-CC := $(CUDA_DIR)/bin/nvcc -cudart=shared -arch=sm_80
+CC := $(CUDA_DIR)/bin/nvcc -cudart=shared -arch=all-major
 
 INCLUDE := $(CUDA_DIR)/include
 
@@ -31,7 +31,7 @@ main.o: 	main.cu \
 				srad2_kernel.cu \
 				compress_kernel.cu
 	nvcc	main.cu \
-				-c -O3 -cudart=shared -arch=sm_86
+				-c -O3 -cudart=shared -arch=all-major
 
 # delete all object files
 clean:
