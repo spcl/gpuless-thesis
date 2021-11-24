@@ -81,9 +81,9 @@ void CudaTraceConverter::traceToExecRequest(
     builder.Finish(fb_protocol_message);
 }
 
-std::shared_ptr<CudaApiCall> CudaTraceConverter::fbCudaApiCallDeserialize(
+std::shared_ptr<AbstractCudaApiCall> CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     const FBCudaApiCall *fb_cuda_api_call) {
-    std::shared_ptr<CudaApiCall> cuda_api_call;
+    std::shared_ptr<AbstractCudaApiCall> cuda_api_call;
 
     switch (fb_cuda_api_call->api_call_type()) {
     case FBCudaApiCallUnion_FBCudaMalloc: {
@@ -163,20 +163,20 @@ std::shared_ptr<CudaApiCall> CudaTraceConverter::fbCudaApiCallDeserialize(
     return cuda_api_call;
 }
 
-std::shared_ptr<CudaApiCall> CudaTraceConverter::execResponseToTopApiCall(
+std::shared_ptr<AbstractCudaApiCall> CudaTraceConverter::execResponseToTopApiCall(
     const FBTraceExecResponse *fb_trace_exec_response) {
-    return CudaTraceConverter::fbCudaApiCallDeserialize(
+    return CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         fb_trace_exec_response->trace_top());
 }
 
-std::vector<std::shared_ptr<CudaApiCall>>
+std::vector<std::shared_ptr<AbstractCudaApiCall>>
 CudaTraceConverter::execRequestToTrace(
     const FBTraceExecRequest *fb_trace_exec_request) {
-    std::vector<std::shared_ptr<CudaApiCall>> cuda_api_calls;
+    std::vector<std::shared_ptr<AbstractCudaApiCall>> cuda_api_calls;
 
     for (const auto &c : *fb_trace_exec_request->trace()) {
         cuda_api_calls.push_back(
-            CudaTraceConverter::fbCudaApiCallDeserialize(c));
+            CudaTraceConverter::fbAbstractCudaApiCallDeserialize(c));
     }
 
     return cuda_api_calls;

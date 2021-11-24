@@ -226,20 +226,23 @@ gpuless::CudnnGetConvolutionForwardAlgorithm_v7::
  */
 uint64_t
 gpuless::CudnnConvolutionForward::executeNative(CudaVirtualDevice &vdev) {
-    static auto real = (decltype(&cudnnConvolutionForward))real_dlsym(
-        RTLD_NEXT, "cudnnConvolutionForward");
-    return real(
-        vdev.cudnn_handles_virtual_to_real[this->virtual_handle],
-        this->alpha.data(),
-        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_xdesc],
-        this->x,
-        vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd_wdesc],
-        this->w,
-        vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
-        this->algo, this->workspace, this->workspace_size_in_bytes,
-        this->beta.data(),
-        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc],
-        this->y);
+    static auto real = GET_REAL_FUNCTION(cudnnConvolutionForward);
+
+    cudnnHandle_t handle =
+        vdev.cudnn_handles_virtual_to_real[this->virtual_handle];
+    const cudnnTensorDescriptor_t xDesc =
+        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_xdesc];
+    const cudnnFilterDescriptor_t wDesc =
+        vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd_wdesc];
+    cudnnConvolutionDescriptor_t convDesc =
+        vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd];
+    const cudnnTensorDescriptor_t yDesc =
+        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc];
+
+    return real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
+                convDesc, this->algo, this->workspace,
+                this->workspace_size_in_bytes, this->beta.data(), yDesc,
+                this->y);
 }
 
 gpuless::CudnnConvolutionForward::CudnnConvolutionForward(
@@ -263,19 +266,22 @@ gpuless::CudnnConvolutionForward::CudnnConvolutionForward(
 uint64_t gpuless::CudnnBatchNormalizationForwardInference::executeNative(
     CudaVirtualDevice &vdev) {
     static auto real =
-        (decltype(&cudnnBatchNormalizationForwardInference))real_dlsym(
-            RTLD_NEXT, "cudnnBatchNormalizationForwardInference");
-    return real(
-        vdev.cudnn_handles_virtual_to_real[this->virtual_handle], this->mode,
-        this->alpha.data(), this->beta.data(),
-        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_xdesc],
-        this->x,
-        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc],
-        this->y,
+        GET_REAL_FUNCTION(cudnnBatchNormalizationForwardInference);
+
+    cudnnHandle_t handle =
+        vdev.cudnn_handles_virtual_to_real[this->virtual_handle];
+    const cudnnTensorDescriptor_t xDesc =
+        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_xdesc];
+    const cudnnTensorDescriptor_t yDesc =
+        vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc];
+    const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real
-            [this->virtual_td_bs_scale_bias_mean_var_desc],
-        this->bn_scale, this->bn_bias, this->estimated_mean,
-        this->estimated_variance, this->epsilon);
+            [this->virtual_td_bs_scale_bias_mean_var_desc];
+
+    return real(handle, this->mode, this->alpha.data(), this->beta.data(),
+                xDesc, this->x, yDesc, this->y, bnScaleBiasMeanVarDesc,
+                this->bn_scale, this->bn_bias, this->estimated_mean,
+                this->estimated_variance, this->epsilon);
 }
 
 gpuless::CudnnBatchNormalizationForwardInference::
@@ -286,9 +292,9 @@ gpuless::CudnnBatchNormalizationForwardInference::
         uint64_t virtualTdBsScaleBiasMeanVarDesc, const void *bnScale,
         const void *bnBias, const void *estimatedMean,
         const void *estimatedVariance, double epsilon)
-    : virtual_handle(virtualHandle), mode(mode), alpha(scaling_size), beta(scaling_size),
-      virtual_td_xdesc(virtualTdXdesc), x(x), virtual_td_ydesc(virtualTdYdesc),
-      y(y),
+    : virtual_handle(virtualHandle), mode(mode), alpha(scaling_size),
+      beta(scaling_size), virtual_td_xdesc(virtualTdXdesc), x(x),
+      virtual_td_ydesc(virtualTdYdesc), y(y),
       virtual_td_bs_scale_bias_mean_var_desc(virtualTdBsScaleBiasMeanVarDesc),
       bn_scale(bnScale), bn_bias(bnBias), estimated_mean(estimatedMean),
       estimated_variance(estimatedVariance), epsilon(epsilon) {
@@ -305,8 +311,7 @@ gpuless::CudnnDestroyConvolutionDescriptor::CudnnDestroyConvolutionDescriptor(
 
 uint64_t gpuless::CudnnDestroyConvolutionDescriptor::executeNative(
     CudaVirtualDevice &vdev) {
-    static auto real = (decltype(&cudnnDestroyConvolutionDescriptor))real_dlsym(
-        RTLD_NEXT, "cudnnDestroyConvolutionDescriptor");
+    static auto real = GET_REAL_FUNCTION(cudnnDestroyConvolutionDescriptor);
     return real(
         vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd]);
 }
@@ -320,8 +325,7 @@ gpuless::CudnnDestroyFilterDescriptor::CudnnDestroyFilterDescriptor(
 
 uint64_t
 gpuless::CudnnDestroyFilterDescriptor::executeNative(CudaVirtualDevice &vdev) {
-    static auto real = (decltype(&cudnnDestroyFilterDescriptor))real_dlsym(
-        RTLD_NEXT, "cudnnDestroyFilterDescriptor");
+    static auto real = GET_REAL_FUNCTION(cudnnDestroyFilterDescriptor);
     return real(vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd]);
 }
 

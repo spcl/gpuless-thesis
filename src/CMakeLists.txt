@@ -63,16 +63,19 @@ target_link_libraries(analysis
 add_library(gpuless SHARED
     trace/libgpuless.cpp
     trace/hijack_cudnn.cpp
+    trace/hijack_cublas.cpp
     trace/cuda_trace.cpp
     trace/cuda_trace_converter.cpp
     trace/cuda_api_calls.cpp
+    trace/cudnn_api_calls.cpp
+    trace/cublas_api_calls.cpp
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp
     trace/trace_executor_local.cpp
     trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
     utils.cpp
-    trace/cubin_analysis.cpp trace/cudnn_api_calls.cpp)
+    trace/cubin_analysis.cpp)
 target_link_libraries(gpuless
     iberty
     CUDA::cuda_driver

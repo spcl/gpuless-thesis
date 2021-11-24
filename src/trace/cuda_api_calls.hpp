@@ -15,22 +15,22 @@
 
 namespace gpuless {
 
-class CudaApiCall {
+class AbstractCudaApiCall {
   public:
-    virtual ~CudaApiCall() = default;
+    virtual ~AbstractCudaApiCall() = default;
 
     virtual uint64_t executeNative(CudaVirtualDevice &vdev) = 0;
     virtual std::string nativeErrorToString(uint64_t err) = 0;
 
-        // serialize to flatbuffer object and append to list of serialized calls
+    // serialize to flatbuffer object and append to list of serialized calls
     // TODO: make pure virtual
     virtual void appendToFBCudaApiCallList(
         flatbuffers::FlatBufferBuilder &builder,
         std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
-        std::cerr << "appendToFBCudaApiCallList(): not implemented" << std::endl;
+        std::cerr << "appendToFBCudaApiCallList(): not implemented"
+                  << std::endl;
         std::exit(EXIT_FAILURE);
     };
-
 
     virtual std::vector<uint64_t> requiredCudaModuleIds() { return {}; };
     virtual std::vector<std::string> requiredFunctionSymbols() { return {}; };
@@ -41,7 +41,7 @@ class CudaApiCall {
  * Public CUDA API functions
  */
 
-class CudaRuntimeApiCall : public CudaApiCall {
+class CudaRuntimeApiCall : public AbstractCudaApiCall {
   public:
     std::string nativeErrorToString(uint64_t err) override;
 };

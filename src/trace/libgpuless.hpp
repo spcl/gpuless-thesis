@@ -11,6 +11,7 @@
 
 #include "cuda_trace.hpp"
 #include "trace_executor.hpp"
+#include "dlsym_util.hpp"
 
 #define LINK_CU_FUNCTION(symbol, f)                                            \
     do {                                                                       \

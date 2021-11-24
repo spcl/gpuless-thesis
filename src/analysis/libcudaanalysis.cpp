@@ -199,7 +199,28 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
     }
 
     auto s = std::chrono::high_resolution_clock::now();
+
+    //    float probe[4];
+    //    static auto real_memcpy =
+    //        (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
+    //    if (kind == cudaMemcpyKind::cudaMemcpyDeviceToDevice) {
+    //        real_memcpy(probe, dst, 4 * sizeof(float),
+    //        cudaMemcpyDeviceToHost); fprintf(stderr,
+    //                "cudaMemcpyAsyncD2D probe (y=%p): y[0]=%f, y[1]=%f,
+    //                y[2]=%f, " "y[3]=%f\n\n", dst, probe[0], probe[1],
+    //                probe[2], probe[3]);
+    //    }
+
     cudaError_t err = real_func(dst, src, count, kind, stream);
+
+    //    if (kind == cudaMemcpyKind::cudaMemcpyDeviceToDevice) {
+    //        real_memcpy(probe, dst, 4 * sizeof(float),
+    //        cudaMemcpyDeviceToHost); fprintf(stderr,
+    //                "cudaMemcpyAsyncD2D probe (y=%p): y[0]=%f, y[1]=%f,
+    //                y[2]=%f, " "y[3]=%f\n\n", dst, probe[0], probe[1],
+    //                probe[2], probe[3]);
+    //    }
+
     auto e = std::chrono::high_resolution_clock::now();
     auto d =
         std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
@@ -208,6 +229,19 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
 
     ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
        << std::endl;
+
+    if (kind == cudaMemcpyKind::cudaMemcpyDeviceToHost) {
+        size_t nbytes = std::min(count, 16UL);
+        auto *dst_byte_ptr = static_cast<uint8_t *>(dst);
+
+        ss << "D2H memory probe: ";
+        for (size_t i = 0; i < nbytes; i++) {
+            ss << std::hex << std::setfill('0') << std::setw(2)
+               << (int)dst_byte_ptr[i] << " ";
+        }
+        ss << std::endl;
+    }
+
     std::cerr << ss.str() << std::endl;
 
     return err;
@@ -537,6 +571,41 @@ extern "C" CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn,
     return real_func(symbol, pfn, cudaVersion, flags);
 }
 
+extern "C" cudnnStatus_t
+cudnnConvolutionForward(cudnnHandle_t handle, const void *alpha,
+                        const cudnnTensorDescriptor_t xDesc, const void *x,
+                        const cudnnFilterDescriptor_t wDesc, const void *w,
+                        const cudnnConvolutionDescriptor_t convDesc,
+                        cudnnConvolutionFwdAlgo_t algo, void *workSpace,
+                        size_t workSpaceSizeInBytes, const void *beta,
+                        const cudnnTensorDescriptor_t yDesc, void *y) {
+    static auto real_func =
+        (decltype(&cudnnConvolutionForward))real_dlsym(RTLD_NEXT, __func__);
+
+    //    static auto real_memcpy =
+    //        (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
+    //
+    //    float probe[4];
+    //    std::cerr << "cudnnConvolutionForward()" << std::endl << std::endl;
+    //
+    //    real_memcpy(probe, y, 4 * sizeof(float), cudaMemcpyDeviceToHost);
+    //    fprintf(stderr,
+    //            "cudnnConvolutionForward probe (y=%p): y[0]=%f, y[1]=%f,
+    //            y[2]=%f, " "y[3]=%f\n\n", y, probe[0], probe[1], probe[2],
+    //            probe[3]);
+
+    auto err = real_func(handle, alpha, xDesc, x, wDesc, w, convDesc, algo,
+                         workSpace, workSpaceSizeInBytes, beta, yDesc, y);
+    //
+    //    real_memcpy(probe, y, 4 * sizeof(float), cudaMemcpyDeviceToHost);
+    //    fprintf(stderr,
+    //            "cudnnConvolutionForward probe (y=%p): y[0]=%f, y[1]=%f,
+    //            y[2]=%f, " "y[3]=%f\n\n", y, probe[0], probe[1], probe[2],
+    //            probe[3]);
+
+    return err;
+}
+
 extern "C" cudnnStatus_t cudnnCreate(cudnnHandle_t *handle) {
     std::cerr << "cudnnCreate()" << std::endl << std::endl;
     static auto real_func =
@@ -561,22 +630,6 @@ cudnnDeriveBNTensorDescriptor(cudnnTensorDescriptor_t derivedBnDesc,
         (decltype(&cudnnDeriveBNTensorDescriptor))real_dlsym(RTLD_NEXT,
                                                              __func__);
     return real_func(derivedBnDesc, xDesc, mode);
-}
-
-extern "C" cudnnStatus_t
-cudnnConvolutionForward(cudnnHandle_t handle, const void *alpha,
-                        const cudnnTensorDescriptor_t xDesc, const void *x,
-                        const cudnnFilterDescriptor_t wDesc, const void *w,
-                        const cudnnConvolutionDescriptor_t convDesc,
-                        cudnnConvolutionFwdAlgo_t algo, void *workSpace,
-                        size_t workSpaceSizeInBytes, const void *beta,
-                        const cudnnTensorDescriptor_t yDesc, void *y) {
-
-    std::cerr << "cudnnConvolutionForward()" << std::endl << std::endl;
-    static auto real_func =
-        (decltype(&cudnnConvolutionForward))real_dlsym(RTLD_NEXT, __func__);
-    return real_func(handle, alpha, xDesc, x, wDesc, w, convDesc, algo,
-                     workSpace, workSpaceSizeInBytes, beta, yDesc, y);
 }
 
 extern "C" cudnnStatus_t

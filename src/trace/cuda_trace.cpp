@@ -6,7 +6,7 @@ namespace gpuless {
 
 CudaTrace::CudaTrace() {}
 
-void CudaTrace::record(const std::shared_ptr<CudaApiCall> &cudaApiCall) {
+void CudaTrace::record(const std::shared_ptr<AbstractCudaApiCall> &cudaApiCall) {
     this->call_stack_.push_back(cudaApiCall);
 }
 
@@ -19,11 +19,11 @@ void CudaTrace::markSynchronized() {
     this->call_stack_.clear();
 }
 
-const std::shared_ptr<CudaApiCall> &CudaTrace::historyTop() {
+const std::shared_ptr<AbstractCudaApiCall> &CudaTrace::historyTop() {
     return this->synchronized_history_.back();
 }
 
-std::vector<std::shared_ptr<CudaApiCall>> CudaTrace::callStack() {
+std::vector<std::shared_ptr<AbstractCudaApiCall>> CudaTrace::callStack() {
     return this->call_stack_;
 }
 
@@ -61,32 +61,13 @@ CudaTrace::getModuleIdToFatbinResource() {
     return module_id_to_fatbin_resource_;
 }
 
-void CudaTrace::setHistoryTop(std::shared_ptr<CudaApiCall> top) {
-    this->synchronized_history_.back() = top;
+void CudaTrace::setHistoryTop(std::shared_ptr<AbstractCudaApiCall> top) {
+    this->synchronized_history_.back() = std::move(top);
 }
 
 void CudaTrace::setCallStack(
-    const std::vector<std::shared_ptr<CudaApiCall>> &callStack) {
+    const std::vector<std::shared_ptr<AbstractCudaApiCall>> &callStack) {
     call_stack_ = callStack;
 }
-
-// std::map<std::string, uint64_t> &CudaTrace::symbolToModuleIdMap() {
-//     return this->symbol_to_module_id_;
-// }
-
-// std::vector<std::pair<std::string, uint64_t>> &
-// CudaTrace::getNewSymbolToModuleId() {
-//     return new_symbol_to_module_id_;
-// }
-//
-// std::vector<std::pair<std::string, uint64_t>> &
-// CudaTrace::getNewGlobalVarToModuleId() {
-//     return new_global_var_to_module_id_;
-// }
-//
-// std::vector<std::pair<uint64_t, std::vector<uint8_t>>> &
-// CudaTrace::getNewModuleIdToFatbinDataMap() {
-//     return new_module_id_to_fatbin_data_map_;
-// }
 
 } // namespace gpuless

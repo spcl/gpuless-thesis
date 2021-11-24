@@ -5,6 +5,7 @@
 
 #include "cuda_api_calls.hpp"
 #include "dlsym_util.hpp"
+#include "libgpuless.hpp"
 
 std::string gpuless::CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
     auto str = "[cudart] " +
@@ -137,7 +138,7 @@ uint64_t gpuless::CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice,
-                this->stream);
+                    this->stream);
 }
 
 /*
@@ -175,8 +176,7 @@ gpuless::CudaLaunchKernel::CudaLaunchKernel(
       stream(stream), paramBuffers(paramBuffers), paramInfos(paramInfos) {}
 
 uint64_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
-    static auto real =
-        (decltype(&cuLaunchKernel))real_dlsym(RTLD_NEXT, "cuLaunchKernel");
+    static auto real = GET_REAL_FUNCTION(cuLaunchKernel);
 
     auto fn_reg_it = vdev.function_registry_.find(this->symbol);
     if (fn_reg_it == vdev.function_registry_.end()) {

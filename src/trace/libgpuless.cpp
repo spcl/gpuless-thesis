@@ -197,7 +197,6 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
 cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
                             enum cudaMemcpyKind kind, cudaStream_t stream) {
     hijackInit();
-    //    HIJACK_FN_PROLOGUE();
     if (kind == cudaMemcpyHostToDevice) {
         spdlog::info(
             "{}() [cudaMemcpyHostToDevice, {} <- {}, stream={}, pid={}]",
@@ -294,6 +293,7 @@ cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaStreamSynchronize>(stream));
+//    getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 
