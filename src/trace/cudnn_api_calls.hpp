@@ -15,7 +15,12 @@ class CudnnCreate : public CudaCudnnApiCall {
     uint64_t virtual_handle;
 
     explicit CudnnCreate(uint64_t virtualHandle);
+    explicit CudnnCreate(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetStream : public CudaCudnnApiCall {
@@ -24,7 +29,12 @@ class CudnnSetStream : public CudaCudnnApiCall {
     cudaStream_t stream;
 
     CudnnSetStream(uint64_t virtualHandle, cudaStream_t stream);
+    explicit CudnnSetStream(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnCreateTensorDescriptor : public CudaCudnnApiCall {
@@ -32,7 +42,12 @@ class CudnnCreateTensorDescriptor : public CudaCudnnApiCall {
     uint64_t virtual_td;
 
     explicit CudnnCreateTensorDescriptor(uint64_t virtualTd);
+    explicit CudnnCreateTensorDescriptor(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetTensorNdDescriptor : public CudaCudnnApiCall {
@@ -46,7 +61,12 @@ class CudnnSetTensorNdDescriptor : public CudaCudnnApiCall {
     CudnnSetTensorNdDescriptor(uint64_t virtualTd, cudnnDataType_t dataType,
                                int nbDims, std::vector<int> dimA,
                                std::vector<int> strideA);
+    explicit CudnnSetTensorNdDescriptor(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnCreateFilterDescriptor : public CudaCudnnApiCall {
@@ -54,7 +74,12 @@ class CudnnCreateFilterDescriptor : public CudaCudnnApiCall {
     uint64_t virtual_fd;
 
     explicit CudnnCreateFilterDescriptor(uint64_t virtualFd);
+    explicit CudnnCreateFilterDescriptor(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetFilterNdDescriptor : public CudaCudnnApiCall {
@@ -68,7 +93,12 @@ class CudnnSetFilterNdDescriptor : public CudaCudnnApiCall {
     CudnnSetFilterNdDescriptor(uint64_t virtualFd, cudnnDataType_t dataType,
                                cudnnTensorFormat_t format, int nbDims,
                                const std::vector<int> &filterDimA);
+    explicit CudnnSetFilterNdDescriptor(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnCreateConvolutionDescriptor : public CudaCudnnApiCall {
@@ -76,7 +106,13 @@ class CudnnCreateConvolutionDescriptor : public CudaCudnnApiCall {
     uint64_t virtual_cd;
 
     explicit CudnnCreateConvolutionDescriptor(uint64_t virtualCd);
+    explicit CudnnCreateConvolutionDescriptor(
+        const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetConvolutionGroupCount : public CudaCudnnApiCall {
@@ -85,7 +121,13 @@ class CudnnSetConvolutionGroupCount : public CudaCudnnApiCall {
     int group_count;
 
     CudnnSetConvolutionGroupCount(uint64_t virtualCd, int groupCount);
+    explicit CudnnSetConvolutionGroupCount(
+        const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetConvolutionMathType : public CudaCudnnApiCall {
@@ -94,7 +136,12 @@ class CudnnSetConvolutionMathType : public CudaCudnnApiCall {
     cudnnMathType_t math_type;
 
     CudnnSetConvolutionMathType(uint64_t virtualCd, cudnnMathType_t mathType);
+    explicit CudnnSetConvolutionMathType(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnSetConvolutionNdDescriptor : public CudaCudnnApiCall {
@@ -113,10 +160,16 @@ class CudnnSetConvolutionNdDescriptor : public CudaCudnnApiCall {
                                     std::vector<int> dilation,
                                     cudnnConvolutionMode_t convolutionMode,
                                     cudnnDataType_t cudnnDataType);
+    explicit CudnnSetConvolutionNdDescriptor(
+        const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
-class CudnnGetConvolutionForwardAlgorithm_v7 : public CudaCudnnApiCall {
+class CudnnGetConvolutionForwardAlgorithmV7 : public CudaCudnnApiCall {
   public:
     uint64_t virtual_handle;
     uint64_t virtual_td_xdesc;
@@ -129,14 +182,19 @@ class CudnnGetConvolutionForwardAlgorithm_v7 : public CudaCudnnApiCall {
     int returned_algo_count{};
     std::vector<cudnnConvolutionFwdAlgoPerf_t> perf_results;
 
-    CudnnGetConvolutionForwardAlgorithm_v7(uint64_t virtualHandle,
-                                           uint64_t virtualTdXdesc,
-                                           uint64_t virtualTdYdesc,
-                                           uint64_t virtualFd,
-                                           uint64_t virtualCd,
-                                           int requestedAlgoCount);
+    CudnnGetConvolutionForwardAlgorithmV7(uint64_t virtualHandle,
+                                          uint64_t virtualTdXdesc,
+                                          uint64_t virtualTdYdesc,
+                                          uint64_t virtualFd,
+                                          uint64_t virtualCd,
+                                          int requestedAlgoCount);
+    explicit CudnnGetConvolutionForwardAlgorithmV7(
+        const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnConvolutionForward : public CudaCudnnApiCall {
@@ -162,7 +220,12 @@ class CudnnConvolutionForward : public CudaCudnnApiCall {
                             uint64_t virtualFdWdesc, const void *w,
                             uint64_t virtualTdXdesc, const void *x,
                             uint64_t virtualTdYdesc, void *y);
+    explicit CudnnConvolutionForward(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnBatchNormalizationForwardInference : public CudaCudnnApiCall {
@@ -190,16 +253,26 @@ class CudnnBatchNormalizationForwardInference : public CudaCudnnApiCall {
         uint64_t virtualTdBsScaleBiasMeanVarDesc, const void *bnScale,
         const void *bnBias, const void *estimatedMean,
         const void *estimatedVariance, double epsilon);
+    explicit CudnnBatchNormalizationForwardInference(
+        const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnDestroyConvolutionDescriptor : public CudaCudnnApiCall {
   public:
     uint64_t virtual_cd;
     explicit CudnnDestroyConvolutionDescriptor(uint64_t virtualCd);
+    explicit CudnnDestroyConvolutionDescriptor(
+        const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnDestroyFilterDescriptor : public CudaCudnnApiCall {
@@ -207,14 +280,26 @@ class CudnnDestroyFilterDescriptor : public CudaCudnnApiCall {
     uint64_t virtual_fd;
 
     explicit CudnnDestroyFilterDescriptor(uint64_t virtualFd);
+    explicit CudnnDestroyFilterDescriptor(
+        const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnDestroyTensorDescriptor : public CudaCudnnApiCall {
   public:
     uint64_t virtual_td;
-    CudnnDestroyTensorDescriptor(uint64_t virtualTd);
+    explicit CudnnDestroyTensorDescriptor(uint64_t virtualTd);
+    explicit CudnnDestroyTensorDescriptor(
+        const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 } // namespace gpuless

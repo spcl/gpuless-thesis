@@ -2,5 +2,5 @@ build
 kernels/build
 tags
 compile_commands.json
-*/.gdb_history
+.gdb_history
 cmake-build-debug

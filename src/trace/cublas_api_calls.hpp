@@ -15,7 +15,12 @@ class CublasCreateV2 : public CublasApiCAll {
     uint64_t virtual_handle;
 
     explicit CublasCreateV2(uint64_t virtualHandle);
+    explicit CublasCreateV2(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CublasSetStreamV2 : public CublasApiCAll {
@@ -24,7 +29,12 @@ class CublasSetStreamV2 : public CublasApiCAll {
     cudaStream_t stream;
 
     CublasSetStreamV2(uint64_t virtualHandle, cudaStream_t stream);
+    explicit CublasSetStreamV2(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CublasSetMathMode : public CublasApiCAll {
@@ -33,7 +43,12 @@ class CublasSetMathMode : public CublasApiCAll {
     cublasMath_t mode;
 
     CublasSetMathMode(uint64_t virtualHandle, cublasMath_t mode);
+    explicit CublasSetMathMode(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CublasSgemmV2 : public CublasApiCAll {
@@ -57,7 +72,12 @@ class CublasSgemmV2 : public CublasApiCAll {
                   cublasOperation_t transb, int m, int n, int k, float alpha,
                   float beta, const float *a, const float *b, const float *c,
                   int lda, int ldb, int ldc);
+    explicit CublasSgemmV2(const FBCudaApiCall *fb_cuda_api_call);
+
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 } // namespace gpuless

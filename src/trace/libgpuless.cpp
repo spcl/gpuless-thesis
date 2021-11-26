@@ -25,6 +25,9 @@ const int CUDA_MINOR_VERSION = 0;
 short manager_port = 8002;
 std::string manager_ip = "127.0.0.1";
 
+static bool useTcp = true;
+static void exitHandler();
+
 static void hijackInit() {
     static bool hijack_initialized = false;
     if (!hijack_initialized) {
@@ -66,15 +69,17 @@ static uint64_t incrementFatbinCount() {
     return ctr++;
 }
 
-static void exitHandler();
-
 std::shared_ptr<TraceExecutor> getTraceExecutor() {
     static std::shared_ptr<TraceExecutor> trace_executor;
     static bool te_initialized = false;
     if (!te_initialized) {
+
+        // register the exit handler here, so that the static trace_executor
+        // gets destructed after the exit handler
+        std::atexit([]() { exitHandler(); });
+
         spdlog::info("Initializing trace executor");
         te_initialized = true;
-        bool useTcp = true;
         char *executor_type = std::getenv("EXECUTOR_TYPE");
         if (executor_type != nullptr) {
             std::string executor_type_str(executor_type);
@@ -98,6 +103,8 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
         } else {
             trace_executor = std::make_shared<TraceExecutorLocal>();
         }
+
+        spdlog::info("TCP executor enabled: {}", useTcp);
     }
 
     return trace_executor;
@@ -110,12 +117,6 @@ static CubinAnalyzer &getCubinAnalyzer() {
 
 CudaTrace &getCudaTrace() {
     static CudaTrace cuda_trace;
-
-    static bool exit_handler_registered = false;
-    if (!exit_handler_registered) {
-        exit_handler_registered = true;
-        std::atexit([]() { exitHandler(); });
-    }
 
     if (!getCubinAnalyzer().isInitialized()) {
         char *cuda_binary = std::getenv("CUDA_BINARY");
@@ -137,9 +138,20 @@ CudaTrace &getCudaTrace() {
 
 static void exitHandler() {
     spdlog::debug("std::atexit()");
+
     // this does not work, because CUDA exit handler have already destructed
     // the drive runtime at std::atexit time
     //    getCudaTrace().synchronize();
+
+    // deallocate session
+    if (useTcp) {
+        auto success = getTraceExecutor()->deallocate();
+        if (!success) {
+            spdlog::error("Failed to deallocate session");
+        } else {
+            spdlog::info("Deallocated session");
+        }
+    }
 }
 
 extern "C" {
@@ -184,6 +196,10 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
         std::shared_ptr<CudaMemcpyD2H> top =
             (const std::shared_ptr<CudaMemcpyD2H> &)getCudaTrace().historyTop();
         std::memcpy(dst, top->buffer.data(), count);
+
+//        auto *dstb = reinterpret_cast<uint8_t *>(dst);
+//        spdlog::debug("cudaMemcpyD2H memory probe: {:x} {:x} {:x} {:x}",
+//                      dstb[0], dstb[1], dstb[2], dstb[3]);
     } else if (kind == cudaMemcpyDeviceToDevice) {
         spdlog::info("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
@@ -213,7 +229,15 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
             std::make_shared<CudaMemcpyAsyncD2H>(dst, src, count, stream);
         getCudaTrace().record(rec);
         getTraceExecutor()->synchronize(getCudaTrace());
-        std::memcpy(dst, rec->buffer.data(), count);
+
+        std::shared_ptr<CudaMemcpyAsyncD2H> top =
+            (const std::shared_ptr<CudaMemcpyAsyncD2H> &)getCudaTrace()
+                .historyTop();
+        std::memcpy(dst, top->buffer.data(), count);
+
+//        auto *dstb = reinterpret_cast<uint8_t *>(dst);
+//        spdlog::debug("cudaMemcpyAsyncD2H memory probe: {:x} {:x} {:x} {:x}",
+//                      dstb[0], dstb[1], dstb[2], dstb[3]);
     } else if (kind == cudaMemcpyDeviceToDevice) {
         spdlog::info(
             "{}() [cudaMemcpyDeviceToDevice, {} <- {}, stream={}, pid={}]",
@@ -293,7 +317,7 @@ cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaStreamSynchronize>(stream));
-//    getTraceExecutor()->synchronize(getCudaTrace());
+    //    getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 

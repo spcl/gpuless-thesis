@@ -10,6 +10,7 @@ class TraceExecutorTcp : public TraceExecutor {
     sockaddr_in manager_addr{};
     sockaddr_in exec_addr{};
     uint64_t synchronize_counter_ = 0;
+    int32_t session_id_ = -1;
 
     bool negotiateSession(manager::instance_profile profile);
 

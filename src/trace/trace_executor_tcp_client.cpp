@@ -38,14 +38,13 @@ bool TraceExecutorTcp::negotiateSession(
     auto offered_profiles =
         allocate_offer_msg->message_as_AllocateOffer()->available_profiles();
     int32_t selected_profile = offered_profiles->Get(0);
-    int32_t session_id =
-        allocate_offer_msg->message_as_AllocateOffer()->session_id();
+    this->session_id_ = allocate_offer_msg->message_as_AllocateOffer()->session_id();
 
     // choose a profile and send finalize request
     builder.Reset();
     auto allocate_select_msg = CreateProtocolMessage(
         builder, Message_AllocateSelect,
-        CreateAllocateSelect(builder, Status_OK, session_id, selected_profile)
+        CreateAllocateSelect(builder, Status_OK, this->session_id_, selected_profile)
             .Union());
     builder.Finish(allocate_select_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
@@ -87,8 +86,36 @@ bool TraceExecutorTcp::init(const char *ip, const short port,
     return r;
 }
 
-// TODO
-bool TraceExecutorTcp::deallocate() { return true; }
+bool TraceExecutorTcp::deallocate() {
+    int socket_fd;
+    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        std::cerr << "failed to open socket" << std::endl;
+        return false;
+    }
+
+    if (connect(socket_fd, (sockaddr *)&this->manager_addr,
+                sizeof(manager_addr)) < 0) {
+        std::cerr << "failed to connect" << std::endl;
+        return false;
+    }
+
+    using namespace gpuless::manager;
+    flatbuffers::FlatBufferBuilder builder;
+    auto deallocate_request_msg = CreateProtocolMessage(
+        builder, Message_DeallocateRequest,
+        CreateDeallocateRequest(builder, this->session_id_).Union());
+    builder.Finish(deallocate_request_msg);
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+
+    spdlog::debug("Deallocate request sent");
+
+    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
+    auto deallocate_confirm_msg = GetProtocolMessage(buffer.data());
+    auto status =
+        deallocate_confirm_msg->message_as_DeallocateConfirm()->status();
+    this->session_id_ = -1;
+    return status == Status_OK;
+}
 
 bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     this->synchronize_counter_++;
@@ -111,9 +138,11 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     flatbuffers::FlatBufferBuilder builder;
     CudaTraceConverter::traceToExecRequest(cuda_trace, builder);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    spdlog::info("Trace execution request sent");
 
     // receive trace execution response
     std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
+    spdlog::info("Trace execution response received");
     auto fb_protocol_message_response =
         GetFBProtocolMessage(response_buffer.data());
     auto fb_trace_exec_response =

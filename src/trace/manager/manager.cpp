@@ -28,6 +28,7 @@ static void deallocate_session_devices(int32_t session_id) {
     for (auto &d : devices) {
         if (std::get<2>(d) == session_id) {
             std::get<2>(d) = NO_SESSION_ASSIGNED;
+            spdlog::info("Session {} deallocated", session_id);
             break;
         }
     }

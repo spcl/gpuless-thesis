@@ -1,0 +1,30 @@
+table FBCublasCreateV2 {
+    virtual_handle:uint64;
+}
+
+table FBCublasSetStreamV2 {
+    virtual_handle:uint64;
+    stream:uint64;
+}
+
+table FBCublasSetMathMode {
+    virtual_handle:uint64;
+    math_mode:uint64;
+}
+
+table FBCublasSgemmV2 {
+    virtual_handle:uint64;
+    transa_op:uint64;
+    transb_op:uint64;
+    m:int;
+    n:int;
+    k:int;
+    alpha:float;
+    beta:float;
+    a:uint64;
+    b:uint64;
+    c:uint64;
+    lda:int;
+    ldb:int;
+    ldc:int;
+}

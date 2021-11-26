@@ -1,5 +1,7 @@
 #include "cuda_trace_converter.hpp"
+#include "cublas_api_calls.hpp"
 #include "cuda_trace.hpp"
+#include "cudnn_api_calls.hpp"
 #include <spdlog/spdlog.h>
 
 namespace gpuless {
@@ -9,7 +11,7 @@ void CudaTraceConverter::traceToExecRequest(
     std::vector<flatbuffers::Offset<FBCudaApiCall>> fb_call_trace;
     for (auto &c : cuda_trace.callStack()) {
         spdlog::debug("Serializing api call: {}", c->typeName());
-        c->appendToFBCudaApiCallList(builder, fb_call_trace);
+        fb_call_trace.push_back(c->fbSerialize(builder));
     }
 
     std::vector<flatbuffers::Offset<FBNewModule>> fb_new_modules;
@@ -81,89 +83,129 @@ void CudaTraceConverter::traceToExecRequest(
     builder.Finish(fb_protocol_message);
 }
 
-std::shared_ptr<AbstractCudaApiCall> CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
+std::shared_ptr<AbstractCudaApiCall>
+CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     const FBCudaApiCall *fb_cuda_api_call) {
     std::shared_ptr<AbstractCudaApiCall> cuda_api_call;
 
     switch (fb_cuda_api_call->api_call_type()) {
-    case FBCudaApiCallUnion_FBCudaMalloc: {
-        auto c = fb_cuda_api_call->api_call_as_FBCudaMalloc();
-        auto p = std::make_shared<CudaMalloc>(c->size());
-        p->devPtr = reinterpret_cast<void *>(c->dev_ptr());
-        cuda_api_call = p;
-        break;
-    }
-    case FBCudaApiCallUnion_FBCudaMemcpyH2D: {
-        auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyH2D();
-        //        spdlog::info("{:x} {:x} {:x}", c->dst(), c->src(), c->size());
-        auto p = std::make_shared<CudaMemcpyH2D>(
-            reinterpret_cast<void *>(c->dst()),
-            reinterpret_cast<void *>(c->src()), c->size());
-
-        std::memcpy(p->buffer.data(), c->buffer()->data(), c->buffer()->size());
-        cuda_api_call = p;
-        break;
-    }
-    case FBCudaApiCallUnion_FBCudaMemcpyD2H: {
-        auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyD2H();
-        auto p = std::make_shared<CudaMemcpyD2H>(
-            reinterpret_cast<void *>(c->dst()),
-            reinterpret_cast<void *>(c->src()), c->size());
-        std::memcpy(p->buffer.data(), c->buffer()->data(), c->buffer()->size());
-        cuda_api_call = p;
-        break;
-    }
-    case FBCudaApiCallUnion_FBCudaLaunchKernel: {
-        auto c = fb_cuda_api_call->api_call_as_FBCudaLaunchKernel();
-        const FBDim3 *fb_grid_dim = c->grid_dim();
-        const FBDim3 *fb_block_dim = c->block_dim();
-        const dim3 grid_dim{static_cast<unsigned int>(fb_grid_dim->x()),
-                            static_cast<unsigned int>(fb_grid_dim->y()),
-                            static_cast<unsigned int>(fb_grid_dim->z())};
-        const dim3 block_dim{static_cast<unsigned int>(fb_block_dim->x()),
-                             static_cast<unsigned int>(fb_block_dim->y()),
-                             static_cast<unsigned int>(fb_block_dim->z())};
-        cudaStream_t stream = reinterpret_cast<cudaStream_t>(c->stream());
-
-        std::vector<std::vector<uint8_t>> pb;
-        for (const auto &b : *c->param_buffers()) {
-            pb.emplace_back(b->buffer()->size());
-            std::memcpy(pb.back().data(), b->buffer()->data(),
-                        b->buffer()->size());
-        }
-
-        std::vector<KParamInfo> kpi;
-        for (const auto &i : *c->param_infos()) {
-            KParamInfo info{i->name()->str(),
-                            static_cast<PtxParameterType>(i->ptx_param_type()),
-                            static_cast<int>(i->type_size()),
-                            static_cast<int>(i->align()),
-                            static_cast<int>(i->size())};
-            kpi.push_back(info);
-        }
-
-        auto p = std::make_shared<CudaLaunchKernel>(
-            c->symbol()->str(), std::vector<uint64_t>(),
-            std::vector<std::string>(), nullptr, grid_dim, block_dim,
-            c->shared_mem(), stream, pb, kpi);
-        cuda_api_call = p;
-        break;
-    }
-    case FBCudaApiCallUnion_FBCudaFree: {
-        auto c = fb_cuda_api_call->api_call_as_FBCudaFree();
-        cuda_api_call =
-            std::make_shared<CudaFree>(reinterpret_cast<void *>(c->dev_ptr()));
-        break;
-    }
     case FBCudaApiCallUnion_NONE:
-        spdlog::error("FBCudaApiCallUnion should not be of type NONE");
+        spdlog::error("Cannot convert FBCudaApiCallUnion_NONE");
+        std::exit(EXIT_FAILURE);
+        break;
+    case FBCudaApiCallUnion_FBCudaMalloc:
+        cuda_api_call = std::make_shared<CudaMalloc>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyH2D:
+        cuda_api_call = std::make_shared<CudaMemcpyH2D>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyD2H:
+        cuda_api_call = std::make_shared<CudaMemcpyD2H>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyD2D:
+        cuda_api_call = std::make_shared<CudaMemcpyD2D>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D:
+        cuda_api_call = std::make_shared<CudaMemcpyAsyncH2D>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H:
+        cuda_api_call = std::make_shared<CudaMemcpyAsyncD2H>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D:
+        cuda_api_call = std::make_shared<CudaMemcpyAsyncD2D>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaLaunchKernel:
+        cuda_api_call = std::make_shared<CudaLaunchKernel>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaFree:
+        cuda_api_call = std::make_shared<CudaFree>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaStreamSynchronize:
+        cuda_api_call =
+            std::make_shared<CudaStreamSynchronize>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasCreateV2:
+        cuda_api_call = std::make_shared<CublasCreateV2>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasSetStreamV2:
+        cuda_api_call = std::make_shared<CublasSetStreamV2>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasSetMathMode:
+        cuda_api_call = std::make_shared<CublasSetMathMode>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasSgemmV2:
+        cuda_api_call = std::make_shared<CublasSgemmV2>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnCreate:
+        cuda_api_call = std::make_shared<CudnnCreate>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetStream:
+        cuda_api_call = std::make_shared<CudnnSetStream>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnCreateTensorDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnSetTensorNdDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnCreateFilterDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnSetFilterNdDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor:
+        cuda_api_call = std::make_shared<CudnnCreateConvolutionDescriptor>(
+            fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount:
+        cuda_api_call =
+            std::make_shared<CudnnSetConvolutionGroupCount>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionMathType:
+        cuda_api_call =
+            std::make_shared<CudnnSetConvolutionMathType>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnSetConvolutionNdDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7:
+        cuda_api_call = std::make_shared<CudnnGetConvolutionForwardAlgorithmV7>(
+            fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnConvolutionForward:
+        cuda_api_call =
+            std::make_shared<CudnnConvolutionForward>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference:
+        cuda_api_call =
+            std::make_shared<CudnnBatchNormalizationForwardInference>(
+                fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor:
+        cuda_api_call = std::make_shared<CudnnDestroyConvolutionDescriptor>(
+            fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnDestroyFilterDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor:
+        cuda_api_call =
+            std::make_shared<CudnnDestroyTensorDescriptor>(fb_cuda_api_call);
         break;
     }
 
     return cuda_api_call;
 }
 
-std::shared_ptr<AbstractCudaApiCall> CudaTraceConverter::execResponseToTopApiCall(
+std::shared_ptr<AbstractCudaApiCall>
+CudaTraceConverter::execResponseToTopApiCall(
     const FBTraceExecResponse *fb_trace_exec_response) {
     return CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         fb_trace_exec_response->trace_top());

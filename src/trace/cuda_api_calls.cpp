@@ -7,7 +7,9 @@
 #include "dlsym_util.hpp"
 #include "libgpuless.hpp"
 
-std::string gpuless::CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
+namespace gpuless {
+
+std::string CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
     auto str = "[cudart] " +
                std::string(cudaGetErrorString(static_cast<cudaError_t>(err)));
     return str;
@@ -16,155 +18,257 @@ std::string gpuless::CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
 /*
  * cudaMalloc
  */
-gpuless::CudaMalloc::CudaMalloc(size_t size) : devPtr(nullptr), size(size) {}
+CudaMalloc::CudaMalloc(size_t size) : devPtr(nullptr), size(size) {}
 
-uint64_t gpuless::CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMalloc<void>))real_dlsym(RTLD_NEXT, "cudaMalloc");
     return real(&this->devPtr, size);
 }
 
-void gpuless::CudaMalloc::appendToFBCudaApiCallList(
-    flatbuffers::FlatBufferBuilder &builder,
-    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+flatbuffers::Offset<FBCudaApiCall>
+CudaMalloc::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call = CreateFBCudaMalloc(
         builder, reinterpret_cast<uint64_t>(this->devPtr), this->size);
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaMalloc, api_call.Union());
-    api_calls.push_back(api_call_union);
+    return api_call_union;
+}
+
+CudaMalloc::CudaMalloc(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMalloc();
+    this->devPtr = reinterpret_cast<void *>(c->dev_ptr());
+    this->size = c->size();
 }
 
 /*
  * cudaMemcpyH2D
  */
-gpuless::CudaMemcpyH2D::CudaMemcpyH2D(void *dst, const void *src, size_t size)
+CudaMemcpyH2D::CudaMemcpyH2D(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size), buffer(size) {}
 
-uint64_t gpuless::CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->dst, this->buffer.data(), this->size,
                 cudaMemcpyHostToDevice);
 }
 
-void gpuless::CudaMemcpyH2D::appendToFBCudaApiCallList(
-    flatbuffers::FlatBufferBuilder &builder,
-    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyH2D::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call =
         CreateFBCudaMemcpyH2D(builder, reinterpret_cast<uint64_t>(this->dst),
                               reinterpret_cast<uint64_t>(this->src), this->size,
                               builder.CreateVector(this->buffer));
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaMemcpyH2D, api_call.Union());
-    api_calls.push_back(api_call_union);
+    return api_call_union;
+}
+
+CudaMemcpyH2D::CudaMemcpyH2D(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyH2D();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+    this->buffer = std::vector<uint8_t>(c->size());
+    std::memcpy(this->buffer.data(), c->buffer()->data(), c->buffer()->size());
 }
 
 /*
  * cudaMemcpyD2H
  */
-gpuless::CudaMemcpyD2H::CudaMemcpyD2H(void *dst, const void *src, size_t size)
+CudaMemcpyD2H::CudaMemcpyD2H(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size), buffer(size) {}
 
-uint64_t gpuless::CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->buffer.data(), this->src, this->size,
                 cudaMemcpyDeviceToHost);
 }
 
-void gpuless::CudaMemcpyD2H::appendToFBCudaApiCallList(
-    flatbuffers::FlatBufferBuilder &builder,
-    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyD2H::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call =
         CreateFBCudaMemcpyD2H(builder, reinterpret_cast<uint64_t>(this->dst),
                               reinterpret_cast<uint64_t>(this->src), this->size,
                               builder.CreateVector(this->buffer));
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaMemcpyD2H, api_call.Union());
-    api_calls.push_back(api_call_union);
+    return api_call_union;
+}
+
+CudaMemcpyD2H::CudaMemcpyD2H(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyD2H();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+    this->buffer = std::vector<uint8_t>(c->size());
+    std::memcpy(this->buffer.data(), c->buffer()->data(), c->buffer()->size());
 }
 
 /*
  * cudaMemcpyD2D
  */
-gpuless::CudaMemcpyD2D::CudaMemcpyD2D(void *dst, const void *src, size_t size)
+CudaMemcpyD2D::CudaMemcpyD2D(void *dst, const void *src, size_t size)
     : dst(dst), src(src), size(size) {}
 
-uint64_t gpuless::CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
     return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice);
 }
 
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyD2D::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaMemcpyD2D(
+        builder, reinterpret_cast<uint64_t>(this->dst),
+        reinterpret_cast<uint64_t>(this->src), this->size);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyD2D, api_call.Union());
+    return api_call_union;
+}
+
+CudaMemcpyD2D::CudaMemcpyD2D(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyD2D();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+}
+
 /*
  * cudaMemcpyAsyncH2D
  */
-gpuless::CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(void *dst, const void *src,
-                                                size_t size,
-                                                cudaStream_t stream)
+CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(void *dst, const void *src, size_t size,
+                                       cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream), buffer(size) {}
 
-uint64_t gpuless::CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->dst, this->buffer.data(), this->size,
                 cudaMemcpyHostToDevice, this->stream);
 }
 
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyAsyncH2D::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaMemcpyAsyncH2D(
+        builder, reinterpret_cast<uint64_t>(this->dst),
+        reinterpret_cast<uint64_t>(this->src), this->size,
+        reinterpret_cast<uint64_t>(this->stream),
+        builder.CreateVector(this->buffer));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D, api_call.Union());
+    return api_call_union;
+}
+
+CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyAsyncH2D();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+    this->stream = reinterpret_cast<cudaStream_t>(c->stream());
+    this->buffer = std::vector<uint8_t>(c->size());
+    std::memcpy(this->buffer.data(), c->buffer()->data(), c->buffer()->size());
+}
+
 /*
  * cudaMemcpyAsyncD2H
  */
-gpuless::CudaMemcpyAsyncD2H::CudaMemcpyAsyncD2H(void *dst, const void *src,
-                                                size_t size,
-                                                cudaStream_t stream)
+CudaMemcpyAsyncD2H::CudaMemcpyAsyncD2H(void *dst, const void *src, size_t size,
+                                       cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream), buffer(size) {}
 
-uint64_t gpuless::CudaMemcpyAsyncD2H::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyAsyncD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->buffer.data(), this->src, this->size,
                 cudaMemcpyDeviceToHost, this->stream);
 }
 
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyAsyncD2H::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaMemcpyAsyncD2H(
+        builder, reinterpret_cast<uint64_t>(this->dst),
+        reinterpret_cast<uint64_t>(this->src), this->size,
+        reinterpret_cast<uint64_t>(this->stream),
+        builder.CreateVector(this->buffer));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H, api_call.Union());
+    return api_call_union;
+}
+
+CudaMemcpyAsyncD2H::CudaMemcpyAsyncD2H(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyAsyncD2H();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+    this->stream = reinterpret_cast<cudaStream_t>(c->stream());
+    this->buffer = std::vector<uint8_t>(c->size());
+    std::memcpy(this->buffer.data(), c->buffer()->data(), c->buffer()->size());
+}
+
 /*
  * cudaMemcpyAsyncD2D
  */
-gpuless::CudaMemcpyAsyncD2D::CudaMemcpyAsyncD2D(void *dst, const void *src,
-                                                size_t size,
-                                                cudaStream_t stream)
+CudaMemcpyAsyncD2D::CudaMemcpyAsyncD2D(void *dst, const void *src, size_t size,
+                                       cudaStream_t stream)
     : dst(dst), src(src), size(size), stream(stream) {}
 
-uint64_t gpuless::CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
     return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice,
-                    this->stream);
+                this->stream);
+}
+
+flatbuffers::Offset<FBCudaApiCall>
+CudaMemcpyAsyncD2D::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaMemcpyAsyncD2D(
+        builder, reinterpret_cast<uint64_t>(this->dst),
+        reinterpret_cast<uint64_t>(this->src), this->size,
+        reinterpret_cast<uint64_t>(this->stream));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D, api_call.Union());
+    return api_call_union;
+}
+
+CudaMemcpyAsyncD2D::CudaMemcpyAsyncD2D(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaMemcpyAsyncD2D();
+    this->dst = reinterpret_cast<void *>(c->dst());
+    this->src = reinterpret_cast<void *>(c->src());
+    this->size = c->size();
+    this->stream = reinterpret_cast<cudaStream_t>(c->stream());
 }
 
 /*
  * cudaFree
  */
-gpuless::CudaFree::CudaFree(void *devPtr) : devPtr(devPtr) {}
+CudaFree::CudaFree(void *devPtr) : devPtr(devPtr) {}
 
-uint64_t gpuless::CudaFree::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaFree::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaFree))real_dlsym(RTLD_NEXT, "cudaFree");
     return real(this->devPtr);
 }
 
-void gpuless::CudaFree::appendToFBCudaApiCallList(
-    flatbuffers::FlatBufferBuilder &builder,
-    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
+flatbuffers::Offset<FBCudaApiCall>
+CudaFree::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call =
         CreateFBCudaFree(builder, reinterpret_cast<uint64_t>(this->devPtr));
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaFree, api_call.Union());
-    api_calls.push_back(api_call_union);
+    return api_call_union;
+}
+
+CudaFree::CudaFree(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaFree();
+    this->devPtr = reinterpret_cast<void *>(c->dev_ptr());
 }
 
 /*
  * cudaLaunchKernel
  */
-gpuless::CudaLaunchKernel::CudaLaunchKernel(
+CudaLaunchKernel::CudaLaunchKernel(
     std::string symbol, std::vector<uint64_t> required_cuda_modules,
     std::vector<std::string> required_function_symbols, const void *fnPtr,
     const dim3 &gridDim, const dim3 &blockDim, size_t sharedMem,
@@ -175,7 +279,7 @@ gpuless::CudaLaunchKernel::CudaLaunchKernel(
       gridDim(gridDim), blockDim(blockDim), sharedMem(sharedMem),
       stream(stream), paramBuffers(paramBuffers), paramInfos(paramInfos) {}
 
-uint64_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cuLaunchKernel);
 
     auto fn_reg_it = vdev.function_registry_.find(this->symbol);
@@ -204,18 +308,16 @@ uint64_t gpuless::CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     return cudaSuccess;
 }
 
-std::vector<uint64_t> gpuless::CudaLaunchKernel::requiredCudaModuleIds() {
+std::vector<uint64_t> CudaLaunchKernel::requiredCudaModuleIds() {
     return this->required_cuda_modules_;
 }
 
-std::vector<std::string> gpuless::CudaLaunchKernel::requiredFunctionSymbols() {
+std::vector<std::string> CudaLaunchKernel::requiredFunctionSymbols() {
     return this->required_function_symbols_;
 }
 
-void gpuless::CudaLaunchKernel::appendToFBCudaApiCallList(
-    flatbuffers::FlatBufferBuilder &builder,
-    std::vector<flatbuffers::Offset<FBCudaApiCall>> &api_calls) {
-
+flatbuffers::Offset<FBCudaApiCall>
+CudaLaunchKernel::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     std::vector<flatbuffers::Offset<flatbuffers::String>> fb_req_fns;
     for (const auto &f : this->requiredFunctionSymbols()) {
         fb_req_fns.push_back(builder.CreateString(f));
@@ -246,92 +348,77 @@ void gpuless::CudaLaunchKernel::appendToFBCudaApiCallList(
 
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaLaunchKernel, api_call.Union());
-    api_calls.push_back(api_call_union);
+    return api_call_union;
+}
+
+CudaLaunchKernel::CudaLaunchKernel(const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaLaunchKernel();
+    const FBDim3 *fb_grid_dim = c->grid_dim();
+    const FBDim3 *fb_block_dim = c->block_dim();
+    const dim3 grid_dim{static_cast<unsigned int>(fb_grid_dim->x()),
+                        static_cast<unsigned int>(fb_grid_dim->y()),
+                        static_cast<unsigned int>(fb_grid_dim->z())};
+    const dim3 block_dim{static_cast<unsigned int>(fb_block_dim->x()),
+                         static_cast<unsigned int>(fb_block_dim->y()),
+                         static_cast<unsigned int>(fb_block_dim->z())};
+    auto stream_ = reinterpret_cast<cudaStream_t>(c->stream());
+
+    std::vector<std::vector<uint8_t>> pb;
+    for (const auto &b : *c->param_buffers()) {
+        pb.emplace_back(b->buffer()->size());
+        std::memcpy(pb.back().data(), b->buffer()->data(), b->buffer()->size());
+    }
+
+    std::vector<KParamInfo> kpi;
+    for (const auto &i : *c->param_infos()) {
+        KParamInfo info{i->name()->str(),
+                        static_cast<PtxParameterType>(i->ptx_param_type()),
+                        static_cast<int>(i->type_size()),
+                        static_cast<int>(i->align()),
+                        static_cast<int>(i->size())};
+        kpi.push_back(info);
+    }
+
+    this->symbol = c->symbol()->str();
+
+    // required modules and functions are shipped outside this object
+    this->required_cuda_modules_ = std::vector<uint64_t>();
+    this->required_function_symbols_ = std::vector<std::string>();
+
+    this->fnPtr = nullptr;
+    this->gridDim = grid_dim;
+    this->blockDim = block_dim;
+    this->sharedMem = c->shared_mem();
+    this->stream = stream_;
+    this->paramBuffers = pb;
+    this->paramInfos = kpi;
 }
 
 /*
  * cudaStreamSynchronize
  */
-gpuless::CudaStreamSynchronize::CudaStreamSynchronize(cudaStream_t stream)
+CudaStreamSynchronize::CudaStreamSynchronize(cudaStream_t stream)
     : stream(stream) {}
 
-uint64_t
-gpuless::CudaStreamSynchronize::executeNative(CudaVirtualDevice &vdev) {
+uint64_t CudaStreamSynchronize::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaStreamSynchronize))real_dlsym(
         RTLD_NEXT, "cudaStreamSynchronize");
     return real(this->stream);
 }
 
-/*
- * cudaStreamIsCapturing
- */
-gpuless::CudaStreamIsCapturing::CudaStreamIsCapturing(cudaStream_t stream)
-    : stream(stream), cudaStreamCaptureStatus(cudaStreamCaptureStatusNone) {}
-
-uint64_t
-gpuless::CudaStreamIsCapturing::executeNative(CudaVirtualDevice &vdev) {
-    static auto real = (decltype(&cudaStreamIsCapturing))real_dlsym(
-        RTLD_NEXT, "cudaStreamIsCapturing");
-    return real(this->stream, &this->cudaStreamCaptureStatus);
+flatbuffers::Offset<FBCudaApiCall>
+CudaStreamSynchronize::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaStreamSynchronize(
+        builder, reinterpret_cast<uint64_t>(this->stream));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaStreamSynchronize, api_call.Union());
+    return api_call_union;
 }
 
-/*
- * __cudaRegisterFatBinary
- */
-gpuless::PrivCudaRegisterFatBinary::PrivCudaRegisterFatBinary(
-    uint64_t client_handle_id)
-    : client_handle_id(client_handle_id) {}
-
-uint64_t
-gpuless::PrivCudaRegisterFatBinary::executeNative(CudaVirtualDevice &vdev) {
-    return cudaSuccess;
+CudaStreamSynchronize::CudaStreamSynchronize(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaStreamSynchronize();
+    this->stream = reinterpret_cast<cudaStream_t>(c->stream());
 }
 
-/*
- * __cudaRegisterFatBinaryEnd
- */
-gpuless::PrivCudaRegisterFatBinaryEnd::PrivCudaRegisterFatBinaryEnd(
-    uint64_t client_handle_id)
-    : client_handle_id(client_handle_id) {}
-
-uint64_t
-gpuless::PrivCudaRegisterFatBinaryEnd::executeNative(CudaVirtualDevice &vdev) {
-    return cudaSuccess;
-}
-
-/*
- * __cudaRegisterFunction
- */
-gpuless::PrivCudaRegisterFunction::PrivCudaRegisterFunction(
-    uint64_t client_handle_id, void *hostFnPtr, void *deviceFnPtr,
-    const std::string &fnName, int threadLimit, uint3 *tid, uint3 *bid,
-    dim3 *blockDim, dim3 *gridDim, int *wSize)
-    : client_handle_id(client_handle_id), host_fn_ptr(hostFnPtr),
-      device_fn_ptr(deviceFnPtr), fn_name(fnName), thread_limit(threadLimit),
-      tid(tid), bid(bid), block_dim(blockDim), grid_dim(gridDim), wSize(wSize) {
-}
-
-uint64_t
-gpuless::PrivCudaRegisterFunction::executeNative(CudaVirtualDevice &vdev) {
-    return cudaSuccess;
-}
-
-/*
- * __cudaRegisterVar
- */
-gpuless::PrivCudaRegisterVar::PrivCudaRegisterVar(
-    std::vector<uint64_t> required_cuda_modules, uint64_t clientHandleId,
-    void *hostVar, void *deviceAddress, std::string deviceName, int ext,
-    size_t size, int constant, int global)
-    : required_cuda_modules_(std::move(required_cuda_modules)),
-      client_handle_id(clientHandleId), host_var(hostVar),
-      device_address(deviceAddress), device_name(std::move(deviceName)),
-      ext(ext), size(size), constant(constant), global(global) {}
-
-uint64_t gpuless::PrivCudaRegisterVar::executeNative(CudaVirtualDevice &vdev) {
-    return cudaSuccess;
-}
-
-std::vector<uint64_t> gpuless::PrivCudaRegisterVar::requiredCudaModuleIds() {
-    return this->required_cuda_modules_;
-}
+} // namespace gpuless

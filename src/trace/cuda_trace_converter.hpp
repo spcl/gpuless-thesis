@@ -20,6 +20,8 @@ class CudaTraceConverter {
 
     static std::shared_ptr<AbstractCudaApiCall>
     execResponseToTopApiCall(const FBTraceExecResponse *fb_trace_exec_response);
+
+
 };
 
 } // namespace gpuless

@@ -1,0 +1,122 @@
+table FBCudnnCreate {
+    virtual_handle:uint64;
+}
+
+table FBCudnnSetStream {
+    virtual_handle:uint64;
+    stream:uint64;
+}
+
+table FBCudnnCreateTensorDescriptor {
+    virtual_td:uint64;
+}
+
+table FBCudnnSetTensorNdDescriptor {
+    virtual_td:uint64;
+    data_type:uint64;
+    nb_dims:int;
+    dim_a:[int];
+    stride_a:[int];
+}
+
+table FBCudnnCreateFilterDescriptor {
+    virtual_fd:uint64;
+}
+
+table FBCudnnSetFilterNdDescriptor {
+    virtual_fd:uint64;
+    data_type:uint64;
+    format:uint64;
+    nb_dims:int;
+    filter_dim_a:[int];
+}
+
+table FBCudnnCreateConvolutionDescriptor {
+    virtual_cd:uint64;
+}
+
+table FBCudnnSetConvolutionGroupCount {
+    virtual_cd:uint64;
+    group_count:int;
+}
+
+table FBCudnnSetConvolutionMathType {
+    virtual_cd:uint64;
+    math_type:uint64;
+}
+
+table FBCudnnSetConvolutionNdDescriptor {
+    virtual_cd:uint64;
+    array_length:int;
+    pad_a:[int];
+    filter_stride_a:[int];
+    dilation:[int];
+    convolution_mode:uint64;
+    cudnn_data_type:uint64;
+}
+
+table FBCudnnConvolutionFwdAlgoPerf {
+    algo:uint64;
+    status:uint64;
+    time:float;
+    memory:uint64;
+    determinism:uint64;
+    math_type:uint64;
+    reserved:[int];
+}
+
+table FBCudnnGetConvolutionForwardAlgorithmV7 {
+    virtual_handle:uint64;
+    virtual_td_xdesc:uint64;
+    virtual_td_ydesc:uint64;
+    virtual_fd:uint64;
+    virtual_cd:uint64;
+    requested_algo_count:int;
+    returned_algo_count:int;
+    perf_results:[FBCudnnConvolutionFwdAlgoPerf];
+}
+
+table FBCudnnConvolutionForward {
+    virtual_handle:uint64;
+    alpha:[uint8];
+    beta:[uint8];
+    workspace:uint64;
+    workspace_size_in_bytes:uint64;
+    virtual_cd:uint64;
+    algo:uint64;
+    virtual_fd_wdesc:uint64;
+    w:uint64;
+    virtual_td_xdesc:uint64;
+    x:uint64;
+    virtual_td_ydesc:uint64;
+    y:uint64;
+}
+
+table FBCudnnBatchNormalizationForwardInference {
+    virtual_handle:uint64;
+    mode:uint64;
+    alpha:[uint8];
+    beta:[uint8];
+    virtual_td_xdesc:uint64;
+    x:uint64;
+    virtual_td_ydesc:uint64;
+    y:uint64;
+    virtual_td_bs_scale_bias_mean_var_desc:uint64;
+    bn_scale:uint64;
+    bn_bias:uint64;
+    estimated_mean:uint64;
+    estimated_variance:uint64;
+    epsilon:double;
+}
+
+table FBCudnnDestroyConvolutionDescriptor {
+    virtual_cd:uint64;
+}
+
+table FBCudnnDestroyFilterDescriptor {
+    virtual_fd:uint64;
+}
+
+table FBCudnnDestroyTensorDescriptor {
+    virtual_td:uint64;
+}

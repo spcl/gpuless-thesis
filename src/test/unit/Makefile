@@ -6,6 +6,7 @@ TARGETS=manykernel \
 		objkernel \
 		simple \
 		globals \
+		async \
 
 .PHONY: clean
 

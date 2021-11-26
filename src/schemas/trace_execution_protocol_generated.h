@@ -6,7 +6,9 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+#include "cublas_calls_generated.h"
 #include "cuda_runtime_calls_generated.h"
+#include "cudnn_calls_generated.h"
 
 namespace gpuless {
 
@@ -63,39 +65,114 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCudaMalloc = 1,
   FBCudaApiCallUnion_FBCudaMemcpyH2D = 2,
   FBCudaApiCallUnion_FBCudaMemcpyD2H = 3,
-  FBCudaApiCallUnion_FBCudaLaunchKernel = 4,
-  FBCudaApiCallUnion_FBCudaFree = 5,
+  FBCudaApiCallUnion_FBCudaMemcpyD2D = 4,
+  FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D = 5,
+  FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H = 6,
+  FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D = 7,
+  FBCudaApiCallUnion_FBCudaLaunchKernel = 8,
+  FBCudaApiCallUnion_FBCudaFree = 9,
+  FBCudaApiCallUnion_FBCudaStreamSynchronize = 10,
+  FBCudaApiCallUnion_FBCublasCreateV2 = 11,
+  FBCudaApiCallUnion_FBCublasSetStreamV2 = 12,
+  FBCudaApiCallUnion_FBCublasSetMathMode = 13,
+  FBCudaApiCallUnion_FBCublasSgemmV2 = 14,
+  FBCudaApiCallUnion_FBCudnnCreate = 15,
+  FBCudaApiCallUnion_FBCudnnSetStream = 16,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 17,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 18,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 19,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 20,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 21,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 22,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 23,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 24,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 25,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 26,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 27,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 28,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 29,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 30,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
-  FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudaFree
+  FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[6] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[31] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
     FBCudaApiCallUnion_FBCudaMemcpyH2D,
     FBCudaApiCallUnion_FBCudaMemcpyD2H,
+    FBCudaApiCallUnion_FBCudaMemcpyD2D,
+    FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D,
+    FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H,
+    FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D,
     FBCudaApiCallUnion_FBCudaLaunchKernel,
-    FBCudaApiCallUnion_FBCudaFree
+    FBCudaApiCallUnion_FBCudaFree,
+    FBCudaApiCallUnion_FBCudaStreamSynchronize,
+    FBCudaApiCallUnion_FBCublasCreateV2,
+    FBCudaApiCallUnion_FBCublasSetStreamV2,
+    FBCudaApiCallUnion_FBCublasSetMathMode,
+    FBCudaApiCallUnion_FBCublasSgemmV2,
+    FBCudaApiCallUnion_FBCudnnCreate,
+    FBCudaApiCallUnion_FBCudnnSetStream,
+    FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor,
+    FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor,
+    FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor,
+    FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor,
+    FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor,
+    FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount,
+    FBCudaApiCallUnion_FBCudnnSetConvolutionMathType,
+    FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor,
+    FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7,
+    FBCudaApiCallUnion_FBCudnnConvolutionForward,
+    FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference,
+    FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor,
+    FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor,
+    FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor
   };
   return values;
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[7] = {
+  static const char * const names[32] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
     "FBCudaMemcpyD2H",
+    "FBCudaMemcpyD2D",
+    "FBCudaMemcpyAsyncH2D",
+    "FBCudaMemcpyAsyncD2H",
+    "FBCudaMemcpyAsyncD2D",
     "FBCudaLaunchKernel",
     "FBCudaFree",
+    "FBCudaStreamSynchronize",
+    "FBCublasCreateV2",
+    "FBCublasSetStreamV2",
+    "FBCublasSetMathMode",
+    "FBCublasSgemmV2",
+    "FBCudnnCreate",
+    "FBCudnnSetStream",
+    "FBCudnnCreateTensorDescriptor",
+    "FBCudnnSetTensorNdDescriptor",
+    "FBCudnnCreateFilterDescriptor",
+    "FBCudnnSetFilterNdDescriptor",
+    "FBCudnnCreateConvolutionDescriptor",
+    "FBCudnnSetConvolutionGroupCount",
+    "FBCudnnSetConvolutionMathType",
+    "FBCudnnSetConvolutionNdDescriptor",
+    "FBCudnnGetConvolutionForwardAlgorithmV7",
+    "FBCudnnConvolutionForward",
+    "FBCudnnBatchNormalizationForwardInference",
+    "FBCudnnDestroyConvolutionDescriptor",
+    "FBCudnnDestroyFilterDescriptor",
+    "FBCudnnDestroyTensorDescriptor",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameFBCudaApiCallUnion(FBCudaApiCallUnion e) {
-  if (flatbuffers::IsOutRange(e, FBCudaApiCallUnion_NONE, FBCudaApiCallUnion_FBCudaFree)) return "";
+  if (flatbuffers::IsOutRange(e, FBCudaApiCallUnion_NONE, FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesFBCudaApiCallUnion()[index];
 }
@@ -116,12 +193,112 @@ template<> struct FBCudaApiCallUnionTraits<FBCudaMemcpyD2H> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaMemcpyD2H;
 };
 
+template<> struct FBCudaApiCallUnionTraits<FBCudaMemcpyD2D> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaMemcpyD2D;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaMemcpyAsyncH2D> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaMemcpyAsyncD2H> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaMemcpyAsyncD2D> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D;
+};
+
 template<> struct FBCudaApiCallUnionTraits<FBCudaLaunchKernel> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaLaunchKernel;
 };
 
 template<> struct FBCudaApiCallUnionTraits<FBCudaFree> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaFree;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaStreamSynchronize> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaStreamSynchronize;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasCreateV2> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasCreateV2;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasSetStreamV2> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSetStreamV2;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasSetMathMode> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSetMathMode;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasSgemmV2> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSgemmV2;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnCreate> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnCreate;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetStream> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetStream;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnCreateTensorDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetTensorNdDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnCreateFilterDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetFilterNdDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnCreateConvolutionDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetConvolutionGroupCount> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetConvolutionMathType> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetConvolutionMathType;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnSetConvolutionNdDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnGetConvolutionForwardAlgorithmV7> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnConvolutionForward> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnConvolutionForward;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnBatchNormalizationForwardInference> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnDestroyConvolutionDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnDestroyFilterDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnDestroyTensorDescriptor> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor;
 };
 
 bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void *obj, FBCudaApiCallUnion type);
@@ -197,11 +374,86 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const FBCudaMemcpyD2H *api_call_as_FBCudaMemcpyD2H() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaMemcpyD2H ? static_cast<const FBCudaMemcpyD2H *>(api_call()) : nullptr;
   }
+  const FBCudaMemcpyD2D *api_call_as_FBCudaMemcpyD2D() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaMemcpyD2D ? static_cast<const FBCudaMemcpyD2D *>(api_call()) : nullptr;
+  }
+  const FBCudaMemcpyAsyncH2D *api_call_as_FBCudaMemcpyAsyncH2D() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D ? static_cast<const FBCudaMemcpyAsyncH2D *>(api_call()) : nullptr;
+  }
+  const FBCudaMemcpyAsyncD2H *api_call_as_FBCudaMemcpyAsyncD2H() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H ? static_cast<const FBCudaMemcpyAsyncD2H *>(api_call()) : nullptr;
+  }
+  const FBCudaMemcpyAsyncD2D *api_call_as_FBCudaMemcpyAsyncD2D() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D ? static_cast<const FBCudaMemcpyAsyncD2D *>(api_call()) : nullptr;
+  }
   const FBCudaLaunchKernel *api_call_as_FBCudaLaunchKernel() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaLaunchKernel ? static_cast<const FBCudaLaunchKernel *>(api_call()) : nullptr;
   }
   const FBCudaFree *api_call_as_FBCudaFree() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaFree ? static_cast<const FBCudaFree *>(api_call()) : nullptr;
+  }
+  const FBCudaStreamSynchronize *api_call_as_FBCudaStreamSynchronize() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaStreamSynchronize ? static_cast<const FBCudaStreamSynchronize *>(api_call()) : nullptr;
+  }
+  const FBCublasCreateV2 *api_call_as_FBCublasCreateV2() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasCreateV2 ? static_cast<const FBCublasCreateV2 *>(api_call()) : nullptr;
+  }
+  const FBCublasSetStreamV2 *api_call_as_FBCublasSetStreamV2() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSetStreamV2 ? static_cast<const FBCublasSetStreamV2 *>(api_call()) : nullptr;
+  }
+  const FBCublasSetMathMode *api_call_as_FBCublasSetMathMode() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSetMathMode ? static_cast<const FBCublasSetMathMode *>(api_call()) : nullptr;
+  }
+  const FBCublasSgemmV2 *api_call_as_FBCublasSgemmV2() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSgemmV2 ? static_cast<const FBCublasSgemmV2 *>(api_call()) : nullptr;
+  }
+  const FBCudnnCreate *api_call_as_FBCudnnCreate() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreate ? static_cast<const FBCudnnCreate *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetStream *api_call_as_FBCudnnSetStream() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetStream ? static_cast<const FBCudnnSetStream *>(api_call()) : nullptr;
+  }
+  const FBCudnnCreateTensorDescriptor *api_call_as_FBCudnnCreateTensorDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor ? static_cast<const FBCudnnCreateTensorDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetTensorNdDescriptor *api_call_as_FBCudnnSetTensorNdDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor ? static_cast<const FBCudnnSetTensorNdDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnCreateFilterDescriptor *api_call_as_FBCudnnCreateFilterDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor ? static_cast<const FBCudnnCreateFilterDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetFilterNdDescriptor *api_call_as_FBCudnnSetFilterNdDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor ? static_cast<const FBCudnnSetFilterNdDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnCreateConvolutionDescriptor *api_call_as_FBCudnnCreateConvolutionDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor ? static_cast<const FBCudnnCreateConvolutionDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetConvolutionGroupCount *api_call_as_FBCudnnSetConvolutionGroupCount() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount ? static_cast<const FBCudnnSetConvolutionGroupCount *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetConvolutionMathType *api_call_as_FBCudnnSetConvolutionMathType() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetConvolutionMathType ? static_cast<const FBCudnnSetConvolutionMathType *>(api_call()) : nullptr;
+  }
+  const FBCudnnSetConvolutionNdDescriptor *api_call_as_FBCudnnSetConvolutionNdDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor ? static_cast<const FBCudnnSetConvolutionNdDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnGetConvolutionForwardAlgorithmV7 *api_call_as_FBCudnnGetConvolutionForwardAlgorithmV7() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 ? static_cast<const FBCudnnGetConvolutionForwardAlgorithmV7 *>(api_call()) : nullptr;
+  }
+  const FBCudnnConvolutionForward *api_call_as_FBCudnnConvolutionForward() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnConvolutionForward ? static_cast<const FBCudnnConvolutionForward *>(api_call()) : nullptr;
+  }
+  const FBCudnnBatchNormalizationForwardInference *api_call_as_FBCudnnBatchNormalizationForwardInference() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference ? static_cast<const FBCudnnBatchNormalizationForwardInference *>(api_call()) : nullptr;
+  }
+  const FBCudnnDestroyConvolutionDescriptor *api_call_as_FBCudnnDestroyConvolutionDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor ? static_cast<const FBCudnnDestroyConvolutionDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnDestroyFilterDescriptor *api_call_as_FBCudnnDestroyFilterDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor ? static_cast<const FBCudnnDestroyFilterDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnDestroyTensorDescriptor *api_call_as_FBCudnnDestroyTensorDescriptor() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor ? static_cast<const FBCudnnDestroyTensorDescriptor *>(api_call()) : nullptr;
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -224,12 +476,112 @@ template<> inline const FBCudaMemcpyD2H *FBCudaApiCall::api_call_as<FBCudaMemcpy
   return api_call_as_FBCudaMemcpyD2H();
 }
 
+template<> inline const FBCudaMemcpyD2D *FBCudaApiCall::api_call_as<FBCudaMemcpyD2D>() const {
+  return api_call_as_FBCudaMemcpyD2D();
+}
+
+template<> inline const FBCudaMemcpyAsyncH2D *FBCudaApiCall::api_call_as<FBCudaMemcpyAsyncH2D>() const {
+  return api_call_as_FBCudaMemcpyAsyncH2D();
+}
+
+template<> inline const FBCudaMemcpyAsyncD2H *FBCudaApiCall::api_call_as<FBCudaMemcpyAsyncD2H>() const {
+  return api_call_as_FBCudaMemcpyAsyncD2H();
+}
+
+template<> inline const FBCudaMemcpyAsyncD2D *FBCudaApiCall::api_call_as<FBCudaMemcpyAsyncD2D>() const {
+  return api_call_as_FBCudaMemcpyAsyncD2D();
+}
+
 template<> inline const FBCudaLaunchKernel *FBCudaApiCall::api_call_as<FBCudaLaunchKernel>() const {
   return api_call_as_FBCudaLaunchKernel();
 }
 
 template<> inline const FBCudaFree *FBCudaApiCall::api_call_as<FBCudaFree>() const {
   return api_call_as_FBCudaFree();
+}
+
+template<> inline const FBCudaStreamSynchronize *FBCudaApiCall::api_call_as<FBCudaStreamSynchronize>() const {
+  return api_call_as_FBCudaStreamSynchronize();
+}
+
+template<> inline const FBCublasCreateV2 *FBCudaApiCall::api_call_as<FBCublasCreateV2>() const {
+  return api_call_as_FBCublasCreateV2();
+}
+
+template<> inline const FBCublasSetStreamV2 *FBCudaApiCall::api_call_as<FBCublasSetStreamV2>() const {
+  return api_call_as_FBCublasSetStreamV2();
+}
+
+template<> inline const FBCublasSetMathMode *FBCudaApiCall::api_call_as<FBCublasSetMathMode>() const {
+  return api_call_as_FBCublasSetMathMode();
+}
+
+template<> inline const FBCublasSgemmV2 *FBCudaApiCall::api_call_as<FBCublasSgemmV2>() const {
+  return api_call_as_FBCublasSgemmV2();
+}
+
+template<> inline const FBCudnnCreate *FBCudaApiCall::api_call_as<FBCudnnCreate>() const {
+  return api_call_as_FBCudnnCreate();
+}
+
+template<> inline const FBCudnnSetStream *FBCudaApiCall::api_call_as<FBCudnnSetStream>() const {
+  return api_call_as_FBCudnnSetStream();
+}
+
+template<> inline const FBCudnnCreateTensorDescriptor *FBCudaApiCall::api_call_as<FBCudnnCreateTensorDescriptor>() const {
+  return api_call_as_FBCudnnCreateTensorDescriptor();
+}
+
+template<> inline const FBCudnnSetTensorNdDescriptor *FBCudaApiCall::api_call_as<FBCudnnSetTensorNdDescriptor>() const {
+  return api_call_as_FBCudnnSetTensorNdDescriptor();
+}
+
+template<> inline const FBCudnnCreateFilterDescriptor *FBCudaApiCall::api_call_as<FBCudnnCreateFilterDescriptor>() const {
+  return api_call_as_FBCudnnCreateFilterDescriptor();
+}
+
+template<> inline const FBCudnnSetFilterNdDescriptor *FBCudaApiCall::api_call_as<FBCudnnSetFilterNdDescriptor>() const {
+  return api_call_as_FBCudnnSetFilterNdDescriptor();
+}
+
+template<> inline const FBCudnnCreateConvolutionDescriptor *FBCudaApiCall::api_call_as<FBCudnnCreateConvolutionDescriptor>() const {
+  return api_call_as_FBCudnnCreateConvolutionDescriptor();
+}
+
+template<> inline const FBCudnnSetConvolutionGroupCount *FBCudaApiCall::api_call_as<FBCudnnSetConvolutionGroupCount>() const {
+  return api_call_as_FBCudnnSetConvolutionGroupCount();
+}
+
+template<> inline const FBCudnnSetConvolutionMathType *FBCudaApiCall::api_call_as<FBCudnnSetConvolutionMathType>() const {
+  return api_call_as_FBCudnnSetConvolutionMathType();
+}
+
+template<> inline const FBCudnnSetConvolutionNdDescriptor *FBCudaApiCall::api_call_as<FBCudnnSetConvolutionNdDescriptor>() const {
+  return api_call_as_FBCudnnSetConvolutionNdDescriptor();
+}
+
+template<> inline const FBCudnnGetConvolutionForwardAlgorithmV7 *FBCudaApiCall::api_call_as<FBCudnnGetConvolutionForwardAlgorithmV7>() const {
+  return api_call_as_FBCudnnGetConvolutionForwardAlgorithmV7();
+}
+
+template<> inline const FBCudnnConvolutionForward *FBCudaApiCall::api_call_as<FBCudnnConvolutionForward>() const {
+  return api_call_as_FBCudnnConvolutionForward();
+}
+
+template<> inline const FBCudnnBatchNormalizationForwardInference *FBCudaApiCall::api_call_as<FBCudnnBatchNormalizationForwardInference>() const {
+  return api_call_as_FBCudnnBatchNormalizationForwardInference();
+}
+
+template<> inline const FBCudnnDestroyConvolutionDescriptor *FBCudaApiCall::api_call_as<FBCudnnDestroyConvolutionDescriptor>() const {
+  return api_call_as_FBCudnnDestroyConvolutionDescriptor();
+}
+
+template<> inline const FBCudnnDestroyFilterDescriptor *FBCudaApiCall::api_call_as<FBCudnnDestroyFilterDescriptor>() const {
+  return api_call_as_FBCudnnDestroyFilterDescriptor();
+}
+
+template<> inline const FBCudnnDestroyTensorDescriptor *FBCudaApiCall::api_call_as<FBCudnnDestroyTensorDescriptor>() const {
+  return api_call_as_FBCudnnDestroyTensorDescriptor();
 }
 
 struct FBCudaApiCallBuilder {
@@ -607,12 +959,112 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
       auto ptr = reinterpret_cast<const FBCudaMemcpyD2H *>(obj);
       return verifier.VerifyTable(ptr);
     }
+    case FBCudaApiCallUnion_FBCudaMemcpyD2D: {
+      auto ptr = reinterpret_cast<const FBCudaMemcpyD2D *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncH2D: {
+      auto ptr = reinterpret_cast<const FBCudaMemcpyAsyncH2D *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncD2H: {
+      auto ptr = reinterpret_cast<const FBCudaMemcpyAsyncD2H *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaMemcpyAsyncD2D: {
+      auto ptr = reinterpret_cast<const FBCudaMemcpyAsyncD2D *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
     case FBCudaApiCallUnion_FBCudaLaunchKernel: {
       auto ptr = reinterpret_cast<const FBCudaLaunchKernel *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case FBCudaApiCallUnion_FBCudaFree: {
       auto ptr = reinterpret_cast<const FBCudaFree *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaStreamSynchronize: {
+      auto ptr = reinterpret_cast<const FBCudaStreamSynchronize *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasCreateV2: {
+      auto ptr = reinterpret_cast<const FBCublasCreateV2 *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasSetStreamV2: {
+      auto ptr = reinterpret_cast<const FBCublasSetStreamV2 *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasSetMathMode: {
+      auto ptr = reinterpret_cast<const FBCublasSetMathMode *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasSgemmV2: {
+      auto ptr = reinterpret_cast<const FBCublasSgemmV2 *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnCreate: {
+      auto ptr = reinterpret_cast<const FBCudnnCreate *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetStream: {
+      auto ptr = reinterpret_cast<const FBCudnnSetStream *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnCreateTensorDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnSetTensorNdDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnCreateFilterDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnSetFilterNdDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnCreateConvolutionDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount: {
+      auto ptr = reinterpret_cast<const FBCudnnSetConvolutionGroupCount *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionMathType: {
+      auto ptr = reinterpret_cast<const FBCudnnSetConvolutionMathType *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnSetConvolutionNdDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7: {
+      auto ptr = reinterpret_cast<const FBCudnnGetConvolutionForwardAlgorithmV7 *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnConvolutionForward: {
+      auto ptr = reinterpret_cast<const FBCudnnConvolutionForward *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference: {
+      auto ptr = reinterpret_cast<const FBCudnnBatchNormalizationForwardInference *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnDestroyConvolutionDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnDestroyFilterDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor: {
+      auto ptr = reinterpret_cast<const FBCudnnDestroyTensorDescriptor *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return true;

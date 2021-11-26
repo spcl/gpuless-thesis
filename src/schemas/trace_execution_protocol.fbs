@@ -1,5 +1,6 @@
 include "cuda_runtime_calls.fbs";
-// include "cuda_driver_calls.fbs";
+include "cublas_calls.fbs";
+include "cudnn_calls.fbs";
 
 namespace gpuless;
 
@@ -9,11 +10,41 @@ enum FBStatus : byte {
 }
 
 union FBCudaApiCallUnion {
+    // cuda
     FBCudaMalloc,
     FBCudaMemcpyH2D,
     FBCudaMemcpyD2H,
+    FBCudaMemcpyD2D,
+    FBCudaMemcpyAsyncH2D,
+    FBCudaMemcpyAsyncD2H,
+    FBCudaMemcpyAsyncD2D,
     FBCudaLaunchKernel,
-    FBCudaFree
+    FBCudaFree,
+    FBCudaStreamSynchronize,
+
+    // cuBLAS
+    FBCublasCreateV2,
+    FBCublasSetStreamV2,
+    FBCublasSetMathMode,
+    FBCublasSgemmV2,
+
+    // cuDNN
+    FBCudnnCreate,
+    FBCudnnSetStream,
+    FBCudnnCreateTensorDescriptor,
+    FBCudnnSetTensorNdDescriptor,
+    FBCudnnCreateFilterDescriptor,
+    FBCudnnSetFilterNdDescriptor,
+    FBCudnnCreateConvolutionDescriptor,
+    FBCudnnSetConvolutionGroupCount ,
+    FBCudnnSetConvolutionMathType,
+    FBCudnnSetConvolutionNdDescriptor,
+    FBCudnnGetConvolutionForwardAlgorithmV7,
+    FBCudnnConvolutionForward,
+    FBCudnnBatchNormalizationForwardInference,
+    FBCudnnDestroyConvolutionDescriptor,
+    FBCudnnDestroyFilterDescriptor,
+    FBCudnnDestroyTensorDescriptor
 }
 
 table FBCudaApiCall {
@@ -51,4 +82,3 @@ table FBProtocolMessage {
 }
 
 root_type FBProtocolMessage;
-

@@ -31,8 +31,8 @@ static std::vector<size_t> &getTensorDescriptorToSize() {
     return virtual_cd_to_size;
 }
 
-static void recordTensorDescriptorSize(uint64_t virutal_cd, size_t size,
-                                       cudnnDataType_t data_type) {
+static void
+recordTensorDescriptorSize(uint64_t virutal_cd, cudnnDataType_t data_type) {
     auto &virtual_cd_to_size = getTensorDescriptorToSize();
     if (virtual_cd_to_size.size() < virutal_cd + 1) {
         virtual_cd_to_size.resize(virutal_cd + 1);
@@ -43,7 +43,7 @@ static void recordTensorDescriptorSize(uint64_t virutal_cd, size_t size,
     } else {
         type_size = sizeof(float);
     }
-    virtual_cd_to_size[virutal_cd] = size * type_size;
+    virtual_cd_to_size[virutal_cd] = type_size;
 }
 
 cudnnStatus_t cudnnCreate(cudnnHandle_t *handle) {
@@ -82,8 +82,7 @@ cudnnStatus_t cudnnSetTensorNdDescriptor(cudnnTensorDescriptor_t tensorDesc,
     std::memcpy(stride_a_vec.data(), strideA, nbDims * sizeof(int));
 
     auto virtual_td = reinterpret_cast<uint64_t>(tensorDesc);
-    auto tensor_size = std::accumulate(dim_a_vec.begin(), dim_a_vec.end(), 0);
-    recordTensorDescriptorSize(virtual_td, tensor_size, dataType);
+    recordTensorDescriptorSize(virtual_td, dataType);
 
     getCudaTrace().record(std::make_shared<gpuless::CudnnSetTensorNdDescriptor>(
         virtual_td, dataType, nbDims, dim_a_vec, stride_a_vec));
@@ -168,7 +167,7 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
     int *returnedAlgoCount, cudnnConvolutionFwdAlgoPerf_t *perfResults) {
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(
-        std::make_shared<gpuless::CudnnGetConvolutionForwardAlgorithm_v7>(
+        std::make_shared<gpuless::CudnnGetConvolutionForwardAlgorithmV7>(
             reinterpret_cast<uint64_t>(handle),
             reinterpret_cast<uint64_t>(xDesc),
             reinterpret_cast<uint64_t>(yDesc),
@@ -176,7 +175,7 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
             reinterpret_cast<uint64_t>(convDesc), requestedAlgoCount));
     getTraceExecutor()->synchronize(getCudaTrace());
     auto top = std::static_pointer_cast<
-        gpuless::CudnnGetConvolutionForwardAlgorithm_v7>(
+        gpuless::CudnnGetConvolutionForwardAlgorithmV7>(
         getCudaTrace().historyTop());
     *returnedAlgoCount = top->returned_algo_count;
     std::memcpy(perfResults, top->perf_results.data(),

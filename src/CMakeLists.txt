@@ -35,6 +35,8 @@ add_executable(manager_trace
     trace/cuda_trace.cpp
     trace/cuda_trace_converter.cpp
     trace/cuda_api_calls.cpp
+    trace/cudnn_api_calls.cpp
+    trace/cublas_api_calls.cpp
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp
     trace/trace_executor_local.cpp
@@ -44,8 +46,10 @@ add_executable(manager_trace
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
     iberty
+    cudnn
     CUDA::cudart
     CUDA::cuda_driver
+    CUDA::cublas
     pthread)
 
 add_subdirectory(
@@ -78,8 +82,10 @@ add_library(gpuless SHARED
     trace/cubin_analysis.cpp)
 target_link_libraries(gpuless
     iberty
+    cudnn
     CUDA::cuda_driver
-    CUDA::cudart)
+    CUDA::cudart
+    CUDA::cublas)
 
 add_custom_command(
     TARGET gpuless POST_BUILD

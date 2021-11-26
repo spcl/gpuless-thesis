@@ -16,10 +16,7 @@
 #include "../cuda_trace_converter.hpp"
 #include "manager_device.hpp"
 
-#include "../cuda_api_calls.hpp"
-
 extern const int BACKLOG;
-extern const bool DEBUG;
 
 static gpuless::CudaTrace &getCudaTrace() {
     static gpuless::CudaTrace cuda_trace;
@@ -70,10 +67,10 @@ void handle_execute_request(int socket_fd,
 
     for (auto &apiCall : cuda_trace.callStack()) {
         spdlog::debug("Executing: {}", apiCall->typeName());
-        cudaError_t err;
-        if ((err = static_cast<cudaError_t>(apiCall->executeNative(vdev))) != cudaSuccess) {
+        uint64_t err = apiCall->executeNative(vdev);
+        if (err != 0) {
             spdlog::error("Failed to execute call trace: {} ({})",
-                          cudaGetErrorString(err), err);
+                          apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
     }
@@ -81,11 +78,10 @@ void handle_execute_request(int socket_fd,
     cuda_trace.markSynchronized();
 
     flatbuffers::FlatBufferBuilder builder;
-    std::vector<flatbuffers::Offset<gpuless::FBCudaApiCall>> v;
-    cuda_trace.historyTop()->appendToFBCudaApiCallList(builder, v);
+    auto top = cuda_trace.historyTop()->fbSerialize(builder);
 
-    auto fb_trace_exec_response = gpuless::CreateFBTraceExecResponse(
-        builder, gpuless::FBStatus_OK, v.back());
+    auto fb_trace_exec_response =
+        gpuless::CreateFBTraceExecResponse(builder, gpuless::FBStatus_OK, top);
     auto fb_protocol_message = gpuless::CreateFBProtocolMessage(
         builder, gpuless::FBMessage_FBTraceExecResponse,
         fb_trace_exec_response.Union());

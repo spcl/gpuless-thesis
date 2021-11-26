@@ -56,6 +56,35 @@ table FBCudaMemcpyD2H {
     buffer:[uint8];
 }
 
+table FBCudaMemcpyD2D {
+    dst:uint64;
+    src:uint64;
+    size:uint64;
+}
+
+table FBCudaMemcpyAsyncH2D {
+    dst:uint64;
+    src:uint64;
+    size:uint64;
+    stream:uint64;
+    buffer:[uint8];
+}
+
+table FBCudaMemcpyAsyncD2H {
+    dst:uint64;
+    src:uint64;
+    size:uint64;
+    stream:uint64;
+    buffer:[uint8];
+}
+
+table FBCudaMemcpyAsyncD2D {
+    dst:uint64;
+    src:uint64;
+    size:uint64;
+    stream:uint64;
+}
+
 table FBCudaLaunchKernel {
     symbol:string;
     required_modules:[uint64];
@@ -70,4 +99,8 @@ table FBCudaLaunchKernel {
 
 table FBCudaFree {
     dev_ptr:uint64;
+}
+
+table FBCudaStreamSynchronize {
+    stream:uint64;
 }

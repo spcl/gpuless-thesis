@@ -23,11 +23,26 @@ struct FBCudaMemcpyH2DBuilder;
 struct FBCudaMemcpyD2H;
 struct FBCudaMemcpyD2HBuilder;
 
+struct FBCudaMemcpyD2D;
+struct FBCudaMemcpyD2DBuilder;
+
+struct FBCudaMemcpyAsyncH2D;
+struct FBCudaMemcpyAsyncH2DBuilder;
+
+struct FBCudaMemcpyAsyncD2H;
+struct FBCudaMemcpyAsyncD2HBuilder;
+
+struct FBCudaMemcpyAsyncD2D;
+struct FBCudaMemcpyAsyncD2DBuilder;
+
 struct FBCudaLaunchKernel;
 struct FBCudaLaunchKernelBuilder;
 
 struct FBCudaFree;
 struct FBCudaFreeBuilder;
+
+struct FBCudaStreamSynchronize;
+struct FBCudaStreamSynchronizeBuilder;
 
 enum FBPtxParameterType : int8_t {
   FBPtxParameterType_s8 = 0,
@@ -511,6 +526,336 @@ inline flatbuffers::Offset<FBCudaMemcpyD2H> CreateFBCudaMemcpyD2HDirect(
       buffer__);
 }
 
+struct FBCudaMemcpyD2D FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaMemcpyD2DBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DST = 4,
+    VT_SRC = 6,
+    VT_SIZE = 8
+  };
+  uint64_t dst() const {
+    return GetField<uint64_t>(VT_DST, 0);
+  }
+  uint64_t src() const {
+    return GetField<uint64_t>(VT_SRC, 0);
+  }
+  uint64_t size() const {
+    return GetField<uint64_t>(VT_SIZE, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_DST) &&
+           VerifyField<uint64_t>(verifier, VT_SRC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaMemcpyD2DBuilder {
+  typedef FBCudaMemcpyD2D Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_dst(uint64_t dst) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyD2D::VT_DST, dst, 0);
+  }
+  void add_src(uint64_t src) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyD2D::VT_SRC, src, 0);
+  }
+  void add_size(uint64_t size) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyD2D::VT_SIZE, size, 0);
+  }
+  explicit FBCudaMemcpyD2DBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaMemcpyD2D> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaMemcpyD2D>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaMemcpyD2D> CreateFBCudaMemcpyD2D(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0) {
+  FBCudaMemcpyD2DBuilder builder_(_fbb);
+  builder_.add_size(size);
+  builder_.add_src(src);
+  builder_.add_dst(dst);
+  return builder_.Finish();
+}
+
+struct FBCudaMemcpyAsyncH2D FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaMemcpyAsyncH2DBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DST = 4,
+    VT_SRC = 6,
+    VT_SIZE = 8,
+    VT_STREAM = 10,
+    VT_BUFFER = 12
+  };
+  uint64_t dst() const {
+    return GetField<uint64_t>(VT_DST, 0);
+  }
+  uint64_t src() const {
+    return GetField<uint64_t>(VT_SRC, 0);
+  }
+  uint64_t size() const {
+    return GetField<uint64_t>(VT_SIZE, 0);
+  }
+  uint64_t stream() const {
+    return GetField<uint64_t>(VT_STREAM, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *buffer() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BUFFER);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_DST) &&
+           VerifyField<uint64_t>(verifier, VT_SRC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE) &&
+           VerifyField<uint64_t>(verifier, VT_STREAM) &&
+           VerifyOffset(verifier, VT_BUFFER) &&
+           verifier.VerifyVector(buffer()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaMemcpyAsyncH2DBuilder {
+  typedef FBCudaMemcpyAsyncH2D Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_dst(uint64_t dst) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncH2D::VT_DST, dst, 0);
+  }
+  void add_src(uint64_t src) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncH2D::VT_SRC, src, 0);
+  }
+  void add_size(uint64_t size) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncH2D::VT_SIZE, size, 0);
+  }
+  void add_stream(uint64_t stream) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncH2D::VT_STREAM, stream, 0);
+  }
+  void add_buffer(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer) {
+    fbb_.AddOffset(FBCudaMemcpyAsyncH2D::VT_BUFFER, buffer);
+  }
+  explicit FBCudaMemcpyAsyncH2DBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaMemcpyAsyncH2D> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaMemcpyAsyncH2D>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaMemcpyAsyncH2D> CreateFBCudaMemcpyAsyncH2D(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0,
+    uint64_t stream = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer = 0) {
+  FBCudaMemcpyAsyncH2DBuilder builder_(_fbb);
+  builder_.add_stream(stream);
+  builder_.add_size(size);
+  builder_.add_src(src);
+  builder_.add_dst(dst);
+  builder_.add_buffer(buffer);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudaMemcpyAsyncH2D> CreateFBCudaMemcpyAsyncH2DDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0,
+    uint64_t stream = 0,
+    const std::vector<uint8_t> *buffer = nullptr) {
+  auto buffer__ = buffer ? _fbb.CreateVector<uint8_t>(*buffer) : 0;
+  return CreateFBCudaMemcpyAsyncH2D(
+      _fbb,
+      dst,
+      src,
+      size,
+      stream,
+      buffer__);
+}
+
+struct FBCudaMemcpyAsyncD2H FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaMemcpyAsyncD2HBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DST = 4,
+    VT_SRC = 6,
+    VT_SIZE = 8,
+    VT_STREAM = 10,
+    VT_BUFFER = 12
+  };
+  uint64_t dst() const {
+    return GetField<uint64_t>(VT_DST, 0);
+  }
+  uint64_t src() const {
+    return GetField<uint64_t>(VT_SRC, 0);
+  }
+  uint64_t size() const {
+    return GetField<uint64_t>(VT_SIZE, 0);
+  }
+  uint64_t stream() const {
+    return GetField<uint64_t>(VT_STREAM, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *buffer() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BUFFER);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_DST) &&
+           VerifyField<uint64_t>(verifier, VT_SRC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE) &&
+           VerifyField<uint64_t>(verifier, VT_STREAM) &&
+           VerifyOffset(verifier, VT_BUFFER) &&
+           verifier.VerifyVector(buffer()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaMemcpyAsyncD2HBuilder {
+  typedef FBCudaMemcpyAsyncD2H Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_dst(uint64_t dst) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2H::VT_DST, dst, 0);
+  }
+  void add_src(uint64_t src) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2H::VT_SRC, src, 0);
+  }
+  void add_size(uint64_t size) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2H::VT_SIZE, size, 0);
+  }
+  void add_stream(uint64_t stream) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2H::VT_STREAM, stream, 0);
+  }
+  void add_buffer(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer) {
+    fbb_.AddOffset(FBCudaMemcpyAsyncD2H::VT_BUFFER, buffer);
+  }
+  explicit FBCudaMemcpyAsyncD2HBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaMemcpyAsyncD2H> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaMemcpyAsyncD2H>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaMemcpyAsyncD2H> CreateFBCudaMemcpyAsyncD2H(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0,
+    uint64_t stream = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buffer = 0) {
+  FBCudaMemcpyAsyncD2HBuilder builder_(_fbb);
+  builder_.add_stream(stream);
+  builder_.add_size(size);
+  builder_.add_src(src);
+  builder_.add_dst(dst);
+  builder_.add_buffer(buffer);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudaMemcpyAsyncD2H> CreateFBCudaMemcpyAsyncD2HDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0,
+    uint64_t stream = 0,
+    const std::vector<uint8_t> *buffer = nullptr) {
+  auto buffer__ = buffer ? _fbb.CreateVector<uint8_t>(*buffer) : 0;
+  return CreateFBCudaMemcpyAsyncD2H(
+      _fbb,
+      dst,
+      src,
+      size,
+      stream,
+      buffer__);
+}
+
+struct FBCudaMemcpyAsyncD2D FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaMemcpyAsyncD2DBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DST = 4,
+    VT_SRC = 6,
+    VT_SIZE = 8,
+    VT_STREAM = 10
+  };
+  uint64_t dst() const {
+    return GetField<uint64_t>(VT_DST, 0);
+  }
+  uint64_t src() const {
+    return GetField<uint64_t>(VT_SRC, 0);
+  }
+  uint64_t size() const {
+    return GetField<uint64_t>(VT_SIZE, 0);
+  }
+  uint64_t stream() const {
+    return GetField<uint64_t>(VT_STREAM, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_DST) &&
+           VerifyField<uint64_t>(verifier, VT_SRC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE) &&
+           VerifyField<uint64_t>(verifier, VT_STREAM) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaMemcpyAsyncD2DBuilder {
+  typedef FBCudaMemcpyAsyncD2D Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_dst(uint64_t dst) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2D::VT_DST, dst, 0);
+  }
+  void add_src(uint64_t src) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2D::VT_SRC, src, 0);
+  }
+  void add_size(uint64_t size) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2D::VT_SIZE, size, 0);
+  }
+  void add_stream(uint64_t stream) {
+    fbb_.AddElement<uint64_t>(FBCudaMemcpyAsyncD2D::VT_STREAM, stream, 0);
+  }
+  explicit FBCudaMemcpyAsyncD2DBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaMemcpyAsyncD2D> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaMemcpyAsyncD2D>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaMemcpyAsyncD2D> CreateFBCudaMemcpyAsyncD2D(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t dst = 0,
+    uint64_t src = 0,
+    uint64_t size = 0,
+    uint64_t stream = 0) {
+  FBCudaMemcpyAsyncD2DBuilder builder_(_fbb);
+  builder_.add_stream(stream);
+  builder_.add_size(size);
+  builder_.add_src(src);
+  builder_.add_dst(dst);
+  return builder_.Finish();
+}
+
 struct FBCudaLaunchKernel FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBCudaLaunchKernelBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -707,6 +1052,47 @@ inline flatbuffers::Offset<FBCudaFree> CreateFBCudaFree(
     uint64_t dev_ptr = 0) {
   FBCudaFreeBuilder builder_(_fbb);
   builder_.add_dev_ptr(dev_ptr);
+  return builder_.Finish();
+}
+
+struct FBCudaStreamSynchronize FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaStreamSynchronizeBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_STREAM = 4
+  };
+  uint64_t stream() const {
+    return GetField<uint64_t>(VT_STREAM, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_STREAM) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaStreamSynchronizeBuilder {
+  typedef FBCudaStreamSynchronize Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_stream(uint64_t stream) {
+    fbb_.AddElement<uint64_t>(FBCudaStreamSynchronize::VT_STREAM, stream, 0);
+  }
+  explicit FBCudaStreamSynchronizeBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaStreamSynchronize> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaStreamSynchronize>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaStreamSynchronize> CreateFBCudaStreamSynchronize(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t stream = 0) {
+  FBCudaStreamSynchronizeBuilder builder_(_fbb);
+  builder_.add_stream(stream);
   return builder_.Finish();
 }
 

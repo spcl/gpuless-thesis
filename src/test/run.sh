@@ -9,12 +9,28 @@ basic_targets=(
     unit/manymodule
 )
 
+exec_type=local
+log_level=info
+unit_only=no
+
+if [[ $2 == "debug" ]]; then
+    log_level=debug
+fi
+
+if [[ $2 == "tcp" ]]; then
+    exec_type=tcp
+fi
+
+if [[ $3 == "unit" ]]; then
+    unit_only=yes
+fi
+
+
 run_unit() {
     cuda_bin="$1"
     target="$2"
     printf "running: ${target}\n\n"
-    # SPDLOG_LEVEL=debug CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
-    EXECUTOR_TYPE=local CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
+    SPDLOG_LEVEL=${log_level} EXECUTOR_TYPE=${exec_type} CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
     printf "\n"
 }
 
@@ -35,6 +51,9 @@ for target in ${basic_targets[@]}; do
 done
 
 # real benchmarks
-run_custom 'hotspot' 'run' 'hotspot'
-# run_custom 'dwt2d' 'run' 'dwt2d'
-run_custom 'srad' 'run' 'srad_v1'
+if [[ $unit_only != "yes" ]]; then
+    run_custom 'hotspot' 'run' 'hotspot'
+    run_custom 'srad' 'run' 'srad_v1'
+    # run_custom 'dwt2d' 'run' 'dwt2d'
+fi
+
