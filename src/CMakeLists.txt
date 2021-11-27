@@ -3,7 +3,7 @@ project(gpuless)
 
 enable_language(CUDA)
 
-find_package(CUDAToolkit)
+find_package(CUDAToolkit 11.4)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -46,6 +46,7 @@ add_executable(manager_trace
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
     iberty
+    stdc++fs
     cudnn
     CUDA::cudart
     CUDA::cuda_driver
@@ -82,6 +83,7 @@ add_library(gpuless SHARED
     trace/cubin_analysis.cpp)
 target_link_libraries(gpuless
     iberty
+    stdc++fs
     cudnn
     CUDA::cuda_driver
     CUDA::cudart

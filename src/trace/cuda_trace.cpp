@@ -6,7 +6,8 @@ namespace gpuless {
 
 CudaTrace::CudaTrace() {}
 
-void CudaTrace::record(const std::shared_ptr<AbstractCudaApiCall> &cudaApiCall) {
+void CudaTrace::record(
+    const std::shared_ptr<AbstractCudaApiCall> &cudaApiCall) {
     this->call_stack_.push_back(cudaApiCall);
 }
 

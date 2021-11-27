@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include <vector>
 
 #include <arpa/inet.h>
@@ -17,6 +16,7 @@
 #include "manager_device.hpp"
 
 extern const int BACKLOG;
+static bool g_device_initialized = false;
 
 static gpuless::CudaTrace &getCudaTrace() {
     static gpuless::CudaTrace cuda_trace;
@@ -25,6 +25,10 @@ static gpuless::CudaTrace &getCudaTrace() {
 
 static CudaVirtualDevice &getCudaVirtualDevice() {
     static CudaVirtualDevice cuda_virtual_device;
+    if (!g_device_initialized) {
+        g_device_initialized = true;
+        cuda_virtual_device.initRealDevice();
+    }
     return cuda_virtual_device;
 }
 
@@ -92,14 +96,18 @@ void handle_execute_request(int socket_fd,
 void handle_request(int socket_fd) {
     std::vector<uint8_t> buffer = recv_buffer(socket_fd);
     auto msg = gpuless::GetFBProtocolMessage(buffer.data());
-    if (msg->message_type() != gpuless::FBMessage_FBTraceExecRequest) {
+
+    if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
+        handle_execute_request(socket_fd, msg);
+    } else {
         spdlog::error("Invalid request type");
         return;
     }
-    handle_execute_request(socket_fd, msg);
 }
 
 void manage_device(int device, uint16_t port) {
+    (void)device;
+
     // start server
     int s = socket(AF_INET, SOCK_STREAM, 0);
     if (s < 0) {
@@ -110,7 +118,7 @@ void manage_device(int device, uint16_t port) {
     int opt = 1;
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (void *)&opt, sizeof(opt));
 
-    sockaddr_in sa;
+    sockaddr_in sa{};
     sa.sin_family = AF_INET;
     sa.sin_addr.s_addr = INADDR_ANY;
     sa.sin_port = htons(port);
@@ -128,7 +136,7 @@ void manage_device(int device, uint16_t port) {
     }
 
     int s_new;
-    sockaddr remote_addr;
+    sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(s, &remote_addr, &remote_addrlen))) {
         spdlog::info("manager_device: connection from {}",

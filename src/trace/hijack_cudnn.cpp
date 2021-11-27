@@ -31,8 +31,8 @@ static std::vector<size_t> &getTensorDescriptorToSize() {
     return virtual_cd_to_size;
 }
 
-static void
-recordTensorDescriptorSize(uint64_t virutal_cd, cudnnDataType_t data_type) {
+static void recordTensorDescriptorSize(uint64_t virutal_cd,
+                                       cudnnDataType_t data_type) {
     auto &virtual_cd_to_size = getTensorDescriptorToSize();
     if (virtual_cd_to_size.size() < virutal_cd + 1) {
         virtual_cd_to_size.resize(virutal_cd + 1);
@@ -207,6 +207,46 @@ cudnnConvolutionForward(cudnnHandle_t handle, const void *alpha,
     return CUDNN_STATUS_SUCCESS;
 }
 
+cudnnStatus_t cudnnConvolutionBackwardData(
+    cudnnHandle_t handle, const void *alpha,
+    const cudnnFilterDescriptor_t wDesc, const void *w,
+    const cudnnTensorDescriptor_t dyDesc, const void *dy,
+    const cudnnConvolutionDescriptor_t convDesc,
+    cudnnConvolutionBwdDataAlgo_t algo, void *workSpace,
+    size_t workSpaceSizeInBytes, const void *beta,
+    const cudnnTensorDescriptor_t dxDesc, void *dx) {
+    HIJACK_FN_PROLOGUE();
+    EXIT_NOT_IMPLEMENTED(__func__);
+}
+
+cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(
+    cudnnHandle_t handle, const cudnnFilterDescriptor_t wDesc,
+    const cudnnTensorDescriptor_t dyDesc,
+    const cudnnConvolutionDescriptor_t convDesc,
+    const cudnnTensorDescriptor_t dxDesc, const int requestedAlgoCount,
+    int *returnedAlgoCount, cudnnConvolutionBwdDataAlgoPerf_t *perfResults) {
+    HIJACK_FN_PROLOGUE();
+    EXIT_NOT_IMPLEMENTED(__func__);
+}
+
+cudnnStatus_t cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
+    cudnnHandle_t handle, cudnnBatchNormMode_t mode, cudnnBatchNormOps_t bnOps,
+    const cudnnTensorDescriptor_t xDesc, const cudnnTensorDescriptor_t zDesc,
+    const cudnnTensorDescriptor_t yDesc,
+    const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc,
+    const cudnnActivationDescriptor_t activationDesc, size_t *sizeInBytes) {
+    HIJACK_FN_PROLOGUE();
+    EXIT_NOT_IMPLEMENTED(__func__);
+}
+
+cudnnStatus_t cudnnGetBatchNormalizationTrainingExReserveSpaceSize(
+    cudnnHandle_t handle, cudnnBatchNormMode_t mode, cudnnBatchNormOps_t bnOps,
+    const cudnnActivationDescriptor_t activationDesc,
+    const cudnnTensorDescriptor_t xDesc, size_t *sizeInBytes) {
+    HIJACK_FN_PROLOGUE();
+    EXIT_NOT_IMPLEMENTED(__func__);
+}
+
 cudnnStatus_t cudnnBatchNormalizationForwardInference(
     cudnnHandle_t handle, cudnnBatchNormMode_t mode, const void *alpha,
     const void *beta, const cudnnTensorDescriptor_t xDesc, const void *x,
@@ -230,6 +270,22 @@ cudnnStatus_t cudnnBatchNormalizationForwardInference(
             estimatedMean, estimatedVariance, epsilon));
 
     return CUDNN_STATUS_SUCCESS;
+}
+
+cudnnStatus_t cudnnBatchNormalizationForwardTrainingEx(
+    cudnnHandle_t handle, cudnnBatchNormMode_t mode, cudnnBatchNormOps_t bnOps,
+    const void *alpha, const void *beta, const cudnnTensorDescriptor_t xDesc,
+    const void *xData, const cudnnTensorDescriptor_t zDesc, const void *zData,
+    const cudnnTensorDescriptor_t yDesc, void *yData,
+    const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc,
+    const void *bnScaleData, const void *bnBiasData,
+    double exponentialAverageFactor, void *resultRunningMeanData,
+    void *resultRunningVarianceData, double epsilon, void *saveMean,
+    void *saveInvVariance, const cudnnActivationDescriptor_t activationDesc,
+    void *workspace, size_t workSpaceSizeInBytes, void *reserveSpace,
+    size_t reserveSpaceSizeInBytes) {
+    HIJACK_FN_PROLOGUE();
+    EXIT_NOT_IMPLEMENTED(__func__);
 }
 
 cudnnStatus_t

@@ -16,10 +16,6 @@ class CudaVirtualDevice {
     bool initialized = false;
 
   public:
-    std::map<std::string, uint64_t> symbol_to_module_id_map;
-    std::map<std::string, uint64_t> global_var_to_module_id_map;
-    std::map<uint64_t, std::vector<uint8_t>> module_id_to_fatbin_data_map;
-
     // virtualization of cudnn handles to avoid costly synchronizations
     std::vector<cudnnHandle_t> cudnn_handles_virtual_to_real;
     std::vector<cudnnTensorDescriptor_t>

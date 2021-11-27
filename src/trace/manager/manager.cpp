@@ -1,5 +1,6 @@
 #include <csignal>
 #include <iostream>
+#include <map>
 #include <pthread.h>
 #include <spdlog/cfg/env.h>
 #include <spdlog/spdlog.h>
@@ -21,17 +22,44 @@ static std::vector<std::tuple<int, int, int>> devices = {
 };
 
 static std::atomic<int> next_session_id(1);
-static std::vector<pid_t> child_processes;
+static std::map<int, std::pair<pid_t, short>> child_processes;
+
+pid_t fork_device_manager(int device, int port) {
+    pid_t pid = fork();
+    if (pid == 0) {
+        manage_device(device, port);
+    }
+    return pid;
+}
 
 static void deallocate_session_devices(int32_t session_id) {
     lock_devices.lock();
+    int device;
     for (auto &d : devices) {
         if (std::get<2>(d) == session_id) {
+            device = std::get<0>(d);
             std::get<2>(d) = NO_SESSION_ASSIGNED;
             spdlog::info("Session {} deallocated", session_id);
             break;
         }
     }
+
+    // restart the process to properly reset the CUDA device
+    auto it = child_processes.find(device);
+    if (it == child_processes.end()) {
+        spdlog::error("no process for device {} found", device);
+    }
+
+    spdlog::debug("Killing pid={}", it->second.first);
+    kill(it->second.first, SIGTERM);
+    int wstatus;
+    waitpid(it->first, &wstatus, 0);
+
+    pid_t new_pid = fork_device_manager(device, it->second.second);
+    std::get<0>(it->second) = new_pid;
+    spdlog::info("Device manager restarted for device={}, pid={}, port={}",
+                 device, new_pid, it->second.second);
+
     lock_devices.unlock();
 }
 
@@ -133,8 +161,8 @@ void *handle_request(void *arg) {
 }
 
 void sigint_handler(int signum) {
-    for (const auto p : child_processes) {
-        kill(p, SIGTERM);
+    for (const auto &p : child_processes) {
+        kill(p.second.first, SIGTERM);
         wait(nullptr);
     }
     exit(signum);
@@ -155,12 +183,14 @@ int main(int argc, char **argv) {
         int device = std::get<0>(t);
         int profile = std::get<1>(t);
 
-        pid_t pid = fork();
-        if (pid == 0) {
-            manage_device(device, next_port);
-        } else {
-            child_processes.push_back(pid);
-        }
+        pid_t pid = fork_device_manager(device, next_port);
+        child_processes.emplace(device, std::make_pair(pid, next_port));
+        //        pid_t pid = fork();
+        //        if (pid == 0) {
+        //            manage_device(device, next_port);
+        //        } else {
+        //            child_processes.emplace(device, pid);
+        //        }
 
         spdlog::info("managing device: {} (profile={},pid={},port={})", device,
                      profile, pid, next_port);
@@ -177,7 +207,7 @@ int main(int argc, char **argv) {
     int opt = 1;
     setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, (void *)&opt, sizeof(opt));
 
-    sockaddr_in sa;
+    sockaddr_in sa{};
     sa.sin_family = AF_INET;
     sa.sin_addr.s_addr = INADDR_ANY;
     sa.sin_port = htons(MANAGER_PORT);
@@ -197,7 +227,7 @@ int main(int argc, char **argv) {
     spdlog::info("manager running on port {}", MANAGER_PORT);
 
     int s_new;
-    sockaddr remote_addr;
+    sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(socket_fd, &remote_addr, &remote_addrlen))) {
         spdlog::info("manager: connection from {}",

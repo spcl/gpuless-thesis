@@ -2,6 +2,7 @@
 #define GPULESS_CUDNN_API_CALLS_HPP
 
 #include "cuda_api_calls.hpp"
+#include <cstdint>
 
 namespace gpuless {
 
@@ -301,6 +302,52 @@ class CudnnDestroyTensorDescriptor : public CudaCudnnApiCall {
     flatbuffers::Offset<FBCudaApiCall>
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
+
+class CudnnConvolutionBackwardData : public CudaCudnnApiCall {
+  public:
+    uint64_t virtual_handle;
+    std::vector<uint8_t> alpha;
+    uint64_t virtual_fd_wdesc;
+    const void *w;
+    uint64_t virtual_td_dydesc;
+    const void *dy;
+    uint64_t virtual_cd;
+    cudnnConvolutionBwdDataAlgo_t algo;
+    void *workspace;
+    size_t workspace_size_in_bytes;
+    std::vector<uint8_t> beta;
+    uint64_t virtual_td_dxdesc;
+    void *dx;
+
+    CudnnConvolutionBackwardData(const uint64_t &virtualHandle,
+                                 const std::vector<uint8_t> &alpha,
+                                 const uint64_t &virtualFdWdesc, const void *w,
+                                 const uint64_t &virtualTdDydesc,
+                                 const void *dy, const uint64_t &virtualCd,
+                                 cudnnConvolutionBwdDataAlgo_t algo,
+                                 void *workspace, size_t workspaceSizeInBytes,
+                                 const std::vector<uint8_t> &beta,
+                                 const uint64_t &virtualTdDxdesc, void *dx);
+    explicit CudnnConvolutionBackwardData(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CudnnGetConvolutionBackwardDataAlgorithmV7 : public CudaCudnnApiCall {
+
+};
+
+class CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize
+    : public CudaCudnnApiCall {};
+
+class CudnnGetBatchNormalizationTrainingExReserveSpaceSize
+    : public CudaCudnnApiCall {};
+
+class CudnnBatchNormalizationForwardTrainingEx : public CudaCudnnApiCall {};
 
 } // namespace gpuless
 

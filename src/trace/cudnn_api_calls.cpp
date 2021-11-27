@@ -4,6 +4,7 @@
 #include <dlfcn.h>
 
 #include "libgpuless.hpp"
+#include <cstdint>
 #include <utility>
 
 namespace gpuless {
@@ -116,23 +117,24 @@ uint64_t
 gpuless::CudnnSetTensorNdDescriptor::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetTensorNdDescriptor);
 
-//    std::stringstream ss_dim_a;
-//    std::stringstream ss_stride_a;
-//    ss_dim_a << "[";
-//    ss_stride_a << "[";
-//    for (const auto &d : this->dim_a) {
-//        ss_dim_a << d << ", ";
-//    }
-//    for (const auto &d : this->stride_a) {
-//        ss_stride_a << d << ", ";
-//    }
-//    ss_dim_a << "]";
-//    ss_stride_a << "]";
-//
-//    spdlog::debug("cudnnSetTensorNdDescriptor() [data_type={}, nb_dims={}, "
-//                  "dim_a={}, stride_a={}]",
-//                  this->data_type, this->nb_dims, ss_dim_a.str(),
-//                  ss_stride_a.str());
+    //    std::stringstream ss_dim_a;
+    //    std::stringstream ss_stride_a;
+    //    ss_dim_a << "[";
+    //    ss_stride_a << "[";
+    //    for (const auto &d : this->dim_a) {
+    //        ss_dim_a << d << ", ";
+    //    }
+    //    for (const auto &d : this->stride_a) {
+    //        ss_stride_a << d << ", ";
+    //    }
+    //    ss_dim_a << "]";
+    //    ss_stride_a << "]";
+    //
+    //    spdlog::debug("cudnnSetTensorNdDescriptor() [data_type={}, nb_dims={},
+    //    "
+    //                  "dim_a={}, stride_a={}]",
+    //                  this->data_type, this->nb_dims, ss_dim_a.str(),
+    //                  ss_stride_a.str());
 
     cudnnTensorDescriptor_t td =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td];
@@ -212,15 +214,16 @@ uint64_t
 gpuless::CudnnSetFilterNdDescriptor::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetFilterNdDescriptor);
 
-//    std::stringstream ss;
-//    ss << "[";
-//    for (const auto &d : this->filter_dim_a) {
-//        ss << d << ", ";
-//    }
-//    ss << "]";
-//    spdlog::debug("cudnnSetFilterNdDescriptor() [data_type={}, format={}, "
-//                  "nb_dims={}, filter_dim_a={}]",
-//                  this->data_type, this->format, this->nb_dims, ss.str());
+    //    std::stringstream ss;
+    //    ss << "[";
+    //    for (const auto &d : this->filter_dim_a) {
+    //        ss << d << ", ";
+    //    }
+    //    ss << "]";
+    //    spdlog::debug("cudnnSetFilterNdDescriptor() [data_type={}, format={},
+    //    "
+    //                  "nb_dims={}, filter_dim_a={}]",
+    //                  this->data_type, this->format, this->nb_dims, ss.str());
 
     cudnnFilterDescriptor_t fd =
         vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd];
@@ -366,34 +369,34 @@ uint64_t gpuless::CudnnSetConvolutionNdDescriptor::executeNative(
     CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetConvolutionNdDescriptor);
 
-//    std::stringstream ss_dilation;
-//    std::stringstream ss_filter_stride_a;
-//    std::stringstream ss_pad_a;
-//
-//    ss_dilation << "[";
-//    ss_filter_stride_a << "[";
-//    ss_pad_a << "[";
-//
-//    for (const auto &d : this->dilation) {
-//        ss_dilation << d << ", ";
-//    }
-//    for (const auto &d : this->filter_stride_a) {
-//        ss_filter_stride_a << d << ", ";
-//    }
-//    for (const auto &d : this->pad_a) {
-//        ss_pad_a << d << ", ";
-//    }
-//
-//    ss_dilation << "]";
-//    ss_filter_stride_a << "]";
-//    ss_pad_a << "]";
-//
-//    spdlog::debug("cudnnSetConvolutionNdDescriptor() [array_length={}, "
-//                  "pad_a={}, filter_stride_a={}, dilation={}, "
-//                  "convolution_mode={}, cudnn_data_type={}]",
-//                  this->array_length, ss_pad_a.str(), ss_filter_stride_a.str(),
-//                  ss_dilation.str(), this->convolution_mode,
-//                  this->cudnn_data_type);
+    //    std::stringstream ss_dilation;
+    //    std::stringstream ss_filter_stride_a;
+    //    std::stringstream ss_pad_a;
+    //
+    //    ss_dilation << "[";
+    //    ss_filter_stride_a << "[";
+    //    ss_pad_a << "[";
+    //
+    //    for (const auto &d : this->dilation) {
+    //        ss_dilation << d << ", ";
+    //    }
+    //    for (const auto &d : this->filter_stride_a) {
+    //        ss_filter_stride_a << d << ", ";
+    //    }
+    //    for (const auto &d : this->pad_a) {
+    //        ss_pad_a << d << ", ";
+    //    }
+    //
+    //    ss_dilation << "]";
+    //    ss_filter_stride_a << "]";
+    //    ss_pad_a << "]";
+    //
+    //    spdlog::debug("cudnnSetConvolutionNdDescriptor() [array_length={}, "
+    //                  "pad_a={}, filter_stride_a={}, dilation={}, "
+    //                  "convolution_mode={}, cudnn_data_type={}]",
+    //                  this->array_length, ss_pad_a.str(),
+    //                  ss_filter_stride_a.str(), ss_dilation.str(),
+    //                  this->convolution_mode, this->cudnn_data_type);
 
     cudnnConvolutionDescriptor_t cd =
         vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd];
@@ -773,5 +776,38 @@ CudnnDestroyTensorDescriptor::CudnnDestroyTensorDescriptor(
     auto c = fb_cuda_api_call->api_call_as_FBCudnnDestroyTensorDescriptor();
     this->virtual_td = c->virtual_td();
 }
+
+/*
+ * cudnnConvolutionBackwardData
+ */
+CudnnConvolutionBackwardData::CudnnConvolutionBackwardData(
+    const uint64_t &virtualHandle, const std::vector<uint8_t> &alpha,
+    const uint64_t &virtualFdWdesc, const void *w,
+    const uint64_t &virtualTdDydesc, const void *dy, const uint64_t &virtualCd,
+    cudnnConvolutionBwdDataAlgo_t algo, void *workspace,
+    size_t workspaceSizeInBytes, const std::vector<uint8_t> &beta,
+    const uint64_t &virtualTdDxdesc, void *dx)
+    : virtual_handle(virtualHandle), alpha(alpha),
+      virtual_fd_wdesc(virtualFdWdesc), w(w),
+      virtual_td_dydesc(virtualTdDydesc), dy(dy), virtual_cd(virtualCd),
+      algo(algo), workspace(workspace),
+      workspace_size_in_bytes(workspaceSizeInBytes), beta(beta),
+      virtual_td_dxdesc(virtualTdDxdesc), dx(dx) {}
+
+CudnnConvolutionBackwardData::CudnnConvolutionBackwardData(
+    const FBCudaApiCall *fb_cuda_api_call) {}
+
+uint64_t CudnnConvolutionBackwardData::executeNative(CudaVirtualDevice &vdev) {
+    return 0;
+}
+
+flatbuffers::Offset<FBCudaApiCall> CudnnConvolutionBackwardData::fbSerialize(
+    flatbuffers::FlatBufferBuilder &builder) {
+    return flatbuffers::Offset<FBCudaApiCall>();
+}
+
+/*
+ *
+ */
 
 } // namespace gpuless

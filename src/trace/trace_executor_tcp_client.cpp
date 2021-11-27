@@ -38,13 +38,15 @@ bool TraceExecutorTcp::negotiateSession(
     auto offered_profiles =
         allocate_offer_msg->message_as_AllocateOffer()->available_profiles();
     int32_t selected_profile = offered_profiles->Get(0);
-    this->session_id_ = allocate_offer_msg->message_as_AllocateOffer()->session_id();
+    this->session_id_ =
+        allocate_offer_msg->message_as_AllocateOffer()->session_id();
 
     // choose a profile and send finalize request
     builder.Reset();
     auto allocate_select_msg = CreateProtocolMessage(
         builder, Message_AllocateSelect,
-        CreateAllocateSelect(builder, Status_OK, this->session_id_, selected_profile)
+        CreateAllocateSelect(builder, Status_OK, this->session_id_,
+                             selected_profile)
             .Union());
     builder.Finish(allocate_select_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
@@ -89,13 +91,12 @@ bool TraceExecutorTcp::init(const char *ip, const short port,
 bool TraceExecutorTcp::deallocate() {
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        std::cerr << "failed to open socket" << std::endl;
+        spdlog::error("Failed to open socket");
         return false;
     }
-
     if (connect(socket_fd, (sockaddr *)&this->manager_addr,
                 sizeof(manager_addr)) < 0) {
-        std::cerr << "failed to connect" << std::endl;
+        spdlog::error("Failed to connect");
         return false;
     }
 
