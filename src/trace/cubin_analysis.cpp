@@ -115,12 +115,14 @@ CubinAnalyzer::parsePtxParameters(const std::string &params) {
 bool CubinAnalyzer::isCached(const std::filesystem::path &fname) {
     auto canonical_fname = std::filesystem::canonical(fname);
     std::size_t fname_hash = std::hash<std::string>{}(canonical_fname.string());
+    spdlog::trace("hash({})={}", fname.string(), fname_hash);
     std::filesystem::path home_dir(std::getenv("HOME"));
     std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
     if (!std::filesystem::is_directory(cache_dir)) {
         std::filesystem::create_directories(cache_dir);
     }
     std::filesystem::path cache_file = cache_dir / std::to_string(fname_hash);
+    spdlog::trace("cache_file={}", cache_file.string());
     if (std::filesystem::is_regular_file(cache_file)) {
         return true;
     }
@@ -250,12 +252,13 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
     return true;
 }
 
-bool CubinAnalyzer::analyze(std::vector<std::string> cuda_binaries,
+bool CubinAnalyzer::analyze(const std::vector<std::string>& cuda_binaries,
                             int major_version, int minor_version) {
     bool ret = false;
 
     for (const auto &cbin : cuda_binaries) {
         std::filesystem::path cuda_binary(cbin);
+        spdlog::debug("Analyzing: {}", cuda_binary.string());
         if (!std::filesystem::exists(cuda_binary) ||
             !std::filesystem::is_regular_file(cuda_binary)) {
             std::cerr << "invalid file: " << cbin << std::endl;

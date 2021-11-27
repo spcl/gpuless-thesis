@@ -60,7 +60,7 @@ class CubinAnalyzer {
   public:
     CubinAnalyzer() = default;
     bool isInitialized();
-    bool analyze(std::vector<std::string> cuda_binaries, int major_version,
+    bool analyze(const std::vector<std::string>& cuda_binaries, int major_version,
                  int minor_version);
 
     bool kernel_parameters(std::string &kernel,
