@@ -3,6 +3,9 @@
 #include <time.h>
 #include <assert.h>
 
+#include <chrono>
+#include <iostream>
+
 #ifdef RD_WG_SIZE_0_0                                                            
         #define BLOCK_SIZE RD_WG_SIZE_0_0                                        
 #elif defined(RD_WG_SIZE_0)                                                      
@@ -264,7 +267,7 @@ void usage(int argc, char **argv)
 
 int main(int argc, char** argv)
 {
-  printf("WG size of kernel = %d X %d\n", BLOCK_SIZE, BLOCK_SIZE);
+  /* printf("WG size of kernel = %d X %d\n", BLOCK_SIZE, BLOCK_SIZE); */
 
     run(argc,argv);
 
@@ -273,6 +276,9 @@ int main(int argc, char** argv)
 
 void run(int argc, char** argv)
 {
+
+    auto s = std::chrono::high_resolution_clock::now();
+
     int size;
     int grid_rows,grid_cols;
     float *FilesavingTemp,*FilesavingPower,*MatrixOut; 
@@ -311,8 +317,8 @@ void run(int argc, char** argv)
     if( !FilesavingPower || !FilesavingTemp || !MatrixOut)
         fatal("unable to allocate memory");
 
-    printf("pyramidHeight: %d\ngridSize: [%d, %d]\nborder:[%d, %d]\nblockGrid:[%d, %d]\ntargetBlock:[%d, %d]\n",\
-	pyramid_height, grid_cols, grid_rows, borderCols, borderRows, blockCols, blockRows, smallBlockCol, smallBlockRow);
+    /* printf("pyramidHeight: %d\ngridSize: [%d, %d]\nborder:[%d, %d]\nblockGrid:[%d, %d]\ntargetBlock:[%d, %d]\n",\ */
+	/* pyramid_height, grid_cols, grid_rows, borderCols, borderRows, blockCols, blockRows, smallBlockCol, smallBlockRow); */
 	
     readinput(FilesavingTemp, grid_rows, grid_cols, tfile);
     readinput(FilesavingPower, grid_rows, grid_cols, pfile);
@@ -324,10 +330,10 @@ void run(int argc, char** argv)
 
     cudaMalloc((void**)&MatrixPower, sizeof(float)*size);
     cudaMemcpy(MatrixPower, FilesavingPower, sizeof(float)*size, cudaMemcpyHostToDevice);
-    printf("Start computing the transient temperature\n");
+    /* printf("Start computing the transient temperature\n"); */
     int ret = compute_tran_temp(MatrixPower,MatrixTemp,grid_cols,grid_rows, \
 	 total_iterations,pyramid_height, blockCols, blockRows, borderCols, borderRows);
-	printf("Ending simulation\n");
+	/* printf("Ending simulation\n"); */
     cudaMemcpy(MatrixOut, MatrixTemp[ret], sizeof(float)*size, cudaMemcpyDeviceToHost);
 
     writeoutput(MatrixOut,grid_rows, grid_cols, ofile);
@@ -336,4 +342,8 @@ void run(int argc, char** argv)
     cudaFree(MatrixTemp[0]);
     cudaFree(MatrixTemp[1]);
     free(MatrixOut);
+
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+    printf("%.8f\n", d);
 }
