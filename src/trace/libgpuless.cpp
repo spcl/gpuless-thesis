@@ -357,6 +357,13 @@ cudaError_t cudaSetDevice(int device) {
     return cudaSuccess;
 }
 
+cudaError_t cudaGetDeviceCount(int *count) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    *count = 1;
+    return cudaSuccess;
+}
+
 cudaError_t cudaGetDeviceProperties(cudaDeviceProp *prop, int device) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
