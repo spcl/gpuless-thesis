@@ -40,11 +40,13 @@ static void hijackInit() {
         char *manager_port_env = std::getenv("MANAGER_PORT");
         if (manager_port_env) {
             manager_port = std::stoi(manager_port_env);
+            spdlog::info("MANAGER_PORT={}", manager_port);
         }
 
         char *manager_ip_env = std::getenv("MANAGER_IP");
         if (manager_ip_env) {
             manager_ip = manager_ip_env;
+            spdlog::info("MANAGER_IP={}", manager_ip);
         }
     }
 }
