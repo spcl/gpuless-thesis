@@ -14,6 +14,7 @@
 using namespace gpuless::manager;
 
 extern const int BACKLOG = 5;
+const char *manager_ip = "127.0.0.1";
 
 // nvidia (mig) devices: [device, profile id, session assignment]
 static std::mutex lock_devices;
@@ -22,6 +23,8 @@ static std::vector<std::tuple<int, int, int>> devices = {
 };
 
 static std::atomic<int> next_session_id(1);
+
+// device -> [pid, port]
 static std::map<int, std::pair<pid_t, short>> child_processes;
 
 pid_t fork_device_manager(int device, int port) {
@@ -116,14 +119,22 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     // send confirmation
     int32_t assigned_device = assign_device(selected_profile, session_id);
     auto status = assigned_device < 0 ? Status_FAILURE : Status_OK;
-    // TODO: set correct ip, port
-    uint32_t ip;
-    inet_pton(AF_INET, "127.0.0.1", &ip);
+
+    uint32_t selected_ip;
+    inet_pton(AF_INET, manager_ip, &selected_ip);
+    auto it = child_processes.find(assigned_device);
+    if (it == child_processes.end()) {
+        spdlog::error("assigned_device not in child_processes");
+        std::exit(EXIT_FAILURE);
+    }
+    short selected_port = it->second.second;
+
     builder.Reset();
-    auto allocate_confirm_msg = CreateProtocolMessage(
-        builder, Message_AllocateConfirm,
-        CreateAllocateConfirm(builder, status, session_id, ip, MANAGER_PORT + 1)
-            .Union());
+    auto allocate_confirm_msg =
+        CreateProtocolMessage(builder, Message_AllocateConfirm,
+                              CreateAllocateConfirm(builder, status, session_id,
+                                                    selected_ip, selected_port)
+                                  .Union());
     builder.Finish(allocate_confirm_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 }
@@ -177,6 +188,13 @@ int main(int argc, char **argv) {
     // load log level from env variable SPDLOG_LEVEL
     spdlog::cfg::load_env_levels();
 
+    // set manager ip if given as environment variable
+    char *manager_ip_env = std::getenv("MANAGER_IP");
+    if (manager_ip_env) {
+        manager_ip = manager_ip_env;
+        spdlog::info("MANAGER_IP={}", manager_ip);
+    }
+
     // start device management processes
     short next_port = MANAGER_PORT + 1;
     for (const auto &t : devices) {
@@ -185,13 +203,6 @@ int main(int argc, char **argv) {
 
         pid_t pid = fork_device_manager(device, next_port);
         child_processes.emplace(device, std::make_pair(pid, next_port));
-        //        pid_t pid = fork();
-        //        if (pid == 0) {
-        //            manage_device(device, next_port);
-        //        } else {
-        //            child_processes.emplace(device, pid);
-        //        }
-
         spdlog::info("managing device: {} (profile={},pid={},port={})", device,
                      profile, pid, next_port);
         next_port++;

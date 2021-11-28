@@ -1,4 +1,5 @@
 build
+bin
 kernels/build
 tags
 compile_commands.json

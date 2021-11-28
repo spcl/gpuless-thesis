@@ -23,7 +23,7 @@ const int CUDA_MAJOR_VERSION = 8;
 const int CUDA_MINOR_VERSION = 0;
 
 short manager_port = 8002;
-std::string manager_ip = "127.0.0.1";
+const char *manager_ip = "127.0.0.1";
 
 static bool useTcp = true;
 static void exitHandler();
@@ -94,7 +94,7 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
 
         if (useTcp) {
             trace_executor = std::make_shared<TraceExecutorTcp>();
-            bool r = trace_executor->init(manager_ip.c_str(), manager_port,
+            bool r = trace_executor->init(manager_ip, manager_port,
                                           manager::instance_profile::NO_MIG);
             if (!r) {
                 spdlog::error("Failed to initialize TCP trace executor");
