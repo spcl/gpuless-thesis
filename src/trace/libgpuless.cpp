@@ -377,6 +377,8 @@ cudaError_t cudaGetDeviceProperties(cudaDeviceProp *prop, int device) {
     return cudaSuccess;
 }
 
+cudaError_t cudaGetLastError(void) { return cudaSuccess; }
+
 unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
                                      size_t sharedMem = 0,
                                      struct CUstream_st *stream = 0) {
