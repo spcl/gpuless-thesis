@@ -44,6 +44,9 @@ struct FBCudaFreeBuilder;
 struct FBCudaStreamSynchronize;
 struct FBCudaStreamSynchronizeBuilder;
 
+struct FBCudaGetDeviceProperties;
+struct FBCudaGetDevicePropertiesBuilder;
+
 enum FBPtxParameterType : int8_t {
   FBPtxParameterType_s8 = 0,
   FBPtxParameterType_s16 = 1,
@@ -1094,6 +1097,57 @@ inline flatbuffers::Offset<FBCudaStreamSynchronize> CreateFBCudaStreamSynchroniz
   FBCudaStreamSynchronizeBuilder builder_(_fbb);
   builder_.add_stream(stream);
   return builder_.Finish();
+}
+
+struct FBCudaGetDeviceProperties FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaGetDevicePropertiesBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_PROPERTIES_DATA = 4
+  };
+  const flatbuffers::Vector<uint8_t> *properties_data() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_PROPERTIES_DATA);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_PROPERTIES_DATA) &&
+           verifier.VerifyVector(properties_data()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaGetDevicePropertiesBuilder {
+  typedef FBCudaGetDeviceProperties Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_properties_data(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> properties_data) {
+    fbb_.AddOffset(FBCudaGetDeviceProperties::VT_PROPERTIES_DATA, properties_data);
+  }
+  explicit FBCudaGetDevicePropertiesBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaGetDeviceProperties> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaGetDeviceProperties>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaGetDeviceProperties> CreateFBCudaGetDeviceProperties(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> properties_data = 0) {
+  FBCudaGetDevicePropertiesBuilder builder_(_fbb);
+  builder_.add_properties_data(properties_data);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudaGetDeviceProperties> CreateFBCudaGetDevicePropertiesDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const std::vector<uint8_t> *properties_data = nullptr) {
+  auto properties_data__ = properties_data ? _fbb.CreateVector<uint8_t>(*properties_data) : 0;
+  return CreateFBCudaGetDeviceProperties(
+      _fbb,
+      properties_data__);
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUDARUNTIMECALLS_H_

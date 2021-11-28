@@ -6,6 +6,9 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+struct CUdeviceAttributeValue;
+struct CUdeviceAttributeValueBuilder;
+
 enum CUdeviceAttribute : int32_t {
   CUdeviceAttribute_FLATBUFFER_DEFAULT_VALUE = 0,
   CUdeviceAttribute_CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK = 1,
@@ -409,6 +412,57 @@ inline const char *EnumNameCUdeviceAttribute(CUdeviceAttribute e) {
   if (flatbuffers::IsOutRange(e, CUdeviceAttribute_FLATBUFFER_DEFAULT_VALUE, CUdeviceAttribute_CU_DEVICE_ATTRIBUTE_MAX)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesCUdeviceAttribute()[index];
+}
+
+struct CUdeviceAttributeValue FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef CUdeviceAttributeValueBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_DEVICE_ATTRIBUTE = 4,
+    VT_VALUE = 6
+  };
+  CUdeviceAttribute device_attribute() const {
+    return static_cast<CUdeviceAttribute>(GetField<int32_t>(VT_DEVICE_ATTRIBUTE, 0));
+  }
+  int32_t value() const {
+    return GetField<int32_t>(VT_VALUE, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, VT_DEVICE_ATTRIBUTE) &&
+           VerifyField<int32_t>(verifier, VT_VALUE) &&
+           verifier.EndTable();
+  }
+};
+
+struct CUdeviceAttributeValueBuilder {
+  typedef CUdeviceAttributeValue Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_device_attribute(CUdeviceAttribute device_attribute) {
+    fbb_.AddElement<int32_t>(CUdeviceAttributeValue::VT_DEVICE_ATTRIBUTE, static_cast<int32_t>(device_attribute), 0);
+  }
+  void add_value(int32_t value) {
+    fbb_.AddElement<int32_t>(CUdeviceAttributeValue::VT_VALUE, value, 0);
+  }
+  explicit CUdeviceAttributeValueBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<CUdeviceAttributeValue> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<CUdeviceAttributeValue>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<CUdeviceAttributeValue> CreateCUdeviceAttributeValue(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    CUdeviceAttribute device_attribute = CUdeviceAttribute_FLATBUFFER_DEFAULT_VALUE,
+    int32_t value = 0) {
+  CUdeviceAttributeValueBuilder builder_(_fbb);
+  builder_.add_value(value);
+  builder_.add_device_attribute(device_attribute);
+  return builder_.Finish();
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUDEVICEATTRIBUTES_H_

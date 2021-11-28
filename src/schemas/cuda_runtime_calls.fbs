@@ -104,3 +104,7 @@ table FBCudaFree {
 table FBCudaStreamSynchronize {
     stream:uint64;
 }
+
+table FBCudaGetDeviceProperties {
+    properties_data:[uint8];
+}

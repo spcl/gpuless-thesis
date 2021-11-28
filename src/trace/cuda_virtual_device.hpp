@@ -28,6 +28,10 @@ class CudaVirtualDevice {
     // virtualization of cublas handles to avoid costly synchronizations
     std::vector<cublasHandle_t> cublas_handle_virtual_to_real;
 
+    // stored device attributes
+    size_t device_total_mem = 0;
+    std::vector<int32_t> device_attributes;
+
     std::map<uint64_t, CUmodule> module_registry_;
     std::map<std::string, CUfunction> function_registry_;
     CUdevice device;

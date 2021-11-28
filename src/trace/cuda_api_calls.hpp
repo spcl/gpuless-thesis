@@ -195,6 +195,19 @@ class CudaStreamSynchronize : public CudaRuntimeApiCall {
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
+class CudaGetDeviceProperties : public CudaRuntimeApiCall {
+  public:
+    cudaDeviceProp properties{};
+
+    CudaGetDeviceProperties();
+    explicit CudaGetDeviceProperties(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
 } // namespace gpuless
 
 #endif // __CUDA_API_CALLS_H__

@@ -127,3 +127,8 @@ enum CUdeviceAttribute : int32 {
     CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES               = 119,
     CU_DEVICE_ATTRIBUTE_MAX
 }
+
+table CUdeviceAttributeValue {
+    device_attribute:CUdeviceAttribute;
+    value:int32;
+}

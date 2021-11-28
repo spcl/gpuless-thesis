@@ -421,4 +421,34 @@ CudaStreamSynchronize::CudaStreamSynchronize(
     this->stream = reinterpret_cast<cudaStream_t>(c->stream());
 }
 
+/*
+ * cudaGetDeviceProperties
+ */
+CudaGetDeviceProperties::CudaGetDeviceProperties() = default;
+
+uint64_t CudaGetDeviceProperties::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cudaGetDeviceProperties);
+    return real(&this->properties, 0);
+}
+
+CudaGetDeviceProperties::CudaGetDeviceProperties(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaGetDeviceProperties();
+    std::memcpy(&this->properties, c->properties_data()->data(),
+                sizeof(cudaDeviceProp));
+}
+
+flatbuffers::Offset<FBCudaApiCall>
+CudaGetDeviceProperties::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    std::vector<uint8_t> properites_data(sizeof(cudaDeviceProp));
+    std::memcpy(properites_data.data(), &this->properties,
+                sizeof(cudaDeviceProp));
+    auto api_call = CreateFBCudaGetDeviceProperties(
+        builder, builder.CreateVector(properites_data));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaGetDeviceProperties,
+        api_call.Union());
+    return api_call_union;
+}
+
 } // namespace gpuless

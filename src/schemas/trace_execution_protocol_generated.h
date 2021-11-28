@@ -7,8 +7,9 @@
 #include "flatbuffers/flatbuffers.h"
 
 #include "cublas_calls_generated.h"
-#include "cuda_runtime_calls_generated.h"
+#include "cudevice_attributes_generated.h"
 #include "cudnn_calls_generated.h"
+#include "cuda_runtime_calls_generated.h"
 
 namespace gpuless {
 
@@ -26,6 +27,12 @@ struct FBTraceExecRequestBuilder;
 
 struct FBTraceExecResponse;
 struct FBTraceExecResponseBuilder;
+
+struct FBTraceAttributeRequest;
+struct FBTraceAttributeRequestBuilder;
+
+struct FBTraceAttributeResponse;
+struct FBTraceAttributeResponseBuilder;
 
 struct FBProtocolMessage;
 struct FBProtocolMessageBuilder;
@@ -72,31 +79,32 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCudaLaunchKernel = 8,
   FBCudaApiCallUnion_FBCudaFree = 9,
   FBCudaApiCallUnion_FBCudaStreamSynchronize = 10,
-  FBCudaApiCallUnion_FBCublasCreateV2 = 11,
-  FBCudaApiCallUnion_FBCublasSetStreamV2 = 12,
-  FBCudaApiCallUnion_FBCublasSetMathMode = 13,
-  FBCudaApiCallUnion_FBCublasSgemmV2 = 14,
-  FBCudaApiCallUnion_FBCudnnCreate = 15,
-  FBCudaApiCallUnion_FBCudnnSetStream = 16,
-  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 17,
-  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 18,
-  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 19,
-  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 20,
-  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 21,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 22,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 23,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 24,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 25,
-  FBCudaApiCallUnion_FBCudnnConvolutionForward = 26,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 27,
-  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 28,
-  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 29,
-  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 30,
+  FBCudaApiCallUnion_FBCudaGetDeviceProperties = 11,
+  FBCudaApiCallUnion_FBCublasCreateV2 = 12,
+  FBCudaApiCallUnion_FBCublasSetStreamV2 = 13,
+  FBCudaApiCallUnion_FBCublasSetMathMode = 14,
+  FBCudaApiCallUnion_FBCublasSgemmV2 = 15,
+  FBCudaApiCallUnion_FBCudnnCreate = 16,
+  FBCudaApiCallUnion_FBCudnnSetStream = 17,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 18,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 19,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 20,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 21,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 22,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 23,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 24,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 25,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 26,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 27,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 28,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 29,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 30,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 31,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
   FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[31] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[32] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
@@ -109,6 +117,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[31] {
     FBCudaApiCallUnion_FBCudaLaunchKernel,
     FBCudaApiCallUnion_FBCudaFree,
     FBCudaApiCallUnion_FBCudaStreamSynchronize,
+    FBCudaApiCallUnion_FBCudaGetDeviceProperties,
     FBCudaApiCallUnion_FBCublasCreateV2,
     FBCudaApiCallUnion_FBCublasSetStreamV2,
     FBCudaApiCallUnion_FBCublasSetMathMode,
@@ -134,7 +143,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[31] {
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[32] = {
+  static const char * const names[33] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
@@ -146,6 +155,7 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCudaLaunchKernel",
     "FBCudaFree",
     "FBCudaStreamSynchronize",
+    "FBCudaGetDeviceProperties",
     "FBCublasCreateV2",
     "FBCublasSetStreamV2",
     "FBCublasSetMathMode",
@@ -219,6 +229,10 @@ template<> struct FBCudaApiCallUnionTraits<FBCudaFree> {
 
 template<> struct FBCudaApiCallUnionTraits<FBCudaStreamSynchronize> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaStreamSynchronize;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaGetDeviceProperties> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaGetDeviceProperties;
 };
 
 template<> struct FBCudaApiCallUnionTraits<FBCublasCreateV2> {
@@ -308,31 +322,37 @@ enum FBMessage : uint8_t {
   FBMessage_NONE = 0,
   FBMessage_FBTraceExecRequest = 1,
   FBMessage_FBTraceExecResponse = 2,
+  FBMessage_FBTraceAttributeRequest = 3,
+  FBMessage_FBTraceAttributeResponse = 4,
   FBMessage_MIN = FBMessage_NONE,
-  FBMessage_MAX = FBMessage_FBTraceExecResponse
+  FBMessage_MAX = FBMessage_FBTraceAttributeResponse
 };
 
-inline const FBMessage (&EnumValuesFBMessage())[3] {
+inline const FBMessage (&EnumValuesFBMessage())[5] {
   static const FBMessage values[] = {
     FBMessage_NONE,
     FBMessage_FBTraceExecRequest,
-    FBMessage_FBTraceExecResponse
+    FBMessage_FBTraceExecResponse,
+    FBMessage_FBTraceAttributeRequest,
+    FBMessage_FBTraceAttributeResponse
   };
   return values;
 }
 
 inline const char * const *EnumNamesFBMessage() {
-  static const char * const names[4] = {
+  static const char * const names[6] = {
     "NONE",
     "FBTraceExecRequest",
     "FBTraceExecResponse",
+    "FBTraceAttributeRequest",
+    "FBTraceAttributeResponse",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameFBMessage(FBMessage e) {
-  if (flatbuffers::IsOutRange(e, FBMessage_NONE, FBMessage_FBTraceExecResponse)) return "";
+  if (flatbuffers::IsOutRange(e, FBMessage_NONE, FBMessage_FBTraceAttributeResponse)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesFBMessage()[index];
 }
@@ -347,6 +367,14 @@ template<> struct FBMessageTraits<gpuless::FBTraceExecRequest> {
 
 template<> struct FBMessageTraits<gpuless::FBTraceExecResponse> {
   static const FBMessage enum_value = FBMessage_FBTraceExecResponse;
+};
+
+template<> struct FBMessageTraits<gpuless::FBTraceAttributeRequest> {
+  static const FBMessage enum_value = FBMessage_FBTraceAttributeRequest;
+};
+
+template<> struct FBMessageTraits<gpuless::FBTraceAttributeResponse> {
+  static const FBMessage enum_value = FBMessage_FBTraceAttributeResponse;
 };
 
 bool VerifyFBMessage(flatbuffers::Verifier &verifier, const void *obj, FBMessage type);
@@ -394,6 +422,9 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const FBCudaStreamSynchronize *api_call_as_FBCudaStreamSynchronize() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaStreamSynchronize ? static_cast<const FBCudaStreamSynchronize *>(api_call()) : nullptr;
+  }
+  const FBCudaGetDeviceProperties *api_call_as_FBCudaGetDeviceProperties() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaGetDeviceProperties ? static_cast<const FBCudaGetDeviceProperties *>(api_call()) : nullptr;
   }
   const FBCublasCreateV2 *api_call_as_FBCublasCreateV2() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasCreateV2 ? static_cast<const FBCublasCreateV2 *>(api_call()) : nullptr;
@@ -502,6 +533,10 @@ template<> inline const FBCudaFree *FBCudaApiCall::api_call_as<FBCudaFree>() con
 
 template<> inline const FBCudaStreamSynchronize *FBCudaApiCall::api_call_as<FBCudaStreamSynchronize>() const {
   return api_call_as_FBCudaStreamSynchronize();
+}
+
+template<> inline const FBCudaGetDeviceProperties *FBCudaApiCall::api_call_as<FBCudaGetDeviceProperties>() const {
+  return api_call_as_FBCudaGetDeviceProperties();
 }
 
 template<> inline const FBCublasCreateV2 *FBCudaApiCall::api_call_as<FBCublasCreateV2>() const {
@@ -875,6 +910,111 @@ inline flatbuffers::Offset<FBTraceExecResponse> CreateFBTraceExecResponse(
   return builder_.Finish();
 }
 
+struct FBTraceAttributeRequest FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBTraceAttributeRequestBuilder Builder;
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBTraceAttributeRequestBuilder {
+  typedef FBTraceAttributeRequest Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  explicit FBTraceAttributeRequestBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBTraceAttributeRequest> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBTraceAttributeRequest>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBTraceAttributeRequest> CreateFBTraceAttributeRequest(
+    flatbuffers::FlatBufferBuilder &_fbb) {
+  FBTraceAttributeRequestBuilder builder_(_fbb);
+  return builder_.Finish();
+}
+
+struct FBTraceAttributeResponse FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBTraceAttributeResponseBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_STATUS = 4,
+    VT_TOTAL_MEM = 6,
+    VT_DEVICE_ATTRIBUTES = 8
+  };
+  gpuless::FBStatus status() const {
+    return static_cast<gpuless::FBStatus>(GetField<int8_t>(VT_STATUS, 0));
+  }
+  uint64_t total_mem() const {
+    return GetField<uint64_t>(VT_TOTAL_MEM, 0);
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<CUdeviceAttributeValue>> *device_attributes() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<CUdeviceAttributeValue>> *>(VT_DEVICE_ATTRIBUTES);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int8_t>(verifier, VT_STATUS) &&
+           VerifyField<uint64_t>(verifier, VT_TOTAL_MEM) &&
+           VerifyOffset(verifier, VT_DEVICE_ATTRIBUTES) &&
+           verifier.VerifyVector(device_attributes()) &&
+           verifier.VerifyVectorOfTables(device_attributes()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBTraceAttributeResponseBuilder {
+  typedef FBTraceAttributeResponse Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_status(gpuless::FBStatus status) {
+    fbb_.AddElement<int8_t>(FBTraceAttributeResponse::VT_STATUS, static_cast<int8_t>(status), 0);
+  }
+  void add_total_mem(uint64_t total_mem) {
+    fbb_.AddElement<uint64_t>(FBTraceAttributeResponse::VT_TOTAL_MEM, total_mem, 0);
+  }
+  void add_device_attributes(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<CUdeviceAttributeValue>>> device_attributes) {
+    fbb_.AddOffset(FBTraceAttributeResponse::VT_DEVICE_ATTRIBUTES, device_attributes);
+  }
+  explicit FBTraceAttributeResponseBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBTraceAttributeResponse> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBTraceAttributeResponse>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBTraceAttributeResponse> CreateFBTraceAttributeResponse(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    gpuless::FBStatus status = gpuless::FBStatus_OK,
+    uint64_t total_mem = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<CUdeviceAttributeValue>>> device_attributes = 0) {
+  FBTraceAttributeResponseBuilder builder_(_fbb);
+  builder_.add_total_mem(total_mem);
+  builder_.add_device_attributes(device_attributes);
+  builder_.add_status(status);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBTraceAttributeResponse> CreateFBTraceAttributeResponseDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    gpuless::FBStatus status = gpuless::FBStatus_OK,
+    uint64_t total_mem = 0,
+    const std::vector<flatbuffers::Offset<CUdeviceAttributeValue>> *device_attributes = nullptr) {
+  auto device_attributes__ = device_attributes ? _fbb.CreateVector<flatbuffers::Offset<CUdeviceAttributeValue>>(*device_attributes) : 0;
+  return gpuless::CreateFBTraceAttributeResponse(
+      _fbb,
+      status,
+      total_mem,
+      device_attributes__);
+}
+
 struct FBProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBProtocolMessageBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -894,6 +1034,12 @@ struct FBProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const gpuless::FBTraceExecResponse *message_as_FBTraceExecResponse() const {
     return message_type() == gpuless::FBMessage_FBTraceExecResponse ? static_cast<const gpuless::FBTraceExecResponse *>(message()) : nullptr;
   }
+  const gpuless::FBTraceAttributeRequest *message_as_FBTraceAttributeRequest() const {
+    return message_type() == gpuless::FBMessage_FBTraceAttributeRequest ? static_cast<const gpuless::FBTraceAttributeRequest *>(message()) : nullptr;
+  }
+  const gpuless::FBTraceAttributeResponse *message_as_FBTraceAttributeResponse() const {
+    return message_type() == gpuless::FBMessage_FBTraceAttributeResponse ? static_cast<const gpuless::FBTraceAttributeResponse *>(message()) : nullptr;
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<uint8_t>(verifier, VT_MESSAGE_TYPE) &&
@@ -909,6 +1055,14 @@ template<> inline const gpuless::FBTraceExecRequest *FBProtocolMessage::message_
 
 template<> inline const gpuless::FBTraceExecResponse *FBProtocolMessage::message_as<gpuless::FBTraceExecResponse>() const {
   return message_as_FBTraceExecResponse();
+}
+
+template<> inline const gpuless::FBTraceAttributeRequest *FBProtocolMessage::message_as<gpuless::FBTraceAttributeRequest>() const {
+  return message_as_FBTraceAttributeRequest();
+}
+
+template<> inline const gpuless::FBTraceAttributeResponse *FBProtocolMessage::message_as<gpuless::FBTraceAttributeResponse>() const {
+  return message_as_FBTraceAttributeResponse();
 }
 
 struct FBProtocolMessageBuilder {
@@ -985,6 +1139,10 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
     }
     case FBCudaApiCallUnion_FBCudaStreamSynchronize: {
       auto ptr = reinterpret_cast<const FBCudaStreamSynchronize *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaGetDeviceProperties: {
+      auto ptr = reinterpret_cast<const FBCudaGetDeviceProperties *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case FBCudaApiCallUnion_FBCublasCreateV2: {
@@ -1094,6 +1252,14 @@ inline bool VerifyFBMessage(flatbuffers::Verifier &verifier, const void *obj, FB
     }
     case FBMessage_FBTraceExecResponse: {
       auto ptr = reinterpret_cast<const gpuless::FBTraceExecResponse *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBMessage_FBTraceAttributeRequest: {
+      auto ptr = reinterpret_cast<const gpuless::FBTraceAttributeRequest *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBMessage_FBTraceAttributeResponse: {
+      auto ptr = reinterpret_cast<const gpuless::FBTraceAttributeResponse *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return true;

@@ -4,7 +4,7 @@
 
 namespace gpuless {
 
-CudaTrace::CudaTrace() {}
+CudaTrace::CudaTrace() = default;
 
 void CudaTrace::record(
     const std::shared_ptr<AbstractCudaApiCall> &cudaApiCall) {
@@ -28,11 +28,6 @@ std::vector<std::shared_ptr<AbstractCudaApiCall>> CudaTrace::callStack() {
     return this->call_stack_;
 }
 
-// void CudaTrace::recordFatbinData(std::vector<uint8_t> &data,
-//                                  uint64_t module_id) {
-//     this->new_module_id_to_fatbin_data_map_.emplace_back(module_id, data);
-// }
-
 void CudaTrace::recordFatbinData(void *data, uint64_t size,
                                  uint64_t module_id) {
     this->module_id_to_fatbin_resource_.emplace(
@@ -40,17 +35,12 @@ void CudaTrace::recordFatbinData(void *data, uint64_t size,
 }
 
 void CudaTrace::recordSymbolMapEntry(std::string &symbol, uint64_t module_id) {
-    //    this->new_symbol_to_module_id_.emplace_back(symbol, module_id);
-    //    this->symbol_to_module_id_.emplace(symbol, module_id);
     this->symbol_to_module_id_.emplace(symbol,
                                        std::make_pair(module_id, false));
 }
 
 void CudaTrace::recordGlobalVarMapEntry(std::string &symbol,
-                                        uint64_t module_id) {
-    // TODO
-    //    this->new_global_var_to_module_id_.emplace_back(symbol, module_id);
-}
+                                        uint64_t module_id) {}
 
 std::map<std::string, std::pair<uint64_t, bool>> &
 CudaTrace::getSymbolToModuleId() {

@@ -3,6 +3,8 @@
 level=debug
 if [[ $1 == "info" ]]; then
     level=info
+elif [[ $1 == "trace" ]]; then
+    level=trace
 elif [[ $1 == "off" ]]; then
     level=off
 fi

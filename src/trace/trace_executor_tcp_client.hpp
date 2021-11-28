@@ -13,6 +13,7 @@ class TraceExecutorTcp : public TraceExecutor {
     int32_t session_id_ = -1;
 
     bool negotiateSession(manager::instance_profile profile);
+    bool getDeviceAttributes();
 
   public:
     TraceExecutorTcp();

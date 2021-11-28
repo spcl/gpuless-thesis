@@ -66,6 +66,8 @@ bool TraceExecutorTcp::negotiateSession(
     }
 
     close(socket_fd);
+
+    this->getDeviceAttributes();
     return ret;
 }
 
@@ -153,6 +155,48 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 
     cuda_trace.markSynchronized();
     cuda_trace.setHistoryTop(cuda_api_call);
+
+    close(socket_fd);
+    return true;
+}
+
+bool TraceExecutorTcp::getDeviceAttributes() {
+    spdlog::info("TraceExecutorTcp::getDeviceAttributes()");
+
+    int socket_fd;
+    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        spdlog::error("failed to open socket");
+        return false;
+    }
+    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
+        std::cerr << "failed to connect" << std::endl;
+        spdlog::error("failed to connect");
+        return false;
+    }
+
+    flatbuffers::FlatBufferBuilder builder;
+    auto attr_request =
+        CreateFBProtocolMessage(builder, FBMessage_FBTraceAttributeRequest,
+                                CreateFBTraceAttributeRequest(builder).Union());
+    builder.Finish(attr_request);
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    spdlog::debug("FBTraceAttributeRequest sent");
+
+    std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
+    spdlog::debug("FBTraceAttributeResponse received");
+
+    auto fb_protocol_message_response =
+        GetFBProtocolMessage(response_buffer.data());
+    auto fb_trace_attribute_response =
+        fb_protocol_message_response->message_as_FBTraceAttributeResponse();
+
+    this->device_total_mem = fb_trace_attribute_response->total_mem();
+    this->device_attributes.resize(CU_DEVICE_ATTRIBUTE_MAX);
+    for (const auto &a : *fb_trace_attribute_response->device_attributes()) {
+        int32_t value = a->value();
+        auto dev_attr = static_cast<CUdevice_attribute>(a->device_attribute());
+        this->device_attributes[dev_attr] = value;
+    }
 
     close(socket_fd);
     return true;

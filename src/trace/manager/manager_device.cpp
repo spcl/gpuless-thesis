@@ -32,6 +32,32 @@ static CudaVirtualDevice &getCudaVirtualDevice() {
     return cuda_virtual_device;
 }
 
+void handle_attributes_request(int socket_fd,
+                               const gpuless::FBProtocolMessage *msg) {
+    spdlog::info("Handling device attributes request");
+
+    auto &vdev = getCudaVirtualDevice();
+
+    flatbuffers::FlatBufferBuilder builder;
+    std::vector<flatbuffers::Offset<CUdeviceAttributeValue>> attrs_vec;
+    for (unsigned a = 0; a < vdev.device_attributes.size(); a++) {
+        auto fb_attr = CreateCUdeviceAttributeValue(
+            builder, static_cast<CUdeviceAttribute>(a),
+            vdev.device_attributes[a]);
+        attrs_vec.push_back(fb_attr);
+    }
+
+    auto attrs = gpuless::CreateFBTraceAttributeResponse(
+        builder, gpuless::FBStatus_OK, vdev.device_total_mem,
+        builder.CreateVector(attrs_vec));
+    auto response = gpuless::CreateFBProtocolMessage(
+        builder, gpuless::FBMessage_FBTraceAttributeResponse, attrs.Union());
+    builder.Finish(response);
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+
+    spdlog::debug("FBTraceAttributesResponse sent");
+}
+
 void handle_execute_request(int socket_fd,
                             const gpuless::FBProtocolMessage *msg) {
     spdlog::info("Handling trace execution request");
@@ -99,6 +125,9 @@ void handle_request(int socket_fd) {
 
     if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
         handle_execute_request(socket_fd, msg);
+    } else if (msg->message_type() ==
+               gpuless::FBMessage_FBTraceAttributeRequest) {
+        handle_attributes_request(socket_fd, msg);
     } else {
         spdlog::error("Invalid request type");
         return;
