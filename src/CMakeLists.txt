@@ -56,9 +56,11 @@ target_link_libraries(manager_trace
     CUDA::cublas
     pthread)
 
-add_subdirectory(
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+if (NOT ${_hostname} MATCHES ".*\.cscs\.ch")
+    add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+endif()
 
 add_library(analysis SHARED
     analysis/libcudaanalysis.cpp
