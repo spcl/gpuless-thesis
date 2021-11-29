@@ -139,10 +139,6 @@ CudaTrace &getCudaTrace() {
 static void exitHandler() {
     spdlog::debug("std::atexit()");
 
-    // this does not work, because CUDA exit handler have already destructed
-    // the drive runtime at std::atexit time
-    //    getCudaTrace().synchronize();
-
     // deallocate session
     if (useTcp) {
         auto success = getTraceExecutor()->deallocate();
@@ -383,7 +379,7 @@ unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
                                      size_t sharedMem = 0,
                                      struct CUstream_st *stream = 0) {
     hijackInit();
-    HIJACK_FN_PROLOGUE();
+//    HIJACK_FN_PROLOGUE();
     getCudaCallConfigStack().push({gridDim, blockDim, sharedMem, stream});
     return cudaSuccess;
 }
@@ -391,7 +387,7 @@ unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
 cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
                                        size_t *sharedMem, void *stream) {
     hijackInit();
-    HIJACK_FN_PROLOGUE();
+//    HIJACK_FN_PROLOGUE();
     CudaCallConfig config = getCudaCallConfigStack().top();
     getCudaCallConfigStack().pop();
     *gridDim = config.gridDim;
@@ -403,7 +399,7 @@ cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
 
 void **__cudaRegisterFatBinary(void *fatCubin) {
     hijackInit();
-    HIJACK_FN_PROLOGUE();
+//    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
 
@@ -429,7 +425,7 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
 
 void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
     hijackInit();
-    HIJACK_FN_PROLOGUE();
+//    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
@@ -465,7 +461,7 @@ void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
                        char *deviceAddress, const char *deviceName, int ext,
                        size_t size, int constant, int global) {
     hijackInit();
-    HIJACK_FN_PROLOGUE();
+//    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {

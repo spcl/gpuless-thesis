@@ -259,7 +259,7 @@ bool CubinAnalyzer::analyze(const std::vector<std::string>& cuda_binaries,
         spdlog::debug("Analyzing: {}", cuda_binary.string());
         if (!std::filesystem::exists(cuda_binary) ||
             !std::filesystem::is_regular_file(cuda_binary)) {
-            std::cerr << "invalid file: " << cbin << std::endl;
+            spdlog::error("Invalid file: {}", cbin);
             return false;
         }
 
