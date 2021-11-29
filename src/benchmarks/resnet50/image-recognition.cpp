@@ -1,10 +1,9 @@
-// #include <torch/torch.h>
 #include <torch/script.h>
-
-#include <torchvision/vision.h>
-#include <torchvision/models/resnet.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/opencv.hpp>
+
+#include <chrono>
+#include <iostream>
 
 #define kIMAGE_SIZE 224
 #define kCHANNELS 3
@@ -72,10 +71,16 @@ int recognition(cv::Mat &image) {
 }
 
 int main() {
+    auto s = std::chrono::high_resolution_clock::now();
+
     cv::Mat image;
     if (recognition(image) < 0) {
         std::cout << "image recognition failed" << std::endl;
     }
+
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+    printf("%.8f\n", d);
 
     return 0;
 }
