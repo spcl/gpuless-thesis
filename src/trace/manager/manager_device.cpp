@@ -164,6 +164,9 @@ void manage_device(int device, uint16_t port) {
         exit(EXIT_FAILURE);
     }
 
+    // initialize cuda device pre-emptively
+    getCudaVirtualDevice().initRealDevice();
+
     int s_new;
     sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);

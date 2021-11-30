@@ -49,13 +49,14 @@ class CubinAnalyzer {
 
     bool isCached(const std::filesystem::path &fname);
     bool loadAnalysisFromCache(const std::filesystem::path &fname);
-    static void storeAnalysisToCache(
+    void storeAnalysisToCache(
         const std::filesystem::path &fname,
         const std::map<std::string, std::vector<KParamInfo>> &data);
 
     std::vector<KParamInfo> parsePtxParameters(const std::string &params);
     bool analyzePtx(const std::filesystem::path &path, int major_version,
                     int minor_version);
+    static size_t pathToHash(const std::filesystem::path &path);
 
   public:
     CubinAnalyzer() = default;

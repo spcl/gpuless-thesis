@@ -112,9 +112,13 @@ CubinAnalyzer::parsePtxParameters(const std::string &params) {
     return ps;
 }
 
+size_t CubinAnalyzer::pathToHash(const std::filesystem::path &path) {
+    auto base = path.filename();
+    return std::hash<std::string>{}(base.string());
+}
+
 bool CubinAnalyzer::isCached(const std::filesystem::path &fname) {
-    auto canonical_fname = std::filesystem::canonical(fname);
-    std::size_t fname_hash = std::hash<std::string>{}(canonical_fname.string());
+    std::size_t fname_hash = this->pathToHash(fname);
     std::filesystem::path home_dir(std::getenv("HOME"));
     std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
     if (!std::filesystem::is_directory(cache_dir)) {
@@ -128,8 +132,7 @@ bool CubinAnalyzer::isCached(const std::filesystem::path &fname) {
 }
 
 bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
-    auto canonical_fname = std::filesystem::canonical(fname);
-    std::size_t fname_hash = std::hash<std::string>{}(canonical_fname.string());
+    std::size_t fname_hash = this->pathToHash(fname);
     std::filesystem::path home_dir(std::getenv("HOME"));
     std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
     std::filesystem::path cache_file = cache_dir / std::to_string(fname_hash);
@@ -173,8 +176,7 @@ void CubinAnalyzer::storeAnalysisToCache(
     const std::filesystem::path &fname,
     const std::map<std::string, std::vector<KParamInfo>> &data) {
     spdlog::info("Storing analysis to cache: {}", fname.string());
-    auto canonical_fname = std::filesystem::canonical(fname);
-    std::size_t fname_hash = std::hash<std::string>{}(canonical_fname.string());
+    std::size_t fname_hash = this->pathToHash(fname);
     std::filesystem::path home_dir(std::getenv("HOME"));
     std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
     if (!std::filesystem::is_directory(cache_dir)) {
@@ -215,9 +217,6 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
     std::filesystem::create_directory(tmp_ptx);
 
     std::string arch = std::to_string(major_version * 10 + minor_version);
-    //    std::string cmd = "cd " + tmp_ptx.string() + ";" + "cuobjdump
-    //    -arch=sm_" +
-    //                      arch + " -xptx all " + tmp_bin.string();
     std::string cmd =
         "cd " + tmp_ptx.string() + "; cuobjdump -xptx all " + tmp_bin.string();
     exec(cmd.c_str());
