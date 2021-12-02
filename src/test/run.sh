@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-lib='/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/bin/libgpuless.so'
+lib='/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/build/libgpuless.so'
 
 basic_targets=(
     unit/simple
@@ -49,11 +49,4 @@ run_custom() {
 for target in ${basic_targets[@]}; do
     run_unit "$target" "$target"
 done
-
-# real benchmarks
-if [[ $unit_only != "yes" ]]; then
-    run_custom 'hotspot' 'run' 'hotspot'
-    run_custom 'srad' 'run' 'srad_v1'
-    # run_custom 'dwt2d' 'run' 'dwt2d'
-fi
 

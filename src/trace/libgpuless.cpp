@@ -440,7 +440,7 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
                             int thread_limit, uint3 *tid, uint3 *bid,
                             dim3 *bDim, dim3 *gDim, int *wSize) {
     hijackInit();
-    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
+//    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
