@@ -1,6 +1,18 @@
 cmake_minimum_required(VERSION 3.17)
 project(image-recognition)
 
+cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
+if (${_hostname} MATCHES ".*\.cscs\.ch")
+    set(CMAKE_PREFIX_PATH "$ENV{HOME}/libtorch/share/cmake;$ENV{HOME}/opencv-4.5.4/build")
+
+    set(CUDNN_ROOT $ENV{HOME}/cudnn/cuda)
+    set(CUDNN_LIBRARY $ENV{HOME}/cudnn/cuda/lib64)
+    set(CUDNN_INCLUDE_DIR $ENV{HOME}/cudnn/cuda/include)
+
+    include_directories($ENV{HOME}/miniconda3/include)
+    link_directories($ENV{HOME}/miniconda3/lib)
+endif()
+
 find_package(Torch REQUIRED)
 find_package(OpenCV REQUIRED)
 

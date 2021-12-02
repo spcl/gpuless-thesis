@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.17)
 project(gpuless)
 
 enable_language(CUDA)
-
 find_package(CUDAToolkit 11.4)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -29,8 +28,7 @@ set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
 add_custom_target(
     flatbuffer
     COMMAND make
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/schemas
-    )
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/schemas)
 
 add_executable(manager_trace
     trace/manager/manager.cpp
@@ -56,11 +54,9 @@ target_link_libraries(manager_trace
     CUDA::cublas
     pthread)
 
-if (NOT ${_hostname} MATCHES ".*\.cscs\.ch")
-    add_subdirectory(
-        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
-        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
-endif()
+add_subdirectory(
+    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
+    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
 
 add_library(analysis SHARED
     analysis/libcudaanalysis.cpp
