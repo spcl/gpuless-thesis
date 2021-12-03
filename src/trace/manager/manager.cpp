@@ -143,13 +143,14 @@ void handle_deallocate_request(int socket_fd, const ProtocolMessage *msg) {
     int32_t session_id = msg->message_as_DeallocateRequest()->session_id();
     spdlog::info("deallocation request for session_id={}", session_id);
 
-    deallocate_session_devices(session_id);
     flatbuffers::FlatBufferBuilder builder;
     auto deallocate_confirm_msg = CreateProtocolMessage(
         builder, Message_DeallocateConfirm,
         CreateDeallocateConfirm(builder, Status_OK, session_id).Union());
     builder.Finish(deallocate_confirm_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+
+    deallocate_session_devices(session_id);
 }
 
 void *handle_request(void *arg) {
