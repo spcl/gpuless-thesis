@@ -6,47 +6,55 @@ import sys
 import re
 import pandas as pd
 import numpy
+import re
 
-benchmarks = ['latency', 'srad_v1', 'hotspot', 'resnet50']
-cols = ['benchmark', 'type', 'perc_diff_to_native']
+bechmark_native_median = {}
+for fname in os.listdir('data'):
+    r = r'benchmark-([a-zA-Z0-9_]*)-native-([a-zA-Z0-9_]*)-.*'
+    m = re.search(r, fname)
+    if (m):
+        f = open('data/' + fname)
+        lines_float = [float(l.rstrip()) for l in f.readlines()]
+        bechmark_native_median[m.group(1)] = numpy.median(lines_float)
+        f.close()
 
 v = []
-for b in benchmarks:
-    f_native = open(b + '/native.out')
-    f_remote = open(b + '/remote.out')
-    f_local = open(b + '/local.out')
+for fname in os.listdir('data'):
+    f = open('data/' + fname)
+    lines = [l.rstrip() for l in f.readlines()]
 
-    l_native = [l.rstrip() for l in f_native.readlines()]
-    l_remote = [l.rstrip() for l in f_remote.readlines()]
-    l_local = [l.rstrip() for l in f_local.readlines()]
+    r = r'benchmark-([a-zA-Z0-9_]*)-([a-zA-Z0-9_]*)-([a-zA-Z0-9_]*)-.*'
+    m = re.search(r, fname)
+    benchmark_name = m.group(1)
+    benchmark_type = m.group(2)
+    benchmark_flag = m.group(3)
 
-    native_all = []
-    for l in l_native:
-        native_all.append(float(l))
-    native_median = numpy.median(native_all)
+    if benchmark_type == 'remote' and benchmark_flag == 'local':
+        native_median = bechmark_native_median[benchmark_name]
+        for l in lines:
+            perc_diff = (float(l) - native_median) / native_median * 100.0
+            v.append([benchmark_name, 'Local TCP', perc_diff])
+    elif benchmark_type == 'remote' and benchmark_flag == 'remote':
+        native_median = bechmark_native_median[benchmark_name]
+        for l in lines:
+            perc_diff = (float(l) - native_median) / native_median * 100.0
+            v.append([benchmark_name, 'Remote TCP', perc_diff])
 
-    for l in l_remote:
-        perc_diff = (float(l) - native_median) / native_median * 100.0
-        v.append([b, 'remote-tcp', perc_diff])
+    f.close()
 
-    for l in l_local:
-        perc_diff = (float(l) - native_median) / native_median * 100.0
-        v.append([b, 'local-tcp', perc_diff])
-
-    f_native.close()
-    f_remote.close()
-    f_local.close()
-
+cols = ['benchmark', 'type', 'perc_diff_to_native']
 bench_data = pd.DataFrame(data=v, columns=cols)
+
+hue_order = ['Local TCP', 'Remote TCP']
+order = ['latency', 'hotspot', 'srad_v1', 'resnet50']
 
 sns.set(rc={"figure.figsize": (8.5, 6.5)})
 sns.set_theme(style='whitegrid')
-
-hue_order=['local-tcp', 'remote-tcp']
 ax = sns.barplot(x='benchmark',
                  y='perc_diff_to_native',
                  hue='type',
                  hue_order=hue_order,
+                 order=order,
                  orient='v',
                  data=bench_data,
                  ci=95)
@@ -54,6 +62,6 @@ ax.set_ylabel('Difference', rotation='horizontal')
 ax.set_xlabel('Benchmark')
 ax.yaxis.set_label_coords(-0.06, 1.02)
 ax.yaxis.set_major_formatter(mtick.PercentFormatter())
-ax.legend(loc='upper right')
+ax.legend(loc='lower right')
 ax.set_title('Traced remote execution time vs. median native performance\nNVIDIA A100, n=100, 95% confidence')
-ax.figure.savefig('trace-bench.pdf')
+ax.figure.savefig('trace-percentage.pdf')
