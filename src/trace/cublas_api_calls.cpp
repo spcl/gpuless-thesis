@@ -1,4 +1,6 @@
 #include "cublas_api_calls.hpp"
+
+#include <utility>
 #include "../schemas/cublas_calls_generated.h"
 #include "../schemas/trace_execution_protocol_generated.h"
 #include "libgpuless.hpp"
@@ -275,8 +277,8 @@ flatbuffers::Offset<FBCudaApiCall> CublasLtMatmulDescDestroy::fbSerialize(
 
 CublasLtMatmulDescSetAttribute::CublasLtMatmulDescSetAttribute(
     uint64_t virtualMmd, cublasLtMatmulDescAttributes_t attr,
-    const std::vector<uint8_t> &buf)
-    : virtual_mmd(virtualMmd), attr(attr), buf(buf) {}
+    std::vector<uint8_t> buf)
+    : virtual_mmd(virtualMmd), attr(attr), buf(std::move(buf)) {}
 
 CublasLtMatmulDescSetAttribute::CublasLtMatmulDescSetAttribute(
     const FBCudaApiCall *fb_cuda_api_call) {
@@ -477,8 +479,8 @@ flatbuffers::Offset<FBCudaApiCall> CublasLtMatrixLayoutDestroy::fbSerialize(
  */
 CublasLtMatrixLayoutSetAttribute::CublasLtMatrixLayoutSetAttribute(
     uint64_t virtualMl, cublasLtMatrixLayoutAttribute_t attr,
-    const std::vector<uint8_t> &buf)
-    : virtual_ml(virtualMl), attr(attr), buf(buf) {}
+    std::vector<uint8_t> buf)
+    : virtual_ml(virtualMl), attr(attr), buf(std::move(buf)) {}
 
 CublasLtMatrixLayoutSetAttribute::CublasLtMatrixLayoutSetAttribute(
     const FBCudaApiCall *fb_cuda_api_call) {

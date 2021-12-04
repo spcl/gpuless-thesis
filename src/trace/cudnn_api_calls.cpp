@@ -901,8 +901,6 @@ uint64_t CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative(
     static auto real =
         GET_REAL_FUNCTION(cudnnGetConvolutionBackwardDataAlgorithm_v7);
 
-    spdlog::info("CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative()");
-
     cudnnHandle_t handle =
         vdev.cudnn_handles_virtual_to_real[this->virtual_handle];
     cudnnFilterDescriptor_t wdesc =
@@ -915,12 +913,9 @@ uint64_t CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative(
     cudnnTensorDescriptor_t dxdesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dxdesc];
 
-    auto r = real(handle, wdesc, dydesc, convdesc, dxdesc,
+    return real(handle, wdesc, dydesc, convdesc, dxdesc,
                   this->requested_algo_count, &this->returned_algo_count,
                   this->perf_results.data());
-    spdlog::info("CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative() "
-                 "successful");
-    return r;
 }
 
 flatbuffers::Offset<FBCudaApiCall>

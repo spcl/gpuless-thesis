@@ -379,7 +379,7 @@ unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
                                      size_t sharedMem = 0,
                                      struct CUstream_st *stream = 0) {
     hijackInit();
-//    HIJACK_FN_PROLOGUE();
+    //    HIJACK_FN_PROLOGUE();
     getCudaCallConfigStack().push({gridDim, blockDim, sharedMem, stream});
     return cudaSuccess;
 }
@@ -387,7 +387,7 @@ unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
 cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
                                        size_t *sharedMem, void *stream) {
     hijackInit();
-//    HIJACK_FN_PROLOGUE();
+    //    HIJACK_FN_PROLOGUE();
     CudaCallConfig config = getCudaCallConfigStack().top();
     getCudaCallConfigStack().pop();
     *gridDim = config.gridDim;
@@ -399,7 +399,7 @@ cudaError_t __cudaPopCallConfiguration(dim3 *gridDim, dim3 *blockDim,
 
 void **__cudaRegisterFatBinary(void *fatCubin) {
     hijackInit();
-//    HIJACK_FN_PROLOGUE();
+    //    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
 
@@ -425,7 +425,7 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
 
 void __cudaRegisterFatBinaryEnd(void **fatCubinHandle) {
     hijackInit();
-//    HIJACK_FN_PROLOGUE();
+    //    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
@@ -440,7 +440,7 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
                             int thread_limit, uint3 *tid, uint3 *bid,
                             dim3 *bDim, dim3 *gDim, int *wSize) {
     hijackInit();
-//    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
+    //    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
@@ -461,7 +461,7 @@ void __cudaRegisterVar(void **fatCubinHandle, char *hostVar,
                        char *deviceAddress, const char *deviceName, int ext,
                        size_t size, int constant, int global) {
     hijackInit();
-//    HIJACK_FN_PROLOGUE();
+    //    HIJACK_FN_PROLOGUE();
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
@@ -532,8 +532,23 @@ CUresult cuDeviceGetAttribute(int *pi, CUdevice_attribute attrib,
                               CUdevice dev) {
     hijackInit();
     spdlog::trace("{}()", __func__);
-
     *pi = getTraceExecutor()->deviceAttribute(attrib);
+    return CUDA_SUCCESS;
+}
+
+CUresult cuDriverGetVersion(int *driverVersion) {
+    hijackInit();
+    spdlog::trace("{}()", __func__);
+    *driverVersion = 11400;
+    return CUDA_SUCCESS;
+}
+
+CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int *flags,
+                                    int *active) {
+    hijackInit();
+    spdlog::trace("{}()", __func__);
+    *flags = 0;
+    *active = 1;
     return CUDA_SUCCESS;
 }
 
@@ -549,6 +564,8 @@ CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
     LINK_CU_FUNCTION(symbol, cuDeviceGetName);
     LINK_CU_FUNCTION(symbol, cuDeviceTotalMem);
     LINK_CU_FUNCTION(symbol, cuDeviceGetAttribute);
+    LINK_CU_FUNCTION(symbol, cuDriverGetVersion);
+    LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxGetState);
 
     //    if (strncmp(symbol, "cu", 2) == 0) {
     //        spdlog::debug("cuGetProcAddress({}): symbol not implemented",

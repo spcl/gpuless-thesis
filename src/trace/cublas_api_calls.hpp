@@ -134,7 +134,7 @@ class CublasLtMatmulDescSetAttribute : public CublasApiCAll {
 
     CublasLtMatmulDescSetAttribute(uint64_t virtualMmd,
                                    cublasLtMatmulDescAttributes_t attr,
-                                   const std::vector<uint8_t> &buf);
+                                   std::vector<uint8_t> buf);
     explicit CublasLtMatmulDescSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
@@ -215,7 +215,7 @@ class CublasLtMatrixLayoutSetAttribute : public CublasApiCAll {
 
     CublasLtMatrixLayoutSetAttribute(uint64_t virtualMl,
                                      cublasLtMatrixLayoutAttribute_t attr,
-                                     const std::vector<uint8_t> &buf);
+                                     std::vector<uint8_t> buf);
     explicit CublasLtMatrixLayoutSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
