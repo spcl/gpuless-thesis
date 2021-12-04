@@ -17,7 +17,7 @@ bool TraceExecutorLocal::init(const char *ip, const short port,
 
 bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     this->synchronize_counter_++;
-    spdlog::info(
+    SPDLOG_INFO(
         "TraceExecutorLocal::synchronize() [synchronize_counter={}, size={}]",
         this->synchronize_counter_, cuda_trace.callStack().size());
 
@@ -36,7 +36,7 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     for (const auto &rmod_id : required_modules) {
         auto it = cuda_trace.getModuleIdToFatbinResource().find(rmod_id);
         if (it == cuda_trace.getModuleIdToFatbinResource().end()) {
-            spdlog::error("Required module {} unknown");
+            SPDLOG_ERROR("Required module {} unknown");
             return false;
         }
 
@@ -48,14 +48,14 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
             checkCudaErrors(cuModuleLoadData(&mod, resource_ptr));
             vdev.module_registry_.emplace(rmod_id, mod);
             std::get<2>(it->second) = true;
-            spdlog::debug("Loading module: {}", rmod_id);
+            SPDLOG_DEBUG("Loading module: {}", rmod_id);
         }
     }
 
     for (const auto &rfunc : required_functions) {
         auto it = cuda_trace.getSymbolToModuleId().find(rfunc);
         if (it == cuda_trace.getSymbolToModuleId().end()) {
-            spdlog::error("Required function {} unknown");
+            SPDLOG_ERROR("Required function {} unknown");
         }
 
         auto t = it->second;
@@ -66,18 +66,18 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
             auto mod_it =
                 cuda_trace.getModuleIdToFatbinResource().find(module_id);
             if (mod_it == cuda_trace.getModuleIdToFatbinResource().end()) {
-                spdlog::error("Unknown module {} for function", module_id,
+                SPDLOG_ERROR("Unknown module {} for function", module_id,
                               rfunc);
             }
 
             bool module_is_loaded = std::get<2>(mod_it->second);
             if (!module_is_loaded) {
-                spdlog::error("Module {} not previously loaded", module_id);
+                SPDLOG_ERROR("Module {} not previously loaded", module_id);
             }
 
             auto mod_reg_it = vdev.module_registry_.find(module_id);
             if (mod_reg_it == vdev.module_registry_.end()) {
-                spdlog::error("Module {} not in registry", module_id);
+                SPDLOG_ERROR("Module {} not in registry", module_id);
             }
             CUmodule module = mod_reg_it->second;
 
@@ -85,15 +85,15 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
             checkCudaErrors(cuModuleGetFunction(&func, module, rfunc.c_str()));
             vdev.function_registry_.emplace(rfunc, func);
             std::get<1>(t) = true;
-            spdlog::debug("Function loaded: {}", rfunc);
+            SPDLOG_DEBUG("Function loaded: {}", rfunc);
         }
     }
 
     for (auto &apiCall : cuda_trace.callStack()) {
-        spdlog::debug("Executing: {}", apiCall->typeName());
+        SPDLOG_DEBUG("Executing: {}", apiCall->typeName());
         uint64_t err = apiCall->executeNative(vdev);
         if (err != 0) {
-            spdlog::error("Failed to execute call trace: {} ({})",
+            SPDLOG_ERROR("Failed to execute call trace: {} ({})",
                           apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }

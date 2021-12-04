@@ -12,13 +12,13 @@ bool TraceExecutorTcp::negotiateSession(
     gpuless::manager::instance_profile profile) {
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        spdlog::error("failed to open socket");
+        SPDLOG_ERROR("failed to open socket");
         return false;
     }
 
     if (connect(socket_fd, (sockaddr *)&this->manager_addr,
                 sizeof(manager_addr)) < 0) {
-        spdlog::error("failed to connect");
+        SPDLOG_ERROR("failed to connect");
         return false;
     }
 
@@ -77,15 +77,15 @@ bool TraceExecutorTcp::init(const char *ip, const short port,
     manager_addr.sin_family = AF_INET;
     manager_addr.sin_port = htons(port);
     if (inet_pton(AF_INET, ip, &manager_addr.sin_addr) < 0) {
-        spdlog::error("Invalid IP address: {}", ip);
+        SPDLOG_ERROR("Invalid IP address: {}", ip);
         return false;
     }
 
     bool r = this->negotiateSession(profile);
     if (r) {
-        spdlog::info("Session with {}:{} negotiated", ip, port);
+        SPDLOG_INFO("Session with {}:{} negotiated", ip, port);
     } else {
-        spdlog::error("Failed to negotiate session with {}:{}", ip, port);
+        SPDLOG_ERROR("Failed to negotiate session with {}:{}", ip, port);
     }
     return r;
 }
@@ -93,12 +93,12 @@ bool TraceExecutorTcp::init(const char *ip, const short port,
 bool TraceExecutorTcp::deallocate() {
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        spdlog::error("Failed to open socket");
+        SPDLOG_ERROR("Failed to open socket");
         return false;
     }
     if (connect(socket_fd, (sockaddr *)&this->manager_addr,
                 sizeof(manager_addr)) < 0) {
-        spdlog::error("Failed to connect");
+        SPDLOG_ERROR("Failed to connect");
         return false;
     }
 
@@ -110,7 +110,7 @@ bool TraceExecutorTcp::deallocate() {
     builder.Finish(deallocate_request_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 
-    spdlog::debug("Deallocate request sent");
+    SPDLOG_DEBUG("Deallocate request sent");
 
     std::vector<uint8_t> buffer = recv_buffer(socket_fd);
     auto deallocate_confirm_msg = GetProtocolMessage(buffer.data());
@@ -122,18 +122,18 @@ bool TraceExecutorTcp::deallocate() {
 
 bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     this->synchronize_counter_++;
-    spdlog::info(
+    SPDLOG_INFO(
         "TraceExecutorTcp::synchronize() [synchronize_counter={}, size={}]",
         this->synchronize_counter_, cuda_trace.callStack().size());
 
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        spdlog::error("failed to open socket");
+        SPDLOG_ERROR("failed to open socket");
         return false;
     }
     if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
         std::cerr << "failed to connect" << std::endl;
-        spdlog::error("failed to connect");
+        SPDLOG_ERROR("failed to connect");
         return false;
     }
 
@@ -141,11 +141,11 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     flatbuffers::FlatBufferBuilder builder;
     CudaTraceConverter::traceToExecRequest(cuda_trace, builder);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
-    spdlog::info("Trace execution request sent");
+    SPDLOG_INFO("Trace execution request sent");
 
     // receive trace execution response
     std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
-    spdlog::info("Trace execution response received");
+    SPDLOG_INFO("Trace execution response received");
     auto fb_protocol_message_response =
         GetFBProtocolMessage(response_buffer.data());
     auto fb_trace_exec_response =
@@ -158,21 +158,21 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 
     close(socket_fd);
 
-    spdlog::info("TraceExecutorTcp::synchronize() successful");
+    SPDLOG_INFO("TraceExecutorTcp::synchronize() successful");
     return true;
 }
 
 bool TraceExecutorTcp::getDeviceAttributes() {
-    spdlog::info("TraceExecutorTcp::getDeviceAttributes()");
+    SPDLOG_INFO("TraceExecutorTcp::getDeviceAttributes()");
 
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        spdlog::error("failed to open socket");
+        SPDLOG_ERROR("failed to open socket");
         return false;
     }
     if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
         std::cerr << "failed to connect" << std::endl;
-        spdlog::error("failed to connect");
+        SPDLOG_ERROR("failed to connect");
         return false;
     }
 
@@ -182,10 +182,10 @@ bool TraceExecutorTcp::getDeviceAttributes() {
                                 CreateFBTraceAttributeRequest(builder).Union());
     builder.Finish(attr_request);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
-    spdlog::debug("FBTraceAttributeRequest sent");
+    SPDLOG_DEBUG("FBTraceAttributeRequest sent");
 
     std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
-    spdlog::debug("FBTraceAttributeResponse received");
+    SPDLOG_DEBUG("FBTraceAttributeResponse received");
 
     auto fb_protocol_message_response =
         GetFBProtocolMessage(response_buffer.data());

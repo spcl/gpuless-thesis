@@ -32,12 +32,12 @@
 
 #define HIJACK_FN_PROLOGUE()                                                   \
     do {                                                                       \
-        spdlog::info("{}() [pid={}]", __func__, getpid());                     \
+        SPDLOG_INFO("{}() [pid={}]", __func__, getpid());                     \
     } while (0)
 
 #define EXIT_NOT_IMPLEMENTED(fn)                                               \
     do {                                                                       \
-        spdlog::error("not implemented: {}", fn);                              \
+        SPDLOG_ERROR("not implemented: {}", fn);                              \
         std::exit(EXIT_FAILURE);                                               \
     } while (0)
 

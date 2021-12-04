@@ -34,7 +34,7 @@ static CudaVirtualDevice &getCudaVirtualDevice() {
 
 void handle_attributes_request(int socket_fd,
                                const gpuless::FBProtocolMessage *msg) {
-    spdlog::info("Handling device attributes request");
+    SPDLOG_INFO("Handling device attributes request");
 
     auto &vdev = getCudaVirtualDevice();
 
@@ -55,51 +55,51 @@ void handle_attributes_request(int socket_fd,
     builder.Finish(response);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
 
-    spdlog::debug("FBTraceAttributesResponse sent");
+    SPDLOG_DEBUG("FBTraceAttributesResponse sent");
 }
 
 void handle_execute_request(int socket_fd,
                             const gpuless::FBProtocolMessage *msg) {
-    spdlog::info("Handling trace execution request");
+    SPDLOG_INFO("Handling trace execution request");
     auto &cuda_trace = getCudaTrace();
     auto &vdev = getCudaVirtualDevice();
 
     // load new modules
     auto new_modules = msg->message_as_FBTraceExecRequest()->new_modules();
-    spdlog::info("Loading {} new modules", new_modules->size());
+    SPDLOG_INFO("Loading {} new modules", new_modules->size());
     for (const auto &m : *new_modules) {
         CUmodule mod;
         checkCudaErrors(cuModuleLoadData(&mod, m->buffer()->data()));
         vdev.module_registry_.emplace(m->module_id(), mod);
-        spdlog::debug("Loaded module {}", m->module_id());
+        SPDLOG_DEBUG("Loaded module {}", m->module_id());
     }
 
     // load new functions
     auto new_functions = msg->message_as_FBTraceExecRequest()->new_functions();
-    spdlog::info("Loading {} new functions", new_functions->size());
+    SPDLOG_INFO("Loading {} new functions", new_functions->size());
     for (const auto &m : *new_functions) {
         auto mod_reg_it = vdev.module_registry_.find(m->module_id());
         if (mod_reg_it == vdev.module_registry_.end()) {
-            spdlog::error("Module {} not in registry", m->module_id());
+            SPDLOG_ERROR("Module {} not in registry", m->module_id());
         }
         CUmodule mod = mod_reg_it->second;
         CUfunction func;
         checkCudaErrors(cuModuleGetFunction(&func, mod, m->symbol()->c_str()));
         vdev.function_registry_.emplace(m->symbol()->str(), func);
-        spdlog::debug("Function loaded: {}", m->symbol()->str());
+        SPDLOG_DEBUG("Function loaded: {}", m->symbol()->str());
     }
 
     // execute CUDA api calls
     auto call_stack = gpuless::CudaTraceConverter::execRequestToTrace(
         msg->message_as_FBTraceExecRequest());
     cuda_trace.setCallStack(call_stack);
-    spdlog::info("Execution trace of size {}", call_stack.size());
+    SPDLOG_INFO("Execution trace of size {}", call_stack.size());
 
     for (auto &apiCall : cuda_trace.callStack()) {
-        spdlog::debug("Executing: {}", apiCall->typeName());
+        SPDLOG_DEBUG("Executing: {}", apiCall->typeName());
         uint64_t err = apiCall->executeNative(vdev);
         if (err != 0) {
-            spdlog::error("Failed to execute call trace: {} ({})",
+            SPDLOG_ERROR("Failed to execute call trace: {} ({})",
                           apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
@@ -129,7 +129,7 @@ void handle_request(int socket_fd) {
                gpuless::FBMessage_FBTraceAttributeRequest) {
         handle_attributes_request(socket_fd, msg);
     } else {
-        spdlog::error("Invalid request type");
+        SPDLOG_ERROR("Invalid request type");
         return;
     }
 }
@@ -140,7 +140,7 @@ void manage_device(int device, uint16_t port) {
     // start server
     int s = socket(AF_INET, SOCK_STREAM, 0);
     if (s < 0) {
-        spdlog::error("failed to open socket");
+        SPDLOG_ERROR("failed to open socket");
         exit(EXIT_FAILURE);
     }
 
@@ -153,7 +153,7 @@ void manage_device(int device, uint16_t port) {
     sa.sin_port = htons(port);
 
     if (bind(s, (sockaddr *)&sa, sizeof(sa)) < 0) {
-        spdlog::error("failed to bind socket");
+        SPDLOG_ERROR("failed to bind socket");
         close(s);
         exit(EXIT_FAILURE);
     }
@@ -171,7 +171,7 @@ void manage_device(int device, uint16_t port) {
     sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(s, &remote_addr, &remote_addrlen))) {
-        spdlog::info("manager_device: connection from {}",
+        SPDLOG_INFO("manager_device: connection from {}",
                      inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
 
         // synchronous request handler

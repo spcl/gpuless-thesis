@@ -6,7 +6,7 @@ void CudaVirtualDevice::initRealDevice() {
         return;
     }
 
-    spdlog::info("CudaVirtualDevice: initializing real device");
+    SPDLOG_INFO("CudaVirtualDevice: initializing real device");
     checkCudaErrors(cuInit(0));
     checkCudaErrors(cuDeviceGet(&this->device, 0));
     checkCudaErrors(cuCtxCreate(&this->context, 0, device));
@@ -19,11 +19,11 @@ void CudaVirtualDevice::initRealDevice() {
         checkCudaErrors(cuDeviceGetAttribute(&this->device_attributes[i],
                                              static_cast<CUdevice_attribute>(i),
                                              this->device));
-        spdlog::trace("Device attribute {}: {}", i, this->device_attributes[i]);
+        SPDLOG_TRACE("Device attribute {}: {}", i, this->device_attributes[i]);
     }
 
     checkCudaErrors(cuDeviceTotalMem(&this->device_total_mem, this->device));
-    spdlog::trace("Device TotalMem: {}", this->device_total_mem);
+    SPDLOG_TRACE("Device TotalMem: {}", this->device_total_mem);
 
     this->initialized = true;
 }

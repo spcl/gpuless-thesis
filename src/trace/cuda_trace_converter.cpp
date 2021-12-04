@@ -10,7 +10,7 @@ void CudaTraceConverter::traceToExecRequest(
     CudaTrace &cuda_trace, flatbuffers::FlatBufferBuilder &builder) {
     std::vector<flatbuffers::Offset<FBCudaApiCall>> fb_call_trace;
     for (auto &c : cuda_trace.callStack()) {
-        spdlog::debug("Serializing api call: {}", c->typeName());
+        SPDLOG_DEBUG("Serializing api call: {}", c->typeName());
         fb_call_trace.push_back(c->fbSerialize(builder));
     }
 
@@ -29,7 +29,7 @@ void CudaTraceConverter::traceToExecRequest(
     for (const auto &rmod_id : required_modules) {
         auto it = cuda_trace.getModuleIdToFatbinResource().find(rmod_id);
         if (it == cuda_trace.getModuleIdToFatbinResource().end()) {
-            spdlog::error("Required module {} unknown");
+            SPDLOG_ERROR("Required module {} unknown");
         }
 
         const void *resource_ptr = std::get<0>(it->second);
@@ -48,7 +48,7 @@ void CudaTraceConverter::traceToExecRequest(
     for (const auto &rfunc : required_functions) {
         auto it = cuda_trace.getSymbolToModuleId().find(rfunc);
         if (it == cuda_trace.getSymbolToModuleId().end()) {
-            spdlog::error("Required function {} unknown");
+            SPDLOG_ERROR("Required function {} unknown");
         }
 
         uint64_t module_id = std::get<0>(it->second);
@@ -58,13 +58,13 @@ void CudaTraceConverter::traceToExecRequest(
             auto mod_it =
                 cuda_trace.getModuleIdToFatbinResource().find(module_id);
             if (mod_it == cuda_trace.getModuleIdToFatbinResource().end()) {
-                spdlog::error("Unknown module {} for function", module_id,
+                SPDLOG_ERROR("Unknown module {} for function", module_id,
                               rfunc);
             }
 
             bool module_is_loaded = std::get<2>(mod_it->second);
             if (!module_is_loaded) {
-                spdlog::error("Module {} not previously loaded", module_id);
+                SPDLOG_ERROR("Module {} not previously loaded", module_id);
             }
 
             fb_new_functions.push_back(CreateFBNewFunction(
@@ -90,7 +90,7 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
 
     switch (fb_cuda_api_call->api_call_type()) {
     case FBCudaApiCallUnion_NONE:
-        spdlog::error("Cannot convert FBCudaApiCallUnion_NONE");
+        SPDLOG_ERROR("Cannot convert FBCudaApiCallUnion_NONE");
         std::exit(EXIT_FAILURE);
     // CUDA
     case FBCudaApiCallUnion_FBCudaMalloc:

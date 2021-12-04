@@ -284,7 +284,7 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
 
     auto fn_reg_it = vdev.function_registry_.find(this->symbol);
     if (fn_reg_it == vdev.function_registry_.end()) {
-        spdlog::error("Function not registered: {}", this->symbol);
+        SPDLOG_ERROR("Function not registered: {}", this->symbol);
         std::exit(EXIT_FAILURE);
     }
 
@@ -302,7 +302,7 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     if (ret != CUDA_SUCCESS) {
         const char *err_str;
         cuGetErrorString(ret, &err_str);
-        spdlog::error("cuLaunchKernel() failed: {}", err_str);
+        SPDLOG_ERROR("cuLaunchKernel() failed: {}", err_str);
     }
 
     return cudaSuccess;

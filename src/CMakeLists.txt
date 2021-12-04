@@ -4,6 +4,10 @@ project(gpuless)
 enable_language(CUDA)
 find_package(CUDAToolkit 11.4)
 
+# set desired log level
+add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_OFF)
+#add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+
 include_directories(${CMAKE_SOURCE_DIR}/include)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 

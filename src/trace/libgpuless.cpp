@@ -32,7 +32,7 @@ static void hijackInit() {
     static bool hijack_initialized = false;
     if (!hijack_initialized) {
         hijack_initialized = true;
-        spdlog::debug("hijackInit()");
+        SPDLOG_DEBUG("hijackInit()");
 
         // load log level from env variable SPDLOG_LEVEL
         spdlog::cfg::load_env_levels();
@@ -40,13 +40,13 @@ static void hijackInit() {
         char *manager_port_env = std::getenv("MANAGER_PORT");
         if (manager_port_env) {
             manager_port = std::stoi(manager_port_env);
-            spdlog::info("MANAGER_PORT={}", manager_port);
+            SPDLOG_INFO("MANAGER_PORT={}", manager_port);
         }
 
         char *manager_ip_env = std::getenv("MANAGER_IP");
         if (manager_ip_env) {
             manager_ip = manager_ip_env;
-            spdlog::info("MANAGER_IP={}", manager_ip);
+            SPDLOG_INFO("MANAGER_IP={}", manager_ip);
         }
     }
 }
@@ -80,7 +80,7 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
         // gets destructed after the exit handler
         std::atexit([]() { exitHandler(); });
 
-        spdlog::info("Initializing trace executor");
+        SPDLOG_INFO("Initializing trace executor");
         te_initialized = true;
         char *executor_type = std::getenv("EXECUTOR_TYPE");
         if (executor_type != nullptr) {
@@ -97,14 +97,14 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
             bool r = trace_executor->init(manager_ip, manager_port,
                                           manager::instance_profile::NO_MIG);
             if (!r) {
-                spdlog::error("Failed to initialize TCP trace executor");
+                SPDLOG_ERROR("Failed to initialize TCP trace executor");
                 std::exit(EXIT_FAILURE);
             }
         } else {
             trace_executor = std::make_shared<TraceExecutorLocal>();
         }
 
-        spdlog::info("TCP executor enabled: {}", useTcp);
+        SPDLOG_INFO("TCP executor enabled: {}", useTcp);
     }
 
     return trace_executor;
@@ -128,7 +128,7 @@ CudaTrace &getCudaTrace() {
 
         std::vector<std::string> binaries;
         string_split(std::string(cuda_binary), ',', binaries);
-        spdlog::info("Analyzing CUDA binaries ({})", cuda_binary);
+        SPDLOG_INFO("Analyzing CUDA binaries ({})", cuda_binary);
         getCubinAnalyzer().analyze(binaries, CUDA_MAJOR_VERSION,
                                    CUDA_MINOR_VERSION);
     }
@@ -137,15 +137,15 @@ CudaTrace &getCudaTrace() {
 }
 
 static void exitHandler() {
-    spdlog::debug("std::atexit()");
+    SPDLOG_DEBUG("std::atexit()");
 
     // deallocate session
     if (useTcp) {
         auto success = getTraceExecutor()->deallocate();
         if (!success) {
-            spdlog::error("Failed to deallocate session");
+            SPDLOG_ERROR("Failed to deallocate session");
         } else {
-            spdlog::info("Deallocated session");
+            SPDLOG_INFO("Deallocated session");
         }
     }
 }
@@ -177,13 +177,13 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
     hijackInit();
     HIJACK_FN_PROLOGUE();
     if (kind == cudaMemcpyHostToDevice) {
-        spdlog::info("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]",
+        SPDLOG_INFO("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyH2D>(dst, src, count);
         std::memcpy(rec->buffer.data(), src, count);
         getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
-        spdlog::info("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]",
+        SPDLOG_INFO("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyD2H>(dst, src, count);
         getCudaTrace().record(rec);
@@ -194,11 +194,11 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
         std::memcpy(dst, top->buffer.data(), count);
 
         //        auto *dstb = reinterpret_cast<uint8_t *>(dst);
-        //        spdlog::debug("cudaMemcpyD2H memory probe: {:x} {:x} {:x}
+        //        SPDLOG_DEBUG("cudaMemcpyD2H memory probe: {:x} {:x} {:x}
         //        {:x}",
         //                      dstb[0], dstb[1], dstb[2], dstb[3]);
     } else if (kind == cudaMemcpyDeviceToDevice) {
-        spdlog::info("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
+        SPDLOG_INFO("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
                      __func__, dst, src, getpid());
         getCudaTrace().record(std::make_shared<CudaMemcpyD2D>(dst, src, count));
     } else {
@@ -211,7 +211,7 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
                             enum cudaMemcpyKind kind, cudaStream_t stream) {
     hijackInit();
     if (kind == cudaMemcpyHostToDevice) {
-        spdlog::info(
+        SPDLOG_INFO(
             "{}() [cudaMemcpyHostToDevice, {} <- {}, stream={}, pid={}]",
             __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
         auto rec =
@@ -219,7 +219,7 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
         std::memcpy(rec->buffer.data(), src, count);
         getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
-        spdlog::info(
+        SPDLOG_INFO(
             "{}() [cudaMemcpyDeviceToHost, {} <- {}, stream={}, pid={}]",
             __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
         auto rec =
@@ -233,11 +233,11 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
         std::memcpy(dst, top->buffer.data(), count);
 
         //        auto *dstb = reinterpret_cast<uint8_t *>(dst);
-        //        spdlog::debug("cudaMemcpyAsyncD2H memory probe: {:x} {:x} {:x}
+        //        SPDLOG_DEBUG("cudaMemcpyAsyncD2H memory probe: {:x} {:x} {:x}
         //        {:x}",
         //                      dstb[0], dstb[1], dstb[2], dstb[3]);
     } else if (kind == cudaMemcpyDeviceToDevice) {
-        spdlog::info(
+        SPDLOG_INFO(
             "{}() [cudaMemcpyDeviceToDevice, {} <- {}, stream={}, pid={}]",
             __func__, dst, src, reinterpret_cast<uint64_t>(stream), getpid());
         getCudaTrace().record(
@@ -259,8 +259,8 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
         EXIT_UNRECOVERABLE("unknown function");
     }
     std::string &symbol = it->second;
-    spdlog::info("cudaLaunchKernel({})", cpp_demangle(symbol).c_str());
-    // spdlog::debug("")
+    SPDLOG_INFO("cudaLaunchKernel({})", cpp_demangle(symbol).c_str());
+    // SPDLOG_DEBUG("")
 
     std::vector<KParamInfo> paramInfos;
     const auto &analyzer = getCubinAnalyzer();
@@ -276,7 +276,7 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
         ss << type << "[" << p.size << "], ";
     }
     ss << "]";
-    spdlog::debug(ss.str());
+    SPDLOG_DEBUG(ss.str());
 
     std::vector<std::vector<uint8_t>> paramBuffers(paramInfos.size());
     for (unsigned i = 0; i < paramInfos.size(); i++) {
@@ -289,7 +289,7 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     auto &symbol_to_module_id_map = cuda_trace.getSymbolToModuleId();
     auto mod_id_it = symbol_to_module_id_map.find(symbol);
     if (mod_id_it == symbol_to_module_id_map.end()) {
-        spdlog::error("function in unknown module");
+        SPDLOG_ERROR("function in unknown module");
         std::exit(EXIT_FAILURE);
     }
 
@@ -414,7 +414,7 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
     // appears in dscuda (as far as i know)
     size_t data_len = ((data_ull[1] - 1) / 8 + 1) * 8 + 16;
 
-    spdlog::debug("Recording Fatbin data [id={}, size={}]", fatbin_id,
+    SPDLOG_DEBUG("Recording Fatbin data [id={}, size={}]", fatbin_id,
                   data_len);
 
     void *resource_ptr =
@@ -440,7 +440,7 @@ void __cudaRegisterFunction(void **fatCubinHandle, const char *hostFun,
                             int thread_limit, uint3 *tid, uint3 *bid,
                             dim3 *bDim, dim3 *gDim, int *wSize) {
     hijackInit();
-    //    spdlog::trace("{}({})", __func__, cpp_demangle(deviceName).c_str());
+    //    SPDLOG_TRACE("{}({})", __func__, cpp_demangle(deviceName).c_str());
 
     auto &state = getCudaRegisterState();
     if (!state.is_registering) {
@@ -493,7 +493,7 @@ CUresult cuDevicePrimaryCtxRelease(CUdevice dev) {
 
 CUresult cuDeviceGetCount(int *count) {
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
     *count = 1;
     return CUDA_SUCCESS;
 }
@@ -501,7 +501,7 @@ CUresult cuDeviceGetCount(int *count) {
 CUresult cuDeviceGet(CUdevice *device, int ordinal) {
     (void)ordinal;
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
     *device = 0;
     return CUDA_SUCCESS;
 }
@@ -509,11 +509,11 @@ CUresult cuDeviceGet(CUdevice *device, int ordinal) {
 CUresult cuDeviceGetName(char *name, int len, CUdevice dev) {
     (void)dev;
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
 
     static const char dev_name[] = "libgpuless virtual gpu";
     if (static_cast<unsigned>(len) < sizeof(dev_name)) {
-        spdlog::error("cuGetDeviceName(): len < sizeof(dev_name)");
+        SPDLOG_ERROR("cuGetDeviceName(): len < sizeof(dev_name)");
     }
     std::memcpy(name, dev_name, sizeof(dev_name));
     return CUDA_SUCCESS;
@@ -522,7 +522,7 @@ CUresult cuDeviceGetName(char *name, int len, CUdevice dev) {
 CUresult cuDeviceTotalMem(size_t *bytes, CUdevice dev) {
     (void)dev;
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
 
     *bytes = getTraceExecutor()->totalMem();
     return CUDA_SUCCESS;
@@ -531,14 +531,14 @@ CUresult cuDeviceTotalMem(size_t *bytes, CUdevice dev) {
 CUresult cuDeviceGetAttribute(int *pi, CUdevice_attribute attrib,
                               CUdevice dev) {
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
     *pi = getTraceExecutor()->deviceAttribute(attrib);
     return CUDA_SUCCESS;
 }
 
 CUresult cuDriverGetVersion(int *driverVersion) {
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
     *driverVersion = 11400;
     return CUDA_SUCCESS;
 }
@@ -546,7 +546,7 @@ CUresult cuDriverGetVersion(int *driverVersion) {
 CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int *flags,
                                     int *active) {
     hijackInit();
-    spdlog::trace("{}()", __func__);
+    SPDLOG_TRACE("{}()", __func__);
     *flags = 0;
     *active = 1;
     return CUDA_SUCCESS;
@@ -555,7 +555,7 @@ CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int *flags,
 CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
                           cuuint64_t flags) {
     hijackInit();
-    spdlog::trace("{}({}) [pid={}]", __func__, symbol, getpid());
+    SPDLOG_TRACE("{}({}) [pid={}]", __func__, symbol, getpid());
 
     LINK_CU_FUNCTION(symbol, cuGetProcAddress);
     LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxRelease_v2);
@@ -567,19 +567,12 @@ CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
     LINK_CU_FUNCTION(symbol, cuDriverGetVersion);
     LINK_CU_FUNCTION(symbol, cuDevicePrimaryCtxGetState);
 
-    //    if (strncmp(symbol, "cu", 2) == 0) {
-    //        spdlog::debug("cuGetProcAddress({}): symbol not implemented",
-    //        symbol); *pfn = nullptr;
-    //    }
-
-    //    return CUDA_SUCCESS;
-
     static auto real = GET_REAL_FUNCTION(cuGetProcAddress);
     return real(symbol, pfn, cudaVersion, flags);
 }
 
 void *dlsym(void *handle, const char *symbol) {
-    spdlog::trace("{}({}) [pid={}]", __func__, symbol, getpid());
+    SPDLOG_TRACE("{}({}) [pid={}]", __func__, symbol, getpid());
 
     // early out if not a CUDA driver symbol
     if (strncmp(symbol, "cu", 2) != 0) {

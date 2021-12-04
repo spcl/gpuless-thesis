@@ -117,27 +117,9 @@ uint64_t
 gpuless::CudnnSetTensorNdDescriptor::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetTensorNdDescriptor);
 
-    //    std::stringstream ss_dim_a;
-    //    std::stringstream ss_stride_a;
-    //    ss_dim_a << "[";
-    //    ss_stride_a << "[";
-    //    for (const auto &d : this->dim_a) {
-    //        ss_dim_a << d << ", ";
-    //    }
-    //    for (const auto &d : this->stride_a) {
-    //        ss_stride_a << d << ", ";
-    //    }
-    //    ss_dim_a << "]";
-    //    ss_stride_a << "]";
-    //
-    //    spdlog::debug("cudnnSetTensorNdDescriptor() [data_type={}, nb_dims={},
-    //    "
-    //                  "dim_a={}, stride_a={}]",
-    //                  this->data_type, this->nb_dims, ss_dim_a.str(),
-    //                  ss_stride_a.str());
-
     cudnnTensorDescriptor_t td =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td];
+
     return real(td, this->data_type, this->nb_dims, this->dim_a.data(),
                 this->stride_a.data());
 }
@@ -214,19 +196,9 @@ uint64_t
 gpuless::CudnnSetFilterNdDescriptor::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetFilterNdDescriptor);
 
-    //    std::stringstream ss;
-    //    ss << "[";
-    //    for (const auto &d : this->filter_dim_a) {
-    //        ss << d << ", ";
-    //    }
-    //    ss << "]";
-    //    spdlog::debug("cudnnSetFilterNdDescriptor() [data_type={}, format={},
-    //    "
-    //                  "nb_dims={}, filter_dim_a={}]",
-    //                  this->data_type, this->format, this->nb_dims, ss.str());
-
     cudnnFilterDescriptor_t fd =
         vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd];
+
     return real(fd, this->data_type, this->format, this->nb_dims,
                 this->filter_dim_a.data());
 }
@@ -368,35 +340,6 @@ CudnnSetConvolutionMathType::CudnnSetConvolutionMathType(
 uint64_t gpuless::CudnnSetConvolutionNdDescriptor::executeNative(
     CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnSetConvolutionNdDescriptor);
-
-    //    std::stringstream ss_dilation;
-    //    std::stringstream ss_filter_stride_a;
-    //    std::stringstream ss_pad_a;
-    //
-    //    ss_dilation << "[";
-    //    ss_filter_stride_a << "[";
-    //    ss_pad_a << "[";
-    //
-    //    for (const auto &d : this->dilation) {
-    //        ss_dilation << d << ", ";
-    //    }
-    //    for (const auto &d : this->filter_stride_a) {
-    //        ss_filter_stride_a << d << ", ";
-    //    }
-    //    for (const auto &d : this->pad_a) {
-    //        ss_pad_a << d << ", ";
-    //    }
-    //
-    //    ss_dilation << "]";
-    //    ss_filter_stride_a << "]";
-    //    ss_pad_a << "]";
-    //
-    //    spdlog::debug("cudnnSetConvolutionNdDescriptor() [array_length={}, "
-    //                  "pad_a={}, filter_stride_a={}, dilation={}, "
-    //                  "convolution_mode={}, cudnn_data_type={}]",
-    //                  this->array_length, ss_pad_a.str(),
-    //                  ss_filter_stride_a.str(), ss_dilation.str(),
-    //                  this->convolution_mode, this->cudnn_data_type);
 
     cudnnConvolutionDescriptor_t cd =
         vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd];

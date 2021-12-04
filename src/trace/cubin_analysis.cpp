@@ -175,7 +175,7 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
 void CubinAnalyzer::storeAnalysisToCache(
     const std::filesystem::path &fname,
     const std::map<std::string, std::vector<KParamInfo>> &data) {
-    spdlog::info("Storing analysis to cache: {}", fname.string());
+    SPDLOG_INFO("Storing analysis to cache: {}", fname.string());
     std::size_t fname_hash = this->pathToHash(fname);
     std::filesystem::path home_dir(std::getenv("HOME"));
     std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
@@ -203,7 +203,7 @@ void CubinAnalyzer::storeAnalysisToCache(
 bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
                                int major_version, int minor_version) {
     auto tmp = std::filesystem::temp_directory_path() / "libgpuless";
-    spdlog::info("Using tmp directory: {}", tmp.string());
+    SPDLOG_INFO("Using tmp directory: {}", tmp.string());
     if (std::filesystem::is_directory(tmp)) {
         std::filesystem::remove_all(tmp);
     }
@@ -255,16 +255,16 @@ bool CubinAnalyzer::analyze(const std::vector<std::string>& cuda_binaries,
 
     for (const auto &cbin : cuda_binaries) {
         std::filesystem::path cuda_binary(cbin);
-        spdlog::debug("Analyzing: {}", cuda_binary.string());
+        SPDLOG_DEBUG("Analyzing: {}", cuda_binary.string());
         if (!std::filesystem::exists(cuda_binary) ||
             !std::filesystem::is_regular_file(cuda_binary)) {
-            spdlog::error("Invalid file: {}", cbin);
+            SPDLOG_ERROR("Invalid file: {}", cbin);
             return false;
         }
 
         // check if analysis is cached
         if (this->isCached(cbin)) {
-            spdlog::info("Loading analysis from cache for: {}", cbin);
+            SPDLOG_INFO("Loading analysis from cache for: {}", cbin);
             ret = this->loadAnalysisFromCache(cbin);
         } else {
             ret = this->analyzePtx(cbin, major_version, minor_version);

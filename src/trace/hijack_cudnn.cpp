@@ -305,7 +305,7 @@ cudnnStatus_t cudnnGetBatchNormalizationTrainingExReserveSpaceSize(
         gpuless::CudnnGetBatchNormalizationTrainingExReserveSpaceSize>(
         getCudaTrace().historyTop());
     *sizeInBytes = top->size_in_bytes;
-    spdlog::debug("cudnnGetBatchNormalizationTrainingExReserveSpaceSize() "
+    SPDLOG_DEBUG("cudnnGetBatchNormalizationTrainingExReserveSpaceSize() "
                   "[sizeInBytes={}]",
                   *sizeInBytes);
 

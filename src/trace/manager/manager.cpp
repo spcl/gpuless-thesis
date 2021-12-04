@@ -37,12 +37,12 @@ pid_t fork_device_manager(int device, int port) {
 
 static void deallocate_session_devices(int32_t session_id) {
     lock_devices.lock();
-    int device;
+    int device = -1;
     for (auto &d : devices) {
         if (std::get<2>(d) == session_id) {
             device = std::get<0>(d);
             std::get<2>(d) = NO_SESSION_ASSIGNED;
-            spdlog::info("Session {} deallocated", session_id);
+            SPDLOG_INFO("Session {} deallocated", session_id);
             break;
         }
     }
@@ -50,17 +50,17 @@ static void deallocate_session_devices(int32_t session_id) {
     // restart the process to properly reset the CUDA device
     auto it = child_processes.find(device);
     if (it == child_processes.end()) {
-        spdlog::error("no process for device {} found", device);
+        SPDLOG_ERROR("no process for device {} found", device);
     }
 
-    spdlog::debug("Killing pid={}", it->second.first);
+    SPDLOG_DEBUG("Killing pid={}", it->second.first);
     kill(it->second.first, SIGTERM);
     int wstatus;
     waitpid(it->first, &wstatus, 0);
 
     pid_t new_pid = fork_device_manager(device, it->second.second);
     std::get<0>(it->second) = new_pid;
-    spdlog::info("Device manager restarted for device={}, pid={}, port={}",
+    SPDLOG_INFO("Device manager restarted for device={}, pid={}, port={}",
                  device, new_pid, it->second.second);
 
     lock_devices.unlock();
@@ -95,7 +95,7 @@ static int32_t assign_device(int32_t profile, int32_t session_id) {
 
 void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     int session_id = next_session_id++;
-    spdlog::info("allocation request for {} (session_id={})\n",
+    SPDLOG_INFO("allocation request for {} (session_id={})\n",
                  msg->message_as_AllocateRequest()->profile(), session_id);
 
     flatbuffers::FlatBufferBuilder builder;
@@ -124,7 +124,7 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     inet_pton(AF_INET, manager_ip, &selected_ip);
     auto it = child_processes.find(assigned_device);
     if (it == child_processes.end()) {
-        spdlog::error("assigned_device not in child_processes");
+        SPDLOG_ERROR("assigned_device not in child_processes");
         std::exit(EXIT_FAILURE);
     }
     short selected_port = it->second.second;
@@ -141,7 +141,7 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
 
 void handle_deallocate_request(int socket_fd, const ProtocolMessage *msg) {
     int32_t session_id = msg->message_as_DeallocateRequest()->session_id();
-    spdlog::info("deallocation request for session_id={}", session_id);
+    SPDLOG_INFO("deallocation request for session_id={}", session_id);
 
     flatbuffers::FlatBufferBuilder builder;
     auto deallocate_confirm_msg = CreateProtocolMessage(
@@ -165,7 +165,7 @@ void *handle_request(void *arg) {
     } else if (msg->message_type() == Message_DeallocateRequest) {
         handle_deallocate_request(socket_fd, msg);
     } else {
-        spdlog::error("invalid request");
+        SPDLOG_ERROR("invalid request");
     }
 
     close(socket_fd);
@@ -193,26 +193,25 @@ int main(int argc, char **argv) {
     char *manager_ip_env = std::getenv("MANAGER_IP");
     if (manager_ip_env) {
         manager_ip = manager_ip_env;
-        spdlog::info("MANAGER_IP={}", manager_ip);
+        SPDLOG_INFO("MANAGER_IP={}", manager_ip);
     }
 
     // start device management processes
     short next_port = MANAGER_PORT + 1;
     for (const auto &t : devices) {
         int device = std::get<0>(t);
-        int profile = std::get<1>(t);
 
         pid_t pid = fork_device_manager(device, next_port);
         child_processes.emplace(device, std::make_pair(pid, next_port));
-        spdlog::info("managing device: {} (profile={},pid={},port={})", device,
-                     profile, pid, next_port);
+        SPDLOG_INFO("managing device: {} (profile={},pid={},port={})", device,
+                    std::get<1>(t), pid, next_port);
         next_port++;
     }
 
     // run server
     int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (socket_fd < 0) {
-        spdlog::error("failed to open socket");
+        SPDLOG_ERROR("failed to open socket");
         exit(EXIT_FAILURE);
     }
 
@@ -225,24 +224,24 @@ int main(int argc, char **argv) {
     sa.sin_port = htons(MANAGER_PORT);
 
     if (bind(socket_fd, (sockaddr *)&sa, sizeof(sa)) < 0) {
-        spdlog::error("failed to bind socket");
+        SPDLOG_ERROR("failed to bind socket");
         close(socket_fd);
         exit(EXIT_FAILURE);
     }
 
     if (listen(socket_fd, BACKLOG) < 0) {
-        spdlog::error("failed to listen on socket");
+        SPDLOG_ERROR("failed to listen on socket");
         close(socket_fd);
         exit(EXIT_FAILURE);
     }
 
-    spdlog::info("manager running on port {}", MANAGER_PORT);
+    SPDLOG_INFO("manager running on port {}", MANAGER_PORT);
 
     int s_new;
     sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(socket_fd, &remote_addr, &remote_addrlen))) {
-        spdlog::info("manager: connection from {}",
+        SPDLOG_INFO("manager: connection from {}",
                      inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
 
         // handle connection in new thread

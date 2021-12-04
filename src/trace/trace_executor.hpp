@@ -21,10 +21,10 @@ class TraceExecutor {
     virtual bool synchronize(gpuless::CudaTrace &cuda_trace) = 0;
     virtual bool deallocate() = 0;
 
-    size_t totalMem() { return this->device_total_mem; }
+    size_t totalMem() const { return this->device_total_mem; }
     int32_t deviceAttribute(CUdevice_attribute attribute) {
         if (device_attributes.size() < static_cast<unsigned>(attribute)) {
-            spdlog::error("Device attribute {} not stored", attribute);
+            SPDLOG_ERROR("Device attribute {} not stored", attribute);
             std::exit(EXIT_FAILURE);
         }
         return device_attributes[attribute];
