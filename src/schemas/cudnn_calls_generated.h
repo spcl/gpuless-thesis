@@ -57,6 +57,24 @@ struct FBCudnnDestroyFilterDescriptorBuilder;
 struct FBCudnnDestroyTensorDescriptor;
 struct FBCudnnDestroyTensorDescriptorBuilder;
 
+struct FBCudnnConvolutionBackwardData;
+struct FBCudnnConvolutionBackwardDataBuilder;
+
+struct FBCudnnConvolutionBwdDataAlgoPerf;
+struct FBCudnnConvolutionBwdDataAlgoPerfBuilder;
+
+struct FBCudnnGetConvolutionBackwardDataAlgorithmV7;
+struct FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder;
+
+struct FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize;
+struct FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSizeBuilder;
+
+struct FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize;
+struct FBCudnnGetBatchNormalizationTrainingExReserveSpaceSizeBuilder;
+
+struct FBCudnnBatchNormalizationForwardTrainingEx;
+struct FBCudnnBatchNormalizationForwardTrainingExBuilder;
+
 struct FBCudnnCreate FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBCudnnCreateBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -1487,6 +1505,1015 @@ inline flatbuffers::Offset<FBCudnnDestroyTensorDescriptor> CreateFBCudnnDestroyT
   FBCudnnDestroyTensorDescriptorBuilder builder_(_fbb);
   builder_.add_virtual_td(virtual_td);
   return builder_.Finish();
+}
+
+struct FBCudnnConvolutionBackwardData FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnConvolutionBackwardDataBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_ALPHA = 6,
+    VT_VIRTUAL_FD_WDESC = 8,
+    VT_W = 10,
+    VT_VIRTUAL_TD_DYDESC = 12,
+    VT_DY = 14,
+    VT_VIRTUAL_CD = 16,
+    VT_ALGO = 18,
+    VT_WORKSPACE = 20,
+    VT_WORKSPACE_SIZE_IN_BYTES = 22,
+    VT_BETA = 24,
+    VT_VIRTUAL_TD_DXDESC = 26,
+    VT_DX = 28
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *alpha() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_ALPHA);
+  }
+  uint64_t virtual_fd_wdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_FD_WDESC, 0);
+  }
+  uint64_t w() const {
+    return GetField<uint64_t>(VT_W, 0);
+  }
+  uint64_t virtual_td_dydesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_DYDESC, 0);
+  }
+  uint64_t dy() const {
+    return GetField<uint64_t>(VT_DY, 0);
+  }
+  uint64_t virtual_cd() const {
+    return GetField<uint64_t>(VT_VIRTUAL_CD, 0);
+  }
+  uint64_t algo() const {
+    return GetField<uint64_t>(VT_ALGO, 0);
+  }
+  uint64_t workspace() const {
+    return GetField<uint64_t>(VT_WORKSPACE, 0);
+  }
+  uint64_t workspace_size_in_bytes() const {
+    return GetField<uint64_t>(VT_WORKSPACE_SIZE_IN_BYTES, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *beta() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BETA);
+  }
+  uint64_t virtual_td_dxdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_DXDESC, 0);
+  }
+  uint64_t dx() const {
+    return GetField<uint64_t>(VT_DX, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyOffset(verifier, VT_ALPHA) &&
+           verifier.VerifyVector(alpha()) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_FD_WDESC) &&
+           VerifyField<uint64_t>(verifier, VT_W) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_DYDESC) &&
+           VerifyField<uint64_t>(verifier, VT_DY) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_CD) &&
+           VerifyField<uint64_t>(verifier, VT_ALGO) &&
+           VerifyField<uint64_t>(verifier, VT_WORKSPACE) &&
+           VerifyField<uint64_t>(verifier, VT_WORKSPACE_SIZE_IN_BYTES) &&
+           VerifyOffset(verifier, VT_BETA) &&
+           verifier.VerifyVector(beta()) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_DXDESC) &&
+           VerifyField<uint64_t>(verifier, VT_DX) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnConvolutionBackwardDataBuilder {
+  typedef FBCudnnConvolutionBackwardData Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_alpha(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> alpha) {
+    fbb_.AddOffset(FBCudnnConvolutionBackwardData::VT_ALPHA, alpha);
+  }
+  void add_virtual_fd_wdesc(uint64_t virtual_fd_wdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_VIRTUAL_FD_WDESC, virtual_fd_wdesc, 0);
+  }
+  void add_w(uint64_t w) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_W, w, 0);
+  }
+  void add_virtual_td_dydesc(uint64_t virtual_td_dydesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_VIRTUAL_TD_DYDESC, virtual_td_dydesc, 0);
+  }
+  void add_dy(uint64_t dy) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_DY, dy, 0);
+  }
+  void add_virtual_cd(uint64_t virtual_cd) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_VIRTUAL_CD, virtual_cd, 0);
+  }
+  void add_algo(uint64_t algo) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_ALGO, algo, 0);
+  }
+  void add_workspace(uint64_t workspace) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_WORKSPACE, workspace, 0);
+  }
+  void add_workspace_size_in_bytes(uint64_t workspace_size_in_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_WORKSPACE_SIZE_IN_BYTES, workspace_size_in_bytes, 0);
+  }
+  void add_beta(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> beta) {
+    fbb_.AddOffset(FBCudnnConvolutionBackwardData::VT_BETA, beta);
+  }
+  void add_virtual_td_dxdesc(uint64_t virtual_td_dxdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_VIRTUAL_TD_DXDESC, virtual_td_dxdesc, 0);
+  }
+  void add_dx(uint64_t dx) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBackwardData::VT_DX, dx, 0);
+  }
+  explicit FBCudnnConvolutionBackwardDataBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnConvolutionBackwardData> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnConvolutionBackwardData>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnConvolutionBackwardData> CreateFBCudnnConvolutionBackwardData(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> alpha = 0,
+    uint64_t virtual_fd_wdesc = 0,
+    uint64_t w = 0,
+    uint64_t virtual_td_dydesc = 0,
+    uint64_t dy = 0,
+    uint64_t virtual_cd = 0,
+    uint64_t algo = 0,
+    uint64_t workspace = 0,
+    uint64_t workspace_size_in_bytes = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> beta = 0,
+    uint64_t virtual_td_dxdesc = 0,
+    uint64_t dx = 0) {
+  FBCudnnConvolutionBackwardDataBuilder builder_(_fbb);
+  builder_.add_dx(dx);
+  builder_.add_virtual_td_dxdesc(virtual_td_dxdesc);
+  builder_.add_workspace_size_in_bytes(workspace_size_in_bytes);
+  builder_.add_workspace(workspace);
+  builder_.add_algo(algo);
+  builder_.add_virtual_cd(virtual_cd);
+  builder_.add_dy(dy);
+  builder_.add_virtual_td_dydesc(virtual_td_dydesc);
+  builder_.add_w(w);
+  builder_.add_virtual_fd_wdesc(virtual_fd_wdesc);
+  builder_.add_virtual_handle(virtual_handle);
+  builder_.add_beta(beta);
+  builder_.add_alpha(alpha);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudnnConvolutionBackwardData> CreateFBCudnnConvolutionBackwardDataDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    const std::vector<uint8_t> *alpha = nullptr,
+    uint64_t virtual_fd_wdesc = 0,
+    uint64_t w = 0,
+    uint64_t virtual_td_dydesc = 0,
+    uint64_t dy = 0,
+    uint64_t virtual_cd = 0,
+    uint64_t algo = 0,
+    uint64_t workspace = 0,
+    uint64_t workspace_size_in_bytes = 0,
+    const std::vector<uint8_t> *beta = nullptr,
+    uint64_t virtual_td_dxdesc = 0,
+    uint64_t dx = 0) {
+  auto alpha__ = alpha ? _fbb.CreateVector<uint8_t>(*alpha) : 0;
+  auto beta__ = beta ? _fbb.CreateVector<uint8_t>(*beta) : 0;
+  return CreateFBCudnnConvolutionBackwardData(
+      _fbb,
+      virtual_handle,
+      alpha__,
+      virtual_fd_wdesc,
+      w,
+      virtual_td_dydesc,
+      dy,
+      virtual_cd,
+      algo,
+      workspace,
+      workspace_size_in_bytes,
+      beta__,
+      virtual_td_dxdesc,
+      dx);
+}
+
+struct FBCudnnConvolutionBwdDataAlgoPerf FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnConvolutionBwdDataAlgoPerfBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_ALGO = 4,
+    VT_STATUS = 6,
+    VT_TIME = 8,
+    VT_MEMORY = 10,
+    VT_DETERMINISM = 12,
+    VT_MATH_TYPE = 14,
+    VT_RESERVED = 16
+  };
+  uint64_t algo() const {
+    return GetField<uint64_t>(VT_ALGO, 0);
+  }
+  uint64_t status() const {
+    return GetField<uint64_t>(VT_STATUS, 0);
+  }
+  float time() const {
+    return GetField<float>(VT_TIME, 0.0f);
+  }
+  uint64_t memory() const {
+    return GetField<uint64_t>(VT_MEMORY, 0);
+  }
+  uint64_t determinism() const {
+    return GetField<uint64_t>(VT_DETERMINISM, 0);
+  }
+  uint64_t math_type() const {
+    return GetField<uint64_t>(VT_MATH_TYPE, 0);
+  }
+  const flatbuffers::Vector<int32_t> *reserved() const {
+    return GetPointer<const flatbuffers::Vector<int32_t> *>(VT_RESERVED);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_ALGO) &&
+           VerifyField<uint64_t>(verifier, VT_STATUS) &&
+           VerifyField<float>(verifier, VT_TIME) &&
+           VerifyField<uint64_t>(verifier, VT_MEMORY) &&
+           VerifyField<uint64_t>(verifier, VT_DETERMINISM) &&
+           VerifyField<uint64_t>(verifier, VT_MATH_TYPE) &&
+           VerifyOffset(verifier, VT_RESERVED) &&
+           verifier.VerifyVector(reserved()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnConvolutionBwdDataAlgoPerfBuilder {
+  typedef FBCudnnConvolutionBwdDataAlgoPerf Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_algo(uint64_t algo) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBwdDataAlgoPerf::VT_ALGO, algo, 0);
+  }
+  void add_status(uint64_t status) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBwdDataAlgoPerf::VT_STATUS, status, 0);
+  }
+  void add_time(float time) {
+    fbb_.AddElement<float>(FBCudnnConvolutionBwdDataAlgoPerf::VT_TIME, time, 0.0f);
+  }
+  void add_memory(uint64_t memory) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBwdDataAlgoPerf::VT_MEMORY, memory, 0);
+  }
+  void add_determinism(uint64_t determinism) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBwdDataAlgoPerf::VT_DETERMINISM, determinism, 0);
+  }
+  void add_math_type(uint64_t math_type) {
+    fbb_.AddElement<uint64_t>(FBCudnnConvolutionBwdDataAlgoPerf::VT_MATH_TYPE, math_type, 0);
+  }
+  void add_reserved(flatbuffers::Offset<flatbuffers::Vector<int32_t>> reserved) {
+    fbb_.AddOffset(FBCudnnConvolutionBwdDataAlgoPerf::VT_RESERVED, reserved);
+  }
+  explicit FBCudnnConvolutionBwdDataAlgoPerfBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf> CreateFBCudnnConvolutionBwdDataAlgoPerf(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t algo = 0,
+    uint64_t status = 0,
+    float time = 0.0f,
+    uint64_t memory = 0,
+    uint64_t determinism = 0,
+    uint64_t math_type = 0,
+    flatbuffers::Offset<flatbuffers::Vector<int32_t>> reserved = 0) {
+  FBCudnnConvolutionBwdDataAlgoPerfBuilder builder_(_fbb);
+  builder_.add_math_type(math_type);
+  builder_.add_determinism(determinism);
+  builder_.add_memory(memory);
+  builder_.add_status(status);
+  builder_.add_algo(algo);
+  builder_.add_reserved(reserved);
+  builder_.add_time(time);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf> CreateFBCudnnConvolutionBwdDataAlgoPerfDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t algo = 0,
+    uint64_t status = 0,
+    float time = 0.0f,
+    uint64_t memory = 0,
+    uint64_t determinism = 0,
+    uint64_t math_type = 0,
+    const std::vector<int32_t> *reserved = nullptr) {
+  auto reserved__ = reserved ? _fbb.CreateVector<int32_t>(*reserved) : 0;
+  return CreateFBCudnnConvolutionBwdDataAlgoPerf(
+      _fbb,
+      algo,
+      status,
+      time,
+      memory,
+      determinism,
+      math_type,
+      reserved__);
+}
+
+struct FBCudnnGetConvolutionBackwardDataAlgorithmV7 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_VIRTUAL_FD_WDESC = 6,
+    VT_VIRTUAL_TD_DYDESC = 8,
+    VT_VIRTUAL_CD_CONVDESC = 10,
+    VT_VIRTUAL_TD_DXDESC = 12,
+    VT_REQUESTED_ALGO_COUNT = 14,
+    VT_RETURNED_ALGO_COUNT = 16,
+    VT_PERF_RESULTS = 18
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t virtual_fd_wdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_FD_WDESC, 0);
+  }
+  uint64_t virtual_td_dydesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_DYDESC, 0);
+  }
+  uint64_t virtual_cd_convdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_CD_CONVDESC, 0);
+  }
+  uint64_t virtual_td_dxdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_DXDESC, 0);
+  }
+  int32_t requested_algo_count() const {
+    return GetField<int32_t>(VT_REQUESTED_ALGO_COUNT, 0);
+  }
+  int32_t returned_algo_count() const {
+    return GetField<int32_t>(VT_RETURNED_ALGO_COUNT, 0);
+  }
+  const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *perf_results() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *>(VT_PERF_RESULTS);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_FD_WDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_DYDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_CD_CONVDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_DXDESC) &&
+           VerifyField<int32_t>(verifier, VT_REQUESTED_ALGO_COUNT) &&
+           VerifyField<int32_t>(verifier, VT_RETURNED_ALGO_COUNT) &&
+           VerifyOffset(verifier, VT_PERF_RESULTS) &&
+           verifier.VerifyVector(perf_results()) &&
+           verifier.VerifyVectorOfTables(perf_results()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder {
+  typedef FBCudnnGetConvolutionBackwardDataAlgorithmV7 Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_virtual_fd_wdesc(uint64_t virtual_fd_wdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_FD_WDESC, virtual_fd_wdesc, 0);
+  }
+  void add_virtual_td_dydesc(uint64_t virtual_td_dydesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_TD_DYDESC, virtual_td_dydesc, 0);
+  }
+  void add_virtual_cd_convdesc(uint64_t virtual_cd_convdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_CD_CONVDESC, virtual_cd_convdesc, 0);
+  }
+  void add_virtual_td_dxdesc(uint64_t virtual_td_dxdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_TD_DXDESC, virtual_td_dxdesc, 0);
+  }
+  void add_requested_algo_count(int32_t requested_algo_count) {
+    fbb_.AddElement<int32_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_REQUESTED_ALGO_COUNT, requested_algo_count, 0);
+  }
+  void add_returned_algo_count(int32_t returned_algo_count) {
+    fbb_.AddElement<int32_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_RETURNED_ALGO_COUNT, returned_algo_count, 0);
+  }
+  void add_perf_results(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> perf_results) {
+    fbb_.AddOffset(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_PERF_RESULTS, perf_results);
+  }
+  explicit FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> CreateFBCudnnGetConvolutionBackwardDataAlgorithmV7(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t virtual_fd_wdesc = 0,
+    uint64_t virtual_td_dydesc = 0,
+    uint64_t virtual_cd_convdesc = 0,
+    uint64_t virtual_td_dxdesc = 0,
+    int32_t requested_algo_count = 0,
+    int32_t returned_algo_count = 0,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> perf_results = 0) {
+  FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder builder_(_fbb);
+  builder_.add_virtual_td_dxdesc(virtual_td_dxdesc);
+  builder_.add_virtual_cd_convdesc(virtual_cd_convdesc);
+  builder_.add_virtual_td_dydesc(virtual_td_dydesc);
+  builder_.add_virtual_fd_wdesc(virtual_fd_wdesc);
+  builder_.add_virtual_handle(virtual_handle);
+  builder_.add_perf_results(perf_results);
+  builder_.add_returned_algo_count(returned_algo_count);
+  builder_.add_requested_algo_count(requested_algo_count);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> CreateFBCudnnGetConvolutionBackwardDataAlgorithmV7Direct(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t virtual_fd_wdesc = 0,
+    uint64_t virtual_td_dydesc = 0,
+    uint64_t virtual_cd_convdesc = 0,
+    uint64_t virtual_td_dxdesc = 0,
+    int32_t requested_algo_count = 0,
+    int32_t returned_algo_count = 0,
+    const std::vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *perf_results = nullptr) {
+  auto perf_results__ = perf_results ? _fbb.CreateVector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>(*perf_results) : 0;
+  return CreateFBCudnnGetConvolutionBackwardDataAlgorithmV7(
+      _fbb,
+      virtual_handle,
+      virtual_fd_wdesc,
+      virtual_td_dydesc,
+      virtual_cd_convdesc,
+      virtual_td_dxdesc,
+      requested_algo_count,
+      returned_algo_count,
+      perf_results__);
+}
+
+struct FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSizeBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_MODE = 6,
+    VT_BN_OPS = 8,
+    VT_VIRTUAL_TD_XDESC = 10,
+    VT_VIRTUAL_TD_ZDESC = 12,
+    VT_VIRTUAL_TD_YDESC = 14,
+    VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC = 16,
+    VT_VIRTUAL_AD_ACTIVATION_DESC = 18,
+    VT_SIZE_IN_BYTES = 20
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t mode() const {
+    return GetField<uint64_t>(VT_MODE, 0);
+  }
+  uint64_t bn_ops() const {
+    return GetField<uint64_t>(VT_BN_OPS, 0);
+  }
+  uint64_t virtual_td_xdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_XDESC, 0);
+  }
+  uint64_t virtual_td_zdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_ZDESC, 0);
+  }
+  uint64_t virtual_td_ydesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_YDESC, 0);
+  }
+  uint64_t virtual_td_bn_scale_bias_mean_var_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC, 0);
+  }
+  uint64_t virtual_ad_activation_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_AD_ACTIVATION_DESC, 0);
+  }
+  uint64_t size_in_bytes() const {
+    return GetField<uint64_t>(VT_SIZE_IN_BYTES, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_MODE) &&
+           VerifyField<uint64_t>(verifier, VT_BN_OPS) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_XDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_ZDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_YDESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_AD_ACTIVATION_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE_IN_BYTES) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSizeBuilder {
+  typedef FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_mode(uint64_t mode) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_MODE, mode, 0);
+  }
+  void add_bn_ops(uint64_t bn_ops) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_BN_OPS, bn_ops, 0);
+  }
+  void add_virtual_td_xdesc(uint64_t virtual_td_xdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_TD_XDESC, virtual_td_xdesc, 0);
+  }
+  void add_virtual_td_zdesc(uint64_t virtual_td_zdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_TD_ZDESC, virtual_td_zdesc, 0);
+  }
+  void add_virtual_td_ydesc(uint64_t virtual_td_ydesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_TD_YDESC, virtual_td_ydesc, 0);
+  }
+  void add_virtual_td_bn_scale_bias_mean_var_desc(uint64_t virtual_td_bn_scale_bias_mean_var_desc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC, virtual_td_bn_scale_bias_mean_var_desc, 0);
+  }
+  void add_virtual_ad_activation_desc(uint64_t virtual_ad_activation_desc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_VIRTUAL_AD_ACTIVATION_DESC, virtual_ad_activation_desc, 0);
+  }
+  void add_size_in_bytes(uint64_t size_in_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize::VT_SIZE_IN_BYTES, size_in_bytes, 0);
+  }
+  explicit FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSizeBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize> CreateFBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t mode = 0,
+    uint64_t bn_ops = 0,
+    uint64_t virtual_td_xdesc = 0,
+    uint64_t virtual_td_zdesc = 0,
+    uint64_t virtual_td_ydesc = 0,
+    uint64_t virtual_td_bn_scale_bias_mean_var_desc = 0,
+    uint64_t virtual_ad_activation_desc = 0,
+    uint64_t size_in_bytes = 0) {
+  FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSizeBuilder builder_(_fbb);
+  builder_.add_size_in_bytes(size_in_bytes);
+  builder_.add_virtual_ad_activation_desc(virtual_ad_activation_desc);
+  builder_.add_virtual_td_bn_scale_bias_mean_var_desc(virtual_td_bn_scale_bias_mean_var_desc);
+  builder_.add_virtual_td_ydesc(virtual_td_ydesc);
+  builder_.add_virtual_td_zdesc(virtual_td_zdesc);
+  builder_.add_virtual_td_xdesc(virtual_td_xdesc);
+  builder_.add_bn_ops(bn_ops);
+  builder_.add_mode(mode);
+  builder_.add_virtual_handle(virtual_handle);
+  return builder_.Finish();
+}
+
+struct FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnGetBatchNormalizationTrainingExReserveSpaceSizeBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_MODE = 6,
+    VT_BN_OPS = 8,
+    VT_VIRTUAL_AD_ACTIVATION_DESC = 10,
+    VT_VIRTUAL_TD_XDESC = 12,
+    VT_SIZE_IN_BYTES = 14
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t mode() const {
+    return GetField<uint64_t>(VT_MODE, 0);
+  }
+  uint64_t bn_ops() const {
+    return GetField<uint64_t>(VT_BN_OPS, 0);
+  }
+  uint64_t virtual_ad_activation_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_AD_ACTIVATION_DESC, 0);
+  }
+  uint64_t virtual_td_xdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_XDESC, 0);
+  }
+  uint64_t size_in_bytes() const {
+    return GetField<uint64_t>(VT_SIZE_IN_BYTES, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_MODE) &&
+           VerifyField<uint64_t>(verifier, VT_BN_OPS) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_AD_ACTIVATION_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_XDESC) &&
+           VerifyField<uint64_t>(verifier, VT_SIZE_IN_BYTES) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnGetBatchNormalizationTrainingExReserveSpaceSizeBuilder {
+  typedef FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_mode(uint64_t mode) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_MODE, mode, 0);
+  }
+  void add_bn_ops(uint64_t bn_ops) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_BN_OPS, bn_ops, 0);
+  }
+  void add_virtual_ad_activation_desc(uint64_t virtual_ad_activation_desc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_VIRTUAL_AD_ACTIVATION_DESC, virtual_ad_activation_desc, 0);
+  }
+  void add_virtual_td_xdesc(uint64_t virtual_td_xdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_VIRTUAL_TD_XDESC, virtual_td_xdesc, 0);
+  }
+  void add_size_in_bytes(uint64_t size_in_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize::VT_SIZE_IN_BYTES, size_in_bytes, 0);
+  }
+  explicit FBCudnnGetBatchNormalizationTrainingExReserveSpaceSizeBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize> CreateFBCudnnGetBatchNormalizationTrainingExReserveSpaceSize(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t mode = 0,
+    uint64_t bn_ops = 0,
+    uint64_t virtual_ad_activation_desc = 0,
+    uint64_t virtual_td_xdesc = 0,
+    uint64_t size_in_bytes = 0) {
+  FBCudnnGetBatchNormalizationTrainingExReserveSpaceSizeBuilder builder_(_fbb);
+  builder_.add_size_in_bytes(size_in_bytes);
+  builder_.add_virtual_td_xdesc(virtual_td_xdesc);
+  builder_.add_virtual_ad_activation_desc(virtual_ad_activation_desc);
+  builder_.add_bn_ops(bn_ops);
+  builder_.add_mode(mode);
+  builder_.add_virtual_handle(virtual_handle);
+  return builder_.Finish();
+}
+
+struct FBCudnnBatchNormalizationForwardTrainingEx FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudnnBatchNormalizationForwardTrainingExBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_MODE = 6,
+    VT_BN_OPS = 8,
+    VT_ALPHA = 10,
+    VT_BETA = 12,
+    VT_VIRTUAL_TD_XDESC = 14,
+    VT_X_DATA = 16,
+    VT_VIRTUAL_TD_YDESC = 18,
+    VT_Y_DATA = 20,
+    VT_VIRTUAL_TD_ZDESC = 22,
+    VT_Z_DATA = 24,
+    VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC = 26,
+    VT_BN_SCALE_DATA = 28,
+    VT_BN_BIAS_DATA = 30,
+    VT_EXPONENTIAL_AVERAGE_FACTOR = 32,
+    VT_RESULT_RUNNING_MEAN_DATA = 34,
+    VT_RESULT_RUNNING_VARIANCE_DATA = 36,
+    VT_EPSILON = 38,
+    VT_SAVE_MEAN = 40,
+    VT_SAVE_INV_VARIANCE = 42,
+    VT_VIRTUAL_AD_ACTIVATION_DESC = 44,
+    VT_WORKSPACE = 46,
+    VT_WORKSPACE_SIZE_IN_BYTES = 48,
+    VT_RESERVE_SPACE = 50,
+    VT_RESERVE_SPACE_SIZE_IN_BYTES = 52
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t mode() const {
+    return GetField<uint64_t>(VT_MODE, 0);
+  }
+  uint64_t bn_ops() const {
+    return GetField<uint64_t>(VT_BN_OPS, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *alpha() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_ALPHA);
+  }
+  const flatbuffers::Vector<uint8_t> *beta() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BETA);
+  }
+  uint64_t virtual_td_xdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_XDESC, 0);
+  }
+  uint64_t x_data() const {
+    return GetField<uint64_t>(VT_X_DATA, 0);
+  }
+  uint64_t virtual_td_ydesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_YDESC, 0);
+  }
+  uint64_t y_data() const {
+    return GetField<uint64_t>(VT_Y_DATA, 0);
+  }
+  uint64_t virtual_td_zdesc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_ZDESC, 0);
+  }
+  uint64_t z_data() const {
+    return GetField<uint64_t>(VT_Z_DATA, 0);
+  }
+  uint64_t virtual_td_bn_scale_bias_mean_var_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC, 0);
+  }
+  uint64_t bn_scale_data() const {
+    return GetField<uint64_t>(VT_BN_SCALE_DATA, 0);
+  }
+  uint64_t bn_bias_data() const {
+    return GetField<uint64_t>(VT_BN_BIAS_DATA, 0);
+  }
+  double exponential_average_factor() const {
+    return GetField<double>(VT_EXPONENTIAL_AVERAGE_FACTOR, 0.0);
+  }
+  uint64_t result_running_mean_data() const {
+    return GetField<uint64_t>(VT_RESULT_RUNNING_MEAN_DATA, 0);
+  }
+  uint64_t result_running_variance_data() const {
+    return GetField<uint64_t>(VT_RESULT_RUNNING_VARIANCE_DATA, 0);
+  }
+  double epsilon() const {
+    return GetField<double>(VT_EPSILON, 0.0);
+  }
+  uint64_t save_mean() const {
+    return GetField<uint64_t>(VT_SAVE_MEAN, 0);
+  }
+  uint64_t save_inv_variance() const {
+    return GetField<uint64_t>(VT_SAVE_INV_VARIANCE, 0);
+  }
+  uint64_t virtual_ad_activation_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_AD_ACTIVATION_DESC, 0);
+  }
+  uint64_t workspace() const {
+    return GetField<uint64_t>(VT_WORKSPACE, 0);
+  }
+  uint64_t workspace_size_in_bytes() const {
+    return GetField<uint64_t>(VT_WORKSPACE_SIZE_IN_BYTES, 0);
+  }
+  uint64_t reserve_space() const {
+    return GetField<uint64_t>(VT_RESERVE_SPACE, 0);
+  }
+  uint64_t reserve_space_size_in_bytes() const {
+    return GetField<uint64_t>(VT_RESERVE_SPACE_SIZE_IN_BYTES, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_MODE) &&
+           VerifyField<uint64_t>(verifier, VT_BN_OPS) &&
+           VerifyOffset(verifier, VT_ALPHA) &&
+           verifier.VerifyVector(alpha()) &&
+           VerifyOffset(verifier, VT_BETA) &&
+           verifier.VerifyVector(beta()) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_XDESC) &&
+           VerifyField<uint64_t>(verifier, VT_X_DATA) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_YDESC) &&
+           VerifyField<uint64_t>(verifier, VT_Y_DATA) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_ZDESC) &&
+           VerifyField<uint64_t>(verifier, VT_Z_DATA) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_BN_SCALE_DATA) &&
+           VerifyField<uint64_t>(verifier, VT_BN_BIAS_DATA) &&
+           VerifyField<double>(verifier, VT_EXPONENTIAL_AVERAGE_FACTOR) &&
+           VerifyField<uint64_t>(verifier, VT_RESULT_RUNNING_MEAN_DATA) &&
+           VerifyField<uint64_t>(verifier, VT_RESULT_RUNNING_VARIANCE_DATA) &&
+           VerifyField<double>(verifier, VT_EPSILON) &&
+           VerifyField<uint64_t>(verifier, VT_SAVE_MEAN) &&
+           VerifyField<uint64_t>(verifier, VT_SAVE_INV_VARIANCE) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_AD_ACTIVATION_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_WORKSPACE) &&
+           VerifyField<uint64_t>(verifier, VT_WORKSPACE_SIZE_IN_BYTES) &&
+           VerifyField<uint64_t>(verifier, VT_RESERVE_SPACE) &&
+           VerifyField<uint64_t>(verifier, VT_RESERVE_SPACE_SIZE_IN_BYTES) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudnnBatchNormalizationForwardTrainingExBuilder {
+  typedef FBCudnnBatchNormalizationForwardTrainingEx Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_mode(uint64_t mode) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_MODE, mode, 0);
+  }
+  void add_bn_ops(uint64_t bn_ops) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_BN_OPS, bn_ops, 0);
+  }
+  void add_alpha(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> alpha) {
+    fbb_.AddOffset(FBCudnnBatchNormalizationForwardTrainingEx::VT_ALPHA, alpha);
+  }
+  void add_beta(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> beta) {
+    fbb_.AddOffset(FBCudnnBatchNormalizationForwardTrainingEx::VT_BETA, beta);
+  }
+  void add_virtual_td_xdesc(uint64_t virtual_td_xdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_TD_XDESC, virtual_td_xdesc, 0);
+  }
+  void add_x_data(uint64_t x_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_X_DATA, x_data, 0);
+  }
+  void add_virtual_td_ydesc(uint64_t virtual_td_ydesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_TD_YDESC, virtual_td_ydesc, 0);
+  }
+  void add_y_data(uint64_t y_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_Y_DATA, y_data, 0);
+  }
+  void add_virtual_td_zdesc(uint64_t virtual_td_zdesc) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_TD_ZDESC, virtual_td_zdesc, 0);
+  }
+  void add_z_data(uint64_t z_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_Z_DATA, z_data, 0);
+  }
+  void add_virtual_td_bn_scale_bias_mean_var_desc(uint64_t virtual_td_bn_scale_bias_mean_var_desc) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_TD_BN_SCALE_BIAS_MEAN_VAR_DESC, virtual_td_bn_scale_bias_mean_var_desc, 0);
+  }
+  void add_bn_scale_data(uint64_t bn_scale_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_BN_SCALE_DATA, bn_scale_data, 0);
+  }
+  void add_bn_bias_data(uint64_t bn_bias_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_BN_BIAS_DATA, bn_bias_data, 0);
+  }
+  void add_exponential_average_factor(double exponential_average_factor) {
+    fbb_.AddElement<double>(FBCudnnBatchNormalizationForwardTrainingEx::VT_EXPONENTIAL_AVERAGE_FACTOR, exponential_average_factor, 0.0);
+  }
+  void add_result_running_mean_data(uint64_t result_running_mean_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_RESULT_RUNNING_MEAN_DATA, result_running_mean_data, 0);
+  }
+  void add_result_running_variance_data(uint64_t result_running_variance_data) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_RESULT_RUNNING_VARIANCE_DATA, result_running_variance_data, 0);
+  }
+  void add_epsilon(double epsilon) {
+    fbb_.AddElement<double>(FBCudnnBatchNormalizationForwardTrainingEx::VT_EPSILON, epsilon, 0.0);
+  }
+  void add_save_mean(uint64_t save_mean) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_SAVE_MEAN, save_mean, 0);
+  }
+  void add_save_inv_variance(uint64_t save_inv_variance) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_SAVE_INV_VARIANCE, save_inv_variance, 0);
+  }
+  void add_virtual_ad_activation_desc(uint64_t virtual_ad_activation_desc) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_VIRTUAL_AD_ACTIVATION_DESC, virtual_ad_activation_desc, 0);
+  }
+  void add_workspace(uint64_t workspace) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_WORKSPACE, workspace, 0);
+  }
+  void add_workspace_size_in_bytes(uint64_t workspace_size_in_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_WORKSPACE_SIZE_IN_BYTES, workspace_size_in_bytes, 0);
+  }
+  void add_reserve_space(uint64_t reserve_space) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_RESERVE_SPACE, reserve_space, 0);
+  }
+  void add_reserve_space_size_in_bytes(uint64_t reserve_space_size_in_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudnnBatchNormalizationForwardTrainingEx::VT_RESERVE_SPACE_SIZE_IN_BYTES, reserve_space_size_in_bytes, 0);
+  }
+  explicit FBCudnnBatchNormalizationForwardTrainingExBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudnnBatchNormalizationForwardTrainingEx> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudnnBatchNormalizationForwardTrainingEx>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudnnBatchNormalizationForwardTrainingEx> CreateFBCudnnBatchNormalizationForwardTrainingEx(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t mode = 0,
+    uint64_t bn_ops = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> alpha = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> beta = 0,
+    uint64_t virtual_td_xdesc = 0,
+    uint64_t x_data = 0,
+    uint64_t virtual_td_ydesc = 0,
+    uint64_t y_data = 0,
+    uint64_t virtual_td_zdesc = 0,
+    uint64_t z_data = 0,
+    uint64_t virtual_td_bn_scale_bias_mean_var_desc = 0,
+    uint64_t bn_scale_data = 0,
+    uint64_t bn_bias_data = 0,
+    double exponential_average_factor = 0.0,
+    uint64_t result_running_mean_data = 0,
+    uint64_t result_running_variance_data = 0,
+    double epsilon = 0.0,
+    uint64_t save_mean = 0,
+    uint64_t save_inv_variance = 0,
+    uint64_t virtual_ad_activation_desc = 0,
+    uint64_t workspace = 0,
+    uint64_t workspace_size_in_bytes = 0,
+    uint64_t reserve_space = 0,
+    uint64_t reserve_space_size_in_bytes = 0) {
+  FBCudnnBatchNormalizationForwardTrainingExBuilder builder_(_fbb);
+  builder_.add_reserve_space_size_in_bytes(reserve_space_size_in_bytes);
+  builder_.add_reserve_space(reserve_space);
+  builder_.add_workspace_size_in_bytes(workspace_size_in_bytes);
+  builder_.add_workspace(workspace);
+  builder_.add_virtual_ad_activation_desc(virtual_ad_activation_desc);
+  builder_.add_save_inv_variance(save_inv_variance);
+  builder_.add_save_mean(save_mean);
+  builder_.add_epsilon(epsilon);
+  builder_.add_result_running_variance_data(result_running_variance_data);
+  builder_.add_result_running_mean_data(result_running_mean_data);
+  builder_.add_exponential_average_factor(exponential_average_factor);
+  builder_.add_bn_bias_data(bn_bias_data);
+  builder_.add_bn_scale_data(bn_scale_data);
+  builder_.add_virtual_td_bn_scale_bias_mean_var_desc(virtual_td_bn_scale_bias_mean_var_desc);
+  builder_.add_z_data(z_data);
+  builder_.add_virtual_td_zdesc(virtual_td_zdesc);
+  builder_.add_y_data(y_data);
+  builder_.add_virtual_td_ydesc(virtual_td_ydesc);
+  builder_.add_x_data(x_data);
+  builder_.add_virtual_td_xdesc(virtual_td_xdesc);
+  builder_.add_bn_ops(bn_ops);
+  builder_.add_mode(mode);
+  builder_.add_virtual_handle(virtual_handle);
+  builder_.add_beta(beta);
+  builder_.add_alpha(alpha);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudnnBatchNormalizationForwardTrainingEx> CreateFBCudnnBatchNormalizationForwardTrainingExDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t mode = 0,
+    uint64_t bn_ops = 0,
+    const std::vector<uint8_t> *alpha = nullptr,
+    const std::vector<uint8_t> *beta = nullptr,
+    uint64_t virtual_td_xdesc = 0,
+    uint64_t x_data = 0,
+    uint64_t virtual_td_ydesc = 0,
+    uint64_t y_data = 0,
+    uint64_t virtual_td_zdesc = 0,
+    uint64_t z_data = 0,
+    uint64_t virtual_td_bn_scale_bias_mean_var_desc = 0,
+    uint64_t bn_scale_data = 0,
+    uint64_t bn_bias_data = 0,
+    double exponential_average_factor = 0.0,
+    uint64_t result_running_mean_data = 0,
+    uint64_t result_running_variance_data = 0,
+    double epsilon = 0.0,
+    uint64_t save_mean = 0,
+    uint64_t save_inv_variance = 0,
+    uint64_t virtual_ad_activation_desc = 0,
+    uint64_t workspace = 0,
+    uint64_t workspace_size_in_bytes = 0,
+    uint64_t reserve_space = 0,
+    uint64_t reserve_space_size_in_bytes = 0) {
+  auto alpha__ = alpha ? _fbb.CreateVector<uint8_t>(*alpha) : 0;
+  auto beta__ = beta ? _fbb.CreateVector<uint8_t>(*beta) : 0;
+  return CreateFBCudnnBatchNormalizationForwardTrainingEx(
+      _fbb,
+      virtual_handle,
+      mode,
+      bn_ops,
+      alpha__,
+      beta__,
+      virtual_td_xdesc,
+      x_data,
+      virtual_td_ydesc,
+      y_data,
+      virtual_td_zdesc,
+      z_data,
+      virtual_td_bn_scale_bias_mean_var_desc,
+      bn_scale_data,
+      bn_bias_data,
+      exponential_average_factor,
+      result_running_mean_data,
+      result_running_variance_data,
+      epsilon,
+      save_mean,
+      save_inv_variance,
+      virtual_ad_activation_desc,
+      workspace,
+      workspace_size_in_bytes,
+      reserve_space,
+      reserve_space_size_in_bytes);
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUDNNCALLS_H_

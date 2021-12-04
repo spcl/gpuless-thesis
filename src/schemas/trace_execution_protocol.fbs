@@ -29,6 +29,14 @@ union FBCudaApiCallUnion {
     FBCublasSetStreamV2,
     FBCublasSetMathMode,
     FBCublasSgemmV2,
+    FBCublasLtCreate,
+    FBCublasLtMatmulDescCreate,
+    FBCublasLtMatmulDescDestroy,
+    FBCublasLtMatmulDescSetAttribute,
+    FBCublasLtMatmul,
+    FBCublasLtMatrixLayoutCreate,
+    FBCublasLtMatrixLayoutDestroy,
+    FBCublasLtMatrixLayoutSetAttribute,
 
     // cuDNN
     FBCudnnCreate,
@@ -46,7 +54,12 @@ union FBCudaApiCallUnion {
     FBCudnnBatchNormalizationForwardInference,
     FBCudnnDestroyConvolutionDescriptor,
     FBCudnnDestroyFilterDescriptor,
-    FBCudnnDestroyTensorDescriptor
+    FBCudnnDestroyTensorDescriptor,
+    FBCudnnConvolutionBackwardData,
+    FBCudnnGetConvolutionBackwardDataAlgorithmV7,
+    FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize,
+    FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize,
+    FBCudnnBatchNormalizationForwardTrainingEx,
 }
 
 table FBCudaApiCall {

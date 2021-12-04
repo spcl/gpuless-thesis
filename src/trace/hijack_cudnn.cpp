@@ -179,7 +179,8 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
         getCudaTrace().historyTop());
     *returnedAlgoCount = top->returned_algo_count;
     std::memcpy(perfResults, top->perf_results.data(),
-                requestedAlgoCount * sizeof(cudnnConvolutionFwdAlgoPerf_t));
+                top->returned_algo_count *
+                    sizeof(cudnnConvolutionFwdAlgoPerf_t));
     return CUDNN_STATUS_SUCCESS;
 }
 
@@ -216,7 +217,21 @@ cudnnStatus_t cudnnConvolutionBackwardData(
     size_t workSpaceSizeInBytes, const void *beta,
     const cudnnTensorDescriptor_t dxDesc, void *dx) {
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
+
+    std::vector<uint8_t> alpha_vec(sizeof(float));
+    std::vector<uint8_t> beta_vec(sizeof(float));
+    std::memcpy(alpha_vec.data(), alpha, sizeof(float));
+    std::memcpy(beta_vec.data(), beta, sizeof(float));
+
+    getCudaTrace().record(
+        std::make_shared<gpuless::CudnnConvolutionBackwardData>(
+            reinterpret_cast<uint64_t>(handle), alpha_vec,
+            reinterpret_cast<uint64_t>(wDesc), w,
+            reinterpret_cast<uint64_t>(dyDesc), dy,
+            reinterpret_cast<uint64_t>(convDesc), algo, workSpace,
+            workSpaceSizeInBytes, beta_vec, reinterpret_cast<uint64_t>(dxDesc),
+            dx));
+    return CUDNN_STATUS_SUCCESS;
 }
 
 cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(
@@ -226,7 +241,25 @@ cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(
     const cudnnTensorDescriptor_t dxDesc, const int requestedAlgoCount,
     int *returnedAlgoCount, cudnnConvolutionBwdDataAlgoPerf_t *perfResults) {
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
+
+    getCudaTrace().record(
+        std::make_shared<gpuless::CudnnGetConvolutionBackwardDataAlgorithmV7>(
+            reinterpret_cast<uint64_t>(handle),
+            reinterpret_cast<uint64_t>(wDesc),
+            reinterpret_cast<uint64_t>(dyDesc),
+            reinterpret_cast<uint64_t>(convDesc),
+            reinterpret_cast<uint64_t>(dxDesc), requestedAlgoCount));
+
+    getTraceExecutor()->synchronize(getCudaTrace());
+    auto top = std::static_pointer_cast<
+        gpuless::CudnnGetConvolutionBackwardDataAlgorithmV7>(
+        getCudaTrace().historyTop());
+    *returnedAlgoCount = top->returned_algo_count;
+    std::memcpy(perfResults, top->perf_results.data(),
+                top->returned_algo_count *
+                    sizeof(cudnnConvolutionFwdAlgoPerf_t));
+
+    return CUDNN_STATUS_SUCCESS;
 }
 
 cudnnStatus_t cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
@@ -236,7 +269,23 @@ cudnnStatus_t cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
     const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc,
     const cudnnActivationDescriptor_t activationDesc, size_t *sizeInBytes) {
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
+
+    getCudaTrace().record(
+        std::make_shared<
+            gpuless::CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize>(
+            reinterpret_cast<uint64_t>(handle), mode, bnOps,
+            reinterpret_cast<uint64_t>(xDesc),
+            reinterpret_cast<uint64_t>(zDesc),
+            reinterpret_cast<uint64_t>(yDesc),
+            reinterpret_cast<uint64_t>(bnScaleBiasMeanVarDesc),
+            reinterpret_cast<uint64_t>(activationDesc)));
+    getTraceExecutor()->synchronize(getCudaTrace());
+    auto top = std::static_pointer_cast<
+        gpuless::CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize>(
+        getCudaTrace().historyTop());
+    *sizeInBytes = top->size_in_bytes;
+
+    return CUDNN_STATUS_SUCCESS;
 }
 
 cudnnStatus_t cudnnGetBatchNormalizationTrainingExReserveSpaceSize(
@@ -244,7 +293,23 @@ cudnnStatus_t cudnnGetBatchNormalizationTrainingExReserveSpaceSize(
     const cudnnActivationDescriptor_t activationDesc,
     const cudnnTensorDescriptor_t xDesc, size_t *sizeInBytes) {
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
+
+    getCudaTrace().record(
+        std::make_shared<
+            gpuless::CudnnGetBatchNormalizationTrainingExReserveSpaceSize>(
+            reinterpret_cast<uint64_t>(handle), mode, bnOps,
+            reinterpret_cast<uint64_t>(activationDesc),
+            reinterpret_cast<uint64_t>(xDesc)));
+    getTraceExecutor()->synchronize(getCudaTrace());
+    auto top = std::static_pointer_cast<
+        gpuless::CudnnGetBatchNormalizationTrainingExReserveSpaceSize>(
+        getCudaTrace().historyTop());
+    *sizeInBytes = top->size_in_bytes;
+    spdlog::debug("cudnnGetBatchNormalizationTrainingExReserveSpaceSize() "
+                  "[sizeInBytes={}]",
+                  *sizeInBytes);
+
+    return CUDNN_STATUS_SUCCESS;
 }
 
 cudnnStatus_t cudnnBatchNormalizationForwardInference(
@@ -285,7 +350,25 @@ cudnnStatus_t cudnnBatchNormalizationForwardTrainingEx(
     void *workspace, size_t workSpaceSizeInBytes, void *reserveSpace,
     size_t reserveSpaceSizeInBytes) {
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
+
+    std::vector<uint8_t> alpha_vec(sizeof(float));
+    std::vector<uint8_t> beta_vec(sizeof(float));
+    std::memcpy(alpha_vec.data(), alpha, sizeof(float));
+    std::memcpy(beta_vec.data(), beta, sizeof(float));
+
+    getCudaTrace().record(
+        std::make_shared<gpuless::CudnnBatchNormalizationForwardTrainingEx>(
+            reinterpret_cast<uint64_t>(handle), mode, bnOps, alpha_vec,
+            beta_vec, reinterpret_cast<uint64_t>(xDesc), xData,
+            reinterpret_cast<uint64_t>(yDesc), yData,
+            reinterpret_cast<uint64_t>(zDesc), zData,
+            reinterpret_cast<uint64_t>(bnScaleBiasMeanVarDesc), bnScaleData,
+            bnBiasData, exponentialAverageFactor, resultRunningMeanData,
+            resultRunningVarianceData, epsilon, saveMean, saveInvVariance,
+            reinterpret_cast<uint64_t>(activationDesc), workspace,
+            workSpaceSizeInBytes, reserveSpace, reserveSpaceSizeInBytes));
+
+    return CUDNN_STATUS_SUCCESS;
 }
 
 cudnnStatus_t

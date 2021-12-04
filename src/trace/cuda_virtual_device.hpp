@@ -4,6 +4,7 @@
 #include "../utils.hpp"
 #include <cstdint>
 #include <cublas.h>
+#include <cublasLt.h>
 #include <cuda.h>
 #include <cudnn.h>
 #include <fatbinary_section.h>
@@ -27,6 +28,9 @@ class CudaVirtualDevice {
 
     // virtualization of cublas handles to avoid costly synchronizations
     std::vector<cublasHandle_t> cublas_handle_virtual_to_real;
+    std::vector<cublasLtHandle_t> cublaslt_handle_virtual_to_real;
+    std::vector<cublasLtMatmulDesc_t> cublaslt_matmul_handle_virtual_to_real;
+    std::vector<cublasLtMatrixLayout_t> cublaslt_matrix_layout_handle_virtual_to_real;
 
     // stored device attributes
     size_t device_total_mem = 0;

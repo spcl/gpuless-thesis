@@ -80,6 +80,149 @@ class CublasSgemmV2 : public CublasApiCAll {
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
+class CublasLtCreate : public CublasApiCAll {
+  public:
+    uint64_t virtual_handle;
+
+    explicit CublasLtCreate(uint64_t virtualHandle);
+    explicit CublasLtCreate(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+// class CublasLtCtxInit : public CublasApiCAll {
+//   public:
+//     uint64_t executeNative(CudaVirtualDevice &vdev) override;
+//     flatbuffers::Offset<FBCudaApiCall>
+//     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+// };
+
+class CublasLtMatmulDescCreate : public CublasApiCAll {
+  public:
+    uint64_t virtual_mmd;
+    cublasComputeType_t compute_type;
+    cudaDataType_t scale_type;
+    CublasLtMatmulDescCreate(uint64_t virtualMmd,
+                             cublasComputeType_t computeType,
+                             cudaDataType_t scaleType);
+    explicit CublasLtMatmulDescCreate(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmulDescDestroy : public CublasApiCAll {
+  public:
+    uint64_t virtual_mmd;
+
+    explicit CublasLtMatmulDescDestroy(uint64_t virtualMmd);
+    explicit CublasLtMatmulDescDestroy(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmulDescSetAttribute : public CublasApiCAll {
+  public:
+    uint64_t virtual_mmd;
+    cublasLtMatmulDescAttributes_t attr;
+    std::vector<uint8_t> buf;
+
+    CublasLtMatmulDescSetAttribute(uint64_t virtualMmd,
+                                   cublasLtMatmulDescAttributes_t attr,
+                                   const std::vector<uint8_t> &buf);
+    explicit CublasLtMatmulDescSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmul : public CublasApiCAll {
+  public:
+    uint64_t virtual_handle;
+    uint64_t virtual_mmd;
+    std::vector<uint8_t> alpha;
+    std::vector<uint8_t> beta;
+    const void *A;
+    const void *B;
+    const void *C;
+    void *D;
+    uint64_t virtual_ml_a_desc;
+    uint64_t virtual_ml_b_desc;
+    uint64_t virtual_ml_c_desc;
+    uint64_t virtual_ml_d_desc;
+    cublasLtMatmulAlgo_t algo;
+    bool algo_is_null;
+    void *workspace;
+    size_t workspace_size_in_bytes;
+    cudaStream_t stream;
+
+    CublasLtMatmul(uint64_t virtualHandle, uint64_t virtualMmd,
+                   std::vector<uint8_t> &alpha,
+                   std::vector<uint8_t> &beta, const void *a,
+                   const void *b, const void *c, void *d,
+                   uint64_t virtualMlADesc, uint64_t virtualMlBDesc,
+                   uint64_t virtualMlCDesc, uint64_t virtualMlDDesc,
+                   const cublasLtMatmulAlgo_t &algo, bool algoIsNull,
+                   void *workspace, size_t workspaceSizeInBytes,
+                   cudaStream_t stream);
+    explicit CublasLtMatmul(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatrixLayoutCreate : public CublasApiCAll {
+  public:
+    uint64_t virtual_ml;
+    cudaDataType_t data_type;
+    uint64_t rows;
+    uint64_t cols;
+    int64_t ld;
+
+    CublasLtMatrixLayoutCreate(uint64_t virtualMl, cudaDataType_t dataType,
+                               uint64_t rows, uint64_t cols, int64_t ld);
+    explicit CublasLtMatrixLayoutCreate(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatrixLayoutDestroy : public CublasApiCAll {
+  public:
+    uint64_t virtual_ml;
+
+    explicit CublasLtMatrixLayoutDestroy(uint64_t virtualMl);
+    explicit CublasLtMatrixLayoutDestroy(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatrixLayoutSetAttribute : public CublasApiCAll {
+  public:
+    uint64_t virtual_ml;
+    cublasLtMatrixLayoutAttribute_t attr;
+    std::vector<uint8_t> buf;
+
+    CublasLtMatrixLayoutSetAttribute(uint64_t virtualMl,
+                                     cublasLtMatrixLayoutAttribute_t attr,
+                                     const std::vector<uint8_t> &buf);
+    explicit CublasLtMatrixLayoutSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
 } // namespace gpuless
 
 #endif // GPULESS_CUBLAS_API_CALLS_HPP

@@ -157,6 +157,8 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     cuda_trace.setHistoryTop(cuda_api_call);
 
     close(socket_fd);
+
+    spdlog::info("TraceExecutorTcp::synchronize() successful");
     return true;
 }
 

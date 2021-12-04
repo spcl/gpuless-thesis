@@ -92,7 +92,7 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     case FBCudaApiCallUnion_NONE:
         spdlog::error("Cannot convert FBCudaApiCallUnion_NONE");
         std::exit(EXIT_FAILURE);
-        break;
+    // CUDA
     case FBCudaApiCallUnion_FBCudaMalloc:
         cuda_api_call = std::make_shared<CudaMalloc>(fb_cuda_api_call);
         break;
@@ -128,6 +128,8 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         cuda_api_call =
             std::make_shared<CudaGetDeviceProperties>(fb_cuda_api_call);
         break;
+
+    // cuBLAS
     case FBCudaApiCallUnion_FBCublasCreateV2:
         cuda_api_call = std::make_shared<CublasCreateV2>(fb_cuda_api_call);
         break;
@@ -140,6 +142,38 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     case FBCudaApiCallUnion_FBCublasSgemmV2:
         cuda_api_call = std::make_shared<CublasSgemmV2>(fb_cuda_api_call);
         break;
+    case FBCudaApiCallUnion_FBCublasLtCreate:
+        cuda_api_call = std::make_shared<CublasLtCreate>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescCreate:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulDescCreate>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulDescDestroy>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulDescSetAttribute>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmul:
+        cuda_api_call = std::make_shared<CublasLtMatmul>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate:
+        cuda_api_call =
+            std::make_shared<CublasLtMatrixLayoutCreate>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy:
+        cuda_api_call =
+            std::make_shared<CublasLtMatrixLayoutDestroy>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute:
+        cuda_api_call = std::make_shared<CublasLtMatrixLayoutSetAttribute>(
+            fb_cuda_api_call);
+        break;
+
+    // cuDNN
     case FBCudaApiCallUnion_FBCudnnCreate:
         cuda_api_call = std::make_shared<CudnnCreate>(fb_cuda_api_call);
         break;
@@ -202,6 +236,30 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     case FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor:
         cuda_api_call =
             std::make_shared<CudnnDestroyTensorDescriptor>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnConvolutionBackwardData:
+        cuda_api_call =
+            std::make_shared<CudnnConvolutionBackwardData>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7:
+        cuda_api_call =
+            std::make_shared<CudnnGetConvolutionBackwardDataAlgorithmV7>(
+                fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize:
+        cuda_api_call = std::make_shared<
+            CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize>(
+            fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize:
+        cuda_api_call = std::make_shared<
+            CudnnGetBatchNormalizationTrainingExReserveSpaceSize>(
+            fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx:
+        cuda_api_call =
+            std::make_shared<CudnnBatchNormalizationForwardTrainingEx>(
+                fb_cuda_api_call);
         break;
     }
 

@@ -332,22 +332,141 @@ class CudnnConvolutionBackwardData : public CudaCudnnApiCall {
         const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
-
     flatbuffers::Offset<FBCudaApiCall>
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnGetConvolutionBackwardDataAlgorithmV7 : public CudaCudnnApiCall {
+  public:
+    uint64_t virtual_handle;
+    uint64_t virtual_fd_wdesc;
+    uint64_t virtual_td_dydesc;
+    uint64_t virtual_cd_convdesc;
+    uint64_t virtual_td_dxdesc;
+    int requested_algo_count;
 
+    // outputs
+    int returned_algo_count{};
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> perf_results;
+
+    CudnnGetConvolutionBackwardDataAlgorithmV7(uint64_t virtualHandle,
+                                               uint64_t virtualFdWdesc,
+                                               uint64_t virtualTdDydesc,
+                                               uint64_t virtualCdConvdesc,
+                                               uint64_t virtualTdDxdesc,
+                                               int requestedAlgoCount);
+    explicit CudnnGetConvolutionBackwardDataAlgorithmV7(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
 class CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize
-    : public CudaCudnnApiCall {};
+    : public CudaCudnnApiCall {
+  public:
+    uint64_t virtual_handle;
+    cudnnBatchNormMode_t mode;
+    cudnnBatchNormOps_t bn_ops;
+    uint64_t virtual_td_xdesc;
+    uint64_t virtual_td_zdesc;
+    uint64_t virtual_td_ydesc;
+    uint64_t virtual_td_bn_scale_bias_mean_var_desc;
+    uint64_t virtual_ad_activation_desc;
+
+    // output
+    size_t size_in_bytes{};
+
+    CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
+        uint64_t virtualHandle, cudnnBatchNormMode_t mode,
+        cudnnBatchNormOps_t bnOps, uint64_t virtualTdXdesc,
+        uint64_t virtualTdZdesc, uint64_t virtualTdYdesc,
+        uint64_t virtualTdBnScaleBiasMeanVarDesc,
+        uint64_t virtualAdActivationDesc);
+    explicit CudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
 
 class CudnnGetBatchNormalizationTrainingExReserveSpaceSize
-    : public CudaCudnnApiCall {};
+    : public CudaCudnnApiCall {
+  public:
+    uint64_t virtual_handle;
+    cudnnBatchNormMode_t mode;
+    cudnnBatchNormOps_t bn_ops;
+    uint64_t virtual_ad_activation_desc;
+    uint64_t virtual_td_xdesc;
 
-class CudnnBatchNormalizationForwardTrainingEx : public CudaCudnnApiCall {};
+    // output
+    size_t size_in_bytes{};
+
+    CudnnGetBatchNormalizationTrainingExReserveSpaceSize(
+        uint64_t virtualHandle, cudnnBatchNormMode_t mode,
+        cudnnBatchNormOps_t bnOps, uint64_t virtualAdActivationDesc,
+        uint64_t virtualTdXdesc);
+    explicit CudnnGetBatchNormalizationTrainingExReserveSpaceSize(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CudnnBatchNormalizationForwardTrainingEx : public CudaCudnnApiCall {
+  public:
+    uint64_t virtual_handle;
+    cudnnBatchNormMode_t mode;
+    cudnnBatchNormOps_t bn_ops;
+    std::vector<uint8_t> alpha;
+    std::vector<uint8_t> beta;
+    uint64_t virtual_td_xdesc;
+    const void *x_data;
+    uint64_t virtual_td_ydesc;
+    void *y_data;
+    uint64_t virtual_td_zdesc;
+    const void *z_data;
+    uint64_t virtual_td_bn_scale_bias_mean_var_desc;
+    const void *bn_scale_data;
+    const void *bn_bias_data;
+    double exponential_average_factor;
+    void *result_running_mean_data;
+    void *result_running_variance_data;
+    double epsilon;
+    void *save_mean;
+    void *save_inv_variance;
+    uint64_t virtual_ad_activation_desc;
+    void *workspace;
+    size_t workspace_size_in_bytes;
+    void *reserve_space;
+    size_t reserve_space_size_in_bytes;
+
+    CudnnBatchNormalizationForwardTrainingEx(
+        uint64_t virtualHandle, cudnnBatchNormMode_t mode,
+        cudnnBatchNormOps_t bnOps, std::vector<uint8_t> &alpha,
+        std::vector<uint8_t> &beta, uint64_t virtualTdXdesc,
+        const void *xData, uint64_t virtualTdYdesc, void *yData,
+        uint64_t virtualTdZdesc, const void *zData,
+        uint64_t virtualTdBnScaleBiasMeanVarDesc, const void *bnScaleData,
+        const void *bnBiasData, double exponentialAverageFactor,
+        void *resultRunningMeanData, void *resultRunningVarianceData,
+        double epsilon, void *saveMean, void *saveInvVariance,
+        uint64_t virtualAdActivationDesc, void *workspace,
+        size_t workspaceSizeInBytes, void *reserveSpace,
+        size_t reserveSpaceSizeInBytes);
+    explicit CudnnBatchNormalizationForwardTrainingEx(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
 
 } // namespace gpuless
 

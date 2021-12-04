@@ -3,11 +3,15 @@ import pickle
 import torch
 import numpy as np
 
+from timeit import default_timer as timer
+
 import inference_utils as infu
 from global_vars import *
 
 model_file = './3dunet_kits19_pytorch.ptc'
 input_file = './samples/case_00000.pkl'
+
+start = timer()
 
 device = torch.device("cuda")
 model = torch.jit.load(model_file, map_location=device)
@@ -67,3 +71,6 @@ with open(input_file, 'rb') as f:
     bi = response_array.buffer_info()
     print(bi[0])
     print(bi[1])
+
+end = timer()
+print(end - start)

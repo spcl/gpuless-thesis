@@ -8,8 +8,8 @@
 
 #include "cublas_calls_generated.h"
 #include "cudevice_attributes_generated.h"
-#include "cudnn_calls_generated.h"
 #include "cuda_runtime_calls_generated.h"
+#include "cudnn_calls_generated.h"
 
 namespace gpuless {
 
@@ -84,27 +84,40 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCublasSetStreamV2 = 13,
   FBCudaApiCallUnion_FBCublasSetMathMode = 14,
   FBCudaApiCallUnion_FBCublasSgemmV2 = 15,
-  FBCudaApiCallUnion_FBCudnnCreate = 16,
-  FBCudaApiCallUnion_FBCudnnSetStream = 17,
-  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 18,
-  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 19,
-  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 20,
-  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 21,
-  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 22,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 23,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 24,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 25,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 26,
-  FBCudaApiCallUnion_FBCudnnConvolutionForward = 27,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 28,
-  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 29,
-  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 30,
-  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 31,
+  FBCudaApiCallUnion_FBCublasLtCreate = 16,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescCreate = 17,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy = 18,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute = 19,
+  FBCudaApiCallUnion_FBCublasLtMatmul = 20,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate = 21,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy = 22,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute = 23,
+  FBCudaApiCallUnion_FBCudnnCreate = 24,
+  FBCudaApiCallUnion_FBCudnnSetStream = 25,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 26,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 27,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 28,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 29,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 30,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 31,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 32,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 33,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 34,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 35,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 36,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 37,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 38,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 39,
+  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 40,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 41,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 42,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 43,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 44,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
-  FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor
+  FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[32] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[45] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
@@ -122,6 +135,14 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[32] {
     FBCudaApiCallUnion_FBCublasSetStreamV2,
     FBCudaApiCallUnion_FBCublasSetMathMode,
     FBCudaApiCallUnion_FBCublasSgemmV2,
+    FBCudaApiCallUnion_FBCublasLtCreate,
+    FBCudaApiCallUnion_FBCublasLtMatmulDescCreate,
+    FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy,
+    FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute,
+    FBCudaApiCallUnion_FBCublasLtMatmul,
+    FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate,
+    FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy,
+    FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute,
     FBCudaApiCallUnion_FBCudnnCreate,
     FBCudaApiCallUnion_FBCudnnSetStream,
     FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor,
@@ -137,13 +158,18 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[32] {
     FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference,
     FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor,
     FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor,
-    FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor
+    FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor,
+    FBCudaApiCallUnion_FBCudnnConvolutionBackwardData,
+    FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7,
+    FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize,
+    FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize,
+    FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx
   };
   return values;
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[33] = {
+  static const char * const names[46] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
@@ -160,6 +186,14 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCublasSetStreamV2",
     "FBCublasSetMathMode",
     "FBCublasSgemmV2",
+    "FBCublasLtCreate",
+    "FBCublasLtMatmulDescCreate",
+    "FBCublasLtMatmulDescDestroy",
+    "FBCublasLtMatmulDescSetAttribute",
+    "FBCublasLtMatmul",
+    "FBCublasLtMatrixLayoutCreate",
+    "FBCublasLtMatrixLayoutDestroy",
+    "FBCublasLtMatrixLayoutSetAttribute",
     "FBCudnnCreate",
     "FBCudnnSetStream",
     "FBCudnnCreateTensorDescriptor",
@@ -176,13 +210,18 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCudnnDestroyConvolutionDescriptor",
     "FBCudnnDestroyFilterDescriptor",
     "FBCudnnDestroyTensorDescriptor",
+    "FBCudnnConvolutionBackwardData",
+    "FBCudnnGetConvolutionBackwardDataAlgorithmV7",
+    "FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize",
+    "FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize",
+    "FBCudnnBatchNormalizationForwardTrainingEx",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameFBCudaApiCallUnion(FBCudaApiCallUnion e) {
-  if (flatbuffers::IsOutRange(e, FBCudaApiCallUnion_NONE, FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor)) return "";
+  if (flatbuffers::IsOutRange(e, FBCudaApiCallUnion_NONE, FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesFBCudaApiCallUnion()[index];
 }
@@ -251,6 +290,38 @@ template<> struct FBCudaApiCallUnionTraits<FBCublasSgemmV2> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSgemmV2;
 };
 
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtCreate> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtCreate;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulDescCreate> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulDescCreate;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulDescDestroy> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulDescSetAttribute> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmul> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmul;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutCreate> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutDestroy> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutSetAttribute> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute;
+};
+
 template<> struct FBCudaApiCallUnionTraits<FBCudnnCreate> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnCreate;
 };
@@ -313,6 +384,26 @@ template<> struct FBCudaApiCallUnionTraits<FBCudnnDestroyFilterDescriptor> {
 
 template<> struct FBCudaApiCallUnionTraits<FBCudnnDestroyTensorDescriptor> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnConvolutionBackwardData> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnConvolutionBackwardData;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnGetConvolutionBackwardDataAlgorithmV7> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudnnBatchNormalizationForwardTrainingEx> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx;
 };
 
 bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void *obj, FBCudaApiCallUnion type);
@@ -438,6 +529,30 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const FBCublasSgemmV2 *api_call_as_FBCublasSgemmV2() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSgemmV2 ? static_cast<const FBCublasSgemmV2 *>(api_call()) : nullptr;
   }
+  const FBCublasLtCreate *api_call_as_FBCublasLtCreate() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtCreate ? static_cast<const FBCublasLtCreate *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulDescCreate *api_call_as_FBCublasLtMatmulDescCreate() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulDescCreate ? static_cast<const FBCublasLtMatmulDescCreate *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulDescDestroy *api_call_as_FBCublasLtMatmulDescDestroy() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy ? static_cast<const FBCublasLtMatmulDescDestroy *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulDescSetAttribute *api_call_as_FBCublasLtMatmulDescSetAttribute() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute ? static_cast<const FBCublasLtMatmulDescSetAttribute *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmul *api_call_as_FBCublasLtMatmul() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmul ? static_cast<const FBCublasLtMatmul *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatrixLayoutCreate *api_call_as_FBCublasLtMatrixLayoutCreate() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate ? static_cast<const FBCublasLtMatrixLayoutCreate *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatrixLayoutDestroy *api_call_as_FBCublasLtMatrixLayoutDestroy() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy ? static_cast<const FBCublasLtMatrixLayoutDestroy *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatrixLayoutSetAttribute *api_call_as_FBCublasLtMatrixLayoutSetAttribute() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute ? static_cast<const FBCublasLtMatrixLayoutSetAttribute *>(api_call()) : nullptr;
+  }
   const FBCudnnCreate *api_call_as_FBCudnnCreate() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreate ? static_cast<const FBCudnnCreate *>(api_call()) : nullptr;
   }
@@ -485,6 +600,21 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const FBCudnnDestroyTensorDescriptor *api_call_as_FBCudnnDestroyTensorDescriptor() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor ? static_cast<const FBCudnnDestroyTensorDescriptor *>(api_call()) : nullptr;
+  }
+  const FBCudnnConvolutionBackwardData *api_call_as_FBCudnnConvolutionBackwardData() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnConvolutionBackwardData ? static_cast<const FBCudnnConvolutionBackwardData *>(api_call()) : nullptr;
+  }
+  const FBCudnnGetConvolutionBackwardDataAlgorithmV7 *api_call_as_FBCudnnGetConvolutionBackwardDataAlgorithmV7() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 ? static_cast<const FBCudnnGetConvolutionBackwardDataAlgorithmV7 *>(api_call()) : nullptr;
+  }
+  const FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize *api_call_as_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize ? static_cast<const FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize *>(api_call()) : nullptr;
+  }
+  const FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize *api_call_as_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize ? static_cast<const FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize *>(api_call()) : nullptr;
+  }
+  const FBCudnnBatchNormalizationForwardTrainingEx *api_call_as_FBCudnnBatchNormalizationForwardTrainingEx() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx ? static_cast<const FBCudnnBatchNormalizationForwardTrainingEx *>(api_call()) : nullptr;
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -555,6 +685,38 @@ template<> inline const FBCublasSgemmV2 *FBCudaApiCall::api_call_as<FBCublasSgem
   return api_call_as_FBCublasSgemmV2();
 }
 
+template<> inline const FBCublasLtCreate *FBCudaApiCall::api_call_as<FBCublasLtCreate>() const {
+  return api_call_as_FBCublasLtCreate();
+}
+
+template<> inline const FBCublasLtMatmulDescCreate *FBCudaApiCall::api_call_as<FBCublasLtMatmulDescCreate>() const {
+  return api_call_as_FBCublasLtMatmulDescCreate();
+}
+
+template<> inline const FBCublasLtMatmulDescDestroy *FBCudaApiCall::api_call_as<FBCublasLtMatmulDescDestroy>() const {
+  return api_call_as_FBCublasLtMatmulDescDestroy();
+}
+
+template<> inline const FBCublasLtMatmulDescSetAttribute *FBCudaApiCall::api_call_as<FBCublasLtMatmulDescSetAttribute>() const {
+  return api_call_as_FBCublasLtMatmulDescSetAttribute();
+}
+
+template<> inline const FBCublasLtMatmul *FBCudaApiCall::api_call_as<FBCublasLtMatmul>() const {
+  return api_call_as_FBCublasLtMatmul();
+}
+
+template<> inline const FBCublasLtMatrixLayoutCreate *FBCudaApiCall::api_call_as<FBCublasLtMatrixLayoutCreate>() const {
+  return api_call_as_FBCublasLtMatrixLayoutCreate();
+}
+
+template<> inline const FBCublasLtMatrixLayoutDestroy *FBCudaApiCall::api_call_as<FBCublasLtMatrixLayoutDestroy>() const {
+  return api_call_as_FBCublasLtMatrixLayoutDestroy();
+}
+
+template<> inline const FBCublasLtMatrixLayoutSetAttribute *FBCudaApiCall::api_call_as<FBCublasLtMatrixLayoutSetAttribute>() const {
+  return api_call_as_FBCublasLtMatrixLayoutSetAttribute();
+}
+
 template<> inline const FBCudnnCreate *FBCudaApiCall::api_call_as<FBCudnnCreate>() const {
   return api_call_as_FBCudnnCreate();
 }
@@ -617,6 +779,26 @@ template<> inline const FBCudnnDestroyFilterDescriptor *FBCudaApiCall::api_call_
 
 template<> inline const FBCudnnDestroyTensorDescriptor *FBCudaApiCall::api_call_as<FBCudnnDestroyTensorDescriptor>() const {
   return api_call_as_FBCudnnDestroyTensorDescriptor();
+}
+
+template<> inline const FBCudnnConvolutionBackwardData *FBCudaApiCall::api_call_as<FBCudnnConvolutionBackwardData>() const {
+  return api_call_as_FBCudnnConvolutionBackwardData();
+}
+
+template<> inline const FBCudnnGetConvolutionBackwardDataAlgorithmV7 *FBCudaApiCall::api_call_as<FBCudnnGetConvolutionBackwardDataAlgorithmV7>() const {
+  return api_call_as_FBCudnnGetConvolutionBackwardDataAlgorithmV7();
+}
+
+template<> inline const FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize *FBCudaApiCall::api_call_as<FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize>() const {
+  return api_call_as_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize();
+}
+
+template<> inline const FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize *FBCudaApiCall::api_call_as<FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize>() const {
+  return api_call_as_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize();
+}
+
+template<> inline const FBCudnnBatchNormalizationForwardTrainingEx *FBCudaApiCall::api_call_as<FBCudnnBatchNormalizationForwardTrainingEx>() const {
+  return api_call_as_FBCudnnBatchNormalizationForwardTrainingEx();
 }
 
 struct FBCudaApiCallBuilder {
@@ -1161,6 +1343,38 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
       auto ptr = reinterpret_cast<const FBCublasSgemmV2 *>(obj);
       return verifier.VerifyTable(ptr);
     }
+    case FBCudaApiCallUnion_FBCublasLtCreate: {
+      auto ptr = reinterpret_cast<const FBCublasLtCreate *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescCreate: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulDescCreate *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulDescDestroy *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulDescSetAttribute *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmul: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmul *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatrixLayoutCreate *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatrixLayoutDestroy *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatrixLayoutSetAttribute *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
     case FBCudaApiCallUnion_FBCudnnCreate: {
       auto ptr = reinterpret_cast<const FBCudnnCreate *>(obj);
       return verifier.VerifyTable(ptr);
@@ -1223,6 +1437,26 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
     }
     case FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor: {
       auto ptr = reinterpret_cast<const FBCudnnDestroyTensorDescriptor *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnConvolutionBackwardData: {
+      auto ptr = reinterpret_cast<const FBCudnnConvolutionBackwardData *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7: {
+      auto ptr = reinterpret_cast<const FBCudnnGetConvolutionBackwardDataAlgorithmV7 *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize: {
+      auto ptr = reinterpret_cast<const FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize: {
+      auto ptr = reinterpret_cast<const FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx: {
+      auto ptr = reinterpret_cast<const FBCudnnBatchNormalizationForwardTrainingEx *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return true;

@@ -120,3 +120,90 @@ table FBCudnnDestroyFilterDescriptor {
 table FBCudnnDestroyTensorDescriptor {
     virtual_td:uint64;
 }
+
+table FBCudnnConvolutionBackwardData {
+    virtual_handle:uint64;
+    alpha:[uint8];
+    virtual_fd_wdesc:uint64;
+    w:uint64;
+    virtual_td_dydesc:uint64;
+    dy:uint64;
+    virtual_cd:uint64;
+    algo:uint64;
+    workspace:uint64;
+    workspace_size_in_bytes:uint64;
+    beta:[uint8];
+    virtual_td_dxdesc:uint64;
+    dx:uint64;
+}
+
+table FBCudnnConvolutionBwdDataAlgoPerf {
+    algo:uint64;
+    status:uint64;
+    time:float;
+    memory:uint64;
+    determinism:uint64;
+    math_type:uint64;
+    reserved:[int];
+}
+
+table FBCudnnGetConvolutionBackwardDataAlgorithmV7 {
+    virtual_handle:uint64;
+    virtual_fd_wdesc:uint64;
+    virtual_td_dydesc:uint64;
+    virtual_cd_convdesc:uint64;
+    virtual_td_dxdesc:uint64;
+    requested_algo_count:int;
+    returned_algo_count:int;
+    perf_results:[FBCudnnConvolutionBwdDataAlgoPerf];
+}
+
+table FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize {
+    virtual_handle:uint64;
+    mode:uint64;
+    bn_ops:uint64;
+    virtual_td_xdesc:uint64;
+    virtual_td_zdesc:uint64;
+    virtual_td_ydesc:uint64;
+    virtual_td_bn_scale_bias_mean_var_desc:uint64;
+    virtual_ad_activation_desc:uint64;
+    size_in_bytes:uint64;
+}
+
+table FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize {
+    virtual_handle:uint64;
+    mode:uint64;
+    bn_ops:uint64;
+    virtual_ad_activation_desc:uint64;
+    virtual_td_xdesc:uint64;
+    size_in_bytes:uint64;
+}
+
+table FBCudnnBatchNormalizationForwardTrainingEx {
+    virtual_handle:uint64;
+    mode:uint64;
+    bn_ops:uint64;
+    alpha:[uint8];
+    beta:[uint8];
+    virtual_td_xdesc:uint64;
+    x_data:uint64;
+    virtual_td_ydesc:uint64;
+    y_data:uint64;
+    virtual_td_zdesc:uint64;
+    z_data:uint64;
+    virtual_td_bn_scale_bias_mean_var_desc:uint64;
+    bn_scale_data:uint64;
+    bn_bias_data:uint64;
+    exponential_average_factor:double;
+    result_running_mean_data:uint64;
+    result_running_variance_data:uint64;
+    epsilon:double;
+    save_mean:uint64;
+    save_inv_variance:uint64;
+    virtual_ad_activation_desc:uint64;
+    workspace:uint64;
+    workspace_size_in_bytes:uint64;
+    reserve_space:uint64;
+    reserve_space_size_in_bytes:uint64;
+}
+
