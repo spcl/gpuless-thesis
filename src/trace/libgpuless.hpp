@@ -10,14 +10,21 @@
 #include <unistd.h>
 
 #include "cuda_trace.hpp"
-#include "trace_executor.hpp"
 #include "dlsym_util.hpp"
+#include "trace_executor.hpp"
 
 #define LINK_CU_FUNCTION(symbol, f)                                            \
     do {                                                                       \
         if (strcmp(symbol, #f) == 0) {                                         \
             *pfn = (void *)&f;                                                 \
             return CUDA_SUCCESS;                                               \
+        }                                                                      \
+    } while (0)
+
+#define LINK_CU_FUNCTION_DLSYM(symbol, f)                                      \
+    do {                                                                       \
+        if (strcmp(symbol, #f) == 0) {                                         \
+            return (void *)&f;                                                 \
         }                                                                      \
     } while (0)
 

@@ -586,9 +586,15 @@ void *dlsym(void *handle, const char *symbol) {
         return (real_dlsym(handle, symbol));
     }
 
-    if (strcmp(symbol, "cuGetProcAddress") == 0) {
-        return (void *)&cuGetProcAddress;
-    }
+    LINK_CU_FUNCTION_DLSYM(symbol, cuGetProcAddress);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDevicePrimaryCtxRelease_v2);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDeviceGet);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDeviceGetCount);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDeviceGetName);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDeviceTotalMem);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDeviceGetAttribute);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDriverGetVersion);
+    LINK_CU_FUNCTION_DLSYM(symbol, cuDevicePrimaryCtxGetState);
 
     return real_dlsym(handle, symbol);
 }
