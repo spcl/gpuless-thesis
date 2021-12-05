@@ -451,4 +451,26 @@ CudaGetDeviceProperties::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     return api_call_union;
 }
 
+/*
+ * cudaDeviceSynchronize
+ */
+CudaDeviceSynchronize::CudaDeviceSynchronize() = default;
+
+CudaDeviceSynchronize::CudaDeviceSynchronize(
+    const FBCudaApiCall *fb_cuda_api_call) {}
+
+uint64_t CudaDeviceSynchronize::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cudaDeviceSynchronize);
+    return real();
+}
+
+flatbuffers::Offset<FBCudaApiCall>
+CudaDeviceSynchronize::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaDeviceSynchronize(builder);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaDeviceSynchronize,
+        api_call.Union());
+    return api_call_union;
+}
+
 } // namespace gpuless

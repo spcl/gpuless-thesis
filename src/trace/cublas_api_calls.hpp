@@ -156,7 +156,7 @@ class CublasLtMatmul : public CublasApiCAll {
     uint64_t virtual_ml_b_desc;
     uint64_t virtual_ml_c_desc;
     uint64_t virtual_ml_d_desc;
-    cublasLtMatmulAlgo_t algo;
+    cublasLtMatmulAlgo_t algo{};
     bool algo_is_null;
     void *workspace;
     size_t workspace_size_in_bytes;

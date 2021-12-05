@@ -177,14 +177,14 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
     hijackInit();
     HIJACK_FN_PROLOGUE();
     if (kind == cudaMemcpyHostToDevice) {
-        SPDLOG_INFO("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]",
-                     __func__, dst, src, getpid());
+        SPDLOG_INFO("{}() [cudaMemcpyHostToDevice, {} <- {}, pid={}]", __func__,
+                    dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyH2D>(dst, src, count);
         std::memcpy(rec->buffer.data(), src, count);
         getCudaTrace().record(rec);
     } else if (kind == cudaMemcpyDeviceToHost) {
-        SPDLOG_INFO("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]",
-                     __func__, dst, src, getpid());
+        SPDLOG_INFO("{}() [cudaMemcpyDeviceToHost, {} <- {}, pid={}]", __func__,
+                    dst, src, getpid());
         auto rec = std::make_shared<CudaMemcpyD2H>(dst, src, count);
         getCudaTrace().record(rec);
         getTraceExecutor()->synchronize(getCudaTrace());
@@ -199,7 +199,7 @@ cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
         //                      dstb[0], dstb[1], dstb[2], dstb[3]);
     } else if (kind == cudaMemcpyDeviceToDevice) {
         SPDLOG_INFO("{}() [cudaMemcpyDeviceToDevice, {} <- {}, pid={}]",
-                     __func__, dst, src, getpid());
+                    __func__, dst, src, getpid());
         getCudaTrace().record(std::make_shared<CudaMemcpyD2D>(dst, src, count));
     } else {
         EXIT_NOT_IMPLEMENTED("cudaMemcpyKind");
@@ -323,6 +323,14 @@ cudaError_t cudaThreadSynchronize(void) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
     EXIT_NOT_IMPLEMENTED(__func__);
+    getCudaTrace().record(std::make_shared<CudaDeviceSynchronize>());
+    return cudaSuccess;
+}
+
+cudaError_t cudaDeviceSynchronize(void) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    getCudaTrace().record(std::make_shared<CudaDeviceSynchronize>());
     return cudaSuccess;
 }
 
@@ -414,8 +422,7 @@ void **__cudaRegisterFatBinary(void *fatCubin) {
     // appears in dscuda (as far as i know)
     size_t data_len = ((data_ull[1] - 1) / 8 + 1) * 8 + 16;
 
-    SPDLOG_DEBUG("Recording Fatbin data [id={}, size={}]", fatbin_id,
-                  data_len);
+    SPDLOG_DEBUG("Recording Fatbin data [id={}, size={}]", fatbin_id, data_len);
 
     void *resource_ptr =
         reinterpret_cast<void *>(const_cast<unsigned long long *>(data_ull));

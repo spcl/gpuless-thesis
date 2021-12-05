@@ -59,7 +59,7 @@ void CudaTraceConverter::traceToExecRequest(
                 cuda_trace.getModuleIdToFatbinResource().find(module_id);
             if (mod_it == cuda_trace.getModuleIdToFatbinResource().end()) {
                 SPDLOG_ERROR("Unknown module {} for function", module_id,
-                              rfunc);
+                             rfunc);
             }
 
             bool module_is_loaded = std::get<2>(mod_it->second);
@@ -127,6 +127,10 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
     case FBCudaApiCallUnion_FBCudaGetDeviceProperties:
         cuda_api_call =
             std::make_shared<CudaGetDeviceProperties>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCudaDeviceSynchronize:
+        cuda_api_call =
+            std::make_shared<CudaDeviceSynchronize>(fb_cuda_api_call);
         break;
 
     // cuBLAS

@@ -345,9 +345,15 @@ CublasLtMatmul::CublasLtMatmul(const FBCudaApiCall *fb_cuda_api_call) {
     this->virtual_ml_c_desc = c->virtual_ml_c_desc();
     this->virtual_ml_d_desc = c->virtual_ml_d_desc();
 
-    cublasLtMatmulAlgo_t algo_struct;
-    std::memcpy(algo_struct.data, c->algo()->data(), 8 * sizeof(uint64_t));
-    this->algo = algo_struct;
+    assert(c->algo()->size() >= 8);
+    this->algo.data[0] = c->algo()->Get(0);
+    this->algo.data[1] = c->algo()->Get(1);
+    this->algo.data[2] = c->algo()->Get(2);
+    this->algo.data[3] = c->algo()->Get(3);
+    this->algo.data[4] = c->algo()->Get(4);
+    this->algo.data[5] = c->algo()->Get(5);
+    this->algo.data[6] = c->algo()->Get(6);
+    this->algo.data[7] = c->algo()->Get(7);
 
     this->algo_is_null = c->algo_is_null();
     this->workspace = reinterpret_cast<void *>(c->workspace());
