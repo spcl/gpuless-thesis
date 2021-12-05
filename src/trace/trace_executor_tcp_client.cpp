@@ -126,6 +126,8 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
         "TraceExecutorTcp::synchronize() [synchronize_counter={}, size={}]",
         this->synchronize_counter_, cuda_trace.callStack().size());
 
+    // collect statistics on synchronizations
+
     int socket_fd;
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         SPDLOG_ERROR("failed to open socket");

@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 #include <unistd.h>
 #include <sys/socket.h>
@@ -10,8 +11,6 @@
 #include <arpa/inet.h>
 
 #include <cuda.h>
-
-#include "manager/manager.hpp"
 
 #define checkCudaErrors(err) __checkCudaErrors(err, __FILE__, __LINE__)
 void __checkCudaErrors(CUresult r, const char *file, const int line);

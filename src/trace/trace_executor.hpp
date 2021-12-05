@@ -1,8 +1,8 @@
 #ifndef GPULESS_TRACEEXECUTOR_H
 #define GPULESS_TRACEEXECUTOR_H
 
-#include "../manager/manager.hpp"
-#include "../manager/manager_device.hpp"
+#include "manager/manager.hpp"
+#include "manager/manager_device.hpp"
 #include "cuda_api_calls.hpp"
 #include "cuda_trace.hpp"
 
