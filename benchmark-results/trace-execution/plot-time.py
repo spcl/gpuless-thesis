@@ -12,7 +12,7 @@ for fname in os.listdir('data'):
     f = open('data/' + fname)
     lines = [l.rstrip() for l in f.readlines()]
 
-    r = r'benchmark-([a-zA-Z0-9_]*)-([a-zA-Z0-9_]*)-([a-zA-Z0-9_]*)-.*'
+    r = r'benchmark-([a-zA-Z0-9_-]*)-(native|remote)-(remote|local)-.*'
     m = re.search(r, fname)
     benchmark_name = m.group(1)
     benchmark_type = m.group(2)
@@ -37,7 +37,8 @@ sns.set(rc={"figure.figsize": (8.5, 6.5)})
 sns.set_theme(style='whitegrid')
 
 hue_order=['Native', 'Local TCP', 'Remote TCP']
-order = ['latency', 'hotspot', 'srad_v1', 'resnet50']
+# order = ['latency', 'hotspot', 'srad_v1', 'resnet50']
+order = ['latency', 'hotspot', 'srad_v1', 'resnet50', '3d-unet-kits19']
 
 ax = sns.barplot(x='time',
                  y='benchmark',
