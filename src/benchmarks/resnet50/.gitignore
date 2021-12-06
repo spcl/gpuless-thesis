@@ -9,3 +9,4 @@ detect_cuda_version.cc
 image-recognition.cbp
 detect_cuda_compute_capabilities.cu
 *.log
+image-recognition-batched

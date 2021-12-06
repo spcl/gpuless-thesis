@@ -10,10 +10,9 @@
 #define kTOP_K 3
 
 const char *file_name = "./800px-Porsche_991_silver_IAA.jpg";
-// const char *file_name = "./800px-Sardinian_Warbler.jpg";
 
-bool load_image(cv::Mat &image) {
-    image = cv::imread(file_name);  // CV_8UC3
+bool load_image(cv::Mat &image, const char *fname) {
+    image = cv::imread(fname);  // CV_8UC3
     if (image.empty() || !image.data) {
         return false;
     }
@@ -29,26 +28,37 @@ bool load_image(cv::Mat &image) {
     return true;
 }
 
-int recognition(cv::Mat &image) {
+int main() {
+    // if (!load_image(image)) {
+    //     std::cerr << "failed to load image" << std::endl;
+    //     std::exit(EXIT_FAILURE);
+    // }
+
     static torch::jit::script::Module mod;
-    static bool init = false;
-    if (!init) {
-        try {
-            // reuse model in warm functions
-            mod = torch::jit::load("./resnet50.pt");
-            init = true;
-        }
-        catch (const c10::Error& e) {
-            std::cerr << "error loading the model " << e.msg() << '\n';
-            return -1;
-        }
+    try {
+        mod = torch::jit::load("./resnet50.pt");
+    } catch (const c10::Error& e) {
+        std::cerr << "error loading the model " << e.msg() << '\n';
+        return -1;
     }
 
-    if (load_image(image)) {
-        torch::Device device(torch::kCUDA);
-        // torch::Device device(torch::kCPU);
+    auto s = std::chrono::high_resolution_clock::now();
+    torch::Device device(torch::kCUDA);
+    mod.to(device);
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+    printf("%.8f (module load)\n", d);
 
-        mod.to(device);
+    std::vector<std::string> images = {
+        "./800px-Porsche_991_silver_IAA.jpg",
+        "./800px-Sardinian_Warbler.jpg",
+    };
+
+    for (unsigned i = 0; i < 100; i++) {
+        cv::Mat image;
+        load_image(image, images[i%2].c_str());
+
+        auto s = std::chrono::high_resolution_clock::now();
 
         auto input_tensor = torch::from_blob(
                 image.data, {1, kIMAGE_SIZE, kIMAGE_SIZE, kCHANNELS});
@@ -64,24 +74,14 @@ int recognition(cv::Mat &image) {
         auto softmaxs = std::get<0>(results)[0].softmax(0);
         auto indexs = std::get<1>(results)[0];
 
-        std::cout << indexs[0].item<int>() << " " << softmaxs[0].item<double>() << std::endl;
-        return indexs[0].item<int>();
+        int idx = indexs[0].item<int>();
+        double softmax = softmaxs[0].item<double>();
+
+        auto e = std::chrono::high_resolution_clock::now();
+        auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+        printf("%d %f,  time: %.8f (inference) \n", idx, softmax, d);
+        sleep(1);
     }
-
-    return -1;
-}
-
-int main() {
-    auto s = std::chrono::high_resolution_clock::now();
-
-    cv::Mat image;
-    if (recognition(image) < 0) {
-        std::cout << "image recognition failed" << std::endl;
-    }
-
-    auto e = std::chrono::high_resolution_clock::now();
-    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
-    printf("%.8f\n", d);
 
     return 0;
 }

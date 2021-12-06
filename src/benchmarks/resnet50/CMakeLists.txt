@@ -22,3 +22,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
 
 add_executable(image-recognition image-recognition.cpp)
 target_link_libraries(image-recognition "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
+
+add_executable(image-recognition-batched image-recognition-batched.cpp)
+target_link_libraries(image-recognition-batched "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
