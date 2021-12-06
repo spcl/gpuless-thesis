@@ -108,3 +108,6 @@ table FBCudaStreamSynchronize {
 table FBCudaGetDeviceProperties {
     properties_data:[uint8];
 }
+
+table FBCudaDeviceSynchronize {
+}

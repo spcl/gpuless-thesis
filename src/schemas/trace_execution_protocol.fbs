@@ -23,6 +23,7 @@ union FBCudaApiCallUnion {
     FBCudaFree,
     FBCudaStreamSynchronize,
     FBCudaGetDeviceProperties,
+    FBCudaDeviceSynchronize,
 
     // cuBLAS
     FBCublasCreateV2,

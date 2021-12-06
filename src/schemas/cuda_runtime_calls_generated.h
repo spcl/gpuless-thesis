@@ -47,6 +47,9 @@ struct FBCudaStreamSynchronizeBuilder;
 struct FBCudaGetDeviceProperties;
 struct FBCudaGetDevicePropertiesBuilder;
 
+struct FBCudaDeviceSynchronize;
+struct FBCudaDeviceSynchronizeBuilder;
+
 enum FBPtxParameterType : int8_t {
   FBPtxParameterType_s8 = 0,
   FBPtxParameterType_s16 = 1,
@@ -1148,6 +1151,35 @@ inline flatbuffers::Offset<FBCudaGetDeviceProperties> CreateFBCudaGetDevicePrope
   return CreateFBCudaGetDeviceProperties(
       _fbb,
       properties_data__);
+}
+
+struct FBCudaDeviceSynchronize FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaDeviceSynchronizeBuilder Builder;
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaDeviceSynchronizeBuilder {
+  typedef FBCudaDeviceSynchronize Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  explicit FBCudaDeviceSynchronizeBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaDeviceSynchronize> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaDeviceSynchronize>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaDeviceSynchronize> CreateFBCudaDeviceSynchronize(
+    flatbuffers::FlatBufferBuilder &_fbb) {
+  FBCudaDeviceSynchronizeBuilder builder_(_fbb);
+  return builder_.Finish();
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUDARUNTIMECALLS_H_
