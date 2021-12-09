@@ -21,10 +21,11 @@ run_bench_native() {
     cd $bench_dir
     printf '' > "$out_file" # clear output file
 
-    for ((i=1; i<$n_runs; i++)); do
+    for ((i=0; i<$n_runs; i++)); do
         t=$(./run_timed.sh)
         printf "$t\n" >> "$out_file"
         echo "run ${i}: ${t}"
+        sleep 1.0
     done
 
     popd
@@ -37,10 +38,11 @@ run_bench_remote() {
     cd $bench_dir
     printf '' > "$out_file" # clear output file
 
-    for ((i=1; i<$n_runs; i++)); do
+    for ((i=0; i<$n_runs; i++)); do
         t=$(SPDLOG_LEVEL=off MANAGER_IP=${remote_ip} MANAGER_PORT=8002 CUDA_BINARY=${cuda_bin} EXECUTOR_TYPE=tcp LD_PRELOAD=${project_dir}/src/build/libgpuless.so ./run_timed.sh)
         printf "$t\n" >> "$out_file"
         echo "run ${i}: ${t}"
+        sleep 1.0
     done
 
     popd
