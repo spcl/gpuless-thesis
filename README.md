@@ -9,7 +9,23 @@ cmake ..
 make
 ```
 
-## `libcudaanalysis`
+
+The log output level is set at compile time.
+Use the following to set the log level:
+
+```
+cmake .. -DSPDLOG_LEVEL_OFF=ON
+cmake .. -DSPDLOG_LEVEL_INFO=ON
+cmake .. -DSPDLOG_LEVEL_DEBUG=ON
+```
+
+Remove `CMakeCache.txt` before changing the log level.
+
+## `libgpuless.so`
+
+
+
+## `libcudaanalysis.so`
 
 `libcudaanalysis` can be used to trace CUDA calls for an application. Trace
 output will be written to stderr.
