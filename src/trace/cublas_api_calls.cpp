@@ -174,7 +174,7 @@ CublasSgemmV2::CublasSgemmV2(const FBCudaApiCall *fb_cuda_api_call) {
     this->n = c->n();
     this->k = c->k();
     this->alpha = c->alpha();
-    this->beta = c->alpha();
+    this->beta = c->beta();
     this->A = reinterpret_cast<const float *>(c->a());
     this->B = reinterpret_cast<const float *>(c->b());
     this->C = reinterpret_cast<const float *>(c->c());
@@ -286,7 +286,7 @@ CublasLtMatmulDescSetAttribute::CublasLtMatmulDescSetAttribute(
     this->virtual_mmd = c->virtual_mmd();
     this->attr = static_cast<cublasLtMatmulDescAttributes_t>(c->attr());
     this->buf.resize(c->buf()->size());
-    this->buf.insert(this->buf.begin(), c->buf()->begin(), c->buf()->end());
+    std::memcpy(this->buf.data(), c->buf()->data(), c->buf()->size());
 }
 
 uint64_t
@@ -331,11 +331,9 @@ CublasLtMatmul::CublasLtMatmul(const FBCudaApiCall *fb_cuda_api_call) {
     this->virtual_handle = c->virtual_handle();
     this->virtual_mmd = c->virtual_mmd();
     this->alpha.resize(c->alpha()->size());
-    this->alpha.insert(this->alpha.begin(), c->alpha()->begin(),
-                       c->alpha()->end());
+    std::memcpy(this->alpha.data(), c->alpha()->data(), c->alpha()->size());
     this->beta.resize(c->beta()->size());
-    this->beta.insert(this->alpha.begin(), c->beta()->begin(),
-                      c->beta()->end());
+    std::memcpy(this->beta.data(), c->beta()->data(), c->beta()->size());
     this->A = reinterpret_cast<const void *>(c->a());
     this->B = reinterpret_cast<const void *>(c->b());
     this->C = reinterpret_cast<const void *>(c->c());
@@ -494,7 +492,7 @@ CublasLtMatrixLayoutSetAttribute::CublasLtMatrixLayoutSetAttribute(
     this->virtual_ml = c->virtual_ml();
     this->attr = static_cast<cublasLtMatrixLayoutAttribute_t>(c->attr());
     this->buf.resize(c->buf()->size());
-    this->buf.insert(this->buf.begin(), c->buf()->begin(), c->buf()->end());
+    std::memcpy(this->buf.data(), c->buf()->data(), c->buf()->size());
 }
 
 uint64_t
