@@ -6,9 +6,9 @@
 
 #include "flatbuffers/flatbuffers.h"
 
-#include "cublas_calls_generated.h"
 #include "cudevice_attributes_generated.h"
 #include "cuda_runtime_calls_generated.h"
+#include "cublas_calls_generated.h"
 #include "cudnn_calls_generated.h"
 
 namespace gpuless {
@@ -93,32 +93,33 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate = 22,
   FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy = 23,
   FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute = 24,
-  FBCudaApiCallUnion_FBCudnnCreate = 25,
-  FBCudaApiCallUnion_FBCudnnSetStream = 26,
-  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 27,
-  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 28,
-  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 29,
-  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 30,
-  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 31,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 32,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 33,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 34,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 35,
-  FBCudaApiCallUnion_FBCudnnConvolutionForward = 36,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 37,
-  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 38,
-  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 39,
-  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 40,
-  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 41,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 42,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 43,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 44,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 45,
+  FBCudaApiCallUnion_FBCublasSgemmStridedBatched = 25,
+  FBCudaApiCallUnion_FBCudnnCreate = 26,
+  FBCudaApiCallUnion_FBCudnnSetStream = 27,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 28,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 29,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 30,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 31,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 32,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 33,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 34,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 35,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 36,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 37,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 38,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 39,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 40,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 41,
+  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 42,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 43,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 44,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 45,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 46,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
   FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[46] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[47] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
@@ -145,6 +146,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[46] {
     FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate,
     FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy,
     FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute,
+    FBCudaApiCallUnion_FBCublasSgemmStridedBatched,
     FBCudaApiCallUnion_FBCudnnCreate,
     FBCudaApiCallUnion_FBCudnnSetStream,
     FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor,
@@ -171,7 +173,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[46] {
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[47] = {
+  static const char * const names[48] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
@@ -197,6 +199,7 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCublasLtMatrixLayoutCreate",
     "FBCublasLtMatrixLayoutDestroy",
     "FBCublasLtMatrixLayoutSetAttribute",
+    "FBCublasSgemmStridedBatched",
     "FBCudnnCreate",
     "FBCudnnSetStream",
     "FBCudnnCreateTensorDescriptor",
@@ -327,6 +330,10 @@ template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutDestroy> {
 
 template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutSetAttribute> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasSgemmStridedBatched> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSgemmStridedBatched;
 };
 
 template<> struct FBCudaApiCallUnionTraits<FBCudnnCreate> {
@@ -563,6 +570,9 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const FBCublasLtMatrixLayoutSetAttribute *api_call_as_FBCublasLtMatrixLayoutSetAttribute() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute ? static_cast<const FBCublasLtMatrixLayoutSetAttribute *>(api_call()) : nullptr;
   }
+  const FBCublasSgemmStridedBatched *api_call_as_FBCublasSgemmStridedBatched() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSgemmStridedBatched ? static_cast<const FBCublasSgemmStridedBatched *>(api_call()) : nullptr;
+  }
   const FBCudnnCreate *api_call_as_FBCudnnCreate() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreate ? static_cast<const FBCudnnCreate *>(api_call()) : nullptr;
   }
@@ -729,6 +739,10 @@ template<> inline const FBCublasLtMatrixLayoutDestroy *FBCudaApiCall::api_call_a
 
 template<> inline const FBCublasLtMatrixLayoutSetAttribute *FBCudaApiCall::api_call_as<FBCublasLtMatrixLayoutSetAttribute>() const {
   return api_call_as_FBCublasLtMatrixLayoutSetAttribute();
+}
+
+template<> inline const FBCublasSgemmStridedBatched *FBCudaApiCall::api_call_as<FBCublasSgemmStridedBatched>() const {
+  return api_call_as_FBCublasSgemmStridedBatched();
 }
 
 template<> inline const FBCudnnCreate *FBCudaApiCall::api_call_as<FBCudnnCreate>() const {
@@ -1391,6 +1405,10 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
     }
     case FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute: {
       auto ptr = reinterpret_cast<const FBCublasLtMatrixLayoutSetAttribute *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasSgemmStridedBatched: {
+      auto ptr = reinterpret_cast<const FBCublasSgemmStridedBatched *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case FBCudaApiCallUnion_FBCudnnCreate: {

@@ -42,6 +42,9 @@ struct FBCublasLtMatrixLayoutDestroyBuilder;
 struct FBCublasLtMatrixLayoutSetAttribute;
 struct FBCublasLtMatrixLayoutSetAttributeBuilder;
 
+struct FBCublasSgemmStridedBatched;
+struct FBCublasSgemmStridedBatchedBuilder;
+
 struct FBCublasCreateV2 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBCublasCreateV2Builder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -1016,6 +1019,217 @@ inline flatbuffers::Offset<FBCublasLtMatrixLayoutSetAttribute> CreateFBCublasLtM
       virtual_ml,
       attr,
       buf__);
+}
+
+struct FBCublasSgemmStridedBatched FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCublasSgemmStridedBatchedBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_TRANSA = 6,
+    VT_TRANSB = 8,
+    VT_M = 10,
+    VT_N = 12,
+    VT_K = 14,
+    VT_ALPHA = 16,
+    VT_A = 18,
+    VT_LDA = 20,
+    VT_STRIDE_A = 22,
+    VT_B = 24,
+    VT_LDB = 26,
+    VT_STRIDE_B = 28,
+    VT_BETA = 30,
+    VT_C = 32,
+    VT_LDC = 34,
+    VT_STRIDE_C = 36,
+    VT_BATCH_COUNT = 38
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t transa() const {
+    return GetField<uint64_t>(VT_TRANSA, 0);
+  }
+  uint64_t transb() const {
+    return GetField<uint64_t>(VT_TRANSB, 0);
+  }
+  int32_t m() const {
+    return GetField<int32_t>(VT_M, 0);
+  }
+  int32_t n() const {
+    return GetField<int32_t>(VT_N, 0);
+  }
+  int32_t k() const {
+    return GetField<int32_t>(VT_K, 0);
+  }
+  float alpha() const {
+    return GetField<float>(VT_ALPHA, 0.0f);
+  }
+  uint64_t a() const {
+    return GetField<uint64_t>(VT_A, 0);
+  }
+  int32_t lda() const {
+    return GetField<int32_t>(VT_LDA, 0);
+  }
+  int64_t stride_a() const {
+    return GetField<int64_t>(VT_STRIDE_A, 0);
+  }
+  uint64_t b() const {
+    return GetField<uint64_t>(VT_B, 0);
+  }
+  int32_t ldb() const {
+    return GetField<int32_t>(VT_LDB, 0);
+  }
+  int64_t stride_b() const {
+    return GetField<int64_t>(VT_STRIDE_B, 0);
+  }
+  float beta() const {
+    return GetField<float>(VT_BETA, 0.0f);
+  }
+  uint64_t c() const {
+    return GetField<uint64_t>(VT_C, 0);
+  }
+  int32_t ldc() const {
+    return GetField<int32_t>(VT_LDC, 0);
+  }
+  int64_t stride_c() const {
+    return GetField<int64_t>(VT_STRIDE_C, 0);
+  }
+  int32_t batch_count() const {
+    return GetField<int32_t>(VT_BATCH_COUNT, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_TRANSA) &&
+           VerifyField<uint64_t>(verifier, VT_TRANSB) &&
+           VerifyField<int32_t>(verifier, VT_M) &&
+           VerifyField<int32_t>(verifier, VT_N) &&
+           VerifyField<int32_t>(verifier, VT_K) &&
+           VerifyField<float>(verifier, VT_ALPHA) &&
+           VerifyField<uint64_t>(verifier, VT_A) &&
+           VerifyField<int32_t>(verifier, VT_LDA) &&
+           VerifyField<int64_t>(verifier, VT_STRIDE_A) &&
+           VerifyField<uint64_t>(verifier, VT_B) &&
+           VerifyField<int32_t>(verifier, VT_LDB) &&
+           VerifyField<int64_t>(verifier, VT_STRIDE_B) &&
+           VerifyField<float>(verifier, VT_BETA) &&
+           VerifyField<uint64_t>(verifier, VT_C) &&
+           VerifyField<int32_t>(verifier, VT_LDC) &&
+           VerifyField<int64_t>(verifier, VT_STRIDE_C) &&
+           VerifyField<int32_t>(verifier, VT_BATCH_COUNT) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCublasSgemmStridedBatchedBuilder {
+  typedef FBCublasSgemmStridedBatched Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_transa(uint64_t transa) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_TRANSA, transa, 0);
+  }
+  void add_transb(uint64_t transb) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_TRANSB, transb, 0);
+  }
+  void add_m(int32_t m) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_M, m, 0);
+  }
+  void add_n(int32_t n) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_N, n, 0);
+  }
+  void add_k(int32_t k) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_K, k, 0);
+  }
+  void add_alpha(float alpha) {
+    fbb_.AddElement<float>(FBCublasSgemmStridedBatched::VT_ALPHA, alpha, 0.0f);
+  }
+  void add_a(uint64_t a) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_A, a, 0);
+  }
+  void add_lda(int32_t lda) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_LDA, lda, 0);
+  }
+  void add_stride_a(int64_t stride_a) {
+    fbb_.AddElement<int64_t>(FBCublasSgemmStridedBatched::VT_STRIDE_A, stride_a, 0);
+  }
+  void add_b(uint64_t b) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_B, b, 0);
+  }
+  void add_ldb(int32_t ldb) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_LDB, ldb, 0);
+  }
+  void add_stride_b(int64_t stride_b) {
+    fbb_.AddElement<int64_t>(FBCublasSgemmStridedBatched::VT_STRIDE_B, stride_b, 0);
+  }
+  void add_beta(float beta) {
+    fbb_.AddElement<float>(FBCublasSgemmStridedBatched::VT_BETA, beta, 0.0f);
+  }
+  void add_c(uint64_t c) {
+    fbb_.AddElement<uint64_t>(FBCublasSgemmStridedBatched::VT_C, c, 0);
+  }
+  void add_ldc(int32_t ldc) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_LDC, ldc, 0);
+  }
+  void add_stride_c(int64_t stride_c) {
+    fbb_.AddElement<int64_t>(FBCublasSgemmStridedBatched::VT_STRIDE_C, stride_c, 0);
+  }
+  void add_batch_count(int32_t batch_count) {
+    fbb_.AddElement<int32_t>(FBCublasSgemmStridedBatched::VT_BATCH_COUNT, batch_count, 0);
+  }
+  explicit FBCublasSgemmStridedBatchedBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCublasSgemmStridedBatched> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCublasSgemmStridedBatched>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCublasSgemmStridedBatched> CreateFBCublasSgemmStridedBatched(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t transa = 0,
+    uint64_t transb = 0,
+    int32_t m = 0,
+    int32_t n = 0,
+    int32_t k = 0,
+    float alpha = 0.0f,
+    uint64_t a = 0,
+    int32_t lda = 0,
+    int64_t stride_a = 0,
+    uint64_t b = 0,
+    int32_t ldb = 0,
+    int64_t stride_b = 0,
+    float beta = 0.0f,
+    uint64_t c = 0,
+    int32_t ldc = 0,
+    int64_t stride_c = 0,
+    int32_t batch_count = 0) {
+  FBCublasSgemmStridedBatchedBuilder builder_(_fbb);
+  builder_.add_stride_c(stride_c);
+  builder_.add_c(c);
+  builder_.add_stride_b(stride_b);
+  builder_.add_b(b);
+  builder_.add_stride_a(stride_a);
+  builder_.add_a(a);
+  builder_.add_transb(transb);
+  builder_.add_transa(transa);
+  builder_.add_virtual_handle(virtual_handle);
+  builder_.add_batch_count(batch_count);
+  builder_.add_ldc(ldc);
+  builder_.add_beta(beta);
+  builder_.add_ldb(ldb);
+  builder_.add_lda(lda);
+  builder_.add_alpha(alpha);
+  builder_.add_k(k);
+  builder_.add_n(n);
+  builder_.add_m(m);
+  return builder_.Finish();
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUBLASCALLS_H_

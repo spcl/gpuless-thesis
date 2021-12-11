@@ -38,6 +38,7 @@ union FBCudaApiCallUnion {
     FBCublasLtMatrixLayoutCreate,
     FBCublasLtMatrixLayoutDestroy,
     FBCublasLtMatrixLayoutSetAttribute,
+    FBCublasSgemmStridedBatched,
 
     // cuDNN
     FBCudnnCreate,

@@ -86,3 +86,24 @@ table FBCublasLtMatrixLayoutSetAttribute {
     attr:uint64;
     buf:[uint8];
 }
+
+table FBCublasSgemmStridedBatched {
+    virtual_handle:uint64;
+    transa:uint64;
+    transb:uint64;
+    m:int;
+    n:int;
+    k:int;
+    alpha:float;
+    a:uint64;
+    lda:int;
+    stride_a:int64;
+    b:uint64;
+    ldb:int;
+    stride_b:int64;
+    beta:float;
+    c:uint64;
+    ldc:int;
+    stride_c:int64;
+    batch_count:int;
+}
