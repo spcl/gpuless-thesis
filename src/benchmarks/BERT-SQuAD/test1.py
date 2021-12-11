@@ -1,4 +1,7 @@
 from bert import QA
+from timeit import default_timer as timer
+
+start = timer()
 
 model = QA('model')
 
@@ -7,6 +10,8 @@ doc = "Victoria has a written constitution enacted in 1975, but based on the 185
 q = 'When did Victoria enact its constitution?'
 
 answer = model.predict(doc,q)
-
 print(answer['answer'])
 print(answer.keys())
+
+end = timer()
+print(end - start)
