@@ -176,6 +176,10 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         cuda_api_call = std::make_shared<CublasLtMatrixLayoutSetAttribute>(
             fb_cuda_api_call);
         break;
+    case FBCudaApiCallUnion_FBCublasSgemmStridedBatched:
+        cuda_api_call =
+            std::make_shared<CublasSgemmStridedBatched>(fb_cuda_api_call);
+        break;
 
     // cuDNN
     case FBCudaApiCallUnion_FBCudnnCreate:

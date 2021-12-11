@@ -134,7 +134,6 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
         return false;
     }
     if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
-        std::cerr << "failed to connect" << std::endl;
         SPDLOG_ERROR("failed to connect");
         return false;
     }
@@ -173,7 +172,6 @@ bool TraceExecutorTcp::getDeviceAttributes() {
         return false;
     }
     if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
-        std::cerr << "failed to connect" << std::endl;
         SPDLOG_ERROR("failed to connect");
         return false;
     }

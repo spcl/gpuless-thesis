@@ -135,7 +135,8 @@ class CublasLtMatmulDescSetAttribute : public CublasApiCAll {
     CublasLtMatmulDescSetAttribute(uint64_t virtualMmd,
                                    cublasLtMatmulDescAttributes_t attr,
                                    std::vector<uint8_t> buf);
-    explicit CublasLtMatmulDescSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
+    explicit CublasLtMatmulDescSetAttribute(
+        const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
     flatbuffers::Offset<FBCudaApiCall>
@@ -163,9 +164,8 @@ class CublasLtMatmul : public CublasApiCAll {
     cudaStream_t stream;
 
     CublasLtMatmul(uint64_t virtualHandle, uint64_t virtualMmd,
-                   std::vector<uint8_t> &alpha,
-                   std::vector<uint8_t> &beta, const void *a,
-                   const void *b, const void *c, void *d,
+                   std::vector<uint8_t> &alpha, std::vector<uint8_t> &beta,
+                   const void *a, const void *b, const void *c, void *d,
                    uint64_t virtualMlADesc, uint64_t virtualMlBDesc,
                    uint64_t virtualMlCDesc, uint64_t virtualMlDDesc,
                    const cublasLtMatmulAlgo_t &algo, bool algoIsNull,
@@ -216,7 +216,43 @@ class CublasLtMatrixLayoutSetAttribute : public CublasApiCAll {
     CublasLtMatrixLayoutSetAttribute(uint64_t virtualMl,
                                      cublasLtMatrixLayoutAttribute_t attr,
                                      std::vector<uint8_t> buf);
-    explicit CublasLtMatrixLayoutSetAttribute(const FBCudaApiCall *fb_cuda_api_call);
+    explicit CublasLtMatrixLayoutSetAttribute(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasSgemmStridedBatched : public CublasApiCAll {
+  public:
+    uint64_t virtual_handle;
+    cublasOperation_t transa;
+    cublasOperation_t transb;
+    int m;
+    int n;
+    int k;
+    float alpha;
+    const float *A;
+    int lda;
+    long long int strideA;
+    const float *B;
+    int ldb;
+    long long int strideB;
+    float beta;
+    float *C;
+    int ldc;
+    long long int strideC;
+    int batchCount;
+
+    CublasSgemmStridedBatched(uint64_t virtualHandle, cublasOperation_t transa,
+                              cublasOperation_t transb, int m, int n, int k,
+                              float alpha, const float *a, int lda,
+                              long long int strideA, const float *b, int ldb,
+                              long long int strideB, float beta, float *c,
+                              int ldc, long long int strideC, int batchCount);
+
+    explicit CublasSgemmStridedBatched(const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;
     flatbuffers::Offset<FBCudaApiCall>

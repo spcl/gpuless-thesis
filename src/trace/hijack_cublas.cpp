@@ -161,6 +161,19 @@ cublasLtMatrixLayoutSetAttribute(cublasLtMatrixLayout_t matLayout,
         reinterpret_cast<uint64_t>(matLayout), attr, attr_vec));
     return CUBLAS_STATUS_SUCCESS;
 }
+
+cublasStatus_t
+cublasSgemmStridedBatched(cublasHandle_t handle, cublasOperation_t transa,
+                          cublasOperation_t transb, int m, int n, int k,
+                          const float *alpha, const float *A, int lda,
+                          long long int strideA, const float *B, int ldb,
+                          long long int strideB, const float *beta, float *C,
+                          int ldc, long long int strideC, int batchCount) {
+    getCudaTrace().record(std::make_shared<CublasSgemmStridedBatched>(
+        reinterpret_cast<uint64_t>(handle), transa, transb, m, n, k, *alpha, A,
+        lda, strideA, B, ldb, strideB, *beta, C, ldc, strideC, batchCount));
+    return CUBLAS_STATUS_SUCCESS;
+}
 }
 
 } // namespace gpuless
