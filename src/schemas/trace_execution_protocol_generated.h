@@ -34,9 +34,6 @@ struct FBTraceAttributeRequestBuilder;
 struct FBTraceAttributeResponse;
 struct FBTraceAttributeResponseBuilder;
 
-struct FBTraceTerminate;
-struct FBTraceTerminateBuilder;
-
 struct FBProtocolMessage;
 struct FBProtocolMessageBuilder;
 
@@ -432,38 +429,35 @@ enum FBMessage : uint8_t {
   FBMessage_FBTraceExecResponse = 2,
   FBMessage_FBTraceAttributeRequest = 3,
   FBMessage_FBTraceAttributeResponse = 4,
-  FBMessage_FBTraceTerminate = 5,
   FBMessage_MIN = FBMessage_NONE,
-  FBMessage_MAX = FBMessage_FBTraceTerminate
+  FBMessage_MAX = FBMessage_FBTraceAttributeResponse
 };
 
-inline const FBMessage (&EnumValuesFBMessage())[6] {
+inline const FBMessage (&EnumValuesFBMessage())[5] {
   static const FBMessage values[] = {
     FBMessage_NONE,
     FBMessage_FBTraceExecRequest,
     FBMessage_FBTraceExecResponse,
     FBMessage_FBTraceAttributeRequest,
-    FBMessage_FBTraceAttributeResponse,
-    FBMessage_FBTraceTerminate
+    FBMessage_FBTraceAttributeResponse
   };
   return values;
 }
 
 inline const char * const *EnumNamesFBMessage() {
-  static const char * const names[7] = {
+  static const char * const names[6] = {
     "NONE",
     "FBTraceExecRequest",
     "FBTraceExecResponse",
     "FBTraceAttributeRequest",
     "FBTraceAttributeResponse",
-    "FBTraceTerminate",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameFBMessage(FBMessage e) {
-  if (flatbuffers::IsOutRange(e, FBMessage_NONE, FBMessage_FBTraceTerminate)) return "";
+  if (flatbuffers::IsOutRange(e, FBMessage_NONE, FBMessage_FBTraceAttributeResponse)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesFBMessage()[index];
 }
@@ -486,10 +480,6 @@ template<> struct FBMessageTraits<gpuless::FBTraceAttributeRequest> {
 
 template<> struct FBMessageTraits<gpuless::FBTraceAttributeResponse> {
   static const FBMessage enum_value = FBMessage_FBTraceAttributeResponse;
-};
-
-template<> struct FBMessageTraits<gpuless::FBTraceTerminate> {
-  static const FBMessage enum_value = FBMessage_FBTraceTerminate;
 };
 
 bool VerifyFBMessage(flatbuffers::Verifier &verifier, const void *obj, FBMessage type);
@@ -1235,35 +1225,6 @@ inline flatbuffers::Offset<FBTraceAttributeResponse> CreateFBTraceAttributeRespo
       device_attributes__);
 }
 
-struct FBTraceTerminate FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
-  typedef FBTraceTerminateBuilder Builder;
-  bool Verify(flatbuffers::Verifier &verifier) const {
-    return VerifyTableStart(verifier) &&
-           verifier.EndTable();
-  }
-};
-
-struct FBTraceTerminateBuilder {
-  typedef FBTraceTerminate Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  explicit FBTraceTerminateBuilder(flatbuffers::FlatBufferBuilder &_fbb)
-        : fbb_(_fbb) {
-    start_ = fbb_.StartTable();
-  }
-  flatbuffers::Offset<FBTraceTerminate> Finish() {
-    const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<FBTraceTerminate>(end);
-    return o;
-  }
-};
-
-inline flatbuffers::Offset<FBTraceTerminate> CreateFBTraceTerminate(
-    flatbuffers::FlatBufferBuilder &_fbb) {
-  FBTraceTerminateBuilder builder_(_fbb);
-  return builder_.Finish();
-}
-
 struct FBProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBProtocolMessageBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -1289,9 +1250,6 @@ struct FBProtocolMessage FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const gpuless::FBTraceAttributeResponse *message_as_FBTraceAttributeResponse() const {
     return message_type() == gpuless::FBMessage_FBTraceAttributeResponse ? static_cast<const gpuless::FBTraceAttributeResponse *>(message()) : nullptr;
   }
-  const gpuless::FBTraceTerminate *message_as_FBTraceTerminate() const {
-    return message_type() == gpuless::FBMessage_FBTraceTerminate ? static_cast<const gpuless::FBTraceTerminate *>(message()) : nullptr;
-  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<uint8_t>(verifier, VT_MESSAGE_TYPE) &&
@@ -1315,10 +1273,6 @@ template<> inline const gpuless::FBTraceAttributeRequest *FBProtocolMessage::mes
 
 template<> inline const gpuless::FBTraceAttributeResponse *FBProtocolMessage::message_as<gpuless::FBTraceAttributeResponse>() const {
   return message_as_FBTraceAttributeResponse();
-}
-
-template<> inline const gpuless::FBTraceTerminate *FBProtocolMessage::message_as<gpuless::FBTraceTerminate>() const {
-  return message_as_FBTraceTerminate();
 }
 
 struct FBProtocolMessageBuilder {
@@ -1576,10 +1530,6 @@ inline bool VerifyFBMessage(flatbuffers::Verifier &verifier, const void *obj, FB
     }
     case FBMessage_FBTraceAttributeResponse: {
       auto ptr = reinterpret_cast<const gpuless::FBTraceAttributeResponse *>(obj);
-      return verifier.VerifyTable(ptr);
-    }
-    case FBMessage_FBTraceTerminate: {
-      auto ptr = reinterpret_cast<const gpuless::FBTraceTerminate *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return true;
