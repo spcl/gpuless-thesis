@@ -33,21 +33,12 @@ for fname in os.listdir('data'):
 cols = ['benchmark', 'type', 'time']
 bench_data = pd.DataFrame(data=v, columns=cols)
 
-sns.set(rc={"figure.figsize": (11.0, 6.5)})
+sns.set(rc={"figure.figsize": (8.5, 6.5)})
 sns.set_theme(style='whitegrid')
-palette = sns.color_palette("muted")
 
 hue_order=['Native', 'Local TCP', 'Remote TCP']
-order = [
-        'latency',
-        'hotspot',
-        'srad_v1',
-        'bfs',
-        'pathfinder',
-        'resnet50',
-        '3d-unet-kits19',
-        'BERT-SQuAD'
-        ]
+# order = ['latency', 'hotspot', 'srad_v1', 'resnet50']
+order = ['latency', 'hotspot', 'srad_v1', 'resnet50', '3d-unet-kits19']
 
 ax = sns.barplot(x='time',
                  y='benchmark',
@@ -56,10 +47,8 @@ ax = sns.barplot(x='time',
                  order=order,
                  orient='h',
                  data=bench_data,
-                 palette=palette,
                  ci=95)
-# ax.set_ylabel('Benchmark', rotation='horizontal')
-ax.set_ylabel('')
+ax.set_ylabel('Benchmark', rotation='horizontal')
 ax.set_xlabel('Time [s]')
 # ax.set_xscale('log')
 ax.yaxis.set_label_coords(-0.06, 1.02)

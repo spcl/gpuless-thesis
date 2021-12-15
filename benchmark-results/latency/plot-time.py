@@ -20,49 +20,37 @@ for fname in os.listdir('data'):
 
     if benchmark_type == 'native':
         for l in lines:
-            v.append([benchmark_name, 'Native', float(l)])
+            v.append([benchmark_name, 'Native', float(l) * 1000.0])
     elif benchmark_type == 'remote' and benchmark_flag == 'local':
         for l in lines:
-            v.append([benchmark_name, 'Local TCP', float(l)])
+            v.append([benchmark_name, 'Local TCP', float(l) * 1000.0])
     elif benchmark_type == 'remote' and benchmark_flag == 'remote':
         for l in lines:
-            v.append([benchmark_name, 'Remote TCP', float(l)])
+            v.append([benchmark_name, 'Remote TCP', float(l) * 1000.0])
 
     f.close()
 
 cols = ['benchmark', 'type', 'time']
 bench_data = pd.DataFrame(data=v, columns=cols)
 
-sns.set(rc={"figure.figsize": (11.0, 6.5)})
+sns.set(rc={"figure.figsize": (8.0, 5.5)})
 sns.set_theme(style='whitegrid')
 palette = sns.color_palette("muted")
 
 hue_order=['Native', 'Local TCP', 'Remote TCP']
-order = [
-        'latency',
-        'hotspot',
-        'srad_v1',
-        'bfs',
-        'pathfinder',
-        'resnet50',
-        '3d-unet-kits19',
-        'BERT-SQuAD'
-        ]
-
 ax = sns.barplot(x='time',
                  y='benchmark',
                  hue='type',
                  hue_order=hue_order,
-                 order=order,
                  orient='h',
                  data=bench_data,
                  palette=palette,
                  ci=95)
 # ax.set_ylabel('Benchmark', rotation='horizontal')
 ax.set_ylabel('')
-ax.set_xlabel('Time [s]')
+ax.set_xlabel('Time [ms]')
 # ax.set_xscale('log')
 ax.yaxis.set_label_coords(-0.06, 1.02)
-ax.legend(loc='upper right')
-ax.set_title('Traced remote execution time vs. median native performance\nNVIDIA A100, n=100, 95% confidence')
-ax.figure.savefig('trace-time.pdf')
+ax.legend(loc='lower right')
+ax.set_title('Latency of minimal CUDA API execution\nNVIDIA A100, n=100, 95% confidence')
+ax.figure.savefig('latency.pdf')

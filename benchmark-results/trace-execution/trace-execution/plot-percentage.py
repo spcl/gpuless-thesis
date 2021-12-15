@@ -46,20 +46,10 @@ cols = ['benchmark', 'type', 'perc_diff_to_native']
 bench_data = pd.DataFrame(data=v, columns=cols)
 
 hue_order = ['Local TCP', 'Remote TCP']
-order = [
-        'latency',
-        'hotspot',
-        'srad_v1',
-        'bfs',
-        'pathfinder',
-        'resnet50',
-        '3d-unet-kits19',
-        'BERT-SQuAD'
-        ]
+order = ['latency', 'hotspot', 'srad_v1', 'resnet50', '3d-unet-kits19']
 
-sns.set(rc={"figure.figsize": (8.5, 7.5)})
+sns.set(rc={"figure.figsize": (8.5, 6.5)})
 sns.set_theme(style='whitegrid')
-palette = sns.color_palette("muted")
 ax = sns.barplot(x='benchmark',
                  y='perc_diff_to_native',
                  hue='type',
@@ -67,12 +57,10 @@ ax = sns.barplot(x='benchmark',
                  order=order,
                  orient='v',
                  data=bench_data,
-                 palette=palette,
                  ci=95)
 ax.set_ylabel('Difference \nto native', rotation='horizontal')
-# ax.set_xlabel('Benchmark')
-ax.set_xlabel('')
-ax.tick_params(axis='x', rotation=25)
+ax.set_xlabel('Benchmark')
+# ax.tick_params(axis='x', rotation=30)
 ax.yaxis.set_label_coords(-0.06, 1.02)
 ax.xaxis.set_label_coords(0.5, -0.09)
 ax.yaxis.set_major_formatter(mtick.PercentFormatter())
