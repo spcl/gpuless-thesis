@@ -1,0 +1,125 @@
+cudaMalloc(D0 (0x7f3782200000), 7a1200 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f3782200000) <- H0(0x7f37ac530010), 7a1200 bytes) [time: 0.92 ms, acc_time: 0.92 ms]
+
+cudaMalloc(D1 (0x7f377c000000), 16e3588 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f377c000000) <- H1(0x7f37aab6d010), 16e3588 bytes) [time: 1.954 ms, acc_time: 2.874 ms]
+
+cudaMalloc(D2 (0x7f377d800000), f4240 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f377d800000) <- H2(0x7f37ac43b010), f4240 bytes) [time: 0.061 ms, acc_time: 2.935 ms]
+
+cudaMalloc(D3 (0x7f377d8f4400), f4240 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D3(0x7f377d8f4400) <- H3(0x7f37ac346010), f4240 bytes) [time: 0.119 ms, acc_time: 3.054 ms]
+
+cudaMalloc(D4 (0x7f377da00000), f4240 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D4(0x7f377da00000) <- H4(0x7f37ac251010), f4240 bytes) [time: 0.064 ms, acc_time: 3.118 ms]
+
+cudaMalloc(D5 (0x7f377dc00000), 3d0900 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D5(0x7f377dc00000) <- H5(0x557b376e6830), 3d0900 bytes) [time: 0.269 ms, acc_time: 3.387 ms]
+
+cudaMalloc(D6 (0x7f377d9e8800), 1 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.088 ms, acc_time: 3.475 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.014 ms, acc_time: 3.489 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.012 ms, acc_time: 3.501 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.018 ms, acc_time: 3.519 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.522 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.013 ms, acc_time: 3.535 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.012 ms, acc_time: 3.547 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.017 ms, acc_time: 3.564 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.567 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.011 ms, acc_time: 3.578 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.013 ms, acc_time: 3.591 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.071 ms, acc_time: 3.662 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.665 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.014 ms, acc_time: 3.679 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.014 ms, acc_time: 3.693 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.016 ms, acc_time: 3.709 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.712 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.014 ms, acc_time: 3.726 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.015 ms, acc_time: 3.741 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.022 ms, acc_time: 3.763 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.766 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.015 ms, acc_time: 3.781 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.014 ms, acc_time: 3.795 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.017 ms, acc_time: 3.812 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.815 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.013 ms, acc_time: 3.828 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.014 ms, acc_time: 3.842 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.064 ms, acc_time: 3.906 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.909 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.011 ms, acc_time: 3.92 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.014 ms, acc_time: 3.934 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.019 ms, acc_time: 3.953 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.003 ms, acc_time: 3.956 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.017 ms, acc_time: 3.973 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.015 ms, acc_time: 3.988 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.021 ms, acc_time: 4.009 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.004 ms, acc_time: 4.013 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.015 ms, acc_time: 4.028 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.016 ms, acc_time: 4.044 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.02 ms, acc_time: 4.064 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.004 ms, acc_time: 4.068 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.017 ms, acc_time: 4.085 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.015 ms, acc_time: 4.1 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.02 ms, acc_time: 4.12 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7f377d9e8800) <- H6(0x7fff11c30d37), 1 bytes) [time: 0.004 ms, acc_time: 4.124 ms]
+
+cuLaunchKernel(Kernel(Node*, int*, bool*, bool*, bool*, int*, int)) [time: 0.016 ms, acc_time: 4.14 ms]
+
+cuLaunchKernel(Kernel2(bool*, bool*, bool*, bool*, int)) [time: 0.016 ms, acc_time: 4.156 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff11c30d37) <- D6(0x7f377d9e8800), 1 bytes) [time: 0.022 ms, acc_time: 4.178 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x557b376e6830) <- D5(0x7f377dc00000), 3d0900 bytes) [time: 0.483 ms, acc_time: 4.661 ms]
+
+1.09290400

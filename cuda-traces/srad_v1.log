@@ -1,0 +1,1455 @@
+cudaMalloc(D0 (0x7fe1c2200000), e0870 bytes)
+
+cudaMalloc(D1 (0x7fe1c22e0a00), 7d8 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7fe1c22e0a00) <- H0(0x555ead7c8c80), 7d8 bytes) [time: 0.013 ms, acc_time: 0.013 ms]
+
+cudaMalloc(D2 (0x7fe1c22e1200), 7d8 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7fe1c22e1200) <- H1(0x555ead7c9460), 7d8 bytes) [time: 0.003 ms, acc_time: 0.016 ms]
+
+cudaMalloc(D3 (0x7fe1c22e1a00), 728 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D3(0x7fe1c22e1a00) <- H2(0x555ead7ca370), 728 bytes) [time: 0.002 ms, acc_time: 0.018 ms]
+
+cudaMalloc(D4 (0x7fe1c22e2200), 728 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D4(0x7fe1c22e2200) <- H3(0x555ead7c9c40), 728 bytes) [time: 0.002 ms, acc_time: 0.02 ms]
+
+cudaMalloc(D5 (0x7fe1c22e2a00), e0870 bytes)
+
+cudaMalloc(D6 (0x7fe1c2400000), e0870 bytes)
+
+cudaMalloc(D7 (0x7fe1c24e0a00), e0870 bytes)
+
+cudaMalloc(D8 (0x7fe1c2600000), e0870 bytes)
+
+cudaMalloc(D9 (0x7fe1c26e0a00), e0870 bytes)
+
+cudaMalloc(D10 (0x7fe1c2800000), e0870 bytes)
+
+cudaMalloc(D11 (0x7fe1c28e0a00), e0870 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7fe1c2200000) <- H4(0x7fe1e9391010), e0870 bytes) [time: 0.064 ms, acc_time: 0.084 ms]
+
+cuLaunchKernel(extract(long, float*)) [time: 0.012 ms, acc_time: 0.096 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 0.115 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 0.125 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 0.137 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.016 ms, acc_time: 0.153 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 0.159 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 0.172 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 0.184 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 0.199 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 0.213 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 0.229 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.063 ms, acc_time: 0.292 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 0.298 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 0.311 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 0.324 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 0.337 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 0.347 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 0.362 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 0.381 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 0.388 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 0.4 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 0.412 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 0.425 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 0.439 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 0.454 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 0.474 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 0.482 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 0.498 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 0.512 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 0.528 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 0.545 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 0.562 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 0.582 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 0.589 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 0.606 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.018 ms, acc_time: 0.624 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.017 ms, acc_time: 0.641 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 0.657 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 0.676 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.38 ms, acc_time: 1.056 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 1.063 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 1.075 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 1.085 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.02 ms, acc_time: 1.105 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 1.12 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 1.133 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 1.15 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 1.156 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.022 ms, acc_time: 1.178 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 1.188 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.009 ms, acc_time: 1.197 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 1.213 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 1.224 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.071 ms, acc_time: 1.295 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 1.301 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 1.313 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.019 ms, acc_time: 1.332 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.011 ms, acc_time: 1.343 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 1.355 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 1.37 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.06 ms, acc_time: 1.43 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 1.437 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.009 ms, acc_time: 1.446 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 1.462 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.017 ms, acc_time: 1.479 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 1.493 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 1.511 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.063 ms, acc_time: 1.574 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 1.581 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 1.596 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.018 ms, acc_time: 1.614 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 1.627 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 1.642 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 1.658 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.064 ms, acc_time: 1.722 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 1.729 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 1.745 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.019 ms, acc_time: 1.764 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.018 ms, acc_time: 1.782 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 1.799 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 1.816 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 1.835 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 1.842 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 1.858 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 1.871 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 1.884 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.022 ms, acc_time: 1.906 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 1.921 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 1.94 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 1.946 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 1.962 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 1.977 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 1.993 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 2.009 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.024 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 2.042 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 2.048 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 2.065 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 2.079 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 2.095 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 2.108 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.123 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 2.141 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 2.147 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.022 ms, acc_time: 2.169 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 2.184 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 2.199 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.214 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.229 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 2.291 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 2.298 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.011 ms, acc_time: 2.309 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 2.324 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 2.337 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 2.353 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.368 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.065 ms, acc_time: 2.433 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 2.44 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.02 ms, acc_time: 2.46 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.017 ms, acc_time: 2.477 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 2.493 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.508 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 2.521 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 2.538 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 2.544 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 2.556 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 2.57 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 2.584 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 2.598 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 2.61 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.07 ms, acc_time: 2.68 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.005 ms, acc_time: 2.685 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.01 ms, acc_time: 2.695 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 2.708 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 2.721 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.009 ms, acc_time: 2.73 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 2.745 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.016 ms, acc_time: 2.761 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 2.767 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 2.781 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 2.791 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 2.806 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 2.819 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 2.833 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 2.852 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 2.859 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 2.874 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 2.888 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 2.907 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 2.92 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 2.934 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.022 ms, acc_time: 2.956 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 2.964 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.02 ms, acc_time: 2.984 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.022 ms, acc_time: 3.006 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 3.022 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 3.041 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 3.059 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.059 ms, acc_time: 3.118 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 3.126 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.02 ms, acc_time: 3.146 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.021 ms, acc_time: 3.167 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.018 ms, acc_time: 3.185 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 3.203 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 3.219 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 3.237 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 3.243 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 3.255 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.011 ms, acc_time: 3.266 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 3.279 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 3.293 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 3.306 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 3.326 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 3.332 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 3.346 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.011 ms, acc_time: 3.357 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.017 ms, acc_time: 3.374 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 3.388 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 3.399 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.026 ms, acc_time: 3.425 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 3.431 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 3.446 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 3.46 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.011 ms, acc_time: 3.471 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.486 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.501 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 3.563 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.005 ms, acc_time: 3.568 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 3.58 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 3.592 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 3.606 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.008 ms, acc_time: 3.614 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 3.627 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 3.644 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 3.651 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 3.665 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.011 ms, acc_time: 3.676 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 3.69 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.705 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.72 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 3.738 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 3.745 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 3.76 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 3.774 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 3.789 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.804 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 3.82 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 3.84 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 3.847 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.018 ms, acc_time: 3.865 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 3.878 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 3.894 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 3.913 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 3.928 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 3.947 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 3.954 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.018 ms, acc_time: 3.972 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.017 ms, acc_time: 3.989 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.005 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 4.024 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 4.04 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 4.06 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.067 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 4.084 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.1 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 4.115 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 4.133 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 4.149 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 4.168 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.175 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 4.19 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 4.204 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.017 ms, acc_time: 4.221 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 4.234 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 4.248 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 4.268 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.275 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 4.291 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 4.306 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.322 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 4.338 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 4.354 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 4.374 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.381 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 4.397 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.017 ms, acc_time: 4.414 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.43 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 4.447 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 4.465 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.096 ms, acc_time: 4.561 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.568 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 4.585 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.018 ms, acc_time: 4.603 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 4.617 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 4.628 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 4.642 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 4.659 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 4.665 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 4.678 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 4.688 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.704 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 4.718 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 4.732 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 4.749 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 4.756 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 4.772 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 4.786 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.012 ms, acc_time: 4.798 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 4.814 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 4.825 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.07 ms, acc_time: 4.895 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 4.901 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.009 ms, acc_time: 4.91 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 4.926 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 4.94 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 4.954 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 4.969 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 5.031 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 5.037 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.01 ms, acc_time: 5.047 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 5.061 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 5.074 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 5.091 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 5.107 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.578 ms, acc_time: 5.685 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.009 ms, acc_time: 5.694 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 5.706 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 5.722 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 5.735 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 5.751 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 5.768 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.516 ms, acc_time: 6.284 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.009 ms, acc_time: 6.293 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 6.309 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 6.323 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 6.337 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 6.352 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 6.368 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 6.387 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 6.394 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 6.409 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 6.422 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 6.437 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 6.447 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 6.461 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 6.479 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 6.485 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 6.5 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 6.51 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 6.524 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 6.54 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 6.551 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.07 ms, acc_time: 6.621 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 6.627 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 6.641 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 6.656 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 6.67 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 6.684 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 6.698 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.063 ms, acc_time: 6.761 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 6.767 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 6.782 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 6.798 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 6.817 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 6.83 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 6.844 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.061 ms, acc_time: 6.905 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 6.911 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 6.923 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 6.936 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 6.951 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 6.964 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 6.98 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 6.999 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 7.005 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 7.022 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 7.036 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.051 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 7.067 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 7.086 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 7.106 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 7.113 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 7.128 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 7.142 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 7.161 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 7.175 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 7.187 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 7.205 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 7.211 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 7.226 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 7.24 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.255 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 7.27 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 7.284 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 7.302 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 7.308 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 7.324 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 7.337 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.012 ms, acc_time: 7.349 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 7.364 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 7.375 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 7.393 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 7.399 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 7.414 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.429 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 7.443 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 7.46 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 7.473 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.061 ms, acc_time: 7.534 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 7.541 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 7.557 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.021 ms, acc_time: 7.578 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 7.591 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 7.606 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 7.62 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.061 ms, acc_time: 7.681 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 7.689 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 7.702 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 7.718 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.733 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 7.75 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 7.767 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 7.786 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 7.793 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.018 ms, acc_time: 7.811 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.826 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 7.84 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.024 ms, acc_time: 7.864 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 7.878 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.061 ms, acc_time: 7.939 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 7.946 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 7.958 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 7.973 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 7.986 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 8.001 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 8.014 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.064 ms, acc_time: 8.078 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 8.084 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 8.099 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 8.115 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 8.13 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 8.145 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 8.16 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.063 ms, acc_time: 8.223 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 8.23 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 8.244 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.017 ms, acc_time: 8.261 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.018 ms, acc_time: 8.279 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 8.298 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.02 ms, acc_time: 8.318 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.024 ms, acc_time: 8.342 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 8.35 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.022 ms, acc_time: 8.372 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.019 ms, acc_time: 8.391 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 8.41 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.021 ms, acc_time: 8.431 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 8.45 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.023 ms, acc_time: 8.473 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 8.481 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.02 ms, acc_time: 8.501 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.022 ms, acc_time: 8.523 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 8.542 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 8.56 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 8.575 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.06 ms, acc_time: 8.635 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 8.642 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.011 ms, acc_time: 8.653 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 8.668 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 8.683 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 8.697 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 8.714 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.219 ms, acc_time: 8.933 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 8.941 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 8.953 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 8.963 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 8.976 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 8.991 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 9.004 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 9.021 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 9.027 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 9.042 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 9.052 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.01 ms, acc_time: 9.062 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 9.076 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 9.087 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 9.104 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 9.111 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 9.127 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.017 ms, acc_time: 9.144 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.012 ms, acc_time: 9.156 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 9.172 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 9.188 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 9.208 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 9.214 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 9.231 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 9.247 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.018 ms, acc_time: 9.265 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 9.282 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.02 ms, acc_time: 9.302 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 9.321 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 9.328 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 9.345 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.022 ms, acc_time: 9.367 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 9.383 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 9.397 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 9.412 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.359 ms, acc_time: 9.771 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.019 ms, acc_time: 9.79 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 9.804 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.011 ms, acc_time: 9.815 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.021 ms, acc_time: 9.836 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 9.849 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 9.859 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.016 ms, acc_time: 9.875 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 9.881 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 9.897 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 9.909 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 9.923 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 9.939 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 9.952 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.069 ms, acc_time: 10.021 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 10.027 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 10.041 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 10.057 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.01 ms, acc_time: 10.067 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 10.079 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 10.096 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.561 ms, acc_time: 10.657 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 10.664 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 10.676 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 10.69 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 10.705 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 10.719 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 10.733 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 10.751 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 10.757 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 10.772 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 10.786 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 10.801 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 10.815 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 10.832 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 10.851 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 10.859 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 10.875 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.019 ms, acc_time: 10.894 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 10.91 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 10.928 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 10.944 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.065 ms, acc_time: 11.009 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 11.016 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.016 ms, acc_time: 11.032 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 11.048 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.063 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 11.077 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 11.091 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 11.153 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 11.159 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 11.171 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 11.184 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.199 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 11.212 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 11.226 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.271 ms, acc_time: 11.497 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.019 ms, acc_time: 11.516 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 11.529 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.544 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.559 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 11.573 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.022 ms, acc_time: 11.595 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.027 ms, acc_time: 11.622 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 11.629 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 11.644 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 11.66 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.675 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 11.69 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 11.701 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.016 ms, acc_time: 11.717 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 11.724 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 11.736 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 11.751 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.011 ms, acc_time: 11.762 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 11.777 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 11.79 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 11.852 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 11.858 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 11.872 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 11.886 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 11.9 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 11.913 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 11.927 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 11.944 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 11.95 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 11.964 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 11.977 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 11.99 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 12.003 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.009 ms, acc_time: 12.012 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.016 ms, acc_time: 12.028 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 12.035 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.011 ms, acc_time: 12.046 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.014 ms, acc_time: 12.06 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 12.073 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 12.088 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 12.104 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.061 ms, acc_time: 12.165 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 12.173 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.018 ms, acc_time: 12.191 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 12.207 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 12.226 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 12.244 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.022 ms, acc_time: 12.266 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.05 ms, acc_time: 12.316 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.009 ms, acc_time: 12.325 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 12.342 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.02 ms, acc_time: 12.362 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.021 ms, acc_time: 12.383 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 12.402 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.025 ms, acc_time: 12.427 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.592 ms, acc_time: 13.019 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.01 ms, acc_time: 13.029 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.019 ms, acc_time: 13.048 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.022 ms, acc_time: 13.07 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.024 ms, acc_time: 13.094 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.02 ms, acc_time: 13.114 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.021 ms, acc_time: 13.135 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.141 ms, acc_time: 13.276 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.019 ms, acc_time: 13.295 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.021 ms, acc_time: 13.316 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.019 ms, acc_time: 13.335 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 13.351 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 13.367 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 13.379 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 13.397 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 13.403 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 13.417 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 13.43 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.011 ms, acc_time: 13.441 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 13.451 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 13.464 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.062 ms, acc_time: 13.526 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 13.532 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 13.545 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.01 ms, acc_time: 13.555 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 13.569 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 13.58 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 13.591 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 13.608 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 13.614 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 13.627 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 13.639 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 13.652 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 13.667 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 13.683 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.021 ms, acc_time: 13.704 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 13.712 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.018 ms, acc_time: 13.73 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.02 ms, acc_time: 13.75 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.019 ms, acc_time: 13.769 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.022 ms, acc_time: 13.791 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.02 ms, acc_time: 13.811 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.058 ms, acc_time: 13.869 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.009 ms, acc_time: 13.878 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.019 ms, acc_time: 13.897 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.02 ms, acc_time: 13.917 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.021 ms, acc_time: 13.938 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.021 ms, acc_time: 13.959 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.019 ms, acc_time: 13.978 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.059 ms, acc_time: 14.037 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 14.045 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 14.062 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 14.078 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.016 ms, acc_time: 14.094 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.016 ms, acc_time: 14.11 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.021 ms, acc_time: 14.131 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.02 ms, acc_time: 14.151 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 14.158 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.017 ms, acc_time: 14.175 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 14.188 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 14.203 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 14.22 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 14.237 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.375 ms, acc_time: 14.612 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.008 ms, acc_time: 14.62 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 14.634 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.018 ms, acc_time: 14.652 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 14.666 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.021 ms, acc_time: 14.687 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.018 ms, acc_time: 14.705 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.024 ms, acc_time: 14.729 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.01 ms, acc_time: 14.739 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.022 ms, acc_time: 14.761 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.024 ms, acc_time: 14.785 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.021 ms, acc_time: 14.806 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.026 ms, acc_time: 14.832 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.026 ms, acc_time: 14.858 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.042 ms, acc_time: 14.9 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.012 ms, acc_time: 14.912 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.028 ms, acc_time: 14.94 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.021 ms, acc_time: 14.961 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.018 ms, acc_time: 14.979 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.015 ms, acc_time: 14.994 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 15.008 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.059 ms, acc_time: 15.067 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 15.073 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 15.086 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.016 ms, acc_time: 15.102 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 15.116 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.01 ms, acc_time: 15.126 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.017 ms, acc_time: 15.143 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.019 ms, acc_time: 15.162 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 15.168 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.014 ms, acc_time: 15.182 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.018 ms, acc_time: 15.2 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.015 ms, acc_time: 15.215 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 15.229 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 15.241 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 15.258 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 15.264 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.012 ms, acc_time: 15.276 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.013 ms, acc_time: 15.289 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 15.303 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 15.317 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.012 ms, acc_time: 15.329 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.069 ms, acc_time: 15.398 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.007 ms, acc_time: 15.405 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.01 ms, acc_time: 15.415 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 15.43 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.014 ms, acc_time: 15.444 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 15.457 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.011 ms, acc_time: 15.468 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.017 ms, acc_time: 15.485 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 15.491 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.013 ms, acc_time: 15.504 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.012 ms, acc_time: 15.516 ms]
+
+cuLaunchKernel(prepare(long, float*, float*, float*)) [time: 0.013 ms, acc_time: 15.529 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.013 ms, acc_time: 15.542 ms]
+
+cuLaunchKernel(reduce(long, int, int, float*, float*)) [time: 0.014 ms, acc_time: 15.556 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7fff994dc790) <- D5(0x7fe1c22e2a00), 4 bytes) [time: 0.018 ms, acc_time: 15.574 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7fff994dc794) <- D6(0x7fe1c2400000), 4 bytes) [time: 0.006 ms, acc_time: 15.58 ms]
+
+cuLaunchKernel(srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)) [time: 0.015 ms, acc_time: 15.595 ms]
+
+cuLaunchKernel(srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)) [time: 0.015 ms, acc_time: 15.61 ms]
+
+cuLaunchKernel(compress(long, float*)) [time: 0.015 ms, acc_time: 15.625 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H4(0x7fe1e9391010) <- D0(0x7fe1c2200000), e0870 bytes) [time: 0.168 ms, acc_time: 15.793 ms]
+
+Time spent in different stages of the application:
+ 0.000000000000 s,  0.000000000000 % : SETUP VARIABLES
+ 0.000012000000 s,  0.000345489068 % : READ COMMAND LINE PARAMETERS
+ 0.021066000685 s,  0.606506109238 % : READ IMAGE FROM FILE
+ 0.000517999986 s,  0.014913612045 % : RESIZE IMAGE
+ 0.084778003395 s,  2.440822601318 % : GPU DRIVER INIT, CPU/GPU SETUP, MEMORY ALLOCATION
+ 0.000071000002 s,  0.002044143621 % : COPY DATA TO CPU->GPU
+ 0.005671999883 s,  0.163301169872 % : EXTRACT IMAGE
+ 3.342256069183 s, 96.226081848145 % : COMPUTE
+ 0.006012999918 s,  0.173118814826 % : COMPRESS IMAGE
+ 0.000180999996 s,  0.005211126991 % : COPY DATA TO GPU->CPU
+ 0.012342000380 s,  0.355335503817 % : SAVE IMAGE INTO FILE
+ 0.000427999999 s,  0.012322443537 % : FREE MEMORY
+Total time:
+3.473336935043 s
