@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 
-#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -120,17 +119,22 @@ void handle_execute_request(int socket_fd,
 }
 
 void handle_request(int socket_fd) {
-    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
-    auto msg = gpuless::GetFBProtocolMessage(buffer.data());
+    bool terminate = false;
+    while (!terminate) {
+        std::vector<uint8_t> buffer = recv_buffer(socket_fd);
+        auto msg = gpuless::GetFBProtocolMessage(buffer.data());
 
-    if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
-        handle_execute_request(socket_fd, msg);
-    } else if (msg->message_type() ==
-               gpuless::FBMessage_FBTraceAttributeRequest) {
-        handle_attributes_request(socket_fd, msg);
-    } else {
-        SPDLOG_ERROR("Invalid request type");
-        return;
+        if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
+            handle_execute_request(socket_fd, msg);
+        } else if (msg->message_type() ==
+                   gpuless::FBMessage_FBTraceAttributeRequest) {
+            handle_attributes_request(socket_fd, msg);
+        } else if (msg->message_type() == gpuless::FBMessage_FBTraceTerminate) {
+            terminate = true;
+        } else {
+            SPDLOG_ERROR("Invalid request type");
+            return;
+        }
     }
 }
 
