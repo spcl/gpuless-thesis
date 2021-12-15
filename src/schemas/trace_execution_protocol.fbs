@@ -98,11 +98,15 @@ table FBTraceAttributeResponse {
     device_attributes:[CUdeviceAttributeValue];
 }
 
+table FBTraceTerminate {
+}
+
 union FBMessage {
     FBTraceExecRequest,
     FBTraceExecResponse,
     FBTraceAttributeRequest,
-    FBTraceAttributeResponse
+    FBTraceAttributeResponse,
+    FBTraceTerminate,
 }
 
 table FBProtocolMessage {
