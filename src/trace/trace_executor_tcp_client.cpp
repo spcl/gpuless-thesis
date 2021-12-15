@@ -102,24 +102,14 @@ bool TraceExecutorTcp::deallocate() {
         return false;
     }
 
-    // terminate device session
-    flatbuffers::FlatBufferBuilder builder;
-    auto trace_terminate_msg =
-        CreateFBProtocolMessage(builder, FBMessage_FBTraceTerminate,
-                                CreateFBTraceTerminate(builder).Union());
-    builder.Finish(trace_terminate_msg);
-    send_buffer(this->device_session_socket_, builder.GetBufferPointer(),
-                builder.GetSize());
-    SPDLOG_DEBUG("Device session terminate request sent");
-
-    // deallocate manager
     using namespace gpuless::manager;
-    builder.Reset();
+    flatbuffers::FlatBufferBuilder builder;
     auto deallocate_request_msg = CreateProtocolMessage(
         builder, Message_DeallocateRequest,
         CreateDeallocateRequest(builder, this->session_id_).Union());
     builder.Finish(deallocate_request_msg);
     send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+
     SPDLOG_DEBUG("Deallocate request sent");
 
     std::vector<uint8_t> buffer = recv_buffer(socket_fd);
@@ -127,11 +117,6 @@ bool TraceExecutorTcp::deallocate() {
     auto status =
         deallocate_confirm_msg->message_as_DeallocateConfirm()->status();
     this->session_id_ = -1;
-
-    close(socket_fd);
-    close(this->device_session_socket_);
-    this->device_session_socket_ = -1;
-
     return status == Status_OK;
 }
 
@@ -141,31 +126,26 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
         "TraceExecutorTcp::synchronize() [synchronize_counter={}, size={}]",
         this->synchronize_counter_, cuda_trace.callStack().size());
 
-    if (!this->connectSession()) {
+    // collect statistics on synchronizations
+
+    int socket_fd;
+    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        SPDLOG_ERROR("failed to open socket");
         return false;
     }
-
-    //    int socket_fd;
-    //    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-    //        SPDLOG_ERROR("failed to open socket");
-    //        return false;
-    //    }
-    //    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0)
-    //    {
-    //        SPDLOG_ERROR("failed to connect");
-    //        return false;
-    //    }
+    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
+        SPDLOG_ERROR("failed to connect");
+        return false;
+    }
 
     // send trace execution request
     flatbuffers::FlatBufferBuilder builder;
     CudaTraceConverter::traceToExecRequest(cuda_trace, builder);
-    send_buffer(this->device_session_socket_, builder.GetBufferPointer(),
-                builder.GetSize());
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
     SPDLOG_INFO("Trace execution request sent");
 
     // receive trace execution response
-    std::vector<uint8_t> response_buffer =
-        recv_buffer(this->device_session_socket_);
+    std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
     SPDLOG_INFO("Trace execution response received");
     auto fb_protocol_message_response =
         GetFBProtocolMessage(response_buffer.data());
@@ -177,7 +157,7 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     cuda_trace.markSynchronized();
     cuda_trace.setHistoryTop(cuda_api_call);
 
-    //    close(socket_fd);
+    close(socket_fd);
 
     SPDLOG_INFO("TraceExecutorTcp::synchronize() successful");
     return true;
@@ -185,32 +165,26 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 
 bool TraceExecutorTcp::getDeviceAttributes() {
     SPDLOG_INFO("TraceExecutorTcp::getDeviceAttributes()");
-    if (!this->connectSession()) {
+
+    int socket_fd;
+    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        SPDLOG_ERROR("failed to open socket");
         return false;
     }
-
-    //    int socket_fd;
-    //    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-    //        SPDLOG_ERROR("failed to open socket");
-    //        return false;
-    //    }
-    //    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0)
-    //    {
-    //        SPDLOG_ERROR("failed to connect");
-    //        return false;
-    //    }
+    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
+        SPDLOG_ERROR("failed to connect");
+        return false;
+    }
 
     flatbuffers::FlatBufferBuilder builder;
     auto attr_request =
         CreateFBProtocolMessage(builder, FBMessage_FBTraceAttributeRequest,
                                 CreateFBTraceAttributeRequest(builder).Union());
     builder.Finish(attr_request);
-    send_buffer(this->device_session_socket_, builder.GetBufferPointer(),
-                builder.GetSize());
+    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
     SPDLOG_DEBUG("FBTraceAttributeRequest sent");
 
-    std::vector<uint8_t> response_buffer =
-        recv_buffer(this->device_session_socket_);
+    std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
     SPDLOG_DEBUG("FBTraceAttributeResponse received");
 
     auto fb_protocol_message_response =
@@ -226,25 +200,7 @@ bool TraceExecutorTcp::getDeviceAttributes() {
         this->device_attributes[dev_attr] = value;
     }
 
-    //    close(socket_fd);
-    return true;
-}
-
-bool TraceExecutorTcp::connectSession() {
-    if (this->device_session_socket_ > 0) {
-        return true;
-    }
-
-    if ((this->device_session_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        SPDLOG_ERROR("failed to open socket");
-        return false;
-    }
-    if (connect(this->device_session_socket_, (sockaddr *)&exec_addr,
-                sizeof(exec_addr)) < 0) {
-        SPDLOG_ERROR("failed to connect");
-        return false;
-    }
-
+    close(socket_fd);
     return true;
 }
 

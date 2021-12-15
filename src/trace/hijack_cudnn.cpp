@@ -1,4 +1,5 @@
 #include <cudnn.h>
+#include <numeric>
 
 #include "cudnn_api_calls.hpp"
 #include "libgpuless.hpp"

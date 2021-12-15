@@ -11,10 +11,8 @@ class TraceExecutorTcp : public TraceExecutor {
     sockaddr_in exec_addr{};
     uint64_t synchronize_counter_ = 0;
     int32_t session_id_ = -1;
-    int device_session_socket_ = -1;
 
     bool negotiateSession(manager::instance_profile profile);
-    bool connectSession();
     bool getDeviceAttributes();
 
   public:

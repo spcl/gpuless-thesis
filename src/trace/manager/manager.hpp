@@ -11,7 +11,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-namespace gpuless::manager {
+namespace gpuless {
+namespace manager {
 
 const uint16_t MANAGER_PORT = 8002;
 const int NO_SESSION_ASSIGNED = -1;
@@ -25,6 +26,7 @@ enum instance_profile : int32_t {
     MIG_7g40gb = 0,
 };
 
+} // namespace manager
 } // namespace gpuless
 
 #endif // __MANAGER_HPP__
