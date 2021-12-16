@@ -31,3 +31,6 @@ target_link_libraries(image-recognition "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
 
 add_executable(image-recognition-batched image-recognition-batched.cpp)
 target_link_libraries(image-recognition-batched "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
+
+add_executable(image-recognition-batched-total image-recognition-batched-total.cpp)
+target_link_libraries(image-recognition-batched-total "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
