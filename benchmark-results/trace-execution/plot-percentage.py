@@ -53,6 +53,7 @@ order = [
         'bfs',
         'pathfinder',
         'resnet50',
+        'vgg19',
         '3d-unet-kits19',
         'BERT-SQuAD'
         ]
@@ -69,13 +70,14 @@ ax = sns.barplot(x='benchmark',
                  data=bench_data,
                  palette=palette,
                  ci=95)
-ax.set_ylabel('Difference \nto native', rotation='horizontal')
+# ax.set_ylabel('Difference \nto native', rotation='horizontal')
+ax.set_ylabel('Difference to native')
 # ax.set_xlabel('Benchmark')
 ax.set_xlabel('')
 ax.tick_params(axis='x', rotation=25)
-ax.yaxis.set_label_coords(-0.06, 1.02)
-ax.xaxis.set_label_coords(0.5, -0.09)
+# ax.yaxis.set_label_coords(-0.06, 1.02)
+# ax.xaxis.set_label_coords(0.5, -0.09)
 ax.yaxis.set_major_formatter(mtick.PercentFormatter())
-ax.legend(loc='lower right')
+ax.legend(loc='upper left')
 ax.set_title('Traced remote execution time vs. median native performance\nNVIDIA A100, n=100, 95% confidence')
 ax.figure.savefig('trace-percentage.pdf')
