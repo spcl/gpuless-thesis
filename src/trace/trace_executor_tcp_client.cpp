@@ -121,6 +121,8 @@ bool TraceExecutorTcp::deallocate() {
 }
 
 bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
+    auto s = std::chrono::high_resolution_clock::now();
+
     this->synchronize_counter_++;
     SPDLOG_INFO(
         "TraceExecutorTcp::synchronize() [synchronize_counter={}, size={}]",
@@ -159,7 +161,15 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 
     close(socket_fd);
 
-    SPDLOG_INFO("TraceExecutorTcp::synchronize() successful");
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d =
+        std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() /
+        1000000.0;
+    this->synchronize_total_time_ += d;
+
+    SPDLOG_INFO(
+        "TraceExecutorTcp::synchronize() successful [t={}s, total_time={}s]", d,
+        this->synchronize_total_time_);
     return true;
 }
 
@@ -202,6 +212,10 @@ bool TraceExecutorTcp::getDeviceAttributes() {
 
     close(socket_fd);
     return true;
+}
+
+double TraceExecutorTcp::getSynchronizeTotalTime() const {
+    return synchronize_total_time_;
 }
 
 } // namespace gpuless

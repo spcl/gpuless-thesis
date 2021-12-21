@@ -16,7 +16,9 @@
 #include "manager_device.hpp"
 
 extern const int BACKLOG;
+
 static bool g_device_initialized = false;
+static int64_t g_sync_counter = 0;
 
 static gpuless::CudaTrace &getCudaTrace() {
     static gpuless::CudaTrace cuda_trace;
@@ -106,6 +108,8 @@ void handle_execute_request(int socket_fd,
     }
 
     cuda_trace.markSynchronized();
+    g_sync_counter++;
+    SPDLOG_INFO("Number of synchronizations: {}", g_sync_counter);
 
     flatbuffers::FlatBufferBuilder builder;
     auto top = cuda_trace.historyTop()->fbSerialize(builder);

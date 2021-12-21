@@ -139,6 +139,11 @@ CudaTrace &getCudaTrace() {
 static void exitHandler() {
     SPDLOG_DEBUG("std::atexit()");
 
+    // print total synchronization time
+    std::cout << "synchronize_time="
+              << getTraceExecutor()->getSynchronizeTotalTime() << "s"
+              << std::endl;
+
     // deallocate session
     if (useTcp) {
         auto success = getTraceExecutor()->deallocate();
@@ -322,7 +327,6 @@ cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
 cudaError_t cudaThreadSynchronize(void) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
-    EXIT_NOT_IMPLEMENTED(__func__);
     getCudaTrace().record(std::make_shared<CudaDeviceSynchronize>());
     return cudaSuccess;
 }

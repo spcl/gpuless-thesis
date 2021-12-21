@@ -1,6 +1,8 @@
 #include <algorithm>
+#include <spdlog/spdlog.h>
 
 #include "utils.hpp"
+#define HAVE_DECL_BASENAME 1
 #include "libiberty/demangle.h"
 
 void __checkCudaErrors(CUresult r, const char *file, const int line) {
@@ -10,6 +12,16 @@ void __checkCudaErrors(CUresult r, const char *file, const int line) {
         std::cout << "cuda error in " << file << "(" << line << "):"
             << std::endl << msg << std::endl;
     }
+}
+
+static size_t &getBytesSent() {
+    static size_t bytes = 0;
+    return bytes;
+}
+
+static size_t &getBytesReceived() {
+    static size_t bytes = 0;
+    return bytes;
 }
 
 std::vector<uint8_t> recv_buffer(int socket_fd) {
@@ -22,6 +34,11 @@ std::vector<uint8_t> recv_buffer(int socket_fd) {
         size_t n_read = std::min(65536UL, msg_len - bytes_read);
         bytes_read += recv(socket_fd, dst, n_read, 0);
     } while (bytes_read < msg_len);
+
+    auto &bytes_recvd_total = getBytesReceived();
+    bytes_recvd_total += bytes_read;
+    SPDLOG_INFO("Bytes received: {}", bytes_recvd_total);
+
     return buf;
 }
 
@@ -33,6 +50,10 @@ void send_buffer(int socket_fd, const uint8_t *buf, size_t len) {
         size_t n_send = std::min(65536UL, len - bytes_sent);
         bytes_sent += send(socket_fd, src, n_send, 0);
     } while (bytes_sent < len);
+
+    auto &bytes_sent_total = getBytesSent();
+    bytes_sent_total += bytes_sent;
+    SPDLOG_INFO("Bytes sent: {}", bytes_sent_total);
 }
 
 void string_split(std::string const &str, const char delim,

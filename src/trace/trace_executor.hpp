@@ -1,10 +1,10 @@
 #ifndef GPULESS_TRACEEXECUTOR_H
 #define GPULESS_TRACEEXECUTOR_H
 
-#include "manager/manager.hpp"
-#include "manager/manager_device.hpp"
 #include "cuda_api_calls.hpp"
 #include "cuda_trace.hpp"
+#include "manager/manager.hpp"
+#include "manager/manager_device.hpp"
 
 namespace gpuless {
 
@@ -29,6 +29,8 @@ class TraceExecutor {
         }
         return device_attributes[attribute];
     }
+
+    virtual double getSynchronizeTotalTime() const { return 0.0; };
 };
 
 } // namespace gpuless

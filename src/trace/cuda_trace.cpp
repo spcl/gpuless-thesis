@@ -16,6 +16,9 @@ void CudaTrace::markSynchronized() {
     std::move(std::begin(this->call_stack_), std::end(this->call_stack_),
               std::back_inserter(this->synchronized_history_));
 
+    SPDLOG_INFO("Cuda trace history size: {}",
+                this->synchronized_history_.size());
+
     // clear the current trace
     this->call_stack_.clear();
 }
