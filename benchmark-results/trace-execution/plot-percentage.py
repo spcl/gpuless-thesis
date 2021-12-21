@@ -9,18 +9,18 @@ import numpy
 import re
 
 bechmark_native_median = {}
-for fname in os.listdir('data'):
+for fname in os.listdir('data/total'):
     r = r'benchmark-([a-zA-Z0-9_-]*)-native-([a-zA-Z0-9_]*)-.*'
     m = re.search(r, fname)
     if (m):
-        f = open('data/' + fname)
+        f = open('data/total/' + fname)
         lines_float = [float(l.rstrip()) for l in f.readlines()]
         bechmark_native_median[m.group(1)] = numpy.median(lines_float)
         f.close()
 
 v = []
-for fname in os.listdir('data'):
-    f = open('data/' + fname)
+for fname in os.listdir('data/total'):
+    f = open('data/total/' + fname)
     lines = [l.rstrip() for l in f.readlines()]
 
     r = r'benchmark-([a-zA-Z0-9_-]*)-(native|remote)-(remote|local)-.*'

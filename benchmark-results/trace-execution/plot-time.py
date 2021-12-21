@@ -8,8 +8,8 @@ import pandas as pd
 import numpy
 
 v = []
-for fname in os.listdir('data'):
-    f = open('data/' + fname)
+for fname in os.listdir('data/total'):
+    f = open('data/total/' + fname)
     lines = [l.rstrip() for l in f.readlines()]
 
     r = r'benchmark-([a-zA-Z0-9_-]*)-(native|remote)-(remote|local)-.*'
@@ -45,6 +45,7 @@ order = [
         'bfs',
         'pathfinder',
         'resnet50',
+        'vgg19',
         '3d-unet-kits19',
         'BERT-SQuAD'
         ]
