@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ip='148.187.105.35'
-root=${1:-$HOME/msc-gpuless-lutobler}
+root=${1:-$HOME/msc-lutobler-gpuless}
 benchmarks=$root/src/benchmarks
 
 echo
