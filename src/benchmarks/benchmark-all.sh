@@ -1,79 +1,85 @@
 #!/usr/bin/env bash
 
-IP=148.187.105.35
+ip='148.187.105.35'
+root=${1:-$HOME/msc-gpuless-lutobler}
+benchmarks=$root/src/benchmarks
 
+echo
 echo 'native execution'
 echo
 
 echo 'latency'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/latency \
-	native latency $IP local
+./benchmark.sh $root $benchmarks/latency native latency $ip local
 
 echo 'hotspot'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/hotspot \
-	native hotspot $IP local
+./benchmark.sh $root $benchmarks/hotspot native hotspot $ip local
 
 echo 'srad_v1'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/srad_v1 \
-	native srad $IP local
+./benchmark.sh $root $benchmarks/srad_v1 native srad $ip local
 
 echo 'pathfinder'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/pathfinder \
-	native pathfinder $IP local
+./benchmark.sh $root $benchmarks/pathfinder native pathfinder $ip local
 
 echo 'bfs'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/bfs \
-	native bfs $IP local
+./benchmark.sh $root $benchmarks/bfs native bfs $ip local
 
 echo 'resnet50'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/resnet50 \
-	native ~/libtorch/lib/libtorch_cuda.so $IP local
+./benchmark.sh $root $benchmarks/resnet50 native ~/libtorch/lib/libtorch_cuda.so $ip local
 
 echo '3d-unet-kits19'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/3d-unet-kits19 \
-	native ~/libtorch/lib/libtorch_cuda.so $IP local
+./benchmark.sh $root $benchmarks/3d-unet-kits19 native ~/libtorch/lib/libtorch_cuda.so $ip local
 
+echo 'vgg19'
+./benchmark.sh $root $benchmarks/vgg19 native ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'resnext50'
+./benchmark.sh $root $benchmarks/resnext50 native ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'resnext101'
+./benchmark.sh $root $benchmarks/resnext101 native ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'alexnet'
+./benchmark.sh $root $benchmarks/alexnet native ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'midas'
+./benchmark.sh $root $benchmarks/midas native ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo
 echo 'local TCP execution'
 echo
 
 echo 'latency'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/latency \
-	remote latency $IP local
+./benchmark.sh $root $benchmarks/latency remote latency $ip local
 
 echo 'hotspot'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/hotspot \
-	remote hotspot $IP local
+./benchmark.sh $root $benchmarks/hotspot remote hotspot $ip local
 
 echo 'srad_v1'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/srad_v1 \
-	remote srad $IP local
+./benchmark.sh $root $benchmarks/srad_v1 remote srad $ip local
 
 echo 'pathfinder'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/pathfinder \
-	remote pathfinder $IP local
+./benchmark.sh $root $benchmarks/pathfinder remote pathfinder $ip local
 
 echo 'bfs'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/bfs \
-	remote bfs $IP local
+./benchmark.sh $root $benchmarks/bfs remote bfs $ip local
 
 echo 'resnet50'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/resnet50 \
-	remote ~/libtorch/lib/libtorch_cuda.so $IP local
+./benchmark.sh $root $benchmarks/resnet50 remote ~/libtorch/lib/libtorch_cuda.so $ip local
 
 echo '3d-unet-kits19'
-./benchmark.sh ~/msc-lutobler-gpuless \
-	~/msc-lutobler-gpuless/src/benchmarks/3d-unet-kits19 \
-	remote ~/libtorch/lib/libtorch_cuda.so $IP local
+./benchmark.sh $root $benchmarks/3d-unet-kits19 remote ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'vgg19'
+./benchmark.sh $root $benchmarks/vgg19 remote ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'resnext50'
+./benchmark.sh $root $benchmarks/resnext50 remote ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'resnext101'
+./benchmark.sh $root $benchmarks/resnext101 remote ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'alexnet'
+./benchmark.sh $root $benchmarks/alexnet remote ~/libtorch/lib/libtorch_cuda.so $ip local
+
+echo 'midas'
+./benchmark.sh $root $benchmarks/midas remote ~/libtorch/lib/libtorch_cuda.so $ip local
