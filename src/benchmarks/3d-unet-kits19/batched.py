@@ -11,9 +11,8 @@ from global_vars import *
 model_file = './3dunet_kits19_pytorch.ptc'
 input_file = './samples/case_00000.pkl'
 
-device = torch.device("cuda")
-
 m_start = timer()
+device = torch.device("cuda")
 model = torch.jit.load(model_file, map_location=device)
 model.eval()
 m_end = timer()
