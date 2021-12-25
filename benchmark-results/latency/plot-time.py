@@ -54,7 +54,7 @@ ax = sns.barplot(x='time',
 ax.set_ylabel('')
 ax.set_xlabel('Time [ms]')
 ax.set_xscale('log')
-ax.yaxis.set_label_coords(-0.06, 1.02)
+# ax.yaxis.set_label_coords(-0.06, 1.02)
 ax.legend(loc='lower right')
 ax.set_title('Latency of minimal CUDA API execution\nNVIDIA A100, n=100, 95% confidence')
 ax.figure.savefig('latency.pdf')

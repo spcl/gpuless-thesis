@@ -60,11 +60,10 @@ ax = sns.barplot(y='time',
                  data=bench_data,
                  ci=95,
                  palette=palette)
-# ax.set_ylabel('Benchmark', rotation='horizontal')
-# ax.set_xlabel('Time [ms]')
-ax.set_ylabel('Time [ms]', rotation='horizontal')
+ax.set_ylabel('Time [ms]')
+# ax.set_ylabel('Time [ms]', rotation='horizontal')
 ax.set_xlabel('Benchmark')
-ax.yaxis.set_label_coords(-0.06, 1.02)
+# ax.yaxis.set_label_coords(-0.06, 1.02)
 ax.legend(loc='upper left')
 ax.set_title('Runtime of model inference in hot environment\nNVIDIA A100, n=100, 95% confidence')
 ax.figure.savefig('hot-inference.pdf')

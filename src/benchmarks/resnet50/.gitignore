@@ -10,3 +10,4 @@ image-recognition.cbp
 detect_cuda_compute_capabilities.cu
 *.log
 image-recognition-batched
+image-recognition-batched-total
