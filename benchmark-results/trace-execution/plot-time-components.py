@@ -8,6 +8,24 @@ import pandas as pd
 import numpy
 import re
 
+color1_s0 = '#ca6565'
+color1_s1 = '#ffcccc'
+# color1_s2 = '#F29F9F'
+# color1_s3 = '#A43A3A'
+# color1_s4 = '#7C1717'
+
+color2_s0 = '#3d7979'
+color2_s1 = '#94b9b9'
+# color2_s2 = '#5F9191'
+# color2_s3 = '#236262'
+# color2_s4 = '#0E4A4A'
+
+# color3_s0 = '#9DBC5E'
+# color3_s1 = '#E3F3C2'
+# color3_s2 = '#C8E294'
+# color3_s3 = '#789936'
+# color3_s4 = '#547416'
+
 benchmark_total_median = {}
 benchmark_sync_median = {}
 benchmark_native_median = {}
@@ -22,7 +40,11 @@ include = [
         # 'bfs',
         # 'pathfinder',
         'resnet50',
+        'resnext50',
+        'resnext101',
+        'alexnet',
         'vgg19',
+        'MiDaS',
         '3d-unet-kits19',
         'BERT-SQuAD'
         ]
@@ -49,12 +71,15 @@ sort_map = {
         # 'bfs',
         # 'pathfinder',
         'resnet50': 0,
-        'vgg19': 1,
-        '3d-unet-kits19': 2,
-        'BERT-SQuAD': 3
+        'resnext50': 1,
+        'resnext101': 2,
+        'alexnet': 3,
+        'vgg19': 4,
+        'MiDaS': 5,
+        '3d-unet-kits19': 6,
+        'BERT-SQuAD': 7
         }
 df_stats = df_stats.sort_values(by=['benchmark'], key=lambda x: x.map(sort_map))
-print(df_stats)
 
 for fname in os.listdir('data/total'):
     r = r'benchmark-([a-zA-Z0-9_-]*)-remote-remote-.*'
@@ -97,15 +122,15 @@ df = pd.DataFrame(data=rows, columns=cols)
 #
 # stacked bar plot
 #
-sns.set(rc={"figure.figsize": (8.0, 6.5)})
+sns.set(rc={"figure.figsize": (8.5, 7.0)})
 sns.set_theme(style='whitegrid')
 palette_top = {
-        'native': 'lightcoral',
-        'remote': 'lightskyblue',
+        'native': color1_s0,
+        'remote': color2_s1,
         }
 palette_bottom = {
         'native': 'red', # will be 0.0 value, so unused
-        'remote': 'sandybrown',
+        'remote': color2_s0,
         }
 
 order = [
@@ -115,7 +140,11 @@ order = [
         # 'bfs',
         # 'pathfinder',
         'resnet50',
+        'resnext50',
+        'resnext101',
+        'alexnet',
         'vgg19',
+        'MiDaS',
         '3d-unet-kits19',
         'BERT-SQuAD'
         ]
@@ -143,7 +172,8 @@ ax = sns.barplot(x='benchmark',
 
 ax.set_ylabel('Time [s]')
 ax.set_xlabel('')
-ax.set_title('Execution time components of ML inference benchmarks\nNVIDIA A100, n=20, median execution time')
+ax.tick_params(axis='x', rotation=25)
+ax.set_title('Cold execution time components of ML inference benchmarks\nNVIDIA A100, n=20, median execution time')
 ax.get_legend().remove()
 
 #
@@ -158,17 +188,17 @@ sns.pointplot(x='benchmark',
         y='sync_count',
         data=df_stats,
         linestyles=['--'],
+        scale=0.8,
         ax=ax_stats)
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('#Synchronizations')
 
-
 #
 # custom legend
 #
-rect_native = plt.Rectangle((0, 0), 1, 1, fc='lightcoral', edgecolor='none')
-rect_host = plt.Rectangle((0, 0), 1, 1, fc='lightskyblue', edgecolor='none')
-rect_sync = plt.Rectangle((0, 0), 1, 1, fc='sandybrown', edgecolor='none')
+rect_native = plt.Rectangle((0, 0), 1, 1, fc=color1_s0, edgecolor='none')
+rect_host = plt.Rectangle((0, 0), 1, 1, fc=color2_s1, edgecolor='none')
+rect_sync = plt.Rectangle((0, 0), 1, 1, fc=color2_s0, edgecolor='none')
 line_handle = ax_stats.lines[0]
 
 legend_entries = [

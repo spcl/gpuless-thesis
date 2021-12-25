@@ -45,7 +45,11 @@ order = [
         'bfs',
         'pathfinder',
         'resnet50',
+        'resnext50',
+        'resnext101',
+        'alexnet',
         'vgg19',
+        'midas',
         '3d-unet-kits19',
         'BERT-SQuAD'
         ]
