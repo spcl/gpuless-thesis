@@ -3,13 +3,14 @@ from PIL import Image
 from torchvision import transforms
 from timeit import default_timer as timer
 import time
+import sys
 
 def inference(model):
     with torch.no_grad():
         output = model(input_batch)
     probabilities = torch.nn.functional.softmax(output[0], dim=0)
     top_prob, top_catid = torch.topk(probabilities, 1)
-    # print(top_prob[0].item())
+    print(top_catid[0].item(), file=sys.stderr)
 
 start = timer()
 

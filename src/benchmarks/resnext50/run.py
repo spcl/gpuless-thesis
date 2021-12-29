@@ -7,6 +7,7 @@ start = timer()
 
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext50_32x4d', pretrained=True)
 # model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext101_32x8d', pretrained=True)
+# model = torch.load('resnext50_32x4d.pt')
 model.eval()
 
 input_image = Image.open('dog.jpg')
@@ -40,6 +41,9 @@ print(end - start)
 # probabilities = torch.nn.functional.softmax(output[0], dim=0)
 # with open("imagenet_classes.txt", "r") as f:
 #     categories = [s.strip() for s in f.readlines()]
+
+# top_prob, top_catid = torch.topk(probabilities, 5)
+# print(categories[top_catid[0]], top_prob[0].item())
 
 # # show top categories per image
 # top5_prob, top5_catid = torch.topk(probabilities, 5)
