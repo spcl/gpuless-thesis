@@ -14,6 +14,11 @@ qs = [
     'How many awards was Beyonce nominated for at the 52nd Grammy Awards?',
     ]
 
+# warmup
+for i in range(0, 5):
+    answer = model.predict(docs[i%2], qs[i%2])
+
+# benchmark
 for i in range(0, 100):
     start = timer()
     answer = model.predict(docs[i%2], qs[i%2])
@@ -21,4 +26,5 @@ for i in range(0, 100):
     # print(answer.keys())
     end = timer()
     print(end - start)
+    timer.sleep(0.3)
 
