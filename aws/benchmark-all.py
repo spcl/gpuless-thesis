@@ -8,9 +8,10 @@ api_endpoints = {
         # 'resnext50': 'https://0eqknn6wa9.execute-api.eu-central-1.amazonaws.com/Prod',
         # 'resnext101': 'https://lg0rsjbxr2.execute-api.eu-central-1.amazonaws.com/Prod',
         # 'vgg19': 'https://9td0jyy6y0.execute-api.eu-central-1.amazonaws.com/Prod'
-        'midas': 'https://vx84twe3ed.execute-api.eu-central-1.amazonaws.com/Prod',
-        'yolop': 'https://s2mopwrhn8.execute-api.eu-central-1.amazonaws.com/Prod',
-        'bert': 'https://38gmvj5c1l.execute-api.eu-central-1.amazonaws.com/Prod'
+        # 'midas': 'https://vx84twe3ed.execute-api.eu-central-1.amazonaws.com/Prod',
+        # 'yolop': 'https://s2mopwrhn8.execute-api.eu-central-1.amazonaws.com/Prod',
+        # 'bert': 'https://38gmvj5c1l.execute-api.eu-central-1.amazonaws.com/Prod',
+        '3d-unet-kits19': 'https://hrja1m1zvd.execute-api.eu-central-1.amazonaws.com/Prod',
         }
 
 def run_benchmark(name, api_endpoint):
@@ -34,7 +35,7 @@ def run_benchmark(name, api_endpoint):
         # print(r.content)
         time.sleep(0.3)
 
-    benchmark
+    # benchmark
     for i in range(0, 100):
         start = timer()
         r = requests.post(url, data=test_json, headers=headers)
