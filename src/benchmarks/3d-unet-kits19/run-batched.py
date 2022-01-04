@@ -70,8 +70,7 @@ with open(input_file, 'rb') as f:
     input_bytes = f.read()
 
     # warmup
-    for i in range(0, 5):
-        print('x')
+    for i in range(0, 1):
         query = pickle.loads(input_bytes)[0]
         result = infer_single_query(query)
 
@@ -80,8 +79,8 @@ with open(input_file, 'rb') as f:
 
         query = pickle.loads(input_bytes)[0]
         result = infer_single_query(query)
-        response_array = array.array("B", result.tobytes())
-        bi = response_array.buffer_info()
+        # response_array = array.array("B", result.tobytes())
+        # bi = response_array.buffer_info()
         # print(bi[0])
         # print(bi[1])
 
