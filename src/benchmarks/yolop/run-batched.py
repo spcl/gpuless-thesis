@@ -3,6 +3,7 @@ import torchvision.transforms as transforms
 import cv2
 from timeit import default_timer as timer
 import time
+import sys
 
 from lib.utils.augmentations import letterbox_for_img
 
@@ -27,6 +28,9 @@ def inference():
     img = transform(img)
     img = img.unsqueeze(0).to('cuda')
     det_out, da_seg_out, ll_seg_out = model(img)
+    print(det_out[0], file=sys.stderr)
+    print(da_seg_out[0], file=sys.stderr)
+    print(ll_seg_out[0], file=sys.stderr)
 
 # warmup
 for i in range(0, 5):

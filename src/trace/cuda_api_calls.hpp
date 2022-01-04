@@ -219,6 +219,30 @@ class CudaDeviceSynchronize : public CudaRuntimeApiCall {
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
+class CudaFuncGetAttributes : public CudaRuntimeApiCall {
+  public:
+    cudaFuncAttributes cfa{};
+
+    std::string symbol;
+    std::vector<uint64_t> required_cuda_modules_;
+    std::vector<std::string> required_function_symbols_;
+
+    CudaFuncGetAttributes(
+        std::string symbol,
+        std::vector<uint64_t> requiredCudaModules,
+        std::vector<std::string> requiredFunctionSymbols);
+
+    explicit CudaFuncGetAttributes(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+
+    std::vector<uint64_t> requiredCudaModuleIds() override;
+    std::vector<std::string> requiredFunctionSymbols() override;
+};
+
 } // namespace gpuless
 
 #endif // __CUDA_API_CALLS_H__

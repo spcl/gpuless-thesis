@@ -24,6 +24,7 @@ union FBCudaApiCallUnion {
     FBCudaStreamSynchronize,
     FBCudaGetDeviceProperties,
     FBCudaDeviceSynchronize,
+    FBCudaFuncGetAttributes,
 
     // cuBLAS
     FBCublasCreateV2,

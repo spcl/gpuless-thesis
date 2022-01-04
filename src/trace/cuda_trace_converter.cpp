@@ -132,6 +132,10 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         cuda_api_call =
             std::make_shared<CudaDeviceSynchronize>(fb_cuda_api_call);
         break;
+    case FBCudaApiCallUnion_FBCudaFuncGetAttributes:
+        cuda_api_call =
+            std::make_shared<CudaFuncGetAttributes>(fb_cuda_api_call);
+        break;
 
     // cuBLAS
     case FBCudaApiCallUnion_FBCublasCreateV2:

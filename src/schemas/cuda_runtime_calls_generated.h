@@ -50,6 +50,9 @@ struct FBCudaGetDevicePropertiesBuilder;
 struct FBCudaDeviceSynchronize;
 struct FBCudaDeviceSynchronizeBuilder;
 
+struct FBCudaFuncGetAttributes;
+struct FBCudaFuncGetAttributesBuilder;
+
 enum FBPtxParameterType : int8_t {
   FBPtxParameterType_s8 = 0,
   FBPtxParameterType_s16 = 1,
@@ -972,8 +975,8 @@ inline flatbuffers::Offset<FBCudaLaunchKernel> CreateFBCudaLaunchKernel(
     flatbuffers::Offset<flatbuffers::String> symbol = 0,
     flatbuffers::Offset<flatbuffers::Vector<uint64_t>> required_modules = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>> required_function_symbols = 0,
-    const FBDim3 *grid_dim = 0,
-    const FBDim3 *block_dim = 0,
+    const FBDim3 *grid_dim = nullptr,
+    const FBDim3 *block_dim = nullptr,
     uint64_t shared_mem = 0,
     uint64_t stream = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBParamBuffer>>> param_buffers = 0,
@@ -996,8 +999,8 @@ inline flatbuffers::Offset<FBCudaLaunchKernel> CreateFBCudaLaunchKernelDirect(
     const char *symbol = nullptr,
     const std::vector<uint64_t> *required_modules = nullptr,
     const std::vector<flatbuffers::Offset<flatbuffers::String>> *required_function_symbols = nullptr,
-    const FBDim3 *grid_dim = 0,
-    const FBDim3 *block_dim = 0,
+    const FBDim3 *grid_dim = nullptr,
+    const FBDim3 *block_dim = nullptr,
     uint64_t shared_mem = 0,
     uint64_t stream = 0,
     const std::vector<flatbuffers::Offset<FBParamBuffer>> *param_buffers = nullptr,
@@ -1180,6 +1183,177 @@ inline flatbuffers::Offset<FBCudaDeviceSynchronize> CreateFBCudaDeviceSynchroniz
     flatbuffers::FlatBufferBuilder &_fbb) {
   FBCudaDeviceSynchronizeBuilder builder_(_fbb);
   return builder_.Finish();
+}
+
+struct FBCudaFuncGetAttributes FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCudaFuncGetAttributesBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_SYMBOL = 4,
+    VT_BINARY_VERSION = 6,
+    VT_CACHE_MODE_CA = 8,
+    VT_CONST_SIZE_BYTES = 10,
+    VT_LOCAL_SIZE_BYTES = 12,
+    VT_MAX_DYNAMIC_SHARED_SIZE_BYTES = 14,
+    VT_MAX_THREADS_PER_BLOCK = 16,
+    VT_NUM_REGS = 18,
+    VT_PREFERRED_SHMEM_CARVEOUT = 20,
+    VT_PTX_VERSION = 22,
+    VT_SHARED_SIZE_BYTES = 24
+  };
+  const flatbuffers::String *symbol() const {
+    return GetPointer<const flatbuffers::String *>(VT_SYMBOL);
+  }
+  int32_t binary_version() const {
+    return GetField<int32_t>(VT_BINARY_VERSION, 0);
+  }
+  int32_t cache_mode_ca() const {
+    return GetField<int32_t>(VT_CACHE_MODE_CA, 0);
+  }
+  uint64_t const_size_bytes() const {
+    return GetField<uint64_t>(VT_CONST_SIZE_BYTES, 0);
+  }
+  uint64_t local_size_bytes() const {
+    return GetField<uint64_t>(VT_LOCAL_SIZE_BYTES, 0);
+  }
+  int32_t max_dynamic_shared_size_bytes() const {
+    return GetField<int32_t>(VT_MAX_DYNAMIC_SHARED_SIZE_BYTES, 0);
+  }
+  int32_t max_threads_per_block() const {
+    return GetField<int32_t>(VT_MAX_THREADS_PER_BLOCK, 0);
+  }
+  int32_t num_regs() const {
+    return GetField<int32_t>(VT_NUM_REGS, 0);
+  }
+  int32_t preferred_shmem_carveout() const {
+    return GetField<int32_t>(VT_PREFERRED_SHMEM_CARVEOUT, 0);
+  }
+  int32_t ptx_version() const {
+    return GetField<int32_t>(VT_PTX_VERSION, 0);
+  }
+  uint64_t shared_size_bytes() const {
+    return GetField<uint64_t>(VT_SHARED_SIZE_BYTES, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_SYMBOL) &&
+           verifier.VerifyString(symbol()) &&
+           VerifyField<int32_t>(verifier, VT_BINARY_VERSION) &&
+           VerifyField<int32_t>(verifier, VT_CACHE_MODE_CA) &&
+           VerifyField<uint64_t>(verifier, VT_CONST_SIZE_BYTES) &&
+           VerifyField<uint64_t>(verifier, VT_LOCAL_SIZE_BYTES) &&
+           VerifyField<int32_t>(verifier, VT_MAX_DYNAMIC_SHARED_SIZE_BYTES) &&
+           VerifyField<int32_t>(verifier, VT_MAX_THREADS_PER_BLOCK) &&
+           VerifyField<int32_t>(verifier, VT_NUM_REGS) &&
+           VerifyField<int32_t>(verifier, VT_PREFERRED_SHMEM_CARVEOUT) &&
+           VerifyField<int32_t>(verifier, VT_PTX_VERSION) &&
+           VerifyField<uint64_t>(verifier, VT_SHARED_SIZE_BYTES) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCudaFuncGetAttributesBuilder {
+  typedef FBCudaFuncGetAttributes Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_symbol(flatbuffers::Offset<flatbuffers::String> symbol) {
+    fbb_.AddOffset(FBCudaFuncGetAttributes::VT_SYMBOL, symbol);
+  }
+  void add_binary_version(int32_t binary_version) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_BINARY_VERSION, binary_version, 0);
+  }
+  void add_cache_mode_ca(int32_t cache_mode_ca) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_CACHE_MODE_CA, cache_mode_ca, 0);
+  }
+  void add_const_size_bytes(uint64_t const_size_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudaFuncGetAttributes::VT_CONST_SIZE_BYTES, const_size_bytes, 0);
+  }
+  void add_local_size_bytes(uint64_t local_size_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudaFuncGetAttributes::VT_LOCAL_SIZE_BYTES, local_size_bytes, 0);
+  }
+  void add_max_dynamic_shared_size_bytes(int32_t max_dynamic_shared_size_bytes) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_MAX_DYNAMIC_SHARED_SIZE_BYTES, max_dynamic_shared_size_bytes, 0);
+  }
+  void add_max_threads_per_block(int32_t max_threads_per_block) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_MAX_THREADS_PER_BLOCK, max_threads_per_block, 0);
+  }
+  void add_num_regs(int32_t num_regs) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_NUM_REGS, num_regs, 0);
+  }
+  void add_preferred_shmem_carveout(int32_t preferred_shmem_carveout) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_PREFERRED_SHMEM_CARVEOUT, preferred_shmem_carveout, 0);
+  }
+  void add_ptx_version(int32_t ptx_version) {
+    fbb_.AddElement<int32_t>(FBCudaFuncGetAttributes::VT_PTX_VERSION, ptx_version, 0);
+  }
+  void add_shared_size_bytes(uint64_t shared_size_bytes) {
+    fbb_.AddElement<uint64_t>(FBCudaFuncGetAttributes::VT_SHARED_SIZE_BYTES, shared_size_bytes, 0);
+  }
+  explicit FBCudaFuncGetAttributesBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCudaFuncGetAttributes> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCudaFuncGetAttributes>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCudaFuncGetAttributes> CreateFBCudaFuncGetAttributes(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::String> symbol = 0,
+    int32_t binary_version = 0,
+    int32_t cache_mode_ca = 0,
+    uint64_t const_size_bytes = 0,
+    uint64_t local_size_bytes = 0,
+    int32_t max_dynamic_shared_size_bytes = 0,
+    int32_t max_threads_per_block = 0,
+    int32_t num_regs = 0,
+    int32_t preferred_shmem_carveout = 0,
+    int32_t ptx_version = 0,
+    uint64_t shared_size_bytes = 0) {
+  FBCudaFuncGetAttributesBuilder builder_(_fbb);
+  builder_.add_shared_size_bytes(shared_size_bytes);
+  builder_.add_local_size_bytes(local_size_bytes);
+  builder_.add_const_size_bytes(const_size_bytes);
+  builder_.add_ptx_version(ptx_version);
+  builder_.add_preferred_shmem_carveout(preferred_shmem_carveout);
+  builder_.add_num_regs(num_regs);
+  builder_.add_max_threads_per_block(max_threads_per_block);
+  builder_.add_max_dynamic_shared_size_bytes(max_dynamic_shared_size_bytes);
+  builder_.add_cache_mode_ca(cache_mode_ca);
+  builder_.add_binary_version(binary_version);
+  builder_.add_symbol(symbol);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCudaFuncGetAttributes> CreateFBCudaFuncGetAttributesDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const char *symbol = nullptr,
+    int32_t binary_version = 0,
+    int32_t cache_mode_ca = 0,
+    uint64_t const_size_bytes = 0,
+    uint64_t local_size_bytes = 0,
+    int32_t max_dynamic_shared_size_bytes = 0,
+    int32_t max_threads_per_block = 0,
+    int32_t num_regs = 0,
+    int32_t preferred_shmem_carveout = 0,
+    int32_t ptx_version = 0,
+    uint64_t shared_size_bytes = 0) {
+  auto symbol__ = symbol ? _fbb.CreateString(symbol) : 0;
+  return CreateFBCudaFuncGetAttributes(
+      _fbb,
+      symbol__,
+      binary_version,
+      cache_mode_ca,
+      const_size_bytes,
+      local_size_bytes,
+      max_dynamic_shared_size_bytes,
+      max_threads_per_block,
+      num_regs,
+      preferred_shmem_carveout,
+      ptx_version,
+      shared_size_bytes);
 }
 
 #endif  // FLATBUFFERS_GENERATED_CUDARUNTIMECALLS_H_

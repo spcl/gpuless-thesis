@@ -468,9 +468,89 @@ flatbuffers::Offset<FBCudaApiCall>
 CudaDeviceSynchronize::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call = CreateFBCudaDeviceSynchronize(builder);
     auto api_call_union = CreateFBCudaApiCall(
-        builder, FBCudaApiCallUnion_FBCudaDeviceSynchronize,
-        api_call.Union());
+        builder, FBCudaApiCallUnion_FBCudaDeviceSynchronize, api_call.Union());
     return api_call_union;
+}
+
+/*
+ * cudaFuncGetAttributes
+ */
+CudaFuncGetAttributes::CudaFuncGetAttributes(
+    std::string symbol, std::vector<uint64_t> requiredCudaModules,
+    std::vector<std::string> requiredFunctionSymbols)
+    : symbol(std::move(symbol)),
+      required_cuda_modules_(std::move(requiredCudaModules)),
+      required_function_symbols_(std::move(requiredFunctionSymbols)) {}
+
+CudaFuncGetAttributes::CudaFuncGetAttributes(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCudaFuncGetAttributes();
+
+    this->cfa.binaryVersion = c->binary_version();
+    this->cfa.cacheModeCA = c->cache_mode_ca();
+    this->cfa.constSizeBytes = c->const_size_bytes();
+    this->cfa.localSizeBytes = c->local_size_bytes();
+    this->cfa.maxDynamicSharedSizeBytes = c->max_dynamic_shared_size_bytes();
+    this->cfa.maxThreadsPerBlock = c->max_threads_per_block();
+    this->cfa.numRegs = c->num_regs();
+    this->cfa.preferredShmemCarveout = c->preferred_shmem_carveout();
+    this->cfa.ptxVersion = c->ptx_version();
+    this->cfa.sharedSizeBytes = c->shared_size_bytes();
+    this->symbol = c->symbol()->str();
+}
+
+uint64_t CudaFuncGetAttributes::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cuFuncGetAttribute);
+
+    auto fn_reg_it = vdev.function_registry_.find(this->symbol);
+    if (fn_reg_it == vdev.function_registry_.end()) {
+        SPDLOG_ERROR("Function not registered: {}", this->symbol);
+        std::exit(EXIT_FAILURE);
+    }
+
+    CUfunction f = fn_reg_it->second;
+
+    real(&this->cfa.binaryVersion, CU_FUNC_ATTRIBUTE_BINARY_VERSION, f);
+    real(&this->cfa.cacheModeCA, CU_FUNC_ATTRIBUTE_CACHE_MODE_CA, f);
+    real(reinterpret_cast<int *>(&this->cfa.constSizeBytes),
+         CU_FUNC_ATTRIBUTE_CONST_SIZE_BYTES, f);
+    real(reinterpret_cast<int *>(&this->cfa.localSizeBytes),
+         CU_FUNC_ATTRIBUTE_LOCAL_SIZE_BYTES, f);
+    real(&this->cfa.maxDynamicSharedSizeBytes,
+         CU_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES, f);
+    real(&this->cfa.maxThreadsPerBlock, CU_FUNC_ATTRIBUTE_MAX_THREADS_PER_BLOCK,
+         f);
+    real(&this->cfa.numRegs, CU_FUNC_ATTRIBUTE_NUM_REGS, f);
+    real(&this->cfa.preferredShmemCarveout,
+         CU_FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT, f);
+    real(&this->cfa.ptxVersion, CU_FUNC_ATTRIBUTE_PTX_VERSION, f);
+    real(reinterpret_cast<int *>(&this->cfa.sharedSizeBytes),
+         CU_FUNC_ATTRIBUTE_SHARED_SIZE_BYTES, f);
+
+    return cudaSuccess;
+}
+
+flatbuffers::Offset<FBCudaApiCall>
+CudaFuncGetAttributes::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCudaFuncGetAttributes(
+        builder, builder.CreateString(this->symbol), this->cfa.binaryVersion,
+        this->cfa.cacheModeCA, this->cfa.constSizeBytes,
+        this->cfa.localSizeBytes, this->cfa.maxDynamicSharedSizeBytes,
+        this->cfa.maxThreadsPerBlock, this->cfa.numRegs,
+        this->cfa.preferredShmemCarveout, this->cfa.ptxVersion,
+        this->cfa.sharedSizeBytes);
+
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCudaFuncGetAttributes, api_call.Union());
+    return api_call_union;
+}
+
+std::vector<uint64_t> CudaFuncGetAttributes::requiredCudaModuleIds() {
+    return this->required_cuda_modules_;
+}
+
+std::vector<std::string> CudaFuncGetAttributes::requiredFunctionSymbols() {
+    return this->required_function_symbols_;
 }
 
 } // namespace gpuless

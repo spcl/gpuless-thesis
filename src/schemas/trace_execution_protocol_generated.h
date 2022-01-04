@@ -7,9 +7,9 @@
 #include "flatbuffers/flatbuffers.h"
 
 #include "cudevice_attributes_generated.h"
-#include "cuda_runtime_calls_generated.h"
 #include "cublas_calls_generated.h"
 #include "cudnn_calls_generated.h"
+#include "cuda_runtime_calls_generated.h"
 
 namespace gpuless {
 
@@ -81,45 +81,46 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCudaStreamSynchronize = 10,
   FBCudaApiCallUnion_FBCudaGetDeviceProperties = 11,
   FBCudaApiCallUnion_FBCudaDeviceSynchronize = 12,
-  FBCudaApiCallUnion_FBCublasCreateV2 = 13,
-  FBCudaApiCallUnion_FBCublasSetStreamV2 = 14,
-  FBCudaApiCallUnion_FBCublasSetMathMode = 15,
-  FBCudaApiCallUnion_FBCublasSgemmV2 = 16,
-  FBCudaApiCallUnion_FBCublasLtCreate = 17,
-  FBCudaApiCallUnion_FBCublasLtMatmulDescCreate = 18,
-  FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy = 19,
-  FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute = 20,
-  FBCudaApiCallUnion_FBCublasLtMatmul = 21,
-  FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate = 22,
-  FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy = 23,
-  FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute = 24,
-  FBCudaApiCallUnion_FBCublasSgemmStridedBatched = 25,
-  FBCudaApiCallUnion_FBCudnnCreate = 26,
-  FBCudaApiCallUnion_FBCudnnSetStream = 27,
-  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 28,
-  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 29,
-  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 30,
-  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 31,
-  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 32,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 33,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 34,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 35,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 36,
-  FBCudaApiCallUnion_FBCudnnConvolutionForward = 37,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 38,
-  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 39,
-  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 40,
-  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 41,
-  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 42,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 43,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 44,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 45,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 46,
+  FBCudaApiCallUnion_FBCudaFuncGetAttributes = 13,
+  FBCudaApiCallUnion_FBCublasCreateV2 = 14,
+  FBCudaApiCallUnion_FBCublasSetStreamV2 = 15,
+  FBCudaApiCallUnion_FBCublasSetMathMode = 16,
+  FBCudaApiCallUnion_FBCublasSgemmV2 = 17,
+  FBCudaApiCallUnion_FBCublasLtCreate = 18,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescCreate = 19,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescDestroy = 20,
+  FBCudaApiCallUnion_FBCublasLtMatmulDescSetAttribute = 21,
+  FBCudaApiCallUnion_FBCublasLtMatmul = 22,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutCreate = 23,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy = 24,
+  FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute = 25,
+  FBCudaApiCallUnion_FBCublasSgemmStridedBatched = 26,
+  FBCudaApiCallUnion_FBCudnnCreate = 27,
+  FBCudaApiCallUnion_FBCudnnSetStream = 28,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 29,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 30,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 31,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 32,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 33,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 34,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 35,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 36,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 37,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 38,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 39,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 40,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 41,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 42,
+  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 43,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 44,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 45,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 46,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 47,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
   FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[47] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[48] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
@@ -134,6 +135,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[47] {
     FBCudaApiCallUnion_FBCudaStreamSynchronize,
     FBCudaApiCallUnion_FBCudaGetDeviceProperties,
     FBCudaApiCallUnion_FBCudaDeviceSynchronize,
+    FBCudaApiCallUnion_FBCudaFuncGetAttributes,
     FBCudaApiCallUnion_FBCublasCreateV2,
     FBCudaApiCallUnion_FBCublasSetStreamV2,
     FBCudaApiCallUnion_FBCublasSetMathMode,
@@ -173,7 +175,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[47] {
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[48] = {
+  static const char * const names[49] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
@@ -187,6 +189,7 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCudaStreamSynchronize",
     "FBCudaGetDeviceProperties",
     "FBCudaDeviceSynchronize",
+    "FBCudaFuncGetAttributes",
     "FBCublasCreateV2",
     "FBCublasSetStreamV2",
     "FBCublasSetMathMode",
@@ -282,6 +285,10 @@ template<> struct FBCudaApiCallUnionTraits<FBCudaGetDeviceProperties> {
 
 template<> struct FBCudaApiCallUnionTraits<FBCudaDeviceSynchronize> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaDeviceSynchronize;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCudaFuncGetAttributes> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCudaFuncGetAttributes;
 };
 
 template<> struct FBCudaApiCallUnionTraits<FBCublasCreateV2> {
@@ -534,6 +541,9 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const FBCudaDeviceSynchronize *api_call_as_FBCudaDeviceSynchronize() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaDeviceSynchronize ? static_cast<const FBCudaDeviceSynchronize *>(api_call()) : nullptr;
   }
+  const FBCudaFuncGetAttributes *api_call_as_FBCudaFuncGetAttributes() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudaFuncGetAttributes ? static_cast<const FBCudaFuncGetAttributes *>(api_call()) : nullptr;
+  }
   const FBCublasCreateV2 *api_call_as_FBCublasCreateV2() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasCreateV2 ? static_cast<const FBCublasCreateV2 *>(api_call()) : nullptr;
   }
@@ -691,6 +701,10 @@ template<> inline const FBCudaGetDeviceProperties *FBCudaApiCall::api_call_as<FB
 
 template<> inline const FBCudaDeviceSynchronize *FBCudaApiCall::api_call_as<FBCudaDeviceSynchronize>() const {
   return api_call_as_FBCudaDeviceSynchronize();
+}
+
+template<> inline const FBCudaFuncGetAttributes *FBCudaApiCall::api_call_as<FBCudaFuncGetAttributes>() const {
+  return api_call_as_FBCudaFuncGetAttributes();
 }
 
 template<> inline const FBCublasCreateV2 *FBCudaApiCall::api_call_as<FBCublasCreateV2>() const {
@@ -1357,6 +1371,10 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
     }
     case FBCudaApiCallUnion_FBCudaDeviceSynchronize: {
       auto ptr = reinterpret_cast<const FBCudaDeviceSynchronize *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCudaFuncGetAttributes: {
+      auto ptr = reinterpret_cast<const FBCudaFuncGetAttributes *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case FBCudaApiCallUnion_FBCublasCreateV2: {

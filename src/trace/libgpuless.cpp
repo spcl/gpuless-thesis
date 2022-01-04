@@ -385,7 +385,59 @@ cudaError_t cudaGetDeviceProperties(cudaDeviceProp *prop, int device) {
     return cudaSuccess;
 }
 
+cudaError_t cudaDeviceGetAttribute(int *value, cudaDeviceAttr attr,
+                                   int device) {
+    hijackInit();
+    SPDLOG_TRACE("{}()", __func__);
+    *value = getTraceExecutor()->deviceAttribute(
+        static_cast<CUdevice_attribute>(attr));
+    return cudaSuccess;
+}
+
+cudaError_t cudaFuncGetAttributes(cudaFuncAttributes *attr, const void *func) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    auto &symbol_map = getSymbolMap();
+    auto it = symbol_map.find(func);
+    if (it == symbol_map.end()) {
+        EXIT_UNRECOVERABLE("symbol for function not found in map");
+    }
+    std::string &symbol = it->second;
+    SPDLOG_INFO("{}({})", __func__, symbol);
+
+    auto &cuda_trace = getCudaTrace();
+    auto &symbol_to_module_id_map = cuda_trace.getSymbolToModuleId();
+    auto mod_id_it = symbol_to_module_id_map.find(symbol);
+    if (mod_id_it == symbol_to_module_id_map.end()) {
+        SPDLOG_ERROR("function in unknown module");
+        std::exit(EXIT_FAILURE);
+    }
+
+    std::vector<uint64_t> required_cuda_modules{mod_id_it->second.first};
+    std::vector<std::string> required_function_symbols{symbol};
+
+    cuda_trace.record(std::make_shared<CudaFuncGetAttributes>(
+        symbol, required_cuda_modules, required_function_symbols));
+    getTraceExecutor()->synchronize(getCudaTrace());
+    *attr = std::static_pointer_cast<CudaFuncGetAttributes>(
+                getCudaTrace().historyTop())
+                ->cfa;
+
+    return cudaSuccess;
+}
+
+cudaError_t cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(
+    int *numBlocks, const void *func, int blockSize, size_t dynamicSmemSize,
+    unsigned int flags) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    // TODO
+    return cudaSuccess;
+}
+
 cudaError_t cudaGetLastError(void) { return cudaSuccess; }
+
+cudaError_t cudaPeekAtLastError(void) { return cudaSuccess; }
 
 unsigned __cudaPushCallConfiguration(dim3 gridDim, dim3 blockDim,
                                      size_t sharedMem = 0,
