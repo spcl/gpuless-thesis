@@ -79,6 +79,7 @@ for b in benchmarks:
     ax.set_xscale('log')
     ax.set_ylim([0.0, 100.0])
     ax.xaxis.set_major_formatter(mtick.ScalarFormatter())
+    ax.set_xticks([0.1, 1, 10, 100])
     ax.set_xlabel('Network bandwidth [Gbps]')
     ax.set_ylabel('Time [s]')
     ax.set_title(f'{b}')
@@ -131,6 +132,7 @@ for b in benchmarks:
     ax.set_xscale('log')
     # ax.set_ylim([0.0, 100.0])
     ax.xaxis.set_major_formatter(mtick.ScalarFormatter())
+    ax.set_xticks([0.1, 1, 10, 100])
     ax.set_xlabel('Network bandwidth [Gbps]')
     if b == '3d-unet-kits19':
         ax.set_ylabel('Time [s]')
