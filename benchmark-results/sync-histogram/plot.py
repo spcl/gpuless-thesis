@@ -44,18 +44,23 @@ def plot(name):
     read_bench(v, f'data/{name}.out', name)
     bench_data = pd.DataFrame(data=v, columns=cols)
 
-    sns.set(rc={"figure.figsize": (6.0, 4.5)})
+    # histogram
+    # sns.set(rc={"figure.figsize": (6.0, 4.5)})
     sns.set_theme(style='whitegrid')
-    ax = sns.histplot(x='time', y='size', bins=25, data=bench_data)
-
+    ax = sns.histplot(x='time', y='size', bins=25, data=bench_data, cbar=True)
     ax.set_ylabel('Data transfer size [MB]')
     ax.set_xlabel('Timestamp [ms]')
     ax.set_title(f'Histogram of synchronization calls ({name})')
+
     ax.figure.savefig(f'{name}-sync-histogram.pdf')
     plt.clf()
 
 plot('resnet50')
-# plot('resnext101')
-# plot('yolop')
-# plot('3d-unet-kits19')
-# plot('midas')
+plot('resnext50')
+plot('resnext101')
+plot('alexnet')
+plot('vgg19')
+plot('yolop')
+plot('3d-unet-kits19')
+plot('BERT-SQuAD')
+plot('midas')
