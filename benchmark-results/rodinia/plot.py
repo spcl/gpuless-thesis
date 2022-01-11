@@ -33,7 +33,7 @@ def read_bench(fname, name, type_):
     f = open(fname)
     lines = [l.rstrip() for l in f.readlines()]
     for line in lines:
-        v.append([name, type_, float(line)])
+        v.append([name, type_, float(line) * 1000.0])
     f.close()
 
 read_bench('data/benchmark-bfs-native-local.out', 'bfs', 'Native')
