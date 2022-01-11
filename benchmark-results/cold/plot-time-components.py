@@ -184,17 +184,17 @@ ax.get_legend().remove()
 #
 
 # sns.set_theme(style='whitegrid')
-sns.set_style('white')
-ax_stats = plt.twinx()
-sns.pointplot(x='benchmark',
-        color='black',
-        y='sync_count',
-        data=df_stats,
-        linestyles=['--'],
-        scale=0.8,
-        ax=ax_stats)
-ax_stats.set_xlabel('')
-ax_stats.set_ylabel('#Synchronizations')
+# sns.set_style('white')
+# ax_stats = plt.twinx()
+# sns.pointplot(x='benchmark',
+#         color='black',
+#         y='sync_count',
+#         data=df_stats,
+#         linestyles=['--'],
+#         scale=0.8,
+#         ax=ax_stats)
+# ax_stats.set_xlabel('')
+# ax_stats.set_ylabel('#Synchronizations')
 
 #
 # custom legend
@@ -202,16 +202,17 @@ ax_stats.set_ylabel('#Synchronizations')
 rect_native = plt.Rectangle((0, 0), 1, 1, fc=color1_s0, edgecolor='none')
 rect_host = plt.Rectangle((0, 0), 1, 1, fc=color2_s1, edgecolor='none')
 rect_sync = plt.Rectangle((0, 0), 1, 1, fc=color2_s0, edgecolor='none')
-line_handle = ax_stats.lines[0]
+# line_handle = ax_stats.lines[0]
 
 legend_entries = [
         'Native execution',
-        'Host execution',
-        'Synchronization',
-        '#Synchronizations'
+        'Client execution',
+        'Waiting for synchronization',
+        # '#Synchronizations'
         ]
 plt.legend(
-        handles=[rect_native, rect_host, rect_sync, line_handle],
+        # handles=[rect_native, rect_host, rect_sync, line_handle],
+        handles=[rect_native, rect_host, rect_sync],
         labels=legend_entries,
         title='')
 
