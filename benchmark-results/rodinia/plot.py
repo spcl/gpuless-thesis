@@ -40,11 +40,15 @@ read_bench('data/benchmark-bfs-native-local.out', 'bfs', 'Native')
 read_bench('data/benchmark-hotspot-native-local.out', 'hotspot', 'Native')
 read_bench('data/benchmark-pathfinder-native-local.out', 'pathfinder', 'Native')
 read_bench('data/benchmark-srad_v1-native-local.out', 'srad_v1', 'Native')
+read_bench('data/benchmark-gaussian-native-local.out', 'gaussian', 'Native')
+read_bench('data/benchmark-myocyte-native-local.out', 'myocyte', 'Native')
 
 read_bench('data/benchmark-bfs-remote-remote.out', 'bfs', 'GPUless remote')
 read_bench('data/benchmark-hotspot-remote-remote.out', 'hotspot', 'GPUless remote')
 read_bench('data/benchmark-pathfinder-remote-remote.out', 'pathfinder', 'GPUless remote')
 read_bench('data/benchmark-srad_v1-remote-remote.out', 'srad_v1', 'GPUless remote')
+read_bench('data/benchmark-gaussian-remote-remote.out', 'gaussian', 'GPUless remote')
+read_bench('data/benchmark-myocyte-remote-remote.out', 'myocyte', 'GPUless remote')
 
 bench_data = pd.DataFrame(data=v, columns=cols)
 
@@ -55,7 +59,7 @@ sns.set_theme(style='whitegrid')
 
 
 hue_order = ['Native', 'GPUless remote']
-order = ['bfs', 'hotspot', 'pathfinder', 'srad_v1']
+# order = ['bfs', 'hotspot', 'pathfinder', 'srad_v1', 'gaus']
 
 palette = {
         'Native': color1_s0,
@@ -66,7 +70,7 @@ ax = sns.barplot(x='benchmark',
                  y='time',
                  hue='type',
                  hue_order=hue_order,
-                 order=order,
+                 # order=order,
                  # orient='h',
                  palette=palette,
                  data=bench_data,
