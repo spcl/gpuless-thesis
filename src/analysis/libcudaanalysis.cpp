@@ -158,8 +158,8 @@ extern "C" void CUDARTAPI __cudaRegisterFunction(
     dim3 *bDim, dim3 *gDim, int *wSize) {
     static auto real_func =
         (decltype(&__cudaRegisterFunction))real_dlsym(RTLD_NEXT, __func__);
-    //    std::cerr << "__cudaRegisterFunction(" << deviceName << ")"
-    //    <<std::endl;
+//    std::cerr << "__cudaRegisterFunction(" << deviceName << ")"
+//        << std::endl;
     auto &map = getCUfnptrToSymbolMap();
     map.emplace(std::make_pair((void *)deviceFun, deviceName));
     map.emplace(std::make_pair((void *)hostFun, deviceName));
@@ -460,7 +460,7 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
 extern "C" void **CUDARTAPI __cudaRegisterFatBinary(void *fatCubin) {
     static auto real_func =
         (decltype(&__cudaRegisterFatBinary))real_dlsym(RTLD_NEXT, __func__);
-    //    std::cerr << "__cudaRegisterFatBinary()" << std::endl;
+//    std::cerr << "__cudaRegisterFatBinary()" << std::endl;
     return real_func(fatCubin);
 }
 
