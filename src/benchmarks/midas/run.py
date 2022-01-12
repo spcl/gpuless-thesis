@@ -9,13 +9,13 @@ model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest i
 #model_type = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
 #model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
 
-midas = torch.hub.load("intel-isl/MiDaS", model_type)
-
 start = timer()
+
+midas = torch.hub.load("intel-isl/MiDaS", model_type)
+midas.eval()
 
 device = torch.device("cuda")
 midas.to(device)
-midas.eval()
 
 midas_transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
 if model_type == "DPT_Large" or model_type == "DPT_Hybrid":
@@ -39,9 +39,9 @@ with torch.no_grad():
 
 output = prediction.cpu().numpy()
 
-plt.imshow(output)
+# plt.imshow(output)
 # plt.show()
-plt.savefig('out.pdf')
+# plt.savefig('out.pdf')
 
 end = timer()
 print(end - start)

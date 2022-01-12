@@ -26,26 +26,11 @@ model.to('cuda')
 with torch.no_grad():
     output = model(input_batch)
 
-# Tensor of shape 1000, with confidence scores over Imagenet's 1000 classes
-# print(output[0])
-# The output has unnormalized scores. To get probabilities, you can run a softmax on it.
 probabilities = torch.nn.functional.softmax(output[0], dim=0)
-# print(probabilities)
+probabilities = torch.nn.functional.softmax(output[0], dim=0)
+top_prob, top_catid = torch.topk(probabilities, 1)
+top_catid = top_catid[0].item()
+top_prob = top_prob[0].item()
 
 end = timer()
 print(end - start)
-
-# print(output[0])
-# print(probabilities)
-
-# probabilities = torch.nn.functional.softmax(output[0], dim=0)
-# with open("imagenet_classes.txt", "r") as f:
-#     categories = [s.strip() for s in f.readlines()]
-
-# top_prob, top_catid = torch.topk(probabilities, 5)
-# print(categories[top_catid[0]], top_prob[0].item())
-
-# # show top categories per image
-# top5_prob, top5_catid = torch.topk(probabilities, 5)
-# for i in range(top5_prob.size(0)):
-#     print(categories[top5_catid[i]], top5_prob[i].item())
