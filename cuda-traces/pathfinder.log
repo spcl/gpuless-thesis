@@ -1,0 +1,29 @@
+pyramidHeight: 20
+gridSize: [100000]
+border:[20]
+blockSize: 256
+blockGrid:[463]
+targetBlock:[216]
+cudaMalloc(D0 (0x7f737e200000), 61a80 bytes)
+
+cudaMalloc(D1 (0x7f737e261c00), 61a80 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f737e200000) <- H0(0x7f738d9da010), 61a80 bytes) [time: 0.05 ms, acc_time: 0.05 ms]
+
+cudaMalloc(D2 (0x7f7376000000), 25c3f80 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f7376000000) <- H1(0x7f738da3ba90), 25c3f80 bytes) [time: 3.332 ms, acc_time: 3.382 ms]
+
+cuLaunchKernel(dynproc_kernel(int, int*, int*, int*, int, int, int, int)) [time: 0.009 ms, acc_time: 3.391 ms]
+
+cuLaunchKernel(dynproc_kernel(int, int*, int*, int*, int, int, int, int)) [time: 0.008 ms, acc_time: 3.399 ms]
+
+cuLaunchKernel(dynproc_kernel(int, int*, int*, int*, int, int, int, int)) [time: 0.007 ms, acc_time: 3.406 ms]
+
+cuLaunchKernel(dynproc_kernel(int, int*, int*, int*, int, int, int, int)) [time: 0.007 ms, acc_time: 3.413 ms]
+
+cuLaunchKernel(dynproc_kernel(int, int*, int*, int*, int, int, int, int)) [time: 0.008 ms, acc_time: 3.421 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x7f73a19e6010) <- D1(0x7f737e261c00), 61a80 bytes) [time: 0.182 ms, acc_time: 3.603 ms]
+
+0.23382600

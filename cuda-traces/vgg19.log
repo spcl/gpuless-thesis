@@ -1,0 +1,462 @@
+Using cache found in /home/luke/.cache/torch/hub/pytorch_vision_v0.10.0
+cudaStreamIsCapturing() [time: 771.493 ms, acc_time: 771.493 ms]
+
+cudaMalloc(D0 (0x7f54c5000000), 200000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D0(0x7f54c5000000) <- H0(0x55dd88165580), 93000 bytes) [time: 0.055 ms, acc_time: 771.548 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D1(0x7f54c5093000) <- H1(0x55dd87540800), 1b00 bytes) [time: 0.005 ms, acc_time: 771.553 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D2(0x7f54c5094c00) <- H2(0x55dd87524f00), 100 bytes) [time: 0.004 ms, acc_time: 771.557 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D3(0x7f54c5094e00) <- H3(0x55dd87542ac0), 24000 bytes) [time: 0.013 ms, acc_time: 771.57 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D4(0x7f54c50b8e00) <- H4(0x55dd87566c00), 100 bytes) [time: 0.002 ms, acc_time: 771.572 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D5(0x7f54c50b9000) <- H5(0x55dd87566fc0), 48000 bytes) [time: 0.021 ms, acc_time: 771.593 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D6(0x7f54c5101000) <- H6(0x55dd875af200), 200 bytes) [time: 0.002 ms, acc_time: 771.595 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D7(0x7f54c5101200) <- H7(0x55dd875af680), 90000 bytes) [time: 0.038 ms, acc_time: 771.633 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D8(0x7f54c5191200) <- H8(0x55dd8763f8c0), 200 bytes) [time: 0.002 ms, acc_time: 771.635 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 771.635 ms]
+
+cudaMalloc(D9 (0x7f54c2000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D9(0x7f54c2000000) <- H9(0x55dd8763fd80), 120000 bytes) [time: 0.079 ms, acc_time: 771.714 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D10(0x7f54c5191400) <- H10(0x55dd8775ffc0), 400 bytes) [time: 0.003 ms, acc_time: 771.717 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D11(0x7f54c2120000) <- H11(0x7f555b746040), 240000 bytes) [time: 0.181 ms, acc_time: 771.898 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D12(0x7f54c5191800) <- H12(0x55dd87760800), 400 bytes) [time: 0.004 ms, acc_time: 771.902 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D13(0x7f54c2360000) <- H13(0x7f555b505040), 240000 bytes) [time: 0.179 ms, acc_time: 772.081 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D14(0x7f54c5191c00) <- H14(0x55dd87761080), 400 bytes) [time: 0.003 ms, acc_time: 772.084 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D15(0x7f54c25a0000) <- H15(0x7f555b2c4040), 240000 bytes) [time: 0.175 ms, acc_time: 772.259 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D16(0x7f54c5192000) <- H16(0x55dd877618c0), 400 bytes) [time: 0.003 ms, acc_time: 772.262 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D17(0x7f54c27e0000) <- H17(0x7f555ae43040), 480000 bytes) [time: 0.372 ms, acc_time: 772.634 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D18(0x7f54c5192400) <- H18(0x55dd87762180), 800 bytes) [time: 0.004 ms, acc_time: 772.638 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 772.638 ms]
+
+cudaMalloc(D19 (0x7f54c0000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D19(0x7f54c0000000) <- H19(0x7f555a542040), 900000 bytes) [time: 0.773 ms, acc_time: 773.411 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D20(0x7f54c5192c00) <- H20(0x55dd87762e00), 800 bytes) [time: 0.005 ms, acc_time: 773.416 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D21(0x7f54c0900000) <- H21(0x7f5559c41040), 900000 bytes) [time: 0.771 ms, acc_time: 774.187 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D22(0x7f54c5193400) <- H22(0x55dd87763ac0), 800 bytes) [time: 0.004 ms, acc_time: 774.191 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 774.191 ms]
+
+cudaMalloc(D23 (0x7f54be000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D23(0x7f54be000000) <- H23(0x7f5559340040), 900000 bytes) [time: 0.776 ms, acc_time: 774.967 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D24(0x7f54c5193c00) <- H24(0x55dd87764700), 800 bytes) [time: 0.004 ms, acc_time: 774.971 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D25(0x7f54be900000) <- H25(0x7f5558a3f040), 900000 bytes) [time: 0.778 ms, acc_time: 775.749 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D26(0x7f54c5194400) <- H26(0x55dd87765380), 800 bytes) [time: 0.004 ms, acc_time: 775.753 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 775.753 ms]
+
+cudaMalloc(D27 (0x7f54bc000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D27(0x7f54bc000000) <- H27(0x7f555813e040), 900000 bytes) [time: 0.802 ms, acc_time: 776.555 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D28(0x7f54c5194c00) <- H28(0x55dd87766040), 800 bytes) [time: 0.004 ms, acc_time: 776.559 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D29(0x7f54bc900000) <- H29(0x7f555773d040), 900000 bytes) [time: 0.814 ms, acc_time: 777.373 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D30(0x7f54c5195400) <- H30(0x55dd87766c80), 800 bytes) [time: 0.004 ms, acc_time: 777.377 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 777.377 ms]
+
+cudaMalloc(D31 (0x7f54ba000000), 1400000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D31(0x7f54ba000000) <- H31(0x7f5556e3c040), 900000 bytes) [time: 0.774 ms, acc_time: 778.151 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D32(0x7f54c5195c00) <- H32(0x55dd87767900), 800 bytes) [time: 0.004 ms, acc_time: 778.155 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 778.155 ms]
+
+cudaMalloc(D33 (0x7f54a0000000), 18800000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D33(0x7f54a0000000) <- H33(0x7f553e63b040), 18800000 bytes) [time: 36.11 ms, acc_time: 814.265 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D34(0x7f54c5196400) <- H34(0x55dd87769340), 4000 bytes) [time: 0.016 ms, acc_time: 814.281 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 814.281 ms]
+
+cudaMalloc(D35 (0x7f5554000000), 4000000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D35(0x7f5554000000) <- H35(0x7f553a63a040), 4000000 bytes) [time: 5.994 ms, acc_time: 820.275 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D36(0x7f54c519a400) <- H36(0x55dd8776da40), 4000 bytes) [time: 0.009 ms, acc_time: 820.284 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 820.284 ms]
+
+cudaMalloc(D37 (0x7f54b8800000), 1000000 bytes)
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D37(0x7f54b8800000) <- H37(0x7f5539699040), fa0000 bytes) [time: 1.373 ms, acc_time: 821.657 ms]
+
+cudaMemcpyAsync(cudaMemcpyHostToDevice) D38(0x7f54c519e400) <- H38(0x55dd87771e80), fa0 bytes) [time: 0.004 ms, acc_time: 821.661 ms]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 821.661 ms]
+
+cudaMalloc(D39 (0x7f54c5200000), e00000 bytes)
+
+cudnnCreate()
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cask_cudnn::computeOffsetsKernel<false, false>(cask_cudnn::ComputeOffsetsParams)) [time: 0.013 ms, acc_time: 821.674 ms]
+
+cuLaunchKernel(ampere_scudnn_128x32_relu_small_nn_v1) [time: 0.009 ms, acc_time: 821.683 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.009 ms, acc_time: 821.692 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.008 ms, acc_time: 821.7 ms]
+
+cudaStreamIsCapturing() [time: 0.001 ms, acc_time: 821.701 ms]
+
+cudaMalloc(D40 (0x7f5446600000), e00000 bytes)
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudaStreamIsCapturing() [time: 0 ms, acc_time: 821.701 ms]
+
+cudaMalloc(D41 (0x7f5447400000), 200000 bytes)
+
+cuLaunchKernel(void cudnn::winograd::generateWinogradTilesKernel<0, float, float>(cudnn::winograd::GenerateWinogradTilesParams<float, float>)) [time: 0.011 ms, acc_time: 821.712 ms]
+
+cuLaunchKernel(ampere_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148t_nt_v1) [time: 0.008 ms, acc_time: 821.72 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.013 ms, acc_time: 821.733 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.009 ms, acc_time: 821.742 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.011 ms, acc_time: 821.753 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.013 ms, acc_time: 821.766 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.013 ms, acc_time: 821.779 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.014 ms, acc_time: 821.793 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.015 ms, acc_time: 821.808 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.013 ms, acc_time: 821.821 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 821.835 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.013 ms, acc_time: 821.848 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc>(cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc::Params)) [time: 0.013 ms, acc_time: 821.861 ms]
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.013 ms, acc_time: 821.874 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.014 ms, acc_time: 821.888 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.014 ms, acc_time: 821.902 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.014 ms, acc_time: 821.916 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 821.93 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 821.944 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.015 ms, acc_time: 821.959 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.014 ms, acc_time: 821.973 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.014 ms, acc_time: 821.987 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 822.001 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.015 ms, acc_time: 822.016 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.012 ms, acc_time: 822.028 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.008 ms, acc_time: 822.036 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.008 ms, acc_time: 822.044 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.009 ms, acc_time: 822.053 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.01 ms, acc_time: 822.063 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.012 ms, acc_time: 822.075 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.009 ms, acc_time: 822.084 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.015 ms, acc_time: 822.099 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.014 ms, acc_time: 822.113 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.015 ms, acc_time: 822.128 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.015 ms, acc_time: 822.143 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.015 ms, acc_time: 822.158 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.014 ms, acc_time: 822.172 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.014 ms, acc_time: 822.186 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.01 ms, acc_time: 822.196 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.008 ms, acc_time: 822.204 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc>(cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc::Params)) [time: 0.008 ms, acc_time: 822.212 ms]
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.009 ms, acc_time: 822.221 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.01 ms, acc_time: 822.231 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.012 ms, acc_time: 822.243 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.009 ms, acc_time: 822.252 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.009 ms, acc_time: 822.261 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc>(cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc::Params)) [time: 0.012 ms, acc_time: 822.273 ms]
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.011 ms, acc_time: 822.284 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.013 ms, acc_time: 822.297 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.018 ms, acc_time: 822.315 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.024 ms, acc_time: 822.339 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.032 ms, acc_time: 822.371 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc>(cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc::Params)) [time: 0.041 ms, acc_time: 822.412 ms]
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.043 ms, acc_time: 822.455 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.043 ms, acc_time: 822.498 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.044 ms, acc_time: 822.542 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.045 ms, acc_time: 822.587 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.045 ms, acc_time: 822.632 ms]
+
+cuLaunchKernel(void cutlass_cudnn::Kernel<cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc>(cutlass_tensorop_s1688fprop_optimized_tf32_64x128_16x6_nhwc::Params)) [time: 0.042 ms, acc_time: 822.674 ms]
+
+cuLaunchKernel(void cudnn::ops::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::ops::nhwc2nchw_params_t<float>, float const*, float*)) [time: 0.042 ms, acc_time: 822.716 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.035 ms, acc_time: 822.751 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.033 ms, acc_time: 822.784 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.035 ms, acc_time: 822.819 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.031 ms, acc_time: 822.85 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.041 ms, acc_time: 822.891 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.042 ms, acc_time: 822.933 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.04 ms, acc_time: 822.973 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.04 ms, acc_time: 823.013 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.04 ms, acc_time: 823.053 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.032 ms, acc_time: 823.085 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.035 ms, acc_time: 823.12 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.031 ms, acc_time: 823.151 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.026 ms, acc_time: 823.177 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.033 ms, acc_time: 823.21 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.029 ms, acc_time: 823.239 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.034 ms, acc_time: 823.273 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.031 ms, acc_time: 823.304 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.032 ms, acc_time: 823.336 ms]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cudnnCreateTensorDescriptor()
+
+cudnnSetTensorNdDescriptor() [nbDims=4]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.031 ms, acc_time: 823.367 ms]
+
+cuLaunchKernel(void cudnn::ops::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::ops::nchw2nhwc_params_t<float>, float const*, float*)) [time: 0.033 ms, acc_time: 823.4 ms]
+
+cuLaunchKernel(sm80_xmma_fprop_implicit_gemm_tf32f32_tf32f32_f32_nhwckrsc_nchw_tilesize128x128x16_stage4_warpsize2x2x1_g1_tensor16x8x8_kernel_cudnn) [time: 0.029 ms, acc_time: 823.429 ms]
+
+cuLaunchKernel(void at::native::unrolled_elementwise_kernel<at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast>(int, at::native::BinaryFunctor<float, float, float, at::native::AddFunctor<float> >, at::detail::Array<char*, 3>, OffsetCalculator<2, unsigned int, false>, OffsetCalculator<1, unsigned int, false>, at::native::memory::LoadWithoutCast, at::native::memory::StoreWithoutCast)) [time: 0.033 ms, acc_time: 823.462 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.03 ms, acc_time: 823.492 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, float*, long*)) [time: 0.03 ms, acc_time: 823.522 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::adaptive_average_pool<float>(float*, float*, int, int, int, int, long, long, long)) [time: 0.033 ms, acc_time: 823.555 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D42 <- D34), 16384 bytes) [time: 0.04 ms, acc_time: 823.595 ms]
+
+cuLaunchKernel(std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, float, float, float, float, false, true, true, false, 7, false, cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float>)) [time: 0.037 ms, acc_time: 823.632 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.046 ms, acc_time: 823.678 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D43 <- D36), 16384 bytes) [time: 0.055 ms, acc_time: 823.733 ms]
+
+cuLaunchKernel(std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, float, float, float, float, false, true, true, false, 6, false, cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float>)) [time: 0.042 ms, acc_time: 823.775 ms]
+
+cuLaunchKernel(void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::clamp_min_scalar_kernel_impl(at::TensorIterator&, c10::Scalar)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)) [time: 0.028 ms, acc_time: 823.803 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToDevice) D42 <- D38), 4000 bytes) [time: 0.031 ms, acc_time: 823.834 ms]
+
+cuLaunchKernel(std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, float, float, float, float, false, true, true, false, 6, false, cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float>)) [time: 0.026 ms, acc_time: 823.86 ms]
+
+cuLaunchKernel(void (anonymous namespace)::softmax_warp_forward<float, float, float, 10, false>(float*, float const*, int, int, int)) [time: 0.024 ms, acc_time: 823.884 ms]
+
+cuLaunchKernel(void at::native::(anonymous namespace)::gatherTopK<float, unsigned int, 1, true>(at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, unsigned int, unsigned int, unsigned int, at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, unsigned int, at::cuda::detail::TensorInfo<long, unsigned int>, unsigned int)) [time: 0.098 ms, acc_time: 823.982 ms]
+
+cudaMemcpyAsync(cudaMemcpyDeviceToHost, H39(0x7ffff6c8b0f8) <- D44(0x7f54c51a1600), 8 bytes) [time: 0.033 ms, acc_time: 824.015 ms]
+D2H memory probe: 02 01 00 00 00 00 00 00 
+
+cudaMemcpyAsync(cudaMemcpyDeviceToHost, H39(0x7ffff6c8b0f8) <- D45(0x7f54c51a1400), 4 bytes) [time: 0.014 ms, acc_time: 824.029 ms]
+D2H memory probe: 63 74 69 3f 
+
+4.488284170001862

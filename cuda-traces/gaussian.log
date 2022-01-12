@@ -1,0 +1,4115 @@
+WG size of kernel 1 = 512, WG size of kernel 2= 4 X 4
+Read file from ./matrix1024.txt 
+cudaMalloc(D0 (0x7f8c1c200000), 400000 bytes)
+
+cudaMalloc(D1 (0x7f8c1c600000), 400000 bytes)
+
+cudaMalloc(D2 (0x7f8c1ca00000), 1000 bytes)
+
+cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f8c1c200000) <- H0(0x7f8c4634c010), 400000 bytes) [time: 0.354 ms, acc_time: 0.354 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f8c1c600000) <- H1(0x7f8c4674d010), 400000 bytes) [time: 0.411 ms, acc_time: 0.765 ms]
+
+cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f8c1ca00000) <- H2(0x55952fb9f7a0), 1000 bytes) [time: 0.085 ms, acc_time: 0.85 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 0.859 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 0.866 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 0.873 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.006 ms, acc_time: 0.879 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 0.886 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 0.893 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 0.9 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 0.907 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 0.916 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 0.925 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 0.934 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 0.945 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 0.952 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 0.959 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 0.967 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 0.975 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 0.984 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 0.995 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 1.005 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 1.016 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 1.027 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 1.039 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 1.055 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 1.075 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 1.096 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 1.106 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 1.113 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.121 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.129 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 1.138 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 1.148 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 1.16 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 1.171 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 1.185 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.193 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.201 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 1.208 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.215 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.223 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.23 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.239 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 1.248 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 1.262 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 1.278 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 1.299 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 1.329 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.338 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.345 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.353 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.361 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.369 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.377 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.386 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 1.397 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 1.408 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 1.42 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 1.439 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 1.468 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.476 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.483 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.491 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.499 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.508 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 1.517 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 1.528 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 1.54 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 1.555 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 1.576 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 1.603 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 1.636 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.645 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.652 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 1.659 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.666 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 1.673 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.68 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 1.687 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 1.696 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 1.706 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 1.718 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 1.731 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 1.751 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 1.782 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 1.819 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.828 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 1.835 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 1.843 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.851 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 1.86 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 1.868 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 1.879 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 1.892 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 1.909 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 1.942 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 1.977 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 2.013 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 2.05 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 2.07 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 2.089 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 2.108 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.024 ms, acc_time: 2.132 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 2.157 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 2.191 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 2.225 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 2.261 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 2.296 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 2.305 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 2.312 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 2.32 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 2.328 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 2.337 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 2.347 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 2.36 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 2.376 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 2.399 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 2.435 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 2.469 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 2.501 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 2.534 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 2.567 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.04 ms, acc_time: 2.607 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 2.644 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 2.678 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 2.704 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 2.73 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 2.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 2.793 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 2.828 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 2.863 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.055 ms, acc_time: 2.918 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 2.953 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 2.987 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 3.021 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 3.029 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 3.036 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 3.043 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 3.05 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 3.057 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 3.067 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 3.076 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 3.085 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 3.097 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 3.11 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 3.127 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 3.144 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 3.165 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 3.191 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 3.218 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 3.244 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 3.278 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 3.311 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 3.343 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 3.378 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 3.41 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 3.446 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 3.482 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 3.518 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 3.552 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.04 ms, acc_time: 3.592 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.041 ms, acc_time: 3.633 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 3.669 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 3.705 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 3.741 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 3.773 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 3.793 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 3.811 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 3.84 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 3.876 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 3.912 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 3.946 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.024 ms, acc_time: 3.97 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 3.995 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 4.002 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 4.01 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 4.016 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 4.023 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 4.031 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 4.039 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 4.049 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 4.058 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 4.07 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 4.084 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 4.106 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 4.139 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 4.175 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 4.21 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 4.246 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 4.282 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 4.315 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 4.349 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 4.387 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.039 ms, acc_time: 4.426 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 4.435 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 4.443 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 4.45 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 4.457 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 4.465 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 4.472 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 4.481 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 4.491 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 4.501 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 4.514 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 4.529 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 4.543 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 4.557 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 4.577 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 4.612 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 4.645 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 4.681 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 4.718 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 4.754 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 4.791 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 4.827 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 4.865 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 4.902 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 4.91 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 4.917 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 4.927 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 4.935 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 4.942 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 4.95 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 4.958 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 4.968 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 4.978 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 4.992 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 5.007 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 5.024 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 5.042 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 5.062 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 5.084 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.092 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.1 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.108 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.116 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 5.125 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 5.136 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 5.148 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 5.161 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 5.177 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 5.199 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.042 ms, acc_time: 5.241 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 5.279 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 5.315 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 5.351 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 5.386 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 5.414 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.422 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 5.429 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 5.435 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.443 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 5.452 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 5.462 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 5.472 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 5.484 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 5.498 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 5.517 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 5.539 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 5.568 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 5.602 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 5.638 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 5.674 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 5.709 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 5.719 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.727 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.735 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.743 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.751 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 5.76 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 5.77 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 5.782 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.79 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.798 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.806 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 5.815 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 5.825 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 5.837 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 5.851 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 5.869 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 5.894 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.902 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.91 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 5.919 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 5.927 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 5.935 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 5.944 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 5.955 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 5.969 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 5.984 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 5.999 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 6.016 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 6.05 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 6.085 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 6.123 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 6.161 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 6.196 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 6.233 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 6.268 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 6.275 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 6.282 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 6.289 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 6.297 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 6.306 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 6.316 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 6.328 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 6.339 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 6.351 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 6.366 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 6.391 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 6.42 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 6.448 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.028 ms, acc_time: 6.476 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 6.509 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 6.547 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 6.584 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 6.62 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 6.653 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.041 ms, acc_time: 6.694 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 6.732 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 6.768 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 6.794 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 6.82 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 6.829 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 6.836 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 6.844 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 6.852 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 6.862 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 6.873 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 6.886 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 6.904 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 6.912 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 6.92 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 6.929 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 6.938 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 6.949 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 6.961 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 6.974 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 6.996 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 7.031 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 7.068 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 7.104 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 7.113 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 7.121 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 7.129 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 7.137 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 7.144 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 7.151 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 7.158 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 7.165 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 7.173 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 7.181 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 7.19 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 7.199 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 7.209 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 7.22 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 7.233 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 7.253 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 7.284 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 7.319 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 7.354 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 7.39 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 7.425 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 7.459 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 7.494 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 7.53 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.066 ms, acc_time: 7.596 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 7.632 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 7.667 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 7.703 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 7.738 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 7.748 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 7.756 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 7.763 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 7.77 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 7.778 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 7.787 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 7.797 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 7.806 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 7.819 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 7.834 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 7.85 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 7.865 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 7.882 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 7.898 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 7.913 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 7.928 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 7.942 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 7.963 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 7.991 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 7.998 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 8.006 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 8.014 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 8.023 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 8.033 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 8.045 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 8.06 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 8.081 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 8.101 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 8.125 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 8.147 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 8.168 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 8.189 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 8.215 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 8.246 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 8.278 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 8.311 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.031 ms, acc_time: 8.342 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 8.373 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 8.405 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 8.441 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 8.474 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 8.506 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 8.539 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 8.572 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 8.607 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 8.639 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 8.671 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 8.704 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 8.738 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 8.771 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 8.804 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.024 ms, acc_time: 8.828 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 8.852 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 8.859 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 8.866 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 8.873 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 8.881 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 8.889 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 8.897 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 8.906 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 8.917 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 8.924 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 8.931 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 8.94 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 8.949 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 8.959 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 8.971 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 8.983 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 9.005 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 9.043 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 9.069 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 9.079 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 9.088 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 9.097 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.105 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 9.112 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.12 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 9.129 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 9.14 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 9.15 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 9.162 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 9.178 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 9.203 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 9.225 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 9.25 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 9.28 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 9.309 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 9.339 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 9.369 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 9.399 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 9.427 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 9.456 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.464 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 9.471 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 9.478 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 9.485 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.493 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.501 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.509 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 9.518 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 9.528 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 9.541 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 9.558 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 9.589 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 9.624 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.053 ms, acc_time: 9.677 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 9.713 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 9.72 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.006 ms, acc_time: 9.726 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.734 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.742 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.75 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 9.759 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 9.769 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 9.783 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 9.803 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 9.832 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 9.864 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 9.901 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 9.928 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.936 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.944 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 9.951 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.959 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.967 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.975 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 9.983 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 9.991 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 10 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 10.011 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 10.022 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 10.035 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 10.06 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 10.091 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 10.126 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 10.161 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 10.169 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 10.176 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 10.183 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 10.19 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 10.197 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 10.205 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 10.214 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 10.224 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 10.235 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 10.246 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 10.261 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 10.278 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 10.307 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 10.342 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 10.375 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 10.408 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 10.435 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 10.461 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 10.487 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 10.516 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 10.552 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 10.589 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 10.624 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 10.659 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 10.693 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 10.726 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 10.746 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 10.762 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 10.77 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 10.777 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 10.785 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 10.793 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 10.801 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 10.811 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 10.822 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 10.834 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 10.851 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 10.883 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 10.917 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 10.951 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 10.986 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 11.02 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 11.055 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 11.065 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 11.072 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.079 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 11.088 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.095 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.103 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 11.113 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 11.123 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 11.136 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.144 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 11.152 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 11.161 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 11.17 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 11.18 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 11.191 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 11.205 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 11.222 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 11.248 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 11.274 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 11.299 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 11.331 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 11.363 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 11.395 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 11.427 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 11.458 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 11.492 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 11.527 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.535 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.542 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 11.549 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.556 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.564 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.571 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.579 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 11.587 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.595 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 11.603 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 11.612 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 11.62 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 11.63 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 11.642 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 11.657 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 11.683 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 11.717 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.053 ms, acc_time: 11.77 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 11.804 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 11.837 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 11.845 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 11.852 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 11.863 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 11.872 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 11.883 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 11.895 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 11.908 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 11.929 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 11.959 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 11.996 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 12.032 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 12.067 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 12.102 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 12.136 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 12.172 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 12.206 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.214 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 12.22 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.227 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 12.235 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.243 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 12.25 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.257 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 12.265 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.273 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 12.283 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 12.294 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 12.307 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 12.32 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 12.335 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 12.355 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.028 ms, acc_time: 12.383 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 12.412 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 12.439 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 12.471 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 12.505 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 12.538 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 12.571 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 12.606 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 12.637 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.645 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 12.652 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.659 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 12.667 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.675 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 12.683 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.69 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 12.698 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.705 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 12.714 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 12.724 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 12.747 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 12.76 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 12.777 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 12.803 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 12.834 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 12.866 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 12.899 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 12.932 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 12.964 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 12.972 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 12.979 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.986 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 12.992 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 12.999 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 13.007 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 13.015 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 13.023 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 13.033 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 13.047 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 13.063 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 13.08 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 13.101 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 13.126 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 13.152 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 13.16 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 13.167 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 13.174 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 13.186 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 13.196 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 13.206 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 13.216 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 13.226 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 13.237 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 13.251 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 13.27 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.023 ms, acc_time: 13.293 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 13.3 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 13.307 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 13.314 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 13.323 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 13.333 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 13.344 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 13.356 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 13.368 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 13.385 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 13.41 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 13.435 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 13.46 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 13.492 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 13.525 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 13.558 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 13.593 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 13.626 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 13.661 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.037 ms, acc_time: 13.698 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 13.736 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 13.77 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 13.794 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 13.819 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 13.845 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 13.872 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 13.9 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 13.908 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 13.917 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 13.926 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 13.936 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 13.946 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 13.958 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 13.971 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 13.987 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 14.008 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 14.028 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.036 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 14.043 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 14.05 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 14.057 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 14.064 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 14.072 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 14.081 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 14.09 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 14.102 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 14.116 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 14.137 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 14.163 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.171 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 14.179 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.187 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 14.195 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 14.204 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 14.215 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 14.227 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 14.244 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 14.275 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.04 ms, acc_time: 14.315 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 14.351 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 14.389 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 14.424 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 14.431 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.439 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 14.448 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.456 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 14.465 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 14.474 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 14.485 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 14.497 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 14.516 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 14.545 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 14.575 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 14.609 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 14.646 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 14.681 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.056 ms, acc_time: 14.737 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 14.763 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 14.79 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 14.816 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 14.845 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.853 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 14.86 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 14.868 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 14.876 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 14.885 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 14.895 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 14.906 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 14.919 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 14.936 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 14.97 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 15.005 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 15.043 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 15.081 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 15.117 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 15.151 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 15.189 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 15.223 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 15.231 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 15.239 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 15.246 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 15.254 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 15.263 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 15.272 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 15.284 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 15.298 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 15.306 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 15.313 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 15.322 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 15.331 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 15.341 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 15.352 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 15.36 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 15.368 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 15.376 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 15.385 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 15.395 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 15.406 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 15.421 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 15.441 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 15.467 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 15.498 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 15.53 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 15.562 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 15.595 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 15.628 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 15.662 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 15.697 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 15.735 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 15.768 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 15.801 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 15.81 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 15.818 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 15.826 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 15.836 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 15.844 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 15.851 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 15.86 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 15.869 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 15.88 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 15.892 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 15.907 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 15.926 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 15.944 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.023 ms, acc_time: 15.967 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.028 ms, acc_time: 15.995 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 16.029 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 16.063 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 16.097 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 16.133 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 16.167 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 16.202 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 16.236 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 16.274 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 16.309 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 16.344 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 16.354 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 16.361 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 16.369 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 16.377 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 16.385 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 16.394 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 16.403 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 16.414 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 16.427 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 16.445 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 16.472 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 16.498 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 16.535 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 16.57 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 16.605 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 16.64 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 16.675 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 16.71 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 16.743 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 16.777 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 16.81 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 16.844 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 16.878 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.052 ms, acc_time: 16.93 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 16.966 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 16.978 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 16.986 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 16.993 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 17.025 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 17.037 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 17.046 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 17.055 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 17.065 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 17.074 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 17.085 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 17.097 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 17.113 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 17.138 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 17.164 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 17.183 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 17.199 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 17.214 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 17.226 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 17.234 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.006 ms, acc_time: 17.24 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 17.248 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 17.255 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 17.262 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 17.27 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 17.278 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 17.288 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 17.297 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 17.307 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 17.318 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 17.332 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 17.364 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.031 ms, acc_time: 17.395 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 17.425 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 17.462 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 17.496 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 17.53 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 17.564 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 17.6 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 17.626 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 17.634 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 17.64 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 17.647 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 17.654 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 17.661 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 17.668 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 17.677 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 17.687 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 17.698 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 17.713 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 17.73 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 17.738 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 17.745 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 17.752 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 17.76 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 17.769 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 17.779 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 17.791 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 17.804 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 17.821 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 17.829 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 17.836 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 17.844 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 17.854 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 17.865 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 17.876 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 17.89 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 17.915 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 17.948 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 17.983 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.017 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 18.051 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.085 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 18.121 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 18.129 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 18.136 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 18.143 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 18.15 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 18.157 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 18.165 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 18.172 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 18.179 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 18.187 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 18.194 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 18.201 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 18.209 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 18.218 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 18.226 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 18.236 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 18.243 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 18.25 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 18.258 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 18.266 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 18.276 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 18.288 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 18.3 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 18.316 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 18.336 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 18.36 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 18.381 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 18.41 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 18.436 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 18.445 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 18.453 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 18.462 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 18.471 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 18.481 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 18.492 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 18.503 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 18.518 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 18.533 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 18.549 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 18.569 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 18.598 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.632 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 18.666 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 18.701 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 18.734 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.768 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 18.802 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.836 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 18.871 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 18.906 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 18.94 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 18.974 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 19.012 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 19.048 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 19.083 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 19.118 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 19.152 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 19.16 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 19.167 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 19.174 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 19.181 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 19.189 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 19.198 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 19.208 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 19.218 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 19.231 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 19.249 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 19.281 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 19.289 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 19.296 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 19.304 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 19.311 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 19.318 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 19.326 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 19.333 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 19.342 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 19.353 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 19.366 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 19.383 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.031 ms, acc_time: 19.414 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 19.446 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 19.48 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 19.515 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 19.55 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 19.559 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 19.566 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 19.573 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 19.58 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 19.588 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 19.597 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 19.607 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 19.618 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 19.635 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 19.653 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 19.663 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 19.671 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 19.68 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 19.69 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 19.7 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 19.712 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 19.724 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 19.736 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 19.75 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 19.768 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 19.797 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 19.831 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 19.865 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 19.898 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 19.929 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 19.963 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 19.998 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 20.033 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.04 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.047 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.054 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.061 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.006 ms, acc_time: 20.067 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.075 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 20.083 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 20.092 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 20.103 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 20.115 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 20.131 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 20.147 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 20.167 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 20.187 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 20.207 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 20.233 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.24 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.247 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.254 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.262 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 20.274 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 20.285 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 20.297 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 20.312 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.319 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.326 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 20.335 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 20.344 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 20.354 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 20.364 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 20.376 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 20.393 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 20.41 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 20.444 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 20.482 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.49 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.497 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.504 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 20.512 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 20.519 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 20.527 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 20.536 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 20.544 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.552 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 20.561 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 20.571 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 20.582 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 20.595 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 20.615 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 20.642 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 20.667 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 20.694 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 20.725 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 20.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 20.792 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.8 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 20.807 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.815 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 20.824 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 20.832 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 20.841 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 20.851 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 20.864 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 20.882 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 20.907 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.04 ms, acc_time: 20.947 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 20.97 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 20.979 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 20.992 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 21.001 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 21.008 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 21.018 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 21.027 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 21.035 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 21.045 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 21.055 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 21.068 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 21.09 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 21.11 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 21.13 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 21.145 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 21.169 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 21.194 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 21.218 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 21.243 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.023 ms, acc_time: 21.266 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 21.289 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 21.322 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 21.356 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 21.393 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 21.427 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 21.463 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 21.498 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 21.525 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 21.545 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 21.553 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 21.56 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 21.567 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 21.574 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 21.582 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 21.589 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 21.596 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 21.604 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 21.613 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 21.622 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 21.634 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 21.649 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 21.67 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 21.682 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 21.69 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 21.698 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 21.707 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 21.716 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 21.728 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 21.741 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 21.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 21.779 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 21.812 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 21.839 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 21.865 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 21.892 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 21.918 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.027 ms, acc_time: 21.945 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 21.972 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 22.008 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 22.024 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 22.04 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 22.051 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 22.061 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.07 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 22.078 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.086 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 22.094 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.102 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 22.111 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.119 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 22.128 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 22.138 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 22.15 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 22.161 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 22.174 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 22.186 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 22.204 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 22.221 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 22.237 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 22.254 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 22.27 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 22.283 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 22.297 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.306 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 22.314 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.322 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 22.33 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.339 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 22.35 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 22.361 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 22.373 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 22.386 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 22.405 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 22.431 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 22.454 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 22.476 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 22.51 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 22.545 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.038 ms, acc_time: 22.583 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 22.619 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 22.653 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 22.688 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 22.722 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 22.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 22.791 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.8 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 22.807 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 22.814 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 22.821 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.829 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 22.838 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.847 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 22.858 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 22.872 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 22.893 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.901 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 22.908 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 22.916 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 22.924 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 22.933 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 22.943 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 22.954 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 22.968 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 22.989 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 23.014 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 23.04 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 23.05 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 23.059 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 23.067 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 23.077 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 23.087 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 23.098 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 23.109 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 23.12 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 23.133 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 23.146 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 23.158 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 23.171 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 23.184 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 23.202 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 23.209 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 23.218 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 23.226 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 23.234 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 23.243 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 23.255 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 23.265 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 23.275 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 23.286 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 23.3 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 23.317 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 23.336 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 23.356 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 23.388 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 23.42 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 23.446 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 23.471 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.026 ms, acc_time: 23.497 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 23.529 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 23.562 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 23.597 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 23.633 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.033 ms, acc_time: 23.666 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.039 ms, acc_time: 23.705 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.04 ms, acc_time: 23.745 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 23.783 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 23.817 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.038 ms, acc_time: 23.855 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 23.886 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 23.921 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 23.942 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 23.959 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 23.974 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 23.989 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 24.004 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 24.018 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 24.029 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 24.036 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.044 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.052 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.06 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 24.071 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.079 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.087 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.095 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.103 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.111 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 24.122 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 24.134 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 24.149 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 24.165 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 24.181 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 24.197 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 24.226 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 24.261 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 24.296 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 24.33 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 24.363 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 24.398 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.029 ms, acc_time: 24.427 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 24.452 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.46 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 24.467 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 24.474 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 24.481 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.489 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.497 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.505 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 24.516 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 24.527 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 24.542 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 24.562 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 24.588 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 24.621 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 24.652 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.032 ms, acc_time: 24.684 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 24.719 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 24.755 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 24.79 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.798 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 24.805 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 24.812 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.82 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.828 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.836 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 24.846 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 24.856 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 24.869 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 24.883 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 24.903 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 24.912 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.92 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 24.927 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 24.934 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 24.942 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 24.95 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 24.961 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 24.972 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 24.988 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.023 ms, acc_time: 25.011 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 25.031 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 25.05 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 25.068 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 25.085 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 25.102 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 25.119 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 25.136 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.024 ms, acc_time: 25.16 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.023 ms, acc_time: 25.183 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 25.202 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 25.219 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 25.235 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 25.249 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 25.262 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 25.271 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.28 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 25.287 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 25.298 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 25.308 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.317 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 25.327 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 25.337 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 25.35 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 25.364 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 25.379 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 25.4 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 25.426 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 25.453 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 25.479 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 25.512 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 25.547 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 25.583 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 25.617 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.626 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 25.633 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 25.64 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 25.647 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 25.654 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 25.662 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.671 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 25.68 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.689 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 25.701 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 25.714 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 25.732 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 25.752 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.028 ms, acc_time: 25.78 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 25.814 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 25.848 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.034 ms, acc_time: 25.882 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 25.914 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 25.924 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 25.932 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 25.941 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 25.95 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 25.96 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 25.97 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 25.981 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 25.994 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 26.011 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.028 ms, acc_time: 26.039 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 26.066 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 26.096 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.036 ms, acc_time: 26.132 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.032 ms, acc_time: 26.164 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 26.181 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 26.197 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 26.211 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.224 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.237 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 26.249 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.262 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.275 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.288 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 26.302 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.315 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 26.327 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 26.341 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 26.355 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 26.369 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 26.379 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 26.386 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 26.395 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 26.404 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 26.412 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 26.421 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.434 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.447 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.46 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 26.474 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.487 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 26.498 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 26.507 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 26.515 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 26.523 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 26.531 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 26.538 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 26.546 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 26.555 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 26.564 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 26.578 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.591 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 26.603 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 26.617 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 26.63 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 26.643 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 26.665 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 26.693 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 26.723 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 26.756 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 26.787 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 26.82 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 26.85 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.031 ms, acc_time: 26.881 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 26.91 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 26.94 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 26.971 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 27.001 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.03 ms, acc_time: 27.031 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.028 ms, acc_time: 27.059 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 27.088 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.03 ms, acc_time: 27.118 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.036 ms, acc_time: 27.154 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.037 ms, acc_time: 27.191 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.034 ms, acc_time: 27.225 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.233 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.24 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 27.247 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 27.272 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.28 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 27.288 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 27.297 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 27.306 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 27.315 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 27.325 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 27.336 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 27.348 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 27.355 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.362 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.37 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.009 ms, acc_time: 27.379 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.009 ms, acc_time: 27.388 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 27.398 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 27.412 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 27.428 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 27.445 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 27.463 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 27.48 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.025 ms, acc_time: 27.505 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 27.532 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 27.542 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 27.556 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 27.569 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 27.58 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 27.598 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 27.612 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 27.627 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 27.64 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.647 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.655 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 27.665 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 27.672 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.679 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 27.689 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.696 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 27.703 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 27.71 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.718 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 27.726 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 27.734 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 27.742 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 27.753 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 27.764 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 27.779 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 27.797 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 27.816 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 27.833 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 27.85 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 27.866 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 27.884 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 27.9 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 27.916 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 27.938 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 27.959 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 27.98 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 28.005 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 28.027 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 28.052 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 28.06 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.007 ms, acc_time: 28.067 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 28.075 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 28.083 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 28.091 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 28.101 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 28.111 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 28.121 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 28.133 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 28.149 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 28.169 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 28.191 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 28.212 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 28.234 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 28.263 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 28.281 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 28.297 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 28.313 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 28.328 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 28.343 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 28.36 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 28.382 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 28.404 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 28.437 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.035 ms, acc_time: 28.472 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.035 ms, acc_time: 28.507 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.026 ms, acc_time: 28.533 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.025 ms, acc_time: 28.558 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.031 ms, acc_time: 28.589 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.033 ms, acc_time: 28.622 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.044 ms, acc_time: 28.666 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.027 ms, acc_time: 28.693 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 28.707 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 28.722 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 28.734 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 28.748 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 28.762 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 28.774 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 28.786 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 28.801 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 28.814 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 28.828 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 28.842 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 28.854 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 28.865 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 28.876 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 28.889 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 28.903 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 28.917 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 28.93 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 28.942 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 28.955 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 28.975 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 28.989 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.002 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.016 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.029 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.043 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.057 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.072 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 29.084 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.098 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.112 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.126 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.139 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.154 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.169 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.185 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.2 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.215 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.231 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.246 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.26 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.274 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.289 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 29.306 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.32 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.334 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.35 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.365 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.378 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.392 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.406 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.42 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.434 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.448 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.462 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.476 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.49 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.505 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.52 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.534 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.548 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.564 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.578 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.592 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 29.609 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.623 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.639 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.653 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.669 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.684 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.699 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 29.718 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.732 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.748 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.763 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.777 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 29.794 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 29.809 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.822 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.838 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.854 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.868 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 29.882 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 29.901 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 29.916 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.932 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 29.945 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 29.959 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 29.975 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 29.991 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.006 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.02 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 30.041 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.055 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 30.069 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.084 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.1 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.115 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.131 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.145 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.16 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.174 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.189 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 30.205 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 30.222 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 30.239 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 30.256 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.27 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.286 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.3 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 30.314 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 30.33 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 30.349 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 30.366 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 30.38 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.394 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.409 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 30.425 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.44 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.455 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 30.473 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.487 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.502 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.517 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 30.534 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.549 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 30.564 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.579 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.595 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.609 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.622 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 30.639 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.652 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.666 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 30.683 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.698 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 30.712 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.726 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.742 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 30.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 30.774 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.788 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 30.802 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 30.815 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.828 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 30.839 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.852 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 30.866 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.879 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 30.894 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 30.907 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 30.92 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 30.932 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 30.945 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 30.957 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 30.969 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 30.98 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 30.991 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 31.002 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 31.013 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 31.025 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 31.036 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 31.048 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 31.061 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.012 ms, acc_time: 31.073 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.088 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.024 ms, acc_time: 31.112 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 31.126 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 31.136 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 31.149 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 31.162 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.012 ms, acc_time: 31.174 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.011 ms, acc_time: 31.185 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 31.195 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 31.205 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.01 ms, acc_time: 31.215 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.01 ms, acc_time: 31.225 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.011 ms, acc_time: 31.236 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.008 ms, acc_time: 31.244 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.008 ms, acc_time: 31.252 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.007 ms, acc_time: 31.259 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 31.273 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.287 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.302 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.316 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.02 ms, acc_time: 31.336 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 31.356 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 31.372 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 31.392 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 31.41 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 31.429 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.444 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 31.465 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 31.478 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 31.491 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.506 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 31.521 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.536 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.55 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 31.564 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.578 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 31.592 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.606 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.621 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.635 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 31.652 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 31.672 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 31.685 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 31.701 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 31.72 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 31.736 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 31.758 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 31.778 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 31.791 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 31.805 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 31.822 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 31.837 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 31.853 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 31.866 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 31.882 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 31.895 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 31.91 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 31.925 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 31.939 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 31.954 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 31.97 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 31.985 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.001 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.016 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.031 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.046 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 32.064 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 32.08 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 32.097 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.111 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.126 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.14 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.154 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.168 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.182 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 32.204 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.22 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.234 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.248 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 32.265 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.022 ms, acc_time: 32.287 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 32.307 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.323 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.338 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.354 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 32.37 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.385 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 32.407 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.421 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.435 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.449 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 32.468 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.484 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 32.5 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.515 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 32.531 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.546 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.561 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 32.577 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 32.594 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 32.612 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 32.631 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.646 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.661 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.676 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.691 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 32.708 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 32.726 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 32.743 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 32.756 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.771 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.786 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.801 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 32.819 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 32.838 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 32.852 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.867 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.882 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 32.896 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 32.911 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.926 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 32.943 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.958 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 32.977 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 32.992 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 33.006 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.021 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.037 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.053 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 33.067 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.083 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.099 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 33.116 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 33.13 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.145 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.16 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.175 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.19 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 33.209 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.224 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 33.237 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.252 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.267 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.282 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 33.296 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.311 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.326 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.341 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.356 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.372 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 33.391 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.406 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.421 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 33.439 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.454 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.02 ms, acc_time: 33.474 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.49 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 33.508 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.524 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.539 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.554 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 33.568 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 33.586 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 33.605 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.621 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 33.643 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.659 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.674 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.023 ms, acc_time: 33.697 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 33.716 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 33.733 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.748 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 33.763 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 33.777 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 33.795 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 33.81 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 33.829 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.845 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.861 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 33.878 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 33.897 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.913 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 33.929 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.029 ms, acc_time: 33.958 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 33.975 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 33.991 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 34.007 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.022 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 34.04 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 34.058 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 34.077 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 34.094 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.109 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 34.126 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 34.147 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.163 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 34.179 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.194 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 34.211 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 34.228 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 34.244 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.259 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 34.276 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 34.294 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.309 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.324 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.339 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 34.356 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.371 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.387 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.401 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 34.419 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 34.435 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 34.449 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.464 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.48 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.018 ms, acc_time: 34.498 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.019 ms, acc_time: 34.517 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.531 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.546 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.561 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.017 ms, acc_time: 34.578 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.592 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 34.606 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.62 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.635 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.65 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 34.664 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.678 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.694 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.708 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 34.722 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 34.739 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.754 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.768 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.783 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 34.799 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 34.812 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.827 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.842 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 34.856 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.872 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 34.889 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 34.904 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 34.919 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 34.935 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.021 ms, acc_time: 34.956 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.022 ms, acc_time: 34.978 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 34.991 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 35.009 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 35.025 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.04 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 35.056 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.071 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.017 ms, acc_time: 35.088 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.103 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.019 ms, acc_time: 35.122 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 35.14 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.154 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 35.17 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.184 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.198 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.212 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.226 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.241 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.255 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 35.268 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.283 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 35.299 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.314 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.328 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.343 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 35.359 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.021 ms, acc_time: 35.38 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.394 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.408 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.423 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.437 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.013 ms, acc_time: 35.45 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.016 ms, acc_time: 35.466 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.48 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.495 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.509 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.524 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.539 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.013 ms, acc_time: 35.552 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.566 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.58 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.594 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.609 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.624 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.018 ms, acc_time: 35.642 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.656 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.015 ms, acc_time: 35.671 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.016 ms, acc_time: 35.687 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.701 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.715 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.729 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.744 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.758 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.773 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.787 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.801 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.815 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.014 ms, acc_time: 35.829 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.843 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.858 ms]
+
+cuLaunchKernel(Fan1(float*, float*, int, int)) [time: 0.014 ms, acc_time: 35.872 ms]
+
+cuLaunchKernel(Fan2(float*, float*, float*, int, int, int)) [time: 0.015 ms, acc_time: 35.887 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7f8c4634c010) <- D0(0x7f8c1c200000), 400000 bytes) [time: 0.603 ms, acc_time: 36.49 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f8c4674d010) <- D1(0x7f8c1c600000), 400000 bytes) [time: 0.598 ms, acc_time: 37.088 ms]
+
+cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x55952fb9f7a0) <- D2(0x7f8c1ca00000), 1000 bytes) [time: 0.007 ms, acc_time: 37.095 ms]
+
+
+Time total (including memory transfers)	24.359086 sec
+Time for CUDA kernels:	24.282947 sec

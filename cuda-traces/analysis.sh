@@ -9,6 +9,16 @@ files=(
     3d-unet-kits19.log
     srad_v1.log
     bfs.log
+    resnext50.log
+    resnext101.log
+    vgg19.log
+    alexnet.log
+    midas.log
+    yolop.log
+    BERT-SQuAD.log
+    gaussian.log
+    myocyte.log
+    pathfinder.log
 )
 
 printf '| Application | Kernel launches | Unique Kernels | cudaMalloc | Copy H2D | Copy D2D | Copy D2H |\n'
@@ -23,5 +33,5 @@ for f in ${files[@]}; do
 
     # printf "| $f | $n_kernel | $n_uniq_kernel | $n_malloc | $n_cpyh2d | $n_cpyd2d | $n_cpyd2h |\n"
     # printf "| $f | $n_kernel | $n_uniq_kernel | $n_malloc | $n_cpyh2d | $n_cpyd2h |\n"
-    printf "$f & $n_kernel & $n_uniq_kernel & $n_malloc & $n_cpyh2d & $n_cpyd2h &\n"
+    printf "$f & $n_kernel & $n_uniq_kernel & $n_malloc & $n_cpyh2d & $n_cpyd2h \\\\\\\\ \n"
 done
