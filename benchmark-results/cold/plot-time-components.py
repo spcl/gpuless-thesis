@@ -125,7 +125,8 @@ df = pd.DataFrame(data=rows, columns=cols)
 # stacked bar plot
 #
 sns.set(rc={"figure.figsize": (8.5, 7.0)})
-sns.set_theme(style='whitegrid')
+# sns.set_theme(style='whitegrid')
+sns.set_style("ticks",{'axes.grid' : True})
 palette_top = {
         'native': color1_s0,
         'remote': color2_s1,

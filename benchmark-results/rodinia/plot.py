@@ -53,7 +53,8 @@ read_bench('data/benchmark-myocyte-remote-remote.out', 'myocyte', 'GPUless remot
 bench_data = pd.DataFrame(data=v, columns=cols)
 
 # sns.set(rc={"figure.figsize": (8.5, 7.0)})
-sns.set_theme(style='whitegrid')
+# sns.set_theme(style='whitegrid')
+sns.set_style("ticks",{'axes.grid' : True})
 # sns.set_style("ticks")
 # sns.set_style("ticks",{'axes.grid' : True})
 

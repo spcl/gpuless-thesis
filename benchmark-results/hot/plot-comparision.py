@@ -27,7 +27,7 @@ color3_s3 = '#789936'
 color3_s4 = '#547416'
 
 palette = {
-        "AWS": color2_s0,
+        "AWS Lambda": color2_s0,
         "Native": color1_s0,
         "GPUless remote": color3_s0,
         }
@@ -42,15 +42,15 @@ def read_bench(fname, name, type_):
         v.append([name, type_, float(line) * 1000.0])
     f.close()
 
-read_bench('data/aws/alexnet-aws-hot.out', 'alexnet', 'AWS')
-read_bench('data/aws/resnet50-aws-hot.out', 'resnet50', 'AWS')
-read_bench('data/aws/resnext50-aws-hot.out', 'resnext50', 'AWS')
-read_bench('data/aws/resnext101-aws-hot.out', 'resnext101', 'AWS')
-read_bench('data/aws/vgg19-aws-hot.out', 'vgg19', 'AWS')
-read_bench('data/aws/yolop-aws-hot.out', 'yolop', 'AWS')
-read_bench('data/aws/midas-aws-hot.out', 'MiDaS', 'AWS')
-# read_bench('data/aws/3d-unet-kits19-aws-hot.out', '3d-unet-kits19', 'AWS')
-read_bench('data/aws/bert-aws-hot.out', 'BERT-SQuAD', 'AWS')
+read_bench('data/aws/alexnet-aws-hot.out', 'alexnet', 'AWS Lambda')
+read_bench('data/aws/resnet50-aws-hot.out', 'resnet50', 'AWS Lambda')
+read_bench('data/aws/resnext50-aws-hot.out', 'resnext50', 'AWS Lambda')
+read_bench('data/aws/resnext101-aws-hot.out', 'resnext101', 'AWS Lambda')
+read_bench('data/aws/vgg19-aws-hot.out', 'vgg19', 'AWS Lambda')
+read_bench('data/aws/yolop-aws-hot.out', 'yolop', 'AWS Lambda')
+read_bench('data/aws/midas-aws-hot.out', 'MiDaS', 'AWS Lambda')
+# read_bench('data/aws/3d-unet-kits19-aws-hot.out', '3d-unet-kits19', 'AWS Lambda')
+read_bench('data/aws/bert-aws-hot.out', 'BERT-SQuAD', 'AWS Lambda')
 
 read_bench('data/hot/alexnet-native-hot.out', 'alexnet', 'Native')
 read_bench('data/hot/resnet50-native-hot.out', 'resnet50', 'Native')
@@ -92,7 +92,7 @@ order = [
         'BERT-SQuAD'
         ]
 
-hue_order = ['Native', 'GPUless remote', 'AWS']
+hue_order = ['Native', 'GPUless remote', 'AWS Lambda']
 ax = sns.barplot(x='benchmark',
                  y='time',
                  hue='type',
