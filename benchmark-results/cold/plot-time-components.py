@@ -124,7 +124,7 @@ df = pd.DataFrame(data=rows, columns=cols)
 #
 # stacked bar plot
 #
-sns.set(rc={"figure.figsize": (8.5, 7.0)})
+sns.set(rc={"figure.figsize": (8.5, 6.3)})
 # sns.set_theme(style='whitegrid')
 sns.set_style("ticks",{'axes.grid' : True})
 palette_top = {
@@ -177,7 +177,7 @@ ax = sns.barplot(x='benchmark',
 ax.set_ylabel('Time [s]')
 ax.set_xlabel('')
 ax.tick_params(axis='x', rotation=25)
-ax.set_title('Cold execution time components of ML inference benchmarks\nNVIDIA A100, n=20, median execution time')
+ax.set_title('Cold execution time components of ML inference benchmarks\nNVIDIA A100, n=100, median execution time')
 ax.get_legend().remove()
 
 #
