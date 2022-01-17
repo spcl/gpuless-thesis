@@ -50,6 +50,13 @@ read_bench('data/benchmark-srad_v1-remote-remote.out', 'srad_v1', 'GPUless remot
 read_bench('data/benchmark-gaussian-remote-remote.out', 'gaussian', 'GPUless remote')
 read_bench('data/benchmark-myocyte-remote-remote.out', 'myocyte', 'GPUless remote')
 
+read_bench('data.preinit/benchmark-bfs-remote-remote.out', 'bfs', 'GPUless remote, device pre-initialized')
+read_bench('data.preinit/benchmark-hotspot-remote-remote.out', 'hotspot', 'GPUless remote, device pre-initialized')
+read_bench('data.preinit/benchmark-pathfinder-remote-remote.out', 'pathfinder', 'GPUless remote, device pre-initialized')
+read_bench('data.preinit/benchmark-srad_v1-remote-remote.out', 'srad_v1', 'GPUless remote, device pre-initialized')
+read_bench('data.preinit/benchmark-gaussian-remote-remote.out', 'gaussian', 'GPUless remote, device pre-initialized')
+read_bench('data.preinit/benchmark-myocyte-remote-remote.out', 'myocyte', 'GPUless remote, device pre-initialized')
+
 bench_data = pd.DataFrame(data=v, columns=cols)
 
 # sns.set(rc={"figure.figsize": (8.5, 7.0)})
@@ -59,12 +66,17 @@ sns.set_style("ticks",{'axes.grid' : True})
 # sns.set_style("ticks",{'axes.grid' : True})
 
 
-hue_order = ['Native', 'GPUless remote']
+hue_order = [
+        'Native',
+        'GPUless remote, device pre-initialized',
+        'GPUless remote',
+        ]
 # order = ['bfs', 'hotspot', 'pathfinder', 'srad_v1', 'gaus']
 
 palette = {
         'Native': color1_s0,
         'GPUless remote': color2_s0,
+        'GPUless remote, device pre-initialized': color3_s0,
         }
 
 ax = sns.barplot(x='benchmark',
