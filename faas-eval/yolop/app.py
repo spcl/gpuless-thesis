@@ -7,6 +7,8 @@ from PIL import Image
 from io import BytesIO
 import base64
 import sys
+import os
+import signal
 
 import cv2
 import numpy
@@ -64,6 +66,10 @@ def invoke():
 
     response.headers['Content-Type'] = 'application/json'
     return json.dumps({})
+
+@get('/exit')
+def exit():
+    os.kill(os.getpid(), signal.SIGTERM)
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)

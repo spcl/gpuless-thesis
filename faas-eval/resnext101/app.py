@@ -6,6 +6,8 @@ from torchvision import transforms
 from PIL import Image
 from io import BytesIO
 import base64
+import os
+import signal
 
 initialized = False
 categories = []
@@ -64,6 +66,10 @@ def invoke():
 
     response.headers['Content-Type'] = 'application/json'
     return json.dumps({'label': label})
+
+@get('/exit')
+def exit():
+    os.kill(os.getpid(), signal.SIGTERM)
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)

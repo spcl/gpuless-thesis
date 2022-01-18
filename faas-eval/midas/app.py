@@ -8,6 +8,8 @@ import json
 import cv2
 import numpy
 import matplotlib.pyplot as plt
+import os
+import signal
 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -71,6 +73,10 @@ def invoke():
 
     response.headers['Content-Type'] = 'application/json'
     return json.dumps({})
+
+@get('/exit')
+def exit():
+    os.kill(os.getpid(), signal.SIGTERM)
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)
