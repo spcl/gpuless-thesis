@@ -3,7 +3,7 @@ import time
 import requests
 
 api_endpoints = {
-        'alexnet': 'http://0.0.0.0:9000',
+        'alexnet': 'http://0.0.0.0:9005',
         # 'resnet50': 'http://0.0.0.0:9000',
         # 'resnext50': 'http://0.0.0.0:9000',
         # 'resnext101': 'http://0.0.0.0:9000',
@@ -28,8 +28,8 @@ def run_benchmark_cold(name, api_endpoint):
         print(end - start)
 
         time.sleep(0.5)
-        os.system('./kill-server-runner.sh')
-        # r = requests.get(url + '/exit')
+        # os.system('./kill-server-runner.sh')
+        r = requests.get(url + '/exit')
         time.sleep(3.0)
 
     # # warmup

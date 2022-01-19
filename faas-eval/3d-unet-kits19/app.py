@@ -12,6 +12,7 @@ import array
 import torchvision
 import pickle
 import numpy as np
+import sys
 
 import inference_utils as infu
 from global_vars import *
@@ -104,7 +105,7 @@ def invoke():
 
 @get('/exit')
 def exit():
-    os.kill(os.getpid(), signal.SIGTERM)
+    sys.stderr.close()
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)

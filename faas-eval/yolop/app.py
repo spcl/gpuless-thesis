@@ -9,6 +9,7 @@ import base64
 import sys
 import os
 import signal
+import sys
 
 import cv2
 import numpy
@@ -69,7 +70,7 @@ def invoke():
 
 @get('/exit')
 def exit():
-    os.kill(os.getpid(), signal.SIGTERM)
+    sys.stderr.close()
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)

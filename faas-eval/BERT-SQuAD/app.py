@@ -9,6 +9,7 @@ import base64
 from bert import QA
 import os
 import signal
+import sys
 
 initialized = False
 model = None
@@ -38,7 +39,7 @@ def invoke():
 
 @get('/exit')
 def exit():
-    os.kill(os.getpid(), signal.SIGTERM)
+    sys.stderr.close()
 
 if __name__ == '__main__':
     bottle.run(host='0.0.0.0', port = 9000)
