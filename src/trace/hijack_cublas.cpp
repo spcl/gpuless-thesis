@@ -4,6 +4,8 @@
 #include <cublas.h>
 #include <cublasLt.h>
 
+#define FAKE_HEURISTIC 503285028
+
 namespace gpuless {
 
 static uint64_t nextCublasHandle() {
@@ -12,7 +14,8 @@ static uint64_t nextCublasHandle() {
 }
 
 static uint64_t nextCublasLtHandle() {
-    static uint64_t next = 1;
+    // TODO this is here because a cublas handle can also be used as a cublasLtHandle
+    static uint64_t next = 20;
     return next++;
 }
 
@@ -118,10 +121,13 @@ cublasLtMatmul(cublasLtHandle_t lightHandle, cublasLtMatmulDesc_t computeDesc,
     std::memcpy(beta_vec.data(), beta, beta_vec.size());
 
     cublasLtMatmulAlgo_t algo_struct;
-    if (algo) {
+    bool algo_is_null = true;
+    // TODO questionable solution
+    if (algo && ((*algo).data[0] != FAKE_HEURISTIC)) {
         algo_struct = *algo;
+        algo_is_null = false;
+        SPDLOG_INFO("Using algo {}.", (*algo).data[0]);
     }
-    bool algo_is_null = (algo == nullptr);
 
     getCudaTrace().record(std::make_shared<CublasLtMatmul>(
         reinterpret_cast<uint64_t>(lightHandle),
@@ -174,6 +180,48 @@ cublasSgemmStridedBatched(cublasHandle_t handle, cublasOperation_t transa,
         lda, strideA, B, ldb, strideB, *beta, C, ldc, strideC, batchCount));
     return CUBLAS_STATUS_SUCCESS;
 }
+
+cublasStatus_t cublasLtMatmulAlgoGetHeuristic(
+    cublasLtHandle_t lightHandle, cublasLtMatmulDesc_t operationDesc,
+    cublasLtMatrixLayout_t Adesc, cublasLtMatrixLayout_t Bdesc,
+    cublasLtMatrixLayout_t Cdesc, cublasLtMatrixLayout_t Ddesc,
+    cublasLtMatmulPreference_t preference, int requestedAlgoCount,
+    cublasLtMatmulHeuristicResult_t heuristicResultsArray[],
+    int *returnAlgoCount) {
+    HIJACK_FN_PROLOGUE();
+
+    // TODO benchmark this vs. synchronizing vs. asynchronously obtaining heuristic results
+    cublasLtMatmulHeuristicResult_t pseudo_res;
+    pseudo_res.algo = {FAKE_HEURISTIC};
+    std::memcpy(heuristicResultsArray, &pseudo_res, sizeof(cublasLtMatmulHeuristicResult_t));
+    *returnAlgoCount = 1;
+
+    return CUBLAS_STATUS_SUCCESS;
+}
+
+cublasStatus_t cublasLtMatmulPreferenceCreate(
+    cublasLtMatmulPreference_t *pref) {
+    // TODO nop
+    return CUBLAS_STATUS_SUCCESS;
+}
+
+cublasStatus_t cublasLtMatmulPreferenceSetAttribute(
+    cublasLtMatmulPreference_t pref,
+    cublasLtMatmulPreferenceAttributes_t attr,
+    const void *buf,
+    size_t sizeInBytes) {
+    HIJACK_FN_PROLOGUE();
+    // TODO nop
+    return CUBLAS_STATUS_SUCCESS;
+}
+
+cublasStatus_t cublasLtMatmulPreferenceDestroy(
+    cublasLtMatmulPreference_t pref) {
+    HIJACK_FN_PROLOGUE();
+    // TODO nop
+    return CUBLAS_STATUS_SUCCESS;
+}
+
 }
 
 } // namespace gpuless

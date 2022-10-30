@@ -58,7 +58,16 @@ uint64_t gpuless::CublasCreateV2::executeNative(CudaVirtualDevice &vdev) {
     if (vdev.cublas_handle_virtual_to_real.size() < this->virtual_handle + 1) {
         vdev.cublas_handle_virtual_to_real.resize(this->virtual_handle + 1);
     }
-    return real(&vdev.cublas_handle_virtual_to_real[this->virtual_handle]);
+    if (vdev.cublaslt_handle_virtual_to_real.size() <
+        this->virtual_handle + 1) {
+        vdev.cublaslt_handle_virtual_to_real.resize(this->virtual_handle + 1);
+    }
+    cublasStatus_t res =
+        real(&vdev.cublas_handle_virtual_to_real[this->virtual_handle]);
+    vdev.cublaslt_handle_virtual_to_real[this->virtual_handle] =
+        reinterpret_cast<cublasLtHandle_t>(
+            vdev.cublas_handle_virtual_to_real[this->virtual_handle]);
+    return res;
 }
 
 flatbuffers::Offset<FBCudaApiCall>
@@ -230,6 +239,11 @@ CublasLtMatmulDescCreate::CublasLtMatmulDescCreate(
 
 uint64_t CublasLtMatmulDescCreate::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cublasLtMatmulDescCreate);
+    if (vdev.cublaslt_matmul_handle_virtual_to_real.size() <
+        this->virtual_mmd + 1) {
+        vdev.cublaslt_matmul_handle_virtual_to_real.resize(this->virtual_mmd +
+                                                           1);
+    }
     return real(&vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
                 this->compute_type, this->scale_type);
 }
@@ -563,11 +577,12 @@ uint64_t CublasSgemmStridedBatched::executeNative(CudaVirtualDevice &vdev) {
 flatbuffers::Offset<FBCudaApiCall> CublasSgemmStridedBatched::fbSerialize(
     flatbuffers::FlatBufferBuilder &builder) {
     auto api_call = CreateFBCublasSgemmStridedBatched(
-        builder, this->virtual_handle, this->transa, this->transb, this->m, this->n,
-        this->k, this->alpha, reinterpret_cast<uint64_t>(this->A), this->lda,
-        this->strideA, reinterpret_cast<uint64_t>(this->B), this->ldb,
-        this->strideB, this->beta, reinterpret_cast<uint64_t>(this->C),
-        this->ldc, this->strideC, this->batchCount);
+        builder, this->virtual_handle, this->transa, this->transb, this->m,
+        this->n, this->k, this->alpha, reinterpret_cast<uint64_t>(this->A),
+        this->lda, this->strideA, reinterpret_cast<uint64_t>(this->B),
+        this->ldb, this->strideB, this->beta,
+        reinterpret_cast<uint64_t>(this->C), this->ldc, this->strideC,
+        this->batchCount);
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCublasSgemmStridedBatched,
         api_call.Union());
