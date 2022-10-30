@@ -8,7 +8,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
+#include <array>
 #include <cudnn.h>
 
 #include "../trace/cubin_analysis.hpp"
@@ -38,7 +38,7 @@ void *__libc_dlopen_mode(const char *name, int mode);
 
 // execute a command in a shell
 static std::string exec(const char *cmd) {
-    std::array<char, 128> buffer;
+    std::array<char, 128> buffer{};
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
     if (!pipe) {
