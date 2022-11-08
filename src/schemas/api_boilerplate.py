@@ -2,9 +2,9 @@ import os
 import sys
 
 
-def create_boilerplate(function="TEST:(int a, int b, int* c, std::vector<double> d)", i=""):
+def create_boilerplate(function="TEST:(int a, int b, int* c, std::vector<double> d)"):
     """
-    usage: function = name:(params)
+    usage: function = name:(params) (ie ctags -x --_xformat=%N:%{signature} [file calling cuda functions])
     add boilerplate.ccp/hpp to src/trace/cuda_api_calls.cpp/hpp
     add fb_boilerplate.h to src/schemas/cuda_runtime_calls_generated.h
     add trace_ex_boilerplate.h to src/schemas/trace_execution_protocol_generated.h
@@ -198,7 +198,7 @@ def create_boilerplate(function="TEST:(int a, int b, int* c, std::vector<double>
     }}
     """
 
-    files = [f"boilerplate{i}.cpp", f"boilerplate{i}.hpp", f"fb_boilerplate{i}.h", f"trace_ex_boilerplate{i}.h"]
+    files = [f"boilerplate_{name}.cpp", f"boilerplate_{name}.hpp", f"fb_boilerplate_{name}.h", f"trace_ex_boilerplate_{name}.h"]
 
     with open(files[0], "w") as f:
         f.write(class_impl)
@@ -219,8 +219,5 @@ def create_boilerplate(function="TEST:(int a, int b, int* c, std::vector<double>
 
 if __name__ == "__main__":
     assert len(sys.argv) >= 2
-    if len(sys.argv) == 2:
-        create_boilerplate(sys.argv[1])
-    else:
-        for i, f in enumerate(sys.argv[1:]):
-            create_boilerplate(f, i)
+    for f in sys.argv[1:]:
+        create_boilerplate(f)
