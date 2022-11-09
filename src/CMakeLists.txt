@@ -89,6 +89,14 @@ target_link_libraries(analysis
     CUDA::cudart
     CUDA::cuda_driver)
 
+add_library(argument_analysis SHARED
+        argument_analysis/libarganalysis.cpp
+        trace/cubin_analysis.cpp
+        utils.cpp trace/trace_executor.hpp)
+target_link_libraries(argument_analysis
+        CUDA::cudart
+        CUDA::cuda_driver)
+
 add_library(gpuless SHARED
     trace/libgpuless.cpp
     trace/hijack_cudnn.cpp
