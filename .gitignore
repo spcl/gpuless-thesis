@@ -2,3 +2,4 @@
 *.qdrep
 .vscode
 .idea
+.cache
