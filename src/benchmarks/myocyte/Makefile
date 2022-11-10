@@ -9,7 +9,7 @@
 
 # link objects(binaries) together
 myocyte.out:		main.o
-	nvcc	-cudart=shared -arch=sm_80 main.o \
+	nvcc	-cudart=shared -arch=$(CUDA_ARCH) main.o \
 				-I/usr/local/cuda/include \
 				-L/usr/local/cuda/lib \
 				-lm -lcuda -lcudart \
@@ -35,7 +35,7 @@ main.o:	define.c \
 				kernel_fin_2.cu \
 				file.c \
 				timer.c
-	nvcc	-cudart=shared -arch=sm_80 main.cu \
+	nvcc	-cudart=shared -arch=$(CUDA_ARCH) main.cu \
 				-c -O3 -g
 
 # delete all object files
