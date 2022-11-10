@@ -1,0 +1,83 @@
+[23:27:54:414:414313] cudaGetDeviceProperties ( prop:{0x7ffe75490fe0} device:{0} )
+
+[23:27:54:461:461112] cudaMalloc(D0 (0x1a4), 400000 bytes)
+
+[23:27:54:461:461246] cudaMalloc(D1 (0x7f7bd9910061), 400000 bytes)
+
+[23:27:54:461:461321] cudaMalloc(D2 (0x2020202020202020), 400000 bytes)
+
+[23:27:54:461:461388] cudaMalloc(D3 (0x7f7bd99107ad), 400000 bytes)
+
+[23:27:54:461:461457] cudaMalloc(D4 (0x100000), 400000 bytes)
+
+[23:27:54:461:461527] cudaMalloc(D5 (0xda5c92c0), 400000 bytes)
+
+[23:27:54:461:461589] cudaMalloc(D6 (0x29), 400000 bytes)
+
+[23:27:54:461:461650] cudaMalloc(D7 (0x7ffe75490cd0), 300000 bytes)
+
+[23:27:54:461:461709] cudaThreadSynchronize( )
+[23:27:54:461:461726] cudaMemcpy(cudaMemcpyHostToDevice) D8(0x7f7bb3800000) <- H0(0x7f7bb5600000), 300000 bytes)
+
+[23:27:54:627:627976] cudaLaunchKernel( name{void c_CopySrcToComponents<int>(int*, int*, int*, unsigned char*, int)}grid{4096,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x7f7bb2c00000, 0x7f7bb3000000, 0x7f7bb3400000, 0x7f7bb3800000, 0xb380000000100000}  )
+
+[23:27:54:628:628010] cudaThreadSynchronize( )
+[23:27:54:628:628033] cudaFree ( devPtr:{0x7f7bb3800000} )
+
+[23:27:54:628:628172] cudaThreadSynchronize( )
+[23:27:54:628:628195] cudaMemcpy(cudaMemcpyDeviceToDevice) D9 <- D10), 4194304 bytes)
+
+[23:27:54:633:633195] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)}grid{6,15,1},block{192,1,1} sharedMem {0} stream {0} args {0x7f7bb2c00000, 0x7f7bb5a00000, 0xb5a0000000000400, 0x40000000400, 0x40000000009}  )
+
+[23:27:54:633:633233] cudaMemcpy(cudaMemcpyDeviceToDevice) D10 <- D11), 1048576 bytes)
+
+[23:27:54:638:638367] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)}grid{4,13,1},block{128,1,1} sharedMem {0} stream {0} args {0x7f7bb2c00000, 0x7f7bb5a00000, 0xb5a0000000000200, 0x20000000200, 0x20000000005}  )
+
+[23:27:54:638:638398] cudaMemcpy(cudaMemcpyDeviceToDevice) D10 <- D11), 262144 bytes)
+
+[23:27:54:643:643174] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)}grid{4,11,1},block{64,1,1} sharedMem {0} stream {0} args {0x7f7bb2c00000, 0x7f7bb5a00000, 0xb5a0000000000100, 0x10000000100, 0x10000000003}  )
+
+[23:27:54:643:643212] cudaMemcpy(cudaMemcpyDeviceToDevice) D9 <- D12), 4194304 bytes)
+
+[23:27:54:648:648321] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)}grid{6,15,1},block{192,1,1} sharedMem {0} stream {0} args {0x7f7bb3000000, 0x7f7bb2400000, 0xb240000000000400, 0x40000000400, 0x40000000009}  )
+
+[23:27:54:648:648354] cudaMemcpy(cudaMemcpyDeviceToDevice) D12 <- D13), 1048576 bytes)
+
+[23:27:54:654:654118] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)}grid{4,13,1},block{128,1,1} sharedMem {0} stream {0} args {0x7f7bb3000000, 0x7f7bb2400000, 0xb240000000000200, 0x20000000200, 0x20000000005}  )
+
+[23:27:54:654:654162] cudaMemcpy(cudaMemcpyDeviceToDevice) D12 <- D13), 262144 bytes)
+
+[23:27:54:659:659996] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)}grid{4,11,1},block{64,1,1} sharedMem {0} stream {0} args {0x7f7bb3000000, 0x7f7bb2400000, 0xb240000000000100, 0x10000000100, 0x10000000003}  )
+
+[23:27:54:660:660043] cudaMemcpy(cudaMemcpyDeviceToDevice) D9 <- D14), 4194304 bytes)
+
+[23:27:54:665:665235] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<192, 8>(int const*, int*, int, int, int)}grid{6,15,1},block{192,1,1} sharedMem {0} stream {0} args {0x7f7bb3400000, 0x7f7bb2800000, 0xb280000000000400, 0x40000000400, 0x40000000009}  )
+
+[23:27:54:665:665274] cudaMemcpy(cudaMemcpyDeviceToDevice) D14 <- D15), 1048576 bytes)
+
+[23:27:54:670:670269] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<128, 8>(int const*, int*, int, int, int)}grid{4,13,1},block{128,1,1} sharedMem {0} stream {0} args {0x7f7bb3400000, 0x7f7bb2800000, 0xb280000000000200, 0x20000000200, 0x20000000005}  )
+
+[23:27:54:670:670297] cudaMemcpy(cudaMemcpyDeviceToDevice) D14 <- D15), 262144 bytes)
+
+[23:27:54:675:675765] cudaLaunchKernel( name{void dwt_cuda::fdwt53Kernel<64, 8>(int const*, int*, int, int, int)}grid{4,11,1},block{64,1,1} sharedMem {0} stream {0} args {0x7f7bb3400000, 0x7f7bb2800000, 0xb280000000000100, 0x10000000100, 0x10000000003}  )
+
+[23:27:54:676:676996] cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f7bb3800000) <- D11(0x7f7bb5a00000), 400000 bytes)
+
+[23:27:54:684:684132] cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f7bb3800000) <- D13(0x7f7bb2400000), 400000 bytes)
+
+[23:27:54:687:687863] cudaMemcpy(cudaMemcpyDeviceToHost, H1(0x7f7bb3800000) <- D15(0x7f7bb2800000), 400000 bytes)
+
+[23:27:54:690:690336] cudaFree ( devPtr:{0x7f7bb2c00000} )
+
+[23:27:54:690:690407] cudaFree ( devPtr:{0x7f7bb3000000} )
+
+[23:27:54:690:690455] cudaFree ( devPtr:{0x7f7bb3400000} )
+
+[23:27:54:690:690497] cudaFree ( devPtr:{0x7f7bb2400000} )
+
+[23:27:54:690:690540] cudaFree ( devPtr:{0x7f7bb2800000} )
+
+[23:27:54:690:690582] cudaFree ( devPtr:{0x7f7bb5a00000} )
+
+[23:27:54:690:690634] cudaFree ( devPtr:{0x7f7bb2000000} )
+

@@ -1,0 +1,35 @@
+[12:32:52:991:991643] Synchronization 0.
+[12:32:52:991:991701] cudaMalloc(D0 (0x7ffec67ef8a8), 61a80 bytes)
+
+[12:32:53:030:030668] Synchronization 1.
+[12:32:53:030:030696] cudaMalloc(D1 (0x7ffec67ef790), 61a80 bytes)
+
+[12:32:53:030:030712] cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7ffa37600000) <- H0(0x7ffa519da010), 61a80 bytes)
+
+[12:32:53:030:030762] Synchronization 2.
+[12:32:53:030:030764] cudaMalloc(D3 (0x7ffa622cbbd3), 25c3f80 bytes)
+
+[12:32:53:030:030891] cudaMemcpy(cudaMemcpyHostToDevice) D4(0x7ffa32000000) <- H1(0x7ffa51a3ba90), 25c3f80 bytes)
+
+[12:32:53:055:055545] cudaLaunchKernel( name{dynproc_kernel(int, int*, int*, int*, int, int, int, int)}grid{463,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x4141414100000014, 0x7ffa32000000, 0x7ffa37600000, 0x7ffa37661c00, 0x14000186a0, 0x37661c0000000064, 0, 0x14}  )
+
+[12:32:53:060:060328] cudaLaunchKernel( name{dynproc_kernel(int, int*, int*, int*, int, int, int, int)}grid{463,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x4141414100000014, 0x7ffa32000000, 0x7ffa37661c00, 0x7ffa37600000, 0x14000186a0, 0x3760000000000064, 0x14, 0x14}  )
+
+[12:32:53:065:065204] cudaLaunchKernel( name{dynproc_kernel(int, int*, int*, int*, int, int, int, int)}grid{463,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x4141414100000014, 0x7ffa32000000, 0x7ffa37600000, 0x7ffa37661c00, 0x14000186a0, 0x37661c0000000064, 0x28, 0x14}  )
+
+[12:32:53:071:071020] cudaLaunchKernel( name{dynproc_kernel(int, int*, int*, int*, int, int, int, int)}grid{463,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x4141414100000014, 0x7ffa32000000, 0x7ffa37661c00, 0x7ffa37600000, 0x14000186a0, 0x3760000000000064, 0x3c, 0x14}  )
+
+[12:32:53:077:077599] cudaLaunchKernel( name{dynproc_kernel(int, int*, int*, int*, int, int, int, int)}grid{463,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x4141414100000013, 0x7ffa32000000, 0x7ffa37600000, 0x7ffa37661c00, 0x13000186a0, 0x37661c0000000064, 0x50, 0x14}  )
+
+[12:32:53:077:077638] Synchronization 3.
+[12:32:53:077:077641] cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x7ffa624d3010) <- D5(0x7ffa37661c00), 61a80 bytes)
+
+[12:32:53:078:078464] Synchronization 4.
+[12:32:53:078:078479] cudaFree ( devPtr:{0x7ffa32000000} )
+
+[12:32:53:078:078710] Synchronization 5.
+[12:32:53:078:078720] cudaFree ( devPtr:{0x7ffa37600000} )
+
+[12:32:53:078:078733] Synchronization 6.
+[12:32:53:078:078737] cudaFree ( devPtr:{0x7ffa37661c00} )
+

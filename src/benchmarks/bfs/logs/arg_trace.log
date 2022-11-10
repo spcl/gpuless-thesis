@@ -1,0 +1,48 @@
+[23:26:54:470:470041] cudaMalloc(D0 (0), 7a1200 bytes)
+
+[23:26:55:657:657000] cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7fa787600000) <- H0(0x7fa7ad45e010), 7a1200 bytes)
+
+[23:26:55:659:659192] cudaMalloc(D0 (0), 16e3588 bytes)
+
+[23:26:55:659:659334] cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7fa784000000) <- H1(0x7fa7abc85010), 16e3588 bytes)
+
+[23:26:55:666:666889] cudaMalloc(D0 (0), f4240 bytes)
+
+[23:26:55:667:667016] cudaMemcpy(cudaMemcpyHostToDevice) D3(0x7fa785800000) <- H2(0x7fa7aff0b010), f4240 bytes)
+
+[23:26:55:667:667526] cudaMalloc(D0 (0), f4240 bytes)
+
+[23:26:55:667:667535] cudaMemcpy(cudaMemcpyHostToDevice) D4(0x7fa7858f4400) <- H3(0x7fa7afb0b010), f4240 bytes)
+
+[23:26:55:667:667915] cudaMalloc(D0 (0), f4240 bytes)
+
+[23:26:55:668:668023] cudaMemcpy(cudaMemcpyHostToDevice) D5(0x7fa785a00000) <- H4(0x7fa7ad369010), f4240 bytes)
+
+[23:26:55:670:670839] cudaMalloc(D0 (0), 3d0900 bytes)
+
+[23:26:55:670:670920] cudaMemcpy(cudaMemcpyHostToDevice) D6(0x7fa785c00000) <- H5(0x55c5893a7700), 3d0900 bytes)
+
+[23:26:55:671:671741] cudaMalloc(D0 (0), 1 bytes)
+
+[23:26:55:671:671766] cudaMemcpy(cudaMemcpyHostToDevice) D7(0x7fa7859e8800) <- H6(0x7ffd3bd53ac7), 1 bytes)
+
+[23:26:55:687:687329] cudaLaunchKernel( name{Kernel(Node*, int*, bool*, bool*, bool*, int*, int)}grid{1954,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x7fa787600000, 0x7fa784000000, 0x7fa785800000, 0x7fa7858f4400, 0x7fa785a00000, 0x7fa785c00000, 0xf4240}  )
+
+[23:26:55:692:692436] cudaLaunchKernel( name{Kernel2(bool*, bool*, bool*, bool*, int)}grid{1954,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x7fa785800000, 0x7fa7858f4400, 0x7fa785a00000, 0x7fa7859e8800, 0x859e8800000f4240}  )
+
+[23:26:55:692:692464] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffd3bd53ac7) <- D7(0x7fa7859e8800), 1 bytes)
+
+[23:26:55:692:692504] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x55c5893a7700) <- D6(0x7fa785c00000), 3d0900 bytes)
+
+[23:26:55:766:766507] cudaFree ( devPtr:{0x7fa787600000} )
+
+[23:26:55:766:766710] cudaFree ( devPtr:{0x7fa784000000} )
+
+[23:26:55:766:766772] cudaFree ( devPtr:{0x7fa785800000} )
+
+[23:26:55:766:766779] cudaFree ( devPtr:{0x7fa7858f4400} )
+
+[23:26:55:766:766784] cudaFree ( devPtr:{0x7fa785a00000} )
+
+[23:26:55:766:766826] cudaFree ( devPtr:{0x7fa785c00000} )
+

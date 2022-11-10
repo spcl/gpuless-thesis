@@ -1,0 +1,990 @@
+[12:47:51:803:803675] Synchronization 0.
+[12:47:51:803:803736] cudaGetDeviceProperties ( prop:{0x7ffd2db0a080} device:{0} )
+
+[12:47:51:848:848946] Synchronization 1.
+[12:47:51:848:848970] cudaMalloc(D0 (0), 200000 bytes)
+
+[12:47:51:849:849139] cudaMemcpyAsync(cudaMemcpyHostToDevice) D1(0x7feed3600000) <- H0(0x55922a00f900), 93000 bytes)
+
+[12:47:51:849:849211] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849514] cudaMemcpyAsync(cudaMemcpyHostToDevice) D2(0x7feed3693000) <- H1(0x5592296c4540), 1b00 bytes)
+
+[12:47:51:849:849523] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849570] cudaMemcpyAsync(cudaMemcpyHostToDevice) D3(0x7feed3694c00) <- H2(0x55922958c440), 100 bytes)
+
+[12:47:51:849:849576] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849603] cudaMemcpyAsync(cudaMemcpyHostToDevice) D4(0x7feed3694e00) <- H3(0x5592296c6780), 24000 bytes)
+
+[12:47:51:849:849619] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849686] cudaMemcpyAsync(cudaMemcpyHostToDevice) D5(0x7feed36b8e00) <- H4(0x55922960a540), 100 bytes)
+
+[12:47:51:849:849691] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849716] cudaMemcpyAsync(cudaMemcpyHostToDevice) D6(0x7feed36b9000) <- H5(0x5592296ea7c0), 48000 bytes)
+
+[12:47:51:849:849741] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849854] cudaMemcpyAsync(cudaMemcpyHostToDevice) D7(0x7feed3701000) <- H6(0x559229732840), 200 bytes)
+
+[12:47:51:849:849859] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:849:849880] cudaMemcpyAsync(cudaMemcpyHostToDevice) D8(0x7feed3701200) <- H7(0x559229732a80), 90000 bytes)
+
+[12:47:51:849:849924] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:850:850133] cudaMemcpyAsync(cudaMemcpyHostToDevice) D9(0x7feed3791200) <- H8(0x5592297c2b00), 200 bytes)
+
+[12:47:51:850:850139] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:850:850168] Synchronization 2.
+[12:47:51:850:850171] cudaMalloc(D0 (0), 1400000 bytes)
+
+[12:47:51:850:850292] cudaMemcpyAsync(cudaMemcpyHostToDevice) D10(0x7feed0000000) <- H9(0x7fef0b9f3040), 120000 bytes)
+
+[12:47:51:850:850386] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:850:850844] cudaMemcpyAsync(cudaMemcpyHostToDevice) D11(0x7feed3791400) <- H10(0x5592297c2d40), 400 bytes)
+
+[12:47:51:850:850853] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:850:850880] cudaMemcpyAsync(cudaMemcpyHostToDevice) D12(0x7feed0120000) <- H11(0x7fef0b7b2040), 240000 bytes)
+
+[12:47:51:851:851315] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:851:851817] cudaMemcpyAsync(cudaMemcpyHostToDevice) D13(0x7feed3791800) <- H12(0x5592297c3180), 400 bytes)
+
+[12:47:51:851:851826] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:851:851853] cudaMemcpyAsync(cudaMemcpyHostToDevice) D14(0x7feed0360000) <- H13(0x7fef0b571040), 240000 bytes)
+
+[12:47:51:852:852288] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:852:852791] cudaMemcpyAsync(cudaMemcpyHostToDevice) D15(0x7feed3791c00) <- H14(0x5592297c35c0), 400 bytes)
+
+[12:47:51:852:852798] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:852:852824] cudaMemcpyAsync(cudaMemcpyHostToDevice) D16(0x7feed05a0000) <- H15(0x7fef0b330040), 240000 bytes)
+
+[12:47:51:853:853257] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:853:853823] cudaMemcpyAsync(cudaMemcpyHostToDevice) D17(0x7feed3792000) <- H16(0x5592297c3a00), 400 bytes)
+
+[12:47:51:853:853832] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:853:853860] cudaMemcpyAsync(cudaMemcpyHostToDevice) D18(0x7feed07e0000) <- H17(0x7fef0aeaf040), 480000 bytes)
+
+[12:47:51:854:854986] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:855:855577] cudaMemcpyAsync(cudaMemcpyHostToDevice) D19(0x7feed3792400) <- H18(0x5592297c3e40), 800 bytes)
+
+[12:47:51:855:855585] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:855:855613] Synchronization 3.
+[12:47:51:855:855615] cudaMalloc(D0 (0), 1400000 bytes)
+
+[12:47:51:855:855727] cudaMemcpyAsync(cudaMemcpyHostToDevice) D20(0x7feece000000) <- H19(0x7fef0a5ae040), 900000 bytes)
+
+[12:47:51:858:858270] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:858:858972] cudaMemcpyAsync(cudaMemcpyHostToDevice) D21(0x7feed3792c00) <- H20(0x5592297c4680), 800 bytes)
+
+[12:47:51:859:859009] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:859:859041] cudaMemcpyAsync(cudaMemcpyHostToDevice) D22(0x7feece900000) <- H21(0x7fef09cad040), 900000 bytes)
+
+[12:47:51:861:861545] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:862:862303] cudaMemcpyAsync(cudaMemcpyHostToDevice) D23(0x7feed3793400) <- H22(0x5592297c4ec0), 800 bytes)
+
+[12:47:51:862:862312] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:862:862339] Synchronization 4.
+[12:47:51:862:862341] cudaMalloc(D0 (0), 1400000 bytes)
+
+[12:47:51:862:862449] cudaMemcpyAsync(cudaMemcpyHostToDevice) D24(0x7feecc000000) <- H23(0x7fef093ac040), 900000 bytes)
+
+[12:47:51:864:864960] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:865:865779] cudaMemcpyAsync(cudaMemcpyHostToDevice) D25(0x7feed3793c00) <- H24(0x5592297c5700), 800 bytes)
+
+[12:47:51:865:865788] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:865:865819] cudaMemcpyAsync(cudaMemcpyHostToDevice) D26(0x7feecc900000) <- H25(0x7fef08aab040), 900000 bytes)
+
+[12:47:51:868:868324] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:869:869090] cudaMemcpyAsync(cudaMemcpyHostToDevice) D27(0x7feed3794400) <- H26(0x5592297c5f40), 800 bytes)
+
+[12:47:51:869:869098] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:869:869126] Synchronization 5.
+[12:47:51:869:869128] cudaMalloc(D0 (0), 1400000 bytes)
+
+[12:47:51:869:869236] cudaMemcpyAsync(cudaMemcpyHostToDevice) D28(0x7feeca000000) <- H27(0x7fef081aa040), 900000 bytes)
+
+[12:47:51:871:871770] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:872:872468] cudaMemcpyAsync(cudaMemcpyHostToDevice) D29(0x7feed3794c00) <- H28(0x5592297c6780), 800 bytes)
+
+[12:47:51:872:872476] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:872:872503] cudaMemcpyAsync(cudaMemcpyHostToDevice) D30(0x7feeca900000) <- H29(0x7fef078a9040), 900000 bytes)
+
+[12:47:51:875:875007] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:875:875799] cudaMemcpyAsync(cudaMemcpyHostToDevice) D31(0x7feed3795400) <- H30(0x5592297c6fc0), 800 bytes)
+
+[12:47:51:875:875808] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:875:875835] Synchronization 6.
+[12:47:51:875:875837] cudaMalloc(D0 (0), 1400000 bytes)
+
+[12:47:51:875:875956] cudaMemcpyAsync(cudaMemcpyHostToDevice) D32(0x7fef08000000) <- H31(0x7fef06fa8040), 900000 bytes)
+
+[12:47:51:878:878471] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:879:879144] cudaMemcpyAsync(cudaMemcpyHostToDevice) D33(0x7feed3795c00) <- H32(0x5592297c7800), 800 bytes)
+
+[12:47:51:879:879153] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:51:879:879189] Synchronization 7.
+[12:47:51:879:879191] cudaMalloc(D0 (0), 18800000 bytes)
+
+[12:47:51:879:879501] cudaMemcpyAsync(cudaMemcpyHostToDevice) D34(0x7fee86000000) <- H33(0x7feeee7a7040), 18800000 bytes)
+
+[12:47:52:010:010916] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:012:012226] cudaMemcpyAsync(cudaMemcpyHostToDevice) D35(0x7feed3796400) <- H34(0x5592297c8e40), 4000 bytes)
+
+[12:47:52:012:012240] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:012:012280] Synchronization 8.
+[12:47:52:012:012283] cudaMalloc(D0 (0), 4000000 bytes)
+
+[12:47:52:012:012418] cudaMemcpyAsync(cudaMemcpyHostToDevice) D36(0x7fef04000000) <- H35(0x7feeea7a6040), 4000000 bytes)
+
+[12:47:52:033:033438] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:034:034244] cudaMemcpyAsync(cudaMemcpyHostToDevice) D37(0x7feed379a400) <- H36(0x5592297cd0c0), 4000 bytes)
+
+[12:47:52:034:034256] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:034:034294] Synchronization 9.
+[12:47:52:034:034296] cudaMalloc(D0 (0), 1000000 bytes)
+
+[12:47:52:034:034399] cudaMemcpyAsync(cudaMemcpyHostToDevice) D38(0x7fee9e800000) <- H37(0x7feee9805040), fa0000 bytes)
+
+[12:47:52:039:039239] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:039:039968] cudaMemcpyAsync(cudaMemcpyHostToDevice) D39(0x7feed379e400) <- H38(0x5592297d1100), fa0 bytes)
+
+[12:47:52:039:039978] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:52:040:040091] Synchronization 10.
+[12:47:52:040:040094] cudaMalloc(D0 (0), e00000 bytes)
+
+[12:47:52:040:040220] cudnnCreate ( handle:{0x5592297d1ff0} )
+
+[12:47:52:051:051626] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:051:051749] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:051:051790] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922b3a0260} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:051:051807] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:051:051829] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922b3a02d0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:051:051836] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:051:051839] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922b3a0310} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:051:051849] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:056:056106] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922b57ce10} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:056:056165] cudnnSetConvolutionGroupCount ( convDesc:{0x55922b57ce10} groupCount:{1} )
+
+[12:47:52:056:056182] cudnnSetConvolutionMathType ( convDesc:{0x55922b57ce10} mathType:{0} )
+
+[12:47:52:056:056192] Synchronization 11.
+[12:47:52:056:056224] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922b3a0260} wDesc:{0x55922b3a02d0} convDesc:{0x55922b57ce10} yDesc:{0x55922b3a0310} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922a8a04c0} )
+
+[12:47:52:079:079657] Number of algs: 8. First alg: 1.
+[12:47:52:079:079714] cudnnSetConvolutionMathType ( convDesc:{0x55922b57ce10} mathType:{0} )
+
+[12:47:52:079:079769] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922b3a0260} x:{0x7feed3600000} wDesc:{0x55922b3a02d0} w:{0x7feed3693000} convDesc:{0x55922b57ce10} algo:{1} workSpace:{0x7feed379f400} workSpaceSizeInBytes:{309120} beta:{0x7ffd2db08150} yDesc:{0x55922b3a0310} y:{0x7fef02000000} )
+
+[12:47:52:092:092219] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922b57ce10} )
+
+[12:47:52:092:092315] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922b3a02d0} )
+
+[12:47:52:092:092327] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922b3a0310} )
+
+[12:47:52:092:092334] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922b3a0260} )
+
+[12:47:52:212:212205] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{12544,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x310000, 0xc40000000002}  )
+
+[12:47:52:242:242385] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{6272,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100310000, 0, 0x7fef02000000}  )
+
+[12:47:52:250:250018] Synchronization 12.
+[12:47:52:250:250031] cudaMalloc(D0 (0), e00000 bytes)
+
+[12:47:52:251:251237] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:251:251266] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:251:251275] cudnnSetTensorNdDescriptor ( tensorDesc:{0x559230753a90} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:251:251281] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:251:251287] cudnnSetFilterNdDescriptor ( filterDesc:{0x5592307348d0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:251:251316] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:251:251320] cudnnSetTensorNdDescriptor ( tensorDesc:{0x559230752b30} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:251:251324] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:251:251332] cudnnSetConvolutionNdDescriptor ( convDesc:{0x559230752610} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:251:251337] cudnnSetConvolutionGroupCount ( convDesc:{0x559230752610} groupCount:{1} )
+
+[12:47:52:251:251341] cudnnSetConvolutionMathType ( convDesc:{0x559230752610} mathType:{0} )
+
+[12:47:52:251:251345] Synchronization 13.
+[12:47:52:251:251351] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x559230753a90} wDesc:{0x5592307348d0} convDesc:{0x559230752610} yDesc:{0x559230752b30} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922e413950} )
+
+[12:47:52:253:253159] Number of algs: 8. First alg: 6.
+[12:47:52:253:253207] Synchronization 14.
+[12:47:52:253:253210] cudaMalloc(D0 (0), 200000 bytes)
+
+[12:47:52:253:253364] cudnnSetConvolutionMathType ( convDesc:{0x559230752610} mathType:{0} )
+
+[12:47:52:253:253386] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x559230753a90} x:{0x7fef02000000} wDesc:{0x5592307348d0} w:{0x7feed3694e00} convDesc:{0x559230752610} algo:{6} workSpace:{0x7feef9e00000} workSpaceSizeInBytes:{410880} beta:{0x7ffd2db08150} yDesc:{0x559230752b30} y:{0x7feed2000000} )
+
+[12:47:52:253:253584] cudnnDestroyConvolutionDescriptor ( convDesc:{0x559230752610} )
+
+[12:47:52:253:253593] cudnnDestroyFilterDescriptor ( filterDesc:{0x5592307348d0} )
+
+[12:47:52:253:253598] cudnnDestroyTensorDescriptor ( tensorDesc:{0x559230752b30} )
+
+[12:47:52:253:253602] cudnnDestroyTensorDescriptor ( tensorDesc:{0x559230753a90} )
+
+[12:47:52:269:269455] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{12544,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x310000, 0xc40000000002}  )
+
+[12:47:52:295:295780] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{6272,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100310000, 0, 0x7feed2000000}  )
+
+[12:47:52:320:320838] cudaLaunchKernel( name{void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)}grid{3136,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x70000c4000, 0x7feed2000000, 0x40, 0xe0, 0xe0, 0x7000000070, 0x200000070, 0x200000002, 0x200000002, 0x200000002, 0x2, 0, 0x100000000, 0x100000001, 0x2989418000000001, 0x7feed0c60000, 0x7fef08900000}  )
+
+[12:47:52:327:327266] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:327:327316] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:327:327327] cudnnSetTensorNdDescriptor ( tensorDesc:{0x559230dc6bf0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:327:327333] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:327:327362] cudnnSetFilterNdDescriptor ( filterDesc:{0x5592308dc3c0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:327:327366] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:327:327370] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922c5cf8d0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:327:327374] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:327:327382] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d19a360} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:327:327386] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d19a360} groupCount:{1} )
+
+[12:47:52:327:327391] cudnnSetConvolutionMathType ( convDesc:{0x55922d19a360} mathType:{0} )
+
+[12:47:52:327:327395] Synchronization 15.
+[12:47:52:327:327401] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x559230dc6bf0} wDesc:{0x5592308dc3c0} convDesc:{0x55922d19a360} yDesc:{0x55922c5cf8d0} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922c8622c0} )
+
+[12:47:52:329:329436] Number of algs: 8. First alg: 6.
+[12:47:52:329:329475] cudnnSetConvolutionMathType ( convDesc:{0x55922d19a360} mathType:{0} )
+
+[12:47:52:329:329497] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x559230dc6bf0} x:{0x7feed0c60000} wDesc:{0x5592308dc3c0} w:{0x7feed36b9000} convDesc:{0x55922d19a360} algo:{6} workSpace:{0x7feef9e00000} workSpaceSizeInBytes:{820736} beta:{0x7ffd2db08150} yDesc:{0x55922c5cf8d0} y:{0x7fef08900000} )
+
+[12:47:52:329:329570] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d19a360} )
+
+[12:47:52:329:329578] cudnnDestroyFilterDescriptor ( filterDesc:{0x5592308dc3c0} )
+
+[12:47:52:329:329584] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922c5cf8d0} )
+
+[12:47:52:329:329589] cudnnDestroyTensorDescriptor ( tensorDesc:{0x559230dc6bf0} )
+
+[12:47:52:345:345478] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{6272,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x188000, 0x310000000002}  )
+
+[12:47:52:372:372285] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100188000, 0, 0x7fef08900000}  )
+
+[12:47:52:379:379930] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:379:379964] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:379:379975] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d61c450} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:379:379981] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:379:379987] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922c228e20} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:379:379991] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:379:379994] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d61c530} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:379:379998] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:380:380046] cudnnSetConvolutionNdDescriptor ( convDesc:{0x5592296c4660} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:380:380051] cudnnSetConvolutionGroupCount ( convDesc:{0x5592296c4660} groupCount:{1} )
+
+[12:47:52:380:380055] cudnnSetConvolutionMathType ( convDesc:{0x5592296c4660} mathType:{0} )
+
+[12:47:52:380:380059] Synchronization 16.
+[12:47:52:380:380066] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d61c450} wDesc:{0x55922c228e20} convDesc:{0x5592296c4660} yDesc:{0x55922d61c530} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922d260c10} )
+
+[12:47:52:381:381983] Number of algs: 8. First alg: 6.
+[12:47:52:382:382024] cudnnSetConvolutionMathType ( convDesc:{0x5592296c4660} mathType:{0} )
+
+[12:47:52:382:382045] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d61c450} x:{0x7fef08900000} wDesc:{0x55922c228e20} w:{0x7feed3701200} convDesc:{0x5592296c4660} algo:{6} workSpace:{0x7feecb200000} workSpaceSizeInBytes:{1639936} beta:{0x7ffd2db08150} yDesc:{0x55922d61c530} y:{0x7feed0c60000} )
+
+[12:47:52:382:382113] cudnnDestroyConvolutionDescriptor ( convDesc:{0x5592296c4660} )
+
+[12:47:52:382:382121] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922c228e20} )
+
+[12:47:52:382:382126] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d61c530} )
+
+[12:47:52:382:382130] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d61c450} )
+
+[12:47:52:397:397703] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{6272,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x188000, 0x310000000002}  )
+
+[12:47:52:423:423915] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100188000, 0, 0x7feed0c60000}  )
+
+[12:47:52:450:450841] cudaLaunchKernel( name{void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)}grid{1568,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x3800062000, 0x7feed0c60000, 0x80, 0x70, 0x70, 0x3800000038, 0x200000038, 0x200000002, 0x200000002, 0x200000002, 0x2, 0, 0x100000000, 0x100000001, 0x2989418000000001, 0x7feecb200000, 0x7fef08900000}  )
+
+[12:47:52:458:458497] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:458:458533] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:458:458544] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8a3db0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:458:458550] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:458:458557] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922e0ed2c0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:458:458561] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:458:458564] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8a3e90} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:458:458568] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:458:458605] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d89e890} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:458:458609] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d89e890} groupCount:{1} )
+
+[12:47:52:458:458613] cudnnSetConvolutionMathType ( convDesc:{0x55922d89e890} mathType:{0} )
+
+[12:47:52:458:458617] Synchronization 17.
+[12:47:52:458:458624] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d8a3db0} wDesc:{0x55922e0ed2c0} convDesc:{0x55922d89e890} yDesc:{0x55922d8a3e90} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922cab4670} )
+
+[12:47:52:460:460504] Number of algs: 8. First alg: 6.
+[12:47:52:460:460545] cudnnSetConvolutionMathType ( convDesc:{0x55922d89e890} mathType:{0} )
+
+[12:47:52:460:460566] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d8a3db0} x:{0x7feecb200000} wDesc:{0x55922e0ed2c0} w:{0x7feed0000000} convDesc:{0x55922d89e890} algo:{6} workSpace:{0x7feed0f70000} workSpaceSizeInBytes:{3278848} beta:{0x7ffd2db08150} yDesc:{0x55922d8a3e90} y:{0x7feed0c60000} )
+
+[12:47:52:460:460643] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d89e890} )
+
+[12:47:52:460:460650] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922e0ed2c0} )
+
+[12:47:52:460:460656] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8a3e90} )
+
+[12:47:52:460:460659] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8a3db0} )
+
+[12:47:52:476:476352] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0xc4000, 0xc4000000002}  )
+
+[12:47:52:502:502652] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x1000c4000, 0, 0x7feed0c60000}  )
+
+[12:47:52:510:510021] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:510:510060] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:510:510070] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d94e6d0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:510:510076] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:510:510083] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922d511540} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:510:510086] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:510:510090] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d94e660} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:510:510093] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:510:510101] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d94e580} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:510:510104] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d94e580} groupCount:{1} )
+
+[12:47:52:510:510109] cudnnSetConvolutionMathType ( convDesc:{0x55922d94e580} mathType:{0} )
+
+[12:47:52:510:510112] Synchronization 18.
+[12:47:52:510:510118] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d94e6d0} wDesc:{0x55922d511540} convDesc:{0x55922d94e580} yDesc:{0x55922d94e660} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922ccfae20} )
+
+[12:47:52:511:511788] Number of algs: 8. First alg: 6.
+[12:47:52:511:511824] cudnnSetConvolutionMathType ( convDesc:{0x55922d94e580} mathType:{0} )
+
+[12:47:52:511:511843] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d94e6d0} x:{0x7feed0c60000} wDesc:{0x55922d511540} w:{0x7feed0120000} convDesc:{0x55922d94e580} algo:{6} workSpace:{0x7fef08900000} workSpaceSizeInBytes:{6555648} beta:{0x7ffd2db08150} yDesc:{0x55922d94e660} y:{0x7feed0f70000} )
+
+[12:47:52:511:511901] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d94e580} )
+
+[12:47:52:511:511907] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922d511540} )
+
+[12:47:52:511:511912] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d94e660} )
+
+[12:47:52:511:511915] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d94e6d0} )
+
+[12:47:52:527:527683] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0xc4000, 0xc4000000002}  )
+
+[12:47:52:554:554369] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x1000c4000, 0, 0x7feed0f70000}  )
+
+[12:47:52:561:561682] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:561:561730] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:561:561742] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922cf23780} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:561:561747] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:561:561754] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922dce60e0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:561:561758] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:561:561761] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922cf1e1e0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:561:561765] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:561:561773] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922cf23710} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:561:561777] cudnnSetConvolutionGroupCount ( convDesc:{0x55922cf23710} groupCount:{1} )
+
+[12:47:52:561:561781] cudnnSetConvolutionMathType ( convDesc:{0x55922cf23710} mathType:{0} )
+
+[12:47:52:561:561791] cudnnSetConvolutionMathType ( convDesc:{0x55922cf23710} mathType:{0} )
+
+[12:47:52:561:561802] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922cf23780} x:{0x7feed0f70000} wDesc:{0x55922dce60e0} w:{0x7feed0360000} convDesc:{0x55922cf23710} algo:{6} workSpace:{0x7fef08900000} workSpaceSizeInBytes:{6555648} beta:{0x7ffd2db08150} yDesc:{0x55922cf1e1e0} y:{0x7feed0c60000} )
+
+[12:47:52:563:563551] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922cf23710} )
+
+[12:47:52:563:563569] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922dce60e0} )
+
+[12:47:52:563:563604] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922cf1e1e0} )
+
+[12:47:52:563:563609] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922cf23780} )
+
+[12:47:52:579:579001] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0xc4000, 0xc4000000002}  )
+
+[12:47:52:605:605715] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x1000c4000, 0, 0x7feed0c60000}  )
+
+[12:47:52:613:613078] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:613:613114] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:613:613125] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922e4f0e90} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:613:613130] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:613:613138] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922d19c000} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:613:613141] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:613:613145] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922e4f0f70} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:613:613148] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:613:613156] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d898220} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:613:613160] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d898220} groupCount:{1} )
+
+[12:47:52:613:613164] cudnnSetConvolutionMathType ( convDesc:{0x55922d898220} mathType:{0} )
+
+[12:47:52:613:613172] cudnnSetConvolutionMathType ( convDesc:{0x55922d898220} mathType:{0} )
+
+[12:47:52:613:613183] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922e4f0e90} x:{0x7feed0c60000} wDesc:{0x55922d19c000} w:{0x7feed05a0000} convDesc:{0x55922d898220} algo:{6} workSpace:{0x7fef08900000} workSpaceSizeInBytes:{6555648} beta:{0x7ffd2db08150} yDesc:{0x55922e4f0f70} y:{0x7feed0f70000} )
+
+[12:47:52:614:614883] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d898220} )
+
+[12:47:52:614:614904] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922d19c000} )
+
+[12:47:52:614:614910] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922e4f0f70} )
+
+[12:47:52:614:614914] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922e4f0e90} )
+
+[12:47:52:630:630808] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{3136,1,1},block{128,1,1} sharedMem {0} stream {0} args {0xc4000, 0xc4000000002}  )
+
+[12:47:52:656:656997] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x1000c4000, 0, 0x7feed0f70000}  )
+
+[12:47:52:684:684353] cudaLaunchKernel( name{void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)}grid{784,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x1c00031000, 0x7feed0f70000, 0x100, 0x38, 0x38, 0x1c0000001c, 0x20000001c, 0x200000002, 0x200000002, 0x200000002, 0x2, 0, 0x100000000, 0x100000001, 0x2989418000000001, 0x7feef9e00000, 0x7feecb200000}  )
+
+[12:47:52:691:691883] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:691:691919] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:691:691930] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d022ba0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:691:691936] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:691:691942] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922df85030} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:691:691946] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:691:691949] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d022c10} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:691:691953] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:691:691961] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d022c80} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:691:691965] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d022c80} groupCount:{1} )
+
+[12:47:52:691:691969] cudnnSetConvolutionMathType ( convDesc:{0x55922d022c80} mathType:{0} )
+
+[12:47:52:691:691973] Synchronization 19.
+[12:47:52:691:691979] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d022ba0} wDesc:{0x55922df85030} convDesc:{0x55922d022c80} yDesc:{0x55922d022c10} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922e446180} )
+
+[12:47:52:693:693751] Number of algs: 8. First alg: 6.
+[12:47:52:693:693788] cudnnSetConvolutionMathType ( convDesc:{0x55922d022c80} mathType:{0} )
+
+[12:47:52:693:693806] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d022ba0} x:{0x7feef9e00000} wDesc:{0x55922df85030} w:{0x7feed07e0000} convDesc:{0x55922d022c80} algo:{6} workSpace:{0x7feed2000000} workSpaceSizeInBytes:{13111296} beta:{0x7ffd2db08150} yDesc:{0x55922d022c10} y:{0x7feecb200000} )
+
+[12:47:52:693:693868] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d022c80} )
+
+[12:47:52:693:693875] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922df85030} )
+
+[12:47:52:693:693879] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d022c10} )
+
+[12:47:52:693:693882] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d022ba0} )
+
+[12:47:52:709:709471] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x62000, 0x31000000002}  )
+
+[12:47:52:734:734486] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{784,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100062000, 0, 0x7feecb200000}  )
+
+[12:47:52:741:741747] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:741:741787] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:741:741796] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8b1140} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:741:741803] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:741:741810] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922cfb7d90} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:741:741814] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:741:741817] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8b11b0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:741:741820] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:741:741828] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d8b1220} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:741:741832] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d8b1220} groupCount:{1} )
+
+[12:47:52:741:741837] cudnnSetConvolutionMathType ( convDesc:{0x55922d8b1220} mathType:{0} )
+
+[12:47:52:741:741840] Synchronization 20.
+[12:47:52:741:741847] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d8b1140} wDesc:{0x55922cfb7d90} convDesc:{0x55922d8b1220} yDesc:{0x55922d8b11b0} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922e039ca0} )
+
+[12:47:52:743:743518] Number of algs: 8. First alg: 6.
+[12:47:52:743:743561] Synchronization 21.
+[12:47:52:743:743564] cudaMalloc(D0 (0), 1a00000 bytes)
+
+[12:47:52:743:743773] cudnnSetConvolutionMathType ( convDesc:{0x55922d8b1220} mathType:{0} )
+
+[12:47:52:743:743793] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d8b1140} x:{0x7feecb200000} wDesc:{0x55922cfb7d90} w:{0x7feece000000} convDesc:{0x55922d8b1220} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d8b11b0} y:{0x7feecd200000} )
+
+[12:47:52:743:743869] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d8b1220} )
+
+[12:47:52:743:743874] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922cfb7d90} )
+
+[12:47:52:743:743879] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8b11b0} )
+
+[12:47:52:743:743882] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8b1140} )
+
+[12:47:52:759:759538] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x62000, 0x31000000002}  )
+
+[12:47:52:785:785756] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{784,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100062000, 0, 0x7feecd200000}  )
+
+[12:47:52:793:793088] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:793:793126] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:793:793136] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d5b1410} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:793:793142] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:793:793149] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922cc79a90} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:793:793152] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:793:793156] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d5abd30} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:793:793159] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:793:793167] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d5b13a0} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:793:793170] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d5b13a0} groupCount:{1} )
+
+[12:47:52:793:793175] cudnnSetConvolutionMathType ( convDesc:{0x55922d5b13a0} mathType:{0} )
+
+[12:47:52:793:793183] cudnnSetConvolutionMathType ( convDesc:{0x55922d5b13a0} mathType:{0} )
+
+[12:47:52:793:793194] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d5b1410} x:{0x7feecd200000} wDesc:{0x55922cc79a90} w:{0x7feece900000} convDesc:{0x55922d5b13a0} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d5abd30} y:{0x7feecb200000} )
+
+[12:47:52:794:794926] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d5b13a0} )
+
+[12:47:52:794:794945] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922cc79a90} )
+
+[12:47:52:794:794950] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d5abd30} )
+
+[12:47:52:794:794953] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d5b1410} )
+
+[12:47:52:810:810298] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x62000, 0x31000000002}  )
+
+[12:47:52:836:836535] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{784,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100062000, 0, 0x7feecb200000}  )
+
+[12:47:52:843:843947] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:843:843999] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:844:844011] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d67c710} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:844:844017] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:844:844024] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922d1c5b80} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:844:844028] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:844:844031] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d677030} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:844:844061] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:844:844069] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d67c6a0} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:844:844074] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d67c6a0} groupCount:{1} )
+
+[12:47:52:844:844079] cudnnSetConvolutionMathType ( convDesc:{0x55922d67c6a0} mathType:{0} )
+
+[12:47:52:844:844088] cudnnSetConvolutionMathType ( convDesc:{0x55922d67c6a0} mathType:{0} )
+
+[12:47:52:844:844105] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d67c710} x:{0x7feecb200000} wDesc:{0x55922d1c5b80} w:{0x7feecc000000} convDesc:{0x55922d67c6a0} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d677030} y:{0x7feecd200000} )
+
+[12:47:52:845:845735] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d67c6a0} )
+
+[12:47:52:845:845752] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922d1c5b80} )
+
+[12:47:52:845:845756] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d677030} )
+
+[12:47:52:845:845760] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d67c710} )
+
+[12:47:52:861:861585] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{1568,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x62000, 0x31000000002}  )
+
+[12:47:52:888:888293] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{784,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100062000, 0, 0x7feecd200000}  )
+
+[12:47:52:915:915680] cudaLaunchKernel( name{void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)}grid{392,1,1},block{256,1,1} sharedMem {0} stream {0} args {0xe00018800, 0x7feecd200000, 0x200, 0x1c, 0x1c, 0xe0000000e, 0x20000000e, 0x200000002, 0x200000002, 0x200000002, 0x2, 0, 0x100000000, 0x100000001, 0x2989418000000001, 0x7feef9e00000, 0x7feef9e62000}  )
+
+[12:47:52:923:923319] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:923:923354] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:923:923364] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d020ef0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:923:923370] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:923:923377] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922d62d340} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:923:923381] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:923:923384] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d022550} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:923:923388] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:923:923395] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922de153c0} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:923:923399] cudnnSetConvolutionGroupCount ( convDesc:{0x55922de153c0} groupCount:{1} )
+
+[12:47:52:923:923432] cudnnSetConvolutionMathType ( convDesc:{0x55922de153c0} mathType:{0} )
+
+[12:47:52:923:923436] Synchronization 22.
+[12:47:52:923:923443] cudnnGetConvolutionForwardAlgorithm_v7 ( handle:{0x5592297318f0} xDesc:{0x55922d020ef0} wDesc:{0x55922d62d340} convDesc:{0x55922de153c0} yDesc:{0x55922d022550} requestedAlgoCount:{8} returnedAlgoCount:{0x7ffd2db0814c} perfResults:{0x55922cd17710} )
+
+[12:47:52:925:925330] Number of algs: 8. First alg: 6.
+[12:47:52:925:925372] cudnnSetConvolutionMathType ( convDesc:{0x55922de153c0} mathType:{0} )
+
+[12:47:52:925:925394] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922d020ef0} x:{0x7feef9e00000} wDesc:{0x55922d62d340} w:{0x7feecc900000} convDesc:{0x55922de153c0} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d022550} y:{0x7feef9e62000} )
+
+[12:47:52:925:925469] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922de153c0} )
+
+[12:47:52:925:925476] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922d62d340} )
+
+[12:47:52:925:925481] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d022550} )
+
+[12:47:52:925:925485] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d020ef0} )
+
+[12:47:52:941:941458] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{392,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x18800, 0xc400000002}  )
+
+[12:47:52:968:968007] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{196,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100018800, 0, 0x7feef9e62000}  )
+
+[12:47:52:975:975373] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:52:975:975406] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:975:975417] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922cf21cd0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:975:975422] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:52:975:975429] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922b3a0340} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:52:975:975432] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:52:975:975435] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8bd0c0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:52:975:975439] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:52:975:975447] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922cf21c60} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:52:975:975451] cudnnSetConvolutionGroupCount ( convDesc:{0x55922cf21c60} groupCount:{1} )
+
+[12:47:52:975:975455] cudnnSetConvolutionMathType ( convDesc:{0x55922cf21c60} mathType:{0} )
+
+[12:47:52:975:975463] cudnnSetConvolutionMathType ( convDesc:{0x55922cf21c60} mathType:{0} )
+
+[12:47:52:975:975474] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922cf21cd0} x:{0x7feef9e62000} wDesc:{0x55922b3a0340} w:{0x7feeca000000} convDesc:{0x55922cf21c60} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d8bd0c0} y:{0x7feef9e00000} )
+
+[12:47:52:977:977199] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922cf21c60} )
+
+[12:47:52:977:977221] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922b3a0340} )
+
+[12:47:52:977:977227] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8bd0c0} )
+
+[12:47:52:977:977231] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922cf21cd0} )
+
+[12:47:52:993:993386] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{392,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x18800, 0xc400000002}  )
+
+[12:47:53:019:019698] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{196,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100018800, 0, 0x7feef9e00000}  )
+
+[12:47:53:027:027119] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:53:027:027152] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:53:027:027163] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922ce8b3d0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:53:027:027168] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:53:027:027175] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922e4ae5f0} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:53:027:027178] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:53:027:027181] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922ce8b4b0} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:53:027:027185] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:53:027:027193] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922d57faf0} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:53:027:027197] cudnnSetConvolutionGroupCount ( convDesc:{0x55922d57faf0} groupCount:{1} )
+
+[12:47:53:027:027201] cudnnSetConvolutionMathType ( convDesc:{0x55922d57faf0} mathType:{0} )
+
+[12:47:53:027:027211] cudnnSetConvolutionMathType ( convDesc:{0x55922d57faf0} mathType:{0} )
+
+[12:47:53:027:027222] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922ce8b3d0} x:{0x7feef9e00000} wDesc:{0x55922e4ae5f0} w:{0x7feeca900000} convDesc:{0x55922d57faf0} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922ce8b4b0} y:{0x7feef9e62000} )
+
+[12:47:53:028:028882] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922d57faf0} )
+
+[12:47:53:028:028900] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922e4ae5f0} )
+
+[12:47:53:028:028905] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922ce8b4b0} )
+
+[12:47:53:028:028908] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922ce8b3d0} )
+
+[12:47:53:044:044488] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{392,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x18800, 0xc400000002}  )
+
+[12:47:53:070:070435] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{196,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100018800, 0, 0x7feef9e62000}  )
+
+[12:47:53:077:077799] cudnnSetStream ( handle:{0x5592297318f0} streamId:{0} )
+
+[12:47:53:077:077837] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:53:077:077847] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922db00b10} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:53:077:077853] cudnnCreateFilterDescriptor ( filterDesc:{0x7ffd2db07ee0} )
+
+[12:47:53:077:077860] cudnnSetFilterNdDescriptor ( filterDesc:{0x55922cdd2180} dataType:{0} format:{0} nbDims:{4} filterDimA:{0x7ffd2db08180} )
+
+[12:47:53:077:077864] cudnnCreateTensorDescriptor ( tensorDesc:{0x7ffd2db080f0} )
+
+[12:47:53:077:077867] cudnnSetTensorNdDescriptor ( tensorDesc:{0x55922d8b9d00} dataType:{0} nbDims:{4} dimA:{0x7ffd2db08280} strideA:{0x7ffd2db082a0} )
+
+[12:47:53:077:077871] cudnnCreateConvolutionDescriptor ( convDesc:{0x7ffd2db081d0} )
+
+[12:47:53:077:077878] cudnnSetConvolutionNdDescriptor ( convDesc:{0x55922db00aa0} arrayLength:{2} padA:{0x7ffd2db083dc} filterStrideA:{0x7ffd2db083e8} dilationA:{0x7ffd2db083f4} mode:{1} dataType:{0} )
+
+[12:47:53:077:077882] cudnnSetConvolutionGroupCount ( convDesc:{0x55922db00aa0} groupCount:{1} )
+
+[12:47:53:077:077887] cudnnSetConvolutionMathType ( convDesc:{0x55922db00aa0} mathType:{0} )
+
+[12:47:53:077:077895] cudnnSetConvolutionMathType ( convDesc:{0x55922db00aa0} mathType:{0} )
+
+[12:47:53:077:077906] cudnnConvolutionForward ( handle:{0x5592297318f0} alpha:{0x7ffd2db08148} xDesc:{0x55922db00b10} x:{0x7feef9e62000} wDesc:{0x55922cdd2180} w:{0x7fef08000000} convDesc:{0x55922db00aa0} algo:{6} workSpace:{0x7feef6000000} workSpaceSizeInBytes:{26218496} beta:{0x7ffd2db08150} yDesc:{0x55922d8b9d00} y:{0x7feef9e00000} )
+
+[12:47:53:079:079653] cudnnDestroyConvolutionDescriptor ( convDesc:{0x55922db00aa0} )
+
+[12:47:53:079:079671] cudnnDestroyFilterDescriptor ( filterDesc:{0x55922cdd2180} )
+
+[12:47:53:079:079676] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922d8b9d00} )
+
+[12:47:53:079:079679] cudnnDestroyTensorDescriptor ( tensorDesc:{0x55922db00b10} )
+
+[12:47:53:095:095264] cudaLaunchKernel( name{void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})}grid{392,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x18800, 0xc400000002}  )
+
+[12:47:53:121:121876] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{196,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x100018800, 0, 0x7feef9e00000}  )
+
+[12:47:53:149:149339] cudaLaunchKernel( name{void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)}grid{98,1,1},block{256,1,1} sharedMem {0} stream {0} args {0x700006200, 0x7feef9e00000, 0x200, 0xe, 0xe, 0x700000007, 0x200000007, 0x200000002, 0x200000002, 0x200000002, 0x2, 0, 0x100000000, 0x100000001, 0x2989418000000001, 0x7feed379f400, 0x7feed37b7c00}  )
+
+[12:47:53:177:177549] cudaLaunchKernel( name{void at::native::(anonymous namespace)::adaptive_average_pool<float>(float*, float*, int, int, int, int, long, long, long)}grid{512,1,1},block{32,8,1} sharedMem {0} stream {0} args {0x7feed379f400, 0x7feed37b7c00, 0x700000007, 0x700000007, 0x700000007, 0x1880000000007, 0x31, 0x7, 0x1}  )
+
+[12:47:53:185:185740] cublasLtMatmulDescCreate ( matmulDesc:{0x7ffd2db09458} computeType:{68} scaleType:{0} )
+
+[12:47:53:187:187249] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x55922cc38b90} attr:{3} buf:{0x7ffd2db093b0} sizeInBytes:{4} )
+
+[12:47:53:187:187265] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x55922cc38b90} attr:{4} buf:{0x7ffd2db093b4} sizeInBytes:{4} )
+
+[12:47:53:187:187277] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x55922cc38b90} attr:{7} buf:{0x7ffd2db093b8} sizeInBytes:{4} )
+
+[12:47:53:187:187280] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x55922cc38b90} attr:{8} buf:{0x7ffd2db09390} sizeInBytes:{8} )
+
+[12:47:53:187:187305] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{25088} cols:{4096} ld:{25088} )
+
+[12:47:53:187:187310] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{25088} cols:{1} ld:{25088} )
+
+[12:47:53:187:187314] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{1} ld:{4096} )
+
+[12:47:53:187:187326] cublasLtMatmulPreferenceCreate ( pref:{0x7ffd2db09458} )
+
+[12:47:53:187:187344] cublasLtMatmulPreferenceSetAttribute ( pref:{0x55922cc69b30} attr:{1} buf:{0x7ffd2db093e8} sizeInBytes:{8} )
+
+[12:47:53:187:187386] cublasCreate_v2 ( handle:{0x55922c8feda0} )
+
+[12:47:53:187:187747] cublasSetStream_v2 ( handle:{0x55922cf672c0} streamId:{0} )
+
+[12:47:53:187:187768] cublasSetMathMode ( handle:{0x55922cf672c0} mode:{0} )
+
+[12:47:53:187:187802] cublasLtMatmulAlgoGetHeuristic ( lightHandle:{0x55922cf672c0} operationDesc:{0x55922cc38b90} Adesc:{0x55922d40c880} Bdesc:{0x55922d529410} Cdesc:{0x55922cbf08b0} Ddesc:{0x55922cbf08b0} preference:{0x55922cc69b30} requestedAlgoCount:{1} heuristicResultsArray:{0x7ffd2db094a0} returnAlgoCount:{0x7ffd2db093bc} )
+
+[12:47:53:188:188628] cublasLtMatmul ( lightHandle:{0x55922cf672c0} computeDesc:{0x55922cc38b90} alpha:{0x7ffd2db0939c} A:{0x7fee86000000} Adesc:{0x55922d40c880} B:{0x7feed37b7c00} Bdesc:{0x55922d529410} beta:{0x7ffd2db093ac} C:{0x7feed379f400} Cdesc:{0x55922cbf08b0} D:{0x7feed379f400} Ddesc:{0x55922cbf08b0} algo:{0x7ffd2db094a0} workspace:{0x7feef9e00000} workspaceSizeInBytes:{1048576} stream:{0} )
+
+[12:47:53:195:195262] cublasLtMatmulPreferenceDestroy ( pref:{0x55922cc69b30} )
+
+[12:47:53:195:195278] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922cbf08b0} )
+
+[12:47:53:195:195281] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922d529410} )
+
+[12:47:53:195:195284] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922d40c880} )
+
+[12:47:53:195:195288] cublasLtMatmulDescDestroy ( matmulDesc:{0x55922cc38b90} )
+
+[12:47:53:211:211120] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{8,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x2db0899000001000, 0, 0x7feed379f400}  )
+
+[12:47:53:217:217485] cublasLtMatmulDescCreate ( matmulDesc:{0x7ffd2db09458} computeType:{68} scaleType:{0} )
+
+[12:47:53:217:217508] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230db1360} attr:{3} buf:{0x7ffd2db093b0} sizeInBytes:{4} )
+
+[12:47:53:217:217533] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230db1360} attr:{4} buf:{0x7ffd2db093b4} sizeInBytes:{4} )
+
+[12:47:53:217:217536] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230db1360} attr:{7} buf:{0x7ffd2db093b8} sizeInBytes:{4} )
+
+[12:47:53:217:217539] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230db1360} attr:{8} buf:{0x7ffd2db09390} sizeInBytes:{8} )
+
+[12:47:53:217:217544] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{4096} ld:{4096} )
+
+[12:47:53:217:217548] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{1} ld:{4096} )
+
+[12:47:53:217:217551] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{1} ld:{4096} )
+
+[12:47:53:217:217556] cublasLtMatmulPreferenceCreate ( pref:{0x7ffd2db09458} )
+
+[12:47:53:217:217561] cublasLtMatmulPreferenceSetAttribute ( pref:{0x55922e281160} attr:{1} buf:{0x7ffd2db093e8} sizeInBytes:{8} )
+
+[12:47:53:217:217573] cublasSetStream_v2 ( handle:{0x55922cf672c0} streamId:{0} )
+
+[12:47:53:217:217578] cublasSetMathMode ( handle:{0x55922cf672c0} mode:{0} )
+
+[12:47:53:217:217587] cublasLtMatmulAlgoGetHeuristic ( lightHandle:{0x55922cf672c0} operationDesc:{0x559230db1360} Adesc:{0x55922cbf08b0} Bdesc:{0x55922d20aae0} Cdesc:{0x55922e1dc5f0} Ddesc:{0x55922e1dc5f0} preference:{0x55922e281160} requestedAlgoCount:{1} heuristicResultsArray:{0x7ffd2db094a0} returnAlgoCount:{0x7ffd2db093bc} )
+
+[12:47:53:217:217625] cublasLtMatmul ( lightHandle:{0x55922cf672c0} computeDesc:{0x559230db1360} alpha:{0x7ffd2db0939c} A:{0x7fef04000000} Adesc:{0x55922cbf08b0} B:{0x7feed379f400} Bdesc:{0x55922d20aae0} beta:{0x7ffd2db093ac} C:{0x7feed37a3400} Cdesc:{0x55922e1dc5f0} D:{0x7feed37a3400} Ddesc:{0x55922e1dc5f0} algo:{0x7ffd2db094a0} workspace:{0x7feef9e00000} workspaceSizeInBytes:{1048576} stream:{0} )
+
+[12:47:53:217:217653] cublasLtMatmulPreferenceDestroy ( pref:{0x55922e281160} )
+
+[12:47:53:217:217656] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922e1dc5f0} )
+
+[12:47:53:217:217659] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922d20aae0} )
+
+[12:47:53:217:217662] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922cbf08b0} )
+
+[12:47:53:217:217664] cublasLtMatmulDescDestroy ( matmulDesc:{0x559230db1360} )
+
+[12:47:53:237:237633] cudaLaunchKernel( name{void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#14}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)}grid{8,1,1},block{128,1,1} sharedMem {0} stream {0} args {0x2db0899000001000, 0, 0x7feed37a3400}  )
+
+[12:47:53:244:244958] cublasLtMatmulDescCreate ( matmulDesc:{0x7ffd2db09458} computeType:{68} scaleType:{0} )
+
+[12:47:53:244:244988] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230726870} attr:{3} buf:{0x7ffd2db093b0} sizeInBytes:{4} )
+
+[12:47:53:244:244992] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230726870} attr:{4} buf:{0x7ffd2db093b4} sizeInBytes:{4} )
+
+[12:47:53:244:244995] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230726870} attr:{7} buf:{0x7ffd2db093b8} sizeInBytes:{4} )
+
+[12:47:53:244:244998] cublasLtMatmulDescSetAttribute ( matmulDesc:{0x559230726870} attr:{8} buf:{0x7ffd2db09390} sizeInBytes:{8} )
+
+[12:47:53:245:245003] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{1000} ld:{4096} )
+
+[12:47:53:245:245008] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{4096} cols:{1} ld:{4096} )
+
+[12:47:53:245:245011] cublasLtMatrixLayoutCreate ( matLayout:{0x7ffd2db09458} type:{0} rows:{1000} cols:{1} ld:{1000} )
+
+[12:47:53:245:245041] cublasLtMatmulPreferenceCreate ( pref:{0x7ffd2db09458} )
+
+[12:47:53:245:245046] cublasLtMatmulPreferenceSetAttribute ( pref:{0x55922cc69b30} attr:{1} buf:{0x7ffd2db093e8} sizeInBytes:{8} )
+
+[12:47:53:245:245058] cublasSetStream_v2 ( handle:{0x55922cf672c0} streamId:{0} )
+
+[12:47:53:245:245064] cublasSetMathMode ( handle:{0x55922cf672c0} mode:{0} )
+
+[12:47:53:245:245072] cublasLtMatmulAlgoGetHeuristic ( lightHandle:{0x55922cf672c0} operationDesc:{0x559230726870} Adesc:{0x55922e1dc5f0} Bdesc:{0x55922d40c880} Cdesc:{0x55923101de20} Ddesc:{0x55923101de20} preference:{0x55922cc69b30} requestedAlgoCount:{1} heuristicResultsArray:{0x7ffd2db094a0} returnAlgoCount:{0x7ffd2db093bc} )
+
+[12:47:53:245:245116] cublasLtMatmul ( lightHandle:{0x55922cf672c0} computeDesc:{0x559230726870} alpha:{0x7ffd2db0939c} A:{0x7fee9e800000} Adesc:{0x55922e1dc5f0} B:{0x7feed37a3400} Bdesc:{0x55922d40c880} beta:{0x7ffd2db093ac} C:{0x7feed379f400} Cdesc:{0x55923101de20} D:{0x7feed379f400} Ddesc:{0x55923101de20} algo:{0x7ffd2db094a0} workspace:{0x7feef9e00000} workspaceSizeInBytes:{1048576} stream:{0} )
+
+[12:47:53:245:245145] cublasLtMatmulPreferenceDestroy ( pref:{0x55922cc69b30} )
+
+[12:47:53:245:245149] cublasLtMatrixLayoutDestroy ( matLayout:{0x55923101de20} )
+
+[12:47:53:245:245152] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922d40c880} )
+
+[12:47:53:245:245155] cublasLtMatrixLayoutDestroy ( matLayout:{0x55922e1dc5f0} )
+
+[12:47:53:245:245158] cublasLtMatmulDescDestroy ( matmulDesc:{0x559230726870} )
+
+[12:47:53:267:267944] cudaLaunchKernel( name{void (anonymous namespace)::softmax_warp_forward<float, float, float, 10, false, false>(float*, float const*, int, int, int, bool const*, int, bool)}grid{1,1,1},block{32,4,1} sharedMem {0} stream {0} args {0x7feed37a0400, 0x7feed379f400, 0x3e800000001, 0x3e8000003e8, 0xffffffff000003e8, 0, 0xffffffff, 0xc321158620a50000}  )
+
+[12:47:53:296:296504] cudaLaunchKernel( name{void at::native::sbtopk::gatherTopK<float, unsigned int, 1, false>(at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, unsigned int, bool, unsigned int, unsigned int, at::cuda::detail::TensorInfo<float, unsigned int>, unsigned int, at::cuda::detail::TensorInfo<long, unsigned int>, unsigned int, float*)}grid{1,1,1},block{1024,1,1} sharedMem {0} stream {0} args {0x7feed37a0400, 0x1000003e8, 0x100000001, 0x1000003e801, 0x100000001, 0x100000001, 0x7feed37a1400, 0x100000001, 0x7feed37a1600, 0x1, 0}  )
+
+[12:47:53:304:304605] Synchronization 23.
+[12:47:53:304:304617] cudaMemcpyAsync(cudaMemcpyDeviceToHost, H39(0x7ffd2db0a760) <- D40(0x7feed37a1600), 8 bytes)
+
+[12:47:53:304:304652] cudaStreamSynchronize ( stream:{0} )
+
+[12:47:53:304:304679] Synchronization 24.
+[12:47:53:304:304681] cudaMemcpyAsync(cudaMemcpyDeviceToHost, H39(0x7ffd2db0a760) <- D41(0x7feed37a1400), 4 bytes)
+
+[12:47:53:304:304693] cudaStreamSynchronize ( stream:{0} )
+

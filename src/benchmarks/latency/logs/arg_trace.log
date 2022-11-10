@@ -1,0 +1,6 @@
+[23:31:55:398:398487] cudaMalloc(D0 (0), 4 bytes)
+
+[23:31:56:617:617045] cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f2645600000) <- H0(0x7ffeaf8d3554), 4 bytes)
+
+[23:31:56:617:617084] cudaMemcpy(cudaMemcpyDeviceToHost, H0(0x7ffeaf8d3554) <- D1(0x7f2645600000), 4 bytes)
+

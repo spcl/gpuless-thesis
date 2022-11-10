@@ -1,0 +1,1689 @@
+[12:40:43:871:871878] Synchronization 0.
+[12:40:43:871:871915] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067766] Synchronization 1.
+[12:40:45:067:067793] cudaMalloc(D0 (0), 7d8 bytes)
+
+[12:40:45:067:067814] cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f59f56e0a00) <- H0(0x562ef5d07c50), 7d8 bytes)
+
+[12:40:45:067:067829] Synchronization 2.
+[12:40:45:067:067831] cudaMalloc(D0 (0), 7d8 bytes)
+
+[12:40:45:067:067837] cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f59f56e1200) <- H1(0x562ef5d08430), 7d8 bytes)
+
+[12:40:45:067:067841] Synchronization 3.
+[12:40:45:067:067843] cudaMalloc(D0 (0), 728 bytes)
+
+[12:40:45:067:067848] cudaMemcpy(cudaMemcpyHostToDevice) D3(0x7f59f56e1a00) <- H2(0x562ef5d09340), 728 bytes)
+
+[12:40:45:067:067853] Synchronization 4.
+[12:40:45:067:067855] cudaMalloc(D0 (0), 728 bytes)
+
+[12:40:45:067:067863] cudaMemcpy(cudaMemcpyHostToDevice) D4(0x7f59f56e2200) <- H3(0x562ef5d08c10), 728 bytes)
+
+[12:40:45:067:067868] Synchronization 5.
+[12:40:45:067:067869] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067874] Synchronization 6.
+[12:40:45:067:067875] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067933] Synchronization 7.
+[12:40:45:067:067936] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067940] Synchronization 8.
+[12:40:45:067:067941] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067993] Synchronization 9.
+[12:40:45:067:067995] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:067:067999] Synchronization 10.
+[12:40:45:068:068001] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:068:068054] Synchronization 11.
+[12:40:45:068:068057] cudaMalloc(D0 (0), e0870 bytes)
+
+[12:40:45:068:068065] cudaMemcpy(cudaMemcpyHostToDevice) D5(0x7f59f5600000) <- H4(0x7f5a1a31f010), e0870 bytes)
+
+[12:40:45:085:085480] cudaLaunchKernel( name{extract(long, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000}  )
+
+[12:40:45:090:090215] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:095:095253] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:100:100497] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:100:100530] Synchronization 12.
+[12:40:45:100:100532] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:100:100562] Synchronization 13.
+[12:40:45:100:100564] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:105:105329] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f59d20c, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:110:110644] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:117:117661] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:127:127617] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:138:138591] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:138:138646] Synchronization 14.
+[12:40:45:138:138651] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:138:138698] Synchronization 15.
+[12:40:45:138:138702] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:150:150235] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f598e82, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:162:162455] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:175:175044] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:187:187594] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:199:199843] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:199:199901] Synchronization 16.
+[12:40:45:199:199906] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:199:199957] Synchronization 17.
+[12:40:45:199:199962] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:212:212351] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f595c63, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:223:223309] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:235:235448] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:247:247659] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:260:260021] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:260:260075] Synchronization 18.
+[12:40:45:260:260080] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:260:260128] Synchronization 19.
+[12:40:45:260:260133] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:272:272630] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f593479, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:284:284873] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:297:297574] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:309:309670] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:321:321733] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:321:321787] Synchronization 20.
+[12:40:45:321:321792] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:321:321840] Synchronization 21.
+[12:40:45:321:321845] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:334:334436] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f59135c, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:346:346588] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:359:359119] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:371:371534] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:384:384146] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:384:384199] Synchronization 22.
+[12:40:45:384:384204] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:384:384252] Synchronization 23.
+[12:40:45:384:384257] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:396:396683] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58f723, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:409:409245] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:421:421539] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:434:434268] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:446:446510] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:446:446568] Synchronization 24.
+[12:40:45:446:446573] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:446:446622] Synchronization 25.
+[12:40:45:446:446627] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:458:458664] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58de5d, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:471:471264] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:481:481871] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:493:493920] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:505:505577] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:505:505635] Synchronization 26.
+[12:40:45:505:505640] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:505:505689] Synchronization 27.
+[12:40:45:505:505694] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:517:517970] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58c884, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:530:530181] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:541:541344] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:553:553521] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:565:565825] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:565:565887] Synchronization 28.
+[12:40:45:565:565893] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:565:565949] Synchronization 29.
+[12:40:45:565:565954] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:578:578408] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58b4a6, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:590:590948] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:603:603344] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:614:614224] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:626:626251] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:626:626309] Synchronization 30.
+[12:40:45:626:626314] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:626:626364] Synchronization 31.
+[12:40:45:626:626370] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:638:638544] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58a2aa, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:651:651200] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:663:663520] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:675:675945] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:688:688178] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:688:688236] Synchronization 32.
+[12:40:45:688:688241] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:688:688290] Synchronization 33.
+[12:40:45:688:688294] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:700:700484] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f589217, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:712:712963] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:725:725340] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:737:737998] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:750:750513] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:750:750571] Synchronization 34.
+[12:40:45:750:750577] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:750:750625] Synchronization 35.
+[12:40:45:750:750630] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:762:762635] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5882cc, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:775:775408] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:787:787893] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:800:800406] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:812:812747] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:812:812802] Synchronization 36.
+[12:40:45:812:812807] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:812:812854] Synchronization 37.
+[12:40:45:812:812859] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:825:825329] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58747b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:837:837791] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:850:850055] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:862:862587] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:874:874654] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:874:874710] Synchronization 38.
+[12:40:45:874:874715] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:874:874763] Synchronization 39.
+[12:40:45:874:874768] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:887:887044] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f586706, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:899:899498] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:911:911700] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:924:924376] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:936:936588] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:936:936645] Synchronization 40.
+[12:40:45:936:936650] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:936:936700] Synchronization 41.
+[12:40:45:936:936705] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:947:947650] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f585a74, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:957:957567] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:45:968:968451] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:980:980351] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:990:990287] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:45:990:990328] Synchronization 42.
+[12:40:45:990:990331] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:45:990:990370] Synchronization 43.
+[12:40:45:990:990373] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:45:997:997810] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f584e74, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:005:005789] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:015:015370] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:026:026170] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:037:037656] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:037:037712] Synchronization 44.
+[12:40:46:037:037716] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:037:037762] Synchronization 45.
+[12:40:46:037:037766] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:049:049787] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58431c, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:060:060305] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:068:068954] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:075:075940] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:083:083285] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:083:083331] Synchronization 46.
+[12:40:46:083:083335] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:083:083373] Synchronization 47.
+[12:40:46:083:083377] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:092:092518] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f583838, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:103:103456] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:114:114566] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:126:126603] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:138:138743] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:138:138802] Synchronization 48.
+[12:40:46:138:138807] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:138:138854] Synchronization 49.
+[12:40:46:138:138860] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:151:151281] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f582dee, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:163:163718] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:175:175923] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:188:188329] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:200:200927] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:200:200986] Synchronization 50.
+[12:40:46:200:200991] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:201:201039] Synchronization 51.
+[12:40:46:201:201044] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:213:213179] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f582412, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:225:225625] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:237:237974] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:250:250153] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:260:260871] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:260:260913] Synchronization 52.
+[12:40:46:260:260916] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:260:260957] Synchronization 53.
+[12:40:46:260:260960] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:272:272510] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f581ab2, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:284:284796] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:295:295104] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:305:305989] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:317:317825] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:317:317879] Synchronization 54.
+[12:40:46:317:317884] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:317:317931] Synchronization 55.
+[12:40:46:317:317998] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:327:327529] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5811a1, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:337:337827] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:348:348878] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:361:361102] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:373:373195] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:373:373254] Synchronization 56.
+[12:40:46:373:373259] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:373:373308] Synchronization 57.
+[12:40:46:373:373313] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:385:385547] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5808f4, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:397:397922] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:410:410195] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:422:422744] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:435:435066] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:435:435121] Synchronization 58.
+[12:40:46:435:435126] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:435:435174] Synchronization 59.
+[12:40:46:435:435179] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:447:447653] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f58005a, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:460:460270] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:470:470980] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:481:481466] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:493:493207] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:493:493265] Synchronization 60.
+[12:40:46:493:493270] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:493:493318] Synchronization 61.
+[12:40:46:493:493323] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:505:505434] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57f840, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:517:517900] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:530:530598] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:541:541248] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:552:552656] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:552:552717] Synchronization 62.
+[12:40:46:552:552722] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:552:552771] Synchronization 63.
+[12:40:46:552:552776] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:564:564624] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57f04c, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:576:576688] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:588:588678] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:601:601161] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:613:613714] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:613:613784] Synchronization 64.
+[12:40:46:613:613789] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:613:613840] Synchronization 65.
+[12:40:46:613:613845] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:626:626012] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57e8af, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:638:638115] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:650:650887] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:663:663090] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:675:675574] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:675:675635] Synchronization 66.
+[12:40:46:675:675641] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:675:675691] Synchronization 67.
+[12:40:46:675:675696] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:687:687837] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57e144, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:700:700394] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:712:712437] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:725:725029] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:737:737635] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:737:737698] Synchronization 68.
+[12:40:46:737:737706] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:737:737774] Synchronization 69.
+[12:40:46:737:737784] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:750:750028] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57da05, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:762:762586] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:774:774860] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:787:787088] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:799:799289] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:799:799350] Synchronization 70.
+[12:40:46:799:799355] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:799:799405] Synchronization 71.
+[12:40:46:799:799410] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:811:811995] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57d2f8, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:824:824168] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:836:836443] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:848:848815] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:861:861266] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:861:861327] Synchronization 72.
+[12:40:46:861:861332] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:861:861415] Synchronization 73.
+[12:40:46:861:861422] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:873:873947] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57cc2b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:885:885799] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:898:898174] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:910:910902] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:922:922932] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:922:922989] Synchronization 74.
+[12:40:46:922:922994] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:923:923043] Synchronization 75.
+[12:40:46:923:923048] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:935:935264] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57c572, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:947:947802] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:46:960:960061] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:972:972406] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:984:984762] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:46:984:984820] Synchronization 76.
+[12:40:46:984:984825] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:46:984:984874] Synchronization 77.
+[12:40:46:984:984879] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:46:995:995510] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57bedd, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:003:003673] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:012:012452] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:022:022236] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:033:033830] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:033:033881] Synchronization 78.
+[12:40:47:033:033885] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:033:033929] Synchronization 79.
+[12:40:47:033:033934] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:045:045816] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57b88f, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:057:057935] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:070:070422] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:083:083145] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:095:095832] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:095:095892] Synchronization 80.
+[12:40:47:095:095897] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:095:095948] Synchronization 81.
+[12:40:47:095:095953] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:108:108367] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57b263, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:121:121209] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:131:131115] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:142:142051] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:154:154104] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:154:154162] Synchronization 82.
+[12:40:47:154:154167] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:154:154217] Synchronization 83.
+[12:40:47:154:154223] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:166:166486] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57ac4b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:181:181164] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:190:190922] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:201:201532] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:212:212884] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:212:212933] Synchronization 84.
+[12:40:47:212:212938] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:212:212982] Synchronization 85.
+[12:40:47:212:212986] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:224:224913] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57a656, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:237:237213] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:249:249600] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:261:261620] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:274:274513] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:274:274584] Synchronization 86.
+[12:40:47:274:274589] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:274:274641] Synchronization 87.
+[12:40:47:274:274646] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:287:287160] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57a077, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:299:299522] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:312:312438] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:323:323016] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:334:334424] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:334:334494] Synchronization 88.
+[12:40:47:334:334499] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:334:334549] Synchronization 89.
+[12:40:47:334:334553] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:345:345200] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f579ace, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:357:357371] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:369:369582] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:381:381502] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:393:393772] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:393:393831] Synchronization 90.
+[12:40:47:393:393836] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:393:393921] Synchronization 91.
+[12:40:47:393:393932] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:406:406910] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57952a, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:419:419734] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:432:432241] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:445:445287] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:458:458125] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:458:458192] Synchronization 92.
+[12:40:47:458:458197] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:458:458247] Synchronization 93.
+[12:40:47:458:458251] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:468:468583] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f578fb0, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:479:479962] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:492:492334] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:504:504447] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:517:517194] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:517:517261] Synchronization 94.
+[12:40:47:517:517266] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:517:517339] Synchronization 95.
+[12:40:47:517:517345] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:526:526955] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f578a30, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:532:532355] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:537:537803] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:543:543074] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:548:548221] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:548:548260] Synchronization 96.
+[12:40:47:548:548262] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:548:548291] Synchronization 97.
+[12:40:47:548:548293] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:553:553457] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5784e3, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:558:558891] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:564:564682] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:569:569582] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:574:574865] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:574:574901] Synchronization 98.
+[12:40:47:574:574903] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:574:574933] Synchronization 99.
+[12:40:47:574:574935] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:579:579991] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f577fa1, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:585:585215] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:590:590835] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:597:597422] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:604:604656] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:604:604688] Synchronization 100.
+[12:40:47:604:604690] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:604:604721] Synchronization 101.
+[12:40:47:604:604724] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:613:613056] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f577a9b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:620:620126] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:627:627174] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:635:635234] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:644:644149] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:644:644187] Synchronization 102.
+[12:40:47:644:644190] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:644:644228] Synchronization 103.
+[12:40:47:644:644231] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:654:654594] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f577589, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:667:667180] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:677:677809] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:689:689277] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:701:701383] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:701:701443] Synchronization 104.
+[12:40:47:701:701449] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:701:701500] Synchronization 105.
+[12:40:47:701:701505] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:714:714090] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f577098, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:725:725580] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:737:737726] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:748:748269] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:759:759995] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:760:760055] Synchronization 106.
+[12:40:47:760:760060] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:760:760111] Synchronization 107.
+[12:40:47:760:760116] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:772:772343] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f576bb1, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:784:784794] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:797:797073] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:809:809515] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:821:821632] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:821:821690] Synchronization 108.
+[12:40:47:821:821695] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:821:821789] Synchronization 109.
+[12:40:47:821:821797] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:832:832543] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5766ed, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:844:844216] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:853:853763] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:861:861064] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:867:867426] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:867:867471] Synchronization 110.
+[12:40:47:867:867474] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:867:867509] Synchronization 111.
+[12:40:47:867:867512] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:874:874582] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f576222, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:884:884174] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:893:893966] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:901:901596] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:907:907070] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:907:907111] Synchronization 112.
+[12:40:47:907:907113] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:907:907144] Synchronization 113.
+[12:40:47:907:907146] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:912:912774] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f575d70, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:918:918684] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:925:925090] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:931:931200] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:937:937246] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:937:937300] Synchronization 114.
+[12:40:47:937:937303] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:937:937353] Synchronization 115.
+[12:40:47:937:937356] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:944:944025] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5758cf, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:951:951327] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:957:957970] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:963:963528] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:970:970176] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:970:970220] Synchronization 116.
+[12:40:47:970:970222] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:47:970:970256] Synchronization 117.
+[12:40:47:970:970259] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:47:977:977013] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f575442, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:983:983860] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:47:989:989675] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:47:996:996701] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:004:004029] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:004:004073] Synchronization 118.
+[12:40:48:004:004075] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:004:004108] Synchronization 119.
+[12:40:48:004:004110] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:010:010531] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f574fdc, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:017:017019] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:023:023501] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:029:029525] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:035:035368] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:035:035408] Synchronization 120.
+[12:40:48:035:035410] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:035:035442] Synchronization 121.
+[12:40:48:035:035443] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:041:041300] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f574b68, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:047:047276] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:052:052856] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:058:058618] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:064:064442] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:064:064503] Synchronization 122.
+[12:40:48:064:064508] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:064:064551] Synchronization 123.
+[12:40:48:064:064555] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:070:070439] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57470c, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:076:076110] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:082:082441] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:088:088517] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:094:094211] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:094:094249] Synchronization 124.
+[12:40:48:094:094251] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:094:094281] Synchronization 125.
+[12:40:48:094:094282] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:099:099798] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5742b9, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:105:105230] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:110:110865] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:117:117044] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:123:123434] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:123:123478] Synchronization 126.
+[12:40:48:123:123480] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:123:123535] Synchronization 127.
+[12:40:48:123:123538] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:130:130048] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f573e65, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:136:136937] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:143:143297] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:148:148920] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:154:154496] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:154:154536] Synchronization 128.
+[12:40:48:154:154538] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:154:154570] Synchronization 129.
+[12:40:48:154:154572] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:160:160418] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f573a21, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:166:166521] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:173:173155] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:179:179595] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:186:186552] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:186:186593] Synchronization 130.
+[12:40:48:186:186599] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:186:186632] Synchronization 131.
+[12:40:48:186:186635] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:194:194059] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f573606, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:201:201848] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:211:211546] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:221:221257] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:231:231987] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:232:232052] Synchronization 132.
+[12:40:48:232:232057] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:232:232105] Synchronization 133.
+[12:40:48:232:232110] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:243:243464] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5731d5, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:255:255808] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:266:266627] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:279:279243] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:291:291675] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:291:291735] Synchronization 134.
+[12:40:48:291:291740] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:291:291789] Synchronization 135.
+[12:40:48:291:291793] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:304:304351] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f572dc8, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:316:316567] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:328:328960] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:341:341101] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:353:353068] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:353:353127] Synchronization 136.
+[12:40:48:353:353132] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:353:353182] Synchronization 137.
+[12:40:48:353:353188] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:365:365728] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57299b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:378:378210] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:390:390389] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:402:402801] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:415:415105] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:415:415162] Synchronization 138.
+[12:40:48:415:415167] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:415:415217] Synchronization 139.
+[12:40:48:415:415222] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:427:427520] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5725a1, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:439:439786] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:452:452007] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:464:464353] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:476:476600] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:476:476659] Synchronization 140.
+[12:40:48:476:476664] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:476:476713] Synchronization 141.
+[12:40:48:476:476718] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:489:489178] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5721b0, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:501:501754] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:513:513895] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:526:526457] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:537:537116] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:537:537159] Synchronization 142.
+[12:40:48:537:537162] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:537:537202] Synchronization 143.
+[12:40:48:537:537205] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:549:549497] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f571db8, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:561:561745] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:574:574302] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:586:586286] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:598:598368] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:598:598427] Synchronization 144.
+[12:40:48:598:598464] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:598:598516] Synchronization 145.
+[12:40:48:598:598521] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:609:609150] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f5719dd, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:621:621427] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:633:633826] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:644:644407] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:655:655791] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:655:655845] Synchronization 146.
+[12:40:48:655:655850] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:655:655897] Synchronization 147.
+[12:40:48:655:655902] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:668:668183] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f571619, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:680:680368] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:692:692901] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:705:705048] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:717:717587] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:717:717643] Synchronization 148.
+[12:40:48:717:717648] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:717:717696] Synchronization 149.
+[12:40:48:717:717706] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:729:729988] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f571248, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:740:740972] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:752:752857] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:765:765185] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:777:777579] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:777:777638] Synchronization 150.
+[12:40:48:777:777643] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:777:777692] Synchronization 151.
+[12:40:48:777:777697] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:790:790464] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f570e86, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:802:802649] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:815:815049] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:827:827411] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:841:841338] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:841:841418] Synchronization 152.
+[12:40:48:841:841427] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:841:841487] Synchronization 153.
+[12:40:48:841:841495] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:852:852188] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f570ace, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:860:860864] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:867:867596] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:873:873366] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:879:879369] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:879:879412] Synchronization 154.
+[12:40:48:879:879414] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:879:879445] Synchronization 155.
+[12:40:48:879:879447] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:885:885498] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57072b, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:892:892856] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:900:900034] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:906:906458] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:912:912936] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:912:912981] Synchronization 156.
+[12:40:48:912:912984] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:913:913020] Synchronization 157.
+[12:40:48:913:913023] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:919:919627] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f57039a, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:926:926546] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:933:933891] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:939:939244] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:944:944450] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:944:944490] Synchronization 158.
+[12:40:48:944:944492] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:944:944523] Synchronization 159.
+[12:40:48:944:944525] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:949:949584] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56fff0, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:955:955752] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:961:961702] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:968:968769] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:976:976472] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:48:976:976517] Synchronization 160.
+[12:40:48:976:976520] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:48:976:976560] Synchronization 161.
+[12:40:48:976:976564] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:48:985:985707] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56fc76, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:993:993103] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:48:999:999430] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:005:005316] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:012:012289] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:012:012380] Synchronization 162.
+[12:40:49:012:012385] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:012:012427] Synchronization 163.
+[12:40:49:012:012430] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:019:019997] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56f8e3, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:025:025912] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:031:031887] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:037:037710] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:043:043385] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:043:043426] Synchronization 164.
+[12:40:49:043:043428] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:043:043459] Synchronization 165.
+[12:40:49:043:043461] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:049:049064] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56f569, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:054:054896] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:060:060615] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:066:066294] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:072:072096] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:072:072142] Synchronization 166.
+[12:40:49:072:072144] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:072:072176] Synchronization 167.
+[12:40:49:072:072178] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:078:078683] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56f1fa, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:084:084582] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:089:089989] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:096:096063] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:101:101704] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:101:101749] Synchronization 168.
+[12:40:49:101:101751] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:101:101784] Synchronization 169.
+[12:40:49:101:101786] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:107:107257] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56ee73, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:112:112498] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:118:118359] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:123:123828] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:129:129638] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:129:129684] Synchronization 170.
+[12:40:49:129:129687] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:129:129721] Synchronization 171.
+[12:40:49:129:129723] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:135:135495] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56eafe, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:141:141204] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:146:146903] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:152:152531] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:157:157976] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:158:158020] Synchronization 172.
+[12:40:49:158:158022] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:158:158054] Synchronization 173.
+[12:40:49:158:158056] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:163:163409] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56e79d, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:168:168677] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:173:173705] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:178:178588] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:183:183419] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:183:183443] Synchronization 174.
+[12:40:49:183:183445] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:183:183473] Synchronization 175.
+[12:40:49:183:183475] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:188:188349] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56e43a, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:193:193106] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:198:198063] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:202:202639] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:207:207529] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:207:207555] Synchronization 176.
+[12:40:49:207:207556] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:207:207584] Synchronization 177.
+[12:40:49:207:207586] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:212:212706] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56e0e7, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:217:217870] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:224:224899] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:234:234872] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:245:245487] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:245:245542] Synchronization 178.
+[12:40:49:245:245546] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:245:245590] Synchronization 179.
+[12:40:49:245:245595] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:257:257655] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56dd88, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:269:269537] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:281:281549] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:293:293834] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:306:306020] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:306:306112] Synchronization 180.
+[12:40:49:306:306118] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:306:306170] Synchronization 181.
+[12:40:49:306:306175] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:318:318129] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56da49, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:329:329306] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:341:341590] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:351:351984] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:363:363484] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:363:363545] Synchronization 182.
+[12:40:49:363:363550] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:363:363600] Synchronization 183.
+[12:40:49:363:363605] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:375:375786] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56d701, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:388:388058] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:400:400677] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:412:412761] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:423:423700] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:423:423745] Synchronization 184.
+[12:40:49:423:423749] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:423:423792] Synchronization 185.
+[12:40:49:423:423796] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:435:435824] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56d3cf, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:446:446958] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:456:456169] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:466:466244] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:477:477672] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:477:477731] Synchronization 186.
+[12:40:49:477:477736] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:477:477784] Synchronization 187.
+[12:40:49:477:477789] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:490:490271] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56d098, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:502:502727] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:515:515123] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:527:527772] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:540:540037] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:540:540090] Synchronization 188.
+[12:40:49:540:540095] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:540:540142] Synchronization 189.
+[12:40:49:540:540147] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:552:552146] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56cd76, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:562:562831] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:572:572758] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:584:584333] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:594:594200] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:594:594251] Synchronization 190.
+[12:40:49:594:594255] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:594:594296] Synchronization 191.
+[12:40:49:594:594300] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:605:605475] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56ca32, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:617:617451] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:629:629305] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:638:638787] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:651:651441] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:651:651508] Synchronization 192.
+[12:40:49:651:651513] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:651:651566] Synchronization 193.
+[12:40:49:651:651572] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:661:661844] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56c700, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:673:673104] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:684:684927] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:697:697792] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:710:710992] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:711:711058] Synchronization 194.
+[12:40:49:711:711063] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:711:711115] Synchronization 195.
+[12:40:49:711:711120] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:723:723408] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56c3e9, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:736:736011] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:748:748482] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:761:761778] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:774:774470] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:774:774530] Synchronization 196.
+[12:40:49:774:774535] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:774:774583] Synchronization 197.
+[12:40:49:774:774588] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:787:787236] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56c0cd, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:799:799696] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:811:811121] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:823:823361] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:835:835816] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:835:835919] Synchronization 198.
+[12:40:49:835:835928] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:835:835978] Synchronization 199.
+[12:40:49:835:835983] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:848:848175] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56bdc0, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:860:860876] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:871:871594] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:882:882951] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:893:893070] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:893:893117] Synchronization 200.
+[12:40:49:893:893120] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:893:893159] Synchronization 201.
+[12:40:49:893:893162] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:904:904785] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56baae, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:917:917005] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:928:928473] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:941:941260] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:953:953901] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:49:953:953960] Synchronization 202.
+[12:40:49:953:953965] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:49:954:954031] Synchronization 203.
+[12:40:49:954:954037] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:49:966:966776] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56b7a1, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:979:979357] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:49:992:992054] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:004:004523] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:016:016922] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:016:016989] Synchronization 204.
+[12:40:50:016:016995] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:50:017:017050] Synchronization 205.
+[12:40:50:017:017055] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:50:029:029520] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56b495, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:041:041712] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:053:053972] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:064:064310] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:076:076146] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:076:076212] Synchronization 206.
+[12:40:50:076:076217] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:50:076:076272] Synchronization 207.
+[12:40:50:076:076277] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:50:087:087207] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56b18a, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:097:097559] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:109:109121] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:120:120852] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:133:133820] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:133:133902] Synchronization 208.
+[12:40:50:133:133911] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:50:133:133993] Synchronization 209.
+[12:40:50:134:134002] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:50:146:146388] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56ae9f, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:158:158833] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:169:169587] cudaLaunchKernel( name{prepare(long, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:178:178044] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x10003821c, 0xf56e2a0000000001, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:187:187570] cudaLaunchKernel( name{reduce(long, int, int, float*, float*)}grid{1,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x200000001c2, 0xf56e2a0000000200, 0x7f59f56e2a00, 0x7f59f5800000}  )
+
+[12:40:50:187:187625] Synchronization 210.
+[12:40:50:187:187630] cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x7ffe585a0900) <- D6(0x7f59f56e2a00), 4 bytes)
+
+[12:40:50:187:187678] Synchronization 211.
+[12:40:50:187:187683] cudaMemcpy(cudaMemcpyDeviceToHost, H6(0x7ffe585a0904) <- D7(0x7f59f5800000), 4 bytes)
+
+[12:40:50:198:198945] cudaLaunchKernel( name{srad(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x1ca3f56aba6, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:211:211242] cudaLaunchKernel( name{srad2(float, int, int, long, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3f000000, 0x3f000000000001f6, 0x1f6000001ca, 0x3821c, 0x7f59f56e0a00, 0x7f59f56e1200, 0x7f59f56e1a00, 0x7f59f56e2200, 0x7f59f58e0a00, 0x7f59f5a00000, 0x7f59f5ae0a00, 0x7f59f5c00000, 0x7f59f5ce0a00, 0x7f59f5600000}  )
+
+[12:40:50:223:223770] cudaLaunchKernel( name{compress(long, float*)}grid{450,1,1},block{512,1,1} sharedMem {0} stream {0} args {0x3821c, 0x7f59f5600000}  )
+
+[12:40:50:223:223869] Synchronization 212.
+[12:40:50:223:223878] cudaMemcpy(cudaMemcpyDeviceToHost, H4(0x7f5a1a31f010) <- D5(0x7f59f5600000), e0870 bytes)
+
+[12:40:50:244:244268] Synchronization 213.
+[12:40:50:244:244291] cudaFree ( devPtr:{0x7f59f5600000} )
+
+[12:40:50:244:244329] Synchronization 214.
+[12:40:50:244:244332] cudaFree ( devPtr:{0x7f59f5ce0a00} )
+
+[12:40:50:244:244338] Synchronization 215.
+[12:40:50:244:244340] cudaFree ( devPtr:{0x7f59f56e0a00} )
+
+[12:40:50:244:244344] Synchronization 216.
+[12:40:50:244:244347] cudaFree ( devPtr:{0x7f59f56e1200} )
+
+[12:40:50:244:244351] Synchronization 217.
+[12:40:50:244:244353] cudaFree ( devPtr:{0x7f59f56e1a00} )
+
+[12:40:50:244:244357] Synchronization 218.
+[12:40:50:244:244360] cudaFree ( devPtr:{0x7f59f56e2200} )
+
+[12:40:50:244:244363] Synchronization 219.
+[12:40:50:244:244365] cudaFree ( devPtr:{0x7f59f58e0a00} )
+
+[12:40:50:244:244370] Synchronization 220.
+[12:40:50:244:244372] cudaFree ( devPtr:{0x7f59f5a00000} )
+
+[12:40:50:244:244376] Synchronization 221.
+[12:40:50:244:244378] cudaFree ( devPtr:{0x7f59f5c00000} )
+
+[12:40:50:244:244512] Synchronization 222.
+[12:40:50:244:244515] cudaFree ( devPtr:{0x7f59f5ae0a00} )
+
+[12:40:50:244:244563] Synchronization 223.
+[12:40:50:244:244566] cudaFree ( devPtr:{0x7f59f56e2a00} )
+
+[12:40:50:244:244610] Synchronization 224.
+[12:40:50:244:244612] cudaFree ( devPtr:{0x7f59f5800000} )
+

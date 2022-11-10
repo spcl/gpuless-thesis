@@ -1,0 +1,40 @@
+[23:30:44:926:926885] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:46:112:112985] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:46:113:113033] cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f75ef600000) <- H0(0x7f76178ff010), 100000 bytes)
+
+[23:30:46:113:113128] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:46:113:113237] cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f75ef800000) <- H1(0x7f76174ff010), 100000 bytes)
+
+[23:30:46:119:119547] cudaLaunchKernel( name{calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)}grid{43,43,1},block{16,16,1} sharedMem {0} stream {0} args {}  )
+
+[23:30:46:119:119581] cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x7f76154ff010) <- D3(0x7f75ef700000), 100000 bytes)
+
+[23:30:46:155:155454] cudaFree ( devPtr:{0x7f75ef800000} )
+
+[23:30:46:155:155621] cudaFree ( devPtr:{0x7f75ef600000} )
+
+[23:30:46:155:155628] cudaFree ( devPtr:{0x7f75ef700000} )
+
+[23:30:56:222:222771] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:56:272:272516] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:56:272:272564] cudaMemcpy(cudaMemcpyHostToDevice) D1(0x7f6021600000) <- H0(0x7f6048eff010), 100000 bytes)
+
+[23:30:56:272:272658] cudaMalloc(D0 (0), 100000 bytes)
+
+[23:30:56:272:272765] cudaMemcpy(cudaMemcpyHostToDevice) D2(0x7f6021800000) <- H1(0x7f6046eff010), 100000 bytes)
+
+[23:30:56:287:287484] cudaLaunchKernel( name{calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)}grid{43,43,1},block{16,16,1} sharedMem {0} stream {0} args {0x2, 0x7f6021800000, 0x7f6021600000, 0x7f6021700000, 0x200000200, 0x2170000000000200, 0x2, 0x2, 0x20034e56044, 0x34e5604441200000, 0x4120000041200000, 0x4120000045a00000, 0x45a00000341c965d, 0x341c965d3a83126f}  )
+
+[23:30:56:287:287517] cudaMemcpy(cudaMemcpyDeviceToHost, H2(0x7f6046dfe010) <- D3(0x7f6021700000), 100000 bytes)
+
+[23:30:56:325:325936] cudaFree ( devPtr:{0x7f6021800000} )
+
+[23:30:56:326:326133] cudaFree ( devPtr:{0x7f6021600000} )
+
+[23:30:56:326:326141] cudaFree ( devPtr:{0x7f6021700000} )
+

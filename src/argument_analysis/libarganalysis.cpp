@@ -165,6 +165,15 @@ CubinAnalyzer &getAnalyzer() {
     return analyzer;
 }
 
+static int syncs = 0;
+
+#define SYNCHRONIZE()                                                          \
+    do {                                                                       \
+        std::stringstream syncstream;                                          \
+        syncstream << "Synchronization " << syncs++ << ".";                    \
+        SPDLOG_LOGGER_INFO(get_logger(), syncstream.str());                    \
+    } while (0)
+
 // Make a FOREACH macro
 #define FE_0(WHAT)
 #define FE_1(WHAT, X) WHAT(X)
@@ -246,7 +255,6 @@ extern "C" CUresult CUDAAPI cuLaunchKernel(
         auto demangled_symbol = exec(cmd.c_str());
         ss << string_rstrip(demangled_symbol);
         std::vector<KParamInfo> params;
-
 
         // grid/block configuaration
         ss << "grid(";
@@ -331,7 +339,7 @@ cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim,
         // kernel symbol name
         std::string cmd = "echo " + kernel_symbol + "| c++filt";
         auto demangled_symbol = exec(cmd.c_str());
-        ss << "name{" <<string_rstrip(demangled_symbol) << "}";
+        ss << "name{" << string_rstrip(demangled_symbol) << "}";
 
         // grid/block configuaration
         ss << "grid{";
@@ -384,6 +392,7 @@ cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src, size_t count,
            << " <- " << addrToIdentDevice((void *)src) << "(" << std::hex << src
            << ")"
            << ", " << count << " bytes)";
+        SYNCHRONIZE();
     } else if (kind == cudaMemcpyKind::cudaMemcpyHostToDevice) {
         kind_str = "cudaMemcpyHostToDevice";
         ss << "cudaMemcpy(" << kind_str << ") ";
@@ -412,20 +421,20 @@ cudaError_t cudaMalloc(void **devPtr, size_t size) {
     static auto real_func = (T)real_dlsym(RTLD_NEXT, __func__);
     std::stringstream ss;
     ss << "cudaMalloc(" << addrToIdentDevice(*devPtr) << " (" << std::hex
-              << *devPtr << "), " << size << " bytes)" << std::endl;
+       << *devPtr << "), " << size << " bytes)" << std::endl;
+    SYNCHRONIZE();
     SPDLOG_LOGGER_INFO(get_logger(), ss.str());
     return real_func(devPtr, size);
 }
 
-cudaError_t cudaMallocAsync(void **devPtr, size_t size,
-                                                 cudaStream_t hStream) {
+cudaError_t cudaMallocAsync(void **devPtr, size_t size, cudaStream_t hStream) {
     using T = cudaError_t (*)(void **, size_t, cudaStream_t);
     static auto real_func = (T)real_dlsym(RTLD_NEXT, __func__);
 
-    std::stringstream  ss;
-    ss << "cudaMallocAsync(" << addrToIdentDevice(*devPtr) << " ("
-              << std::hex << *devPtr << "), " << size << " bytes"
-              << ", stream " << ((uint64_t)hStream) << ")" << std::endl;
+    std::stringstream ss;
+    ss << "cudaMallocAsync(" << addrToIdentDevice(*devPtr) << " (" << std::hex
+       << *devPtr << "), " << size << " bytes"
+       << ", stream " << ((uint64_t)hStream) << ")" << std::endl;
     SPDLOG_LOGGER_INFO(get_logger(), ss.str());
     return real_func(devPtr, size, hStream);
 }
@@ -444,6 +453,7 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
            << " <- " << addrToIdentDevice((void *)src) << "(" << std::hex << src
            << ")"
            << ", " << count << " bytes)";
+        SYNCHRONIZE();
     } else if (kind == cudaMemcpyKind::cudaMemcpyHostToDevice) {
         kind_str = "cudaMemcpyHostToDevice";
         ss << "cudaMemcpyAsync(" << kind_str << ") ";
@@ -464,7 +474,10 @@ cudaError_t cudaMemcpyAsync(void *dst, const void *src, size_t count,
     return real_func(dst, src, count, kind, stream);
 }
 
-cudaError_t cudaFree(void *devPtr) { return TRACE_FUNC(cudaFree, devPtr); }
+cudaError_t cudaFree(void *devPtr) {
+    SYNCHRONIZE();
+    return TRACE_FUNC(cudaFree, devPtr);
+}
 
 cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
     return TRACE_FUNC(cudaStreamSynchronize, stream);
@@ -479,6 +492,7 @@ cudaError_t cudaDeviceSynchronize(void) {
 }
 
 cudaError_t cudaGetDeviceProperties(cudaDeviceProp *prop, int device) {
+    SYNCHRONIZE();
     return TRACE_FUNC(cudaGetDeviceProperties, prop, device);
 }
 
@@ -488,6 +502,7 @@ cudaError_t cudaDeviceGetAttribute(int *value, cudaDeviceAttr attr,
 }
 
 cudaError_t cudaFuncGetAttributes(cudaFuncAttributes *attr, const void *func) {
+    SYNCHRONIZE();
     return TRACE_FUNC(cudaFuncGetAttributes, attr, func);
 }
 
@@ -499,6 +514,7 @@ cudaError_t cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(
 }
 
 CUresult cuDevicePrimaryCtxRelease(CUdevice dev) {
+    SYNCHRONIZE();
     return TRACE_FUNC(cuDevicePrimaryCtxRelease, dev);
 }
 
@@ -560,9 +576,15 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
     const cudnnConvolutionDescriptor_t convDesc,
     const cudnnTensorDescriptor_t yDesc, const int requestedAlgoCount,
     int *returnedAlgoCount, cudnnConvolutionFwdAlgoPerf_t *perfResults) {
-    return TRACE_FUNC(cudnnGetConvolutionForwardAlgorithm_v7, handle, xDesc,
+    SYNCHRONIZE();
+    auto err = TRACE_FUNC(cudnnGetConvolutionForwardAlgorithm_v7, handle, xDesc,
                       wDesc, convDesc, yDesc, requestedAlgoCount,
                       returnedAlgoCount, perfResults);
+    std::stringstream argstream;
+    argstream << "Number of algs: " << *returnedAlgoCount << ".";
+    argstream << " First alg: "  << perfResults[0].algo << ".";
+    SPDLOG_LOGGER_INFO(get_logger(), argstream.str());
+    return err;
 }
 
 cudnnStatus_t
@@ -597,9 +619,15 @@ cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(
     const cudnnConvolutionDescriptor_t convDesc,
     const cudnnTensorDescriptor_t dxDesc, const int requestedAlgoCount,
     int *returnedAlgoCount, cudnnConvolutionBwdDataAlgoPerf_t *perfResults) {
-    return TRACE_FUNC(cudnnGetConvolutionBackwardDataAlgorithm_v7, handle,
+    SYNCHRONIZE();
+    auto err = TRACE_FUNC(cudnnGetConvolutionBackwardDataAlgorithm_v7, handle,
                       wDesc, dyDesc, convDesc, dxDesc, requestedAlgoCount,
                       returnedAlgoCount, perfResults);
+    std::stringstream argstream;
+    argstream << "Number of algs: " << *returnedAlgoCount << ".";
+    argstream << " First alg: "  << perfResults[0].algo << ".";
+    SPDLOG_LOGGER_INFO(get_logger(), argstream.str());
+    return err;
 }
 
 cudnnStatus_t cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
@@ -608,6 +636,7 @@ cudnnStatus_t cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize(
     const cudnnTensorDescriptor_t yDesc,
     const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc,
     const cudnnActivationDescriptor_t activationDesc, size_t *sizeInBytes) {
+    SYNCHRONIZE();
     return TRACE_FUNC(cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize,
                       handle, mode, bnOps, xDesc, zDesc, yDesc,
                       bnScaleBiasMeanVarDesc, activationDesc, sizeInBytes);
