@@ -2,6 +2,15 @@ build
 bin
 kernels/build
 tags
-compile_commands.json
+compile_commands.
+debug
 .gdb_history
 cmake-build-debug
+*.sql
+/compile_commands.old.json
+/benchmarks/vgg19/analysis/filter.log
+/benchmarks/vgg19/analysis/filter2.log
+/analysis/libanalysis.so
+/benchmarks/vgg19/analysis/local.log
+/benchmarks/vgg19/vgcore.2905
+/compile_commands.json

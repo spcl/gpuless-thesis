@@ -2,3 +2,4 @@
 192.bmp.dwt.*
 rgb.bmp.dwt.*
 dwt2d
+/dwt_cuda/fdwt53.cu.1.sm_80.ptx
