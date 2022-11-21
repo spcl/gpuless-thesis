@@ -29,13 +29,6 @@ const int minor_compute_version = 6;
 
 static double acc_time = 0.0;
 
-extern "C" {
-void *__libc_dlsym(void *map, const char *name);
-}
-extern "C" {
-void *__libc_dlopen_mode(const char *name, int mode);
-}
-
 // execute a command in a shell
 static std::string exec(const char *cmd) {
     std::array<char, 128> buffer{};
@@ -50,9 +43,8 @@ static std::string exec(const char *cmd) {
     return result;
 }
 
-static void *real_dlsym(void *handle, const char *symbol) {
-    static auto internal_dlsym = (decltype(&dlsym))__libc_dlsym(
-        __libc_dlopen_mode("libdl.so.2", RTLD_LAZY), "dlsym");
+void *real_dlsym(void *handle, const char *symbol) {
+    static auto internal_dlsym = (decltype(&dlsym))dlvsym(RTLD_NEXT, "dlsym", "GLIBC_2.34");
     return (*internal_dlsym)(handle, symbol);
 }
 
@@ -230,17 +222,17 @@ extern "C" cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src,
     ss << " [time: " << d << " ms, acc_time: " << acc_time << " ms]"
        << std::endl;
 
-    if (kind == cudaMemcpyKind::cudaMemcpyDeviceToHost) {
-        size_t nbytes = std::min(count, 16UL);
-        auto *dst_byte_ptr = static_cast<uint8_t *>(dst);
-
-        ss << "D2H memory probe: ";
-        for (size_t i = 0; i < nbytes; i++) {
-            ss << std::hex << std::setfill('0') << std::setw(2)
-               << (int)dst_byte_ptr[i] << " ";
-        }
-        ss << std::endl;
-    }
+//    if (kind == cudaMemcpyKind::cudaMemcpyDeviceToHost) {
+//        size_t nbytes = std::min(count, 16UL);
+//        auto *dst_byte_ptr = static_cast<uint8_t *>(dst);
+//
+//        ss << "D2H memory probe: ";
+//        for (size_t i = 0; i < nbytes; i++) {
+//            ss << std::hex << std::setfill('0') << std::setw(2)
+//               << (int)dst_byte_ptr[i] << " ";
+//        }
+//        ss << std::endl;
+//    }
 
     std::cerr << ss.str() << std::endl;
 

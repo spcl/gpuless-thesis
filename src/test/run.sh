@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-lib='/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/build/libgpuless.so'
+lib='/home/paul/ETH/HS22/DPHPC/gpuless/src/cmake-build-debug/libgpuless.so'
 
 basic_targets=(
     unit/simple
@@ -9,8 +9,8 @@ basic_targets=(
     unit/manymodule
 )
 
-exec_type=local
-log_level=info
+exec_type=tcp
+log_level=debug
 unit_only=no
 
 if [[ $2 == "debug" ]]; then
@@ -28,6 +28,7 @@ fi
 
 run_unit() {
     cuda_bin="$1"
+    printf "cuda_bin: ${cuda_bin}\n"
     target="$2"
     printf "running: ${target}\n\n"
     SPDLOG_LEVEL=${log_level} EXECUTOR_TYPE=${exec_type} CUDA_BINARY=./${cuda_bin} LD_PRELOAD=${lib} ./${target}
