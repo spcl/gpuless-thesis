@@ -72,8 +72,7 @@ table FBCudnnGetConvolutionForwardAlgorithmV7 {
     virtual_fd:uint64;
     virtual_cd:uint64;
     requested_algo_count:int;
-    returned_algo_count:int;
-    perf_results:[FBCudnnConvolutionFwdAlgoPerf];
+    virtual_alg_vec:[FBCudnnConvolutionFwdAlgoPerf];
 }
 
 table FBCudnnConvolutionForward {
@@ -154,8 +153,7 @@ table FBCudnnGetConvolutionBackwardDataAlgorithmV7 {
     virtual_cd_convdesc:uint64;
     virtual_td_dxdesc:uint64;
     requested_algo_count:int;
-    returned_algo_count:int;
-    perf_results:[FBCudnnConvolutionBwdDataAlgoPerf];
+    virtual_alg_vec:[FBCudnnConvolutionBwdDataAlgoPerf];
 }
 
 table FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize {

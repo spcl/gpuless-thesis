@@ -26,6 +26,19 @@ static uint64_t nextCudnnConvolutionDescriptor() {
     return next++;
 }
 
+static cudnnConvolutionBwdDataAlgo_t
+nextCudnnConvolutionBackwardDataAlgorithmHandle() {
+    static int next = CUDNN_CONV_BWD_DAT_ALG_PREF;
+    return static_cast<cudnnConvolutionBwdDataAlgo_t>(
+        next++); // UB, but needed for virtualization
+}
+
+static cudnnConvolutionFwdAlgo_t nextCudnnConvolutionForwardAlgorithmHandle() {
+    static int next = CUDNN_CONV_FWD_ALG_PREF;
+    return static_cast<cudnnConvolutionFwdAlgo_t>(
+        next++); // UB, but needed for virtualization
+}
+
 static std::vector<size_t> &getTensorDescriptorToSize() {
     static std::vector<size_t> virtual_cd_to_size;
     return virtual_cd_to_size;
@@ -166,20 +179,41 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
     const cudnnTensorDescriptor_t yDesc, const int requestedAlgoCount,
     int *returnedAlgoCount, cudnnConvolutionFwdAlgoPerf_t *perfResults) {
     HIJACK_FN_PROLOGUE();
+
+    std::vector<cudnnConvolutionFwdAlgoPerf_t> virtual_alg_vec(
+        CUDNN_CONV_FWD_VIRT_ALG_CNT);
+    for (unsigned i = 0; i < virtual_alg_vec.size(); ++i) {
+        cudnnConvolutionFwdAlgoPerf_t virtual_alg{
+            .algo = nextCudnnConvolutionForwardAlgorithmHandle(),
+            .status = CUDNN_STATUS_SUCCESS,
+            .time = 0,
+            .memory = virtual_alg_vec.size() - i, // Inplace
+            .determinism = CUDNN_DETERMINISTIC, // limits to letting the client
+                                                  // believe alg is heuristic
+            .mathType =
+                CUDNN_DEFAULT_MATH, // TODO Change math mode in native exec.
+        };
+        virtual_alg.reserved[0] = 0;
+        virtual_alg.reserved[1] = 1;
+        virtual_alg.reserved[2] = 2;
+        virtual_alg_vec[i] = virtual_alg;
+    }
+
     getCudaTrace().record(
         std::make_shared<gpuless::CudnnGetConvolutionForwardAlgorithmV7>(
             reinterpret_cast<uint64_t>(handle),
             reinterpret_cast<uint64_t>(xDesc),
             reinterpret_cast<uint64_t>(yDesc),
             reinterpret_cast<uint64_t>(wDesc),
-            reinterpret_cast<uint64_t>(convDesc), requestedAlgoCount));
-    getTraceExecutor()->synchronize(getCudaTrace());
-    auto top = std::static_pointer_cast<
-        gpuless::CudnnGetConvolutionForwardAlgorithmV7>(
-        getCudaTrace().historyTop());
-    *returnedAlgoCount = top->returned_algo_count;
-    std::memcpy(perfResults, top->perf_results.data(),
-                top->returned_algo_count *
+            reinterpret_cast<uint64_t>(convDesc), requestedAlgoCount,
+            virtual_alg_vec));
+    //getTraceExecutor()->synchronize(getCudaTrace());
+    //auto top = std::static_pointer_cast<
+    //    gpuless::CudnnGetConvolutionForwardAlgorithmV7>(
+    //    getCudaTrace().historyTop());
+    *returnedAlgoCount = virtual_alg_vec.size();
+    std::memcpy(perfResults, virtual_alg_vec.data(),
+                virtual_alg_vec.size() *
                     sizeof(cudnnConvolutionFwdAlgoPerf_t));
     return CUDNN_STATUS_SUCCESS;
 }
@@ -242,22 +276,41 @@ cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(
     int *returnedAlgoCount, cudnnConvolutionBwdDataAlgoPerf_t *perfResults) {
     HIJACK_FN_PROLOGUE();
 
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> virtual_alg_vec(
+        CUDNN_CONV_BWD_DAT_VIRT_ALG_CNT);
+    for (unsigned i = 0; i < virtual_alg_vec.size(); ++i) {
+        cudnnConvolutionBwdDataAlgoPerf_t virtual_alg{
+            .algo = nextCudnnConvolutionBackwardDataAlgorithmHandle(),
+            .status = CUDNN_STATUS_SUCCESS,
+            .time = 0,
+            .memory = virtual_alg_vec.size() - i, // Inplace
+            .determinism = CUDNN_DETERMINISTIC, // limits to letting the client
+                                                // believe alg is heuristic
+            .mathType =
+                CUDNN_DEFAULT_MATH, // TODO Change math mode in native exec.
+        };
+        virtual_alg.reserved[0] = 0;
+        virtual_alg.reserved[1] = 1;
+        virtual_alg.reserved[2] = 2;
+        virtual_alg_vec[i] = virtual_alg;
+    }
+
     getCudaTrace().record(
         std::make_shared<gpuless::CudnnGetConvolutionBackwardDataAlgorithmV7>(
             reinterpret_cast<uint64_t>(handle),
             reinterpret_cast<uint64_t>(wDesc),
             reinterpret_cast<uint64_t>(dyDesc),
             reinterpret_cast<uint64_t>(convDesc),
-            reinterpret_cast<uint64_t>(dxDesc), requestedAlgoCount));
+            reinterpret_cast<uint64_t>(dxDesc), requestedAlgoCount,
+            virtual_alg_vec));
 
-    getTraceExecutor()->synchronize(getCudaTrace());
-    auto top = std::static_pointer_cast<
-        gpuless::CudnnGetConvolutionBackwardDataAlgorithmV7>(
-        getCudaTrace().historyTop());
-    *returnedAlgoCount = top->returned_algo_count;
-    std::memcpy(perfResults, top->perf_results.data(),
-                top->returned_algo_count *
-                    sizeof(cudnnConvolutionFwdAlgoPerf_t));
+    // getTraceExecutor()->synchronize(getCudaTrace());
+    // auto top = std::static_pointer_cast<
+    //     gpuless::CudnnGetConvolutionBackwardDataAlgorithmV7>(
+    //     getCudaTrace().historyTop());
+    *returnedAlgoCount = virtual_alg_vec.size();
+    std::memcpy(perfResults, virtual_alg_vec.data(),
+                virtual_alg_vec.size() * sizeof(cudnnConvolutionFwdAlgoPerf_t));
 
     return CUDNN_STATUS_SUCCESS;
 }
@@ -306,8 +359,8 @@ cudnnStatus_t cudnnGetBatchNormalizationTrainingExReserveSpaceSize(
         getCudaTrace().historyTop());
     *sizeInBytes = top->size_in_bytes;
     SPDLOG_DEBUG("cudnnGetBatchNormalizationTrainingExReserveSpaceSize() "
-                  "[sizeInBytes={}]",
-                  *sizeInBytes);
+                 "[sizeInBytes={}]",
+                 *sizeInBytes);
 
     return CUDNN_STATUS_SUCCESS;
 }

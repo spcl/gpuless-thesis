@@ -6,10 +6,10 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+#include "cuda_runtime_calls_generated.h"
+#include "cudnn_calls_generated.h"
 #include "cudevice_attributes_generated.h"
 #include "cublas_calls_generated.h"
-#include "cudnn_calls_generated.h"
-#include "cuda_runtime_calls_generated.h"
 
 namespace gpuless {
 

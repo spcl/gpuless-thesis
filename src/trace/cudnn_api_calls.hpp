@@ -4,6 +4,11 @@
 #include "cuda_api_calls.hpp"
 #include <cstdint>
 
+#define CUDNN_CONV_BWD_DAT_VIRT_ALG_CNT 6
+#define CUDNN_CONV_FWD_VIRT_ALG_CNT 6
+#define CUDNN_CONV_BWD_DAT_ALG_PREF 20
+#define CUDNN_CONV_FWD_ALG_PREF 20
+
 namespace gpuless {
 
 class CudaCudnnApiCall : public AbstractCudaApiCall {
@@ -71,9 +76,9 @@ class CudnnSetTensorNdDescriptor : public CudaCudnnApiCall {
 };
 
 class CudnnCreateFilterDescriptor : public CudaCudnnApiCall {
-  public:
     uint64_t virtual_fd;
 
+  public:
     explicit CudnnCreateFilterDescriptor(uint64_t virtualFd);
     explicit CudnnCreateFilterDescriptor(const FBCudaApiCall *fb_cuda_api_call);
 
@@ -178,17 +183,15 @@ class CudnnGetConvolutionForwardAlgorithmV7 : public CudaCudnnApiCall {
     uint64_t virtual_fd;
     uint64_t virtual_cd;
     int requested_algo_count;
-
-    // outputs
-    int returned_algo_count{};
-    std::vector<cudnnConvolutionFwdAlgoPerf_t> perf_results;
+    std::vector<cudnnConvolutionFwdAlgoPerf_t> virtual_alg_vec;
 
     CudnnGetConvolutionForwardAlgorithmV7(uint64_t virtualHandle,
                                           uint64_t virtualTdXdesc,
                                           uint64_t virtualTdYdesc,
                                           uint64_t virtualFd,
                                           uint64_t virtualCd,
-                                          int requestedAlgoCount);
+                                          int requestedAlgoCount,
+                                          const std::vector<cudnnConvolutionFwdAlgoPerf_t> &virtualAlgVec);
     explicit CudnnGetConvolutionForwardAlgorithmV7(
         const FBCudaApiCall *fb_cuda_api_call);
 
@@ -344,17 +347,13 @@ class CudnnGetConvolutionBackwardDataAlgorithmV7 : public CudaCudnnApiCall {
     uint64_t virtual_cd_convdesc;
     uint64_t virtual_td_dxdesc;
     int requested_algo_count;
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> virtual_alg_vec;
 
-    // outputs
-    int returned_algo_count{};
-    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> perf_results;
-
-    CudnnGetConvolutionBackwardDataAlgorithmV7(uint64_t virtualHandle,
-                                               uint64_t virtualFdWdesc,
-                                               uint64_t virtualTdDydesc,
-                                               uint64_t virtualCdConvdesc,
-                                               uint64_t virtualTdDxdesc,
-                                               int requestedAlgoCount);
+    CudnnGetConvolutionBackwardDataAlgorithmV7(
+        uint64_t virtualHandle, uint64_t virtualFdWdesc,
+        uint64_t virtualTdDydesc, uint64_t virtualCdConvdesc,
+        uint64_t virtualTdDxdesc, int requestedAlgoCount,
+        const std::vector<cudnnConvolutionBwdDataAlgoPerf_t> &virtualAlgVec);
     explicit CudnnGetConvolutionBackwardDataAlgorithmV7(
         const FBCudaApiCall *fb_cuda_api_call);
 
@@ -449,15 +448,14 @@ class CudnnBatchNormalizationForwardTrainingEx : public CudaCudnnApiCall {
     CudnnBatchNormalizationForwardTrainingEx(
         uint64_t virtualHandle, cudnnBatchNormMode_t mode,
         cudnnBatchNormOps_t bnOps, std::vector<uint8_t> &alpha,
-        std::vector<uint8_t> &beta, uint64_t virtualTdXdesc,
-        const void *xData, uint64_t virtualTdYdesc, void *yData,
-        uint64_t virtualTdZdesc, const void *zData,
-        uint64_t virtualTdBnScaleBiasMeanVarDesc, const void *bnScaleData,
-        const void *bnBiasData, double exponentialAverageFactor,
-        void *resultRunningMeanData, void *resultRunningVarianceData,
-        double epsilon, void *saveMean, void *saveInvVariance,
-        uint64_t virtualAdActivationDesc, void *workspace,
-        size_t workspaceSizeInBytes, void *reserveSpace,
+        std::vector<uint8_t> &beta, uint64_t virtualTdXdesc, const void *xData,
+        uint64_t virtualTdYdesc, void *yData, uint64_t virtualTdZdesc,
+        const void *zData, uint64_t virtualTdBnScaleBiasMeanVarDesc,
+        const void *bnScaleData, const void *bnBiasData,
+        double exponentialAverageFactor, void *resultRunningMeanData,
+        void *resultRunningVarianceData, double epsilon, void *saveMean,
+        void *saveInvVariance, uint64_t virtualAdActivationDesc,
+        void *workspace, size_t workspaceSizeInBytes, void *reserveSpace,
         size_t reserveSpaceSizeInBytes);
     explicit CudnnBatchNormalizationForwardTrainingEx(
         const FBCudaApiCall *fb_cuda_api_call);

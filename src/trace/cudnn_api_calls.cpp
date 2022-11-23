@@ -405,41 +405,65 @@ uint64_t gpuless::CudnnGetConvolutionForwardAlgorithmV7::executeNative(
     cudnnTensorDescriptor_t td_ydesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc];
 
-    return real(handle, td_xdexc, fd, cd, td_ydesc, this->requested_algo_count,
-                &this->returned_algo_count, this->perf_results.data());
+    int request_algo_count = this->virtual_alg_vec.size();
+    int returned_algo_count;
+    std::vector<cudnnConvolutionFwdAlgoPerf_t> perf_results(request_algo_count);
+
+    auto err = real(handle, td_xdexc, fd, cd, td_ydesc, request_algo_count,
+                    &returned_algo_count, perf_results.data());
+
+    std::vector<unsigned> idx(
+        std::min(static_cast<unsigned>(this->virtual_alg_vec.size()),
+                 static_cast<unsigned>(returned_algo_count)));
+    for (unsigned i = 0; i < idx.size(); ++i) {
+        idx[i] = static_cast<int>(this->virtual_alg_vec[i].algo) -
+                 CUDNN_CONV_FWD_ALG_PREF;
+    }
+
+    unsigned max_idx = *std::max_element(idx.begin(), idx.end());
+    if (vdev.cudnn_convolution_fwd_algo_perf_virtual_to_real.size() <
+        max_idx + 1) {
+        vdev.cudnn_convolution_fwd_algo_perf_virtual_to_real.resize(
+            max_idx + 1);
+    }
+
+    for (unsigned i = 0; i < idx.size(); ++i) {
+        vdev.cudnn_convolution_fwd_algo_perf_virtual_to_real[idx[i]] =
+            perf_results[i];
+    }
+
+    return err;
 }
 
 gpuless::CudnnGetConvolutionForwardAlgorithmV7::
-    CudnnGetConvolutionForwardAlgorithmV7(uint64_t virtualHandle,
-                                          uint64_t virtualTdXdesc,
-                                          uint64_t virtualTdYdesc,
-                                          uint64_t virtualFd,
-                                          uint64_t virtualCd,
-                                          int requestedAlgoCount)
+    CudnnGetConvolutionForwardAlgorithmV7(
+        uint64_t virtualHandle, uint64_t virtualTdXdesc,
+        uint64_t virtualTdYdesc, uint64_t virtualFd, uint64_t virtualCd,
+        int requestedAlgoCount,
+        const std::vector<cudnnConvolutionFwdAlgoPerf_t> &virtualAlgVec)
     : virtual_handle(virtualHandle), virtual_td_xdesc(virtualTdXdesc),
       virtual_td_ydesc(virtualTdYdesc), virtual_fd(virtualFd),
       virtual_cd(virtualCd), requested_algo_count(requestedAlgoCount),
-      perf_results(requestedAlgoCount) {}
+      virtual_alg_vec(virtualAlgVec) {}
 
 flatbuffers::Offset<FBCudaApiCall>
 CudnnGetConvolutionForwardAlgorithmV7::fbSerialize(
     flatbuffers::FlatBufferBuilder &builder) {
     std::vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>
-        perf_results_vec;
-    for (const auto &p : this->perf_results) {
+        virtual_algs;
+    for (const auto &p : this->virtual_alg_vec) {
         std::vector<int> reserved_vec(3);
         reserved_vec[0] = p.reserved[0];
         reserved_vec[1] = p.reserved[1];
         reserved_vec[2] = p.reserved[2];
-        perf_results_vec.push_back(CreateFBCudnnConvolutionFwdAlgoPerf(
+        virtual_algs.push_back(CreateFBCudnnConvolutionFwdAlgoPerf(
             builder, p.algo, p.status, p.time, p.memory, p.determinism,
             p.mathType, builder.CreateVector(reserved_vec)));
     }
     auto api_call = CreateFBCudnnGetConvolutionForwardAlgorithmV7(
         builder, this->virtual_handle, this->virtual_td_xdesc,
         this->virtual_td_ydesc, this->virtual_fd, this->virtual_cd,
-        this->requested_algo_count, this->returned_algo_count,
-        builder.CreateVector(perf_results_vec));
+        this->requested_algo_count, builder.CreateVector(virtual_algs));
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7,
         api_call.Union());
@@ -456,9 +480,8 @@ CudnnGetConvolutionForwardAlgorithmV7::CudnnGetConvolutionForwardAlgorithmV7(
     this->virtual_fd = c->virtual_fd();
     this->virtual_cd = c->virtual_cd();
     this->requested_algo_count = c->requested_algo_count();
-    this->returned_algo_count = c->returned_algo_count();
-    this->perf_results = std::vector<cudnnConvolutionFwdAlgoPerf_t>();
-    for (const auto &p : *c->perf_results()) {
+    std::vector<cudnnConvolutionFwdAlgoPerf_t> virtual_algs;
+    for (const auto &p : *c->virtual_alg_vec()) {
         auto perf = cudnnConvolutionFwdAlgoPerf_t{};
         perf.algo = static_cast<cudnnConvolutionFwdAlgo_t>(p->algo());
         perf.status = static_cast<cudnnStatus_t>(p->status());
@@ -469,9 +492,9 @@ CudnnGetConvolutionForwardAlgorithmV7::CudnnGetConvolutionForwardAlgorithmV7(
         perf.reserved[0] = p->reserved()->Get(0);
         perf.reserved[1] = p->reserved()->Get(1);
         perf.reserved[2] = p->reserved()->Get(2);
-        this->perf_results.push_back(perf);
+        virtual_algs.push_back(perf);
     }
-    this->perf_results.resize(requested_algo_count);
+    this->virtual_alg_vec = virtual_algs;
 }
 
 /*
@@ -491,10 +514,25 @@ gpuless::CudnnConvolutionForward::executeNative(CudaVirtualDevice &vdev) {
     const cudnnTensorDescriptor_t yDesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc];
 
-    return real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
-                convDesc, this->algo, this->workspace,
-                this->workspace_size_in_bytes, this->beta.data(), yDesc,
-                this->y);
+    int alg_idx = static_cast<int>(this->algo);
+    if (alg_idx < CUDNN_CONV_FWD_ALG_PREF) {
+        return real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
+                    convDesc, this->algo, this->workspace,
+                    this->workspace_size_in_bytes, this->beta.data(), yDesc,
+                    this->y);
+    }
+    alg_idx -= CUDNN_CONV_FWD_ALG_PREF;
+
+    cudnnConvolutionFwdAlgoPerfStruct alg =
+        vdev.cudnn_convolution_fwd_algo_perf_virtual_to_real[alg_idx];
+    void* scratch = vdev.get_scratch(alg.memory);
+    auto err = real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
+                    convDesc, alg.algo, scratch,
+                    alg.memory, this->beta.data(), yDesc,
+                    this->y);
+    vdev.free_scratch();
+
+    return err;
 }
 
 gpuless::CudnnConvolutionForward::CudnnConvolutionForward(
@@ -760,19 +798,43 @@ CudnnConvolutionBackwardData::CudnnConvolutionBackwardData(
 
 uint64_t CudnnConvolutionBackwardData::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnConvolutionBackwardData);
-    return real(
+
+    int alg_idx = static_cast<int>(this->algo);
+    if (alg_idx < CUDNN_CONV_BWD_DAT_ALG_PREF) {
+        return real(
+            vdev.cudnn_handles_virtual_to_real[this->virtual_handle],
+            this->alpha.data(),
+            vdev.cudnn_filter_descriptor_virtual_to_real
+                [this->virtual_fd_wdesc],
+            this->w,
+            vdev.cudnn_tensor_descriptor_virtual_to_real
+                [this->virtual_td_dydesc],
+            dy,
+            vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
+            this->algo, this->workspace, this->workspace_size_in_bytes,
+            this->beta.data(),
+            vdev.cudnn_tensor_descriptor_virtual_to_real
+                [this->virtual_td_dxdesc],
+            this->dx);
+    }
+    alg_idx -= CUDNN_CONV_BWD_DAT_ALG_PREF;
+
+    cudnnConvolutionBwdDataAlgoPerfStruct alg =
+        vdev.cudnn_convolution_bwd_data_algo_perf_virtual_to_real[alg_idx];
+    void *scratch = vdev.get_scratch(alg.memory);
+    auto err = real(
         vdev.cudnn_handles_virtual_to_real[this->virtual_handle],
         this->alpha.data(),
         vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd_wdesc],
         this->w,
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dydesc],
         dy, vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
-        this->algo, this->workspace, this->workspace_size_in_bytes,
-        this->beta.data(),
+        alg.algo, scratch, alg.memory, this->beta.data(),
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dxdesc],
-        this->dx
+        this->dx);
+    vdev.free_scratch();
 
-    );
+    return err;
 }
 
 flatbuffers::Offset<FBCudaApiCall> CudnnConvolutionBackwardData::fbSerialize(
@@ -795,18 +857,17 @@ flatbuffers::Offset<FBCudaApiCall> CudnnConvolutionBackwardData::fbSerialize(
  * cudnnGetConvolutionBackwardDataAlgorithmV7
  */
 CudnnGetConvolutionBackwardDataAlgorithmV7::
-    CudnnGetConvolutionBackwardDataAlgorithmV7(uint64_t virtualHandle,
-                                               uint64_t virtualFdWdesc,
-                                               uint64_t virtualTdDydesc,
-                                               uint64_t virtualCdConvdesc,
-                                               uint64_t virtualTdDxdesc,
-                                               int requestedAlgoCount)
+    CudnnGetConvolutionBackwardDataAlgorithmV7(
+        uint64_t virtualHandle, uint64_t virtualFdWdesc,
+        uint64_t virtualTdDydesc, uint64_t virtualCdConvdesc,
+        uint64_t virtualTdDxdesc, int requestedAlgoCount,
+        const std::vector<cudnnConvolutionBwdDataAlgoPerf_t> &virtualAlgVec)
     : virtual_handle(virtualHandle), virtual_fd_wdesc(virtualFdWdesc),
       virtual_td_dydesc(virtualTdDydesc),
       virtual_cd_convdesc(virtualCdConvdesc),
       virtual_td_dxdesc(virtualTdDxdesc),
-      requested_algo_count(requestedAlgoCount),
-      perf_results(requestedAlgoCount) {}
+      requested_algo_count(requestedAlgoCount), virtual_alg_vec(virtualAlgVec) {
+}
 
 CudnnGetConvolutionBackwardDataAlgorithmV7::
     CudnnGetConvolutionBackwardDataAlgorithmV7(
@@ -819,10 +880,8 @@ CudnnGetConvolutionBackwardDataAlgorithmV7::
     this->virtual_cd_convdesc = c->virtual_cd_convdesc();
     this->virtual_td_dxdesc = c->virtual_td_dxdesc();
     this->requested_algo_count = c->requested_algo_count();
-    this->returned_algo_count = c->returned_algo_count();
-
-    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> perf_results_;
-    for (const auto &p : *c->perf_results()) {
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> virtual_algs;
+    for (const auto &p : *c->virtual_alg_vec()) {
         cudnnConvolutionBwdDataAlgoPerf_t perf;
         perf.algo = static_cast<cudnnConvolutionBwdDataAlgo_t>(p->algo());
         perf.status = static_cast<cudnnStatus_t>(p->status());
@@ -833,10 +892,10 @@ CudnnGetConvolutionBackwardDataAlgorithmV7::
         perf.reserved[0] = p->reserved()->Get(0);
         perf.reserved[1] = p->reserved()->Get(1);
         perf.reserved[2] = p->reserved()->Get(2);
-        perf_results_.push_back(perf);
+        virtual_algs.push_back(perf);
     }
 
-    this->perf_results = perf_results_;
+    this->virtual_alg_vec = virtual_algs;
 }
 
 uint64_t CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative(
@@ -856,17 +915,43 @@ uint64_t CudnnGetConvolutionBackwardDataAlgorithmV7::executeNative(
     cudnnTensorDescriptor_t dxdesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dxdesc];
 
-    return real(handle, wdesc, dydesc, convdesc, dxdesc,
-                  this->requested_algo_count, &this->returned_algo_count,
-                  this->perf_results.data());
+    int request_algo_count = this->virtual_alg_vec.size();
+    int returned_algo_count;
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t> perf_results(
+        request_algo_count);
+
+    auto err = real(handle, wdesc, dydesc, convdesc, dxdesc, request_algo_count,
+                    &returned_algo_count, perf_results.data());
+
+    std::vector<unsigned> idx(
+        std::min(static_cast<unsigned>(this->virtual_alg_vec.size()),
+                 static_cast<unsigned>(returned_algo_count)));
+    for (unsigned i = 0; i < idx.size(); ++i) {
+        idx[i] = static_cast<int>(this->virtual_alg_vec[i].algo) -
+                 CUDNN_CONV_BWD_DAT_ALG_PREF;
+    }
+
+    unsigned max_idx = *std::max_element(idx.begin(), idx.end());
+    if (vdev.cudnn_convolution_bwd_data_algo_perf_virtual_to_real.size() <
+        max_idx + 1) {
+        vdev.cudnn_convolution_bwd_data_algo_perf_virtual_to_real.resize(
+            max_idx + 1);
+    }
+
+    for (unsigned i = 0; i < idx.size(); ++i) {
+        vdev.cudnn_convolution_bwd_data_algo_perf_virtual_to_real[idx[i]] =
+            perf_results[i];
+    }
+
+    return err;
 }
 
 flatbuffers::Offset<FBCudaApiCall>
 CudnnGetConvolutionBackwardDataAlgorithmV7::fbSerialize(
     flatbuffers::FlatBufferBuilder &builder) {
     std::vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>
-        perf_results_vec;
-    for (const auto &p : this->perf_results) {
+        virtual_algs;
+    for (const auto &p : this->virtual_alg_vec) {
         std::vector<int> reserved_(3);
         reserved_[0] = p.reserved[0];
         reserved_[1] = p.reserved[1];
@@ -874,14 +959,14 @@ CudnnGetConvolutionBackwardDataAlgorithmV7::fbSerialize(
         auto perf = CreateFBCudnnConvolutionBwdDataAlgoPerf(
             builder, p.algo, p.status, p.time, p.memory, p.determinism,
             p.mathType, builder.CreateVector(reserved_));
-        perf_results_vec.push_back(perf);
+        virtual_algs.push_back(perf);
     }
 
     auto api_call = CreateFBCudnnGetConvolutionBackwardDataAlgorithmV7(
         builder, this->virtual_handle, this->virtual_fd_wdesc,
         this->virtual_td_dydesc, this->virtual_cd_convdesc,
         this->virtual_td_dxdesc, this->requested_algo_count,
-        this->returned_algo_count, builder.CreateVector(perf_results_vec));
+        builder.CreateVector(virtual_algs));
     auto api_call_union = CreateFBCudaApiCall(
         builder,
         FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7,

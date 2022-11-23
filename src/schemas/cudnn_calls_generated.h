@@ -851,8 +851,7 @@ struct FBCudnnGetConvolutionForwardAlgorithmV7 FLATBUFFERS_FINAL_CLASS : private
     VT_VIRTUAL_FD = 10,
     VT_VIRTUAL_CD = 12,
     VT_REQUESTED_ALGO_COUNT = 14,
-    VT_RETURNED_ALGO_COUNT = 16,
-    VT_PERF_RESULTS = 18
+    VT_VIRTUAL_ALG_VEC = 16
   };
   uint64_t virtual_handle() const {
     return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
@@ -872,11 +871,8 @@ struct FBCudnnGetConvolutionForwardAlgorithmV7 FLATBUFFERS_FINAL_CLASS : private
   int32_t requested_algo_count() const {
     return GetField<int32_t>(VT_REQUESTED_ALGO_COUNT, 0);
   }
-  int32_t returned_algo_count() const {
-    return GetField<int32_t>(VT_RETURNED_ALGO_COUNT, 0);
-  }
-  const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *perf_results() const {
-    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *>(VT_PERF_RESULTS);
+  const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *virtual_alg_vec() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *>(VT_VIRTUAL_ALG_VEC);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -886,10 +882,9 @@ struct FBCudnnGetConvolutionForwardAlgorithmV7 FLATBUFFERS_FINAL_CLASS : private
            VerifyField<uint64_t>(verifier, VT_VIRTUAL_FD) &&
            VerifyField<uint64_t>(verifier, VT_VIRTUAL_CD) &&
            VerifyField<int32_t>(verifier, VT_REQUESTED_ALGO_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_RETURNED_ALGO_COUNT) &&
-           VerifyOffset(verifier, VT_PERF_RESULTS) &&
-           verifier.VerifyVector(perf_results()) &&
-           verifier.VerifyVectorOfTables(perf_results()) &&
+           VerifyOffset(verifier, VT_VIRTUAL_ALG_VEC) &&
+           verifier.VerifyVector(virtual_alg_vec()) &&
+           verifier.VerifyVectorOfTables(virtual_alg_vec()) &&
            verifier.EndTable();
   }
 };
@@ -916,11 +911,8 @@ struct FBCudnnGetConvolutionForwardAlgorithmV7Builder {
   void add_requested_algo_count(int32_t requested_algo_count) {
     fbb_.AddElement<int32_t>(FBCudnnGetConvolutionForwardAlgorithmV7::VT_REQUESTED_ALGO_COUNT, requested_algo_count, 0);
   }
-  void add_returned_algo_count(int32_t returned_algo_count) {
-    fbb_.AddElement<int32_t>(FBCudnnGetConvolutionForwardAlgorithmV7::VT_RETURNED_ALGO_COUNT, returned_algo_count, 0);
-  }
-  void add_perf_results(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>> perf_results) {
-    fbb_.AddOffset(FBCudnnGetConvolutionForwardAlgorithmV7::VT_PERF_RESULTS, perf_results);
+  void add_virtual_alg_vec(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>> virtual_alg_vec) {
+    fbb_.AddOffset(FBCudnnGetConvolutionForwardAlgorithmV7::VT_VIRTUAL_ALG_VEC, virtual_alg_vec);
   }
   explicit FBCudnnGetConvolutionForwardAlgorithmV7Builder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -941,16 +933,14 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionForwardAlgorithmV7> CreateFBCudn
     uint64_t virtual_fd = 0,
     uint64_t virtual_cd = 0,
     int32_t requested_algo_count = 0,
-    int32_t returned_algo_count = 0,
-    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>> perf_results = 0) {
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>> virtual_alg_vec = 0) {
   FBCudnnGetConvolutionForwardAlgorithmV7Builder builder_(_fbb);
   builder_.add_virtual_cd(virtual_cd);
   builder_.add_virtual_fd(virtual_fd);
   builder_.add_virtual_td_ydesc(virtual_td_ydesc);
   builder_.add_virtual_td_xdesc(virtual_td_xdesc);
   builder_.add_virtual_handle(virtual_handle);
-  builder_.add_perf_results(perf_results);
-  builder_.add_returned_algo_count(returned_algo_count);
+  builder_.add_virtual_alg_vec(virtual_alg_vec);
   builder_.add_requested_algo_count(requested_algo_count);
   return builder_.Finish();
 }
@@ -963,9 +953,8 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionForwardAlgorithmV7> CreateFBCudn
     uint64_t virtual_fd = 0,
     uint64_t virtual_cd = 0,
     int32_t requested_algo_count = 0,
-    int32_t returned_algo_count = 0,
-    const std::vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *perf_results = nullptr) {
-  auto perf_results__ = perf_results ? _fbb.CreateVector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>(*perf_results) : 0;
+    const std::vector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>> *virtual_alg_vec = nullptr) {
+  auto virtual_alg_vec__ = virtual_alg_vec ? _fbb.CreateVector<flatbuffers::Offset<FBCudnnConvolutionFwdAlgoPerf>>(*virtual_alg_vec) : 0;
   return CreateFBCudnnGetConvolutionForwardAlgorithmV7(
       _fbb,
       virtual_handle,
@@ -974,8 +963,7 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionForwardAlgorithmV7> CreateFBCudn
       virtual_fd,
       virtual_cd,
       requested_algo_count,
-      returned_algo_count,
-      perf_results__);
+      virtual_alg_vec__);
 }
 
 struct FBCudnnConvolutionForward FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -1836,8 +1824,7 @@ struct FBCudnnGetConvolutionBackwardDataAlgorithmV7 FLATBUFFERS_FINAL_CLASS : pr
     VT_VIRTUAL_CD_CONVDESC = 10,
     VT_VIRTUAL_TD_DXDESC = 12,
     VT_REQUESTED_ALGO_COUNT = 14,
-    VT_RETURNED_ALGO_COUNT = 16,
-    VT_PERF_RESULTS = 18
+    VT_VIRTUAL_ALG_VEC = 16
   };
   uint64_t virtual_handle() const {
     return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
@@ -1857,11 +1844,8 @@ struct FBCudnnGetConvolutionBackwardDataAlgorithmV7 FLATBUFFERS_FINAL_CLASS : pr
   int32_t requested_algo_count() const {
     return GetField<int32_t>(VT_REQUESTED_ALGO_COUNT, 0);
   }
-  int32_t returned_algo_count() const {
-    return GetField<int32_t>(VT_RETURNED_ALGO_COUNT, 0);
-  }
-  const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *perf_results() const {
-    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *>(VT_PERF_RESULTS);
+  const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *virtual_alg_vec() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *>(VT_VIRTUAL_ALG_VEC);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -1871,10 +1855,9 @@ struct FBCudnnGetConvolutionBackwardDataAlgorithmV7 FLATBUFFERS_FINAL_CLASS : pr
            VerifyField<uint64_t>(verifier, VT_VIRTUAL_CD_CONVDESC) &&
            VerifyField<uint64_t>(verifier, VT_VIRTUAL_TD_DXDESC) &&
            VerifyField<int32_t>(verifier, VT_REQUESTED_ALGO_COUNT) &&
-           VerifyField<int32_t>(verifier, VT_RETURNED_ALGO_COUNT) &&
-           VerifyOffset(verifier, VT_PERF_RESULTS) &&
-           verifier.VerifyVector(perf_results()) &&
-           verifier.VerifyVectorOfTables(perf_results()) &&
+           VerifyOffset(verifier, VT_VIRTUAL_ALG_VEC) &&
+           verifier.VerifyVector(virtual_alg_vec()) &&
+           verifier.VerifyVectorOfTables(virtual_alg_vec()) &&
            verifier.EndTable();
   }
 };
@@ -1901,11 +1884,8 @@ struct FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder {
   void add_requested_algo_count(int32_t requested_algo_count) {
     fbb_.AddElement<int32_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_REQUESTED_ALGO_COUNT, requested_algo_count, 0);
   }
-  void add_returned_algo_count(int32_t returned_algo_count) {
-    fbb_.AddElement<int32_t>(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_RETURNED_ALGO_COUNT, returned_algo_count, 0);
-  }
-  void add_perf_results(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> perf_results) {
-    fbb_.AddOffset(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_PERF_RESULTS, perf_results);
+  void add_virtual_alg_vec(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> virtual_alg_vec) {
+    fbb_.AddOffset(FBCudnnGetConvolutionBackwardDataAlgorithmV7::VT_VIRTUAL_ALG_VEC, virtual_alg_vec);
   }
   explicit FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -1926,16 +1906,14 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> CreateF
     uint64_t virtual_cd_convdesc = 0,
     uint64_t virtual_td_dxdesc = 0,
     int32_t requested_algo_count = 0,
-    int32_t returned_algo_count = 0,
-    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> perf_results = 0) {
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>> virtual_alg_vec = 0) {
   FBCudnnGetConvolutionBackwardDataAlgorithmV7Builder builder_(_fbb);
   builder_.add_virtual_td_dxdesc(virtual_td_dxdesc);
   builder_.add_virtual_cd_convdesc(virtual_cd_convdesc);
   builder_.add_virtual_td_dydesc(virtual_td_dydesc);
   builder_.add_virtual_fd_wdesc(virtual_fd_wdesc);
   builder_.add_virtual_handle(virtual_handle);
-  builder_.add_perf_results(perf_results);
-  builder_.add_returned_algo_count(returned_algo_count);
+  builder_.add_virtual_alg_vec(virtual_alg_vec);
   builder_.add_requested_algo_count(requested_algo_count);
   return builder_.Finish();
 }
@@ -1948,9 +1926,8 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> CreateF
     uint64_t virtual_cd_convdesc = 0,
     uint64_t virtual_td_dxdesc = 0,
     int32_t requested_algo_count = 0,
-    int32_t returned_algo_count = 0,
-    const std::vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *perf_results = nullptr) {
-  auto perf_results__ = perf_results ? _fbb.CreateVector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>(*perf_results) : 0;
+    const std::vector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>> *virtual_alg_vec = nullptr) {
+  auto virtual_alg_vec__ = virtual_alg_vec ? _fbb.CreateVector<flatbuffers::Offset<FBCudnnConvolutionBwdDataAlgoPerf>>(*virtual_alg_vec) : 0;
   return CreateFBCudnnGetConvolutionBackwardDataAlgorithmV7(
       _fbb,
       virtual_handle,
@@ -1959,8 +1936,7 @@ inline flatbuffers::Offset<FBCudnnGetConvolutionBackwardDataAlgorithmV7> CreateF
       virtual_cd_convdesc,
       virtual_td_dxdesc,
       requested_algo_count,
-      returned_algo_count,
-      perf_results__);
+      virtual_alg_vec__);
 }
 
 struct FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
