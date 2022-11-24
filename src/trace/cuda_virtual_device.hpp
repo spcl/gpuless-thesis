@@ -12,6 +12,9 @@
 #include <map>
 #include <string>
 
+// Width of memory offset in cuda memory virtualization
+#define CUDA_MEM_OFFSET_WIDTH 38
+
 class CudaVirtualDevice {
   private:
     bool initialized = false;
@@ -20,6 +23,9 @@ class CudaVirtualDevice {
     bool scratch_used = false;
 
   public:
+    // Memory virtualization
+    std::vector<void *> memory_virtual_to_real;
+
     // virtualization of cudnn handles to avoid costly synchronizations
     std::vector<cudnnHandle_t> cudnn_handles_virtual_to_real;
     std::vector<cudnnTensorDescriptor_t>
@@ -52,6 +58,8 @@ class CudaVirtualDevice {
     CUcontext context;
 
     void initRealDevice();
+
+    void* translate_memory(const void* virtual_addr);
 
     void *get_scratch(size_t size);
     void free_scratch();

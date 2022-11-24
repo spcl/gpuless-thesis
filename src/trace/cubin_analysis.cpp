@@ -1,9 +1,11 @@
+#include <array>
 #include <cstring>
+#include <cxxabi.h>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <llvmdemangler/Demangler.h>
 #include <regex>
-#include <array>
 #include <spdlog/spdlog.h>
 
 #include "cubin_analysis.hpp"
@@ -71,25 +73,76 @@ int CubinAnalyzer::byteSizePtxParameterType(PtxParameterType type) {
     return it->second;
 }
 
+template <class StringLikeA, class StringLikeB>
+static bool iequals(const StringLikeA &a, const StringLikeB &b) {
+    return std::equal(a.begin(), a.end(), b.begin(), b.end(),
+                      [](char a, char b) { return tolower(a) == tolower(b); });
+}
+
+static bool
+deduce_nested_ptr(itanium_demangle::NameWithTemplateArgs *tmp_node) {
+    assert(tmp_node != nullptr);
+
+    // If tempplate is an array
+    if (iequals(tmp_node->Name->getBaseName(), std::string("array"))) {
+        auto template_args = dynamic_cast<itanium_demangle::TemplateArgs *>(
+            tmp_node->TemplateArgs);
+        if (!template_args)
+            throw std::runtime_error("Array type not supported.");
+        if (template_args->getParams().size() != 2)
+            throw std::runtime_error("Array type not supported.");
+
+        return template_args->getParams()[0]->getKind() ==
+               itanium_demangle::Node::KPointerType;
+    }
+
+    return false;
+}
+
+static bool deduce_ptr(itanium_demangle::Node *par) {
+    switch (par->getKind()) {
+    case itanium_demangle::Node::KNameWithTemplateArgs:
+        return deduce_nested_ptr(
+            dynamic_cast<itanium_demangle::NameWithTemplateArgs *>(par));
+    case itanium_demangle::Node::KPointerType:
+        return true;
+    default:
+        return false;
+    }
+}
+
 std::vector<KParamInfo>
-CubinAnalyzer::parsePtxParameters(const std::string &params) {
+CubinAnalyzer::parsePtxParameters(const std::string &entry,
+                                  const std::string &params) {
     std::vector<KParamInfo> ps;
 
-    static std::regex r_param(
-        "\\.param\\s*(?:\\.align\\s*([0-9]*)\\s*)?\\.([a-zA-Z0-9]*)\\s*([a-zA-"
-        "Z0-9_]*)(?:\\[([0-9]*)\\])?",
-        std::regex::ECMAScript);
+    Demangler mangling_parser(entry.data(), entry.data() + entry.size());
+    itanium_demangle::Node *parsed = mangling_parser.parse();
+    assert(parsed->getKind() == itanium_demangle::Node::KFunctionEncoding);
+    auto entry_ast = static_cast<itanium_demangle::FunctionEncoding *>(parsed);
+    assert(entry_ast);
+
+    size_t N_mangling_params = entry_ast->getParams().size();
+
+    static std::regex r_param("\\.param\\s*(?:\\.align\\s*([0-9]*)\\s*)?\\."
+                              "([a-zA-Z0-9]*)\\s*([a-zA-"
+                              "Z0-9_]*)(?:\\[([0-9]*)\\])?",
+                              std::regex::ECMAScript);
 
     std::sregex_iterator i =
         std::sregex_iterator(params.begin(), params.end(), r_param);
-    for (; i != std::sregex_iterator(); ++i) {
+
+    for (unsigned par_i = 0; i != std::sregex_iterator(); ++i, ++par_i) {
         std::smatch m = *i;
         const std::string &align = m[1];
         const std::string &type = m[2];
         const std::string &name = m[3];
         const std::string &size = m[4];
 
+        auto mangling_p = entry_ast->getParams()[par_i];
+        bool is_ptr = deduce_ptr(mangling_p);
         int ialign = 0;
+
         if (!align.empty()) {
             ialign = std::stoi(align);
         }
@@ -104,11 +157,14 @@ CubinAnalyzer::parsePtxParameters(const std::string &params) {
         ps.push_back(KParamInfo{
             name,
             ptxParameterType,
+            is_ptr,
             typeSize,
             ialign,
             isize,
         });
     }
+
+    assert(N_mangling_params == ps.size());
 
     return ps;
 }
@@ -157,6 +213,7 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
             in >> kparam_info.paramName;
             in >> u64_type;
             kparam_info.type = PtxParameterType(u64_type);
+            in >> kparam_info.is_ptr;
             in >> kparam_info.typeSize;
             in >> kparam_info.align;
             in >> kparam_info.size;
@@ -193,6 +250,7 @@ void CubinAnalyzer::storeAnalysisToCache(
         for (const auto &p : kparam_infos) {
             out << p.paramName << std::endl;
             out << p.type << std::endl;
+            out << p.is_ptr << std::endl;
             out << p.typeSize << std::endl;
             out << p.align << std::endl;
             out << p.size << std::endl;
@@ -240,7 +298,8 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
             const std::string &entry = m[1];
             const std::string &params = m[2];
 
-            std::vector<KParamInfo> param_infos = parsePtxParameters(params);
+            std::vector<KParamInfo> param_infos =
+                parsePtxParameters(entry, params);
             tmp_map.emplace(std::make_pair(entry, param_infos));
         }
         this->storeAnalysisToCache(std::filesystem::canonical(fname), tmp_map);
@@ -250,7 +309,7 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
     return true;
 }
 
-bool CubinAnalyzer::analyze(const std::vector<std::string>& cuda_binaries,
+bool CubinAnalyzer::analyze(const std::vector<std::string> &cuda_binaries,
                             int major_version, int minor_version) {
     bool ret = false;
 

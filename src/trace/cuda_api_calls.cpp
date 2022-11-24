@@ -18,18 +18,28 @@ std::string CudaRuntimeApiCall::nativeErrorToString(uint64_t err) {
 /*
  * cudaMalloc
  */
-CudaMalloc::CudaMalloc(size_t size) : devPtr(nullptr), size(size) {}
+CudaMalloc::CudaMalloc(uint64_t virtual_ptr, size_t size)
+    : virtualPtr(virtual_ptr), size(size) {}
 
 uint64_t CudaMalloc::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMalloc<void>))real_dlsym(RTLD_NEXT, "cudaMalloc");
-    return real(&this->devPtr, size);
+    void *devPtr;
+    auto err = real(&devPtr, this->size);
+
+    uint64_t idx = this->virtualPtr >> CUDA_MEM_OFFSET_WIDTH;
+    if (vdev.memory_virtual_to_real.size() < idx + 1) {
+        vdev.memory_virtual_to_real.resize(idx + 1);
+    }
+    vdev.memory_virtual_to_real[idx] = devPtr;
+
+    return err;
 }
 
 flatbuffers::Offset<FBCudaApiCall>
 CudaMalloc::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     auto api_call = CreateFBCudaMalloc(
-        builder, reinterpret_cast<uint64_t>(this->devPtr), this->size);
+        builder, reinterpret_cast<uint64_t>(this->virtualPtr), this->size);
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCudaMalloc, api_call.Union());
     return api_call_union;
@@ -37,7 +47,7 @@ CudaMalloc::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
 
 CudaMalloc::CudaMalloc(const FBCudaApiCall *fb_cuda_api_call) {
     auto c = fb_cuda_api_call->api_call_as_FBCudaMalloc();
-    this->devPtr = reinterpret_cast<void *>(c->dev_ptr());
+    this->virtualPtr = c->virtual_ptr();
     this->size = c->size();
 }
 
@@ -50,7 +60,8 @@ CudaMemcpyH2D::CudaMemcpyH2D(void *dst, const void *src, size_t size)
 uint64_t CudaMemcpyH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
-    return real(this->dst, this->buffer.data(), this->size,
+    void *real_dst = vdev.translate_memory(this->dst);
+    return real(real_dst, this->buffer.data(), this->size,
                 cudaMemcpyHostToDevice);
 }
 
@@ -83,7 +94,8 @@ CudaMemcpyD2H::CudaMemcpyD2H(void *dst, const void *src, size_t size)
 uint64_t CudaMemcpyD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
-    return real(this->buffer.data(), this->src, this->size,
+    void *real_src = vdev.translate_memory(src);
+    return real(this->buffer.data(), real_src, this->size,
                 cudaMemcpyDeviceToHost);
 }
 
@@ -116,7 +128,9 @@ CudaMemcpyD2D::CudaMemcpyD2D(void *dst, const void *src, size_t size)
 uint64_t CudaMemcpyD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpy))real_dlsym(RTLD_NEXT, "cudaMemcpy");
-    return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice);
+    void *real_dst = vdev.translate_memory(dst);
+    void *real_src = vdev.translate_memory(src);
+    return real(real_dst, real_src, this->size, cudaMemcpyDeviceToDevice);
 }
 
 flatbuffers::Offset<FBCudaApiCall>
@@ -146,7 +160,8 @@ CudaMemcpyAsyncH2D::CudaMemcpyAsyncH2D(void *dst, const void *src, size_t size,
 uint64_t CudaMemcpyAsyncH2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
-    return real(this->dst, this->buffer.data(), this->size,
+    void *real_dst = vdev.translate_memory(dst);
+    return real(real_dst, this->buffer.data(), this->size,
                 cudaMemcpyHostToDevice, this->stream);
 }
 
@@ -182,7 +197,8 @@ CudaMemcpyAsyncD2H::CudaMemcpyAsyncD2H(void *dst, const void *src, size_t size,
 uint64_t CudaMemcpyAsyncD2H::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
-    return real(this->buffer.data(), this->src, this->size,
+    void *real_src = vdev.translate_memory(src);
+    return real(this->buffer.data(), real_src, this->size,
                 cudaMemcpyDeviceToHost, this->stream);
 }
 
@@ -218,7 +234,9 @@ CudaMemcpyAsyncD2D::CudaMemcpyAsyncD2D(void *dst, const void *src, size_t size,
 uint64_t CudaMemcpyAsyncD2D::executeNative(CudaVirtualDevice &vdev) {
     static auto real =
         (decltype(&cudaMemcpyAsync))real_dlsym(RTLD_NEXT, "cudaMemcpyAsync");
-    return real(this->dst, this->src, this->size, cudaMemcpyDeviceToDevice,
+    void *real_dst = vdev.translate_memory(dst);
+    void *real_src = vdev.translate_memory(src);
+    return real(real_dst, real_src, this->size, cudaMemcpyDeviceToDevice,
                 this->stream);
 }
 
@@ -248,7 +266,8 @@ CudaFree::CudaFree(void *devPtr) : devPtr(devPtr) {}
 
 uint64_t CudaFree::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaFree))real_dlsym(RTLD_NEXT, "cudaFree");
-    return real(this->devPtr);
+    void *real_addr = vdev.translate_memory(this->devPtr);
+    return real(real_addr);
 }
 
 flatbuffers::Offset<FBCudaApiCall>
@@ -289,8 +308,21 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     }
 
     std::vector<void *> args;
-    for (unsigned i = 0; i < paramBuffers.size(); i++) {
+    for (unsigned i = 0; i < this->paramBuffers.size(); i++) {
         auto &b = this->paramBuffers[i];
+        auto &infos = this->paramInfos[i];
+        if (infos.is_ptr) {
+            for (int k = 0; k < infos.size; ++k) {
+                void *virtual_addr;
+                std::memcpy(&virtual_addr,
+                            this->paramBuffers[i].data() + k*infos.typeSize,
+                            infos.typeSize);
+                void *translated = vdev.translate_memory(virtual_addr);
+                std::memcpy(this->paramBuffers[i].data() + k*infos.typeSize,
+                            &translated,
+                            infos.typeSize);
+            }
+        }
         args.push_back(b.data());
     }
 
@@ -331,7 +363,7 @@ CudaLaunchKernel::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     for (const auto &p : this->paramInfos) {
         fb_param_infos.push_back(
             CreateFBParamInfo(builder, builder.CreateString(p.paramName),
-                              static_cast<FBPtxParameterType>(p.type),
+                              static_cast<FBPtxParameterType>(p.type), p.is_ptr,
                               p.typeSize, p.align, p.size));
     }
 
@@ -373,6 +405,7 @@ CudaLaunchKernel::CudaLaunchKernel(const FBCudaApiCall *fb_cuda_api_call) {
     for (const auto &i : *c->param_infos()) {
         KParamInfo info{i->name()->str(),
                         static_cast<PtxParameterType>(i->ptx_param_type()),
+                        static_cast<bool>(i->is_ptr()),
                         static_cast<int>(i->type_size()),
                         static_cast<int>(i->align()),
                         static_cast<int>(i->size())};

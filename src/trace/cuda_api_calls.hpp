@@ -22,12 +22,19 @@ class CudaRuntimeApiCall : public AbstractCudaApiCall {
     std::string nativeErrorToString(uint64_t err) override;
 };
 
+// CUDA Memory virtualization: Return instantly from Cuda Malloc,
+// with a 64-bit pointer that resembles a virtual address, which is later
+// replaced with the actual device address in the server. Memory layout for
+// virtual address [ -- idx -- | --- offs --- ], where in the first bytes are
+// the index of the translation array mapping to the actual address is stored,
+// and the latter bytes are to support malloc calls up to the width of offs.
+
 class CudaMalloc : public CudaRuntimeApiCall {
   public:
-    void *devPtr;
+    uint64_t virtualPtr;
     size_t size;
 
-    explicit CudaMalloc(size_t size);
+    explicit CudaMalloc(uint64_t virtual_ptr, size_t size);
     explicit CudaMalloc(const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;

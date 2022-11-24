@@ -26,6 +26,7 @@ enum FBPtxParameterType : byte {
 table FBParamInfo {
     name:string;
     ptx_param_type:FBPtxParameterType;
+    is_ptr:bool;
     type_size:uint64;
     align:uint64;
     size:uint64;
@@ -38,7 +39,7 @@ struct FBDim3 {
 }
 
 table FBCudaMalloc {
-    dev_ptr:uint64;
+    virtual_ptr:uint64;
     size:uint64;
 }
 

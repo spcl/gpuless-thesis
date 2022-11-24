@@ -216,15 +216,19 @@ struct FBParamInfo FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4,
     VT_PTX_PARAM_TYPE = 6,
-    VT_TYPE_SIZE = 8,
-    VT_ALIGN = 10,
-    VT_SIZE = 12
+    VT_IS_PTR = 8,
+    VT_TYPE_SIZE = 10,
+    VT_ALIGN = 12,
+    VT_SIZE = 14
   };
   const flatbuffers::String *name() const {
     return GetPointer<const flatbuffers::String *>(VT_NAME);
   }
   FBPtxParameterType ptx_param_type() const {
     return static_cast<FBPtxParameterType>(GetField<int8_t>(VT_PTX_PARAM_TYPE, 0));
+  }
+  bool is_ptr() const {
+    return GetField<uint8_t>(VT_IS_PTR, 0) != 0;
   }
   uint64_t type_size() const {
     return GetField<uint64_t>(VT_TYPE_SIZE, 0);
@@ -240,6 +244,7 @@ struct FBParamInfo FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
            VerifyField<int8_t>(verifier, VT_PTX_PARAM_TYPE) &&
+           VerifyField<uint8_t>(verifier, VT_IS_PTR) &&
            VerifyField<uint64_t>(verifier, VT_TYPE_SIZE) &&
            VerifyField<uint64_t>(verifier, VT_ALIGN) &&
            VerifyField<uint64_t>(verifier, VT_SIZE) &&
@@ -256,6 +261,9 @@ struct FBParamInfoBuilder {
   }
   void add_ptx_param_type(FBPtxParameterType ptx_param_type) {
     fbb_.AddElement<int8_t>(FBParamInfo::VT_PTX_PARAM_TYPE, static_cast<int8_t>(ptx_param_type), 0);
+  }
+  void add_is_ptr(bool is_ptr) {
+    fbb_.AddElement<uint8_t>(FBParamInfo::VT_IS_PTR, static_cast<uint8_t>(is_ptr), 0);
   }
   void add_type_size(uint64_t type_size) {
     fbb_.AddElement<uint64_t>(FBParamInfo::VT_TYPE_SIZE, type_size, 0);
@@ -281,6 +289,7 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfo(
     flatbuffers::FlatBufferBuilder &_fbb,
     flatbuffers::Offset<flatbuffers::String> name = 0,
     FBPtxParameterType ptx_param_type = FBPtxParameterType_s8,
+    bool is_ptr = false,
     uint64_t type_size = 0,
     uint64_t align = 0,
     uint64_t size = 0) {
@@ -289,6 +298,7 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfo(
   builder_.add_align(align);
   builder_.add_type_size(type_size);
   builder_.add_name(name);
+  builder_.add_is_ptr(is_ptr);
   builder_.add_ptx_param_type(ptx_param_type);
   return builder_.Finish();
 }
@@ -297,6 +307,7 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfoDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr,
     FBPtxParameterType ptx_param_type = FBPtxParameterType_s8,
+    bool is_ptr = false,
     uint64_t type_size = 0,
     uint64_t align = 0,
     uint64_t size = 0) {
@@ -305,6 +316,7 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfoDirect(
       _fbb,
       name__,
       ptx_param_type,
+      is_ptr,
       type_size,
       align,
       size);
@@ -313,18 +325,18 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfoDirect(
 struct FBCudaMalloc FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBCudaMallocBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_DEV_PTR = 4,
+    VT_VIRTUAL_PTR = 4,
     VT_SIZE = 6
   };
-  uint64_t dev_ptr() const {
-    return GetField<uint64_t>(VT_DEV_PTR, 0);
+  uint64_t virtual_ptr() const {
+    return GetField<uint64_t>(VT_VIRTUAL_PTR, 0);
   }
   uint64_t size() const {
     return GetField<uint64_t>(VT_SIZE, 0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<uint64_t>(verifier, VT_DEV_PTR) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_PTR) &&
            VerifyField<uint64_t>(verifier, VT_SIZE) &&
            verifier.EndTable();
   }
@@ -334,8 +346,8 @@ struct FBCudaMallocBuilder {
   typedef FBCudaMalloc Table;
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_dev_ptr(uint64_t dev_ptr) {
-    fbb_.AddElement<uint64_t>(FBCudaMalloc::VT_DEV_PTR, dev_ptr, 0);
+  void add_virtual_ptr(uint64_t virtual_ptr) {
+    fbb_.AddElement<uint64_t>(FBCudaMalloc::VT_VIRTUAL_PTR, virtual_ptr, 0);
   }
   void add_size(uint64_t size) {
     fbb_.AddElement<uint64_t>(FBCudaMalloc::VT_SIZE, size, 0);
@@ -353,11 +365,11 @@ struct FBCudaMallocBuilder {
 
 inline flatbuffers::Offset<FBCudaMalloc> CreateFBCudaMalloc(
     flatbuffers::FlatBufferBuilder &_fbb,
-    uint64_t dev_ptr = 0,
+    uint64_t virtual_ptr = 0,
     uint64_t size = 0) {
   FBCudaMallocBuilder builder_(_fbb);
   builder_.add_size(size);
-  builder_.add_dev_ptr(dev_ptr);
+  builder_.add_virtual_ptr(virtual_ptr);
   return builder_.Finish();
 }
 

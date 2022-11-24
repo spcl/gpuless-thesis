@@ -155,10 +155,14 @@ gpuless::CublasSgemmV2::CublasSgemmV2(uint64_t virtualHandle,
 
 uint64_t gpuless::CublasSgemmV2::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cublasSgemm_v2);
+    auto real_A = (float*)vdev.translate_memory(this->A);
+    auto real_B = (float*)vdev.translate_memory(this->B);
+    auto real_C = (float*)vdev.translate_memory(this->C);
+
     return real(vdev.cublas_handle_virtual_to_real[this->virtual_handle],
                 this->transa, this->transb, this->m, this->n, this->k,
-                &this->alpha, this->A, this->lda, this->B, this->ldb,
-                &this->beta, const_cast<float *>(this->C), this->ldc);
+                &this->alpha, real_A, this->lda, real_B, this->ldb,
+                &this->beta, const_cast<float *>(real_C), this->ldc);
 }
 
 flatbuffers::Offset<FBCudaApiCall>
@@ -381,21 +385,27 @@ uint64_t CublasLtMatmul::executeNative(CudaVirtualDevice &vdev) {
         algo_ptr = &this->algo;
     }
 
+    const void* real_A = vdev.translate_memory(this->A);
+    const void* real_B = vdev.translate_memory(this->B);
+    const void* real_C = vdev.translate_memory(this->C);
+    void* real_D = vdev.translate_memory(this->D);
+    void* real_ws = vdev.translate_memory(this->workspace);
+
     return real(vdev.cublaslt_handle_virtual_to_real[this->virtual_handle],
                 vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
-                this->alpha.data(), this->A,
+                this->alpha.data(), real_A,
                 vdev.cublaslt_matrix_layout_handle_virtual_to_real
                     [this->virtual_ml_a_desc],
-                this->B,
+                real_B,
                 vdev.cublaslt_matrix_layout_handle_virtual_to_real
                     [this->virtual_ml_b_desc],
-                this->beta.data(), this->C,
+                this->beta.data(), real_C,
                 vdev.cublaslt_matrix_layout_handle_virtual_to_real
                     [this->virtual_ml_c_desc],
-                this->D,
+                real_D,
                 vdev.cublaslt_matrix_layout_handle_virtual_to_real
                     [this->virtual_ml_d_desc],
-                algo_ptr, this->workspace, this->workspace_size_in_bytes,
+                algo_ptr, real_ws, this->workspace_size_in_bytes,
                 this->stream);
 }
 
@@ -568,9 +578,14 @@ uint64_t CublasSgemmStridedBatched::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cublasSgemmStridedBatched);
     cublasHandle_t handle =
         vdev.cublas_handle_virtual_to_real[this->virtual_handle];
+
+    auto real_A = (const float*)vdev.translate_memory(this->A);
+    auto real_B = (const float*)vdev.translate_memory(this->B);
+    auto real_C = (float*)vdev.translate_memory(this->C);
+
     return real(handle, this->transa, this->transb, this->m, this->n, this->k,
-                &this->alpha, this->A, this->lda, this->strideA, this->B,
-                this->ldb, this->strideB, &this->beta, this->C, this->ldc,
+                &this->alpha, real_A, this->lda, this->strideA, real_B,
+                this->ldb, this->strideB, &this->beta, real_C, this->ldc,
                 this->strideC, this->batchCount);
 }
 

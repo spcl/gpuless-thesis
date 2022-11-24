@@ -4,8 +4,8 @@
 #include "cuda_api_calls.hpp"
 #include <cstdint>
 
-#define CUDNN_CONV_BWD_DAT_VIRT_ALG_CNT 6
-#define CUDNN_CONV_FWD_VIRT_ALG_CNT 6
+#define CUDNN_CONV_BWD_DAT_VIRT_ALG_CNT 1
+#define CUDNN_CONV_FWD_VIRT_ALG_CNT 1
 #define CUDNN_CONV_BWD_DAT_ALG_PREF 20
 #define CUDNN_CONV_FWD_ALG_PREF 20
 

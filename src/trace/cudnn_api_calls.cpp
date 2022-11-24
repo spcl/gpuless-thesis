@@ -513,23 +513,27 @@ gpuless::CudnnConvolutionForward::executeNative(CudaVirtualDevice &vdev) {
         vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd];
     const cudnnTensorDescriptor_t yDesc =
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc];
+    void* real_ws = vdev.translate_memory(this->workspace);
+    const void* real_w = vdev.translate_memory(this->w);
+    const void* real_x = vdev.translate_memory(this->x);
+    void* real_y = vdev.translate_memory(this->y);
 
     int alg_idx = static_cast<int>(this->algo);
     if (alg_idx < CUDNN_CONV_FWD_ALG_PREF) {
-        return real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
-                    convDesc, this->algo, this->workspace,
+        return real(handle, this->alpha.data(), xDesc, real_x, wDesc, real_w,
+                    convDesc, this->algo, real_ws,
                     this->workspace_size_in_bytes, this->beta.data(), yDesc,
-                    this->y);
+                    real_y);
     }
     alg_idx -= CUDNN_CONV_FWD_ALG_PREF;
 
     cudnnConvolutionFwdAlgoPerfStruct alg =
         vdev.cudnn_convolution_fwd_algo_perf_virtual_to_real[alg_idx];
     void* scratch = vdev.get_scratch(alg.memory);
-    auto err = real(handle, this->alpha.data(), xDesc, this->x, wDesc, this->w,
+    auto err = real(handle, this->alpha.data(), xDesc, real_x, wDesc, real_w,
                     convDesc, alg.algo, scratch,
                     alg.memory, this->beta.data(), yDesc,
-                    this->y);
+                    real_y);
     vdev.free_scratch();
 
     return err;
@@ -602,10 +606,19 @@ uint64_t gpuless::CudnnBatchNormalizationForwardInference::executeNative(
         vdev.cudnn_tensor_descriptor_virtual_to_real
             [this->virtual_td_bs_scale_bias_mean_var_desc];
 
+    const void* real_x = vdev.translate_memory(this->x);
+    void* real_y = vdev.translate_memory(this->y);
+    const void* real_bnScale = vdev.translate_memory(this->bn_scale);
+    const void* real_bnBias = vdev.translate_memory(this->bn_bias);
+    const void* real_estimatedMean = vdev.translate_memory(this->estimated_mean);
+    const void* real_estimatedVariance = vdev.translate_memory(this->estimated_variance);
+
+
+
     return real(handle, this->mode, this->alpha.data(), this->beta.data(),
-                xDesc, this->x, yDesc, this->y, bnScaleBiasMeanVarDesc,
-                this->bn_scale, this->bn_bias, this->estimated_mean,
-                this->estimated_variance, this->epsilon);
+                xDesc, real_x, yDesc, real_y, bnScaleBiasMeanVarDesc,
+                real_bnScale, real_bnBias, real_estimatedMean,
+                real_estimatedVariance, this->epsilon);
 }
 
 gpuless::CudnnBatchNormalizationForwardInference::
@@ -799,6 +812,11 @@ CudnnConvolutionBackwardData::CudnnConvolutionBackwardData(
 uint64_t CudnnConvolutionBackwardData::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cudnnConvolutionBackwardData);
 
+    const void* real_w = vdev.translate_memory(this->w);
+    const void* real_dy = vdev.translate_memory(this->dy);
+    void* real_ws = vdev.translate_memory(this->workspace);
+    void* real_dx = vdev.translate_memory(this->dx);
+
     int alg_idx = static_cast<int>(this->algo);
     if (alg_idx < CUDNN_CONV_BWD_DAT_ALG_PREF) {
         return real(
@@ -806,16 +824,16 @@ uint64_t CudnnConvolutionBackwardData::executeNative(CudaVirtualDevice &vdev) {
             this->alpha.data(),
             vdev.cudnn_filter_descriptor_virtual_to_real
                 [this->virtual_fd_wdesc],
-            this->w,
+            real_w,
             vdev.cudnn_tensor_descriptor_virtual_to_real
                 [this->virtual_td_dydesc],
-            dy,
+            real_dy,
             vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
-            this->algo, this->workspace, this->workspace_size_in_bytes,
+            this->algo, real_ws, this->workspace_size_in_bytes,
             this->beta.data(),
             vdev.cudnn_tensor_descriptor_virtual_to_real
                 [this->virtual_td_dxdesc],
-            this->dx);
+            real_dx);
     }
     alg_idx -= CUDNN_CONV_BWD_DAT_ALG_PREF;
 
@@ -826,12 +844,12 @@ uint64_t CudnnConvolutionBackwardData::executeNative(CudaVirtualDevice &vdev) {
         vdev.cudnn_handles_virtual_to_real[this->virtual_handle],
         this->alpha.data(),
         vdev.cudnn_filter_descriptor_virtual_to_real[this->virtual_fd_wdesc],
-        this->w,
+        real_w,
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dydesc],
-        dy, vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
+        real_dy, vdev.cudnn_convolution_descriptor_virtual_to_real[this->virtual_cd],
         alg.algo, scratch, alg.memory, this->beta.data(),
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_dxdesc],
-        this->dx);
+        real_dx);
     vdev.free_scratch();
 
     return err;
@@ -1169,24 +1187,37 @@ uint64_t CudnnBatchNormalizationForwardTrainingEx::executeNative(
     CudaVirtualDevice &vdev) {
     static auto real =
         GET_REAL_FUNCTION(cudnnBatchNormalizationForwardTrainingEx);
+
+    const void* real_x = vdev.translate_memory(this->x_data);
+    void* real_y = vdev.translate_memory(this->y_data);
+    const void* real_z = vdev.translate_memory(this->z_data);
+    const void* real_bnScaleData = vdev.translate_memory(this->bn_scale_data);
+    const void* real_bnBiasData = vdev.translate_memory(this->bn_bias_data);
+    void* real_resultRunningMeanData = vdev.translate_memory(this->result_running_mean_data);
+    void* real_resultRunningVarianceData = vdev.translate_memory(this->result_running_variance_data);
+    void* real_saveMean = vdev.translate_memory(this->save_mean);
+    void* real_saveInvVariance = vdev.translate_memory(this->save_inv_variance);
+    void* real_ws = vdev.translate_memory(this->workspace);
+    void* real_reserveSpace = vdev.translate_memory(this->reserve_space);
+
     return real(
         vdev.cudnn_handles_virtual_to_real[this->virtual_handle], this->mode,
         this->bn_ops, this->alpha.data(), this->beta.data(),
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_xdesc],
-        this->x_data,
+        real_x,
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_zdesc],
-        this->z_data,
+        real_z,
         vdev.cudnn_tensor_descriptor_virtual_to_real[this->virtual_td_ydesc],
-        this->y_data,
+        real_y,
         vdev.cudnn_tensor_descriptor_virtual_to_real
             [this->virtual_td_bn_scale_bias_mean_var_desc],
-        this->bn_scale_data, this->bn_bias_data,
-        this->exponential_average_factor, this->result_running_mean_data,
-        this->result_running_variance_data, this->epsilon, this->save_mean,
-        this->save_inv_variance,
+        real_bnScaleData, real_bnBiasData,
+        this->exponential_average_factor, real_resultRunningMeanData,
+        real_resultRunningVarianceData, this->epsilon, real_saveMean,
+        real_saveInvVariance,
         reinterpret_cast<cudnnActivationDescriptor_t>(
             this->virtual_ad_activation_desc),
-        this->workspace, this->workspace_size_in_bytes, this->reserve_space,
+        real_ws, this->workspace_size_in_bytes, real_reserveSpace,
         this->reserve_space_size_in_bytes);
 }
 

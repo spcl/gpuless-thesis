@@ -71,6 +71,11 @@ static uint64_t incrementFatbinCount() {
     return ctr++;
 }
 
+static uint64_t nextAddressIndex() {
+    static uint64_t idx = 1; // Begin with 1 to avoid returning nullptr
+    return idx++;
+}
+
 std::shared_ptr<TraceExecutor> getTraceExecutor() {
     static std::shared_ptr<TraceExecutor> trace_executor;
     static bool te_initialized = false;
@@ -164,10 +169,13 @@ extern "C" {
 cudaError_t cudaMalloc(void **devPtr, size_t size) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
-    getCudaTrace().record(std::make_shared<CudaMalloc>(size));
-    getTraceExecutor()->synchronize(getCudaTrace());
-    *devPtr = std::static_pointer_cast<CudaMalloc>(getCudaTrace().historyTop())
-                  ->devPtr;
+
+    uint64_t idx = nextAddressIndex();
+    uint64_t virtual_ptr = idx<<CUDA_MEM_OFFSET_WIDTH;
+
+    getCudaTrace().record(std::make_shared<CudaMalloc>(virtual_ptr, size));
+
+    *devPtr = reinterpret_cast<void*>(virtual_ptr);
     return cudaSuccess;
 }
 

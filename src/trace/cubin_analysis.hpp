@@ -34,6 +34,7 @@ std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
 struct KParamInfo {
     std::string paramName;
     PtxParameterType type;
+    bool is_ptr;
     int typeSize;
     int align;
     int size;
@@ -53,7 +54,7 @@ class CubinAnalyzer {
         const std::filesystem::path &fname,
         const std::map<std::string, std::vector<KParamInfo>> &data);
 
-    std::vector<KParamInfo> parsePtxParameters(const std::string &params);
+    std::vector<KParamInfo> parsePtxParameters(const std::string &entry,const std::string &params);
     bool analyzePtx(const std::filesystem::path &path, int major_version,
                     int minor_version);
     static size_t pathToHash(const std::filesystem::path &path);

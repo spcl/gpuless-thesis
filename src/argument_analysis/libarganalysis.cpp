@@ -582,7 +582,7 @@ cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(
                       returnedAlgoCount, perfResults);
     std::stringstream argstream;
     argstream << "Number of algs: " << *returnedAlgoCount << ".";
-    argstream << " First alg: "  << perfResults[0].algo << ".";
+    argstream << " First alg memory: "  << perfResults[0].memory << ".";
     SPDLOG_LOGGER_INFO(get_logger(), argstream.str());
     return err;
 }

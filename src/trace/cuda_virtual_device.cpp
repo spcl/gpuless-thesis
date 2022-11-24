@@ -32,15 +32,27 @@ void *CudaVirtualDevice::get_scratch(size_t size) {
         throw std::runtime_error("Scratch already in use.");
     scratch_used = true;
 
-    if(size < scratch_size)
+    if (size < scratch_size)
         return scratch_memory;
 
-    if(scratch_memory != nullptr)
+    if (scratch_memory != nullptr)
         cudaFree(scratch_memory);
 
     cudaMalloc(&scratch_memory, size);
     return scratch_memory;
 }
-void CudaVirtualDevice::free_scratch() {
-    scratch_used = false;
+void CudaVirtualDevice::free_scratch() { scratch_used = false; }
+
+// Memory layout for virtual address [ -- 26B -- | --- 38B --- ], where in the
+// first 26 bytes the index of the translation array mapping to the actual
+// address is stored, and the 38 bytes are to support malloc calls up
+// to 2^38 bytes (≈274GB)
+void *CudaVirtualDevice::translate_memory(const void *virtual_addr) {
+    auto full_virtual_address = reinterpret_cast<uint64_t>(virtual_addr);
+    auto idx = static_cast<unsigned>(full_virtual_address >> CUDA_MEM_OFFSET_WIDTH);
+    uint64_t offset = full_virtual_address & ((1ULL<<CUDA_MEM_OFFSET_WIDTH)-1);
+
+    assert(idx < memory_virtual_to_real.size());
+
+    return reinterpret_cast<void*>(reinterpret_cast<uint64_t>(memory_virtual_to_real[idx]) + offset);
 }

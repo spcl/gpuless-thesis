@@ -126,3 +126,6 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy
         ${CMAKE_BINARY_DIR}/compile_commands.json
         ${CMAKE_SOURCE_DIR})
+
+add_executable(demangle_symbol
+        test/demangle_kernel_symbol.cpp)
