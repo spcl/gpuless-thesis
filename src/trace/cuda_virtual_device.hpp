@@ -13,8 +13,6 @@
 #include <string>
 
 class CudaVirtualDevice {
-  private:
-    bool initialized = false;
 
   public:
     // virtualization of cudnn handles to avoid costly synchronizations
@@ -30,7 +28,8 @@ class CudaVirtualDevice {
     std::vector<cublasHandle_t> cublas_handle_virtual_to_real;
     std::vector<cublasLtHandle_t> cublaslt_handle_virtual_to_real;
     std::vector<cublasLtMatmulDesc_t> cublaslt_matmul_handle_virtual_to_real;
-    std::vector<cublasLtMatrixLayout_t> cublaslt_matrix_layout_handle_virtual_to_real;
+    std::vector<cublasLtMatrixLayout_t>
+        cublaslt_matrix_layout_handle_virtual_to_real;
 
     // stored device attributes
     size_t device_total_mem = 0;
@@ -41,7 +40,7 @@ class CudaVirtualDevice {
     CUdevice device;
     CUcontext context;
 
-    void initRealDevice();
+    CudaVirtualDevice();
 };
 
 #endif // GPULESS_CUDA_VDEV_H

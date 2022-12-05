@@ -22,7 +22,6 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
         this->synchronize_counter_, cuda_trace.callStack().size());
 
     auto &vdev = this->cuda_virtual_device_;
-    this->cuda_virtual_device_.initRealDevice();
 
     std::set<uint64_t> required_modules;
     std::set<std::string> required_functions;
@@ -67,7 +66,7 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
                 cuda_trace.getModuleIdToFatbinResource().find(module_id);
             if (mod_it == cuda_trace.getModuleIdToFatbinResource().end()) {
                 SPDLOG_ERROR("Unknown module {} for function", module_id,
-                              rfunc);
+                             rfunc);
             }
 
             bool module_is_loaded = std::get<2>(mod_it->second);
@@ -94,7 +93,7 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
         uint64_t err = apiCall->executeNative(vdev);
         if (err != 0) {
             SPDLOG_ERROR("Failed to execute call trace: {} ({})",
-                          apiCall->nativeErrorToString(err), err);
+                         apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
     }

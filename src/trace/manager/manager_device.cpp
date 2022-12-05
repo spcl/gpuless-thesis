@@ -17,7 +17,6 @@
 
 extern const int BACKLOG;
 
-static bool g_device_initialized = false;
 static int64_t g_sync_counter = 0;
 
 static gpuless::CudaTrace &getCudaTrace() {
@@ -27,10 +26,6 @@ static gpuless::CudaTrace &getCudaTrace() {
 
 static CudaVirtualDevice &getCudaVirtualDevice() {
     static CudaVirtualDevice cuda_virtual_device;
-    if (!g_device_initialized) {
-        g_device_initialized = true;
-        cuda_virtual_device.initRealDevice();
-    }
     return cuda_virtual_device;
 }
 
@@ -102,7 +97,7 @@ void handle_execute_request(int socket_fd,
         uint64_t err = apiCall->executeNative(vdev);
         if (err != 0) {
             SPDLOG_ERROR("Failed to execute call trace: {} ({})",
-                          apiCall->nativeErrorToString(err), err);
+                         apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
     }
@@ -168,15 +163,12 @@ void manage_device(int device, uint16_t port) {
         exit(EXIT_FAILURE);
     }
 
-    // initialize cuda device pre-emptively
-    getCudaVirtualDevice().initRealDevice();
-
     int s_new;
     sockaddr remote_addr{};
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(s, &remote_addr, &remote_addrlen))) {
         SPDLOG_INFO("manager_device: connection from {}",
-                     inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
+                    inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
 
         // synchronous request handler
         handle_request(s_new);

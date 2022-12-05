@@ -8,10 +8,10 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include "manager/manager.hpp"
-#include "manager/manager_device.hpp"
 #include "cuda_api_calls.hpp"
 #include "cuda_virtual_device.hpp"
+#include "manager/manager.hpp"
+#include "manager/manager_device.hpp"
 #include "trace_executor.hpp"
 
 namespace gpuless {
