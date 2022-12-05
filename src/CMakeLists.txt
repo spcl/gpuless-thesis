@@ -4,6 +4,8 @@ project(gpuless)
 enable_language(CUDA)
 find_package(CUDAToolkit 11.4)
 
+option(BUILD_BENCHMARKS "Build the resnet50 benchmark" OFF)
+
 option(SPDLOG_LEVEL_INFO "Set the spdlog level to info" OFF)
 option(SPDLOG_LEVEL_DEBUG "Set the spdlog level to debug" OFF)
 option(SPDLOG_LEVEL_TRACE "Set the spdlog level to trace" OFF)
@@ -77,9 +79,11 @@ target_link_libraries(manager_trace
     CUDA::cublas
     pthread)
 
-add_subdirectory(
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+if(BUILD_BENCHMARKS)
+    add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+endif()
 
 add_library(analysis SHARED
     analysis/libcudaanalysis.cpp
