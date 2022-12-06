@@ -311,17 +311,20 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     for (unsigned i = 0; i < this->paramBuffers.size(); i++) {
         auto &b = this->paramBuffers[i];
         auto &infos = this->paramInfos[i];
-        if (infos.is_ptr) {
-            for (int k = 0; k < infos.size; ++k) {
-                void *virtual_addr;
-                std::memcpy(&virtual_addr,
-                            this->paramBuffers[i].data() + k*infos.typeSize,
-                            infos.typeSize);
-                void *translated = vdev.translate_memory(virtual_addr);
-                std::memcpy(this->paramBuffers[i].data() + k*infos.typeSize,
-                            &translated,
-                            infos.typeSize);
-            }
+
+        // TODO Something is wrong with the vectors
+        std::sort(infos.ptrOffsets.begin(), infos.ptrOffsets.end() );
+        infos.ptrOffsets.erase( std::unique( infos.ptrOffsets.begin(), infos.ptrOffsets.end() ), infos.ptrOffsets.end() );
+
+
+        for (int offs : infos.ptrOffsets) {
+            size_t ptr_size = sizeof(void *);
+            void *virtual_addr;
+            std::memcpy(&virtual_addr, this->paramBuffers[i].data() + offs,
+                        ptr_size);
+            void *translated = vdev.translate_memory(virtual_addr);
+            std::memcpy(this->paramBuffers[i].data() + offs, &translated,
+                        ptr_size);
         }
         args.push_back(b.data());
     }
@@ -361,10 +364,10 @@ CudaLaunchKernel::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
     }
     std::vector<flatbuffers::Offset<FBParamInfo>> fb_param_infos;
     for (const auto &p : this->paramInfos) {
-        fb_param_infos.push_back(
-            CreateFBParamInfo(builder, builder.CreateString(p.paramName),
-                              static_cast<FBPtxParameterType>(p.type), p.is_ptr,
-                              p.typeSize, p.align, p.size));
+        fb_param_infos.push_back(CreateFBParamInfo(
+            builder, builder.CreateString(p.paramName),
+            static_cast<FBPtxParameterType>(p.type), p.typeSize, p.align,
+            p.size, builder.CreateVector(p.ptrOffsets)));
     }
 
     auto gdim = FBDim3{this->gridDim.x, this->gridDim.y, this->gridDim.z};
@@ -403,12 +406,14 @@ CudaLaunchKernel::CudaLaunchKernel(const FBCudaApiCall *fb_cuda_api_call) {
 
     std::vector<KParamInfo> kpi;
     for (const auto &i : *c->param_infos()) {
-        KParamInfo info{i->name()->str(),
+        KParamInfo info(i->name()->str(),
                         static_cast<PtxParameterType>(i->ptx_param_type()),
-                        static_cast<bool>(i->is_ptr()),
                         static_cast<int>(i->type_size()),
                         static_cast<int>(i->align()),
-                        static_cast<int>(i->size())};
+                        static_cast<int>(i->size()), i->ptr_offsets()->size());
+
+        info.ptrOffsets.insert(info.ptrOffsets.begin(), i->ptr_offsets()->begin(),
+                               i->ptr_offsets()->end());
         kpi.push_back(info);
     }
 

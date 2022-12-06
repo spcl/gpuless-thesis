@@ -1,12 +1,14 @@
 CC=nvcc
 CCOPTS=-cudart shared \
-	   -arch=all-major \
+	   -arch=sm_90 \
+	   -lcudnn\
 
 TARGETS=manykernel \
 		objkernel \
 		simple \
 		globals \
 		async \
+		cudnn \
 
 .PHONY: clean
 

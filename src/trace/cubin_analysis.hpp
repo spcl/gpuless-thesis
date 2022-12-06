@@ -3,7 +3,9 @@
 
 #include <filesystem>
 #include <map>
+#include <regex>
 #include <string>
+#include <utility>
 #include <vector>
 
 enum PtxParameterType {
@@ -34,10 +36,17 @@ std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
 struct KParamInfo {
     std::string paramName;
     PtxParameterType type;
-    bool is_ptr;
     int typeSize;
     int align;
     int size;
+    std::vector<int> ptrOffsets;
+
+    KParamInfo() = default;
+
+    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
+               int alignment, int t_size, size_t vec_size)
+        : paramName(std::move(name)), type(par_type), typeSize(typesize), align(alignment),
+          size(t_size), ptrOffsets(vec_size){};
 };
 
 class CubinAnalyzer {
@@ -54,7 +63,8 @@ class CubinAnalyzer {
         const std::filesystem::path &fname,
         const std::map<std::string, std::vector<KParamInfo>> &data);
 
-    std::vector<KParamInfo> parsePtxParameters(const std::string &entry,const std::string &params);
+    std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
+                                               const std::smatch &match);
     bool analyzePtx(const std::filesystem::path &path, int major_version,
                     int minor_version);
     static size_t pathToHash(const std::filesystem::path &path);
@@ -62,8 +72,8 @@ class CubinAnalyzer {
   public:
     CubinAnalyzer() = default;
     bool isInitialized();
-    bool analyze(const std::vector<std::string>& cuda_binaries, int major_version,
-                 int minor_version);
+    bool analyze(const std::vector<std::string> &cuda_binaries,
+                 int major_version, int minor_version);
 
     bool kernel_parameters(std::string &kernel,
                            std::vector<KParamInfo> &params) const;

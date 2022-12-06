@@ -26,10 +26,10 @@ enum FBPtxParameterType : byte {
 table FBParamInfo {
     name:string;
     ptx_param_type:FBPtxParameterType;
-    is_ptr:bool;
     type_size:uint64;
     align:uint64;
     size:uint64;
+    ptr_offsets:[int];
 }
 
 struct FBDim3 {

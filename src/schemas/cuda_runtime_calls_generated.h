@@ -216,19 +216,16 @@ struct FBParamInfo FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4,
     VT_PTX_PARAM_TYPE = 6,
-    VT_IS_PTR = 8,
-    VT_TYPE_SIZE = 10,
-    VT_ALIGN = 12,
-    VT_SIZE = 14
+    VT_TYPE_SIZE = 8,
+    VT_ALIGN = 10,
+    VT_SIZE = 12,
+    VT_PTR_OFFSETS = 14
   };
   const flatbuffers::String *name() const {
     return GetPointer<const flatbuffers::String *>(VT_NAME);
   }
   FBPtxParameterType ptx_param_type() const {
     return static_cast<FBPtxParameterType>(GetField<int8_t>(VT_PTX_PARAM_TYPE, 0));
-  }
-  bool is_ptr() const {
-    return GetField<uint8_t>(VT_IS_PTR, 0) != 0;
   }
   uint64_t type_size() const {
     return GetField<uint64_t>(VT_TYPE_SIZE, 0);
@@ -239,15 +236,19 @@ struct FBParamInfo FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   uint64_t size() const {
     return GetField<uint64_t>(VT_SIZE, 0);
   }
+  const flatbuffers::Vector<int32_t> *ptr_offsets() const {
+    return GetPointer<const flatbuffers::Vector<int32_t> *>(VT_PTR_OFFSETS);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
            VerifyField<int8_t>(verifier, VT_PTX_PARAM_TYPE) &&
-           VerifyField<uint8_t>(verifier, VT_IS_PTR) &&
            VerifyField<uint64_t>(verifier, VT_TYPE_SIZE) &&
            VerifyField<uint64_t>(verifier, VT_ALIGN) &&
            VerifyField<uint64_t>(verifier, VT_SIZE) &&
+           VerifyOffset(verifier, VT_PTR_OFFSETS) &&
+           verifier.VerifyVector(ptr_offsets()) &&
            verifier.EndTable();
   }
 };
@@ -262,9 +263,6 @@ struct FBParamInfoBuilder {
   void add_ptx_param_type(FBPtxParameterType ptx_param_type) {
     fbb_.AddElement<int8_t>(FBParamInfo::VT_PTX_PARAM_TYPE, static_cast<int8_t>(ptx_param_type), 0);
   }
-  void add_is_ptr(bool is_ptr) {
-    fbb_.AddElement<uint8_t>(FBParamInfo::VT_IS_PTR, static_cast<uint8_t>(is_ptr), 0);
-  }
   void add_type_size(uint64_t type_size) {
     fbb_.AddElement<uint64_t>(FBParamInfo::VT_TYPE_SIZE, type_size, 0);
   }
@@ -273,6 +271,9 @@ struct FBParamInfoBuilder {
   }
   void add_size(uint64_t size) {
     fbb_.AddElement<uint64_t>(FBParamInfo::VT_SIZE, size, 0);
+  }
+  void add_ptr_offsets(flatbuffers::Offset<flatbuffers::Vector<int32_t>> ptr_offsets) {
+    fbb_.AddOffset(FBParamInfo::VT_PTR_OFFSETS, ptr_offsets);
   }
   explicit FBParamInfoBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -289,16 +290,16 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfo(
     flatbuffers::FlatBufferBuilder &_fbb,
     flatbuffers::Offset<flatbuffers::String> name = 0,
     FBPtxParameterType ptx_param_type = FBPtxParameterType_s8,
-    bool is_ptr = false,
     uint64_t type_size = 0,
     uint64_t align = 0,
-    uint64_t size = 0) {
+    uint64_t size = 0,
+    flatbuffers::Offset<flatbuffers::Vector<int32_t>> ptr_offsets = 0) {
   FBParamInfoBuilder builder_(_fbb);
   builder_.add_size(size);
   builder_.add_align(align);
   builder_.add_type_size(type_size);
+  builder_.add_ptr_offsets(ptr_offsets);
   builder_.add_name(name);
-  builder_.add_is_ptr(is_ptr);
   builder_.add_ptx_param_type(ptx_param_type);
   return builder_.Finish();
 }
@@ -307,19 +308,20 @@ inline flatbuffers::Offset<FBParamInfo> CreateFBParamInfoDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr,
     FBPtxParameterType ptx_param_type = FBPtxParameterType_s8,
-    bool is_ptr = false,
     uint64_t type_size = 0,
     uint64_t align = 0,
-    uint64_t size = 0) {
+    uint64_t size = 0,
+    const std::vector<int32_t> *ptr_offsets = nullptr) {
   auto name__ = name ? _fbb.CreateString(name) : 0;
+  auto ptr_offsets__ = ptr_offsets ? _fbb.CreateVector<int32_t>(*ptr_offsets) : 0;
   return CreateFBParamInfo(
       _fbb,
       name__,
       ptx_param_type,
-      is_ptr,
       type_size,
       align,
-      size);
+      size,
+      ptr_offsets__);
 }
 
 struct FBCudaMalloc FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
