@@ -10,7 +10,7 @@
 
 
 namespace PtxTreeParser {
-        
+
 enum PtxParameterType {
     s8 = 0,
     s16 = 1,
@@ -117,6 +117,18 @@ bool startsWith(const std::string &str, const std::string &prefix) {
 bool endsWith(const std::string &str, const std::string &suffix) {
     return str.size() >= suffix.size() &&
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
+bool rgetline(std::string::reverse_iterator &it, const std::string::reverse_iterator &end,
+              std::string &line) {
+    std::stringstream ss;
+    char t;
+    while (it != end && (t = *it++) != '\n') {
+        ss << t;
+    }
+    line = ss.str();
+    std::reverse(line.begin(), line.end());
+    return it != end;
 }
 
 class PtxAbstractOperand {
@@ -305,7 +317,6 @@ public:
 
     void collapse() {
         root = root->eval();
-
         // Check if root is of type PtxParamValueNode:
         // If yes, then the tree is fully collapsed and the last node is a parameter
         if(auto* collapsed_ = dynamic_cast<PtxParamValueNode*>(root)) {
@@ -334,23 +345,56 @@ public:
         return dynamic_cast<PtxParamValueNode*>(root)->getParam();
     }
 
-
     ~PtxTree() {
         delete root;
     }
 };
 
-std::vector<PtxTree> parsePtxTrees(std::istringstream& ss) {
-    return {};
+
+std::vector<PtxTree> parsePtxTrees(std::string& ss) {
+    std::vector<PtxTree> trees;
+    std::string line;
+
+    auto it = ss.rbegin();
+    const auto end_it = ss.rend();
+    while(rgetline(it, end_it, line)) {
+        if(startsWith(line, "cvta.to.global.u64")) {
+            std::cout << line << std::endl;
+        }
+    }
+
+    return trees;
 };
+
+std::vector<PtxTree> testKernel(const std::string &fname, const std::string& kernel_mangle) {
+    std::ifstream s(fname);
+    // get lines
+    std::string line;
+    std::stringstream ss;
+    bool started = false;
+    while(getline(s, line)) {
+        if (line.find(kernel_mangle) != std::string::npos) {
+            started = true;
+        } else if (line.find(".entry") != std::string::npos) {
+            started = false;
+        }
+        if (started) {
+            ss << line << std::endl;
+            
+        }
+    }
+
+    std::string kernel_lines = ss.str();
+    return parsePtxTrees(kernel_lines);
+}
 
 
 std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
                    const std::smatch &match) {
     const std::string &entry = match[1];
     const size_t str_idx = match.position(2)+1;
-    std::istringstream ss(ptx_data.substr(str_idx, ptx_data.size() - str_idx));
-    std::vector<PtxTree> trees = parsePtxTrees(ss);
+    std::string kernel_lines = ptx_data.substr(str_idx, match.length(2)-2);
+    std::vector<PtxTree> trees = parsePtxTrees(kernel_lines);
 
     // Do fancy stuff with trees
 
@@ -373,6 +417,7 @@ std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
     // }
     return {};
 }
+
 
 bool analyzePtx(const std::string &fname) {
         // analyze single ptx file
@@ -400,8 +445,10 @@ bool analyzePtx(const std::string &fname) {
 }
 } // namespace PtxTreeParser
 
+
 using namespace PtxTreeParser;
-int main() {
+
+void unit_tests() {
     // 1. Tree with 1 node, e.g.:
     {
     // cvta.to.global.u64 %r1, [myPtr];
@@ -467,5 +514,11 @@ int main() {
     assert(tree.is_param() && "Tree should be a parameter");
     std::cout << "Third Test passed\n\n";
     }
+}
 
+int main() {
+    // unit_tests();
+    std::string kernel_mangle = "_ZN6caffe24math54_GLOBAL__N__beabb26c_14_elementwise_cu_f0da4091_12388115AxpbyCUDAKernelIfdEEvlT_PKT0_S3_PS4_";
+    testKernel("dumped_ptx.ptx", kernel_mangle);
+    return 0;
 }
