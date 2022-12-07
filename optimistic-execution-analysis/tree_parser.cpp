@@ -10,8 +10,7 @@
 
 
 namespace PtxTreeParser {
-
-    
+        
 enum PtxParameterType {
     s8 = 0,
     s16 = 1,
@@ -81,8 +80,7 @@ std::map<PtxParameterType, int> &getPtxParameterTypeToSize() {
     return map_;
 }
 
-PtxParameterType
-ptxParameterTypeFromString(const std::string &str) {
+PtxParameterType ptxParameterTypeFromString(const std::string &str) {
     auto it = getStrToPtxParameterType().find(str);
     if (it == getStrToPtxParameterType().end()) {
         return PtxParameterType::invalid;
@@ -98,7 +96,6 @@ int byteSizePtxParameterType(PtxParameterType type) {
     return it->second;
 }
 
-
 std::vector<std::string> split_string(std::string str, const std::string &delimiter) {
     std::vector<std::string> result;
 
@@ -112,9 +109,6 @@ std::vector<std::string> split_string(std::string str, const std::string &delimi
     result.push_back(str);
     return result;
 }
-
-
-
 
 bool startsWith(const std::string &str, const std::string &prefix) {
     return str.rfind(prefix, 0) == 0;
@@ -165,20 +159,18 @@ public:
     virtual void print() = 0;
     virtual PtxAbstractNode* eval() = 0;
     virtual std::vector<PtxAbstractNode*> getChildren() = 0;
-    virtual ~PtxAbstractNode() = 0;
+    virtual ~PtxAbstractNode() = default;
 };
 
-
-class PtxAbstractValueNode : public virtual PtxAbstractNode {
+class PtxAbstractValueNode : public PtxAbstractNode {
 public:
-    virtual ~PtxAbstractValueNode() = 0;
-    virtual void print() = 0;
     PtxAbstractNode* eval() override {
         return this;
     }
     std::vector<PtxAbstractNode*> getChildren() override {
         return std::vector<PtxAbstractNode*>();
     }
+    virtual ~PtxAbstractValueNode() = default;
 };
 
 class PtxParamValueNode : public PtxAbstractValueNode {
@@ -189,13 +181,12 @@ public:
     void print() override {
         std::cout << "PtxParamValueNode(" << param.get_name() << ", " << getPtxParameterTypeToStr()[param.get_type()] << ", " << param.get_offset() << ")\n";
     }
-    ~PtxParamValueNode() override {}
+    ~PtxParamValueNode() {}
 
     PtxParameter getParam() {
         return param;
     }
 };
-
 
 class PtxAddNode : public PtxAbstractNode {
 private:
@@ -238,8 +229,8 @@ public:
     PtxMoveNode(PtxAbstractNode* _src) : src(_src) {};
 
     void print() override {
-        std::cout << "MoveNode" << std::endl;
-        std::cout << "\nsrc: ";
+        std::cout << "MoveNode\n";
+        std::cout << "src: ";
         src->print();
     }
 
@@ -256,9 +247,6 @@ public:
     }
 };
 
-
-
-
 typedef enum {
     PtxAddOp,
     PtxMoveOp,
@@ -270,7 +258,7 @@ private:
     bool m_is_collapsed = false;
     bool m_is_param = false;
     
-    // hashmap of registers of intereset -> leaf node
+    // hashmap of registers of interests -> leaf node
     std::unordered_map<std::string, PtxAbstractNode**> registers_to_leafs;
 
 public:
@@ -415,10 +403,69 @@ bool analyzePtx(const std::string &fname) {
 using namespace PtxTreeParser;
 int main() {
     // 1. Tree with 1 node, e.g.:
+    {
     // cvta.to.global.u64 %r1, [myPtr];
     PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
     PtxTree tree = PtxTree(param);
     tree.print();
+    tree.collapse();
+    tree.print();
+    assert(tree.is_collapsed() && "Tree should be collapsed");
+    assert(tree.is_param() && "Tree should be a parameter");
+    std::cout << "First Test passed\n\n";
+    }
 
+    // 2. Tree with 2 nodes, e.g.:
+    {
+    // cvta.to.global.u64 %r1, %r2;
+    PtxRegister* reg = new PtxRegister("%r2");
+    PtxTree tree = PtxTree(reg);
+    // mov.u64 %r2, [myPtr];
+    PtxAbstractNode** parent = tree.get_parent("%r2");
+    if (parent != nullptr) {
+        PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
+        tree.add_node(PtxMoveOp, parent, {param});
+    }
+
+    tree.print();
+    tree.collapse();
+    tree.print();
+    assert(tree.is_collapsed() && "Tree should be collapsed");
+    assert(tree.is_param() && "Tree should be a parameter");
+    std::cout << "Second Test passed\n\n";
+    }
+
+    // 3. Tree with 10 move nodes, e.g.:
+    {
+    // cvta.to.global.u64 %r1, %r2;
+    PtxRegister* param = new PtxRegister("%r2");
+    PtxTree tree = PtxTree(param);
+
+    // mov.u64 %r(i-1), r(i);
+    for(uint64_t i = 3; i < 13; ++i) {
+        std::string dst = "%r" + std::to_string(i-1);
+        std::string src = "%r" + std::to_string(i);
+
+        PtxAbstractNode** parent = tree.get_parent(dst);
+        if (parent != nullptr) {
+            PtxRegister* reg = new PtxRegister(src);
+            tree.add_node(PtxMoveOp, parent, {reg});
+        }
+    }
+
+    // mov.u64 %r12, [myPtr];
+    PtxAbstractNode** parent = tree.get_parent("%r12");
+    if (parent != nullptr) {
+        PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
+        tree.add_node(PtxMoveOp, parent, {param});
+    }
+
+    tree.print();
+    tree.collapse();
+    tree.print();
+    assert(tree.is_collapsed() && "Tree should be collapsed");
+    assert(tree.is_param() && "Tree should be a parameter");
+    std::cout << "Third Test passed\n\n";
+    }
 
 }
