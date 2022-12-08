@@ -7,7 +7,7 @@
 class TcpSocked {
 
   public:
-    explicit TcpSocked(sockaddr_in addr);
+    explicit TcpSocked(const sockaddr_in &addr);
     TcpSocked(const TcpSocked &) = delete;
     ~TcpSocked();
     TcpSocked &operator=(const TcpSocked &) = delete;

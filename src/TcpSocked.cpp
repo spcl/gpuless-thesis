@@ -3,7 +3,7 @@
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>
 
-TcpSocked::TcpSocked(sockaddr_in addr) {
+TcpSocked::TcpSocked(const sockaddr_in &addr) {
     if ((m_sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         SPDLOG_ERROR("failed to open socket");
         throw "failed to open socket";

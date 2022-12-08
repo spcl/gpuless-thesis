@@ -1,4 +1,5 @@
 #include "trace_executor_tcp_client.hpp"
+#include "../TcpSocked.hpp"
 #include "../schemas/allocation_protocol_generated.h"
 #include "cuda_trace_converter.hpp"
 #include <spdlog/spdlog.h>
@@ -10,17 +11,8 @@ TraceExecutorTcp::~TraceExecutorTcp() = default;
 
 bool TraceExecutorTcp::negotiateSession(
     gpuless::manager::instance_profile profile) {
-    int socket_fd;
-    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        SPDLOG_ERROR("failed to open socket");
-        return false;
-    }
 
-    if (connect(socket_fd, (sockaddr *)&this->manager_addr,
-                sizeof(manager_addr)) < 0) {
-        SPDLOG_ERROR("failed to connect");
-        return false;
-    }
+    TcpSocked tcp = TcpSocked(this->manager_addr);
 
     using namespace gpuless::manager;
     flatbuffers::FlatBufferBuilder builder;
@@ -30,10 +22,10 @@ bool TraceExecutorTcp::negotiateSession(
         builder, Message_AllocateRequest,
         CreateAllocateRequest(builder, profile, -1).Union());
     builder.Finish(allocate_request_msg);
-    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    tcp.send(builder.GetBufferPointer(), builder.GetSize());
 
     // manager offers some sessions
-    std::vector<uint8_t> buffer_offer = recv_buffer(socket_fd);
+    std::vector<uint8_t> buffer_offer = tcp.recv();
     auto allocate_offer_msg = GetProtocolMessage(buffer_offer.data());
     auto offered_profiles =
         allocate_offer_msg->message_as_AllocateOffer()->available_profiles();
@@ -49,10 +41,10 @@ bool TraceExecutorTcp::negotiateSession(
                              selected_profile)
             .Union());
     builder.Finish(allocate_select_msg);
-    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    tcp.send(builder.GetBufferPointer(), builder.GetSize());
 
     // get server confirmation
-    std::vector<uint8_t> buffer_confirm = recv_buffer(socket_fd);
+    std::vector<uint8_t> buffer_confirm = tcp.recv();
     auto allocate_confirm_msg = GetProtocolMessage(buffer_confirm.data());
     bool ret = false;
     if (allocate_confirm_msg->message_as_AllocateConfirm()->status() ==
@@ -64,8 +56,6 @@ bool TraceExecutorTcp::negotiateSession(
         this->exec_addr.sin_addr = *((struct in_addr *)&ip);
         ret = true;
     }
-
-    close(socket_fd);
 
     this->getDeviceAttributes();
     return ret;
