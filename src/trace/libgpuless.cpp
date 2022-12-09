@@ -144,16 +144,6 @@ static void exitHandler() {
     std::cout << "synchronize_time="
               << getTraceExecutor()->getSynchronizeTotalTime() << "s"
               << std::endl;
-
-    // deallocate session
-    if (useTcp) {
-        auto success = getTraceExecutor()->deallocate();
-        if (!success) {
-            SPDLOG_ERROR("Failed to deallocate session");
-        } else {
-            SPDLOG_INFO("Deallocated session");
-        }
-    }
 }
 
 extern "C" {

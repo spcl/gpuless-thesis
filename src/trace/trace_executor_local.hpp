@@ -25,8 +25,7 @@ class TraceExecutorLocal final : public TraceExecutor {
     TraceExecutorLocal();
     ~TraceExecutorLocal();
 
-    bool synchronize(gpuless::CudaTrace &cuda_trace);
-    bool deallocate();
+    bool synchronize(gpuless::CudaTrace &cuda_trace) override;
 };
 
 } // namespace gpuless

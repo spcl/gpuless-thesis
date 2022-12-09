@@ -16,8 +16,8 @@ class TraceExecutor {
     std::vector<int32_t> device_attributes;
 
   public:
+    virtual ~TraceExecutor() = default;
     virtual bool synchronize(gpuless::CudaTrace &cuda_trace) = 0;
-    virtual bool deallocate() = 0;
 
     size_t totalMem() const { return this->device_total_mem; }
     int32_t deviceAttribute(CUdevice_attribute attribute) {

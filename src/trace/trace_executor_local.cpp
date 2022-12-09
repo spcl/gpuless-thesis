@@ -97,6 +97,4 @@ bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     return true;
 }
 
-bool TraceExecutorLocal::deallocate() { return false; }
-
 } // namespace gpuless

@@ -8,12 +8,19 @@ namespace gpuless {
 
 TraceExecutorTcp::TraceExecutorTcp(const char *ip, const short port,
                                    manager::instance_profile profile) {
-    bool sucess = this->init(ip, port, profile);
-    if (!sucess) {
+    bool success = init(ip, port, profile);
+    if (!success) {
         throw "Unable to init TraceExecutorTcp";
     }
 };
-TraceExecutorTcp::~TraceExecutorTcp() = default;
+TraceExecutorTcp::~TraceExecutorTcp() {
+    bool success = deallocate();
+    if (!success) {
+        SPDLOG_ERROR("Failed to deallocate session");
+    } else {
+        SPDLOG_INFO("Deallocated session");
+    }
+};
 
 bool TraceExecutorTcp::negotiateSession(
     gpuless::manager::instance_profile profile) {

@@ -20,6 +20,7 @@ class TraceExecutorTcp : public TraceExecutor {
 
     bool init(const char *ip, const short port,
               manager::instance_profile profile);
+    bool deallocate();
 
   public:
     TraceExecutorTcp(const char *ip, short port,
@@ -27,7 +28,6 @@ class TraceExecutorTcp : public TraceExecutor {
     ~TraceExecutorTcp();
 
     bool synchronize(gpuless::CudaTrace &cuda_trace) override;
-    bool deallocate() override;
 
     double getSynchronizeTotalTime() const override;
 };
