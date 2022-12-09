@@ -16,8 +16,6 @@ class TraceExecutor {
     std::vector<int32_t> device_attributes;
 
   public:
-    virtual bool init(const char *ip, short port,
-                      gpuless::manager::instance_profile profile) = 0;
     virtual bool synchronize(gpuless::CudaTrace &cuda_trace) = 0;
     virtual bool deallocate() = 0;
 

@@ -93,10 +93,11 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
         }
 
         if (useTcp) {
-            trace_executor = std::make_shared<TraceExecutorTcp>();
-            bool r = trace_executor->init(manager_ip, manager_port,
-                                          manager::instance_profile::NO_MIG);
-            if (!r) {
+            try {
+                trace_executor = std::make_shared<TraceExecutorTcp>(
+                    manager_ip, manager_port,
+                    manager::instance_profile::NO_MIG);
+            } catch (...) {
                 SPDLOG_ERROR("Failed to initialize TCP trace executor");
                 std::exit(EXIT_FAILURE);
             }

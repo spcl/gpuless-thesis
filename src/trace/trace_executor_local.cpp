@@ -10,11 +10,6 @@ TraceExecutorLocal::TraceExecutorLocal() {}
 
 TraceExecutorLocal::~TraceExecutorLocal() = default;
 
-bool TraceExecutorLocal::init(const char *ip, const short port,
-                              manager::instance_profile profile) {
-    return true;
-}
-
 bool TraceExecutorLocal::synchronize(gpuless::CudaTrace &cuda_trace) {
     this->synchronize_counter_++;
     SPDLOG_INFO(

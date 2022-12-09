@@ -6,57 +6,64 @@
 
 namespace gpuless {
 
-TraceExecutorTcp::TraceExecutorTcp() = default;
+TraceExecutorTcp::TraceExecutorTcp(const char *ip, const short port,
+                                   manager::instance_profile profile) {
+    bool sucess = this->init(ip, port, profile);
+    if (!sucess) {
+        throw "Unable to init TraceExecutorTcp";
+    }
+};
 TraceExecutorTcp::~TraceExecutorTcp() = default;
 
 bool TraceExecutorTcp::negotiateSession(
     gpuless::manager::instance_profile profile) {
-
-    TcpSocked tcp = TcpSocked(this->manager_addr);
-
-    using namespace gpuless::manager;
-    flatbuffers::FlatBufferBuilder builder;
-
-    // make initial request
-    auto allocate_request_msg = CreateProtocolMessage(
-        builder, Message_AllocateRequest,
-        CreateAllocateRequest(builder, profile, -1).Union());
-    builder.Finish(allocate_request_msg);
-    tcp.send(builder.GetBufferPointer(), builder.GetSize());
-
-    // manager offers some sessions
-    std::vector<uint8_t> buffer_offer = tcp.recv();
-    auto allocate_offer_msg = GetProtocolMessage(buffer_offer.data());
-    auto offered_profiles =
-        allocate_offer_msg->message_as_AllocateOffer()->available_profiles();
-    int32_t selected_profile = offered_profiles->Get(0);
-    this->session_id_ =
-        allocate_offer_msg->message_as_AllocateOffer()->session_id();
-
-    // choose a profile and send finalize request
-    builder.Reset();
-    auto allocate_select_msg = CreateProtocolMessage(
-        builder, Message_AllocateSelect,
-        CreateAllocateSelect(builder, Status_OK, this->session_id_,
-                             selected_profile)
-            .Union());
-    builder.Finish(allocate_select_msg);
-    tcp.send(builder.GetBufferPointer(), builder.GetSize());
-
-    // get server confirmation
-    std::vector<uint8_t> buffer_confirm = tcp.recv();
-    auto allocate_confirm_msg = GetProtocolMessage(buffer_confirm.data());
     bool ret = false;
-    if (allocate_confirm_msg->message_as_AllocateConfirm()->status() ==
-        Status_OK) {
-        auto port = allocate_confirm_msg->message_as_AllocateConfirm()->port();
-        auto ip = allocate_confirm_msg->message_as_AllocateConfirm()->ip();
-        this->exec_addr.sin_family = AF_INET;
-        this->exec_addr.sin_port = htons(port);
-        this->exec_addr.sin_addr = *((struct in_addr *)&ip);
-        ret = true;
-    }
+    {
+        TcpSocked tcp = TcpSocked(this->manager_addr);
 
+        using namespace gpuless::manager;
+        flatbuffers::FlatBufferBuilder builder;
+
+        // make initial request
+        auto allocate_request_msg = CreateProtocolMessage(
+            builder, Message_AllocateRequest,
+            CreateAllocateRequest(builder, profile, -1).Union());
+        builder.Finish(allocate_request_msg);
+        tcp.send(builder.GetBufferPointer(), builder.GetSize());
+
+        // manager offers some sessions
+        std::vector<uint8_t> buffer_offer = tcp.recv();
+        auto allocate_offer_msg = GetProtocolMessage(buffer_offer.data());
+        auto offered_profiles = allocate_offer_msg->message_as_AllocateOffer()
+                                    ->available_profiles();
+        int32_t selected_profile = offered_profiles->Get(0);
+        this->session_id_ =
+            allocate_offer_msg->message_as_AllocateOffer()->session_id();
+
+        // choose a profile and send finalize request
+        builder.Reset();
+        auto allocate_select_msg = CreateProtocolMessage(
+            builder, Message_AllocateSelect,
+            CreateAllocateSelect(builder, Status_OK, this->session_id_,
+                                 selected_profile)
+                .Union());
+        builder.Finish(allocate_select_msg);
+        tcp.send(builder.GetBufferPointer(), builder.GetSize());
+
+        // get server confirmation
+        std::vector<uint8_t> buffer_confirm = tcp.recv();
+        auto allocate_confirm_msg = GetProtocolMessage(buffer_confirm.data());
+        if (allocate_confirm_msg->message_as_AllocateConfirm()->status() ==
+            Status_OK) {
+            auto port =
+                allocate_confirm_msg->message_as_AllocateConfirm()->port();
+            auto ip = allocate_confirm_msg->message_as_AllocateConfirm()->ip();
+            this->exec_addr.sin_family = AF_INET;
+            this->exec_addr.sin_port = htons(port);
+            this->exec_addr.sin_addr = *((struct in_addr *)&ip);
+            ret = true;
+        }
+    }
     this->getDeviceAttributes();
     return ret;
 }

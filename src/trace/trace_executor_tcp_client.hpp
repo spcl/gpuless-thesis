@@ -18,12 +18,14 @@ class TraceExecutorTcp : public TraceExecutor {
     bool negotiateSession(manager::instance_profile profile);
     bool getDeviceAttributes();
 
+    bool init(const char *ip, const short port,
+              manager::instance_profile profile);
+
   public:
-    TraceExecutorTcp();
+    TraceExecutorTcp(const char *ip, short port,
+                     manager::instance_profile profile);
     ~TraceExecutorTcp();
 
-    bool init(const char *ip, short port,
-              manager::instance_profile profile) override;
     bool synchronize(gpuless::CudaTrace &cuda_trace) override;
     bool deallocate() override;
 
