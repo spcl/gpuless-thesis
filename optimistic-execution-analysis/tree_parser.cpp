@@ -32,6 +32,12 @@ enum PtxParameterType {
     invalid = 17, // invalid type for signaling errors
 };
 
+typedef enum {
+    AddOp,
+    MoveOp,
+    invalidOp,
+} PtxOpCode;
+
 struct KParamInfo {
     std::string paramName;
     PtxParameterType type;
@@ -48,6 +54,12 @@ struct KParamInfo {
           size(t_size), ptrOffsets(vec_size){};
 };
 
+std::map<std::string, PtxOpCode> &getStrToPtxOpCode() {
+    static std::map<std::string, PtxOpCode> map_ = {
+        {"add", AddOp}, {"mov", MoveOp},
+    };
+    return map_;
+}
 
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType() {
     static std::map<std::string, PtxParameterType> map_ = {
@@ -88,6 +100,14 @@ PtxParameterType ptxParameterTypeFromString(const std::string &str) {
     return it->second;
 }
 
+PtxOpCode ptxOpCodeFromString(const std::string &str) {
+    auto it = getStrToPtxOpCode().find(str);
+    if (it == getStrToPtxOpCode().end()) {
+        return PtxOpCode::invalidOp;
+    }
+    return it->second;
+}
+
 int byteSizePtxParameterType(PtxParameterType type) {
     auto it = getPtxParameterTypeToSize().find(type);
     if (it == getPtxParameterTypeToSize().end()) {
@@ -121,6 +141,7 @@ bool endsWith(const std::string &str, const std::string &suffix) {
 
 bool rgetline(std::string::reverse_iterator &it, const std::string::reverse_iterator &end,
               std::string &line) {
+    if(it == end) return false;
     std::stringstream ss;
     char t;
     while (it != end && (t = *it++) != '\n') {
@@ -128,40 +149,66 @@ bool rgetline(std::string::reverse_iterator &it, const std::string::reverse_iter
     }
     line = ss.str();
     std::reverse(line.begin(), line.end());
-    return it != end;
+    return true;
 }
 
 class PtxAbstractOperand {
 public:
     // Make this struct abstract
     virtual std::string get_name() = 0;
+    virtual uint64_t get_offset() {
+        return 0;
+    }
 };
 
 class PtxRegister: public PtxAbstractOperand {
 private:
     std::string name;
+    uint64_t offset;
+    std::string name_with_offset;
 public:
-    PtxRegister(std::string _name) : name(_name) {};
+    PtxRegister(std::string _name_with_offset) : name_with_offset(_name_with_offset) {
+        auto split = split_string(name, "+");
+        name = split[0];
+        offset = split.size() == 1 ? 0 : std::stoull(split[1]);
+    };
+    PtxRegister(std::string _name, uint64_t _offset) : name(_name), offset(_offset) {
+        name_with_offset = name + "+" + std::to_string(offset);
+    };
     std::string get_name() override {
         return name;
+    }
+    uint64_t get_offset() override {
+        return offset;
+    }
+    std::string get_name_with_offset() {
+        return name_with_offset;
     }
 };
 
 class PtxParameter : public PtxAbstractOperand {
 private:
     std::string name;
-    PtxParameterType type;
     uint64_t offset;
+    std::string name_with_offset;
+    PtxParameterType type = PtxParameterType::invalid;
 public:
     PtxParameter(std::string _name, PtxParameterType _type, uint64_t _offset) : name(_name), type(_type), offset(_offset) {};
+    PtxParameter(std::string _name, uint64_t _offset) : name(_name), offset(_offset) {};
+    PtxParameter(std::string _name_with_offset) : name_with_offset(_name_with_offset) {
+        auto split = split_string(_name_with_offset, "+");
+        name = split[0];
+        offset = split.size() == 1 ? 0 : std::stoull(split[1]);
+    };
     std::string get_name() override {
         return name;
     }
-    PtxParameterType get_type() {
-        return type;
-    }
     uint64_t get_offset() {
         return offset;
+    }
+    PtxParameterType get_type() {
+        assert(type != PtxParameterType::invalid && "Type of parameter not known");
+        return type;
     }
 };
 
@@ -191,7 +238,8 @@ private:
 public:
     PtxParamValueNode(PtxParameter _param) : param(_param) {};
     void print() override {
-        std::cout << "PtxParamValueNode(" << param.get_name() << ", " << getPtxParameterTypeToStr()[param.get_type()] << ", " << param.get_offset() << ")\n";
+        // std::cout << "PtxParamValueNode(" << param.get_name() << ", " << getPtxParameterTypeToStr()[param.get_type()] << ", " << param.get_offset() << ")\n";
+        std::cout << "PtxParamValueNode(" << param.get_name() << ", " << param.get_offset() << ")\n";
     }
     ~PtxParamValueNode() {}
 
@@ -259,14 +307,11 @@ public:
     }
 };
 
-typedef enum {
-    PtxAddOp,
-    PtxMoveOp,
-} PtxOpCode;
+
 
 class PtxTree {
 private:
-    PtxAbstractNode* root;
+    PtxAbstractNode* root = nullptr;
     bool m_is_collapsed = false;
     bool m_is_param = false;
     
@@ -277,15 +322,16 @@ public:
     PtxTree(PtxAbstractOperand* operand) {
         if (auto* reg = dynamic_cast<PtxRegister*>(operand)) {
             // In this case we don't have to register a node
-            registers_to_leafs[reg->get_name()] = &root;
+            registers_to_leafs[reg->get_name_with_offset()] = &root;
         } else if (auto* param = dynamic_cast<PtxParameter*>(operand)) {
             root = new PtxParamValueNode(*param);
         } else {
             assert(false && "Unknown operand type");
         }
+
     };
 
-    void print() {
+    void print() const {
         std::cout << "CvtaNode:\n";
         root->print();
     }
@@ -301,11 +347,11 @@ public:
 
     void add_node(PtxOpCode opcode, PtxAbstractNode** parent_to_child, std::vector<PtxAbstractOperand*> operands) {
         switch(opcode) {
-            case PtxMoveOp:
+            case MoveOp:
                 assert(operands.size() == 1 && "Move operation must have 1 operand");
                 if (auto* reg = dynamic_cast<PtxRegister*>(operands[0])) {
                     // In this case we don't have to register a node
-                    registers_to_leafs[reg->get_name()] = parent_to_child;
+                    registers_to_leafs[reg->get_name_with_offset()] = parent_to_child;
                 } else if(auto* param = dynamic_cast<PtxParameter*>(operands[0])) {
                     *parent_to_child = new PtxMoveNode(new PtxParamValueNode(*param));
                 } else {
@@ -358,12 +404,53 @@ std::vector<PtxTree> parsePtxTrees(std::string& ss) {
     auto it = ss.rbegin();
     const auto end_it = ss.rend();
     while(rgetline(it, end_it, line)) {
+        std::cout << line << std::endl;
         if(startsWith(line, "cvta.to.global.u64")) {
-            std::cout << line << std::endl;
+            // Create a new tree and add it to the vector
+            auto splitted_line = split_string(line, " ");
+            // the operand is the last element, without the ;
+            auto operand = splitted_line.back();
+            operand.pop_back();
+            if (operand[0] == '[') {
+                operand = operand.substr(1, operand.size() - 2);
+            }
+            if (operand[0] == '%') {
+                auto* reg = new PtxRegister(operand);
+                trees.push_back(PtxTree(reg));  
+            } else {
+                auto* param = new PtxParameter(operand);
+                trees.push_back(PtxTree(param));
+            }
+        } else if(startsWith(line, "mov.u64") || startsWith(line, "mov.b64")) {
+            auto operands = split_string(line, ",");
+            std::string dst = split_string(operands[0], " ").back();
+            // Check if the dst is a register of interest
+            for(auto& tree: trees) {
+                auto* parent = tree.get_parent(dst);
+                if(parent != nullptr) {
+                    std::string src = split_string(operands[1], " ").back();
+                    // Remove ; from src and if necessary [] from src
+                    src.pop_back();
+                    if(src[0] == '[') {
+                        src = src.substr(1, src.size() - 2);
+                    }
+                    if(src[0] == '%') {
+                        tree.add_node(MoveOp, parent, {new PtxRegister(src)});
+                    } else {
+                        tree.add_node(MoveOp, parent, {new PtxParameter(src)});
+                    }
+                    break;
+                }
+            }
         }
     }
 
     return trees;
+};
+
+struct NameWithOffset {
+    std::string name;
+    int offset;
 };
 
 std::vector<PtxTree> testKernel(const std::string &fname, const std::string& kernel_mangle) {
@@ -371,21 +458,78 @@ std::vector<PtxTree> testKernel(const std::string &fname, const std::string& ker
     // get lines
     std::string line;
     std::stringstream ss;
+
+    // 1. Get the kernel lines and find the parameters
     bool started = false;
+    std::vector<NameWithOffset> params;
+    std::vector<KParamInfo> raw_parameters;
+
+
     while(getline(s, line)) {
         if (line.find(kernel_mangle) != std::string::npos) {
             started = true;
         } else if (line.find(".entry") != std::string::npos) {
             started = false;
         }
-        if (started) {
-            ss << line << std::endl;
-            
+        if (!started) continue;
+        
+        if (line.find(')') != std::string::npos) {
+            break;
         }
+        // NO parameters
+        if(!startsWith(line, ".param")) {
+            break;
+        }
+        assert(startsWith(line, ".param") && "Expected .param directive");
+        auto splitted_line = split_string(line, " ");
+
+        // Remove last comma
+        auto last = splitted_line.back();
+        if(endsWith(last, ",")) {
+            splitted_line.back() = last.substr(0, last.size() - 1);
+        }
+
+        if(splitted_line[1] == ".align") {
+            int param_align = std::stoi(splitted_line[2]);
+            const std::string &name = splitted_line[4];
+            std::vector<std::string> splitted_name = split_string(name, "[");
+            const std::string &param_name = splitted_name[0];
+            // Remove last ']' from the size
+            int param_size = std::stoi(
+                splitted_name[1].substr(0, splitted_name[1].size() - 1));
+
+            std::string type_name = splitted_line[3].substr(1, splitted_line[3].size());
+            PtxParameterType param_type = ptxParameterTypeFromString(type_name);
+            int param_typeSize = byteSizePtxParameterType(param_type);
+
+            KParamInfo param(param_name, ptxParameterTypeFromString(type_name), param_typeSize, param_align, param_size, 0);
+            raw_parameters.push_back(param);
+
+            for(int offset = 0; offset < param_size; offset += param_align) {
+                params.push_back({param_name, offset});
+            }
+        } else {
+            std::string &name = splitted_line[2];
+            std::string typeName = splitted_line[1].substr(1, splitted_line[1].size()-1);
+            auto type = ptxParameterTypeFromString(typeName);
+            KParamInfo param(name, type, byteSizePtxParameterType(type), 0, 1, 0);
+
+            raw_parameters.push_back(param);
+            params.push_back({name ,0});
+        }
+           
     }
 
+    // 2. Parse the trees
     std::string kernel_lines = ss.str();
-    return parsePtxTrees(kernel_lines);
+    std::vector<PtxTree> trees = parsePtxTrees(kernel_lines);
+
+
+    // 3. Update KParamInfos according to the trees
+
+    // Go through every tree, collapse them and update the parameters if they're ptrs
+
+    return trees;
 }
 
 
@@ -448,7 +592,30 @@ bool analyzePtx(const std::string &fname) {
 
 using namespace PtxTreeParser;
 
-void unit_tests() {
+void parsePtxTrees_tests() {
+    // 1. Tree with 1 node, e.g.:
+    {
+    std::string s = "cvta.to.global.u64 %r1, [myPtr];\n";
+    std::vector<PtxTree> trees = parsePtxTrees(s);
+
+    for(auto &tree : trees) tree.print();
+    }
+    // // 2. Tree with 2 nodes, e.g.:
+    // {
+    // std::string s = "mov.u64 %r2, [myPtr];\ncvta.to.global.u64 %r1, %r2;\n";
+    // std::vector<PtxTree> trees = parsePtxTrees(s);
+    // for(const auto &tree : trees) tree.print();
+    // }
+    // // 2. Multiple Trees with 2 nodes, e.g.:
+    // {
+    // std::string s1 = "mov.u64 %r2, [myPtr1];\ncvta.to.global.u64 %r1, %r2;\n";
+    // std::string s2 = "mov.u64 %r2, [myPtr2];\ncvta.to.global.u64 %r1, %r2;\n";
+    // std::string s = s1 + s2;
+    // std::vector<PtxTree> trees = parsePtxTrees(s);
+    // for(const auto &tree : trees) tree.print();
+    // }
+}
+void PtxTree_tests() {
     // 1. Tree with 1 node, e.g.:
     {
     // cvta.to.global.u64 %r1, [myPtr];
@@ -471,7 +638,7 @@ void unit_tests() {
     PtxAbstractNode** parent = tree.get_parent("%r2");
     if (parent != nullptr) {
         PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
-        tree.add_node(PtxMoveOp, parent, {param});
+        tree.add_node(MoveOp, parent, {param});
     }
 
     tree.print();
@@ -496,7 +663,7 @@ void unit_tests() {
         PtxAbstractNode** parent = tree.get_parent(dst);
         if (parent != nullptr) {
             PtxRegister* reg = new PtxRegister(src);
-            tree.add_node(PtxMoveOp, parent, {reg});
+            tree.add_node(MoveOp, parent, {reg});
         }
     }
 
@@ -504,7 +671,7 @@ void unit_tests() {
     PtxAbstractNode** parent = tree.get_parent("%r12");
     if (parent != nullptr) {
         PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
-        tree.add_node(PtxMoveOp, parent, {param});
+        tree.add_node(MoveOp, parent, {param});
     }
 
     tree.print();
@@ -517,8 +684,9 @@ void unit_tests() {
 }
 
 int main() {
-    // unit_tests();
-    std::string kernel_mangle = "_ZN6caffe24math54_GLOBAL__N__beabb26c_14_elementwise_cu_f0da4091_12388115AxpbyCUDAKernelIfdEEvlT_PKT0_S3_PS4_";
-    testKernel("dumped_ptx.ptx", kernel_mangle);
+    // PtxTree_tests();
+    parsePtxTrees_tests();
+    // std::string kernel_mangle = "_ZN6caffe24math54_GLOBAL__N__beabb26c_14_elementwise_cu_f0da4091_12388115AxpbyCUDAKernelIfdEEvlT_PKT0_S3_PS4_";
+    // testKernel("dumped_ptx.ptx", kernel_mangle);
     return 0;
 }
