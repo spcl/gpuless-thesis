@@ -143,9 +143,9 @@ add_executable(demangle_symbol
 
 add_executable(
         parser_tests
-        ../optimistic-execution-analysis/tests/parser_tests.cpp
-        ../optimistic-execution-analysis/tree_parser.cpp
-)
+        trace/cubin_parser/tests/parser_tests.cpp
+        trace/cubin_parser/tree_parser.cpp
+        trace/cubin_parser/ptx_tree.cpp trace/cubin_parser/ptx_tree.h trace/cubin_parser/parser_util.cpp trace/cubin_parser/parser_util.h)
 target_link_libraries(
         parser_tests
         GTest::gtest_main
@@ -153,5 +153,3 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(parser_tests)
-
-add_executable(ptx_parser ../optimistic-execution-analysis/tree_parser.cpp)

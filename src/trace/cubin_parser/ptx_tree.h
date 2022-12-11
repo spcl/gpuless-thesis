@@ -1,5 +1,5 @@
-#ifndef GPULESS_TREE_PARSER_H
-#define GPULESS_TREE_PARSER_H
+#ifndef GPULESS_PTX_TREE_H
+#define GPULESS_PTX_TREE_H
 
 #include <array>
 #include <map>
@@ -9,30 +9,11 @@
 #include <utility>
 #include <vector>
 
+#include "../cubin_analysis.hpp"
+
 namespace PtxTreeParser {
 
-enum PtxParameterType {
-    s8 = 0,
-    s16 = 1,
-    s32 = 2,
-    s64 = 3, // signed integers
-    u8 = 4,
-    u16 = 5,
-    u32 = 6,
-    u64 = 7, // unsigned integers
-    f16 = 8,
-    f16x2 = 9,
-    f32 = 10,
-    f64 = 11, // floating-point
-    b8 = 12,
-    b16 = 13,
-    b32 = 14,
-    b64 = 15,     // untyped bits
-    pred = 16,    // predicate
-    invalid = 17, // invalid type for signaling errors
-};
-
-typedef enum {
+enum class PtxNodeKind {
     Parameter,
     Immediate,
     ImmediateArray,
@@ -42,34 +23,29 @@ typedef enum {
     MoveOp,
     Register,
     invalidOp,
-} PtxNodeKind;
-
-typedef enum { ThreadId, NThreadIds, CTAId, NCTAIds } SpecialRegisterKind;
-
-struct KParamInfo {
-    std::string paramName;
-    PtxParameterType type;
-    int typeSize{};
-    int align{};
-    int size{};
-    std::vector<int> ptrOffsets;
-
-    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
-               int alignment, int t_size, size_t vec_size)
-        : paramName(std::move(name)), type(par_type), typeSize(typesize),
-          align(alignment), size(t_size), ptrOffsets(vec_size){};
-
-    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
-               int alignment, int offset)
-        : paramName(std::move(name)), type(par_type), typeSize(typesize),
-          align(alignment), size(1), ptrOffsets(1) {
-        ptrOffsets[0] = offset;
-    };
 };
+
+enum class SpecialRegisterKind { ThreadId, NThreadIds, CTAId, NCTAIds };
 
 struct KLaunchConfig {
     std::array<int, 3> gridDim;
     std::array<int, 3> blockDim;
+};
+
+enum class PtxOperandKind {
+    Register,
+    Parameter,
+    Immediate,
+    SpecialRegisterTid,
+    SpecialRegisterNTid,
+    SpecialRegisterCtaId,
+    SpecialRegisterNCtaId
+};
+
+struct PtxOperand {
+    PtxOperandKind kind;
+    std::string name;
+    int64_t offset;
 };
 
 class PtxAbstractNode {
@@ -93,7 +69,7 @@ class PtxImmediate : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return Immediate; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::Immediate; }
 
     [[nodiscard]] int64_t &get_value() { return _value; }
     [[nodiscard]] int64_t get_value() const { return _value; }
@@ -112,7 +88,7 @@ class PtxImmediateArray : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return ImmediateArray; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::ImmediateArray; }
 
     [[nodiscard]] std::vector<int64_t> &get_values() { return _values; }
     [[nodiscard]] const std::vector<int64_t> &get_values() const {
@@ -129,6 +105,25 @@ class PtxSpecialRegister : public PtxAbstractNode {
   public:
     PtxSpecialRegister(SpecialRegisterKind kind, int dim)
         : _kind(kind), _dim(dim) {}
+    PtxSpecialRegister(PtxOperandKind kind, int dim)
+        : _dim(dim) {
+        switch (kind) {
+        case PtxOperandKind::SpecialRegisterTid:
+            _kind = SpecialRegisterKind::ThreadId;
+            break;
+        case PtxOperandKind::SpecialRegisterNTid:
+            _kind = SpecialRegisterKind::NThreadIds;
+            break;
+        case PtxOperandKind::SpecialRegisterCtaId:
+            _kind = SpecialRegisterKind::CTAId;
+            break;
+        case PtxOperandKind::SpecialRegisterNCtaId:
+            _kind = SpecialRegisterKind::NThreadIds;
+            break;
+        default:
+            throw std::runtime_error("Invalid Opearnd for SpecialRegister.");
+        }
+    }
     PtxSpecialRegister(SpecialRegisterKind kind, int dim,
                        std::vector<int64_t> values)
         : _kind(kind), _dim(dim), _values(std::move(values)) {}
@@ -136,7 +131,7 @@ class PtxSpecialRegister : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return SpecialRegister; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::SpecialRegister; }
 
     [[nodiscard]] std::vector<int64_t> &get_values() { return _values; }
     [[nodiscard]] const std::vector<int64_t> &get_values() const {
@@ -171,7 +166,7 @@ class PtxParameter : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return Parameter; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::Parameter; }
 
     [[nodiscard]] std::string get_name() const { return _name; };
     [[nodiscard]] std::vector<int> &get_offsets() { return _offsets; };
@@ -195,7 +190,7 @@ class PtxAddNode : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return AddOp; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
 
   private:
     std::unique_ptr<node_type> _left;
@@ -212,7 +207,7 @@ class PtxCvtaNode : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return Cvta; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::Cvta; }
 
   private:
     std::unique_ptr<node_type> _dst;
@@ -238,10 +233,10 @@ class PtxTree {
                           const std::string &new_register);
 
     void add_node(std::unique_ptr<node_type> new_node,
-                  const std::string &dst_register,
-                  const std::vector<std::string> &src_registers);
+                  const std::vector<PtxOperand> &operands);
 
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config);
+
   private:
     std::unique_ptr<node_type> _root;
 
@@ -249,6 +244,12 @@ class PtxTree {
     std::unordered_map<std::string, std::pair<node_type *, int>>
         _registers_to_leafs;
 };
+
+/*
+ * Serialization
+ */
+std::string stringFromNodeKind(PtxNodeKind kind);
+std::string stringFromSpecialRegister(SpecialRegisterKind kind);
 
 std::map<std::string, PtxNodeKind> &getStrToPtxNodeKind();
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
@@ -258,15 +259,6 @@ PtxParameterType ptxParameterTypeFromString(const std::string &str);
 PtxNodeKind ptxNodeKindFromString(const std::string &str);
 int byteSizePtxParameterType(PtxParameterType type);
 
-std::vector<std::string> split_string(std::string str,
-                                      const std::string &delimiter);
-bool startsWith(const std::string &str, const std::string &prefix);
-bool endsWith(const std::string &str, const std::string &suffix);
-bool rgetline(std::string::reverse_iterator &it,
-              const std::string::reverse_iterator &end, std::string &line);
-
-std::vector<PtxTree> parsePtxTrees(std::string& ss);
-
 } // namespace PtxTreeParser
 
-#endif // GPULESS_TREE_PARSER_H
+#endif // GPULESS_PTX_TREE_H

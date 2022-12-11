@@ -45,8 +45,15 @@ struct KParamInfo {
 
     KParamInfo(std::string name, PtxParameterType par_type, int typesize,
                int alignment, int t_size, size_t vec_size)
-        : paramName(std::move(name)), type(par_type), typeSize(typesize), align(alignment),
-          size(t_size), ptrOffsets(vec_size){};
+        : paramName(std::move(name)), type(par_type), typeSize(typesize),
+          align(alignment), size(t_size), ptrOffsets(vec_size){};
+
+    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
+               int alignment, int offset)
+        : paramName(std::move(name)), type(par_type), typeSize(typesize),
+          align(alignment), size(1), ptrOffsets(1) {
+        ptrOffsets[0] = offset;
+    };
 };
 
 class CubinAnalyzer {
