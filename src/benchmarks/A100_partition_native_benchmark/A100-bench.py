@@ -16,8 +16,8 @@ home = os.environ['HOME']
 out_dir = f'{home}/runs/bench-results'
 date = cmd('date --iso-8601=seconds')
 # hard coded benchmark directory
-benchmark_name = f'bfs'
-path_to_benchmark = f'./{benchmark_name}'
+benchmark_name = f'hotspot'
+path_to_benchmark = f'../{benchmark_name}'
 os.chdir(path_to_benchmark)
 out_file = f'{out_dir}/A100-{benchmark_name}-bench-{date}.out'
 nruns = 100
