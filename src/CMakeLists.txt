@@ -39,13 +39,24 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O2 -Wall -Wextra -Wno-unused-parameter -ggdb")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -O2 -Wall -Wextra -Wno-unused-parameter -ggdb")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall -Wextra -Wno-unused-parameter -ggdb -fno-operator-names")
 
 set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_ARCHITECTURES "80")
 set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
+
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
 
 # build flatbuffer schemas with external Makefile
 add_custom_target(
@@ -129,3 +140,18 @@ add_custom_command(
 
 add_executable(demangle_symbol
         test/demangle_kernel_symbol.cpp)
+
+add_executable(
+        parser_tests
+        ../optimistic-execution-analysis/tests/parser_tests.cpp
+        ../optimistic-execution-analysis/tree_parser.cpp
+)
+target_link_libraries(
+        parser_tests
+        GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(parser_tests)
+
+add_executable(ptx_parser ../optimistic-execution-analysis/tree_parser.cpp)

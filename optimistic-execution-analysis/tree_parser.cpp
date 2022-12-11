@@ -1,62 +1,17 @@
-#include <map>
-#include <unordered_map>
-#include <string>
-#include <vector>
+#include "tree_parser.h"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <numeric>
 #include <regex>
-#include <utility>
-#include <assert.h>
-
+#include <sstream>
 
 namespace PtxTreeParser {
 
-enum PtxParameterType {
-    s8 = 0,
-    s16 = 1,
-    s32 = 2,
-    s64 = 3, // signed integers
-    u8 = 4,
-    u16 = 5,
-    u32 = 6,
-    u64 = 7, // unsigned integers
-    f16 = 8,
-    f16x2 = 9,
-    f32 = 10,
-    f64 = 11, // floating-point
-    b8 = 12,
-    b16 = 13,
-    b32 = 14,
-    b64 = 15,     // untyped bits
-    pred = 16,    // predicate
-    invalid = 17, // invalid type for signaling errors
-};
-
-typedef enum {
-    AddOp,
-    MoveOp,
-    invalidOp,
-} PtxOpCode;
-
-struct KParamInfo {
-    std::string paramName;
-    PtxParameterType type;
-    int typeSize;
-    int align;
-    int size;
-    std::vector<int> ptrOffsets;
-
-    KParamInfo() = default;
-
-    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
-               int alignment, int t_size, size_t vec_size)
-        : paramName(std::move(name)), type(par_type), typeSize(typesize), align(alignment),
-          size(t_size), ptrOffsets(vec_size){};
-};
-
-std::map<std::string, PtxOpCode> &getStrToPtxOpCode() {
-    static std::map<std::string, PtxOpCode> map_ = {
-        {"add", AddOp}, {"mov", MoveOp},
+std::map<std::string, PtxNodeKind> &getStrToPtxNodeKind() {
+    static std::map<std::string, PtxNodeKind> map_ = {
+        {"add", AddOp},
+        {"mov", MoveOp},
     };
     return map_;
 }
@@ -100,10 +55,10 @@ PtxParameterType ptxParameterTypeFromString(const std::string &str) {
     return it->second;
 }
 
-PtxOpCode ptxOpCodeFromString(const std::string &str) {
-    auto it = getStrToPtxOpCode().find(str);
-    if (it == getStrToPtxOpCode().end()) {
-        return PtxOpCode::invalidOp;
+PtxNodeKind ptxOpCodeFromString(const std::string &str) {
+    auto it = getStrToPtxNodeKind().find(str);
+    if (it == getStrToPtxNodeKind().end()) {
+        return PtxNodeKind ::invalidOp;
     }
     return it->second;
 }
@@ -116,7 +71,8 @@ int byteSizePtxParameterType(PtxParameterType type) {
     return it->second;
 }
 
-std::vector<std::string> split_string(std::string str, const std::string &delimiter) {
+std::vector<std::string> split_string(std::string str,
+                                      const std::string &delimiter) {
     std::vector<std::string> result;
 
     size_t pos = 0;
@@ -139,9 +95,10 @@ bool endsWith(const std::string &str, const std::string &suffix) {
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
 
-bool rgetline(std::string::reverse_iterator &it, const std::string::reverse_iterator &end,
-              std::string &line) {
-    if(it == end) return false;
+bool rgetline(std::string::reverse_iterator &it,
+              const std::string::reverse_iterator &end, std::string &line) {
+    if (it == end)
+        return false;
     std::stringstream ss;
     char t;
     while (it != end && (t = *it++) != '\n') {
@@ -152,389 +109,349 @@ bool rgetline(std::string::reverse_iterator &it, const std::string::reverse_iter
     return true;
 }
 
-class PtxAbstractOperand {
-public:
-    // Make this struct abstract
-    virtual std::string get_name() = 0;
-    virtual uint64_t get_offset() {
-        return 0;
-    }
-};
+/*
+ *  PTX NODES IMPLEMENTATIONS
+ */
 
-class PtxRegister: public PtxAbstractOperand {
-private:
-    std::string name;
-    uint64_t offset;
-    std::string name_with_offset;
-public:
-    PtxRegister(std::string _name_with_offset) : name_with_offset(_name_with_offset) {
-        auto split = split_string(name, "+");
-        name = split[0];
-        offset = split.size() == 1 ? 0 : std::stoull(split[1]);
-    };
-    PtxRegister(std::string _name, uint64_t _offset) : name(_name), offset(_offset) {
-        name_with_offset = name + "+" + std::to_string(offset);
-    };
-    std::string get_name() override {
-        return name;
+// PtxParameter implementation
+void PtxParameter::print() const {
+    std::cout << "PtxParameter: Name " << _name << ", Type " << _type
+              << ", Offsets ";
+    if (this->_offsets.empty()) {
+        std::cout << "empty.\n";
+    } else {
+        for (auto &val : this->_offsets) {
+            std::cout << std::hex << val << '\t';
+        }
+        std::cout << ".\n";
     }
-    uint64_t get_offset() override {
-        return offset;
-    }
-    std::string get_name_with_offset() {
-        return name_with_offset;
-    }
-};
+}
+std::unique_ptr<PtxAbstractNode> PtxParameter::eval(KLaunchConfig *config) {
+    return std::make_unique<PtxParameter>(_name, _offsets, _align, _type);
+}
+void PtxParameter::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    throw std::runtime_error("PtxParameter has no children.");
+}
 
-class PtxParameter : public PtxAbstractOperand {
-private:
-    std::string name;
-    uint64_t offset;
-    std::string name_with_offset;
-    PtxParameterType type = PtxParameterType::invalid;
-public:
-    PtxParameter(std::string _name, PtxParameterType _type, uint64_t _offset) : name(_name), type(_type), offset(_offset) {};
-    PtxParameter(std::string _name, uint64_t _offset) : name(_name), offset(_offset) {};
-    PtxParameter(std::string _name_with_offset) : name_with_offset(_name_with_offset) {
-        auto split = split_string(_name_with_offset, "+");
-        name = split[0];
-        offset = split.size() == 1 ? 0 : std::stoull(split[1]);
-    };
-    std::string get_name() override {
-        return name;
-    }
-    uint64_t get_offset() {
-        return offset;
-    }
-    PtxParameterType get_type() {
-        assert(type != PtxParameterType::invalid && "Type of parameter not known");
-        return type;
-    }
-};
-
-
-class PtxAbstractNode {
-public:
-    virtual void print() = 0;
-    virtual PtxAbstractNode* eval() = 0;
-    virtual std::vector<PtxAbstractNode*> getChildren() = 0;
-    virtual ~PtxAbstractNode() = default;
-};
-
-class PtxAbstractValueNode : public PtxAbstractNode {
-public:
-    PtxAbstractNode* eval() override {
-        return this;
-    }
-    std::vector<PtxAbstractNode*> getChildren() override {
-        return std::vector<PtxAbstractNode*>();
-    }
-    virtual ~PtxAbstractValueNode() = default;
-};
-
-class PtxParamValueNode : public PtxAbstractValueNode {
-private:
-    PtxParameter param;
-public:
-    PtxParamValueNode(PtxParameter _param) : param(_param) {};
-    void print() override {
-        // std::cout << "PtxParamValueNode(" << param.get_name() << ", " << getPtxParameterTypeToStr()[param.get_type()] << ", " << param.get_offset() << ")\n";
-        std::cout << "PtxParamValueNode(" << param.get_name() << ", " << param.get_offset() << ")\n";
-    }
-    ~PtxParamValueNode() {}
-
-    PtxParameter getParam() {
-        return param;
-    }
-};
-
-class PtxAddNode : public PtxAbstractNode {
-private:
-    PtxAbstractNode* L;
-    PtxAbstractNode* R;
-public:
-    PtxAddNode(PtxAbstractNode* _L, PtxAbstractNode* _R) : L(_L), R(_R) {}
-    void print() override {
-        std::cout << "AddNode" << std::endl;
-        std::cout << "\nL: ";
-        L->print();
-        std::cout << "\nR: ";
-        R->print();
+// PtxAddNode implementation
+void PtxAddNode::print() const {
+    std::cout << "PtxAddNode: Left ";
+    if (_left) {
+        std::cout << "non-empty: \n";
+        _left->print();
+    } else {
+        std::cout << "empty. \n";
     }
 
-    std::vector<PtxAbstractNode*> getChildren() override {
-        return {L, R};
+    std::cout << "PtxAddNode: Right ";
+    if (_right) {
+        std::cout << "non-empty: \n";
+        _right->print();
+    } else {
+        std::cout << "empty. \n";
     }
+}
+std::unique_ptr<PtxAbstractNode> PtxAddNode::eval(KLaunchConfig *config) {
+    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
+    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
 
-    PtxAbstractValueNode* eval() override {
-        // Check if both children are of type PtxValueNode, if not, then we can't collapse further
-        // if(auto* L_ = dynamic_cast<PtxValueNode>(L)) {
-        //     if(auto* R_ = dynamic_cast<PtxValueNode>(R)) {
-        //         return new PtxValueNode(L_->value + R_->value);
-        //     }
-        // }
+    if (!left_eval && !right_eval) {
+        // Could not collapse anything, no evaluation possible
+        return nullptr;
+    }
+    if (!left_eval && right_eval) {
+        // Could only collapse rigt node, no evaluation possible
+        _right.swap(right_eval);
+        return nullptr;
+    }
+    if (left_eval && !right_eval) {
+        // Could only collapse left node, no evaluation possible
+        _left.swap(left_eval);
         return nullptr;
     }
 
-    ~PtxAddNode() override {
-        delete L;
-        delete R;
-    }
-};
+    PtxNodeKind left_kind = left_eval->get_kind();
+    PtxNodeKind right_kind = right_eval->get_kind();
 
-class PtxMoveNode : public PtxAbstractNode {
-private:
-    PtxAbstractNode* src;
-public:
-    PtxMoveNode(PtxAbstractNode* _src) : src(_src) {};
+    // One node is immediate and one is parameter
+    auto add_par_imm = [](PtxParameter &par, const PtxImmediate &imm) {
+        std::vector<int> &offsets(par.get_offsets());
+        int imm_value = static_cast<int>(imm.get_value());
 
-    void print() override {
-        std::cout << "MoveNode\n";
-        std::cout << "src: ";
-        src->print();
-    }
-
-    std::vector<PtxAbstractNode*> getChildren() override {
-        return {src};
-    }
-
-    PtxAbstractNode* eval() override {
-        return src->eval();
-    }
-
-    ~PtxMoveNode() override {
-        delete src;
-    }
-};
-
-
-
-class PtxTree {
-private:
-    PtxAbstractNode* root = nullptr;
-    bool m_is_collapsed = false;
-    bool m_is_param = false;
-    
-    // hashmap of registers of interests -> leaf node
-    std::unordered_map<std::string, PtxAbstractNode**> registers_to_leafs;
-
-public:
-    PtxTree(PtxAbstractOperand* operand) {
-        if (auto* reg = dynamic_cast<PtxRegister*>(operand)) {
-            // In this case we don't have to register a node
-            registers_to_leafs[reg->get_name_with_offset()] = &root;
-        } else if (auto* param = dynamic_cast<PtxParameter*>(operand)) {
-            root = new PtxParamValueNode(*param);
-        } else {
-            assert(false && "Unknown operand type");
+        for (auto &offset : offsets) {
+            offset += imm_value;
         }
-
     };
-
-    void print() const {
-        std::cout << "CvtaNode:\n";
-        root->print();
+    if (left_kind == Parameter && right_kind == Immediate) {
+        add_par_imm(static_cast<PtxParameter &>(*left_eval),
+                    static_cast<PtxImmediate &>(*right_eval));
+        return left_eval;
     }
-    
-    // Return the parent node of a register if it exists in tree
-    // this operation has to be fast as it will be called for every instruction
-    PtxAbstractNode** get_parent(std::string reg) {
-        if (registers_to_leafs.find(reg) != registers_to_leafs.end()) {
-            return registers_to_leafs[reg];
+    if (right_kind == Parameter && left_kind == Immediate) {
+        add_par_imm(static_cast<PtxParameter &>(*right_eval),
+                    static_cast<PtxImmediate &>(*left_eval));
+        return right_eval;
+    }
+
+    // Both are immediate
+    if (left_kind == Immediate && right_kind == Immediate) {
+        auto &left(static_cast<PtxImmediate &>(*left_eval));
+        auto &right(static_cast<PtxImmediate &>(*right_eval));
+
+        left.get_value() += right.get_value();
+        return left_eval;
+    }
+
+    // One is immediate and one is special register
+    auto add_spec_imm = [](PtxSpecialRegister &reg, PtxImmediate &imm) {
+        std::vector<int64_t> &values(reg.get_values());
+        uint64_t imm_value = imm.get_value();
+        for (auto &value : values) {
+            value += imm_value;
         }
-        return nullptr;  
+
+        return values;
+    };
+    if (left_kind == SpecialRegister && right_kind == Immediate) {
+        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
+        auto &right(static_cast<PtxImmediate &>(*right_eval));
+        return std::make_unique<PtxImmediateArray>(add_spec_imm(left, right),
+                                                   right.get_type());
+    }
+    if (right_kind == SpecialRegister && left_kind == Immediate) {
+        auto &left(static_cast<PtxImmediate &>(*left_eval));
+        auto &right(static_cast<PtxSpecialRegister &>(*right_eval));
+        return std::make_unique<PtxImmediateArray>(add_spec_imm(right, left),
+                                                   left.get_type());
     }
 
-    void add_node(PtxOpCode opcode, PtxAbstractNode** parent_to_child, std::vector<PtxAbstractOperand*> operands) {
-        switch(opcode) {
-            case MoveOp:
-                assert(operands.size() == 1 && "Move operation must have 1 operand");
-                if (auto* reg = dynamic_cast<PtxRegister*>(operands[0])) {
-                    // In this case we don't have to register a node
-                    registers_to_leafs[reg->get_name_with_offset()] = parent_to_child;
-                } else if(auto* param = dynamic_cast<PtxParameter*>(operands[0])) {
-                    *parent_to_child = new PtxMoveNode(new PtxParamValueNode(*param));
-                } else {
-                    assert(false && "Move operand is neither a register nor a parameter");
-                }
-                break;
+    throw std::runtime_error("Addition of these nodes not supported.");
+}
+void PtxAddNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    if (idx == 0) {
+        _left.swap(child);
+        return;
+    }
+    if (idx == 1) {
+        _right.swap(child);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
+
+// PtxImmediate implementation
+std::unique_ptr<PtxAbstractNode> PtxImmediate::eval(KLaunchConfig *config) {
+    return std::make_unique<PtxImmediate>(this->_value, this->_type);
+}
+void PtxImmediate::print() const {
+    std::cout << "PtxImmediate: Value " << _value << ", Type "
+              << getPtxParameterTypeToSize()[_type] << ".\n";
+}
+void PtxImmediate::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    throw std::runtime_error("Immediate has no children.");
+}
+
+// PtxImmediateArray implementation
+void PtxImmediateArray::print() const {
+    std::cout << "PtxImmediateArray: Type "
+              << getPtxParameterTypeToSize()[_type] << ", Values ";
+    for (auto value : this->_values) {
+        std::cout << std::hex << value << '\t';
+    }
+    std::cout << ".\n";
+}
+std::unique_ptr<PtxAbstractNode>
+PtxImmediateArray::eval(KLaunchConfig *config) {
+    return std::make_unique<PtxImmediateArray>(this->_values, this->_type);
+}
+void PtxImmediateArray::set_child(std::unique_ptr<PtxAbstractNode> child,
+                                  int idx) {
+    throw std::runtime_error("PtxImmediateArray has no children.");
+}
+
+// PtxSpecialRegister implementation
+void PtxSpecialRegister::print() const {
+    std::cout << "PtxSpecialRegister: Kind " << _kind << ", dim " << _dim
+              << "Values ";
+    if (_values.empty()) {
+        std::cout << "empty. \n";
+    } else {
+        for (auto value : _values) {
+            std::cout << std::hex << value << '\t';
         }
+        std::cout << ".\n";
+    }
+}
+std::unique_ptr<PtxAbstractNode>
+PtxSpecialRegister::eval(KLaunchConfig *config) {
+    if (!config) { // Cannot evaluate, as value not yet known
+        return nullptr;
+    }
+    if (!_values.empty()) { // Value already filled
+        return std::make_unique<PtxSpecialRegister>(_kind, _dim, _values);
     }
 
-    void collapse() {
-        root = root->eval();
-        // Check if root is of type PtxParamValueNode:
-        // If yes, then the tree is fully collapsed and the last node is a parameter
-        if(auto* collapsed_ = dynamic_cast<PtxParamValueNode*>(root)) {
-            m_is_collapsed = true;
-            m_is_param = true;
-        } else if (auto* collapsed_ = dynamic_cast<PtxAbstractValueNode*>(root)) {
-            m_is_collapsed = true;
+    std::vector<int64_t> values(1);
+    if (_kind == NThreadIds) {
+        values[0] = config->blockDim[_dim];
+    }
+    if (_kind == NCTAIds) {
+        values[0] = config->gridDim[_dim];
+    }
+    if (_kind == ThreadId) {
+        values.resize(config->blockDim[_dim]);
+        std::iota(values.begin(), values.end(), 0);
+    }
+    if (_kind == CTAId) {
+        values.resize(config->gridDim[_dim]);
+        std::iota(values.begin(), values.end(), 0);
+    }
+
+    return std::make_unique<PtxSpecialRegister>(_kind, _dim, values);
+}
+void PtxSpecialRegister::set_child(std::unique_ptr<PtxAbstractNode> child,
+                                   int idx) {
+    throw std::runtime_error("PtxSpecialRegister has no children.");
+}
+
+// PtxCvtaNode implementation
+void PtxCvtaNode::print() const {
+    std::cout << "PtxCvtaNode. \n";
+    _dst->print();
+}
+std::unique_ptr<PtxAbstractNode> PtxCvtaNode::eval(KLaunchConfig *config) {
+    return _dst->eval(config);
+}
+void PtxCvtaNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    if (idx != 0)
+        throw std::runtime_error("Invalid index.");
+    _dst.swap(child);
+}
+
+/*
+ * PTX TREE IMPLEMENTATION
+ */
+
+void PtxTree::print() const { _root->print(); }
+std::pair<PtxTree::node_type *, int>
+PtxTree::find_register_node(const std::string &register_name) {
+    if (auto ret = _registers_to_leafs.find(register_name);
+        ret != _registers_to_leafs.end()) {
+        return ret->second;
+    } else {
+        // Register is not of interest
+        return {nullptr, 0};
+    }
+}
+
+void PtxTree::replace_register(const std::string &old_register,
+                               const std::string &new_register) {
+    if (auto ret = _registers_to_leafs.find(old_register);
+        ret != _registers_to_leafs.end()) {
+        _registers_to_leafs[new_register] = ret->second;
+        _registers_to_leafs.erase(ret);
+    }
+}
+void PtxTree::add_node(std::unique_ptr<node_type> new_node,
+                       const std::string &dst_register,
+                       const std::vector<std::string> &src_registers) {
+    if (auto [par_node, idx] = find_register_node(dst_register); par_node) {
+        for (uint64_t i = 0; i < src_registers.size(); ++i) {
+            _registers_to_leafs[src_registers[i]] = {new_node.get(), i};
         }
+        par_node->set_child(std::move(new_node), idx);
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxTree::eval(KLaunchConfig *config) {
+    return _root->eval(config);
+}
+
+std::tuple<std::string, PtxNodeKind, int64_t> strip_argument(std::string arg,
+                                                             bool strip_last) {
+    if (strip_last)
+        arg.pop_back();
+    int64_t offset = 0;
+
+    if (arg[0] == '[') {
+        auto splitted_line = split_string(arg.substr(1, arg.size() - 2), "+");
+
+        arg = splitted_line[0];
+        if (splitted_line.size() > 1) {
+            offset = std::stoll(splitted_line[1]);
+        }
+
+        return {arg, Parameter, offset};
     }
 
-    bool is_collapsed() {
-        return m_is_collapsed;
+    if (arg[0] == '%') {
+        if (arg[1] == 'r')
+            return {arg, Register, 0};
+
+        if (arg.substr(1, 4) == "ntid" || arg.substr(1, 6) == "nctaid" ||
+            arg.substr(1, 3) == "tid" || arg.substr(1, 4) == "ntid") {
+            return {arg, SpecialRegister, 0};
+        }
+
+        return {arg, Register, 0};
+        arg.pop_back();
     }
 
-    bool is_param() {
-        assert(this->m_is_collapsed && "Cannot tell if root is a parameter, as the tree is not collapsed");
-        return m_is_param;
-    }
+    throw std::runtime_error("Invlaid argument");
+}
 
-    PtxParameter get_param() {
-        assert(this->m_is_collapsed && "Cannot get param of non-collapsed Tree");
-        // For now, throw this assertion as we want to see when this happens (e.g. global variables)
-        assert(this->m_is_param && "Cannot get param of non-parameter Tree");
-        // The dynamic cast is safe, as we checked that the node is a parameter node
-        // (At least, I hope so)
-        return dynamic_cast<PtxParamValueNode*>(root)->getParam();
-    }
-
-    ~PtxTree() {
-        delete root;
-    }
-};
-
-
-std::vector<PtxTree> parsePtxTrees(std::string& ss) {
+std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     std::vector<PtxTree> trees;
     std::string line;
 
     auto it = ss.rbegin();
     const auto end_it = ss.rend();
-    while(rgetline(it, end_it, line)) {
+    while (rgetline(it, end_it, line)) {
         std::cout << line << std::endl;
-        if(startsWith(line, "cvta.to.global.u64")) {
-            // Create a new tree and add it to the vector
-            auto splitted_line = split_string(line, " ");
-            // the operand is the last element, without the ;
-            auto operand = splitted_line.back();
-            operand.pop_back();
-            if (operand[0] == '[') {
-                operand = operand.substr(1, operand.size() - 2);
-            }
-            if (operand[0] == '%') {
-                auto* reg = new PtxRegister(operand);
-                trees.push_back(PtxTree(reg));  
-            } else {
-                auto* param = new PtxParameter(operand);
-                trees.push_back(PtxTree(param));
-            }
-        } else if(startsWith(line, "mov.u64") || startsWith(line, "mov.b64")) {
-            auto operands = split_string(line, ",");
-            std::string dst = split_string(operands[0], " ").back();
-            // Check if the dst is a register of interest
-            for(auto& tree: trees) {
-                auto* parent = tree.get_parent(dst);
-                if(parent != nullptr) {
-                    std::string src = split_string(operands[1], " ").back();
-                    // Remove ; from src and if necessary [] from src
-                    src.pop_back();
-                    if(src[0] == '[') {
-                        src = src.substr(1, src.size() - 2);
-                    }
-                    if(src[0] == '%') {
-                        tree.add_node(MoveOp, parent, {new PtxRegister(src)});
-                    } else {
-                        tree.add_node(MoveOp, parent, {new PtxParameter(src)});
-                    }
-                    break;
-                }
-            }
-        }
-    }
-
-    return trees;
-};
-
-struct NameWithOffset {
-    std::string name;
-    int offset;
-};
-
-std::vector<PtxTree> testKernel(const std::string &fname, const std::string& kernel_mangle) {
-    std::ifstream s(fname);
-    // get lines
-    std::string line;
-    std::stringstream ss;
-
-    // 1. Get the kernel lines and find the parameters
-    bool started = false;
-    std::vector<NameWithOffset> params;
-    std::vector<KParamInfo> raw_parameters;
-
-
-    while(getline(s, line)) {
-        if (line.find(kernel_mangle) != std::string::npos) {
-            started = true;
-        } else if (line.find(".entry") != std::string::npos) {
-            started = false;
-        }
-        if (!started) continue;
-        
-        if (line.find(')') != std::string::npos) {
-            break;
-        }
-        // NO parameters
-        if(!startsWith(line, ".param")) {
-            break;
-        }
-        assert(startsWith(line, ".param") && "Expected .param directive");
         auto splitted_line = split_string(line, " ");
+        if (startsWith(line, "cvta.to.global.u64")) {
+            // Create a new tree and add it to the vector
+            auto [name, kind, offset] =
+                strip_argument(splitted_line.back(), true);
 
-        // Remove last comma
-        auto last = splitted_line.back();
-        if(endsWith(last, ",")) {
-            splitted_line.back() = last.substr(0, last.size() - 1);
-        }
-
-        if(splitted_line[1] == ".align") {
-            int param_align = std::stoi(splitted_line[2]);
-            const std::string &name = splitted_line[4];
-            std::vector<std::string> splitted_name = split_string(name, "[");
-            const std::string &param_name = splitted_name[0];
-            // Remove last ']' from the size
-            int param_size = std::stoi(
-                splitted_name[1].substr(0, splitted_name[1].size() - 1));
-
-            std::string type_name = splitted_line[3].substr(1, splitted_line[3].size());
-            PtxParameterType param_type = ptxParameterTypeFromString(type_name);
-            int param_typeSize = byteSizePtxParameterType(param_type);
-
-            KParamInfo param(param_name, ptxParameterTypeFromString(type_name), param_typeSize, param_align, param_size, 0);
-            raw_parameters.push_back(param);
-
-            for(int offset = 0; offset < param_size; offset += param_align) {
-                params.push_back({param_name, offset});
+            if (kind == Register) {
+                trees.emplace_back(name);
             }
-        } else {
-            std::string &name = splitted_line[2];
-            std::string typeName = splitted_line[1].substr(1, splitted_line[1].size()-1);
-            auto type = ptxParameterTypeFromString(typeName);
-            KParamInfo param(name, type, byteSizePtxParameterType(type), 0, 1, 0);
+            if (kind == Parameter) {
+                trees.emplace_back("_t");
+                trees.back().add_node(std::make_unique<PtxParameter>(name, 0),
+                                      "_t", {});
+            }
+        } else if (startsWith(line, "mov")) {
+            auto [dst_name, dst_kind, dst_offset] =
+                strip_argument(splitted_line[1], true);
+            auto [src_name, src_kind, src_offset] =
+                strip_argument(splitted_line[2], true);
 
-            raw_parameters.push_back(param);
-            params.push_back({name ,0});
+            if (dst_kind != Register)
+                throw std::runtime_error("Destination must be register.");
+
+            if (src_kind == Register) {
+                for (auto &tree : trees) {
+                    tree.replace_register(dst_name, src_name);
+                }
+            } else if (src_kind == Parameter) {
+                for (auto &tree : trees) {
+                    tree.add_node(
+                        std::make_unique<PtxParameter>(src_name, src_offset),
+                        dst_name, {});
+                }
+            } else {
+                throw std::runtime_error("Invalid move instruction source.");
+            }
         }
-           
     }
-
-    // 2. Parse the trees
-    std::string kernel_lines = ss.str();
-    std::vector<PtxTree> trees = parsePtxTrees(kernel_lines);
-
-
-    // 3. Update KParamInfos according to the trees
-
-    // Go through every tree, collapse them and update the parameters if they're ptrs
 
     return trees;
 }
 
-
 std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
-                   const std::smatch &match) {
+                                           const std::smatch &match) {
     const std::string &entry = match[1];
     const size_t str_idx = match.position(2)+1;
     std::string kernel_lines = ptx_data.substr(str_idx, match.length(2)-2);
@@ -562,131 +479,29 @@ std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
     return {};
 }
 
-
 bool analyzePtx(const std::string &fname) {
-        // analyze single ptx file
-        std::ifstream s(fname);
-        std::stringstream ss;
-        ss << s.rdbuf();
-        std::string ptx_data = ss.str();
+    // analyze single ptx file
+    std::ifstream s(fname);
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
 
-        static std::regex r_func_parameters(R"(.entry.*\s(.*)\(([^\)]*)\))",
-                                            std::regex::ECMAScript);
-        std::sregex_iterator i = std::sregex_iterator(
-            ptx_data.begin(), ptx_data.end(), r_func_parameters);
-        std::map<std::string, std::vector<KParamInfo>> tmp_map;
-        for (; i != std::sregex_iterator(); ++i) {
-            std::smatch m = *i;
+    static std::regex r_func_parameters(R"(.entry.*\s(.*)\(([^\)]*)\))",
+                                        std::regex::ECMAScript);
+    std::sregex_iterator i = std::sregex_iterator(
+        ptx_data.begin(), ptx_data.end(), r_func_parameters);
+    std::map<std::string, std::vector<KParamInfo>> tmp_map;
+    for (; i != std::sregex_iterator(); ++i) {
+        std::smatch m = *i;
 
-            std::vector<KParamInfo> param_infos =
-                parsePtxParameters(ptx_data, m);
-            
-            const std::string &entry = m[1];
-            tmp_map.emplace(std::make_pair(entry, param_infos));
+        std::vector<KParamInfo> param_infos =
+            parsePtxParameters(ptx_data, m);
+
+        const std::string &entry = m[1];
+        tmp_map.emplace(std::make_pair(entry, param_infos));
     }
 
     return true;
 }
+
 } // namespace PtxTreeParser
-
-
-using namespace PtxTreeParser;
-
-void parsePtxTrees_tests() {
-    // 1. Tree with 1 node, e.g.:
-    {
-    std::string s = "cvta.to.global.u64 %r1, [myPtr];\n";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
-
-    for(auto &tree : trees) tree.print();
-    }
-    // // 2. Tree with 2 nodes, e.g.:
-    // {
-    // std::string s = "mov.u64 %r2, [myPtr];\ncvta.to.global.u64 %r1, %r2;\n";
-    // std::vector<PtxTree> trees = parsePtxTrees(s);
-    // for(const auto &tree : trees) tree.print();
-    // }
-    // // 2. Multiple Trees with 2 nodes, e.g.:
-    // {
-    // std::string s1 = "mov.u64 %r2, [myPtr1];\ncvta.to.global.u64 %r1, %r2;\n";
-    // std::string s2 = "mov.u64 %r2, [myPtr2];\ncvta.to.global.u64 %r1, %r2;\n";
-    // std::string s = s1 + s2;
-    // std::vector<PtxTree> trees = parsePtxTrees(s);
-    // for(const auto &tree : trees) tree.print();
-    // }
-}
-void PtxTree_tests() {
-    // 1. Tree with 1 node, e.g.:
-    {
-    // cvta.to.global.u64 %r1, [myPtr];
-    PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
-    PtxTree tree = PtxTree(param);
-    tree.print();
-    tree.collapse();
-    tree.print();
-    assert(tree.is_collapsed() && "Tree should be collapsed");
-    assert(tree.is_param() && "Tree should be a parameter");
-    std::cout << "First Test passed\n\n";
-    }
-
-    // 2. Tree with 2 nodes, e.g.:
-    {
-    // cvta.to.global.u64 %r1, %r2;
-    PtxRegister* reg = new PtxRegister("%r2");
-    PtxTree tree = PtxTree(reg);
-    // mov.u64 %r2, [myPtr];
-    PtxAbstractNode** parent = tree.get_parent("%r2");
-    if (parent != nullptr) {
-        PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
-        tree.add_node(MoveOp, parent, {param});
-    }
-
-    tree.print();
-    tree.collapse();
-    tree.print();
-    assert(tree.is_collapsed() && "Tree should be collapsed");
-    assert(tree.is_param() && "Tree should be a parameter");
-    std::cout << "Second Test passed\n\n";
-    }
-
-    // 3. Tree with 10 move nodes, e.g.:
-    {
-    // cvta.to.global.u64 %r1, %r2;
-    PtxRegister* param = new PtxRegister("%r2");
-    PtxTree tree = PtxTree(param);
-
-    // mov.u64 %r(i-1), r(i);
-    for(uint64_t i = 3; i < 13; ++i) {
-        std::string dst = "%r" + std::to_string(i-1);
-        std::string src = "%r" + std::to_string(i);
-
-        PtxAbstractNode** parent = tree.get_parent(dst);
-        if (parent != nullptr) {
-            PtxRegister* reg = new PtxRegister(src);
-            tree.add_node(MoveOp, parent, {reg});
-        }
-    }
-
-    // mov.u64 %r12, [myPtr];
-    PtxAbstractNode** parent = tree.get_parent("%r12");
-    if (parent != nullptr) {
-        PtxParameter* param = new PtxParameter("myPtr", PtxParameterType::u64, 0);
-        tree.add_node(MoveOp, parent, {param});
-    }
-
-    tree.print();
-    tree.collapse();
-    tree.print();
-    assert(tree.is_collapsed() && "Tree should be collapsed");
-    assert(tree.is_param() && "Tree should be a parameter");
-    std::cout << "Third Test passed\n\n";
-    }
-}
-
-int main() {
-    // PtxTree_tests();
-    parsePtxTrees_tests();
-    // std::string kernel_mangle = "_ZN6caffe24math54_GLOBAL__N__beabb26c_14_elementwise_cu_f0da4091_12388115AxpbyCUDAKernelIfdEEvlT_PKT0_S3_PS4_";
-    // testKernel("dumped_ptx.ptx", kernel_mangle);
-    return 0;
-}
