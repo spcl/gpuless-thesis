@@ -20,7 +20,20 @@ enum class PtxNodeKind {
     SpecialRegister,
     Cvta,
     AddOp,
+    SubOp,
+    MulOp,
+    MadOp,
+    SadOp,
+    DivOp,
+    RemOp,
+    AbsOp,
+    NegOp,
+    MinOp,
+    MaxOp,
+    ShlOp,
+    ShrOp,
     MoveOp,
+    LdOp,
     Register,
     invalidOp,
 };
@@ -179,11 +192,11 @@ class PtxParameter : public PtxAbstractNode {
     PtxParameterType _type = PtxParameterType::invalid;
 };
 
-class PtxAddNode : public PtxAbstractNode {
+class PtxSubNode : public PtxAbstractNode {
   public:
     using node_type = PtxAbstractNode;
-    PtxAddNode() = default;
-    explicit PtxAddNode(std::unique_ptr<node_type> L,
+    PtxSubNode() = default;
+    explicit PtxSubNode(std::unique_ptr<node_type> L,
                         std::unique_ptr<node_type> R)
         : _left(std::move(L)), _right(std::move(R)){};
 
@@ -193,6 +206,200 @@ class PtxAddNode : public PtxAbstractNode {
     PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
 
   private:
+    std::unique_ptr<node_type> _left;
+    std::unique_ptr<node_type> _right;
+};
+
+class PtxMulNode : public PtxAbstractNode {
+public:
+    using node_type = PtxAbstractNode;
+    PtxMulNode() = default;
+    explicit PtxMulNode(std::unique_ptr<node_type> L,
+                        std::unique_ptr<node_type> R)
+            : _left(std::move(L)), _right(std::move(R)){};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+private:
+    std::unique_ptr<node_type> _left;
+    std::unique_ptr<node_type> _right;
+};
+
+class PtxAbdNode : public PtxAbstractNode {
+public:
+    using node_type = PtxAbstractNode;
+    PtxAbdNode() = default;
+    explicit PtxAbdNode(std::unique_ptr<node_type> L,
+                        std::unique_ptr<node_type> R)
+            : _left(std::move(L)), _right(std::move(R)){};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+private:
+    std::unique_ptr<node_type> _left;
+    std::unique_ptr<node_type> _right;
+};
+
+class PtxDivNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxDivNode() = default;
+        explicit PtxDivNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+};
+
+class PtxRemNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxRemNode() = default;
+        explicit PtxRemNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+    };
+
+class PtxAbsNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxAbsNode() = default;
+        explicit PtxAbsNode(std::unique_ptr<node_type> C)
+                : _child(std::move(C)) {};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _child;
+    };
+
+class PtxNegNode : public PtxAbstractNode {
+public:
+    using node_type = PtxAbstractNode;
+    PtxNegNode() = default;
+    explicit PtxNegNode(std::unique_ptr<node_type> C)
+            : _child(std::move(C)) {};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+private:
+    std::unique_ptr<node_type> _child;
+};
+
+class PtxMinNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxMinNode() = default;
+        explicit PtxMinNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+    };
+
+class PtxMaxNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxMaxNode() = default;
+        explicit PtxMaxNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+    };
+
+class PtxShlNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxShlNode() = default;
+        explicit PtxShlNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+    };
+
+class PtxShrNode : public PtxAbstractNode {
+    public:
+        using node_type = PtxAbstractNode;
+        PtxShrNode() = default;
+        explicit PtxShrNode(std::unique_ptr<node_type> L,
+                            std::unique_ptr<node_type> R)
+                : _left(std::move(L)), _right(std::move(R)){};
+
+        void print() const override;
+        std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+        void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+        PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+    private:
+        std::unique_ptr<node_type> _left;
+        std::unique_ptr<node_type> _right;
+    };
+
+class PtxAddNode : public PtxAbstractNode {
+public:
+    using node_type = PtxAbstractNode;
+    PtxAddNode() = default;
+    explicit PtxAddNode(std::unique_ptr<node_type> L,
+                        std::unique_ptr<node_type> R)
+            : _left(std::move(L)), _right(std::move(R)){};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+
+private:
     std::unique_ptr<node_type> _left;
     std::unique_ptr<node_type> _right;
 };

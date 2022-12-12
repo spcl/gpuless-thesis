@@ -15,8 +15,21 @@ PtxNodeKind parseOperation(const std::string &op) {
     const static std::map<std::string, PtxNodeKind> str_to_kind = {
         {"cvta", PtxNodeKind::Cvta},
         {"mov", PtxNodeKind::MoveOp},
-        {"add", PtxNodeKind::AddOp}};
-
+        {"add", PtxNodeKind::AddOp},
+        {"sub", PtxNodeKind::SubOp},
+        {"mul", PtxNodeKind::MulOp},
+        {"div", PtxNodeKind::DivOp},
+        {"rem", PtxNodeKind::RemOp},
+        {"abs", PtxNodeKind::AbsOp},
+        {"neg", PtxNodeKind::NegOp},
+        {"min", PtxNodeKind::MinOp},
+        {"max", PtxNodeKind::MaxOp},
+        {"shr", PtxNodeKind::ShrOp},
+        {"shl", PtxNodeKind::ShlOp},
+        {"mad", PtxNodeKind::MadOp},
+        {"sad", PtxNodeKind::SadOp},
+        {"ld", PtxNodeKind::LdOp},
+        };
     std::string opcode = split_string(op, ".")[0];
 
     if (auto it = str_to_kind.find(opcode); it != str_to_kind.end()) {
@@ -70,12 +83,37 @@ PtxOperand parseArgument(std::string arg) {
 
 std::unique_ptr<PtxTree::node_type> produce_node(PtxNodeKind kind) {
     switch(kind) {
-    case PtxNodeKind::AddOp:
-        return std::make_unique<PtxAddNode>(nullptr, nullptr);
-    default:
-        throw std::runtime_error("Invalid Operation.");
+        case PtxNodeKind::AddOp:
+            return std::make_unique<PtxAddNode>(nullptr, nullptr);
+        case PtxNodeKind::SubOp:
+            return std::make_unique<PtxSubNode>(nullptr, nullptr);
+        case PtxNodeKind::MulOp:
+            return std::make_unique<PtxMulNode>(nullptr, nullptr);
+        case PtxNodeKind::MadOp:
+            throw std::runtime_error("not implemented yet");
+            return std::make_unique<PtxAddNode>(nullptr, std::make_unique<PtxMulNode>());
+        case PtxNodeKind::SadOp:
+            throw std::runtime_error("not implemented yet");
+            return std::make_unique<PtxAddNode>(nullptr, std::make_unique<PtxAbsNode>());
+        case PtxNodeKind::RemOp:
+            return std::make_unique<PtxRemNode>(nullptr, nullptr);
+        case PtxNodeKind::AbsOp:
+            return std::make_unique<PtxAbsNode>(nullptr);
+        case PtxNodeKind::NegOp:
+            return std::make_unique<PtxNegNode>(nullptr);
+        case PtxNodeKind::MinOp:
+            return std::make_unique<PtxMinNode>(nullptr, nullptr);
+        case PtxNodeKind::MaxOp:
+            return std::make_unique<PtxMaxNode>(nullptr, nullptr);
+        case PtxNodeKind::ShlOp:
+            return std::make_unique<PtxShlNode>(nullptr, nullptr);
+        case PtxNodeKind::ShrOp:
+            return std::make_unique<PtxShrNode>(nullptr, nullptr);
+        default:
+            throw std::runtime_error("Invalid Operation.");
     }
 }
+
 std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     std::vector<PtxTree> trees;
     std::string line;
