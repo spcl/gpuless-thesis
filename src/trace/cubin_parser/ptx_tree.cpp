@@ -308,6 +308,68 @@ void PtxMulNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
         throw std::runtime_error("Invalid index.");
     }
 
+// PtxMadNode implementation
+void PtxMadNode::print() const {
+    std::cout << "PtxMadNode: Child ";
+    if (_child) {
+        std::cout << "non-empty: \n";
+        _child->print();
+    } else {
+        std::cout << "empty. \n";
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxMadNode::eval(KLaunchConfig *config) {
+    return _child->eval(config);
+}
+void PtxMadNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+
+    if (idx == 0) {
+        _child->set_child(std::move(child), 0);
+        return;
+    }
+    if (idx == 1) {
+        _child->_right->set_child(std::move(child), 0);
+        return;
+    }
+    if (idx == 2) {
+        _child->_right->set_child(std::move(child), 1);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
+
+// PtxSadNode implementation
+void PtxSadNode::print() const {
+    std::cout << "PtxSadNode: Child ";
+    if (_child) {
+        std::cout << "non-empty: \n";
+        _child->print();
+    } else {
+        std::cout << "empty. \n";
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxSadNode::eval(KLaunchConfig *config) {
+    return _child->eval(config);
+}
+void PtxSadNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+
+        if (idx == 0) {
+            _child->set_child(std::move(child), 0);
+            return;
+        }
+        if (idx == 1) {
+            _child->_right->set_child(std::move(child), 0);
+            return;
+        }
+        if (idx == 2) {
+            _child->_right->set_child(std::move(child), 1);
+            return;
+        }
+
+        throw std::runtime_error("Invalid index.");
+    }
+
 // PtxDivNode implementation
 void PtxDivNode::print() const {
     std::cout << "PtxDivNode: Left ";

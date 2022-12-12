@@ -89,12 +89,14 @@ std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind) {
             return std::make_unique<PtxSubNode>(nullptr, nullptr);
         case PtxNodeKind::MulOp:
             return std::make_unique<PtxMulNode>(nullptr, nullptr);
+        case PtxNodeKind::AbdOp:
+            return std::make_unique<PtxAbdNode>(nullptr, nullptr);
         case PtxNodeKind::MadOp:
-            throw std::runtime_error("not implemented yet");
-            return std::make_unique<PtxAddNode>(nullptr, std::make_unique<PtxMulNode>());
+            return std::make_unique<PtxMadNode>(nullptr, nullptr, nullptr);
         case PtxNodeKind::SadOp:
-            throw std::runtime_error("not implemented yet");
-            return std::make_unique<PtxAddNode>(nullptr, std::make_unique<PtxAbsNode>());
+            return std::make_unique<PtxSadNode>(nullptr, nullptr, nullptr);
+        case PtxNodeKind::DivOp:
+            return std::make_unique<PtxDivNode>(nullptr, nullptr);
         case PtxNodeKind::RemOp:
             return std::make_unique<PtxRemNode>(nullptr, nullptr);
         case PtxNodeKind::AbsOp:
