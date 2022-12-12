@@ -25,7 +25,7 @@ TEST(PtxTree, SimpleEval) {
     EXPECT_EQ(imm.get_value(), 42);
 }
 
-TEST(PtxTree, AddEval) {
+TEST(PtxTree, AddEvalParam) {
     PtxTree test_tree("test_register");
     test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
                        {{PtxOperandKind::Register, "test_register",0},
@@ -33,22 +33,16 @@ TEST(PtxTree, AddEval) {
                         {PtxOperandKind::Register, "reg_b",0}});
 
     // Add Immediate 42 to left
-    test_tree.add_node(std::make_unique<PtxImmediate>(42, s64),
-                       {{PtxOperandKind::Register, "reg_a",0}});
+    test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Immediate, "", 22},
+                        {PtxOperandKind::Immediate, "", 20}});
 
     // Add another add on right
     test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
                        {{PtxOperandKind::Register, "reg_b",0},
-                        {PtxOperandKind::Register, "reg_c",0},
-                        {PtxOperandKind::Register, "reg_d",0}});
-
-    // Add Immediate 10 to left
-    test_tree.add_node(std::make_unique<PtxImmediate>(10, s64),
-                       {{PtxOperandKind::Register, "reg_c",0}});
-
-    // Add Parameter to right
-    test_tree.add_node(std::make_unique<PtxParameter>("test_param", 2, 0, s64),
-                       {{PtxOperandKind::Register, "reg_d",0}});
+                        {PtxOperandKind::Immediate, "", 10},
+                        {PtxOperandKind::Parameter, "test_param", 2}});
 
     std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
     EXPECT_EQ(evaluated->get_kind(), PtxNodeKind::Parameter);
@@ -56,6 +50,68 @@ TEST(PtxTree, AddEval) {
     auto &par(dynamic_cast<PtxParameter &>(*evaluated));
     EXPECT_EQ(par.get_offsets().size(), 1);
     EXPECT_EQ(par.get_offsets()[0], 54);
+}
+
+TEST(PtxTree, AddEvalSimpleSpecialRegister) {
+    PtxTree test_tree("test_register");
+    test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "test_register",0},
+                        {PtxOperandKind::SpecialRegisterCtaId, "",0},
+                        {PtxOperandKind::Immediate, "",10}});
+
+    std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
+    EXPECT_EQ(evaluated, nullptr);
+    KLaunchConfig config{{3, 0, 0}, {3, 0, 0}};
+    std::unique_ptr<PtxAbstractNode> collapsed = test_tree.eval(&config);
+    EXPECT_NE(collapsed, nullptr);
+    collapsed->print();
+}
+
+TEST(PtxTree, AddMultipleEvalsSpecialRegister) {
+    PtxTree test_tree("test_register");
+    test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "test_register",0},
+                        {PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Immediate, "",10}});
+
+    test_tree.add_node(std::make_unique<PtxAddNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::SpecialRegisterCtaId, "", 0},
+                        {PtxOperandKind::Immediate, "",10}});
+
+    std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
+    EXPECT_EQ(evaluated, nullptr);
+    KLaunchConfig config{{3, 0, 0}, {3, 0, 0}};
+    std::unique_ptr<PtxAbstractNode> collapsed = test_tree.eval(&config);
+    EXPECT_NE(collapsed, nullptr);
+    collapsed->print();
+}
+
+
+TEST(PtxTree, SubEvalParam) {
+    PtxTree test_tree("test_register");
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "test_register",0},
+                        {PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Register, "reg_b",0}});
+
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Parameter, "test_param", 20},
+                        {PtxOperandKind::Immediate, "", 10}});
+
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_b",0},
+                        {PtxOperandKind::Immediate, "", 30},
+                        {PtxOperandKind::Immediate, "", 20}});
+
+
+    std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
+    EXPECT_EQ(evaluated->get_kind(), PtxNodeKind::Parameter);
+
+    auto &par(dynamic_cast<PtxParameter &>(*evaluated));
+    EXPECT_EQ(par.get_offsets().size(), 1);
+    EXPECT_EQ(par.get_offsets()[0], 0);
 }
 
 TEST(PtxParser, ParseSimpleCvta) {
@@ -84,3 +140,4 @@ TEST(PtxParser, ParseAdd) {
     EXPECT_EQ(par.get_name(), "par");
     EXPECT_EQ(par.get_offsets()[0], 6);
 }
+
