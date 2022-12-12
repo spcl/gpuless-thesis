@@ -81,7 +81,7 @@ PtxOperand parseArgument(std::string arg) {
     return {PtxOperandKind::Immediate, arg, imm_value};
 }
 
-std::unique_ptr<PtxTree::node_type> produce_node(PtxNodeKind kind) {
+std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind) {
     switch(kind) {
         case PtxNodeKind::AddOp:
             return std::make_unique<PtxAddNode>(nullptr, nullptr);
@@ -187,7 +187,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
             }
         } else {
             for(auto& tree : trees) {
-                tree.add_node(produce_node(op_kind), pars);
+                tree.add_node(produceNode(op_kind), pars);
             }
         }
     }
