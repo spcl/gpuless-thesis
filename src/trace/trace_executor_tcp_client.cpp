@@ -6,13 +6,24 @@
 
 namespace gpuless {
 
-TraceExecutorTcp::TraceExecutorTcp(const char *ip, const short port,
-                                   manager::instance_profile profile) {
-    bool success = init(ip, port, profile);
-    if (!success) {
-        throw "Unable to init TraceExecutorTcp";
+static sockaddr_in iptoaddr(const char *ip, const short port) {
+    sockaddr_in addr{};
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    if (inet_pton(AF_INET, ip, &addr.sin_addr) < 0) {
+        SPDLOG_ERROR("Invalid IP address: {}", ip);
+        throw "Invalid IP address";
     }
+    return addr;
+}
+
+TraceExecutorTcp::TraceExecutorTcp(const char *ip, const short port,
+                                   manager::instance_profile profile)
+    : m_gpusession(negotiateSession(ip, port, profile)),
+      m_manager_addr(iptoaddr(ip, port)) {
+    getDeviceAttributes();
 };
+
 TraceExecutorTcp::~TraceExecutorTcp() {
     bool success = deallocate();
     if (!success) {
@@ -22,136 +33,98 @@ TraceExecutorTcp::~TraceExecutorTcp() {
     }
 };
 
-bool TraceExecutorTcp::negotiateSession(
-    gpuless::manager::instance_profile profile) {
-    bool ret = false;
-    {
-        TcpSocked tcp = TcpSocked(this->manager_addr);
+TcpGpuSession
+TraceExecutorTcp::negotiateSession(const char *ip, const short port,
+                                   gpuless::manager::instance_profile profile) {
 
-        using namespace gpuless::manager;
-        flatbuffers::FlatBufferBuilder builder;
+    TcpSocked tcp = TcpSocked(ip, port);
 
-        // make initial request
-        auto allocate_request_msg = CreateProtocolMessage(
-            builder, Message_AllocateRequest,
-            CreateAllocateRequest(builder, profile, -1).Union());
-        builder.Finish(allocate_request_msg);
-        tcp.send(builder.GetBufferPointer(), builder.GetSize());
+    using namespace gpuless::manager;
+    flatbuffers::FlatBufferBuilder builder;
 
-        // manager offers some sessions
-        std::vector<uint8_t> buffer_offer = tcp.recv();
-        auto allocate_offer_msg = GetProtocolMessage(buffer_offer.data());
-        auto offered_profiles = allocate_offer_msg->message_as_AllocateOffer()
-                                    ->available_profiles();
-        int32_t selected_profile = offered_profiles->Get(0);
-        this->session_id_ =
-            allocate_offer_msg->message_as_AllocateOffer()->session_id();
+    // make initial request
+    auto allocate_request_msg = CreateProtocolMessage(
+        builder, Message_AllocateRequest,
+        CreateAllocateRequest(builder, profile, -1).Union());
+    builder.Finish(allocate_request_msg);
+    tcp.send(builder.GetBufferPointer(), builder.GetSize());
 
-        // choose a profile and send finalize request
-        builder.Reset();
-        auto allocate_select_msg = CreateProtocolMessage(
-            builder, Message_AllocateSelect,
-            CreateAllocateSelect(builder, Status_OK, this->session_id_,
-                                 selected_profile)
-                .Union());
-        builder.Finish(allocate_select_msg);
-        tcp.send(builder.GetBufferPointer(), builder.GetSize());
+    // manager offers some sessions
+    std::vector<uint8_t> buffer_offer = tcp.recv();
+    auto allocate_offer_msg = GetProtocolMessage(buffer_offer.data());
+    auto offered_profiles =
+        allocate_offer_msg->message_as_AllocateOffer()->available_profiles();
+    int32_t selected_profile = offered_profiles->Get(0);
+    int32_t session_id =
+        allocate_offer_msg->message_as_AllocateOffer()->session_id();
 
-        // get server confirmation
-        std::vector<uint8_t> buffer_confirm = tcp.recv();
-        auto allocate_confirm_msg = GetProtocolMessage(buffer_confirm.data());
-        if (allocate_confirm_msg->message_as_AllocateConfirm()->status() ==
-            Status_OK) {
-            auto port =
-                allocate_confirm_msg->message_as_AllocateConfirm()->port();
-            auto ip = allocate_confirm_msg->message_as_AllocateConfirm()->ip();
-            this->exec_addr.sin_family = AF_INET;
-            this->exec_addr.sin_port = htons(port);
-            this->exec_addr.sin_addr = *((struct in_addr *)&ip);
-            ret = true;
-        }
-    }
-    this->getDeviceAttributes();
-    return ret;
-}
+    // choose a profile and send finalize request
+    builder.Reset();
+    auto allocate_select_msg = CreateProtocolMessage(
+        builder, Message_AllocateSelect,
+        CreateAllocateSelect(builder, Status_OK, session_id, selected_profile)
+            .Union());
+    builder.Finish(allocate_select_msg);
+    tcp.send(builder.GetBufferPointer(), builder.GetSize());
 
-bool TraceExecutorTcp::init(const char *ip, const short port,
-                            manager::instance_profile profile) {
-    // store and check server address/port
-    manager_addr.sin_family = AF_INET;
-    manager_addr.sin_port = htons(port);
-    if (inet_pton(AF_INET, ip, &manager_addr.sin_addr) < 0) {
-        SPDLOG_ERROR("Invalid IP address: {}", ip);
-        return false;
-    }
+    // get server confirmation
+    std::vector<uint8_t> buffer_confirm = tcp.recv();
+    auto allocate_confirm_msg = GetProtocolMessage(buffer_confirm.data());
+    sockaddr_in addr = {};
+    if (allocate_confirm_msg->message_as_AllocateConfirm()->status() ==
+        Status_OK) {
+        auto port = allocate_confirm_msg->message_as_AllocateConfirm()->port();
+        auto ip = allocate_confirm_msg->message_as_AllocateConfirm()->ip();
 
-    bool r = this->negotiateSession(profile);
-    if (r) {
-        SPDLOG_INFO("Session with {}:{} negotiated", ip, port);
+        addr.sin_family = AF_INET;
+        addr.sin_port = htons(port);
+        addr.sin_addr = *((struct in_addr *)&ip);
     } else {
-        SPDLOG_ERROR("Failed to negotiate session with {}:{}", ip, port);
+        throw "Failed to negotiate Session";
     }
-    return r;
+
+    // this->getDeviceAttributes();
+    return TcpGpuSession(addr, session_id);
 }
 
 bool TraceExecutorTcp::deallocate() {
-    int socket_fd;
-    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        SPDLOG_ERROR("Failed to open socket");
-        return false;
-    }
-    if (connect(socket_fd, (sockaddr *)&this->manager_addr,
-                sizeof(manager_addr)) < 0) {
-        SPDLOG_ERROR("Failed to connect");
-        return false;
-    }
+
+    TcpSocked tcp = TcpSocked(m_manager_addr);
 
     using namespace gpuless::manager;
     flatbuffers::FlatBufferBuilder builder;
     auto deallocate_request_msg = CreateProtocolMessage(
         builder, Message_DeallocateRequest,
-        CreateDeallocateRequest(builder, this->session_id_).Union());
+        CreateDeallocateRequest(builder, m_gpusession.getSessionId()).Union());
     builder.Finish(deallocate_request_msg);
-    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    tcp.send(builder.GetBufferPointer(), builder.GetSize());
 
     SPDLOG_DEBUG("Deallocate request sent");
 
-    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
+    std::vector<uint8_t> buffer = tcp.recv();
     auto deallocate_confirm_msg = GetProtocolMessage(buffer.data());
     auto status =
         deallocate_confirm_msg->message_as_DeallocateConfirm()->status();
-    this->session_id_ = -1;
     return status == Status_OK;
 }
 
 bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
     auto s = std::chrono::high_resolution_clock::now();
 
+    // collect statistics on synchronizations
     this->synchronize_counter_++;
     SPDLOG_INFO(
         "TraceExecutorTcp::synchronize() [synchronize_counter={}, size={}]",
         this->synchronize_counter_, cuda_trace.callStack().size());
 
-    // collect statistics on synchronizations
-
-    int socket_fd;
-    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        SPDLOG_ERROR("failed to open socket");
-        return false;
-    }
-    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
-        SPDLOG_ERROR("failed to connect");
-        return false;
-    }
-
     // send trace execution request
     flatbuffers::FlatBufferBuilder builder;
     CudaTraceConverter::traceToExecRequest(cuda_trace, builder);
-    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    m_gpusession.send(builder.GetBufferPointer(), builder.GetSize());
     SPDLOG_INFO("Trace execution request sent");
 
     // receive trace execution response
-    std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
+    std::vector<uint8_t> response_buffer = m_gpusession.recv();
     SPDLOG_INFO("Trace execution response received");
     auto fb_protocol_message_response =
         GetFBProtocolMessage(response_buffer.data());
@@ -162,8 +135,6 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 
     cuda_trace.markSynchronized();
     cuda_trace.setHistoryTop(cuda_api_call);
-
-    close(socket_fd);
 
     auto e = std::chrono::high_resolution_clock::now();
     auto d =
@@ -180,25 +151,15 @@ bool TraceExecutorTcp::synchronize(CudaTrace &cuda_trace) {
 bool TraceExecutorTcp::getDeviceAttributes() {
     SPDLOG_INFO("TraceExecutorTcp::getDeviceAttributes()");
 
-    int socket_fd;
-    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        SPDLOG_ERROR("failed to open socket");
-        return false;
-    }
-    if (connect(socket_fd, (sockaddr *)&exec_addr, sizeof(exec_addr)) < 0) {
-        SPDLOG_ERROR("failed to connect");
-        return false;
-    }
-
     flatbuffers::FlatBufferBuilder builder;
     auto attr_request =
         CreateFBProtocolMessage(builder, FBMessage_FBTraceAttributeRequest,
                                 CreateFBTraceAttributeRequest(builder).Union());
     builder.Finish(attr_request);
-    send_buffer(socket_fd, builder.GetBufferPointer(), builder.GetSize());
+    m_gpusession.send(builder.GetBufferPointer(), builder.GetSize());
     SPDLOG_DEBUG("FBTraceAttributeRequest sent");
 
-    std::vector<uint8_t> response_buffer = recv_buffer(socket_fd);
+    std::vector<uint8_t> response_buffer = m_gpusession.recv();
     SPDLOG_DEBUG("FBTraceAttributeResponse received");
 
     auto fb_protocol_message_response =
@@ -214,7 +175,6 @@ bool TraceExecutorTcp::getDeviceAttributes() {
         this->device_attributes[dev_attr] = value;
     }
 
-    close(socket_fd);
     return true;
 }
 

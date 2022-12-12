@@ -65,6 +65,7 @@ add_executable(manager_trace
     trace/cublas_api_calls.cpp
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp
+    trace/tcp_gpu_session.cpp
     trace/trace_executor_local.cpp
     trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
@@ -113,6 +114,7 @@ add_library(gpuless SHARED
     trace/cublas_api_calls.cpp
     trace/cuda_virtual_device.cpp
     trace/cuda_virtual_device.cpp
+    trace/tcp_gpu_session.cpp
     trace/trace_executor_local.cpp
     trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
