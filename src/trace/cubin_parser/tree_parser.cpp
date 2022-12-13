@@ -11,7 +11,7 @@
 
 namespace PtxTreeParser {
 
-PtxNodeKind parseOperation(const std::string_view &op) {
+PtxNodeKind parseOperation(const std::string_view &op, std::size_t &vec_op) {
     const static std::map<std::string, PtxNodeKind, std::less<void>>
         str_to_kind = {
             {"cvta", PtxNodeKind::Cvta}, {"mov", PtxNodeKind::MoveOp},
@@ -23,7 +23,12 @@ PtxNodeKind parseOperation(const std::string_view &op) {
             {"shl", PtxNodeKind::ShlOp}, {"mad", PtxNodeKind::MadOp},
             {"sad", PtxNodeKind::SadOp}, {"ld", PtxNodeKind::LdOp},
         };
-    std::string_view opcode = split_string(op, ".")[0];
+    auto splitted_string = split_string(op, ".");
+    std::string_view opcode = splitted_string[0];
+
+    // determine whether it is a vector instruction
+    if (auto it = std::find(splitted_string.begin(), splitted_string.end(), "v4"); it != splitted_string.end()) vec_op = 4;
+    else if (auto it = std::find(splitted_string.begin(), splitted_string.end(), "v2"); it != splitted_string.end()) vec_op = 2;
 
     if (auto it = str_to_kind.find(opcode); it != str_to_kind.end()) {
         return it->second;
@@ -46,6 +51,9 @@ PtxOperand parseArgument(std::string_view arg) {
 
         return {PtxOperandKind::Parameter, std::string(arg), offset};
     }
+
+    if (arg[0] == '{') arg.remove_prefix(1);
+    if (arg.back() == '}') arg.remove_suffix(1);
 
     if (arg[0] == '%') {
         if (arg[1] == 'r')
@@ -119,7 +127,8 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     for (std::string_view line = rgetline(beg, end_it); !line.empty();
          line = rgetline(beg, end_it)) {
         auto splitted_line = split_string(line, " ");
-        PtxNodeKind op_kind = parseOperation(splitted_line[0]);
+        std::size_t vec_count = 1;
+        PtxNodeKind op_kind = parseOperation(splitted_line[0], vec_count);
 
         if (op_kind == PtxNodeKind::invalidOp)
             continue; // Opeartion not relevant
@@ -146,44 +155,51 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
                 throw std::runtime_error("Invalid operand to cvta.");
             }
         } else if (op_kind == PtxNodeKind::MoveOp) {
-            if (pars[0].kind != PtxOperandKind::Register)
-                throw std::runtime_error("Destination must be register.");
+            for (size_t v = 0; v < vec_count; ++v) {
+                if (pars[v].kind != PtxOperandKind::Register)
+                    throw std::runtime_error("Destination must be register.");
 
-            switch (pars[1].kind) {
+                switch (pars[vec_count].kind) {
 
-            case PtxOperandKind::Register:
-                for (auto &tree : trees) {
-                    tree.replace_register(pars[0].name, pars[1].name);
+                    case PtxOperandKind::Register:
+                        for (auto &tree: trees) {
+                            tree.replace_register(pars[v].name, pars[vec_count].name);
+                        }
+                        break;
+                    case PtxOperandKind::Parameter:
+                        for (auto &tree: trees) {
+                            tree.add_node(std::make_unique<PtxParameter>(
+                                                  pars[vec_count].name, pars[vec_count].offset),
+                                          {pars[v]});
+                        }
+                        break;
+                    case PtxOperandKind::Immediate:
+                        for (auto &tree: trees) {
+                            tree.add_node(
+                                    std::make_unique<PtxImmediate>(pars[vec_count].offset, s64),
+                                    {pars[v]});
+                        }
+                        break;
+                    case PtxOperandKind::SpecialRegisterTid:
+                    case PtxOperandKind::SpecialRegisterNTid:
+                    case PtxOperandKind::SpecialRegisterCtaId:
+                    case PtxOperandKind::SpecialRegisterNCtaId:
+                        for (auto &tree: trees) {
+                            tree.add_node(std::make_unique<PtxSpecialRegister>(
+                                                  pars[vec_count].kind, pars[vec_count].offset),
+                                          {pars[v]});
+                        }
+                        break;
+
                 }
-                break;
-            case PtxOperandKind::Parameter:
-                for (auto &tree : trees) {
-                    tree.add_node(std::make_unique<PtxParameter>(
-                                      pars[1].name, pars[1].offset),
-                                  {pars[0]});
-                }
-                break;
-            case PtxOperandKind::Immediate:
-                for (auto &tree : trees) {
-                    tree.add_node(
-                        std::make_unique<PtxImmediate>(pars[1].offset, s64),
-                        {pars[0]});
-                }
-                break;
-            case PtxOperandKind::SpecialRegisterTid:
-            case PtxOperandKind::SpecialRegisterNTid:
-            case PtxOperandKind::SpecialRegisterCtaId:
-            case PtxOperandKind::SpecialRegisterNCtaId:
-                for (auto &tree : trees) {
-                    tree.add_node(std::make_unique<PtxSpecialRegister>(
-                                      pars[1].kind, pars[1].offset),
-                                  {pars[0]});
-                }
-                break;
             }
         } else {
             for (auto &tree : trees) {
-                tree.add_node(produceNode(op_kind), pars);
+                for (size_t v = 0; v < vec_count; ++v) {
+                    std::vector<PtxOperand> p{pars[v]};
+                    p.insert(p.end(), pars.begin() + vec_count, pars.end());
+                    tree.add_node(produceNode(op_kind), p);
+                }
             }
         }
     }
