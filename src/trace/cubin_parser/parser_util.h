@@ -8,11 +8,11 @@
 #include <utility>
 #include <vector>
 
-std::vector<std::string> split_string(std::string str,
+std::vector<std::string_view> split_string(std::string_view str,
                                       const std::string &delimiter);
-bool startsWith(const std::string &str, const std::string &prefix);
-bool endsWith(const std::string &str, const std::string &suffix);
-bool rgetline(std::string::reverse_iterator &it,
-              const std::string::reverse_iterator &end, std::string &line);
+bool startsWith(const std::string_view &str, const std::string_view &prefix);
+bool endsWith(const std::string_view &str, const std::string_view &suffix);
+std::string_view rgetline(const std::string::iterator &beg,
+              std::string::iterator &end);
 
 #endif // GPULESS_PARSER_UTIL_H

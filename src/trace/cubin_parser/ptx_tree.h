@@ -278,7 +278,7 @@ public:
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+    PtxNodeKind get_kind() override { return PtxNodeKind::AbdOp; }
 
 private:
     std::unique_ptr<node_type> _left;
