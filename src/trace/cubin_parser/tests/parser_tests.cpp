@@ -22,7 +22,7 @@ TEST(PtxTree, SimpleEval) {
     EXPECT_EQ(evaluated->get_kind(), PtxNodeKind::Immediate);
 
     auto &imm(dynamic_cast<PtxImmediate &>(*evaluated));
-    EXPECT_EQ(imm.get_value(), 42);
+    EXPECT_EQ(imm.get_values()[0], 42);
 }
 
 TEST(PtxTree, AddEvalParam) {
@@ -78,6 +78,8 @@ TEST(PtxTree, AddMultipleEvalsSpecialRegister) {
                        {{PtxOperandKind::Register, "reg_a",0},
                         {PtxOperandKind::SpecialRegisterCtaId, "", 0},
                         {PtxOperandKind::Immediate, "",10}});
+
+    test_tree.print();
 
     std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
     EXPECT_EQ(evaluated, nullptr);

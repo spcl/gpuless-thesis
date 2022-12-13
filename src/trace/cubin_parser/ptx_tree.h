@@ -16,7 +16,6 @@ namespace PtxTreeParser {
 enum class PtxNodeKind {
     Parameter,
     Immediate,
-    ImmediateArray,
     SpecialRegister,
     Cvta,
     AddOp,
@@ -78,36 +77,20 @@ class PtxAbstractNode {
 class PtxImmediate : public PtxAbstractNode {
   public:
     PtxImmediate(int64_t value, PtxParameterType type)
-        : _value(value), _type(type) {}
+        : _values(1), _type(type) {
+        _values[0] = value;
+    }
+
+    PtxImmediate(std::vector<int64_t> values, PtxParameterType type)
+        : _values(std::move(values)), _type(type) {}
 
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
     PtxNodeKind get_kind() override { return PtxNodeKind::Immediate; }
 
-    [[nodiscard]] int64_t &get_value() { return _value; }
-    [[nodiscard]] int64_t get_value() const { return _value; }
-    [[nodiscard]] PtxParameterType get_type() const { return _type; }
-
-  private:
-    int64_t _value;
-    PtxParameterType _type;
-};
-
-class PtxImmediateArray : public PtxAbstractNode {
-  public:
-    PtxImmediateArray(std::vector<int64_t> values, PtxParameterType type)
-        : _values(std::move(values)), _type(type) {}
-
-    void print() const override;
-    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
-    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::ImmediateArray; }
-
-    [[nodiscard]] std::vector<int64_t> &get_values() { return _values; }
-    [[nodiscard]] const std::vector<int64_t> &get_values() const {
-        return _values;
-    }
+    [[nodiscard]] std::vector<int64_t>  &get_values() { return _values; }
+    [[nodiscard]] const std::vector<int64_t> &get_values() const { return _values; }
     [[nodiscard]] PtxParameterType get_type() const { return _type; }
 
   private:
@@ -163,15 +146,15 @@ class PtxSpecialRegister : public PtxAbstractNode {
 
 class PtxParameter : public PtxAbstractNode {
   public:
-    PtxParameter(std::string name, std::vector<int> offsets, int align,
+    PtxParameter(std::string name, std::vector<int64_t> offsets, int64_t align,
                  PtxParameterType type)
         : _name(std::move(name)), _offsets(std::move(offsets)), _align(align),
           _type(type) {}
-    PtxParameter(std::string name, int offset, int align, PtxParameterType type)
+    PtxParameter(std::string name, int64_t offset, int64_t align, PtxParameterType type)
         : _name(std::move(name)), _offsets(1), _align(align), _type(type) {
         _offsets[0] = offset;
     }
-    explicit PtxParameter(std::string name, int offset)
+    explicit PtxParameter(std::string name, int64_t offset)
         : _name(std::move(name)), _offsets(1), _align(0),
           _type(PtxParameterType::invalid) {
         _offsets[0] = offset;
@@ -183,13 +166,13 @@ class PtxParameter : public PtxAbstractNode {
     PtxNodeKind get_kind() override { return PtxNodeKind::Parameter; }
 
     [[nodiscard]] std::string get_name() const { return _name; };
-    [[nodiscard]] std::vector<int> &get_offsets() { return _offsets; };
+    [[nodiscard]] std::vector<int64_t> &get_offsets() { return _offsets; };
     [[nodiscard]] PtxParameterType get_type() const { return _type; };
 
   private:
     std::string _name;
-    std::vector<int> _offsets;
-    int _align;
+    std::vector<int64_t> _offsets;
+    int64_t _align;
     PtxParameterType _type = PtxParameterType::invalid;
 };
 

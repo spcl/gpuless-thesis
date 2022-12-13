@@ -3,40 +3,38 @@
 #include <algorithm>
 #include <sstream>
 
-std::vector<std::string> split_string(std::string str,
+std::vector<std::string_view> split_string(std::string_view str,
                                       const std::string &delimiter) {
-    std::vector<std::string> result;
+    std::vector<std::string_view> result;
 
-    size_t pos = 0;
-    std::string token;
-    while ((pos = str.find(delimiter)) != std::string::npos) {
-        token = str.substr(0, pos);
-        result.push_back(token);
-        str.erase(0, pos + delimiter.length());
+    size_t old_pos = 0;
+    for(size_t pos = 0; (pos = str.find(delimiter, old_pos )) != std::string::npos; old_pos = pos+1) {
+        result.push_back(str.substr(old_pos, pos - old_pos));
     }
-    result.push_back(str);
+    result.push_back(str.substr(old_pos, str.size() - old_pos));
+
     return result;
 }
 
-bool startsWith(const std::string &str, const std::string &prefix) {
+bool startsWith(const std::string_view &str, const std::string_view &prefix) {
     return str.rfind(prefix, 0) == 0;
 }
 
-bool endsWith(const std::string &str, const std::string &suffix) {
+bool endsWith(const std::string_view &str, const std::string_view &suffix) {
     return str.size() >= suffix.size() &&
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
 
-bool rgetline(std::string::reverse_iterator &it,
-              const std::string::reverse_iterator &end, std::string &line) {
-    if (it == end)
-        return false;
-    std::stringstream ss;
-    char t;
-    while (it != end && (t = *it++) != '\n') {
-        ss << t;
+std::string_view rgetline(const std::string::iterator &beg,
+              std::string::iterator &end) {
+
+    for(size_t len = 0; true ;++len) {
+        if(end == beg) {
+             return {end.operator->(), len};
+        }
+
+        if(*(--end) == '\n') {
+            return {end.operator->()+1, len};
+        }
     }
-    line = ss.str();
-    std::reverse(line.begin(), line.end());
-    return true;
 }

@@ -9,6 +9,7 @@
 #include <spdlog/spdlog.h>
 
 #include "cubin_analysis.hpp"
+#include "cubin_parser/parser_util.h"
 
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType() {
     static std::map<std::string, PtxParameterType> map_ = {
@@ -141,29 +142,6 @@ struct NameWithOffset {
     int offset;
 };
 
-bool startsWith(const std::string &str, const std::string &prefix) {
-    return str.rfind(prefix, 0) == 0;
-}
-
-bool endsWith(const std::string &str, const std::string &suffix) {
-    return str.size() >= suffix.size() &&
-           str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
-}
-
-std::vector<std::string> split_string(std::string str, const std::string &delimiter) {
-    std::vector<std::string> result;
-
-    size_t pos = 0;
-    std::string token;
-    while ((pos = str.find(delimiter)) != std::string::npos) {
-        token = str.substr(0, pos);
-        result.push_back(token);
-        str.erase(0, pos + delimiter.length());
-    }
-    result.push_back(str);
-    return result;
-}
-
 std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx_data,
                    const std::smatch &match) {
     const std::string &entry = match[1];
@@ -192,33 +170,33 @@ std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx
         }
 
         if(splitted_line[1] == ".align") {
-            int param_align = std::stoi(splitted_line[2]);
-            const std::string &name = splitted_line[4];
-            std::vector<std::string> splitted_name = split_string(name, "[");
-            const std::string &param_name = splitted_name[0];
+            int param_align = std::stoi(splitted_line[2].data());
+            const std::string_view &name = splitted_line[4];
+            std::vector<std::string_view> splitted_name = split_string(name, "[");
+            const std::string_view &param_name = splitted_name[0];
             // Remove last ']' from the size
             int param_size = std::stoi(
-                splitted_name[1].substr(0, splitted_name[1].size() - 1));
+                splitted_name[1].substr(0, splitted_name[1].size() - 1).data());
 
-            std::string type_name = splitted_line[3].substr(1, splitted_line[3].size());
-            PtxParameterType param_type = ptxParameterTypeFromString(type_name);
+            std::string_view type_name = splitted_line[3].substr(1, splitted_line[3].size());
+            PtxParameterType param_type = ptxParameterTypeFromString(std::string(type_name));
             int param_typeSize = byteSizePtxParameterType(param_type);
 
-            KParamInfo param(param_name, ptxParameterTypeFromString(type_name), param_typeSize, param_align, param_size, 0);
+            KParamInfo param(std::string(param_name), ptxParameterTypeFromString(std::string(type_name)), param_typeSize, param_align, param_size, 0);
             raw_parameters.push_back(param);
 
             for(int offset = 0; offset < param_size; offset += param_align) {
                 param.size = param_size - offset;
-                params.push_back({param_name, offset});
+                params.push_back({std::string(param_name), offset});
             }
         } else {
-            std::string &name = splitted_line[2];
-            std::string typeName = splitted_line[1].substr(1, splitted_line[1].size()-1);
-            auto type = ptxParameterTypeFromString(typeName);
-            KParamInfo param(name, type, byteSizePtxParameterType(type), 0, 1, 0);
+            std::string_view &name = splitted_line[2];
+            std::string_view typeName = splitted_line[1].substr(1, splitted_line[1].size()-1);
+            auto type = ptxParameterTypeFromString(std::string(typeName));
+            KParamInfo param(std::string(name), type, byteSizePtxParameterType(type), 0, 1, 0);
 
             raw_parameters.push_back(param);
-            params.push_back({name ,0});
+            params.push_back({std::string(name) ,0});
         }
     }
 
@@ -244,10 +222,10 @@ std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx
             auto param_split = split_string(param, "+");
             auto param_name = param_split[0];
             if(param_split.size() == 1) {
-                table[reg][0] = table[param_name][0];
+                table[std::string(reg)][0] = table[std::string(param_name)][0];
             } else {
-                int offset = std::stoi(param_split[1]);
-                table[reg][offset] = table[param_name][offset];
+                int offset = std::stoi(param_split[1].data());
+                table[std::string(reg)][offset] = table[std::string(param_name)][offset];
             }
         } else if (startsWith(line, "ld.param.v2.u64") || startsWith(line, "ld.param.v4.u64")) {
             auto operands = split_string(line, "}");
@@ -257,11 +235,11 @@ std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx
             param = param.substr(1, param.size() - 3);
             auto param_split = split_string(param, "+");
             auto param_name = param_split[0];
-            auto offset = std::stoi(param_split[1]);
+            auto offset = std::stoi(param_split[1].data());
             for(size_t i = 0; i < registers.size(); ++i) {
                 auto reg = registers[i];
                 uint64_t local_offset = offset + i * 8;
-                table[reg][local_offset] = table[param_name][local_offset];
+                table[std::string(reg)][local_offset] = table[std::string(param_name)][local_offset];
             }
         } else if (startsWith(line, "mov.u64") || startsWith(line, "mov.b64")) {
             auto operands = split_string(line, ",");
@@ -276,12 +254,12 @@ std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx
             auto param_split = split_string(param, "+");
             auto param_name = param_split[0];
             // Only move if we are keeping track of the parameter
-            if(table.find(param_name) == table.end()) continue;
+            if(table.find(std::string(param_name)) == table.end()) continue;
             if(param_split.size() > 1) {
-                auto offset = std::stoi(param_split[1]);
-                if(table[param_name].find(offset) == table[param_name].end()) continue;
+                auto offset = std::stoi(param_split[1].data());
+                if(table[std::string(param_name)].find(offset) == table[std::string(param_name)].end()) continue;
             }
-            table[reg] = table[param_name];
+            table[std::string(reg)] = table[std::string(param_name)];
 
         } else if (startsWith(line, "cvta.to.global.u64")) {
             auto operands = split_string(line, ",");
@@ -297,15 +275,15 @@ std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx
             std::string origin;
             uint64_t offset;
             if(param_split.size() == 1) {
-                auto localMap = table[param_name];
+                auto localMap = table[std::string(param_name)];
                 if(localMap.empty())
                     continue;
                 assert(localMap.size() == 1 && "Expected only one offset");
                 offset = 0;
                 origin = localMap.begin()->second;
             } else {
-                offset = std::stoi(param_split[1]);
-                origin = table[param_name][offset];
+                offset = std::stoi(param_split[1].data());
+                origin = table[std::string(param_name)][offset];
             }
             is_ptr[origin][offset] = true;
         }

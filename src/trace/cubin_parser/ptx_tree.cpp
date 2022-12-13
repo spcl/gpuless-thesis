@@ -9,6 +9,130 @@
 
 namespace PtxTreeParser {
 /*
+ * PTX NODE HELPER
+ */
+template <class F, class L, class R>
+std::unique_ptr<PtxAbstractNode> BinaryEval(KLaunchConfig *config, L &l, R &r,
+                                            F op) {
+    std::unique_ptr<PtxAbstractNode> left_eval(l->eval(config));
+    std::unique_ptr<PtxAbstractNode> right_eval(r->eval(config));
+
+    if (!left_eval && !right_eval) {
+        // Could not collapse anything, no evaluation possible
+        return nullptr;
+    }
+    if (!left_eval && right_eval) {
+        // Could only collapse rigt node, no evaluation possible
+        r.swap(right_eval);
+        return nullptr;
+    }
+    if (left_eval && !right_eval) {
+        // Could only collapse left node, no evaluation possible
+        l.swap(left_eval);
+        return nullptr;
+    }
+
+    PtxNodeKind left_kind = left_eval->get_kind();
+    PtxNodeKind right_kind = right_eval->get_kind();
+
+    // One node is immediate and one is parameter
+    auto par_imm = [&](PtxParameter &par, const PtxImmediate &imm, bool inv) {
+        std::vector<int64_t> &offsets(par.get_offsets());
+        const std::vector<int64_t> &values(imm.get_values());
+
+        size_t n_offsets = offsets.size();
+        size_t n_imm = values.size();
+
+        if (n_imm > 1) {
+            for (size_t i = 0; i < n_offsets; ++i) {
+                for (size_t k = 1; k < n_imm; ++k) {
+                    offsets.push_back(inv ? op(values[k], offsets[i])
+                                          : op(offsets[i], values[k]));
+                }
+            }
+        }
+
+        for (size_t i = 0; i < n_offsets; ++i) {
+            offsets[i] = inv ? op(imm.get_values()[0], offsets[i])
+                             : op(offsets[i], imm.get_values()[0]);
+        }
+    };
+    if (left_kind == PtxNodeKind::Parameter &&
+        right_kind == PtxNodeKind::Immediate) {
+        par_imm(static_cast<PtxParameter &>(*left_eval),
+                static_cast<PtxImmediate &>(*right_eval), false);
+        return left_eval;
+    }
+    if (right_kind == PtxNodeKind::Parameter &&
+        left_kind == PtxNodeKind::Immediate) {
+        par_imm(static_cast<PtxParameter &>(*right_eval),
+                static_cast<PtxImmediate &>(*left_eval), true);
+        return right_eval;
+    }
+
+    // Both are immediate
+    if (left_kind == PtxNodeKind::Immediate &&
+        right_kind == PtxNodeKind::Immediate) {
+        auto &left(static_cast<PtxImmediate &>(*left_eval));
+        auto &right(static_cast<PtxImmediate &>(*right_eval));
+
+        size_t n_l = left.get_values().size();
+        size_t n_r = right.get_values().size();
+
+        auto &l_values(left.get_values());
+        auto &r_values(right.get_values());
+
+        for (size_t i = 0; i < n_l; ++i) {
+            for (size_t j = 1; j < n_r; ++j) {
+                l_values.push_back(op(l_values[i], r_values[j]));
+            }
+        }
+
+        for (size_t i = 0; i < n_l; ++i)
+            l_values[i] = op(l_values[i], r_values[0]);
+
+        return left_eval;
+    }
+
+    // One is immediate and one is special register
+    auto spec_imm = [&](const PtxSpecialRegister &reg, PtxImmediate &imm,
+                        bool inv) {
+        const std::vector<int64_t> &reg_values(reg.get_values());
+        std::vector<int64_t> &imm_values(imm.get_values());
+
+        size_t n_reg = reg_values.size();
+        size_t n_imm = imm_values.size();
+
+        for (size_t i = 0; i < n_imm; ++i) {
+            for (size_t j = 1; j < n_reg; ++j) {
+                imm_values.push_back(inv ? op(imm_values[i], reg_values[j])
+                                         : op(reg_values[j], imm_values[i]));
+            }
+        }
+
+        for (size_t i = 0; i < n_imm; ++i)
+            imm_values[i] = inv ? op(imm_values[i], reg_values[0])
+                                : op(reg_values[0], imm_values[i]);
+    };
+    if (left_kind == PtxNodeKind::SpecialRegister &&
+        right_kind == PtxNodeKind::Immediate) {
+        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
+        auto &right(static_cast<PtxImmediate &>(*right_eval));
+        spec_imm(left, right, false);
+        return right_eval;
+    }
+    if (right_kind == PtxNodeKind::SpecialRegister &&
+        left_kind == PtxNodeKind::Immediate) {
+        auto &left(static_cast<PtxImmediate &>(*left_eval));
+        auto &right(static_cast<PtxSpecialRegister &>(*right_eval));
+        spec_imm(right, left, true);
+        return left_eval;
+    }
+
+    throw std::runtime_error("Binary Operation on these nodes not supported.");
+}
+
+/*
  *  PTX NODES IMPLEMENTATIONS
  */
 
@@ -51,85 +175,7 @@ void PtxAddNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxAddNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // One node is immediate and one is parameter
-    auto add_par_imm = [](PtxParameter &par, const PtxImmediate &imm) {
-        std::vector<int> &offsets(par.get_offsets());
-        int imm_value = static_cast<int>(imm.get_value());
-
-        for (auto &offset : offsets) {
-            offset += imm_value;
-        }
-    };
-    if (left_kind == PtxNodeKind::Parameter &&
-        right_kind == PtxNodeKind::Immediate) {
-        add_par_imm(static_cast<PtxParameter &>(*left_eval),
-                    static_cast<PtxImmediate &>(*right_eval));
-        return left_eval;
-    }
-    if (right_kind == PtxNodeKind::Parameter &&
-        left_kind == PtxNodeKind::Immediate) {
-        add_par_imm(static_cast<PtxParameter &>(*right_eval),
-                    static_cast<PtxImmediate &>(*left_eval));
-        return right_eval;
-    }
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() += right.get_value();
-        return left_eval;
-    }
-
-    // One is immediate and one is special register
-    auto add_spec_imm = [](PtxSpecialRegister &reg, PtxImmediate &imm) {
-        std::vector<int64_t> &values(reg.get_values());
-        int64_t imm_value = imm.get_value();
-        for (auto &value : values) {
-            value += imm_value;
-        }
-
-        return values;
-    };
-    if (left_kind == PtxNodeKind::SpecialRegister &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(add_spec_imm(left, right),
-                                                   right.get_type());
-    }
-    if (right_kind == PtxNodeKind::SpecialRegister &&
-        left_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxSpecialRegister &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(add_spec_imm(right, left),
-                                                   left.get_type());
-    }
-
-    throw std::runtime_error("Addition of these nodes not supported.");
+    return BinaryEval(config, _left, _right, std::plus<int64_t>{});
 }
 void PtxAddNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -163,72 +209,7 @@ void PtxSubNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxSubNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // left is param, right immediate
-    auto sub_par_imm = [](PtxParameter &par, const PtxImmediate &imm) {
-        std::vector<int> &offsets(par.get_offsets());
-        int imm_value = static_cast<int>(imm.get_value());
-
-        for (auto &offset : offsets) {
-            offset -= imm_value;
-        }
-    };
-    if (left_kind == PtxNodeKind::Parameter &&
-        right_kind == PtxNodeKind::Immediate) {
-        sub_par_imm(static_cast<PtxParameter &>(*left_eval),
-                    static_cast<PtxImmediate &>(*right_eval));
-        return left_eval;
-    }
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() -= right.get_value();
-        return left_eval;
-    }
-
-    // One is immediate and one is special register
-    auto sub_spec_imm = [](PtxSpecialRegister &reg, PtxImmediate &imm) {
-        std::vector<int64_t> &values(reg.get_values());
-        int64_t imm_value = imm.get_value();
-        for (auto &value : values) {
-            value -= imm_value;
-        }
-
-        return values;
-    };
-    if (left_kind == PtxNodeKind::SpecialRegister &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(sub_spec_imm(left, right),
-                                                   right.get_type());
-    }
-
-    throw std::runtime_error("Subtraction of these nodes not supported.");
+    return BinaryEval(config, _left, _right, std::minus<int64_t>{});
 }
 void PtxSubNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -262,51 +243,20 @@ void PtxMulNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxMulNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() *= right.get_value();
-        return left_eval;
-    }
-
-    throw std::runtime_error("Multiplication of these nodes not supported.");
+    return BinaryEval(config, _left, _right, std::multiplies<int64_t>{});
 }
 void PtxMulNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
-        if (idx == 0) {
-            _left.swap(child);
-            return;
-        }
-        if (idx == 1) {
-            _right.swap(child);
-            return;
-        }
-
-        throw std::runtime_error("Invalid index.");
+    if (idx == 0) {
+        _left.swap(child);
+        return;
     }
+    if (idx == 1) {
+        _right.swap(child);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
 
 // PtxMadNode implementation
 void PtxMadNode::print() const {
@@ -354,21 +304,21 @@ std::unique_ptr<PtxAbstractNode> PtxSadNode::eval(KLaunchConfig *config) {
 }
 void PtxSadNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
 
-        if (idx == 0) {
-            _child->set_child(std::move(child), 0);
-            return;
-        }
-        if (idx == 1) {
-            _child->_right->set_child(std::move(child), 0);
-            return;
-        }
-        if (idx == 2) {
-            _child->_right->set_child(std::move(child), 1);
-            return;
-        }
-
-        throw std::runtime_error("Invalid index.");
+    if (idx == 0) {
+        _child->set_child(std::move(child), 0);
+        return;
     }
+    if (idx == 1) {
+        _child->_right->set_child(std::move(child), 0);
+        return;
+    }
+    if (idx == 2) {
+        _child->_right->set_child(std::move(child), 1);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
 
 // PtxDivNode implementation
 void PtxDivNode::print() const {
@@ -389,51 +339,20 @@ void PtxDivNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxDivNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() /= right.get_value();
-        return left_eval;
-    }
-
-    throw std::runtime_error("Division of these nodes not supported.");
+    return BinaryEval(config, _left, _right, std::divides<int64_t>{});
 }
 void PtxDivNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
-        if (idx == 0) {
-            _left.swap(child);
-            return;
-        }
-        if (idx == 1) {
-            _right.swap(child);
-            return;
-        }
-
-        throw std::runtime_error("Invalid index.");
+    if (idx == 0) {
+        _left.swap(child);
+        return;
     }
+    if (idx == 1) {
+        _right.swap(child);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
 
 // PtxRemNode implementation
 void PtxRemNode::print() const {
@@ -454,74 +373,7 @@ void PtxRemNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxRemNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-
-    auto rem_par_imm = [](PtxParameter &par, const PtxImmediate &imm) {
-        std::vector<int> &offsets(par.get_offsets());
-        int imm_value = static_cast<int>(imm.get_value());
-
-        for (auto &offset : offsets) {
-            offset %= imm_value;
-        }
-    };
-    if (left_kind == PtxNodeKind::Parameter &&
-        right_kind == PtxNodeKind::Immediate) {
-        rem_par_imm(static_cast<PtxParameter &>(*left_eval),
-                    static_cast<PtxImmediate &>(*right_eval));
-        return left_eval;
-    }
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() %= right.get_value();
-        return left_eval;
-    }
-
-    // One is immediate and one is special register
-    auto rem_spec_imm = [](PtxSpecialRegister &reg, PtxImmediate &imm) {
-        std::vector<int64_t> &values(reg.get_values());
-        int64_t imm_value = imm.get_value();
-        for (auto &value : values) {
-            value %= imm_value;
-        }
-
-        return values;
-    };
-    if (left_kind == PtxNodeKind::SpecialRegister &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(rem_spec_imm(left, right),
-                                                   right.get_type());
-    }
-
-
-
-    throw std::runtime_error("Remainder of these nodes not supported.");
+    return BinaryEval(config, _left, _right, std::modulus<int64_t>{});
 }
 void PtxRemNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -555,131 +407,8 @@ void PtxAbdNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxAbdNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // left is param, right immediate
-    auto abd_par_imm = [](PtxParameter &par, const PtxImmediate &imm) {
-        std::vector<int> &offsets(par.get_offsets());
-        int imm_value = static_cast<int>(imm.get_value());
-
-        for (auto &offset : offsets) {
-            offset -= imm_value;
-            if (offset < 0) offset = -offset;
-        }
-    };
-    if (left_kind == PtxNodeKind::Parameter &&
-        right_kind == PtxNodeKind::Immediate) {
-        abd_par_imm(static_cast<PtxParameter &>(*left_eval),
-                    static_cast<PtxImmediate &>(*right_eval));
-        return left_eval;
-    }
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Parameter) {
-        abd_par_imm(static_cast<PtxParameter &>(*right_eval),
-                    static_cast<PtxImmediate &>(*left_eval));
-        return right_eval;
-    }
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() -= right.get_value();
-        if (left.get_value() < 0) left.get_value() = -left.get_value();
-        return left_eval;
-    }
-
-    if (left_kind == PtxNodeKind::Parameter &&
-        right_kind == PtxNodeKind::Parameter) {
-        auto &left(static_cast<PtxParameter &>(*left_eval));
-        auto &right(static_cast<PtxParameter &>(*right_eval));
-
-        std::vector<int> &offsets_left(left.get_offsets());
-        std::vector<int> &offsets_right(right.get_offsets());
-        if (offsets_left.size() != offsets_right.size()) {
-            throw std::runtime_error("Not the same amount of offsets to calculate the absolute difference");
-        }
-
-        for (unsigned i = 0; i < offsets_left.size(); ++i) {
-            offsets_left[i] -= offsets_right[i];
-            if (offsets_left[i] < 0) {
-                offsets_left[i] = -offsets_left[i];
-            }
-        }
-
-        return left_eval;
-    }
-
-    // One is immediate and one is special register
-    auto abd_spec_imm = [](PtxSpecialRegister &reg, PtxImmediate &imm) {
-        std::vector<int64_t> &values(reg.get_values());
-        int64_t imm_value = imm.get_value();
-        for (auto &value : values) {
-            value -= imm_value;
-            if (value < 0) value = -value;
-        }
-
-        return values;
-    };
-    if (left_kind == PtxNodeKind::SpecialRegister &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(abd_spec_imm(left, right),
-                                                   right.get_type());
-    }
-
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::SpecialRegister) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxSpecialRegister &>(*right_eval));
-        return std::make_unique<PtxImmediateArray>(abd_spec_imm(right, left),
-                                                   left.get_type());
-    }
-
-    if (left_kind == PtxNodeKind::SpecialRegister &&
-        right_kind == PtxNodeKind::SpecialRegister) {
-        auto &left(static_cast<PtxSpecialRegister &>(*left_eval));
-        auto &right(static_cast<PtxSpecialRegister &>(*right_eval));
-        std::vector<int64_t> &values_left(left.get_values());
-        std::vector<int64_t> &values_right(right.get_values());
-        if (values_left.size() != values_right.size()) {
-            throw std::runtime_error("Not the same amount of offsets to calculate the absolute difference");
-        }
-
-        for (unsigned i = 0; i < values_left.size(); ++i) {
-            values_left[i] -= values_right[i];
-            if (values_left[i] < 0) {
-                values_left[i] = -values_left[i];
-            }
-        }
-
-        return std::make_unique<PtxImmediateArray>(values_left,
-                                                   PtxParameterType::s64);
-    }
-
-    throw std::runtime_error("Absolute difference of these nodes not supported.");
+    return BinaryEval(config, _left, _right,
+                      [](int64_t l, int64_t r) { return std::abs(l - r); });
 }
 void PtxAbdNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -717,9 +446,10 @@ std::unique_ptr<PtxAbstractNode> PtxAbsNode::eval(KLaunchConfig *config) {
     // Child is immediate
     if (child_kind == PtxNodeKind::Immediate) {
         auto &child(static_cast<PtxImmediate &>(*child_eval));
-        if (child.get_value() < 0)  {
-            child.get_value() = -child.get_value();
+        for(auto &value : child.get_values()) {
+            value = std::abs(value);
         }
+
         return child_eval;
     }
 
@@ -756,19 +486,21 @@ std::unique_ptr<PtxAbstractNode> PtxNegNode::eval(KLaunchConfig *config) {
     // Child is immediate
     if (child_kind == PtxNodeKind::Immediate) {
         auto &child(static_cast<PtxImmediate &>(*child_eval));
-        child.get_value() = -child.get_value();
+        for(auto& value : child.get_values()) {
+            value = -value;
+        }
         return child_eval;
     }
 
     throw std::runtime_error("Negation of this node not supported.");
 }
 void PtxNegNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
-        if (idx == 0) {
-            _child.swap(child);
-            return;
-        }
-        throw std::runtime_error("Invalid index.");
+    if (idx == 0) {
+        _child.swap(child);
+        return;
     }
+    throw std::runtime_error("Invalid index.");
+}
 
 // PtxMinNode implementation
 void PtxMinNode::print() const {
@@ -789,39 +521,9 @@ void PtxMinNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxMinNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() = std::min(left.get_value(), right.get_value());
-        return left_eval;
-    }
-
-    throw std::runtime_error("Minimum of these nodes not supported.");
+    return BinaryEval(config, _left, _right, [] (int64_t a, int64_t b) {
+        return std::min(a,b);
+    });
 }
 void PtxMinNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -855,39 +557,9 @@ void PtxMaxNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxMaxNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() = std::max(left.get_value(), right.get_value());
-        return left_eval;
-    }
-
-    throw std::runtime_error("Maximum of these nodes not supported.");
+    return BinaryEval(config, _left, _right, [] (int64_t a, int64_t b) {
+        return std::max(a,b);
+    });
 }
 void PtxMaxNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -921,38 +593,9 @@ void PtxShlNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxShlNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() <<= right.get_value();
-        return left_eval;
-    }
-
-    throw std::runtime_error("Shift-left of these nodes not supported.");
+    return BinaryEval(config, _left, _right, [] (int64_t a, int64_t b) {
+        return a<<b;
+    });
 }
 void PtxShlNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -986,80 +629,36 @@ void PtxShrNode::print() const {
     }
 }
 std::unique_ptr<PtxAbstractNode> PtxShrNode::eval(KLaunchConfig *config) {
-    std::unique_ptr<PtxAbstractNode> left_eval(_left->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(_right->eval(config));
-
-    if (!left_eval && !right_eval) {
-        // Could not collapse anything, no evaluation possible
-        return nullptr;
-    }
-    if (!left_eval && right_eval) {
-        // Could only collapse rigt node, no evaluation possible
-        _right.swap(right_eval);
-        return nullptr;
-    }
-    if (left_eval && !right_eval) {
-        // Could only collapse left node, no evaluation possible
-        _left.swap(left_eval);
-        return nullptr;
-    }
-
-    PtxNodeKind left_kind = left_eval->get_kind();
-    PtxNodeKind right_kind = right_eval->get_kind();
-
-    // Both are immediate
-    if (left_kind == PtxNodeKind::Immediate &&
-        right_kind == PtxNodeKind::Immediate) {
-        auto &left(static_cast<PtxImmediate &>(*left_eval));
-        auto &right(static_cast<PtxImmediate &>(*right_eval));
-
-        left.get_value() >>= right.get_value();
-        return left_eval;
-    }
-
-    throw std::runtime_error("Shift-right of these nodes not supported.");
+    return BinaryEval(config, _left, _right, [] (int64_t a, int64_t b) {
+        return a>>b;
+    });
 }
 void PtxShrNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
-        if (idx == 0) {
-            _left.swap(child);
-            return;
-        }
-        if (idx == 1) {
-            _right.swap(child);
-            return;
-        }
-
-        throw std::runtime_error("Invalid index.");
+    if (idx == 0) {
+        _left.swap(child);
+        return;
+    }
+    if (idx == 1) {
+        _right.swap(child);
+        return;
     }
 
+    throw std::runtime_error("Invalid index.");
+}
 
 // PtxImmediate implementation
 std::unique_ptr<PtxAbstractNode> PtxImmediate::eval(KLaunchConfig *config) {
-    return std::make_unique<PtxImmediate>(this->_value, this->_type);
+    return std::make_unique<PtxImmediate>(this->_values, this->_type);
 }
 void PtxImmediate::print() const {
-    std::cout << "PtxImmediate: Value " << _value << ".\n";
-}
-void PtxImmediate::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
-    throw std::runtime_error("Immediate has no children.");
-}
-
-// PtxImmediateArray implementation
-void PtxImmediateArray::print() const {
-    std::cout << "PtxImmediateArray:"
-              << "Values ";
-    for (auto value : this->_values) {
-        std::cout << std::hex << value << '\t';
+    std::cout << "PtxImmediate: Values ";
+    for(auto value : _values) {
+        std::cout << value << "\t";
     }
     std::cout << ".\n";
 }
-std::unique_ptr<PtxAbstractNode>
-PtxImmediateArray::eval(KLaunchConfig *config) {
-    return std::make_unique<PtxImmediateArray>(this->_values, this->_type);
-}
-void PtxImmediateArray::set_child(std::unique_ptr<PtxAbstractNode> child,
-                                  int idx) {
-    throw std::runtime_error("PtxImmediateArray has no children.");
+void PtxImmediate::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    throw std::runtime_error("Immediate has no children.");
 }
 
 // PtxSpecialRegister implementation
@@ -1110,7 +709,8 @@ void PtxSpecialRegister::set_child(std::unique_ptr<PtxAbstractNode> child,
 // PtxCvtaNode implementation
 void PtxCvtaNode::print() const {
     std::cout << "PtxCvtaNode. \n";
-    if(_dst) _dst->print();
+    if (_dst)
+        _dst->print();
 }
 std::unique_ptr<PtxAbstractNode> PtxCvtaNode::eval(KLaunchConfig *config) {
     return _dst->eval(config);
@@ -1147,26 +747,32 @@ void PtxTree::replace_register(const std::string &old_register,
     }
 }
 void PtxTree::add_node(std::unique_ptr<PtxTree::node_type> new_node,
-              const std::vector<PtxOperand> &operands) {
-    if(operands[0].kind != PtxOperandKind::Register)
+                       const std::vector<PtxOperand> &operands) {
+    if (operands[0].kind != PtxOperandKind::Register)
         throw std::runtime_error("Destination must be register!");
 
     if (auto [par_node, idx] = find_register_node(operands[0].name); par_node) {
-        for (uint64_t i = 0; i < operands.size()-1; ++i) {
-            auto& operand = operands[i+1];
+        for (uint64_t i = 0; i < operands.size() - 1; ++i) {
+            auto &operand = operands[i + 1];
 
             switch (operand.kind) {
             case PtxOperandKind::Register:
                 _registers_to_leafs[operand.name] = {new_node.get(), i};
                 break;
             case PtxOperandKind::Parameter:
-                new_node->set_child(std::make_unique<PtxParameter>(operand.name, operand.offset), static_cast<int>(i));
+                new_node->set_child(std::make_unique<PtxParameter>(
+                                        operand.name, operand.offset),
+                                    static_cast<int>(i));
                 break;
             case PtxOperandKind::Immediate:
-                new_node->set_child(std::make_unique<PtxImmediate>(operand.offset, s64), static_cast<int>(i));
+                new_node->set_child(
+                    std::make_unique<PtxImmediate>(operand.offset, s64),
+                    static_cast<int>(i));
                 break;
             default:
-                new_node->set_child(std::make_unique<PtxSpecialRegister>(operand.kind, operand.offset), static_cast<int>(i));
+                new_node->set_child(std::make_unique<PtxSpecialRegister>(
+                                        operand.kind, operand.offset),
+                                    static_cast<int>(i));
                 break;
             }
         }
@@ -1188,8 +794,6 @@ std::string stringFromNodeKind(PtxNodeKind kind) {
         return "Parameter";
     case PtxNodeKind::Immediate:
         return "Immediate";
-    case PtxNodeKind::ImmediateArray:
-        return "ImmediateArray";
     case PtxNodeKind::SpecialRegister:
         return "SpecialRegister";
     case PtxNodeKind::Cvta:
@@ -1228,6 +832,34 @@ std::string stringFromNodeKind(PtxNodeKind kind) {
         return "Register";
     case PtxNodeKind::invalidOp:
         return "InvalidOp";
+    case PtxNodeKind::SubOp:
+        return "SubOp";
+    case PtxNodeKind::MulOp:
+        return "MulOp";
+    case PtxNodeKind::AbdOp:
+        return "AbdOp";
+    case PtxNodeKind::MadOp:
+        return "MadOp";
+    case PtxNodeKind::SadOp:
+        return "SadOp";
+    case PtxNodeKind::DivOp:
+        return "DivOp";
+    case PtxNodeKind::RemOp:
+        return "RemOp";
+    case PtxNodeKind::AbsOp:
+        return "AbsOp";
+    case PtxNodeKind::NegOp:
+        return "NegOp";
+    case PtxNodeKind::MinOp:
+        return "MinOp";
+    case PtxNodeKind::MaxOp:
+        return "MaxOp";
+    case PtxNodeKind::ShlOp:
+        return "ShlOp";
+    case PtxNodeKind::ShrOp:
+        return "ShrOp";
+    case PtxNodeKind::LdOp:
+        return "LdOp";
     }
 }
 
