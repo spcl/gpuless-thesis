@@ -22,7 +22,7 @@ TEST(PtxTree, SimpleEval) {
     EXPECT_EQ(evaluated->get_kind(), PtxNodeKind::Immediate);
 
     auto &imm(dynamic_cast<PtxImmediate &>(*evaluated));
-    EXPECT_EQ(imm.get_value(), 42);
+    EXPECT_EQ(imm.get_values()[0], 42);
 }
 
 TEST(PtxTree, AddEvalParam) {
