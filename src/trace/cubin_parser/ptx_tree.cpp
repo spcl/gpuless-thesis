@@ -1196,6 +1196,32 @@ std::string stringFromNodeKind(PtxNodeKind kind) {
         return "Cvta";
     case PtxNodeKind::AddOp:
         return "AddOp";
+    case PtxNodeKind::SubOp:
+        return "SubOp";
+    case PtxNodeKind::MulOp:
+        return "MulOp";
+    case PtxNodeKind::DivOp:
+        return "DivOp";
+    case PtxNodeKind::RemOp:
+        return "RemOp";
+    case PtxNodeKind::AbsOp:
+        return "AbsOp";
+    case PtxNodeKind::NegOp:
+        return "NegOp";
+    case PtxNodeKind::MinOp:
+        return "MinOp";
+    case PtxNodeKind::MaxOp:
+        return "MaxOp";
+    case PtxNodeKind::ShrOp:
+        return "ShrOp";
+    case PtxNodeKind::ShlOp:
+        return "ShlOp";
+    case PtxNodeKind::MadOp:
+        return "MadOp";
+    case PtxNodeKind::SadOp:
+        return "SadOp";
+    case PtxNodeKind::LdOp:
+        return "LdOp";
     case PtxNodeKind::MoveOp:
         return "MoveOp";
     case PtxNodeKind::Register:
@@ -1218,6 +1244,7 @@ std::string stringFromSpecialRegister(SpecialRegisterKind kind) {
     }
 }
 
+// exists in tree_parser.cpp ase parseOp
 std::map<std::string, PtxNodeKind> &getStrToPtxNodeKind() {
     static std::map<std::string, PtxNodeKind> map_ = {
         {"add", PtxNodeKind::AddOp},
