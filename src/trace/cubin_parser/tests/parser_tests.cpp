@@ -143,3 +143,27 @@ TEST(PtxParser, ParseAdd) {
     EXPECT_EQ(par.get_offsets()[0], 6);
 }
 
+TEST(PtxParser, ParseMovV2) {
+    std::string s = "mov.v2 {%r3, %r2}, [myPtr];\n"
+                    "cvta.to.global.u64 %r1, %r3;";
+    std::vector<PtxTree> trees = parsePtxTrees(s);
+    EXPECT_EQ(trees.size(), 1);
+    trees[0].print();
+}
+
+TEST(PtxParser, ParseAddV2) {
+    std::string s = "add.v2 {%r3, %r2}, [myPtr+2], 4;\n"
+                    "cvta.to.global.u64 %r1, %r3;\n"
+                    "cvta.to.global.u64 %r4, %r2;";
+    std::vector<PtxTree> trees = parsePtxTrees(s);
+    EXPECT_EQ(trees.size(), 2);
+    trees[0].print();
+}
+TEST(PtxParser, LoadV2) {
+    std::string s = "ld.v2 {%r3, %r2}, [myPtr];\n"
+                    "cvta.to.global.u64 %r1, %r3;\n"
+                    "cvta.to.global.u64 %r4, %r2;";
+    std::vector<PtxTree> trees = parsePtxTrees(s);
+    EXPECT_EQ(trees.size(), 2);
+    trees[0].print();
+}

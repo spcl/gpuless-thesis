@@ -154,7 +154,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
             default:
                 throw std::runtime_error("Invalid operand to cvta.");
             }
-        } else if (op_kind == PtxNodeKind::MoveOp) {
+        } else if (op_kind == PtxNodeKind::MoveOp || op_kind == PtxNodeKind::LdOp) {
             for (size_t v = 0; v < vec_count; ++v) {
                 if (pars[v].kind != PtxOperandKind::Register)
                     throw std::runtime_error("Destination must be register.");
