@@ -119,17 +119,23 @@ void handle_execute_request(int socket_fd,
 }
 
 void handle_request(int socket_fd) {
-    std::vector<uint8_t> buffer = recv_buffer(socket_fd);
-    auto msg = gpuless::GetFBProtocolMessage(buffer.data());
+    while (true) {
+        std::vector<uint8_t> buffer = recv_buffer(socket_fd);
+        if (buffer.size() == 0) {
+            break;
+        }
 
-    if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
-        handle_execute_request(socket_fd, msg);
-    } else if (msg->message_type() ==
-               gpuless::FBMessage_FBTraceAttributeRequest) {
-        handle_attributes_request(socket_fd, msg);
-    } else {
-        SPDLOG_ERROR("Invalid request type");
-        return;
+        auto msg = gpuless::GetFBProtocolMessage(buffer.data());
+
+        if (msg->message_type() == gpuless::FBMessage_FBTraceExecRequest) {
+            handle_execute_request(socket_fd, msg);
+        } else if (msg->message_type() ==
+                   gpuless::FBMessage_FBTraceAttributeRequest) {
+            handle_attributes_request(socket_fd, msg);
+        } else {
+            SPDLOG_ERROR("Invalid request type");
+            return;
+        }
     }
 }
 
