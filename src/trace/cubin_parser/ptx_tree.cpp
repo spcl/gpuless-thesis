@@ -82,14 +82,14 @@ std::unique_ptr<PtxAbstractNode> BinaryEval(KLaunchConfig *config, L &l, R &r,
         auto &l_values(left.get_values());
         auto &r_values(right.get_values());
 
-        for (size_t i = 1; i < n_l; ++i) {
-            for (size_t j = 0; j < n_r; ++j) {
+        for (size_t i = 0; i < n_l; ++i) {
+            for (size_t j = 1; j < n_r; ++j) {
                 l_values.push_back(op(l_values[i], r_values[j]));
             }
         }
 
-        for (size_t i = 0; i < n_r; ++i)
-            l_values[0] = op(l_values[0], r_values[i]);
+        for (size_t i = 0; i < n_l; ++i)
+            l_values[i] = op(l_values[i], r_values[0]);
 
         return left_eval;
     }
@@ -103,16 +103,16 @@ std::unique_ptr<PtxAbstractNode> BinaryEval(KLaunchConfig *config, L &l, R &r,
         size_t n_reg = reg_values.size();
         size_t n_imm = imm_values.size();
 
-        for (size_t i = 1; i < n_imm; ++i) {
-            for (size_t j = 0; j < n_reg; ++j) {
+        for (size_t i = 0; i < n_imm; ++i) {
+            for (size_t j = 1; j < n_reg; ++j) {
                 imm_values.push_back(inv ? op(imm_values[i], reg_values[j])
                                          : op(reg_values[j], imm_values[i]));
             }
         }
 
-        for (size_t i = 0; i < n_reg; ++i)
-            imm_values[0] = inv ? op(imm_values[0], reg_values[i])
-                                : op(reg_values[i], imm_values[0]);
+        for (size_t i = 0; i < n_imm; ++i)
+            imm_values[i] = inv ? op(imm_values[i], reg_values[0])
+                                : op(reg_values[0], imm_values[i]);
     };
     if (left_kind == PtxNodeKind::SpecialRegister &&
         right_kind == PtxNodeKind::Immediate) {

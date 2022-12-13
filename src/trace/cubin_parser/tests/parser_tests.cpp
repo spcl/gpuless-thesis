@@ -79,6 +79,8 @@ TEST(PtxTree, AddMultipleEvalsSpecialRegister) {
                         {PtxOperandKind::SpecialRegisterCtaId, "", 0},
                         {PtxOperandKind::Immediate, "",10}});
 
+    test_tree.print();
+
     std::unique_ptr<PtxAbstractNode> evaluated = test_tree.eval(nullptr);
     EXPECT_EQ(evaluated, nullptr);
     KLaunchConfig config{{3, 0, 0}, {3, 0, 0}};
