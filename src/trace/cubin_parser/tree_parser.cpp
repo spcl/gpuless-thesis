@@ -3,7 +3,6 @@
 #include <iostream>
 #include <numeric>
 #include <regex>
-#include <sstream>
 
 #include "parser_util.h"
 #include "ptx_tree.h"
@@ -11,7 +10,7 @@
 
 namespace PtxTreeParser {
 
-PtxNodeKind parseOperation(const std::string_view &op, std::size_t &vec_op) {
+PtxNodeKind parseOperation(const std::string_view &op, int64_t &vec_op) {
     const static std::map<std::string, PtxNodeKind, std::less<void>>
         str_to_kind = {
             {"cvta", PtxNodeKind::Cvta}, {"mov", PtxNodeKind::MoveOp},
@@ -29,7 +28,7 @@ PtxNodeKind parseOperation(const std::string_view &op, std::size_t &vec_op) {
 
     // determine whether it is a vector instruction
     if (auto it = std::find(splitted_string.begin(), splitted_string.end(), "v4"); it != splitted_string.end()) vec_op = 4;
-    else if (auto it = std::find(splitted_string.begin(), splitted_string.end(), "v2"); it != splitted_string.end()) vec_op = 2;
+    else if (it = std::find(splitted_string.begin(), splitted_string.end(), "v2"); it != splitted_string.end()) vec_op = 2;
 
     if (auto it = str_to_kind.find(opcode); it != str_to_kind.end()) {
         return it->second;
@@ -102,7 +101,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     for (std::string_view line = rgetline(beg, end_it); ;
          line = rgetline(beg, end_it)) {
         auto splitted_line = split_string(line, " ");
-        std::size_t vec_count = 1;
+        int64_t vec_count = 1;
         PtxNodeKind op_kind = parseOperation(splitted_line[0], vec_count);
 
         if (op_kind == PtxNodeKind::InvalidOp) {
@@ -132,7 +131,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
                 throw std::runtime_error("Invalid operand to cvta.");
             }
         } else if (op_kind == PtxNodeKind::MoveOp || op_kind == PtxNodeKind::LdOp) {
-            for (size_t v = 0; v < vec_count; ++v) {
+            for (int64_t v = 0; v < vec_count; ++v) {
                 if (pars[v].kind != PtxOperandKind::Register)
                     throw std::runtime_error("Destination must be register.");
 
@@ -172,7 +171,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
             }
         } else {
             for (auto &tree : trees) {
-                for (size_t v = 0; v < vec_count; ++v) {
+                for (int64_t v = 0; v < vec_count; ++v) {
                     std::vector<PtxOperand> p{pars[v]};
                     p.insert(p.end(), pars.begin() + vec_count, pars.end());
                     tree.add_node(produceNode(op_kind), p);
@@ -213,7 +212,7 @@ std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
     return {};
 }
 
-bool analyzePtx(const std::string &fname) {
+[[maybe_unused]] bool analyzePtx(const std::string &fname) {
     // analyze single ptx file
     std::ifstream s(fname);
     std::stringstream ss;
@@ -226,7 +225,7 @@ bool analyzePtx(const std::string &fname) {
         ptx_data.begin(), ptx_data.end(), r_func_parameters);
     std::map<std::string, std::vector<KParamInfo>> tmp_map;
     for (; i != std::sregex_iterator(); ++i) {
-        std::smatch m = *i;
+        const std::smatch& m = *i;
 
         std::vector<KParamInfo> param_infos = parsePtxParameters(ptx_data, m);
 
