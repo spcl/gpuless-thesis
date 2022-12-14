@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <sstream>
 
-std::vector<std::string_view> split_string(std::string_view str,
+std::vector<std::string_view> ptx_split_string(std::string_view str,
                                       const std::string &delimiter) {
     std::vector<std::string_view> result;
 
@@ -16,11 +16,11 @@ std::vector<std::string_view> split_string(std::string_view str,
     return result;
 }
 
-bool startsWith(const std::string_view &str, const std::string_view &prefix) {
+bool ptxStartsWith(const std::string_view &str, const std::string_view &prefix) {
     return str.rfind(prefix, 0) == 0;
 }
 
-bool endsWith(const std::string_view &str, const std::string_view &suffix) {
+bool ptxEndsWith(const std::string_view &str, const std::string_view &suffix) {
     return str.size() >= suffix.size() &&
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }

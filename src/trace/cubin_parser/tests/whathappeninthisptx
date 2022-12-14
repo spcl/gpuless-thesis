@@ -1,0 +1,265 @@
+.entry _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4_(
+.param .align 8 .b8 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_0[24],
+.param .align 8 .b8 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_1[24],
+.param .u64 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_2,
+.param .u64 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_3,
+.param .align 8 .b8 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4[88],
+.param .f64 _ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_5
+)
+{
+.reg .pred %p<10>;
+.reg .b32 %r<20>;
+.reg .f64 %fd<160>;
+.reg .b64 %rd<137>;
+
+
+ld.param.u64 %rd68, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_2];
+ld.param.u64 %rd69, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_3];
+ld.param.f64 %fd55, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_5];
+ld.param.u64 %rd67, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_1+16];
+ld.param.u64 %rd65, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_1];
+ld.param.u64 %rd3, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_0+16];
+ld.param.u64 %rd1, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_0];
+cvta.to.global.u64 %rd4, %rd1;
+ld.param.u64 %rd24, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+72];
+ld.param.u64 %rd22, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+56];
+ld.param.u64 %rd21, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+48];
+ld.param.u64 %rd20, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+40];
+ld.param.u64 %rd19, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+32];
+ld.param.u64 %rd18, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+24];
+ld.param.u64 %rd5, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4];
+mov.u32 %r5, %ctaid.x;
+cvt.u64.u32 %rd28, %r5;
+and.b64 %rd70, %rd19, -4294967296;
+setp.eq.s64 %p1, %rd70, 0;
+@%p1 bra $L__BB0_2;
+
+div.s64 %rd133, %rd28, %rd19;
+mul.lo.s64 %rd71, %rd133, %rd19;
+sub.s64 %rd134, %rd28, %rd71;
+bra.uni $L__BB0_3;
+
+$L__BB0_2:
+cvt.u32.u64 %r6, %rd19;
+cvt.u32.u64 %r7, %rd28;
+div.u32 %r8, %r7, %r6;
+mul.lo.s32 %r9, %r8, %r6;
+sub.s32 %r10, %r7, %r9;
+cvt.u64.u32 %rd133, %r8;
+cvt.u64.u32 %rd134, %r10;
+
+$L__BB0_3:
+mov.u32 %r19, %tid.x;
+cvt.s64.s32 %rd72, %r19;
+mul.lo.s64 %rd38, %rd18, %rd20;
+shr.s64 %rd73, %rd38, 63;
+shr.u64 %rd74, %rd73, 62;
+add.s64 %rd75, %rd38, %rd74;
+shr.s64 %rd39, %rd75, 2;
+setp.le.s64 %p2, %rd39, %rd72;
+@%p2 bra $L__BB0_18;
+
+cvta.to.global.u64 %rd76, %rd68;
+shl.b64 %rd77, %rd133, 2;
+add.s64 %rd78, %rd76, %rd77;
+ld.global.s32 %rd43, [%rd78];
+mul.lo.s64 %rd79, %rd38, %rd134;
+mul.lo.s64 %rd42, %rd79, 3;
+mul.lo.s64 %rd80, %rd133, %rd22;
+mul.lo.s64 %rd81, %rd134, %rd24;
+add.s64 %rd44, %rd80, %rd81;
+mul.lo.s64 %rd83, %rd38, %rd67;
+shl.b64 %rd45, %rd83, 3;
+shl.b64 %rd46, %rd21, 3;
+mul.lo.s64 %rd84, %rd38, %rd3;
+shl.b64 %rd47, %rd84, 3;
+cvta.to.global.u64 %rd48, %rd65;
+cvta.to.global.u64 %rd49, %rd5;
+cvta.to.global.u64 %rd85, %rd69;
+add.s64 %rd50, %rd85, %rd77;
+
+$L__BB0_5:
+shl.b32 %r11, %r19, 2;
+cvt.s64.s32 %rd51, %r11;
+or.b64 %rd86, %rd51, %rd20;
+and.b64 %rd87, %rd86, -4294967296;
+setp.eq.s64 %p3, %rd87, 0;
+@%p3 bra $L__BB0_7;
+
+div.s64 %rd135, %rd51, %rd20;
+mul.lo.s64 %rd88, %rd135, %rd20;
+sub.s64 %rd136, %rd51, %rd88;
+bra.uni $L__BB0_8;
+
+$L__BB0_7:
+cvt.u32.u64 %r18, %rd20;
+cvt.u32.u64 %r13, %rd51;
+div.u32 %r14, %r13, %r18;
+mul.lo.s32 %r15, %r14, %r18;
+sub.s32 %r16, %r13, %r15;
+cvt.u64.u32 %rd135, %r14;
+cvt.u64.u32 %rd136, %r16;
+
+$L__BB0_8:
+ld.param.u64 %rd126, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_1+16];
+add.s64 %rd58, %rd42, %rd51;
+add.s64 %rd89, %rd58, 3;
+ld.global.s32 %rd59, [%rd50];
+setp.lt.s64 %p4, %rd89, %rd59;
+mul.lo.s64 %rd90, %rd126, %rd51;
+shl.b64 %rd91, %rd90, 3;
+add.s64 %rd92, %rd48, %rd91;
+ld.global.v2.f64 {%fd56, %fd57}, [%rd92];
+ld.global.v2.f64 {%fd58, %fd59}, [%rd92+16];
+add.s64 %rd93, %rd92, %rd45;
+ld.global.v2.f64 {%fd60, %fd61}, [%rd93];
+ld.global.v2.f64 {%fd62, %fd63}, [%rd93+16];
+add.s64 %rd94, %rd93, %rd45;
+ld.global.v2.f64 {%fd64, %fd65}, [%rd94];
+ld.global.v2.f64 {%fd66, %fd67}, [%rd94+16];
+add.s64 %rd95, %rd58, %rd43;
+mul.lo.s64 %rd96, %rd95, %rd3;
+shl.b64 %rd97, %rd96, 3;
+add.s64 %rd60, %rd4, %rd97;
+add.s64 %rd61, %rd60, %rd47;
+@%p4 bra $L__BB0_16;
+bra.uni $L__BB0_9;
+
+$L__BB0_16:
+add.s64 %rd132, %rd61, %rd47;
+ld.global.v2.f64 {%fd105, %fd106}, [%rd60];
+ld.global.v2.f64 {%fd109, %fd110}, [%rd60+16];
+ld.global.v2.f64 {%fd113, %fd114}, [%rd61];
+ld.global.v2.f64 {%fd117, %fd118}, [%rd61+16];
+ld.global.v2.f64 {%fd121, %fd122}, [%rd132];
+ld.global.v2.f64 {%fd125, %fd126}, [%rd132+16];
+add.f64 %fd129, %fd105, %fd56;
+mul.f64 %fd151, %fd129, %fd55;
+add.f64 %fd155, %fd113, %fd60;
+add.f64 %fd159, %fd121, %fd64;
+add.f64 %fd130, %fd106, %fd57;
+mul.f64 %fd150, %fd130, %fd55;
+add.f64 %fd154, %fd114, %fd61;
+add.f64 %fd158, %fd122, %fd65;
+add.f64 %fd131, %fd109, %fd58;
+mul.f64 %fd149, %fd131, %fd55;
+add.f64 %fd153, %fd117, %fd62;
+add.f64 %fd157, %fd125, %fd66;
+add.f64 %fd132, %fd110, %fd59;
+mul.f64 %fd148, %fd132, %fd55;
+add.f64 %fd152, %fd118, %fd63;
+add.f64 %fd156, %fd126, %fd67;
+bra.uni $L__BB0_17;
+
+$L__BB0_9:
+mov.f64 %fd156, 0d0000000000000000;
+mov.f64 %fd152, 0d0000000000000000;
+mov.f64 %fd148, 0d0000000000000000;
+setp.ge.s64 %p5, %rd58, %rd59;
+mov.f64 %fd149, 0d0000000000000000;
+mov.f64 %fd150, %fd149;
+mov.f64 %fd151, %fd149;
+mov.f64 %fd153, %fd149;
+mov.f64 %fd154, %fd149;
+mov.f64 %fd155, %fd149;
+mov.f64 %fd157, %fd149;
+mov.f64 %fd158, %fd149;
+mov.f64 %fd159, %fd149;
+@%p5 bra $L__BB0_17;
+
+add.s64 %rd131, %rd60, %rd47;
+add.s64 %rd130, %rd131, %rd47;
+add.s64 %rd127, %rd58, %rd43;
+ld.global.f64 %fd83, [%rd60];
+add.f64 %fd84, %fd83, %fd56;
+mul.f64 %fd151, %fd84, %fd55;
+ld.global.f64 %fd85, [%rd131];
+add.f64 %fd155, %fd85, %fd60;
+ld.global.f64 %fd86, [%rd130];
+add.f64 %fd159, %fd86, %fd64;
+add.s64 %rd100, %rd127, 1;
+setp.ge.s64 %p6, %rd100, %rd59;
+mov.f64 %fd149, 0d0000000000000000;
+@%p6 bra $L__BB0_12;
+
+shl.b64 %rd101, %rd3, 3;
+add.s64 %rd102, %rd60, %rd101;
+add.s64 %rd103, %rd102, %rd47;
+add.s64 %rd104, %rd103, %rd47;
+ld.global.f64 %fd87, [%rd102];
+add.f64 %fd88, %fd87, %fd57;
+mul.f64 %fd150, %fd88, %fd55;
+ld.global.f64 %fd89, [%rd103];
+add.f64 %fd154, %fd89, %fd61;
+ld.global.f64 %fd90, [%rd104];
+add.f64 %fd158, %fd90, %fd65;
+
+$L__BB0_12:
+add.s64 %rd128, %rd58, %rd43;
+add.s64 %rd105, %rd128, 2;
+setp.ge.s64 %p7, %rd105, %rd59;
+mov.f64 %fd153, %fd149;
+mov.f64 %fd157, %fd149;
+@%p7 bra $L__BB0_14;
+
+shl.b64 %rd106, %rd3, 4;
+add.s64 %rd107, %rd60, %rd106;
+add.s64 %rd108, %rd107, %rd47;
+add.s64 %rd109, %rd108, %rd47;
+ld.global.f64 %fd94, [%rd107];
+add.f64 %fd95, %fd94, %fd58;
+mul.f64 %fd149, %fd95, %fd55;
+ld.global.f64 %fd96, [%rd108];
+add.f64 %fd153, %fd96, %fd62;
+ld.global.f64 %fd97, [%rd109];
+add.f64 %fd157, %fd97, %fd66;
+
+$L__BB0_14:
+add.s64 %rd129, %rd58, %rd43;
+mov.f64 %fd156, 0d0000000000000000;
+mov.f64 %fd152, 0d0000000000000000;
+mov.f64 %fd148, 0d0000000000000000;
+add.s64 %rd110, %rd129, 3;
+setp.ge.s64 %p8, %rd110, %rd59;
+@%p8 bra $L__BB0_17;
+
+mul.lo.s64 %rd111, %rd3, 24;
+add.s64 %rd112, %rd60, %rd111;
+add.s64 %rd113, %rd112, %rd47;
+add.s64 %rd114, %rd113, %rd47;
+ld.global.f64 %fd101, [%rd112];
+add.f64 %fd102, %fd101, %fd59;
+mul.f64 %fd148, %fd102, %fd55;
+ld.global.f64 %fd103, [%rd113];
+add.f64 %fd152, %fd103, %fd63;
+ld.global.f64 %fd104, [%rd114];
+add.f64 %fd156, %fd104, %fd67;
+
+$L__BB0_17:
+mov.u32 %r17, %ntid.x;
+ld.param.u64 %rd125, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+80];
+ld.param.u64 %rd124, [_ZN2at6native45_GLOBAL__N__cc2aaa4d_12_attention_cu_6f94629945transform_bias_rescale_qkv_add_padding_kernelIddLb1EEEvNS_27GenericPackedTensorAccessorIT_Lm1ENS_17RestrictPtrTraitsElEES6_PKiS8_NS3_IS4_Lm5ES5_lEES4__param_4+64];
+mul.lo.s64 %rd115, %rd135, %rd124;
+add.s64 %rd116, %rd44, %rd115;
+mul.lo.s64 %rd117, %rd136, %rd125;
+add.s64 %rd118, %rd116, %rd117;
+shl.b64 %rd119, %rd118, 3;
+add.s64 %rd120, %rd49, %rd119;
+st.global.v2.f64 [%rd120], {%fd151, %fd150};
+st.global.v2.f64 [%rd120+16], {%fd149, %fd148};
+add.s64 %rd121, %rd120, %rd46;
+st.global.v2.f64 [%rd121], {%fd155, %fd154};
+st.global.v2.f64 [%rd121+16], {%fd153, %fd152};
+add.s64 %rd122, %rd121, %rd46;
+st.global.f64 [%rd122], %fd159;
+st.global.f64 [%rd122+8], %fd158;
+st.global.v2.f64 [%rd122+16], {%fd157, %fd156};
+add.s32 %r19, %r19, %r17;
+cvt.s64.s32 %rd123, %r19;
+setp.gt.s64 %p9, %rd39, %rd123;
+@%p9 bra $L__BB0_5;
+
+$L__BB0_18:
+ret;
+
+}

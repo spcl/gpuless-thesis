@@ -59,8 +59,8 @@ enum class PtxNodeKind {
 enum class SpecialRegisterKind { ThreadId, NThreadIds, CTAId, NCTAIds };
 
 struct KLaunchConfig {
-    std::array<int, 3> gridDim;
-    std::array<int, 3> blockDim;
+    std::array<unsigned, 3> gridDim;
+    std::array<unsigned, 3> blockDim;
 };
 
 enum class PtxOperandKind {

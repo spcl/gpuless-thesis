@@ -171,11 +171,11 @@ cudaError_t cudaMalloc(void **devPtr, size_t size) {
     HIJACK_FN_PROLOGUE();
 
     uint64_t idx = nextAddressIndex();
-    uint64_t virtual_ptr = idx<<CUDA_MEM_OFFSET_WIDTH;
+    uint64_t virtual_ptr = idx << CUDA_MEM_OFFSET_WIDTH;
 
     getCudaTrace().record(std::make_shared<CudaMalloc>(virtual_ptr, size));
 
-    *devPtr = reinterpret_cast<void*>(virtual_ptr);
+    *devPtr = reinterpret_cast<void *>(virtual_ptr);
     return cudaSuccess;
 }
 
@@ -275,25 +275,26 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     SPDLOG_INFO("cudaLaunchKernel({})", cpp_demangle(symbol).c_str());
     // SPDLOG_DEBUG("")
 
-    std::vector<KParamInfo> paramInfos;
-    const auto &analyzer = getCubinAnalyzer();
-    if (!analyzer.kernel_parameters(symbol, paramInfos)) {
+    auto &analyzer = getCubinAnalyzer();
+    std::vector<UncollapsedKParamInfo> *paramInfos =
+        analyzer.kernel_parameters(symbol);
+    if (!paramInfos) {
         EXIT_UNRECOVERABLE("unable to look up kernel parameter data");
     }
 
     // debug information
     std::stringstream ss;
     ss << "parameters: [";
-    for (const auto &p : paramInfos) {
+    for (const auto &p : *paramInfos) {
         std::string type = getPtxParameterTypeToStr()[p.type];
         ss << type << "[" << p.size << "], ";
     }
     ss << "]";
     SPDLOG_DEBUG(ss.str());
 
-    std::vector<std::vector<uint8_t>> paramBuffers(paramInfos.size());
-    for (unsigned i = 0; i < paramInfos.size(); i++) {
-        const auto &p = paramInfos[i];
+    std::vector<std::vector<uint8_t>> paramBuffers(paramInfos->size());
+    for (unsigned i = 0; i < paramInfos->size(); i++) {
+        const auto &p = (*paramInfos)[i];
         paramBuffers[i].resize(p.size * p.typeSize);
         std::memcpy(paramBuffers[i].data(), args[i], p.size * p.typeSize);
     }
@@ -309,9 +310,42 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
     std::vector<uint64_t> required_cuda_modules{mod_id_it->second.first};
     std::vector<std::string> required_function_symbols{symbol};
 
+    std::vector<KParamInfo> collapsedParamInfos;
+
+    for (auto &paramInfo : *paramInfos) {
+        std::vector<int> offsets;
+        PtxTreeParser::KLaunchConfig config{
+            {gridDim.x, gridDim.y, gridDim.z},
+            {blockDim.x, blockDim.y, blockDim.z}};
+
+        for (auto &tree : paramInfo.trees) {
+            if (tree.second) {
+                auto &par =
+                    static_cast<PtxTreeParser::PtxParameter &>(*tree.first);
+                for (int64_t p : par.get_offsets()) {
+                    offsets.push_back(static_cast<int>(p));
+                }
+            } else {
+                std::unique_ptr<PtxTreeParser::PtxAbstractNode> evaluated =
+                    tree.first->eval(&config);
+                if (!evaluated || evaluated->get_kind() !=
+                                      PtxTreeParser::PtxNodeKind::Parameter)
+                    throw std::runtime_error("Failed to evaluate tree.");
+                auto &par =
+                    static_cast<PtxTreeParser::PtxParameter &>(*evaluated);
+                for (int64_t p : par.get_offsets())
+                    offsets.push_back(static_cast<int>(p));
+            }
+        }
+
+        collapsedParamInfos.emplace_back(paramInfo.paramName, paramInfo.type,
+                                      paramInfo.typeSize, paramInfo.align,
+                                      paramInfo.size, offsets);
+    }
+
     getCudaTrace().record(std::make_shared<CudaLaunchKernel>(
         symbol, required_cuda_modules, required_function_symbols, func, gridDim,
-        blockDim, sharedMem, stream, paramBuffers, paramInfos));
+        blockDim, sharedMem, stream, paramBuffers, collapsedParamInfos));
     return cudaSuccess;
 }
 

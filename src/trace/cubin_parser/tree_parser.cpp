@@ -23,7 +23,7 @@ PtxNodeKind parseOperation(const std::string_view &op, int64_t &vec_op) {
             {"shl", PtxNodeKind::ShlOp}, {"mad", PtxNodeKind::MadOp},
             {"sad", PtxNodeKind::SadOp}, {"ld", PtxNodeKind::MoveOp},
             {"cvt", PtxNodeKind::MoveOp}};
-    auto splitted_string = split_string(op, ".");
+    auto splitted_string = ptx_split_string(op, ".");
     std::string_view opcode = splitted_string[0];
 
     // determine whether it is a vector instruction
@@ -48,7 +48,8 @@ PtxOperand parseArgument(std::string_view arg) {
     int64_t offset = 0;
 
     if (arg[0] == '[') {
-        auto splitted_line = split_string(arg.substr(1, arg.size() - 2), "+");
+        auto splitted_line =
+            ptx_split_string(arg.substr(1, arg.size() - 2), "+");
 
         arg = splitted_line[0];
         if (splitted_line.size() > 1) {
@@ -107,7 +108,7 @@ parsePtxTrees(std::string_view ss) {
 
     for (std::string_view line = rgetline(beg, end_it);;
          line = rgetline(beg, end_it)) {
-        auto splitted_line = split_string(line, " ");
+        auto splitted_line = ptx_split_string(line, " ");
         int64_t vec_count = 1;
         PtxNodeKind op_kind = parseOperation(splitted_line[0], vec_count);
 

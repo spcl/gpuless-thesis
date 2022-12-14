@@ -97,14 +97,14 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
             break;
         }
         // NO parameters
-        if (!startsWith(line, ".param")) {
+        if (!ptxStartsWith(line, ".param")) {
             break;
         }
-        auto splitted_line = split_string(line, " ");
+        auto splitted_line = ptx_split_string(line, " ");
 
         // Remove last comma
         auto last = splitted_line.back();
-        if (endsWith(last, ",")) {
+        if (ptxEndsWith(last, ",")) {
             splitted_line.back() = last.substr(0, last.size() - 1);
         }
 
@@ -112,7 +112,7 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
             int param_align = std::stoi(splitted_line[2].data());
             const std::string_view &name = splitted_line[4];
             std::vector<std::string_view> splitted_name =
-                split_string(name, "[");
+                ptx_split_string(name, "[");
             const std::string_view &param_name = splitted_name[0];
             // Remove last ']' from the size
             int param_size = std::stoi(
@@ -278,14 +278,23 @@ CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
     std::string line;
 
     while (getline(it, file_end, line)) {
-        if (!startsWith(line, ".entry"))
+        if(line.empty())
+            continue;
+        if (!ptxStartsWith(line, ".entry"))
             continue;
 
-        std::string entry = std::string(split_string(line, " ")[1]);
+        std::string entry = std::string(ptx_split_string(line, " ")[1]);
+        //TODO
+        if(ptxStartsWith(entry, "_ZN2at6native52_GLOBAL__N__2ec533aa_19_FakeQuantizeCore_cu_163ccd5445unrolled_elementwise_kernel_for_multi_outputs"))
+            continue;
         entry.pop_back();
         auto entry_beg = it;
-        while (getline(it, file_end, line) && line != "}")
+        while (getline(it, file_end, line) && line != ".entry")
             ;
+        if(line == ".entry") {
+            while(*(--it) != '\n')
+                ;
+        }
         auto entry_end = it;
 
         std::vector<UncollapsedKParamInfo> param_infos =

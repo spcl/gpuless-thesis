@@ -30,3 +30,15 @@ TEST(CubinAnalyis, FullPtx) {
     auto data = analyzer.analyzeTxt(ptx_data, 1,2);
     EXPECT_EQ(data.size(), 2);
 }
+
+TEST(CubinAnalyis, BuggyPtx) {
+    std::string const &f = TEST_RESOURCE_DIR"/whathappeninthisptx";
+    std::ifstream s(f);
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
+
+    CubinAnalyzer analyzer;
+    auto data = analyzer.analyzeTxt(ptx_data, 1,2);
+    EXPECT_NE(data.size(), 0);
+}

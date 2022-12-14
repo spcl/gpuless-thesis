@@ -45,6 +45,10 @@ struct KParamInfo {
     KParamInfo() = default;
 
     KParamInfo(std::string name, PtxParameterType par_type, int typesize,
+               int alignment, int t_size, std::vector<int> offsets)
+        : paramName(std::move(name)), type(par_type), typeSize(typesize),
+          align(alignment), size(t_size), ptrOffsets(std::move(offsets)){}
+    KParamInfo(std::string name, PtxParameterType par_type, int typesize,
                int alignment, int t_size, size_t vec_size)
         : paramName(std::move(name)), type(par_type), typeSize(typesize),
           align(alignment), size(t_size), ptrOffsets(vec_size){};
