@@ -35,7 +35,7 @@ enum class PtxNodeKind {
     MoveOp,
     LdOp,
     Register,
-    invalidOp,
+    InvalidOp,
 };
 
 enum class SpecialRegisterKind { ThreadId, NThreadIds, CTAId, NCTAIds };
@@ -58,7 +58,7 @@ enum class PtxOperandKind {
 struct PtxOperand {
     PtxOperandKind kind;
     std::string name;
-    int64_t offset;
+    int64_t value;
 };
 
 class PtxAbstractNode {
@@ -71,7 +71,14 @@ class PtxAbstractNode {
     virtual void print() const = 0;
     virtual std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) = 0;
     virtual void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) = 0;
-    virtual PtxNodeKind get_kind() = 0;
+    [[nodiscard]] virtual PtxNodeKind get_kind() const = 0;
+
+    // Serialization
+    virtual void serialize(std::ostream& os) const = 0;
+    static std::unique_ptr<PtxAbstractNode> unserialize(std::istream &is);
+
+    typedef std::unique_ptr<PtxAbstractNode> (*Factory)(std::istream&);
+    static std::unique_ptr<PtxAbstractNode> null_factory(std::istream&) {return nullptr;}
 };
 
 class PtxImmediate : public PtxAbstractNode {
@@ -87,11 +94,14 @@ class PtxImmediate : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::Immediate; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::Immediate; }
 
     [[nodiscard]] std::vector<int64_t>  &get_values() { return _values; }
     [[nodiscard]] const std::vector<int64_t> &get_values() const { return _values; }
     [[nodiscard]] PtxParameterType get_type() const { return _type; }
+
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 
   private:
     std::vector<int64_t> _values;
@@ -128,15 +138,18 @@ class PtxSpecialRegister : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::SpecialRegister; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::SpecialRegister; }
 
     [[nodiscard]] std::vector<int64_t> &get_values() { return _values; }
     [[nodiscard]] const std::vector<int64_t> &get_values() const {
         return _values;
     }
-    [[nodiscard]] std::pair<SpecialRegisterKind, int> get_kind() const {
+    [[nodiscard]] std::pair<SpecialRegisterKind, int> get_reg_kind() const {
         return {_kind, _dim};
     }
+
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 
   private:
     SpecialRegisterKind _kind;
@@ -156,18 +169,21 @@ class PtxParameter : public PtxAbstractNode {
     }
     explicit PtxParameter(std::string name, int64_t offset)
         : _name(std::move(name)), _offsets(1), _align(0),
-          _type(PtxParameterType::invalid) {
+          _type(PtxParameterType::s64) {
         _offsets[0] = offset;
     }
 
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::Parameter; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::Parameter; }
 
     [[nodiscard]] std::string get_name() const { return _name; };
     [[nodiscard]] std::vector<int64_t> &get_offsets() { return _offsets; };
     [[nodiscard]] PtxParameterType get_type() const { return _type; };
+
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 
   private:
     std::string _name;
@@ -187,9 +203,12 @@ public:
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::AddOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::AddOp; }
     friend class PtxMadNode;
     friend class PtxSadNode;
+
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 private:
     std::unique_ptr<node_type> _left;
     std::unique_ptr<node_type> _right;
@@ -206,8 +225,10 @@ class PtxSubNode : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::SubOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::SubOp; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
   private:
     std::unique_ptr<node_type> _left;
     std::unique_ptr<node_type> _right;
@@ -224,7 +245,10 @@ public:
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::MulOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::MulOp; }
+
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 
 private:
     std::unique_ptr<node_type> _left;
@@ -240,12 +264,16 @@ public:
                         std::unique_ptr<node_type> R) {
         _child = std::make_unique<PtxAddNode>(std::move(C), std::make_unique<PtxMulNode>(std::move(L), std::move(R)));
     };
+    explicit PtxMadNode(std::unique_ptr<PtxAddNode> child)
+        : _child(std::move(child)) {}
 
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::MadOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::MadOp; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 private:
     std::unique_ptr<PtxAddNode> _child;
 };
@@ -261,8 +289,10 @@ public:
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::AbdOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::AbdOp; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 private:
     std::unique_ptr<node_type> _left;
     std::unique_ptr<node_type> _right;
@@ -277,12 +307,15 @@ public:
                         std::unique_ptr<node_type> R) {
         _child = std::make_unique<PtxAddNode>(std::move(C), std::make_unique<PtxAbdNode>(std::move(L), std::move(R)));
     };
+    explicit PtxSadNode(std::unique_ptr<PtxAddNode> child) : _child(std::move(child)) {}
 
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::SadOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::SadOp; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 private:
     std::unique_ptr<PtxAddNode> _child;
 };
@@ -298,8 +331,10 @@ class PtxDivNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::DivOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::DivOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -316,8 +351,10 @@ class PtxRemNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::RemOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::RemOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -333,8 +370,10 @@ class PtxAbsNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::AbsOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::AbsOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _child;
     };
@@ -349,8 +388,10 @@ public:
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::NegOp; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::NegOp; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
 private:
     std::unique_ptr<node_type> _child;
 };
@@ -366,8 +407,10 @@ class PtxMinNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::MinOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::MinOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -384,8 +427,10 @@ class PtxMaxNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::MaxOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::MaxOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -402,8 +447,10 @@ class PtxShlNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::ShlOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::ShlOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -420,8 +467,10 @@ class PtxShrNode : public PtxAbstractNode {
         void print() const override;
         std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
         void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-        PtxNodeKind get_kind() override { return PtxNodeKind::ShrOp; }
+        [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::ShrOp; }
 
+        void serialize(std::ostream& os) const override;
+        static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
     private:
         std::unique_ptr<node_type> _left;
         std::unique_ptr<node_type> _right;
@@ -437,8 +486,10 @@ class PtxCvtaNode : public PtxAbstractNode {
     void print() const override;
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
     void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
-    PtxNodeKind get_kind() override { return PtxNodeKind::Cvta; }
+    [[nodiscard]] PtxNodeKind get_kind() const override { return PtxNodeKind::Cvta; }
 
+    void serialize(std::ostream& os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream& is);
   private:
     std::unique_ptr<node_type> _dst;
 };
@@ -451,6 +502,8 @@ class PtxTree {
         : _root(std::make_unique<PtxCvtaNode>()) {
         _registers_to_leafs[register_name] = std::make_pair(_root.get(), 0);
     }
+
+    explicit PtxTree(std::unique_ptr<node_type> root) : _root(std::move(root)) {}
 
     void print() const;
 
@@ -466,6 +519,11 @@ class PtxTree {
                   const std::vector<PtxOperand> &operands);
 
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config);
+
+    void serialize(std::ostream& os) { _root->serialize(os); }
+    static std::unique_ptr<PtxTree> unserialize(std::istream &is) {
+        return std::make_unique<PtxTree>(PtxAbstractNode::unserialize(is));
+    }
 
   private:
     std::unique_ptr<node_type> _root;
@@ -488,6 +546,8 @@ std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
 PtxParameterType ptxParameterTypeFromString(const std::string &str);
 PtxNodeKind ptxNodeKindFromString(const std::string &str);
 int byteSizePtxParameterType(PtxParameterType type);
+
+std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind);
 
 } // namespace PtxTreeParser
 

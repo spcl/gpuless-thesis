@@ -145,7 +145,7 @@ TEST(PtxParser, ParseAdd) {
 
 TEST(PtxParser, ParseMovV2) {
     std::string s = "mov.v2 {%r3, %r2}, [myPtr];\n"
-                    "cvta.to.global.u64 %r1, %r3;";
+                    "cvta.to.global.u64 %r1, %r2;";
     std::vector<PtxTree> trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 1);
     trees[0].print();
@@ -166,4 +166,30 @@ TEST(PtxParser, LoadV2) {
     std::vector<PtxTree> trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 2);
     trees[0].print();
+}
+
+TEST(PtxSerializer, BasicSerialization) {
+    PtxTree test_tree("test_register");
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "test_register",0},
+                        {PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Register, "reg_b",0}});
+
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_a",0},
+                        {PtxOperandKind::Parameter, "test_param", 20},
+                        {PtxOperandKind::Immediate, "", 10}});
+
+    test_tree.add_node(std::make_unique<PtxSubNode>(nullptr, nullptr),
+                       {{PtxOperandKind::Register, "reg_b",0},
+                        {PtxOperandKind::Immediate, "", 30},
+                        {PtxOperandKind::Immediate, "", 20}});
+    test_tree.print();
+
+    std::stringstream ss;
+    test_tree.serialize(ss);
+    std::cout << ss.str() << std::endl;
+    std::unique_ptr<PtxTree> new_tree(PtxTree::unserialize(ss));
+
+    new_tree->print();
 }

@@ -33,7 +33,7 @@ PtxNodeKind parseOperation(const std::string_view &op, std::size_t &vec_op) {
     if (auto it = str_to_kind.find(opcode); it != str_to_kind.end()) {
         return it->second;
     } else {
-        return PtxNodeKind::invalidOp;
+        return PtxNodeKind::InvalidOp;
     }
 }
 
@@ -83,41 +83,6 @@ PtxOperand parseArgument(std::string_view arg) {
     return {PtxOperandKind::Immediate, std::string(arg), imm_value};
 }
 
-std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind) {
-    switch (kind) {
-    case PtxNodeKind::AddOp:
-        return std::make_unique<PtxAddNode>(nullptr, nullptr);
-    case PtxNodeKind::SubOp:
-        return std::make_unique<PtxSubNode>(nullptr, nullptr);
-    case PtxNodeKind::MulOp:
-        return std::make_unique<PtxMulNode>(nullptr, nullptr);
-    case PtxNodeKind::AbdOp:
-        return std::make_unique<PtxAbdNode>(nullptr, nullptr);
-    case PtxNodeKind::MadOp:
-        return std::make_unique<PtxMadNode>(nullptr, nullptr, nullptr);
-    case PtxNodeKind::SadOp:
-        return std::make_unique<PtxSadNode>(nullptr, nullptr, nullptr);
-    case PtxNodeKind::DivOp:
-        return std::make_unique<PtxDivNode>(nullptr, nullptr);
-    case PtxNodeKind::RemOp:
-        return std::make_unique<PtxRemNode>(nullptr, nullptr);
-    case PtxNodeKind::AbsOp:
-        return std::make_unique<PtxAbsNode>(nullptr);
-    case PtxNodeKind::NegOp:
-        return std::make_unique<PtxNegNode>(nullptr);
-    case PtxNodeKind::MinOp:
-        return std::make_unique<PtxMinNode>(nullptr, nullptr);
-    case PtxNodeKind::MaxOp:
-        return std::make_unique<PtxMaxNode>(nullptr, nullptr);
-    case PtxNodeKind::ShlOp:
-        return std::make_unique<PtxShlNode>(nullptr, nullptr);
-    case PtxNodeKind::ShrOp:
-        return std::make_unique<PtxShrNode>(nullptr, nullptr);
-    default:
-        throw std::runtime_error("Invalid Operation.");
-    }
-}
-
 std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     std::vector<PtxTree> trees;
 
@@ -130,7 +95,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
         std::size_t vec_count = 1;
         PtxNodeKind op_kind = parseOperation(splitted_line[0], vec_count);
 
-        if (op_kind == PtxNodeKind::invalidOp)
+        if (op_kind == PtxNodeKind::InvalidOp)
             continue; // Opeartion not relevant
 
         std::vector<PtxOperand> pars(splitted_line.size() - 1);
@@ -149,7 +114,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
                 trees.emplace_back("_t");
                 trees.back().add_node(
                     std::make_unique<PtxParameter>(par.name, 0),
-                    {{par.kind, par.name, par.offset}});
+                    {{par.kind, par.name, par.value}});
                 break;
             default:
                 throw std::runtime_error("Invalid operand to cvta.");
@@ -169,14 +134,14 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
                     case PtxOperandKind::Parameter:
                         for (auto &tree: trees) {
                             tree.add_node(std::make_unique<PtxParameter>(
-                                                  pars[vec_count].name, pars[vec_count].offset),
+                                                  pars[vec_count].name, pars[vec_count].value),
                                           {pars[v]});
                         }
                         break;
                     case PtxOperandKind::Immediate:
                         for (auto &tree: trees) {
                             tree.add_node(
-                                    std::make_unique<PtxImmediate>(pars[vec_count].offset, s64),
+                                    std::make_unique<PtxImmediate>(pars[vec_count].value, s64),
                                     {pars[v]});
                         }
                         break;
@@ -186,7 +151,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
                     case PtxOperandKind::SpecialRegisterNCtaId:
                         for (auto &tree: trees) {
                             tree.add_node(std::make_unique<PtxSpecialRegister>(
-                                                  pars[vec_count].kind, pars[vec_count].offset),
+                                                  pars[vec_count].kind, pars[vec_count].value),
                                           {pars[v]});
                         }
                         break;
