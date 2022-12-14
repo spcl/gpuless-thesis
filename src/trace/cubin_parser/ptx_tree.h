@@ -33,7 +33,6 @@ enum class PtxNodeKind {
     ShlOp,
     ShrOp,
     MoveOp,
-    LdOp,
     Register,
     InvalidOp,
 };

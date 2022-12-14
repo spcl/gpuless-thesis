@@ -1062,8 +1062,6 @@ inline std::string stringFromNodeKind(PtxNodeKind kind) {
         return "MadOp";
     case PtxNodeKind::SadOp:
         return "SadOp";
-    case PtxNodeKind::LdOp:
-        return "LdOp";
     case PtxNodeKind::AbdOp:
         return "AbdOp";
     case PtxNodeKind::MoveOp:
@@ -1094,8 +1092,9 @@ std::map<std::string, PtxNodeKind> &nodeKindFromString() {
         {"ShlOp", PtxNodeKind::ShlOp},
         {"MadOp", PtxNodeKind::MadOp},
         {"SadOp", PtxNodeKind::SadOp},
-        {"LdOp", PtxNodeKind::LdOp},
         {"AbdOp", PtxNodeKind::AbdOp},
+        {"LdOp", PtxNodeKind::MoveOp},
+        {"Cvt", PtxNodeKind::MoveOp},
         {"MoveOp", PtxNodeKind::MoveOp},
         {"Register", PtxNodeKind::Register},
         {"InvalidOp", PtxNodeKind::InvalidOp}};

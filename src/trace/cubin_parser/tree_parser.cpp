@@ -20,7 +20,7 @@ PtxNodeKind parseOperation(const std::string_view &op, int64_t &vec_op) {
             {"neg", PtxNodeKind::NegOp}, {"min", PtxNodeKind::MinOp},
             {"max", PtxNodeKind::MaxOp}, {"shr", PtxNodeKind::ShrOp},
             {"shl", PtxNodeKind::ShlOp}, {"mad", PtxNodeKind::MadOp},
-            {"sad", PtxNodeKind::SadOp}, {"ld", PtxNodeKind::LdOp},
+            {"sad", PtxNodeKind::SadOp}, {"ld", PtxNodeKind::MoveOp},
             {"cvt", PtxNodeKind::MoveOp}
         };
     auto splitted_string = split_string(op, ".");
@@ -130,7 +130,7 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
             default:
                 throw std::runtime_error("Invalid operand to cvta.");
             }
-        } else if (op_kind == PtxNodeKind::MoveOp || op_kind == PtxNodeKind::LdOp) {
+        } else if (op_kind == PtxNodeKind::MoveOp) {
             for (int64_t v = 0; v < vec_count; ++v) {
                 if (pars[v].kind != PtxOperandKind::Register)
                     throw std::runtime_error("Destination must be register.");
