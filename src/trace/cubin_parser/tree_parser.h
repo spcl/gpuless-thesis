@@ -9,13 +9,13 @@
 #include <utility>
 #include <vector>
 
-#include "ptx_tree.h"
 #include "../cubin_analysis.hpp"
-
+#include "ptx_tree.h"
 
 namespace PtxTreeParser {
 
-std::vector<PtxTree> parsePtxTrees(std::string &ss);
+std::vector<std::pair<std::unique_ptr<PtxTree>, std::string>>
+parsePtxTrees(std::string_view ss);
 
 } // namespace PtxTreeParser
 

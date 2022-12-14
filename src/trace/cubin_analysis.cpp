@@ -4,12 +4,15 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <llvmdemangler/Demangler.h>
 #include <regex>
 #include <spdlog/spdlog.h>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "cubin_analysis.hpp"
 #include "cubin_parser/parser_util.h"
+#include "cubin_parser/tree_parser.h"
 
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType() {
     static std::map<std::string, PtxParameterType> map_ = {
@@ -74,226 +77,83 @@ int CubinAnalyzer::byteSizePtxParameterType(PtxParameterType type) {
     return it->second;
 }
 
-/*template <class StringLikeA, class StringLikeB>
-static bool iequals(const StringLikeA &a, const StringLikeB &b) {
-    return std::equal(a.begin(), a.end(), b.begin(), b.end(),
-                      [](char a, char b) { return tolower(a) == tolower(b); });
+std::string_view range_to_view(std::string::iterator first,
+                               std::string::iterator last) {
+    if (first != last)
+        return {first.operator->(), static_cast<size_t>(last - first)};
+    else
+        return {nullptr, 0};
 }
 
-static bool
-deduce_nested_ptr(itanium_demangle::NameWithTemplateArgs *tmp_node) {
-    assert(tmp_node != nullptr);
-
-    // If tempplate is an array
-    if (iequals(tmp_node->Name->getBaseName(), std::string("array"))) {
-        auto template_args = dynamic_cast<itanium_demangle::TemplateArgs *>(
-            tmp_node->TemplateArgs);
-        if (!template_args)
-            throw std::runtime_error("Array type not supported.");
-        if (template_args->getParams().size() != 2)
-            throw std::runtime_error("Array type not supported.");
-
-        return template_args->getParams()[0]->getKind() ==
-               itanium_demangle::Node::KPointerType;
-    }
-
-    return false;
-}
-
-static std::vector<itanium_demangle::Node *>
-expand_mangled_par(itanium_demangle::FunctionEncoding* array) {
-    size_t N_unexpanded_par = array->getParams().size();
-    std::vector<itanium_demangle::Node *> expanded(N_unexpanded_par);
-    unsigned cur_idx = 0;
-
-    for(unsigned i = 0; i < N_unexpanded_par; ++i) {
-        if(array->getParams()[i]->getKind() == itanium_demangle::Node::KParameterPackExpansion) {
-            auto pack = dynamic_cast<const itanium_demangle::ParameterPack *>(
-                            dynamic_cast<itanium_demangle::ParameterPackExpansion *>(array->getParams()[i])
-                                ->getChild())->getPack();
-
-            expanded.resize(expanded.size() + pack->size() - 1);
-            for(auto p : *pack) {
-                expanded[cur_idx] = p;
-                ++cur_idx;
-            }
-        } else {
-            expanded[cur_idx] = array->getParams()[i];
-            ++cur_idx;
-        }
-    }
-    return expanded;
-}
-
-static bool deduce_ptr(itanium_demangle::Node *par) {
-    switch (par->getKind()) {
-    case itanium_demangle::Node::KNameWithTemplateArgs:
-        return deduce_nested_ptr(
-            dynamic_cast<itanium_demangle::NameWithTemplateArgs *>(par));
-    case itanium_demangle::Node::KPointerType:
-        return true;
-    default:
-        return false;
-    }
-}*/
-
-struct NameWithOffset {
-    std::string name;
-    int offset;
-};
-
-std::vector<KParamInfo> CubinAnalyzer::parsePtxParameters(const std::string &ptx_data,
-                   const std::smatch &match) {
-    const std::string &entry = match[1];
-    const size_t str_idx = match.position(2)+1;
-    std::istringstream ss(ptx_data.substr(str_idx, ptx_data.size() - str_idx));
-
+std::vector<UncollapsedKParamInfo>
+CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
+                                  std::string::iterator end) {
     // Extract raw parameters from ptx
-    std::vector<KParamInfo> raw_parameters;
-    std::vector<NameWithOffset> params;
+    std::vector<UncollapsedKParamInfo> raw_parameters;
+    std::unordered_map<std::string, std::size_t> par_to_idx;
     std::string line;
-    while(getline(ss, line)) {
+    while (getline(beg, end, line)) {
         if (line.find(')') != std::string::npos) {
             break;
         }
         // NO parameters
-        if(!startsWith(line, ".param")) {
+        if (!startsWith(line, ".param")) {
             break;
         }
-        assert(startsWith(line, ".param") && "Expected .param directive");
         auto splitted_line = split_string(line, " ");
 
         // Remove last comma
         auto last = splitted_line.back();
-        if(endsWith(last, ",")) {
+        if (endsWith(last, ",")) {
             splitted_line.back() = last.substr(0, last.size() - 1);
         }
 
-        if(splitted_line[1] == ".align") {
+        if (splitted_line[1] == ".align") {
             int param_align = std::stoi(splitted_line[2].data());
             const std::string_view &name = splitted_line[4];
-            std::vector<std::string_view> splitted_name = split_string(name, "[");
+            std::vector<std::string_view> splitted_name =
+                split_string(name, "[");
             const std::string_view &param_name = splitted_name[0];
             // Remove last ']' from the size
             int param_size = std::stoi(
                 splitted_name[1].substr(0, splitted_name[1].size() - 1).data());
 
-            std::string_view type_name = splitted_line[3].substr(1, splitted_line[3].size());
-            PtxParameterType param_type = ptxParameterTypeFromString(std::string(type_name));
+            std::string_view type_name =
+                splitted_line[3].substr(1, splitted_line[3].size());
+            PtxParameterType param_type =
+                ptxParameterTypeFromString(std::string(type_name));
             int param_typeSize = byteSizePtxParameterType(param_type);
 
-            KParamInfo param(std::string(param_name), ptxParameterTypeFromString(std::string(type_name)), param_typeSize, param_align, param_size, 0);
-            raw_parameters.push_back(param);
-
-            for(int offset = 0; offset < param_size; offset += param_align) {
-                param.size = param_size - offset;
-                params.push_back({std::string(param_name), offset});
-            }
+            UncollapsedKParamInfo param(
+                std::string(param_name),
+                ptxParameterTypeFromString(std::string(type_name)),
+                param_typeSize, param_align, param_size);
+            par_to_idx[param.paramName] = raw_parameters.size();
+            raw_parameters.emplace_back(std::move(param));
         } else {
             std::string_view &name = splitted_line[2];
-            std::string_view typeName = splitted_line[1].substr(1, splitted_line[1].size()-1);
+            std::string_view typeName =
+                splitted_line[1].substr(1, splitted_line[1].size() - 1);
             auto type = ptxParameterTypeFromString(std::string(typeName));
-            KParamInfo param(std::string(name), type, byteSizePtxParameterType(type), 0, 1, 0);
+            UncollapsedKParamInfo param(std::string(name), type,
+                                        byteSizePtxParameterType(type), 0, 1);
 
-            raw_parameters.push_back(param);
-            params.push_back({std::string(name) ,0});
+            par_to_idx[param.paramName] = raw_parameters.size();
+            raw_parameters.push_back(std::move(param));
         }
     }
 
-    // Map: register -> offset -> identifier
-    std::map<std::string, std::map<uint64_t, std::string>> table;
-    std::map<std::string, std::map<uint64_t, bool>> is_ptr;
-    for(const auto& param : params) {
-        table[param.name][param.offset] = param.name;
-        is_ptr[param.name][param.offset] = false;
-    }
+    auto trees = PtxTreeParser::parsePtxTrees(range_to_view(beg, end));
 
-    // Read through instructions
-    while (getline(ss, line)) {
-        if (line.find(".entry") != std::string::npos) {
-            break;
-        }
-        if (startsWith(line, "ld.param.u64")) {
-            auto operands = split_string(line, ",");
-            auto reg = split_string(operands[0], " ").back();
-            auto param = split_string(operands[1], " ").back();
-            // remove [] and ; from param name
-            param = param.substr(1, param.size() - 3);
-            auto param_split = split_string(param, "+");
-            auto param_name = param_split[0];
-            if(param_split.size() == 1) {
-                table[std::string(reg)][0] = table[std::string(param_name)][0];
-            } else {
-                int offset = std::stoi(param_split[1].data());
-                table[std::string(reg)][offset] = table[std::string(param_name)][offset];
-            }
-        } else if (startsWith(line, "ld.param.v2.u64") || startsWith(line, "ld.param.v4.u64")) {
-            auto operands = split_string(line, "}");
-            auto registers = split_string(split_string(operands[0], "{")[1], ",");
-            auto param = split_string(operands[1], " ").back();
-            // remove [] and ; from param name
-            param = param.substr(1, param.size() - 3);
-            auto param_split = split_string(param, "+");
-            auto param_name = param_split[0];
-            auto offset = std::stoi(param_split[1].data());
-            for(size_t i = 0; i < registers.size(); ++i) {
-                auto reg = registers[i];
-                uint64_t local_offset = offset + i * 8;
-                table[std::string(reg)][local_offset] = table[std::string(param_name)][local_offset];
-            }
-        } else if (startsWith(line, "mov.u64") || startsWith(line, "mov.b64")) {
-            auto operands = split_string(line, ",");
-            auto reg = split_string(operands[0], " ").back();
-            auto param = split_string(operands[1], " ").back();
-            //  remove if necessary [] and ; from param name
-            if(param[0] == '[') {
-                param = param.substr(1, param.size() - 3);
-            } else {
-                param = param.substr(0, param.size() - 1);
-            }
-            auto param_split = split_string(param, "+");
-            auto param_name = param_split[0];
-            // Only move if we are keeping track of the parameter
-            if(table.find(std::string(param_name)) == table.end()) continue;
-            if(param_split.size() > 1) {
-                auto offset = std::stoi(param_split[1].data());
-                if(table[std::string(param_name)].find(offset) == table[std::string(param_name)].end()) continue;
-            }
-            table[std::string(reg)] = table[std::string(param_name)];
+    for (auto &tree : trees) {
+        auto collapsed = tree.first->eval(nullptr);
+        size_t idx = par_to_idx[tree.second];
 
-        } else if (startsWith(line, "cvta.to.global.u64")) {
-            auto operands = split_string(line, ",");
-            auto param = split_string(operands[1], " ").back();
-            //  remove if necessary [] and ; from param name
-            if(param[0] == '[') {
-                param = param.substr(1, param.size() - 3);
-            } else {
-                param = param.substr(0, param.size() - 1);
-            }
-            auto param_split = split_string(param, "+");
-            auto param_name = param_split[0];
-            std::string origin;
-            uint64_t offset;
-            if(param_split.size() == 1) {
-                auto localMap = table[std::string(param_name)];
-                if(localMap.empty())
-                    continue;
-                assert(localMap.size() == 1 && "Expected only one offset");
-                offset = 0;
-                origin = localMap.begin()->second;
-            } else {
-                offset = std::stoi(param_split[1].data());
-                origin = table[std::string(param_name)][offset];
-            }
-            is_ptr[origin][offset] = true;
-        }
-    }
-
-    for(auto& p : raw_parameters) {
-        for(const auto &is_p : is_ptr[p.paramName]) {
-            if(is_p.second) {
-                p.ptrOffsets.push_back(is_p.first);
-            }
+        if (collapsed) {
+            raw_parameters[idx].trees.emplace_back(std::move(collapsed), true);
+        } else {
+            raw_parameters[idx].trees.emplace_back(tree.first->move_root(),
+                                                   false);
         }
     }
 
@@ -328,7 +188,7 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
         return false;
     }
 
-    std::map<std::string, std::vector<KParamInfo>> tmp_map;
+    std::map<std::string, std::vector<UncollapsedKParamInfo>> tmp_map;
     std::ifstream in(cache_file);
 
     while (true) {
@@ -337,9 +197,9 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
         in >> symbol;
         in >> n_params;
 
-        std::vector<KParamInfo> kparam_infos;
+        std::vector<UncollapsedKParamInfo> kparam_infos;
         for (int i = 0; i < n_params; i++) {
-            KParamInfo kparam_info;
+            UncollapsedKParamInfo kparam_info;
             uint64_t u64_type;
             in >> kparam_info.paramName;
             in >> u64_type;
@@ -347,28 +207,36 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
             in >> kparam_info.typeSize;
             in >> kparam_info.align;
             in >> kparam_info.size;
-            int offs_size;
-            in >> offs_size;
-            std::vector<int> offsets(offs_size);
-            for(int l = 0; l < offs_size; ++l)
-                in >> offsets[l];
-            kparam_info.ptrOffsets = offsets;
-            kparam_infos.push_back(kparam_info);
+            size_t trees_size;
+            in >> trees_size;
+            std::vector<std::pair<
+                std::unique_ptr<PtxTreeParser::PtxAbstractNode>, bool>>
+                trees;
+            for (std::size_t k = 0; k < trees_size; ++k) {
+                std::unique_ptr<PtxTreeParser::PtxAbstractNode> tree =
+                    PtxTreeParser::PtxAbstractNode::unserialize(in);
+                bool is_collapsed;
+                in >> is_collapsed;
+                trees.emplace_back(std::move(tree), is_collapsed);
+            }
+            kparam_infos.push_back(std::move(kparam_info));
         }
 
-        tmp_map.emplace(symbol, kparam_infos);
+        tmp_map.emplace(symbol, std::move(kparam_infos));
         if (in.eof()) {
             break;
         }
     }
     in.close();
-    this->kernel_to_kparaminfos.insert(tmp_map.begin(), tmp_map.end());
+    for (auto &m : tmp_map) {
+        this->kernel_to_kparaminfos.emplace(std::move(m));
+    }
     return true;
 }
 
 void CubinAnalyzer::storeAnalysisToCache(
     const std::filesystem::path &fname,
-    const std::map<std::string, std::vector<KParamInfo>> &data) {
+    const std::map<std::string, std::vector<UncollapsedKParamInfo>> &data) {
     SPDLOG_INFO("Storing analysis to cache: {}", fname.string());
     std::size_t fname_hash = this->pathToHash(fname);
     std::filesystem::path home_dir(std::getenv("HOME"));
@@ -381,20 +249,52 @@ void CubinAnalyzer::storeAnalysisToCache(
     std::fstream out(cache_file, std::fstream::app);
     for (const auto &d : data) {
         const std::string &symbol = d.first;
-        const std::vector<KParamInfo> &kparam_infos = d.second;
-        out << symbol << std::endl << kparam_infos.size() << std::endl;
+        const std::vector<UncollapsedKParamInfo> &kparam_infos = d.second;
+        out << symbol << '\n' << kparam_infos.size() << '\n';
         for (const auto &p : kparam_infos) {
-            out << p.paramName << std::endl;
-            out << p.type << std::endl;
-            out << p.typeSize << std::endl;
-            out << p.align << std::endl;
-            out << p.size << std::endl;
-            out << p.ptrOffsets.size() << std::endl;
-            for(auto offs : p.ptrOffsets)
-                out << offs << std::endl;
+            out << p.paramName << '\n';
+            out << p.type << '\n';
+            out << p.typeSize << '\n';
+            out << p.align << '\n';
+            out << p.size << '\n';
+            out << p.trees.size();
+            for (const auto &tree : p.trees) {
+                tree.first->serialize(out);
+                out << '\n';
+                out << tree.second << '\n';
+            }
         }
     }
     out.close();
+}
+
+std::map<std::string, std::vector<UncollapsedKParamInfo>>
+CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
+                          int minor_version) {
+    std::string::iterator it = ptx_data.begin();
+    std::string::iterator file_end = ptx_data.end();
+
+    std::map<std::string, std::vector<UncollapsedKParamInfo>> tmp_map;
+    std::string line;
+
+    while (getline(it, file_end, line)) {
+        if (!startsWith(line, ".entry"))
+            continue;
+
+        std::string entry = std::string(split_string(line, " ")[1]);
+        entry.pop_back();
+        auto entry_beg = it;
+        while (getline(it, file_end, line) && line != "}")
+            ;
+        auto entry_end = it;
+
+        std::vector<UncollapsedKParamInfo> param_infos =
+            parsePtxParameters(entry_beg, entry_end);
+
+        tmp_map.emplace(entry, std::move(param_infos));
+    }
+
+    return tmp_map;
 }
 
 bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
@@ -424,25 +324,13 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
         std::ifstream s(f);
         std::stringstream ss;
         ss << s.rdbuf();
-
-        std::ifstream s2(f);
-
-        static std::regex r_func_parameters(R"(.entry.*\s(.*)\(([^\)]*)\))",
-                                            std::regex::ECMAScript);
         std::string ptx_data = ss.str();
-        std::sregex_iterator i = std::sregex_iterator(
-            ptx_data.begin(), ptx_data.end(), r_func_parameters);
-        std::map<std::string, std::vector<KParamInfo>> tmp_map;
-        for (; i != std::sregex_iterator(); ++i) {
-            std::smatch m = *i;
-            const std::string &entry = m[1];
 
-            std::vector<KParamInfo> param_infos =
-                parsePtxParameters(ptx_data, m);
-            tmp_map.emplace(std::make_pair(entry, param_infos));
-        }
+        auto tmp_map = analyzeTxt(ptx_data, major_version, minor_version);
         this->storeAnalysisToCache(std::filesystem::canonical(fname), tmp_map);
-        this->kernel_to_kparaminfos.insert(tmp_map.begin(), tmp_map.end());
+        for (auto &m : tmp_map) {
+            this->kernel_to_kparaminfos.emplace(std::move(m));
+        }
     }
 
     return true;
@@ -474,17 +362,27 @@ bool CubinAnalyzer::analyze(const std::vector<std::string> &cuda_binaries,
     return ret;
 }
 
-bool CubinAnalyzer::kernel_parameters(std::string &kernel,
-                                      std::vector<KParamInfo> &params) const {
+std::vector<UncollapsedKParamInfo> *
+CubinAnalyzer::kernel_parameters(std::string &kernel) {
     auto it = this->kernel_to_kparaminfos.find(kernel);
     if (it != this->kernel_to_kparaminfos.end()) {
-        params = it->second;
-        return true;
+        return &(it->second);
     }
-    return false;
+    return nullptr;
 }
 
 bool CubinAnalyzer::kernel_module(std::string &kernel,
                                   std::vector<uint8_t> &module_data) {
+    return true;
+}
+int CubinAnalyzer::getline(std::string::iterator &beg,
+                           std::string::iterator end, std::string &line) {
+    if (beg == end)
+        return false;
+    char c;
+    line.clear();
+    while ((beg != end) && ((c = *(beg++)) != '\n')) {
+        line.push_back(c);
+    }
     return true;
 }

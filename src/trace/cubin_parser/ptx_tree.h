@@ -9,7 +9,26 @@
 #include <utility>
 #include <vector>
 
-#include "../cubin_analysis.hpp"
+enum PtxParameterType {
+    s8 = 0,
+    s16 = 1,
+    s32 = 2,
+    s64 = 3, // signed integers
+    u8 = 4,
+    u16 = 5,
+    u32 = 6,
+    u64 = 7, // unsigned integers
+    f16 = 8,
+    f16x2 = 9,
+    f32 = 10,
+    f64 = 11, // floating-point
+    b8 = 12,
+    b16 = 13,
+    b32 = 14,
+    b64 = 15,     // untyped bits
+    pred = 16,    // predicate
+    invalid = 17, // invalid type for signaling errors
+};
 
 namespace PtxTreeParser {
 
@@ -59,6 +78,7 @@ struct PtxOperand {
     std::string name;
     int64_t value;
 };
+
 
 class PtxAbstractNode {
   public:
@@ -522,6 +542,12 @@ class PtxTree {
     void serialize(std::ostream& os) { _root->serialize(os); }
     static std::unique_ptr<PtxTree> unserialize(std::istream &is) {
         return std::make_unique<PtxTree>(PtxAbstractNode::unserialize(is));
+    }
+
+    std::unique_ptr<PtxAbstractNode> move_root() {
+        std::unique_ptr<PtxAbstractNode> root = nullptr;
+        _root.swap(root);
+        return root;
     }
 
   private:

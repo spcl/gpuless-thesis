@@ -8,30 +8,31 @@
 #include <utility>
 #include <vector>
 
-enum PtxParameterType {
-    s8 = 0,
-    s16 = 1,
-    s32 = 2,
-    s64 = 3, // signed integers
-    u8 = 4,
-    u16 = 5,
-    u32 = 6,
-    u64 = 7, // unsigned integers
-    f16 = 8,
-    f16x2 = 9,
-    f32 = 10,
-    f64 = 11, // floating-point
-    b8 = 12,
-    b16 = 13,
-    b32 = 14,
-    b64 = 15,     // untyped bits
-    pred = 16,    // predicate
-    invalid = 17, // invalid type for signaling errors
-};
+#include "cubin_parser/ptx_tree.h"
 
 std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
 std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr();
 std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
+
+struct UncollapsedKParamInfo {
+    std::string paramName;
+    PtxParameterType type;
+    int typeSize{};
+    int align{};
+    int size{};
+    std::vector<
+        std::pair<std::unique_ptr<PtxTreeParser::PtxAbstractNode>, bool>>
+        trees;
+
+    UncollapsedKParamInfo() = default;
+    UncollapsedKParamInfo(const UncollapsedKParamInfo &) = default;
+    UncollapsedKParamInfo(UncollapsedKParamInfo &&) = default;
+
+    UncollapsedKParamInfo(std::string name, PtxParameterType par_type,
+                          int typesize, int alignment, int size)
+        : paramName(std::move(name)), type(par_type), typeSize(typesize),
+          align(alignment), size(size), trees(0){};
+};
 
 struct KParamInfo {
     std::string paramName;
@@ -59,31 +60,37 @@ struct KParamInfo {
 class CubinAnalyzer {
   private:
     bool initialized_ = false;
-    std::map<std::string, std::vector<KParamInfo>> kernel_to_kparaminfos;
+    std::map<std::string, std::vector<UncollapsedKParamInfo>>
+        kernel_to_kparaminfos;
 
     static PtxParameterType ptxParameterTypeFromString(const std::string &str);
     static int byteSizePtxParameterType(PtxParameterType type);
+
+    static int getline(std::string::iterator &beg, std::string::iterator end,
+                       std::string &line);
 
     bool isCached(const std::filesystem::path &fname);
     bool loadAnalysisFromCache(const std::filesystem::path &fname);
     void storeAnalysisToCache(
         const std::filesystem::path &fname,
-        const std::map<std::string, std::vector<KParamInfo>> &data);
+        const std::map<std::string, std::vector<UncollapsedKParamInfo>> &data);
 
-    std::vector<KParamInfo> parsePtxParameters(const std::string &ptx_data,
-                                               const std::smatch &match);
-    bool analyzePtx(const std::filesystem::path &path, int major_version,
-                    int minor_version);
     static size_t pathToHash(const std::filesystem::path &path);
 
   public:
+    std::map<std::string, std::vector<UncollapsedKParamInfo>>
+    analyzeTxt(std::string &ptx_data, int major_version, int minor_version);
+    bool analyzePtx(const std::filesystem::path &path, int major_version,
+                    int minor_version);
+    static std::vector<UncollapsedKParamInfo>
+    parsePtxParameters(std::string::iterator beg, std::string::iterator end);
+
     CubinAnalyzer() = default;
     bool isInitialized();
     bool analyze(const std::vector<std::string> &cuda_binaries,
                  int major_version, int minor_version);
 
-    bool kernel_parameters(std::string &kernel,
-                           std::vector<KParamInfo> &params) const;
+    std::vector<UncollapsedKParamInfo> *kernel_parameters(std::string &kernel);
     bool kernel_module(std::string &kernel, std::vector<uint8_t> &module_data);
 };
 

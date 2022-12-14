@@ -25,16 +25,16 @@ bool endsWith(const std::string_view &str, const std::string_view &suffix) {
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
 
-std::string_view rgetline(const std::string::iterator &beg,
-              std::string::iterator &end) {
+std::string_view rgetline(const std::string_view::iterator &beg,
+              std::string_view::iterator &end) {
 
     for(size_t len = 0; true ;++len) {
         if(end == beg) {
-             return {end.operator->(), len};
+             return {end, len};
         }
 
         if(*(--end) == '\n') {
-            return {end.operator->()+1, len};
+            return {end+1, len};
         }
     }
 }

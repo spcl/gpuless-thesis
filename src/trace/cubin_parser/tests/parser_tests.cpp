@@ -120,53 +120,52 @@ TEST(PtxTree, SubEvalParam) {
 TEST(PtxParser, ParseSimpleCvta) {
     std::string s = "mov %r2, [myPtr]\n"
                     "cvta.to.global.u64 %r1, %r2;";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
+    auto trees = parsePtxTrees(s);
 
     EXPECT_EQ(trees.size(), 1);
 
-    trees[0].print();
+    trees[0].first->print();
 
 }
 
 TEST(PtxParser, ParseAdd) {
     std::string s = "add %r2, [par+4], 2;\n"
                     "cvta.to.global.u64 %r1, %r2;";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
+    auto trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 1);
-    trees[0].print();
+    trees[0].first->print();
 
-    std::unique_ptr<PtxAbstractNode> p = trees[0].eval(nullptr);
+    std::unique_ptr<PtxAbstractNode> p = trees[0].first->eval(nullptr);
 
     EXPECT_EQ(p->get_kind(), PtxNodeKind::Parameter);
     auto &par(static_cast<PtxParameter&>(*p));
     EXPECT_EQ(par.get_offsets().size(), 1);
-    EXPECT_EQ(par.get_name(), "par");
     EXPECT_EQ(par.get_offsets()[0], 6);
 }
 
 TEST(PtxParser, ParseMovV2) {
     std::string s = "mov.v2 {%r3, %r2}, [myPtr];\n"
                     "cvta.to.global.u64 %r1, %r2;";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
+    auto trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 1);
-    trees[0].print();
+    trees[0].first->print();
 }
 
 TEST(PtxParser, ParseAddV2) {
     std::string s = "add.v2 {%r3, %r2}, [myPtr+2], 4;\n"
                     "cvta.to.global.u64 %r1, %r3;\n"
                     "cvta.to.global.u64 %r4, %r2;";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
+    auto trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 2);
-    trees[0].print();
+    trees[0].first->print();
 }
 TEST(PtxParser, LoadV2) {
     std::string s = "ld.v2 {%r3, %r2}, [myPtr];\n"
                     "cvta.to.global.u64 %r1, %r3;\n"
                     "cvta.to.global.u64 %r4, %r2;";
-    std::vector<PtxTree> trees = parsePtxTrees(s);
+    auto trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 2);
-    trees[0].print();
+    trees[0].first->print();
 }
 
 TEST(PtxParser, OriginalComplications) {
@@ -174,15 +173,15 @@ TEST(PtxParser, OriginalComplications) {
     std::stringstream ss;
     ss << s.rdbuf();
     std::string ptx_data = ss.str();
-    std::vector<PtxTree> trees = parsePtxTrees(ptx_data);
+    auto trees = parsePtxTrees(ptx_data);
     EXPECT_EQ(trees.size(), 2);
-    auto empty = trees[0].eval(nullptr);
+    auto empty = trees[0].first->eval(nullptr);
     EXPECT_EQ(empty, nullptr);
-    auto par = trees[1].eval(nullptr);
+    auto par = trees[1].first->eval(nullptr);
     EXPECT_NE(par, nullptr);
 
     KLaunchConfig config{{3, 3, 0}, {3, 3, 0}};
-    auto res = trees[0].eval(&config);
+    auto res = trees[0].first->eval(&config);
     EXPECT_NE(res, nullptr);
     res->print();
 }

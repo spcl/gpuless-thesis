@@ -9,22 +9,22 @@ option(SPDLOG_LEVEL_DEBUG "Set the spdlog level to debug" OFF)
 option(SPDLOG_LEVEL_TRACE "Set the spdlog level to trace" OFF)
 option(SPDLOG_LEVEL_OFF "Set the spdlog level to off" OFF)
 
-if(SPDLOG_LEVEL_INFO)
+if (SPDLOG_LEVEL_INFO)
     add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_INFO)
     message("Set SPDLOG_LEVEL_INFO")
-elseif(SPDLOG_LEVEL_DEBUG)
+elseif (SPDLOG_LEVEL_DEBUG)
     add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
     message("Set SPDLOG_LEVEL_DEBUG")
-elseif(SPDLOG_LEVEL_OFF)
+elseif (SPDLOG_LEVEL_OFF)
     add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_OFF)
     message("Set SPDLOG_LEVEL_OFF")
-elseif(SPDLOG_LEVEL_TRACE)
+elseif (SPDLOG_LEVEL_TRACE)
     add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE)
     message("Set SPDLOG_LEVEL_TRACE")
-else()
+else ()
     add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_OFF)
     message("Set SPDLOG_LEVEL_OFF")
-endif()
+endif ()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -34,7 +34,7 @@ cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
 if (${_hostname} MATCHES ".*\.cscs\.ch")
     include_directories($ENV{HOME}/cudnn/cuda/include)
     link_directories($ENV{HOME}/cudnn/cuda/lib64)
-endif()
+endif ()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
@@ -60,45 +60,45 @@ enable_testing()
 
 # build flatbuffer schemas with external Makefile
 add_custom_target(
-    flatbuffer
-    COMMAND make
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/schemas)
+        flatbuffer
+        COMMAND make
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/schemas)
 
 add_executable(manager_trace
-    trace/manager/manager.cpp
-    trace/manager/manager_device.cpp
-    trace/cuda_trace.cpp
-    trace/cuda_trace_converter.cpp
-    trace/cuda_api_calls.cpp
-    trace/cudnn_api_calls.cpp
-    trace/cublas_api_calls.cpp
-    trace/cuda_virtual_device.cpp
-    trace/cuda_virtual_device.cpp
-    trace/trace_executor_local.cpp
-    trace/trace_executor_tcp_client.cpp
-    trace/dlsym_util.cpp
-    utils.cpp)
+        trace/manager/manager.cpp
+        trace/manager/manager_device.cpp
+        trace/cuda_trace.cpp
+        trace/cuda_trace_converter.cpp
+        trace/cuda_api_calls.cpp
+        trace/cudnn_api_calls.cpp
+        trace/cublas_api_calls.cpp
+        trace/cuda_virtual_device.cpp
+        trace/cuda_virtual_device.cpp
+        trace/trace_executor_local.cpp
+        trace/trace_executor_tcp_client.cpp
+        trace/dlsym_util.cpp
+        utils.cpp)
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
-    iberty
-    stdc++fs
-    cudnn
-    CUDA::cudart
-    CUDA::cuda_driver
-    CUDA::cublas
-    pthread)
+        iberty
+        stdc++fs
+        cudnn
+        CUDA::cudart
+        CUDA::cuda_driver
+        CUDA::cublas
+        pthread)
 
 add_subdirectory(
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
-    ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
 
 add_library(analysis SHARED
-    analysis/libcudaanalysis.cpp
-    trace/cubin_analysis.cpp
-    utils.cpp trace/trace_executor.hpp)
+        analysis/libcudaanalysis.cpp
+        trace/cubin_analysis.cpp
+        utils.cpp trace/trace_executor.hpp)
 target_link_libraries(analysis
-    CUDA::cudart
-    CUDA::cuda_driver)
+        CUDA::cudart
+        CUDA::cuda_driver)
 
 add_library(argument_analysis SHARED
         argument_analysis/libarganalysis.cpp
@@ -109,32 +109,32 @@ target_link_libraries(argument_analysis
         CUDA::cuda_driver)
 
 add_library(gpuless SHARED
-    trace/libgpuless.cpp
-    trace/hijack_cudnn.cpp
-    trace/hijack_cublas.cpp
-    trace/cuda_trace.cpp
-    trace/cuda_trace_converter.cpp
-    trace/cuda_api_calls.cpp
-    trace/cudnn_api_calls.cpp
-    trace/cublas_api_calls.cpp
-    trace/cuda_virtual_device.cpp
-    trace/cuda_virtual_device.cpp
-    trace/trace_executor_local.cpp
-    trace/trace_executor_tcp_client.cpp
-    trace/dlsym_util.cpp
-    utils.cpp
-    trace/cubin_analysis.cpp)
+        trace/libgpuless.cpp
+        trace/hijack_cudnn.cpp
+        trace/hijack_cublas.cpp
+        trace/cuda_trace.cpp
+        trace/cuda_trace_converter.cpp
+        trace/cuda_api_calls.cpp
+        trace/cudnn_api_calls.cpp
+        trace/cublas_api_calls.cpp
+        trace/cuda_virtual_device.cpp
+        trace/cuda_virtual_device.cpp
+        trace/trace_executor_local.cpp
+        trace/trace_executor_tcp_client.cpp
+        trace/dlsym_util.cpp
+        utils.cpp
+        trace/cubin_analysis.cpp)
 target_link_libraries(gpuless
-    iberty
-    stdc++fs
-    cudnn
-    CUDA::cuda_driver
-    CUDA::cudart
-    CUDA::cublas)
+        iberty
+        stdc++fs
+        cudnn
+        CUDA::cuda_driver
+        CUDA::cudart
+        CUDA::cublas)
 
 add_custom_command(
-    TARGET gpuless POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
+        TARGET gpuless POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
         ${CMAKE_BINARY_DIR}/compile_commands.json
         ${CMAKE_SOURCE_DIR})
 
@@ -145,13 +145,27 @@ add_executable(
         parser_tests
         trace/cubin_parser/tests/parser_tests.cpp
         trace/cubin_parser/tree_parser.cpp
-        trace/cubin_parser/ptx_tree.cpp trace/cubin_parser/ptx_tree.h trace/cubin_parser/parser_util.cpp trace/cubin_parser/parser_util.h)
+        trace/cubin_parser/ptx_tree.cpp
+        trace/cubin_parser/parser_util.cpp)
 target_link_libraries(
         parser_tests
         GTest::gtest_main
 )
 
+add_executable(
+        analysis_tests
+        trace/cubin_parser/tests/cubin_analysis_tests.cpp
+        trace/cubin_parser/tree_parser.cpp
+        trace/cubin_parser/ptx_tree.cpp
+        trace/cubin_parser/parser_util.cpp
+        trace/cubin_analysis.cpp)
+target_link_libraries(
+        analysis_tests
+        GTest::gtest_main
+)
+
 target_compile_definitions(parser_tests PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/trace/cubin_parser/tests/")
+target_compile_definitions(analysis_tests PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/trace/cubin_parser/tests/")
 
 include(GoogleTest)
 gtest_discover_tests(parser_tests)
