@@ -176,7 +176,7 @@ void PtxParameter::print() const {
         std::cout << "empty.\n";
     } else {
         for (auto &val : this->_offsets) {
-            std::cout << std::hex << val << '\t';
+            std::cout << val << '\t';
         }
         std::cout << ".\n";
     }
@@ -841,7 +841,7 @@ void PtxSpecialRegister::print() const {
         std::cout << "empty. \n";
     } else {
         for (auto value : _values) {
-            std::cout << std::hex << value << '\t';
+            std::cout <<  value << '\t';
         }
         std::cout << ".\n";
     }
@@ -907,7 +907,8 @@ void PtxCvtaNode::print() const {
         _dst->print();
 }
 std::unique_ptr<PtxAbstractNode> PtxCvtaNode::eval(KLaunchConfig *config) {
-    return _dst->eval(config);
+    if(_dst)
+        return _dst->eval(config);
 }
 void PtxCvtaNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx != 0)
@@ -927,7 +928,7 @@ std::unique_ptr<PtxAbstractNode> PtxCvtaNode::create(std::istream &is) {
  * PTX TREE IMPLEMENTATION
  */
 
-void PtxTree::print() const { _root->print(); }
+void PtxTree::print() const { if(_root) _root->print(); }
 
 std::pair<PtxTree::node_type *, int>
 PtxTree::find_register_node(const std::string &register_name) {

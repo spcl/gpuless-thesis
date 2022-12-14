@@ -151,5 +151,7 @@ target_link_libraries(
         GTest::gtest_main
 )
 
+target_compile_definitions(parser_tests PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/trace/cubin_parser/tests/")
+
 include(GoogleTest)
 gtest_discover_tests(parser_tests)

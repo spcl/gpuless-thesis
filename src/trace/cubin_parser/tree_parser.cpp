@@ -22,6 +22,7 @@ PtxNodeKind parseOperation(const std::string_view &op, std::size_t &vec_op) {
             {"max", PtxNodeKind::MaxOp}, {"shr", PtxNodeKind::ShrOp},
             {"shl", PtxNodeKind::ShlOp}, {"mad", PtxNodeKind::MadOp},
             {"sad", PtxNodeKind::SadOp}, {"ld", PtxNodeKind::LdOp},
+            {"cvt", PtxNodeKind::MoveOp}
         };
     auto splitted_string = split_string(op, ".");
     std::string_view opcode = splitted_string[0];
@@ -49,7 +50,10 @@ PtxOperand parseArgument(std::string_view arg) {
             offset = std::stoll(splitted_line[1].data());
         }
 
-        return {PtxOperandKind::Parameter, std::string(arg), offset};
+        if(arg[0] == '%')
+            return {PtxOperandKind::Register, std::string(arg), offset};
+        else
+            return {PtxOperandKind::Parameter, std::string(arg), offset};
     }
 
     if (arg[0] == '{') arg.remove_prefix(1);
@@ -78,9 +82,15 @@ PtxOperand parseArgument(std::string_view arg) {
         return {PtxOperandKind::Register, std::string(arg), 0};
     }
 
-    std::int64_t imm_value =
-        std::stoll(arg.data()); // Throws if not immediate (?)
-    return {PtxOperandKind::Immediate, std::string(arg), imm_value};
+    try {
+        std::int64_t imm_value =
+            std::stoll(arg.data()); // Throws if not immediate (?)
+        return {PtxOperandKind::Immediate, std::string(arg), imm_value};
+    } catch(std::invalid_argument&) {
+        return {PtxOperandKind::Parameter, std::string(arg), offset};
+    }
+
+
 }
 
 std::vector<PtxTree> parsePtxTrees(std::string &ss) {
@@ -89,14 +99,16 @@ std::vector<PtxTree> parsePtxTrees(std::string &ss) {
     const auto beg = ss.begin();
     auto end_it = ss.end();
 
-    for (std::string_view line = rgetline(beg, end_it); !line.empty();
+    for (std::string_view line = rgetline(beg, end_it); ;
          line = rgetline(beg, end_it)) {
         auto splitted_line = split_string(line, " ");
         std::size_t vec_count = 1;
         PtxNodeKind op_kind = parseOperation(splitted_line[0], vec_count);
 
-        if (op_kind == PtxNodeKind::InvalidOp)
-            continue; // Opeartion not relevant
+        if (op_kind == PtxNodeKind::InvalidOp) {
+            if(beg == end_it) break;
+            else continue;
+        }
 
         std::vector<PtxOperand> pars(splitted_line.size() - 1);
         for (size_t i = 1; i < splitted_line.size(); ++i) {

@@ -1,4 +1,5 @@
 #include "../tree_parser.h"
+#include <fstream>
 #include <gtest/gtest.h>
 
 using namespace PtxTreeParser;
@@ -166,6 +167,24 @@ TEST(PtxParser, LoadV2) {
     std::vector<PtxTree> trees = parsePtxTrees(s);
     EXPECT_EQ(trees.size(), 2);
     trees[0].print();
+}
+
+TEST(PtxParser, OriginalComplications) {
+    std::ifstream s(TEST_RESOURCE_DIR"/test_ptx");
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
+    std::vector<PtxTree> trees = parsePtxTrees(ptx_data);
+    EXPECT_EQ(trees.size(), 2);
+    auto empty = trees[0].eval(nullptr);
+    EXPECT_EQ(empty, nullptr);
+    auto par = trees[1].eval(nullptr);
+    EXPECT_NE(par, nullptr);
+
+    KLaunchConfig config{{3, 3, 0}, {3, 3, 0}};
+    auto res = trees[0].eval(&config);
+    EXPECT_NE(res, nullptr);
+    res->print();
 }
 
 TEST(PtxSerializer, BasicSerialization) {
