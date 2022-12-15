@@ -1,0 +1,276 @@
+.param .f32 _ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_0,
+.param .u32 _ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_1,
+.param .u64 _ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_2,
+.param .u64 _ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_3,
+.param .u64 _ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_4
+)
+{
+.reg .pred %p<5>;
+.reg .f32 %f<4>;
+.reg .b32 %r<8>;
+.reg .b64 %rd<31>;
+
+
+ld.param.f32 %f1, [_ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_0];
+ld.param.u32 %r1, [_ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_1];
+ld.param.u64 %rd14, [_ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_2];
+ld.param.u64 %rd15, [_ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_3];
+ld.param.u64 %rd16, [_ZN6caffe220ScaleBlobsCUDAKernelIfEEvfiPKiPPT_S5__param_4];
+setp.eq.s32 %p1, %r1, 0;
+@%p1 bra $L__BB3_6;
+
+mov.u32 %r2, %ctaid.x;
+mov.u32 %r3, %ntid.x;
+mov.u32 %r4, %tid.x;
+mad.lo.s32 %r5, %r2, %r3, %r4;
+cvt.u64.u32 %rd1, %r5;
+mov.u32 %r6, %nctaid.x;
+mul.lo.s32 %r7, %r3, %r6;
+cvt.u64.u32 %rd2, %r7;
+cvt.s64.s32 %rd3, %r1;
+cvta.to.global.u64 %rd4, %rd14;
+cvta.to.global.u64 %rd5, %rd15;
+cvta.to.global.u64 %rd6, %rd16;
+mov.u64 %rd29, 0;
+
+$L__BB3_2:
+shl.b64 %rd18, %rd29, 2;
+add.s64 %rd8, %rd4, %rd18;
+ld.global.s32 %rd19, [%rd8];
+setp.ge.u64 %p2, %rd1, %rd19;
+@%p2 bra $L__BB3_5;
+
+shl.b64 %rd20, %rd29, 3;
+add.s64 %rd9, %rd5, %rd20;
+add.s64 %rd10, %rd6, %rd20;
+mov.u64 %rd30, %rd1;
+
+$L__BB3_4:
+ld.global.u64 %rd21, [%rd9];
+cvta.to.global.u64 %rd22, %rd21;
+shl.b64 %rd23, %rd30, 2;
+add.s64 %rd24, %rd22, %rd23;
+ld.global.f32 %f2, [%rd24];
+mul.f32 %f3, %f2, %f1;
+ld.global.u64 %rd25, [%rd10];
+cvta.to.global.u64 %rd26, %rd25;
+add.s64 %rd27, %rd26, %rd23;
+st.global.f32 [%rd27], %f3;
+ld.global.s32 %rd28, [%rd8];
+add.s64 %rd30, %rd30, %rd2;
+setp.lt.u64 %p3, %rd30, %rd28;
+@%p3 bra $L__BB3_4;
+
+$L__BB3_5:
+add.s64 %rd29, %rd29, 1;
+setp.lt.u64 %p4, %rd29, %rd3;
+@%p4 bra $L__BB3_2;
+
+$L__BB3_6:
+ret;
+
+}
+
+
+Fatbin elf code:
+================
+arch = sm_90
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_52
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_53
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_60
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_61
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_62
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_70
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_72
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_75
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_80
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_86
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_89
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin ptx code:
+================
+arch = sm_90
+code version = [7,8]
+host = linux
+compile_size = 64bit
+compressed
+
+
+
+
+
+
+
+
+.version 7.8
+.target sm_90
+.address_size 64
+
+
+.extern .func __assertfail
+(
+.param .b64 __assertfail_param_0,
+.param .b64 __assertfail_param_1,
+.param .b32 __assertfail_param_2,
+.param .b64 __assertfail_param_3,
+.param .b64 __assertfail_param_4
+)
+;
+
+.global .align 1 .b8 __unnamed_1[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_2[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_3[18] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_4[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_5[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_6[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_7[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_8[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_9[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_10[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_11[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_12[18] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_13[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_14[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_15[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_16[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_17[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_18[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_19[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_20[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_21[18] = {108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_22[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_23[25] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_24[34] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_25[34] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_26[34] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_27[34] = {115, 112, 97, 114, 115, 101, 95, 108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 107, 101, 114, 110, 101, 108, 0};
+
+
+
+
+.global .align 1 .b8 __unnamed_28[27] = {108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_29[27] = {108, 101, 110, 103, 116, 104, 95, 109, 97, 120, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_30[36] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_31[36] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_32[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_33[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_34[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_35[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_36[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_37[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_38[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_39[52] = {108, 101, 110, 103, 116, 104, 95, 119, 101, 105, 103, 104, 116, 101, 100, 95, 115, 117, 109, 95, 119, 105, 116, 104, 95, 109, 97, 105, 110, 95, 105, 110, 112, 117, 116, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+
+.global .align 1 .b8 __unnamed_40[27] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_41[27] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_42[27] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 __unnamed_43[27] = {108, 101, 110, 103, 116, 104, 95, 115, 117, 109, 95, 103, 114, 97, 100, 105, 101, 110, 116, 95, 107, 101, 114, 110, 101, 108, 0};
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust6system6detail10sequential3seqE[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_1E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_2E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_3E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_4E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_5E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_6E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_7E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_8E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders2_9E[1];
+.global .align 1 .b8 _ZN65_INTERNAL_83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_1292716thrust12placeholders3_10E[1];
+.global .align 1 .b8 $str[21] = {115, 116, 97, 114, 116, 32, 60, 61, 32, 108, 101, 110, 95, 105, 110, 100, 105, 99, 101, 115, 0};
+.global .align 1 .b8 $str$1[96] = {47, 98, 117, 105, 108, 100, 47, 112, 121, 116, 104, 111, 110, 45, 112, 121, 116, 111, 114, 99, 104, 47, 115, 114, 99, 47, 112, 121, 116, 111, 114, 99, 104, 45, 49, 46, 49, 51, 46, 48, 45, 111, 112, 116, 45, 99, 117, 100, 97, 47, 99, 97, 102, 102, 101, 50, 47, 111, 112, 101, 114, 97, 116, 111, 114, 115, 47, 115, 101, 103, 109, 101, 110, 116, 95, 114, 101, 100, 117, 99, 116, 105, 111, 110, 95, 111, 112, 95, 103, 112, 117, 46, 99, 117, 104, 0};
+.global .align 1 .b8 $str$2[19] = {101, 110, 100, 32, 60, 61, 32, 108, 101, 110, 95, 105, 110, 100, 105, 99, 101, 115, 0};
+.global .align 1 .b8 $str$3[11] = {115, 116, 97, 114, 116, 32, 60, 61, 32, 78, 0};
+.global .align 1 .b8 $str$4[95] = {47, 98, 117, 105, 108, 100, 47, 112, 121, 116, 104, 111, 110, 45, 112, 121, 116, 111, 114, 99, 104, 47, 115, 114, 99, 47, 112, 121, 116, 111, 114, 99, 104, 45, 49, 46, 49, 51, 46, 48, 45, 111, 112, 116, 45, 99, 117, 100, 97, 47, 99, 97, 102, 102, 101, 50, 47, 111, 112, 101, 114, 97, 116, 111, 114, 115, 47, 115, 101, 103, 109, 101, 110, 116, 95, 114, 101, 100, 117, 99, 116, 105, 111, 110, 95, 111, 112, 95, 103, 112, 117, 46, 99, 117, 0};
+.global .align 1 .b8 $str$5[9] = {101, 110, 100, 32, 60, 61, 32, 78, 0};
+.extern .shared .align 16 .b8 _ZN6caffe267_GLOBAL__N__83e0e947_27_segment_reduction_op_gpu_cu_f0da4091_12927110reduceValsE[];
+.extern .shared .align 16 .b8 _ZN6caffe27s_floatE[];
+
+.visible .entry _ZN6caffe224sparse_length_sum_kernelIffiLb1ELb0EEEvPKT_PT0_PKiPKT1_iiii(

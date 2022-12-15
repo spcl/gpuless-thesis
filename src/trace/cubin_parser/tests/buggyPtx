@@ -1,0 +1,53 @@
+.param .u32 _ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_0,
+.param .u64 _ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_1,
+.param .u64 _ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_2
+)
+{
+.reg .pred %p<2>;
+.reg .f32 %f<2>;
+.reg .b32 %r<15>;
+.reg .b64 %rd<8>;
+
+
+ld.param.u32 %r2, [_ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_0];
+ld.param.u64 %rd1, [_ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_1];
+ld.param.u64 %rd2, [_ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894314ReluCUDAKernelI7__half2EEviPKT_PS3__param_2];
+mov.u32 %r3, %ctaid.x;
+shl.b32 %r4, %r3, 7;
+mov.u32 %r5, %tid.x;
+add.s32 %r1, %r4, %r5;
+setp.ge.s32 %p1, %r1, %r2;
+@%p1 bra $L__BB2_2;
+
+cvta.to.global.u64 %rd5, %rd2;
+mov.f32 %f1, 0f00000000;
+
+	{.reg .f16 low;
+cvt.rn.f16.f32 low, %f1;
+mov.b32 %r6, {low,low};}
+
+
+	mul.wide.s32 %rd6, %r1, 4;
+add.s64 %rd7, %rd5, %rd6;
+add.s64 %rd4, %rd1, %rd6;
+
+	ld.global.nc.b32 %r7, [%rd4];
+
+	
+	{ set.gt.f16x2.f16x2 %r8,%r7,%r6;
+}
+
+	
+	ld.global.nc.b32 %r11, [%rd4];
+
+	
+	{mul.f16x2 %r12,%r8,%r11;
+}
+
+	st.global.u32 [%rd7], %r12;
+
+$L__BB2_2:
+ret;
+
+}
+.entry _ZN6caffe250_GLOBAL__N__ebbf0d44_10_relu_op_cu_f0da4091_12894322ReluGradientCUDAKernelI6__halfEEviPKT_S5_PS3_(

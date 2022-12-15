@@ -1,0 +1,57 @@
+.entry _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3_(
+.param .u32 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_0,
+.param .u32 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_1,
+.param .u32 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_2,
+.param .u64 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_3,
+.param .u64 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_4,
+.param .u64 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_5,
+.param .u64 _ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_6
+)
+{
+.reg .pred %p<2>;
+.reg .f32 %f<5>;
+.reg .b32 %r<12>;
+.reg .b64 %rd<12>;
+
+
+ld.param.u32 %r3, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_0];
+ld.param.u32 %r4, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_1];
+ld.param.u32 %r5, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_2];
+ld.param.u64 %rd1, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_3];
+ld.param.u64 %rd2, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_4];
+ld.param.u64 %rd3, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_5];
+ld.param.u64 %rd4, [_ZN6caffe24math52_GLOBAL__N__d361319e_12_broadcast_cu_f0da4091_12375027AffineChannelNCHWCUDAKernelIfEEviiiPKT_S5_S5_PS3__param_6];
+mov.u32 %r1, %ctaid.x;
+rem.u32 %r6, %r1, %r4;
+shl.b32 %r7, %r6, 7;
+mov.u32 %r8, %tid.x;
+add.s32 %r2, %r7, %r8;
+setp.ge.s32 %p1, %r2, %r5;
+@%p1 bra $L__BB0_2;
+
+div.u32 %r9, %r1, %r4;
+cvta.to.global.u64 %rd8, %rd4;
+mad.lo.s32 %r10, %r9, %r5, %r2;
+mul.wide.s32 %rd9, %r10, 4;
+add.s64 %rd5, %rd1, %rd9;
+
+	ld.global.nc.f32 %f1, [%rd5];
+
+	rem.s32 %r11, %r9, %r3;
+mul.wide.s32 %rd10, %r11, 4;
+add.s64 %rd6, %rd2, %rd10;
+
+	ld.global.nc.f32 %f2, [%rd6];
+
+	add.s64 %rd7, %rd3, %rd10;
+
+	ld.global.nc.f32 %f3, [%rd7];
+
+	fma.rn.f32 %f4, %f1, %f2, %f3;
+add.s64 %rd11, %rd8, %rd9;
+st.global.f32 [%rd11], %f4;
+
+$L__BB0_2:
+ret;
+
+}

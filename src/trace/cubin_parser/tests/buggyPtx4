@@ -1,0 +1,480 @@
+.param .u32 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_0,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_1,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_2,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_3,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_4,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_5,
+.param .f32 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_6,
+.param .u8 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_7,
+.param .f32 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_8,
+.param .u64 _ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_9
+)
+{
+.reg .pred %p<10>;
+.reg .b16 %rs<2>;
+.reg .f32 %f<68>;
+.reg .b32 %r<47>;
+.reg .b64 %rd<53>;
+
+
+ld.param.s8 %rs1, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_7];
+ld.param.u64 %rd19, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_1];
+ld.param.u64 %rd20, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_2];
+ld.param.u64 %rd21, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_3];
+ld.param.u64 %rd22, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_4];
+ld.param.u64 %rd23, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_5];
+ld.param.f32 %f2, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_6];
+ld.param.f32 %f3, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_8];
+ld.param.u64 %rd18, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_9];
+cvta.to.global.u64 %rd1, %rd21;
+cvta.to.global.u64 %rd2, %rd22;
+cvta.to.global.u64 %rd3, %rd20;
+cvta.to.global.u64 %rd4, %rd19;
+cvta.to.global.u64 %rd5, %rd18;
+cvta.to.global.u64 %rd24, %rd23;
+ld.global.f32 %f1, [%rd24];
+mov.u32 %r1, %ntid.x;
+mov.u32 %r2, %ctaid.x;
+mov.u32 %r3, %tid.x;
+mad.lo.s32 %r4, %r2, %r1, %r3;
+cvt.u64.u32 %rd6, %r4;
+ld.param.u32 %r5, [_ZN6caffe256_GLOBAL__N__d4835dcf_23_fp16_momentum_sgd_op_cu_8083ef1b25FP16MomentumSGDFP32KernelEiPK7__half2S3_PS1_S4_PKffbfS4__param_0];
+shr.u32 %r6, %r5, 31;
+add.s32 %r7, %r5, %r6;
+shr.s32 %r8, %r7, 1;
+cvt.s64.s32 %rd7, %r8;
+setp.eq.s16 %p1, %rs1, 0;
+@%p1 bra $L__BB1_7;
+
+setp.ge.u64 %p2, %rd6, %rd7;
+@%p2 bra $L__BB1_13;
+
+setp.eq.s64 %p3, %rd18, 0;
+mov.u32 %r9, %nctaid.x;
+mul.lo.s32 %r10, %r1, %r9;
+cvt.u64.u32 %rd8, %r10;
+@%p3 bra $L__BB1_6;
+
+$L__BB1_4:
+shl.b64 %rd25, %rd6, 2;
+add.s64 %rd26, %rd5, %rd25;
+ld.global.u32 %r11, [%rd26];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r11;
+cvt.f32.f16 %f4, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r11;
+cvt.f32.f16 %f5, high;}
+
+
+	add.s64 %rd27, %rd4, %rd25;
+ld.global.u32 %r13, [%rd27];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r13;
+cvt.f32.f16 %f6, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r13;
+cvt.f32.f16 %f7, high;}
+
+
+	fma.rn.f32 %f16, %f3, %f4, %f6;
+fma.rn.f32 %f17, %f3, %f5, %f7;
+add.s64 %rd28, %rd3, %rd25;
+ld.global.u32 %r15, [%rd28];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r15;
+cvt.f32.f16 %f8, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r15;
+cvt.f32.f16 %f9, high;}
+
+
+	mul.rn.f32 %f18, %f2, %f8;
+mul.rn.f32 %f19, %f2, %f9;
+fma.rn.f32 %f10, %f1, %f16, %f18;
+fma.rn.f32 %f11, %f1, %f17, %f19;
+
+	{ cvt.rn.f16x2.f32 %r17, %f11, %f10; }
+
+
+	add.s64 %rd29, %rd2, %rd25;
+st.global.u32 [%rd29], %r17;
+fma.rn.f32 %f20, %f10, %f2, %f10;
+sub.rn.f32 %f12, %f20, %f18;
+fma.rn.f32 %f21, %f11, %f2, %f11;
+sub.rn.f32 %f13, %f21, %f19;
+
+	{ cvt.rn.f16x2.f32 %r18, %f13, %f12; }
+
+
+	add.s64 %rd30, %rd1, %rd25;
+st.global.u32 [%rd30], %r18;
+sub.rn.f32 %f14, %f4, %f12;
+sub.rn.f32 %f15, %f5, %f13;
+
+	{ cvt.rn.f16x2.f32 %r19, %f15, %f14; }
+
+
+	st.global.u32 [%rd26], %r19;
+add.s64 %rd6, %rd6, %rd8;
+setp.lt.u64 %p4, %rd6, %rd7;
+@%p4 bra $L__BB1_4;
+bra.uni $L__BB1_13;
+
+$L__BB1_6:
+shl.b64 %rd31, %rd6, 2;
+add.s64 %rd32, %rd5, %rd31;
+ld.global.u32 %r20, [%rd32];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r20;
+cvt.f32.f16 %f22, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r20;
+cvt.f32.f16 %f23, high;}
+
+
+	add.s64 %rd33, %rd4, %rd31;
+ld.global.u32 %r22, [%rd33];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r22;
+cvt.f32.f16 %f24, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r22;
+cvt.f32.f16 %f25, high;}
+
+
+	fma.rn.f32 %f32, %f3, %f22, %f24;
+fma.rn.f32 %f33, %f3, %f23, %f25;
+add.s64 %rd34, %rd3, %rd31;
+ld.global.u32 %r24, [%rd34];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r24;
+cvt.f32.f16 %f26, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r24;
+cvt.f32.f16 %f27, high;}
+
+
+	mul.rn.f32 %f34, %f2, %f26;
+mul.rn.f32 %f35, %f2, %f27;
+fma.rn.f32 %f28, %f1, %f32, %f34;
+fma.rn.f32 %f29, %f1, %f33, %f35;
+
+	{ cvt.rn.f16x2.f32 %r26, %f29, %f28; }
+
+
+	add.s64 %rd35, %rd2, %rd31;
+st.global.u32 [%rd35], %r26;
+fma.rn.f32 %f36, %f28, %f2, %f28;
+sub.rn.f32 %f30, %f36, %f34;
+fma.rn.f32 %f37, %f29, %f2, %f29;
+sub.rn.f32 %f31, %f37, %f35;
+
+	{ cvt.rn.f16x2.f32 %r27, %f31, %f30; }
+
+
+	add.s64 %rd36, %rd1, %rd31;
+st.global.u32 [%rd36], %r27;
+add.s64 %rd6, %rd6, %rd8;
+setp.lt.u64 %p5, %rd6, %rd7;
+@%p5 bra $L__BB1_6;
+bra.uni $L__BB1_13;
+
+$L__BB1_7:
+setp.ge.u64 %p6, %rd6, %rd7;
+@%p6 bra $L__BB1_13;
+
+setp.eq.s64 %p7, %rd18, 0;
+mov.u32 %r28, %nctaid.x;
+mul.lo.s32 %r29, %r1, %r28;
+cvt.u64.u32 %rd13, %r29;
+@%p7 bra $L__BB1_12;
+
+$L__BB1_10:
+shl.b64 %rd37, %rd6, 2;
+add.s64 %rd38, %rd5, %rd37;
+ld.global.u32 %r30, [%rd38];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r30;
+cvt.f32.f16 %f38, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r30;
+cvt.f32.f16 %f39, high;}
+
+
+	add.s64 %rd39, %rd4, %rd37;
+ld.global.u32 %r32, [%rd39];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r32;
+cvt.f32.f16 %f40, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r32;
+cvt.f32.f16 %f41, high;}
+
+
+	fma.rn.f32 %f50, %f3, %f38, %f40;
+fma.rn.f32 %f51, %f3, %f39, %f41;
+add.s64 %rd40, %rd3, %rd37;
+ld.global.u32 %r34, [%rd40];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r34;
+cvt.f32.f16 %f42, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r34;
+cvt.f32.f16 %f43, high;}
+
+
+	mul.rn.f32 %f52, %f2, %f42;
+fma.rn.f32 %f46, %f1, %f50, %f52;
+mul.rn.f32 %f53, %f2, %f43;
+fma.rn.f32 %f47, %f1, %f51, %f53;
+
+	{ cvt.rn.f16x2.f32 %r36, %f47, %f46; }
+
+
+	add.s64 %rd41, %rd2, %rd37;
+st.global.u32 [%rd41], %r36;
+
+	{ cvt.rn.f16x2.f32 %r37, %f47, %f46; }
+
+
+	add.s64 %rd42, %rd1, %rd37;
+st.global.u32 [%rd42], %r37;
+sub.rn.f32 %f48, %f38, %f46;
+sub.rn.f32 %f49, %f39, %f47;
+
+	{ cvt.rn.f16x2.f32 %r38, %f49, %f48; }
+
+
+	st.global.u32 [%rd38], %r38;
+add.s64 %rd6, %rd6, %rd13;
+setp.lt.u64 %p8, %rd6, %rd7;
+@%p8 bra $L__BB1_10;
+bra.uni $L__BB1_13;
+
+$L__BB1_12:
+shl.b64 %rd43, %rd6, 2;
+add.s64 %rd44, %rd5, %rd43;
+ld.global.u32 %r39, [%rd44];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r39;
+cvt.f32.f16 %f54, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r39;
+cvt.f32.f16 %f55, high;}
+
+
+	add.s64 %rd45, %rd4, %rd43;
+ld.global.u32 %r41, [%rd45];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r41;
+cvt.f32.f16 %f56, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r41;
+cvt.f32.f16 %f57, high;}
+
+
+	fma.rn.f32 %f64, %f3, %f54, %f56;
+fma.rn.f32 %f65, %f3, %f55, %f57;
+add.s64 %rd46, %rd3, %rd43;
+ld.global.u32 %r43, [%rd46];
+
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r43;
+cvt.f32.f16 %f58, low;}
+
+
+	
+	{.reg .f16 low,high;
+mov.b32 {low,high},%r43;
+cvt.f32.f16 %f59, high;}
+
+
+	mul.rn.f32 %f66, %f2, %f58;
+fma.rn.f32 %f62, %f1, %f64, %f66;
+mul.rn.f32 %f67, %f2, %f59;
+fma.rn.f32 %f63, %f1, %f65, %f67;
+
+	{ cvt.rn.f16x2.f32 %r45, %f63, %f62; }
+
+
+	add.s64 %rd47, %rd2, %rd43;
+st.global.u32 [%rd47], %r45;
+
+	{ cvt.rn.f16x2.f32 %r46, %f63, %f62; }
+
+
+	add.s64 %rd48, %rd1, %rd43;
+st.global.u32 [%rd48], %r46;
+add.s64 %rd6, %rd6, %rd13;
+setp.lt.u64 %p9, %rd6, %rd7;
+@%p9 bra $L__BB1_12;
+
+$L__BB1_13:
+ret;
+
+}
+
+
+Fatbin elf code:
+================
+arch = sm_90
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_52
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_53
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_60
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_61
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_62
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_70
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_72
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_75
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_80
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_86
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin elf code:
+================
+arch = sm_89
+code version = [1,7]
+host = linux
+compile_size = 64bit
+compressed
+
+Fatbin ptx code:
+================
+arch = sm_90
+code version = [7,8]
+host = linux
+compile_size = 64bit
+compressed
+
+
+
+
+
+
+
+
+.version 7.8
+.target sm_90
+.address_size 64
+
+.global .align 1 .b8 _ZN54_INTERNAL_7eaab7eb_23_fp32_momentum_sgd_op_cu_2aaa053f6thrust6system6detail10sequential3seqE[1];
+
+.entry _ZN6caffe256_GLOBAL__N__7eaab7eb_23_fp32_momentum_sgd_op_cu_2aaa053f21FP32MomentumSGDKernelEiPK6float2S3_PS1_S4_PKffbfS4_(
