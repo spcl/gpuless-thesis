@@ -91,20 +91,22 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
     // Extract raw parameters from ptx
     std::vector<UncollapsedKParamInfo> raw_parameters;
     std::unordered_map<std::string, std::size_t> par_to_idx;
+    std::unordered_set<std::string> param_names;
+
     std::string line;
     while (getline(beg, end, line)) {
         if (line.find(')') != std::string::npos) {
             break;
         }
         // NO parameters
-        if (!ptxStartsWith(line, ".param")) {
+        if (!startsWith(line, ".param")) {
             break;
         }
-        auto splitted_line = ptx_split_string(line, " ");
+        auto splitted_line = splitString(line, " ");
 
         // Remove last comma
         auto last = splitted_line.back();
-        if (ptxEndsWith(last, ",")) {
+        if (endsWith(last, ",")) {
             splitted_line.back() = last.substr(0, last.size() - 1);
         }
 
@@ -112,7 +114,7 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
             int param_align = std::stoi(splitted_line[2].data());
             const std::string_view &name = splitted_line[4];
             std::vector<std::string_view> splitted_name =
-                ptx_split_string(name, "[");
+                splitString(name, "[");
             const std::string_view &param_name = splitted_name[0];
             // Remove last ']' from the size
             int param_size = std::stoi(
@@ -129,6 +131,7 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
                 ptxParameterTypeFromString(std::string(type_name)),
                 param_typeSize, param_align, param_size);
             par_to_idx[param.paramName] = raw_parameters.size();
+            param_names.insert(param.paramName);
             raw_parameters.emplace_back(std::move(param));
         } else {
             std::string_view &name = splitted_line[2];
@@ -139,11 +142,13 @@ CubinAnalyzer::parsePtxParameters(std::string::iterator beg,
                                         byteSizePtxParameterType(type), 0, 1);
 
             par_to_idx[param.paramName] = raw_parameters.size();
+            param_names.insert(param.paramName);
             raw_parameters.push_back(std::move(param));
         }
     }
 
-    auto trees = PtxTreeParser::parsePtxTrees(range_to_view(beg, end));
+    PtxTreeParser::TreeParser parser(std::move(param_names));
+    auto trees = parser.parsePtxTrees(range_to_view(beg, end));
 
     for (auto &tree : trees) {
         auto collapsed = tree.first->eval(nullptr);
@@ -280,20 +285,23 @@ CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
     while (getline(it, file_end, line)) {
         if(line.empty())
             continue;
-        if (!ptxStartsWith(line, ".entry"))
+        if (line.find(".entry") == std::string::npos)
             continue;
 
-        std::string entry = std::string(ptx_split_string(line, " ")[1]);
+        std::string entry = std::string(splitString(line, " ").back());
         //TODO
-        if(ptxStartsWith(entry, "_ZN2at6native52_GLOBAL__N__2ec533aa_19_FakeQuantizeCore_cu_163ccd5445unrolled_elementwise_kernel_for_multi_outputs"))
+        if(startsWith(
+                entry,
+                "_ZN2at6native52_GLOBAL__N__2ec533aa_19_FakeQuantizeCore_cu_163ccd5445unrolled_elementwise_kernel_for_multi_outputs"))
             continue;
         entry.pop_back();
         auto entry_beg = it;
-        while (getline(it, file_end, line) && line != ".entry")
-            ;
-        if(line == ".entry") {
-            while(*(--it) != '\n')
-                ;
+        while (getline(it, file_end, line)) {
+            if(line.find(".entry") != std::string::npos) {
+                while(*(--it) != '\n')
+                    ;
+                break;
+            }
         }
         auto entry_end = it;
 

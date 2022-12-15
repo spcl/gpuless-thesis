@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <sstream>
 
-std::vector<std::string_view> ptx_split_string(std::string_view str,
+std::vector<std::string_view> splitString(std::string_view str,
                                       const std::string &delimiter) {
     std::vector<std::string_view> result;
 
@@ -16,11 +16,24 @@ std::vector<std::string_view> ptx_split_string(std::string_view str,
     return result;
 }
 
-bool ptxStartsWith(const std::string_view &str, const std::string_view &prefix) {
+std::vector<std::string> splitStringCopy(const std::string& str,
+                                          const std::string &delimiter) {
+    std::vector<std::string> result;
+
+    size_t old_pos = 0;
+    for(size_t pos = 0; (pos = str.find(delimiter, old_pos )) != std::string::npos; old_pos = pos+1) {
+        result.push_back(str.substr(old_pos, pos - old_pos));
+    }
+    result.push_back(str.substr(old_pos, str.size() - old_pos));
+
+    return result;
+}
+
+bool startsWith(const std::string_view &str, const std::string_view &prefix) {
     return str.rfind(prefix, 0) == 0;
 }
 
-bool ptxEndsWith(const std::string_view &str, const std::string_view &suffix) {
+bool endsWith(const std::string_view &str, const std::string_view &suffix) {
     return str.size() >= suffix.size() &&
            str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 }

@@ -122,6 +122,9 @@ add_library(gpuless SHARED
         trace/trace_executor_local.cpp
         trace/trace_executor_tcp_client.cpp
         trace/dlsym_util.cpp
+        trace/cubin_parser/tree_parser.cpp
+        trace/cubin_parser/ptx_tree.cpp
+        trace/cubin_parser/parser_util.cpp
         utils.cpp
         trace/cubin_analysis.cpp)
 target_link_libraries(gpuless
