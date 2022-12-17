@@ -10,29 +10,8 @@
 
 #include "cubin_parser/ptx_tree.h"
 
-std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
 std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr();
 std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
-
-struct UncollapsedKParamInfo {
-    std::string paramName;
-    PtxParameterType type;
-    int typeSize{};
-    int align{};
-    int size{};
-    std::vector<
-        std::pair<std::unique_ptr<PtxTreeParser::PtxAbstractNode>, bool>>
-        trees;
-
-    UncollapsedKParamInfo() = default;
-    UncollapsedKParamInfo(const UncollapsedKParamInfo &) = default;
-    UncollapsedKParamInfo(UncollapsedKParamInfo &&) = default;
-
-    UncollapsedKParamInfo(std::string name, PtxParameterType par_type,
-                          int typesize, int alignment, int size)
-        : paramName(std::move(name)), type(par_type), typeSize(typesize),
-          align(alignment), size(size), trees(0){};
-};
 
 struct KParamInfo {
     std::string paramName;

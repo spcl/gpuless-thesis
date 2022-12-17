@@ -13,6 +13,8 @@
 #include "../cubin_analysis.hpp"
 #include "ptx_tree.h"
 
+std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
+
 namespace PtxTreeParser {
 
 class TreeParser {
@@ -20,7 +22,7 @@ class TreeParser {
     std::unordered_set<std::string> _param_names;
 
     PtxOperand parseArgument(std::string arg);
-    PtxNodeKind parseOperation(const std::string_view &op, int64_t &vec_op);
+    std::pair<PtxNodeKind, PtxParameterType> parseOperation(const std::string_view &op, int64_t &vec_op);
 
   public:
     explicit TreeParser(std::unordered_set<std::string> param_names) : _param_names(std::move(param_names)) {}

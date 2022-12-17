@@ -314,7 +314,11 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
 
         // TODO Something is wrong with the vectors
         std::sort(infos.ptrOffsets.begin(), infos.ptrOffsets.end() );
-        infos.ptrOffsets.erase( std::unique( infos.ptrOffsets.begin(), infos.ptrOffsets.end() ), infos.ptrOffsets.end() );
+        if(!infos.ptrOffsets.empty()) {
+            infos.ptrOffsets.erase(infos.ptrOffsets.begin());
+            infos.ptrOffsets.erase( std::unique( infos.ptrOffsets.begin(), infos.ptrOffsets.end() ), infos.ptrOffsets.end() );
+        }
+
 
 
         for (int offs : infos.ptrOffsets) {

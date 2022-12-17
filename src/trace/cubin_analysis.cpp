@@ -14,16 +14,7 @@
 #include "cubin_parser/parser_util.h"
 #include "cubin_parser/tree_parser.h"
 
-std::map<std::string, PtxParameterType> &getStrToPtxParameterType() {
-    static std::map<std::string, PtxParameterType> map_ = {
-        {"s8", s8},     {"s16", s16},     {"s32", s32}, {"s64", s64},
-        {"u8", u8},     {"u16", u16},     {"u32", u32}, {"u64", u64},
-        {"f16", f16},   {"f16x2", f16x2}, {"f32", f32}, {"f64", f64},
-        {"b8", b8},     {"b16", b16},     {"b32", b32}, {"b64", b64},
-        {"pred", pred},
-    };
-    return map_;
-}
+
 
 std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr() {
     static std::map<PtxParameterType, std::string> map_ = {
@@ -196,12 +187,17 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
     std::map<std::string, std::vector<UncollapsedKParamInfo>> tmp_map;
     std::ifstream in(cache_file);
 
+    size_t cnt = 0;
+
     while (true) {
         std::string symbol;
         int n_params;
         in >> symbol;
         in >> n_params;
-
+        ++cnt;
+        if(cnt == 9115) {
+            cnt = 2;
+        }
         std::vector<UncollapsedKParamInfo> kparam_infos;
         for (int i = 0; i < n_params; i++) {
             UncollapsedKParamInfo kparam_info;
@@ -262,7 +258,7 @@ void CubinAnalyzer::storeAnalysisToCache(
             out << p.typeSize << '\n';
             out << p.align << '\n';
             out << p.size << '\n';
-            out << p.trees.size();
+            out << p.trees.size() << '\n';
             for (const auto &tree : p.trees) {
                 tree.first->serialize(out);
                 out << '\n';
@@ -289,15 +285,15 @@ CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
             continue;
 
         std::string entry = std::string(splitString(line, " ").back());
-        //TODO
-        if(startsWith(
-                entry,
-                "_ZN2at6native52_GLOBAL__N__2ec533aa_19_FakeQuantizeCore_cu_163ccd5445unrolled_elementwise_kernel_for_multi_outputs"))
-            continue;
         entry.pop_back();
+
+        if(entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_18TensorIteratorBaseERKT_EUliE_EEviT1_") {
+            std::cout << "Found";
+        }
         auto entry_beg = it;
         while (getline(it, file_end, line)) {
             if(line.find(".entry") != std::string::npos) {
+                --it;
                 while(*(--it) != '\n')
                     ;
                 break;
@@ -349,7 +345,7 @@ bool CubinAnalyzer::analyzePtx(const std::filesystem::path &fname,
             this->kernel_to_kparaminfos.emplace(std::move(m));
         }
     }
-
+    size_t cnt = this->kernel_to_kparaminfos.size();
     return true;
 }
 

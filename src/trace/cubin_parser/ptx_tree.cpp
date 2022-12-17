@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <numeric>
@@ -14,7 +15,7 @@ namespace PtxTreeParser {
 template <class F, class L, class R>
 std::unique_ptr<PtxAbstractNode> BinaryEval(KLaunchConfig *config, L &l, R &r,
                                             F op) {
-    if(!l || !r)
+    if (!l || !r)
         throw std::runtime_error("Node has no leaf.");
 
     std::unique_ptr<PtxAbstractNode> left_eval(l->eval(config));
@@ -133,7 +134,7 @@ std::unique_ptr<PtxAbstractNode> BinaryEval(KLaunchConfig *config, L &l, R &r,
     }
 
     auto specreg_par = [&](const PtxSpecialRegister &reg, PtxParameter &par,
-                        bool inv) {
+                           bool inv) {
         const std::vector<int64_t> &reg_values(reg.get_values());
         std::vector<int64_t> &par_values(par.get_offsets());
 
@@ -838,6 +839,148 @@ std::unique_ptr<PtxAbstractNode> PtxShrNode::create(std::istream &is) {
     return createBinOp<PtxShrNode>(is);
 }
 
+// PtxAndNode implementation
+void PtxAndNode::print() const {
+    std::cout << "PtxAndNode: Left ";
+    if (_left) {
+        std::cout << "non-empty: \n";
+        _left->print();
+    } else {
+        std::cout << "empty. \n";
+    }
+
+    std::cout << "PtxShrNode: Right ";
+    if (_right) {
+        std::cout << "non-empty: \n";
+        _right->print();
+    } else {
+        std::cout << "empty. \n";
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxAndNode::eval(KLaunchConfig *config) {
+    return BinaryEval(config, _left, _right,
+                      [](int64_t a, int64_t b) { return a & b; });
+}
+void PtxAndNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    if (idx == 0) {
+        _left.swap(child);
+        return;
+    }
+    if (idx == 1) {
+        _right.swap(child);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
+void PtxAndNode::serialize(std::ostream &os) const {
+    serializeBinOp(_left, _right, os, PtxNodeKind::ShrOp);
+}
+std::unique_ptr<PtxAbstractNode> PtxAndNode::create(std::istream &is) {
+    return createBinOp<PtxAndNode>(is);
+}
+
+// PtxBfiNode implementation
+void PtxBfiNode::print() const {
+    for (auto &p : {std::ref(_left), std::ref(_right), std::ref(_pos),
+                    std::ref(_length)}) {
+        std::cout << "PtxBfiNode: ";
+        auto &pointer(p.get());
+
+        if (pointer) {
+            std::cout << "non-empty: \n";
+            pointer->print();
+        } else {
+            std::cout << "empty. \n";
+        }
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxBfiNode::eval(KLaunchConfig *config) {
+    if (!_left || !_right || !_length || !_pos)
+        throw std::runtime_error("Node has no leaf.");
+
+    if(_right->get_kind() != PtxNodeKind::LdOp || _left->get_kind() != PtxNodeKind::LdOp)
+        throw std::runtime_error("Children need to be LdOp.");
+
+    auto &left_ld(static_cast<PtxLdOp &>(*_left));
+    auto &right_ld(static_cast<PtxLdOp &>(*_right));
+
+    std::unique_ptr<PtxAbstractNode> left_eval(left_ld.get_child()->eval(config));
+    std::unique_ptr<PtxAbstractNode> right_eval(right_ld.get_child()->eval(config));
+    std::unique_ptr<PtxAbstractNode> length_eval(_length->eval(config));
+    std::unique_ptr<PtxAbstractNode> pos_eval(_pos->eval(config));
+
+    if (!left_eval || !right_eval || !length_eval || !pos_eval) {
+        return nullptr;
+    }
+
+    PtxNodeKind left_kind = left_eval->get_kind();
+    PtxNodeKind right_kind = right_eval->get_kind();
+    PtxNodeKind length_kind = length_eval->get_kind();
+    PtxNodeKind pos_kind = pos_eval->get_kind();
+
+    if (left_kind != PtxNodeKind::Parameter ||
+        right_kind != PtxNodeKind::Parameter ||
+        length_kind != PtxNodeKind::Immediate ||
+        pos_kind != PtxNodeKind::Immediate)
+        throw std::runtime_error("BFI not implemented for these nodes.");
+
+    auto &left_par(static_cast<PtxParameter &>(*left_eval));
+    auto &right_par(static_cast<PtxParameter &>(*right_eval));
+    auto &length_imm(static_cast<PtxImmediate &>(*length_eval));
+    auto &pos_imm(static_cast<PtxImmediate &>(*pos_eval));
+
+    if(length_imm.get_values().size() != 1 || length_imm.get_values()[0] != 32 ||
+        pos_imm.get_values().size() != 1 || pos_imm.get_values()[0] != 32)
+        throw std::runtime_error("BFI not implemented for these lengths/positions.");
+
+    if(left_par.get_name() != right_par.get_name() || left_par.get_offsets().size() != 1
+        || right_par.get_offsets().size() != 1 || left_par.get_offsets()[0] != right_par.get_offsets()[0]+4)
+        throw std::runtime_error("Left/Right parameters are not consecutive.");
+
+    return std::make_unique<PtxParameter>(right_par.get_name(), right_par.get_offsets()[0]);
+}
+void PtxBfiNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    if (idx == 0) {
+        _left.swap(child);
+        return;
+    } else if (idx == 1) {
+        _right.swap(child);
+        return;
+    } else if(idx == 2) {
+        _pos.swap(child);
+        return;
+    } else if(idx == 3) {
+        _length.swap(child);
+        return;
+    }
+
+    throw std::runtime_error("Invalid index.");
+}
+void PtxBfiNode::serialize(std::ostream &os) const {
+    os << to_underlying(PtxNodeKind::BfiOp) << " ";
+    for (auto &p : {std::ref(_left), std::ref(_right), std::ref(_pos),
+                    std::ref(_length)}) {
+        auto &pointer(p.get());
+
+        if (pointer)
+            pointer->serialize(os);
+        else
+            os << -1 << " ";
+    }
+}
+std::unique_ptr<PtxAbstractNode> PtxBfiNode::create(std::istream &is) {
+    std::unique_ptr<PtxAbstractNode> left, right, pos, length;
+
+    left = PtxAbstractNode::unserialize(is);
+    right = PtxAbstractNode::unserialize(is);
+    pos = PtxAbstractNode::unserialize(is);
+    length = PtxAbstractNode::unserialize(is);
+
+    return std::make_unique<PtxBfiNode>(std::move(left), std::move(right),
+                               std::move(pos), std::move(length));
+}
+
 // PtxImmediate implementation
 std::unique_ptr<PtxAbstractNode> PtxImmediate::eval(KLaunchConfig *config) {
     return std::make_unique<PtxImmediate>(this->_values, this->_type);
@@ -965,6 +1108,102 @@ std::unique_ptr<PtxAbstractNode> PtxCvtaNode::create(std::istream &is) {
     return std::make_unique<PtxCvtaNode>(std::move(child));
 }
 
+// PtxLdOp implementation
+void PtxLdOp::print() const {
+    std::cout << "PtxLdOp. \n";
+    if (_child)
+        _child->print();
+}
+
+template <typename T>
+int64_t load_param(const std::vector<uint8_t> &parBuffer, int64_t offset) {
+    T size;
+    std::memcpy(&size, parBuffer.data() + offset, sizeof(T));
+    int64_t result = size;
+
+    return result;
+}
+
+std::unique_ptr<PtxAbstractNode> PtxLdOp::eval(KLaunchConfig *config) {
+    if (!config || !config->paramBuffers)
+        return nullptr;
+
+    if (!_child)
+        return nullptr;
+
+    std::unique_ptr<PtxAbstractNode> child_eval(_child->eval(config));
+    if (!child_eval)
+        return nullptr;
+    if (child_eval->get_kind() != PtxNodeKind::Parameter)
+        throw std::runtime_error("Child of Ld needs to evaluate to parameter.");
+
+    auto &par(static_cast<PtxParameter &>(*child_eval));
+
+    std::size_t idx = 0;
+    bool found = false;
+    for (std::size_t i = 0; i < config->paramInfos->size(); ++i) {
+        if ((*config->paramInfos)[i].paramName == par.get_name()) {
+            idx = i;
+            found = true;
+            break;
+        }
+    }
+    if (!found)
+        throw std::runtime_error("Invalid parameter name dereferenced.");
+
+    auto &buf((*config->paramBuffers)[idx]);
+    std::vector<int64_t> offsets = par.get_offsets();
+
+    auto get_val = [&](PtxParameterType type, int64_t offs) {
+        switch (type) {
+        case s8:
+            return load_param<int8_t>(buf, offs);
+        case s16:
+            return load_param<int16_t>(buf, offs);
+        case s32:
+            return load_param<int32_t>(buf, offs);
+        case s64:
+            return load_param<int64_t>(buf, offs);
+        case u8:
+            return load_param<uint8_t>(buf, offs);
+        case u16:
+            return load_param<uint16_t>(buf, offs);
+        case u32:
+            return load_param<uint32_t>(buf, offs);
+        default:
+            throw std::runtime_error("Invalid type");
+        }
+    };
+    std::vector<int64_t> vals;
+    for (auto offs : offsets)
+        vals.push_back(get_val(_type, offs));
+
+    return std::make_unique<PtxImmediate>(std::move(vals), _type);
+}
+void PtxLdOp::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
+    if (idx != 0)
+        throw std::runtime_error("Invalid index.");
+
+    _child.swap(child);
+}
+void PtxLdOp::serialize(std::ostream &os) const {
+    os << to_underlying(PtxNodeKind::LdOp) << " ";
+    if (_child)
+        _child->serialize(os);
+    else
+        os << -1 << " ";
+
+    os << to_underlying(_type) << " ";
+}
+std::unique_ptr<PtxAbstractNode> PtxLdOp::create(std::istream &is) {
+    std::unique_ptr<PtxAbstractNode> child;
+    int type_id;
+    child = PtxAbstractNode::unserialize(is);
+    is >> type_id;
+    return std::make_unique<PtxLdOp>(std::move(child),
+                                     PtxParameterType(type_id));
+}
+
 /*
  * PTX TREE IMPLEMENTATION
  */
@@ -1051,9 +1290,9 @@ void PtxTree::add_node(std::unique_ptr<PtxImmediate> new_node,
                 imms[0]->get_values(), imms[0]->get_type()));
         }
 
-        for(size_t i = 0; i < vec.size(); ++i) {
+        for (size_t i = 0; i < vec.size(); ++i) {
             auto [par_node, idx] = vec[i];
-            auto& imm = imms[i];
+            auto &imm = imms[i];
             par_node->set_child(std::move(imm), idx);
         }
     }
@@ -1104,6 +1343,54 @@ void PtxTree::add_node(PtxNodeKind kind,
     }
 }
 
+void PtxTree::add_node(std::unique_ptr<PtxLdOp> new_node,
+                       const std::vector<PtxOperand> &operands) {
+    if (operands[0].kind != PtxOperandKind::Register)
+        throw std::runtime_error("Destination must be register!");
+
+    if (auto vec = find_register_node(operands[0].name); !vec.empty()) {
+        std::vector<std::unique_ptr<PtxLdOp>> new_nodes;
+        new_nodes.emplace_back(std::move(new_node));
+        for (std::size_t l = 1; l < vec.size(); ++l) {
+            new_nodes.emplace_back(
+                std::make_unique<PtxLdOp>(new_nodes[0]->get_type()));
+        }
+
+        _registers_to_leafs.erase(operands[0].name);
+        for (size_t k = 0; k < vec.size(); ++k) {
+            std::unique_ptr<PtxLdOp> &node = new_nodes[k];
+            auto [par_node, idx] = vec[k];
+            for (uint64_t i = 0; i < operands.size() - 1; ++i) {
+                auto &operand = operands[i + 1];
+
+                switch (operand.kind) {
+                case PtxOperandKind::Register:
+                    _registers_to_leafs[operand.name].push_back(
+                        {node.get(), i});
+                    break;
+                case PtxOperandKind::Parameter:
+                    node->set_child(std::make_unique<PtxParameter>(
+                                        operand.name, operand.value),
+                                    static_cast<int>(i));
+                    break;
+                case PtxOperandKind::Immediate:
+                    node->set_child(
+                        std::make_unique<PtxImmediate>(operand.value, s64),
+                        static_cast<int>(i));
+                    break;
+                default:
+                    node->set_child(std::make_unique<PtxSpecialRegister>(
+                                        operand.kind, operand.value),
+                                    static_cast<int>(i));
+                    break;
+                }
+            }
+
+            par_node->set_child(std::move(node), idx);
+        }
+    }
+}
+
 std::unique_ptr<PtxAbstractNode> PtxTree::eval(KLaunchConfig *config) {
     return _root->eval(config);
 }
@@ -1138,6 +1425,10 @@ std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind) {
         return std::make_unique<PtxShlNode>(nullptr, nullptr);
     case PtxNodeKind::ShrOp:
         return std::make_unique<PtxShrNode>(nullptr, nullptr);
+    case PtxNodeKind::AndOp:
+        return std::make_unique<PtxAndNode>(nullptr, nullptr);
+    case PtxNodeKind::BfiOp:
+        return std::make_unique<PtxBfiNode>(nullptr, nullptr, nullptr, nullptr);
     default:
         throw std::runtime_error("Invalid Operation.");
     }
@@ -1177,6 +1468,10 @@ inline std::string stringFromNodeKind(PtxNodeKind kind) {
         return "MaxOp";
     case PtxNodeKind::ShrOp:
         return "ShrOp";
+    case PtxNodeKind::AndOp:
+        return "AndOp";
+    case PtxNodeKind::BfiOp:
+        return "BfiOp";
     case PtxNodeKind::ShlOp:
         return "ShlOp";
     case PtxNodeKind::MadOp:
@@ -1191,6 +1486,8 @@ inline std::string stringFromNodeKind(PtxNodeKind kind) {
         return "Register";
     case PtxNodeKind::InvalidOp:
         return "InvalidOp";
+    case PtxNodeKind::LdOp:
+        return "LdOp";
     }
 }
 
@@ -1209,7 +1506,9 @@ std::map<std::string, PtxNodeKind> &nodeKindFromString() {
         {"NegOp", PtxNodeKind::NegOp},
         {"MinOp", PtxNodeKind::MinOp},
         {"MaxOp", PtxNodeKind::MaxOp},
+        {"AndOp", PtxNodeKind::AndOp},
         {"ShrOp", PtxNodeKind::ShrOp},
+        {"BfiOp", PtxNodeKind::BfiOp},
         {"ShlOp", PtxNodeKind::ShlOp},
         {"MadOp", PtxNodeKind::MadOp},
         {"SadOp", PtxNodeKind::SadOp},
@@ -1256,6 +1555,9 @@ PtxAbstractNode::unserialize(std::istream &is) {
         {PtxNodeKind::MaxOp, PtxMaxNode::create},
         {PtxNodeKind::ShlOp, PtxShlNode::create},
         {PtxNodeKind::ShrOp, PtxShrNode::create},
+        {PtxNodeKind::AndOp, PtxAndNode::create},
+        {PtxNodeKind::BfiOp, PtxBfiNode::create},
+        {PtxNodeKind::LdOp, PtxLdOp::create},
         {PtxNodeKind::InvalidOp, null_factory}};
 
     int type_id;

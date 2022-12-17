@@ -29,6 +29,29 @@ enum PtxParameterType {
     pred = 16,    // predicate
     invalid = 17, // invalid type for signaling errors
 };
+namespace PtxTreeParser {
+class PtxAbstractNode;
+}
+
+struct UncollapsedKParamInfo {
+    std::string paramName;
+    PtxParameterType type;
+    int typeSize{};
+    int align{};
+    int size{};
+    std::vector<
+        std::pair<std::unique_ptr<PtxTreeParser::PtxAbstractNode>, bool>>
+        trees;
+
+    UncollapsedKParamInfo() = default;
+    UncollapsedKParamInfo(const UncollapsedKParamInfo &) = default;
+    UncollapsedKParamInfo(UncollapsedKParamInfo &&) = default;
+
+    UncollapsedKParamInfo(std::string name, PtxParameterType par_type,
+                          int typesize, int alignment, int size)
+        : paramName(std::move(name)), type(par_type), typeSize(typesize),
+          align(alignment), size(size), trees(0){};
+};
 
 namespace PtxTreeParser {
 
@@ -51,9 +74,12 @@ enum class PtxNodeKind {
     MaxOp,
     ShlOp,
     ShrOp,
+    BfiOp,
+    AndOp,
     MoveOp,
     Register,
     InvalidOp,
+    LdOp
 };
 
 enum class SpecialRegisterKind { ThreadId, NThreadIds, CTAId, NCTAIds };
@@ -61,6 +87,14 @@ enum class SpecialRegisterKind { ThreadId, NThreadIds, CTAId, NCTAIds };
 struct KLaunchConfig {
     std::array<unsigned, 3> gridDim;
     std::array<unsigned, 3> blockDim;
+    std::vector<std::vector<uint8_t>> *paramBuffers;
+    std::vector<UncollapsedKParamInfo> *paramInfos;
+
+    KLaunchConfig(std::array<unsigned, 3> grid, std::array<unsigned, 3> block)
+        : gridDim(grid), blockDim(block), paramBuffers(nullptr) {}
+
+    KLaunchConfig(std::array<unsigned, 3> grid, std::array<unsigned, 3> block, std::vector<std::vector<uint8_t>> *buffers, std::vector<UncollapsedKParamInfo> *infos)
+        : gridDim(grid), blockDim(block), paramBuffers(buffers), paramInfos(infos) {}
 };
 
 enum class PtxOperandKind {
@@ -180,6 +214,31 @@ class PtxSpecialRegister : public PtxAbstractNode {
     SpecialRegisterKind _kind;
     int _dim;
     std::vector<int64_t> _values;
+};
+
+class PtxLdOp : public PtxAbstractNode {
+  public:
+    PtxLdOp(std::unique_ptr<PtxAbstractNode> child, PtxParameterType type)
+        : _child(std::move(child)), _type(type) {}
+
+    PtxLdOp(PtxParameterType type) : _child(nullptr), _type(type) {}
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    [[nodiscard]] PtxNodeKind get_kind() const override {
+        return PtxNodeKind::LdOp;
+    }
+    std::unique_ptr<PtxAbstractNode>& get_child() {return _child; }
+
+    void serialize(std::ostream &os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream &is);
+
+    [[nodiscard]] PtxParameterType get_type() { return _type; }
+
+  private:
+    std::unique_ptr<PtxAbstractNode> _child;
+    PtxParameterType _type;
 };
 
 class PtxParameter : public PtxAbstractNode {
@@ -549,6 +608,34 @@ class PtxShrNode : public PtxAbstractNode {
     std::unique_ptr<node_type> _right;
 };
 
+class PtxBfiNode : public PtxAbstractNode {
+  public:
+    using node_type = PtxAbstractNode;
+    PtxBfiNode() = default;
+    explicit PtxBfiNode(std::unique_ptr<node_type> L,
+                        std::unique_ptr<node_type> R,
+                        std::unique_ptr<node_type> pos,
+                        std::unique_ptr<node_type> length)
+        : _left(std::move(L)), _right(std::move(R)),
+          _pos(std::move(pos)), _length(std::move(length)){};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    [[nodiscard]] PtxNodeKind get_kind() const override {
+        return PtxNodeKind::BfiOp;
+    }
+
+    void serialize(std::ostream &os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream &is);
+
+  private:
+    std::unique_ptr<node_type> _left;
+    std::unique_ptr<node_type> _right;
+    std::unique_ptr<node_type> _pos;
+    std::unique_ptr<node_type> _length;
+};
+
 class PtxCvtaNode : public PtxAbstractNode {
   public:
     using node_type = PtxAbstractNode;
@@ -568,6 +655,29 @@ class PtxCvtaNode : public PtxAbstractNode {
 
   private:
     std::unique_ptr<node_type> _dst;
+};
+
+class PtxAndNode : public PtxAbstractNode {
+  public:
+    using node_type = PtxAbstractNode;
+    PtxAndNode() = default;
+    explicit PtxAndNode(std::unique_ptr<node_type> L,
+                        std::unique_ptr<node_type> R)
+        : _left(std::move(L)), _right(std::move(R)){};
+
+    void print() const override;
+    std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config) override;
+    void set_child(std::unique_ptr<PtxAbstractNode> child, int idx) override;
+    [[nodiscard]] PtxNodeKind get_kind() const override {
+        return PtxNodeKind::AndOp;
+    }
+
+    void serialize(std::ostream &os) const override;
+    static std::unique_ptr<PtxAbstractNode> create(std::istream &is);
+
+  private:
+    std::unique_ptr<node_type> _left;
+    std::unique_ptr<node_type> _right;
 };
 
 class PtxTree {
@@ -592,13 +702,15 @@ class PtxTree {
     void replace_register(const std::string &old_register,
                           const std::string &new_register);
 
-    void add_node(std::unique_ptr<PtxSpecialRegister> new_node,
-                           const std::vector<PtxOperand> &operands);
     void add_node(PtxNodeKind new_node,
                   const std::vector<PtxOperand> &operands);
     void add_node(std::unique_ptr<PtxParameter> new_node,
                   const std::vector<PtxOperand> &operands);
     void add_node(std::unique_ptr<PtxImmediate> new_node,
+                  const std::vector<PtxOperand> &operands);
+    void add_node(std::unique_ptr<PtxLdOp> new_node,
+                  const std::vector<PtxOperand> &operands);
+    void add_node(std::unique_ptr<PtxSpecialRegister> new_node,
                   const std::vector<PtxOperand> &operands);
 
     std::unique_ptr<PtxAbstractNode> eval(KLaunchConfig *config);
@@ -629,12 +741,8 @@ std::string stringFromNodeKind(PtxNodeKind kind);
 std::string stringFromSpecialRegister(SpecialRegisterKind kind);
 
 std::map<std::string, PtxNodeKind> &getStrToPtxNodeKind();
-std::map<std::string, PtxParameterType> &getStrToPtxParameterType();
 std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr();
-std::map<PtxParameterType, int> &getPtxParameterTypeToSize();
-PtxParameterType ptxParameterTypeFromString(const std::string &str);
 PtxNodeKind ptxNodeKindFromString(const std::string &str);
-int byteSizePtxParameterType(PtxParameterType type);
 
 std::unique_ptr<PtxTree::node_type> produceNode(PtxNodeKind kind);
 
