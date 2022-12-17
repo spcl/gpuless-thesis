@@ -443,11 +443,36 @@ TEST(PtxParser, BuggyPtx6) {
     ss << s.rdbuf();
     std::string ptx_data = ss.str();
     PtxTreeParser::TreeParser parser(
-        {"_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_47launch_prelu_cuda_backward_kernel_share_weightsERNS_18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_EEviT0_T1_T2_T3__param_0",
-         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_47launch_prelu_cuda_backward_kernel_share_weightsERNS_18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_EEviT0_T1_T2_T3__param_1",
-         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_47launch_prelu_cuda_backward_kernel_share_weightsERNS_18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_EEviT0_T1_T2_T3__param_2",
-         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_47launch_prelu_cuda_backward_kernel_share_weightsERNS_18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_EEviT0_T1_T2_T3__param_3",
-         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_47launch_prelu_cuda_backward_kernel_share_weightsERNS_18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_EEviT0_T1_T2_T3__param_4"});
+        {"_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_"
+         "b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_"
+         "47launch_prelu_cuda_backward_kernel_share_weightsERNS_"
+         "18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_"
+         "clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_"
+         "EEviT0_T1_T2_T3__param_0",
+         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_"
+         "b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_"
+         "47launch_prelu_cuda_backward_kernel_share_weightsERNS_"
+         "18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_"
+         "clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_"
+         "EEviT0_T1_T2_T3__param_1",
+         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_"
+         "b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_"
+         "47launch_prelu_cuda_backward_kernel_share_weightsERNS_"
+         "18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_"
+         "clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_"
+         "EEviT0_T1_T2_T3__param_2",
+         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_"
+         "b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_"
+         "47launch_prelu_cuda_backward_kernel_share_weightsERNS_"
+         "18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_"
+         "clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_"
+         "EEviT0_T1_T2_T3__param_3",
+         "_ZN2at6native57_GLOBAL__N__39d96b06_24_ActivationPreluKernel_cu_"
+         "b2f5ef0e45unrolled_elementwise_kernel_for_multi_outputsILi2EZZZNS0_"
+         "47launch_prelu_cuda_backward_kernel_share_weightsERNS_"
+         "18TensorIteratorBaseERKNS_10TensorBaseEENKUlvE_clEvENKUlvE0_"
+         "clEvEUlddE_NS_6detail5ArrayIPcLi4EEE16OffsetCalculatorILi2EjLb0EESG_"
+         "EEviT0_T1_T2_T3__param_4"});
     auto trees = parser.parsePtxTrees(ptx_data);
 
     for (const auto &tree : trees) {
@@ -456,7 +481,7 @@ TEST(PtxParser, BuggyPtx6) {
             KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};
             auto second_eval = tree.first->eval(&kLaunchConfig);
             // Check if all tree actually collapse with a launchConfig
-            if(!second_eval)
+            if (!second_eval)
                 tree.first->print();
             EXPECT_NE(second_eval, nullptr);
         }
@@ -661,13 +686,34 @@ TEST(PtxParser, BuggyPtx16) {
     ss << s.rdbuf();
     std::string ptx_data = ss.str();
     PtxTreeParser::TreeParser parser(
-        {"_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_0",
-         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_1",
-         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_2",
-         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_3",
-         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_4",
-        "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_5",
-        "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_6"});
+        {"_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_0",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_1",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_2",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_3",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_4",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_5",
+         "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_"
+         "sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_"
+         "EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_"
+         "18GridSamplerPaddingEb_param_6"});
     auto trees = parser.parsePtxTrees(ptx_data);
 
     for (const auto &tree : trees) {
@@ -688,25 +734,53 @@ TEST(PtxParser, BuggyPtx16) {
 
                 std::vector<UncollapsedKParamInfo> paramInfos;
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_0",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_0",
                     b8, 1, 0, 8);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_1",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_1",
                     b8, 1, 0, 416);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_2",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_2",
                     b8, 1, 0, 416);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_3",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_3",
                     b8, 1, 0, 416);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_4",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_4",
                     b8, 1, 0, 4);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_5",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_5",
                     b8, 1, 0, 4);
                 paramInfos.emplace_back(
-                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_6detail24GridSamplerInterpolationENSB_18GridSamplerPaddingEb_param_6",
+                    "_ZN2at6native47_GLOBAL__N__4fcf47dd_14_GridSampler_cu_"
+                    "23dc5aa522grid_sampler_2d_kernelIN3c104HalfElEEvT0_NS_"
+                    "4cuda6detail10TensorInfoIT_S5_EESA_SA_NS0_"
+                    "6detail24GridSamplerInterpolationENSB_"
+                    "18GridSamplerPaddingEb_param_6",
                     b8, 1, 0, 1);
 
                 KLaunchConfig kLaunchConfigWithPar{
@@ -968,7 +1042,9 @@ TEST(FinalTest, TheBigBoy) {
 
         entry.pop_back();
 
-        if(entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_18TensorIteratorBaseERKT_EUliE_EEviT1_") {
+        if (entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_"
+                     "kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_"
+                     "18TensorIteratorBaseERKT_EUliE_EEviT1_") {
             std::cout << "Found";
         }
         auto entry_beg = it;
@@ -1081,6 +1157,154 @@ TEST(FinalTest, TheBigBoy) {
               << std::endl;
 }
 
+TEST(FinalTest, TheBigBoySerial) {
+    int cnt = 0, instant_eval = 0, kernel_count = 0, error_cnt = 0;
+    std::ifstream s(TEST_RESOURCE_DIR "/dumped_ptx");
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
+    std::string::iterator it = ptx_data.begin();
+    std::string::iterator file_end = ptx_data.end();
+
+    std::map<std::string, std::vector<UncollapsedKParamInfo>> tmp_map;
+    std::string line;
+
+    auto getline = [](std::string::iterator &beg, std::string::iterator end,
+                      std::string &line) {
+        if (beg == end)
+            return false;
+        char c;
+        line.clear();
+        while ((beg != end) && ((c = *(beg++)) != '\n')) {
+            line.push_back(c);
+        }
+        return true;
+    };
+
+    while (getline(it, file_end, line)) {
+        if (line.empty())
+            continue;
+        if (line.find(".entry") == std::string::npos)
+            continue;
+
+        std::string entry = std::string(splitString(line, " ").back());
+
+        ++kernel_count;
+
+        entry.pop_back();
+
+        auto entry_beg = it;
+        while (getline(it, file_end, line)) {
+            if (line.find(".entry") != std::string::npos) {
+                --it;
+                while (*(--it) != '\n')
+                    ;
+                break;
+            }
+        }
+        auto entry_end = it;
+
+        // Extract raw parameters from ptx
+        std::map<std::string, int64_t> param_to_size;
+        std::unordered_set<std::string> param_names;
+        while (getline(entry_beg, entry_end, line)) {
+            if (line.find(')') != std::string::npos) {
+                break;
+            }
+            // NO parameters
+            if (!startsWith(line, ".param")) {
+                break;
+            }
+            auto splitted_line = splitString(line, " ");
+
+            // Remove last comma
+            auto last = splitted_line.back();
+            if (endsWith(last, ",")) {
+                splitted_line.back() = last.substr(0, last.size() - 1);
+            }
+
+            if (splitted_line[1] == ".align") {
+                const std::string_view &name = splitted_line[4];
+                std::vector<std::string_view> splitted_name =
+                    splitString(name, "[");
+                const std::string_view &param_name = splitted_name[0];
+                int param_size =
+                    std::stoi(splitted_name[1]
+                                  .substr(0, splitted_name[1].size() - 1)
+                                  .data());
+
+                std::string_view type_name =
+                    splitted_line[3].substr(1, splitted_line[3].size());
+                PtxParameterType param_type =
+                    ptxParameterTypeFromString(std::string(type_name));
+                int param_typeSize = byteSizePtxParameterType(param_type);
+                param_to_size.insert(
+                    {std::string(param_name), param_size * param_typeSize});
+                param_names.insert(std::string(param_name));
+            } else {
+                std::string_view &name = splitted_line[2];
+                std::string_view typeName =
+                    splitted_line[1].substr(1, splitted_line[1].size() - 1);
+                auto type = ptxParameterTypeFromString(std::string(typeName));
+
+                param_to_size.insert(
+                    {std::string(name), byteSizePtxParameterType(type)});
+                param_names.insert(std::string(name));
+            }
+        }
+
+        PtxTreeParser::TreeParser parser{param_names};
+        auto trees = parser.parsePtxTrees(range_to_view(entry_beg, entry_end));
+        KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};
+        KLaunchConfig kLaunchConfigPar{{3, 3, 0}, {3, 3, 0}};
+        std::vector<std::vector<uint8_t>> buffers(param_names.size());
+        for (std::size_t i = 0; i < buffers.size(); ++i) {
+            auto iterator = param_to_size.begin();
+            std::advance(iterator, i);
+            buffers[i] = std::vector<uint8_t>(iterator->second, 0);
+        }
+        kLaunchConfigPar.paramBuffers = &buffers;
+
+        std::vector<UncollapsedKParamInfo> infos;
+        for (std::size_t i = 0; i < buffers.size(); ++i) {
+            auto iterator = param_to_size.begin();
+            std::advance(iterator, i);
+
+            std::string name = iterator->first;
+            std::size_t size = iterator->second;
+
+            infos.emplace_back(name, b8, 1, 0, size);
+        }
+        kLaunchConfigPar.paramInfos = &infos;
+
+        std::stringstream ser;
+
+        for (auto &tree : trees) {
+            ++cnt;
+            try {
+                auto first_eval = tree.first->eval(nullptr);
+                first_eval ? first_eval->serialize(ser)
+                           : tree.first->serialize(ser);
+                std::unique_ptr<PtxTree> unser = PtxTree::unserialize(ser);
+                EXPECT_NE(unser, nullptr);
+                std::stringstream second_ser;
+                unser->serialize(second_ser);
+                EXPECT_EQ(ser.str(), second_ser.str());
+                if(ser.str() != second_ser.str()) {
+                    return;
+                }
+            } catch (...) {
+                ++error_cnt;
+            }
+        }
+    }
+    std::cout << "Kernel of kernels: " << kernel_count << std::endl;
+    std::cout << "Number of parameters analyzed: " << cnt
+              << ", Number of parameters without tree: " << instant_eval
+              << ", number of parameters not working: " << error_cnt
+              << std::endl;
+}
+
 TEST(FinalTest, AnotherBigBoy) {
     int cnt = 0, instant_eval = 0, kernel_count = 0, error_cnt = 0;
     std::ifstream s(TEST_RESOURCE_DIR "/libtorch_cuda.380.sm_90.ptx");
@@ -1166,7 +1390,9 @@ TEST(FinalTest, AnotherBigBoy) {
 
         entry.pop_back();
 
-        if(entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_18TensorIteratorBaseERKT_EUliE_EEviT1_") {
+        if (entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_"
+                     "kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_"
+                     "18TensorIteratorBaseERKT_EUliE_EEviT1_") {
             std::cout << "Found";
         }
         auto entry_beg = it;
