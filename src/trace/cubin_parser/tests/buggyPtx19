@@ -1,0 +1,1497 @@
+.visible .entry _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_(
+.param .align 8 .b8 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_0[216],
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_1,
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_2,
+.param .u8 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_3,
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_4,
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_5,
+.param .align 8 .b8 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_6[216],
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_7,
+.param .align 8 .b8 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_8[216],
+.param .u32 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_9,
+.param .u64 _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_10
+)
+.maxntid 1024, 1, 1
+{
+.reg .pred %p<265>;
+.reg .b16 %rs<3>;
+.reg .f32 %f<108>;
+.reg .b32 %r<723>;
+.reg .b64 %rd<102>;
+
+	.shared .align 4 .b8 _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem[128];
+
+mov.b64 %rd5, _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_0;
+ld.param.u32 %r191, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_1];
+ld.param.u32 %r192, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_2];
+ld.param.u32 %r196, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_4];
+ld.param.u32 %r193, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_5];
+mov.b64 %rd6, _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_6;
+ld.param.u32 %r194, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_7];
+mov.b64 %rd7, _ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_8;
+ld.param.u32 %r195, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_9];
+mov.u32 %r197, %nctaid.y;
+mov.u32 %r198, %ctaid.z;
+mov.u32 %r199, %ctaid.y;
+mad.lo.s32 %r200, %r198, %r197, %r199;
+mov.u32 %r201, %nctaid.x;
+mov.u32 %r202, %ctaid.x;
+mad.lo.s32 %r1, %r200, %r201, %r202;
+setp.ge.u32 %p19, %r1, %r196;
+@%p19 bra $L__BB24_191;
+
+mov.u64 %rd8, %rd5;
+ld.param.u32 %r206, [%rd8+108];
+mul.lo.s32 %r207, %r206, %r1;
+mov.u64 %rd9, %rd6;
+ld.param.u32 %r2, [%rd9+108];
+mov.u64 %rd10, %rd7;
+ld.param.u32 %r3, [%rd10+108];
+ld.param.u64 %rd1, [%rd8];
+cvt.u64.u32 %rd2, %r207;
+ld.param.u64 %rd3, [%rd9];
+ld.param.u64 %rd4, [%rd10];
+mov.u32 %r714, %tid.x;
+mov.f32 %f105, 0f00000000;
+mov.u32 %r703, 0;
+mov.u32 %r647, 30;
+mov.u32 %r5, %ntid.x;
+
+	mov.s32 %r241, %laneid;
+
+	mov.u32 %r704, %r192;
+mov.u32 %r702, %r703;
+
+$L__BB24_2:
+mov.u32 %r6, %r647;
+setp.gt.u32 %p20, %r714, 3;
+@%p20 bra $L__BB24_4;
+
+shl.b32 %r208, %r714, 2;
+mov.u32 %r209, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r210, %r209, %r208;
+mov.u32 %r211, 0;
+st.shared.u32 [%r210], %r211;
+
+$L__BB24_4:
+setp.ge.u32 %p21, %r714, %r191;
+bar.sync 0;
+mov.u32 %r656, 0;
+mov.u32 %r657, %r656;
+mov.u32 %r658, %r656;
+mov.u32 %r659, %r656;
+@%p21 bra $L__BB24_7;
+
+mov.u32 %r655, %r714;
+
+$L__BB24_6:
+mul.lo.s32 %r228, %r655, %r193;
+cvt.u64.u32 %rd12, %r228;
+add.s64 %rd13, %rd12, %rd2;
+shl.b64 %rd14, %rd13, 2;
+add.s64 %rd11, %rd1, %rd14;
+
+	ld.global.nc.f32 %f42, [%rd11];
+
+	mov.b32 %r229, %f42;
+setp.lt.s32 %p22, %r229, 0;
+selp.b32 %r230, -1, -2147483648, %p22;
+setp.num.f32 %p23, %f42, %f42;
+xor.b32 %r231, %r230, %r229;
+selp.b32 %r221, %r231, -1, %p23;
+and.b32 %r232, %r221, %r702;
+setp.eq.s32 %p24, %r232, %r703;
+mov.u32 %r223, 2;
+
+	bfe.u32 %r220, %r221, %r6, %r223;
+
+	setp.eq.s32 %p25, %r220, 0;
+and.pred %p26, %p24, %p25;
+
+	activemask.b32 %r224;
+
+	vote.sync.ballot.b32 %r233, %p26, %r224;
+popc.b32 %r234, %r233;
+add.s32 %r659, %r234, %r659;
+setp.eq.s32 %p28, %r220, 1;
+and.pred %p29, %p24, %p28;
+
+	activemask.b32 %r225;
+
+	vote.sync.ballot.b32 %r235, %p29, %r225;
+popc.b32 %r236, %r235;
+add.s32 %r658, %r236, %r658;
+setp.eq.s32 %p31, %r220, 2;
+and.pred %p32, %p24, %p31;
+
+	activemask.b32 %r226;
+
+	vote.sync.ballot.b32 %r237, %p32, %r226;
+popc.b32 %r238, %r237;
+add.s32 %r657, %r238, %r657;
+setp.eq.s32 %p34, %r220, 3;
+and.pred %p35, %p24, %p34;
+
+	activemask.b32 %r227;
+
+	vote.sync.ballot.b32 %r239, %p35, %r227;
+popc.b32 %r240, %r239;
+add.s32 %r656, %r240, %r656;
+add.s32 %r655, %r655, %r5;
+setp.lt.u32 %p37, %r655, %r191;
+@%p37 bra $L__BB24_6;
+
+$L__BB24_7:
+setp.ne.s32 %p38, %r241, 0;
+@%p38 bra $L__BB24_9;
+
+mov.u32 %r242, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+atom.shared.add.u32 %r243, [%r242], %r659;
+add.s32 %r244, %r242, 4;
+atom.shared.add.u32 %r245, [%r244], %r658;
+add.s32 %r246, %r242, 8;
+atom.shared.add.u32 %r247, [%r246], %r657;
+add.s32 %r248, %r242, 12;
+atom.shared.add.u32 %r249, [%r248], %r656;
+
+$L__BB24_9:
+ld.param.s8 %rs2, [_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_3];
+setp.eq.s16 %p39, %rs2, 0;
+bar.sync 0;
+ld.shared.u32 %r24, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.u32 %r25, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+ld.shared.u32 %r26, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+8];
+ld.shared.u32 %r27, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+12];
+bar.sync 0;
+@%p39 bra $L__BB24_77;
+
+setp.ne.s32 %p41, %r704, 1;
+setp.ne.s32 %p42, %r27, 1;
+mov.pred %p251, -1;
+or.pred %p43, %p41, %p42;
+@%p43 bra $L__BB24_22;
+
+setp.gt.u32 %p44, %r714, 1;
+mov.u32 %r259, 2;
+mov.u32 %r256, 3;
+
+	bfi.b32 %r703, %r256, %r703, %r6, %r259;
+
+
+	bfi.b32 %r702, %r256, %r702, %r6, %r259;
+
+	@%p44 bra $L__BB24_13;
+
+shl.b32 %r260, %r714, 2;
+mov.u32 %r261, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r262, %r261, %r260;
+mov.u32 %r263, 0;
+st.shared.u32 [%r262], %r263;
+
+$L__BB24_13:
+bar.sync 0;
+add.s32 %r264, %r5, %r191;
+add.s32 %r265, %r264, -1;
+rem.u32 %r266, %r265, %r5;
+sub.s32 %r30, %r265, %r266;
+setp.ge.u32 %p46, %r714, %r30;
+mov.pred %p251, 0;
+mov.f32 %f105, 0f00000000;
+@%p46 bra $L__BB24_22;
+
+mov.u32 %r660, %r714;
+
+$L__BB24_15:
+setp.ge.u32 %p47, %r660, %r191;
+mov.f32 %f88, 0f00000000;
+@%p47 bra $L__BB24_17;
+
+mul.lo.s32 %r267, %r660, %r193;
+cvt.u64.u32 %rd16, %r267;
+add.s64 %rd17, %rd16, %rd2;
+shl.b64 %rd18, %rd17, 2;
+add.s64 %rd15, %rd1, %rd18;
+
+	ld.global.nc.f32 %f88, [%rd15];
+
+
+$L__BB24_17:
+@%p47 bra $L__BB24_20;
+
+mov.b32 %r268, %f88;
+setp.lt.s32 %p49, %r268, 0;
+selp.b32 %r269, -1, -2147483648, %p49;
+xor.b32 %r270, %r269, %r268;
+setp.num.f32 %p50, %f88, %f88;
+selp.b32 %r271, %r270, -1, %p50;
+and.b32 %r272, %r271, %r702;
+setp.ne.s32 %p51, %r272, %r703;
+@%p51 bra $L__BB24_20;
+
+mov.u32 %r273, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r273;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f88;
+
+$L__BB24_20:
+bar.sync 0;
+ld.shared.f32 %f46, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p53, %f46, 0f00000000;
+add.s32 %r660, %r660, %r5;
+@%p53 bra $L__BB24_22;
+
+setp.lt.u32 %p55, %r660, %r30;
+mov.f32 %f105, 0f00000000;
+@%p55 bra $L__BB24_15;
+
+$L__BB24_22:
+not.pred %p56, %p251;
+@%p56 bra $L__BB24_146;
+
+setp.gt.s32 %p57, %r704, %r27;
+@%p57 bra $L__BB24_25;
+bra.uni $L__BB24_24;
+
+$L__BB24_25:
+sub.s32 %r704, %r704, %r27;
+mov.pred %p252, -1;
+bra.uni $L__BB24_26;
+
+$L__BB24_77:
+setp.ne.s32 %p122, %r704, 1;
+setp.ne.s32 %p123, %r24, 1;
+mov.pred %p258, -1;
+or.pred %p124, %p122, %p123;
+@%p124 bra $L__BB24_89;
+
+setp.gt.u32 %p125, %r714, 1;
+mov.u32 %r395, 2;
+mov.u32 %r387, 0;
+
+	bfi.b32 %r703, %r387, %r703, %r6, %r395;
+
+	mov.u32 %r392, 3;
+
+	bfi.b32 %r702, %r392, %r702, %r6, %r395;
+
+	@%p125 bra $L__BB24_80;
+
+shl.b32 %r396, %r714, 2;
+mov.u32 %r397, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r398, %r397, %r396;
+st.shared.u32 [%r398], %r387;
+
+$L__BB24_80:
+bar.sync 0;
+add.s32 %r400, %r5, %r191;
+add.s32 %r401, %r400, -1;
+rem.u32 %r402, %r401, %r5;
+sub.s32 %r79, %r401, %r402;
+setp.ge.u32 %p127, %r714, %r79;
+mov.pred %p258, 0;
+mov.f32 %f105, 0f00000000;
+@%p127 bra $L__BB24_89;
+
+mov.u32 %r681, %r714;
+
+$L__BB24_82:
+setp.ge.u32 %p128, %r681, %r191;
+mov.f32 %f96, 0f00000000;
+@%p128 bra $L__BB24_84;
+
+mul.lo.s32 %r403, %r681, %r193;
+cvt.u64.u32 %rd32, %r403;
+add.s64 %rd33, %rd32, %rd2;
+shl.b64 %rd34, %rd33, 2;
+add.s64 %rd31, %rd1, %rd34;
+
+	ld.global.nc.f32 %f96, [%rd31];
+
+
+$L__BB24_84:
+@%p128 bra $L__BB24_87;
+
+mov.b32 %r404, %f96;
+setp.lt.s32 %p130, %r404, 0;
+selp.b32 %r405, -1, -2147483648, %p130;
+xor.b32 %r406, %r405, %r404;
+setp.num.f32 %p131, %f96, %f96;
+selp.b32 %r407, %r406, -1, %p131;
+and.b32 %r408, %r407, %r702;
+setp.ne.s32 %p132, %r408, %r703;
+@%p132 bra $L__BB24_87;
+
+mov.u32 %r409, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r409;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f96;
+
+$L__BB24_87:
+bar.sync 0;
+ld.shared.f32 %f66, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p134, %f66, 0f00000000;
+add.s32 %r681, %r681, %r5;
+@%p134 bra $L__BB24_89;
+
+setp.lt.u32 %p136, %r681, %r79;
+mov.f32 %f105, 0f00000000;
+@%p136 bra $L__BB24_82;
+
+$L__BB24_89:
+not.pred %p137, %p258;
+@%p137 bra $L__BB24_146;
+
+setp.gt.s32 %p138, %r704, %r24;
+@%p138 bra $L__BB24_92;
+bra.uni $L__BB24_91;
+
+$L__BB24_92:
+sub.s32 %r704, %r704, %r24;
+mov.pred %p259, -1;
+bra.uni $L__BB24_93;
+
+$L__BB24_24:
+mov.u32 %r280, 3;
+mov.u32 %r283, 2;
+
+	bfi.b32 %r703, %r280, %r703, %r6, %r283;
+
+
+	bfi.b32 %r702, %r280, %r702, %r6, %r283;
+
+	mov.pred %p252, 0;
+
+$L__BB24_26:
+not.pred %p60, %p252;
+@%p60 bra $L__BB24_144;
+
+setp.ne.s32 %p62, %r26, 1;
+setp.ne.s32 %p63, %r704, 1;
+mov.pred %p253, -1;
+or.pred %p64, %p63, %p62;
+@%p64 bra $L__BB24_39;
+
+setp.gt.u32 %p65, %r714, 1;
+mov.u32 %r293, 2;
+
+	bfi.b32 %r703, %r293, %r703, %r6, %r293;
+
+	mov.u32 %r290, 3;
+
+	bfi.b32 %r702, %r290, %r702, %r6, %r293;
+
+	@%p65 bra $L__BB24_30;
+
+shl.b32 %r294, %r714, 2;
+mov.u32 %r295, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r296, %r295, %r294;
+mov.u32 %r297, 0;
+st.shared.u32 [%r296], %r297;
+
+$L__BB24_30:
+bar.sync 0;
+add.s32 %r298, %r5, %r191;
+add.s32 %r299, %r298, -1;
+rem.u32 %r300, %r299, %r5;
+sub.s32 %r43, %r299, %r300;
+setp.ge.u32 %p67, %r714, %r43;
+mov.pred %p253, 0;
+mov.f32 %f105, 0f00000000;
+@%p67 bra $L__BB24_39;
+
+mov.u32 %r666, %r714;
+
+$L__BB24_32:
+setp.ge.u32 %p68, %r666, %r191;
+mov.f32 %f90, 0f00000000;
+@%p68 bra $L__BB24_34;
+
+mul.lo.s32 %r301, %r666, %r193;
+cvt.u64.u32 %rd20, %r301;
+add.s64 %rd21, %rd20, %rd2;
+shl.b64 %rd22, %rd21, 2;
+add.s64 %rd19, %rd1, %rd22;
+
+	ld.global.nc.f32 %f90, [%rd19];
+
+
+$L__BB24_34:
+@%p68 bra $L__BB24_37;
+
+mov.b32 %r302, %f90;
+setp.lt.s32 %p70, %r302, 0;
+selp.b32 %r303, -1, -2147483648, %p70;
+xor.b32 %r304, %r303, %r302;
+setp.num.f32 %p71, %f90, %f90;
+selp.b32 %r305, %r304, -1, %p71;
+and.b32 %r306, %r305, %r702;
+setp.ne.s32 %p72, %r306, %r703;
+@%p72 bra $L__BB24_37;
+
+mov.u32 %r307, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r307;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f90;
+
+$L__BB24_37:
+bar.sync 0;
+ld.shared.f32 %f51, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p74, %f51, 0f00000000;
+add.s32 %r666, %r666, %r5;
+@%p74 bra $L__BB24_39;
+
+setp.lt.u32 %p76, %r666, %r43;
+mov.f32 %f105, 0f00000000;
+@%p76 bra $L__BB24_32;
+
+$L__BB24_39:
+not.pred %p77, %p253;
+@%p77 bra $L__BB24_146;
+
+setp.gt.s32 %p78, %r704, %r26;
+@%p78 bra $L__BB24_42;
+bra.uni $L__BB24_41;
+
+$L__BB24_42:
+sub.s32 %r704, %r704, %r26;
+mov.pred %p254, -1;
+bra.uni $L__BB24_43;
+
+$L__BB24_91:
+mov.u32 %r411, 0;
+mov.u32 %r419, 2;
+
+	bfi.b32 %r703, %r411, %r703, %r6, %r419;
+
+	mov.u32 %r416, 3;
+
+	bfi.b32 %r702, %r416, %r702, %r6, %r419;
+
+	mov.pred %p259, 0;
+
+$L__BB24_93:
+not.pred %p141, %p259;
+@%p141 bra $L__BB24_144;
+
+setp.ne.s32 %p143, %r25, 1;
+setp.ne.s32 %p144, %r704, 1;
+mov.pred %p260, -1;
+or.pred %p145, %p144, %p143;
+@%p145 bra $L__BB24_106;
+
+setp.gt.u32 %p146, %r714, 1;
+mov.u32 %r429, 2;
+mov.u32 %r421, 1;
+
+	bfi.b32 %r703, %r421, %r703, %r6, %r429;
+
+	mov.u32 %r426, 3;
+
+	bfi.b32 %r702, %r426, %r702, %r6, %r429;
+
+	@%p146 bra $L__BB24_97;
+
+shl.b32 %r430, %r714, 2;
+mov.u32 %r431, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r432, %r431, %r430;
+mov.u32 %r433, 0;
+st.shared.u32 [%r432], %r433;
+
+$L__BB24_97:
+bar.sync 0;
+add.s32 %r434, %r5, %r191;
+add.s32 %r435, %r434, -1;
+rem.u32 %r436, %r435, %r5;
+sub.s32 %r92, %r435, %r436;
+setp.ge.u32 %p148, %r714, %r92;
+mov.pred %p260, 0;
+mov.f32 %f105, 0f00000000;
+@%p148 bra $L__BB24_106;
+
+mov.u32 %r687, %r714;
+
+$L__BB24_99:
+setp.ge.u32 %p149, %r687, %r191;
+mov.f32 %f98, 0f00000000;
+@%p149 bra $L__BB24_101;
+
+mul.lo.s32 %r437, %r687, %r193;
+cvt.u64.u32 %rd36, %r437;
+add.s64 %rd37, %rd36, %rd2;
+shl.b64 %rd38, %rd37, 2;
+add.s64 %rd35, %rd1, %rd38;
+
+	ld.global.nc.f32 %f98, [%rd35];
+
+
+$L__BB24_101:
+@%p149 bra $L__BB24_104;
+
+mov.b32 %r438, %f98;
+setp.lt.s32 %p151, %r438, 0;
+selp.b32 %r439, -1, -2147483648, %p151;
+xor.b32 %r440, %r439, %r438;
+setp.num.f32 %p152, %f98, %f98;
+selp.b32 %r441, %r440, -1, %p152;
+and.b32 %r442, %r441, %r702;
+setp.ne.s32 %p153, %r442, %r703;
+@%p153 bra $L__BB24_104;
+
+mov.u32 %r443, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r443;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f98;
+
+$L__BB24_104:
+bar.sync 0;
+ld.shared.f32 %f71, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p155, %f71, 0f00000000;
+add.s32 %r687, %r687, %r5;
+@%p155 bra $L__BB24_106;
+
+setp.lt.u32 %p157, %r687, %r92;
+mov.f32 %f105, 0f00000000;
+@%p157 bra $L__BB24_99;
+
+$L__BB24_106:
+not.pred %p158, %p260;
+@%p158 bra $L__BB24_146;
+
+setp.gt.s32 %p159, %r704, %r25;
+@%p159 bra $L__BB24_109;
+bra.uni $L__BB24_108;
+
+$L__BB24_109:
+sub.s32 %r704, %r704, %r25;
+mov.pred %p261, -1;
+bra.uni $L__BB24_110;
+
+$L__BB24_41:
+mov.u32 %r317, 2;
+
+	bfi.b32 %r703, %r317, %r703, %r6, %r317;
+
+	mov.u32 %r314, 3;
+
+	bfi.b32 %r702, %r314, %r702, %r6, %r317;
+
+	mov.pred %p254, 0;
+
+$L__BB24_43:
+not.pred %p81, %p254;
+@%p81 bra $L__BB24_144;
+
+setp.ne.s32 %p83, %r25, 1;
+setp.ne.s32 %p84, %r704, 1;
+mov.pred %p255, -1;
+or.pred %p85, %p84, %p83;
+@%p85 bra $L__BB24_56;
+
+setp.gt.u32 %p86, %r714, 1;
+mov.u32 %r327, 2;
+mov.u32 %r319, 1;
+
+	bfi.b32 %r703, %r319, %r703, %r6, %r327;
+
+	mov.u32 %r324, 3;
+
+	bfi.b32 %r702, %r324, %r702, %r6, %r327;
+
+	@%p86 bra $L__BB24_47;
+
+shl.b32 %r328, %r714, 2;
+mov.u32 %r329, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r330, %r329, %r328;
+mov.u32 %r331, 0;
+st.shared.u32 [%r330], %r331;
+
+$L__BB24_47:
+bar.sync 0;
+add.s32 %r332, %r5, %r191;
+add.s32 %r333, %r332, -1;
+rem.u32 %r334, %r333, %r5;
+sub.s32 %r56, %r333, %r334;
+setp.ge.u32 %p88, %r714, %r56;
+mov.pred %p255, 0;
+mov.f32 %f105, 0f00000000;
+@%p88 bra $L__BB24_56;
+
+mov.u32 %r672, %r714;
+
+$L__BB24_49:
+setp.ge.u32 %p89, %r672, %r191;
+mov.f32 %f92, 0f00000000;
+@%p89 bra $L__BB24_51;
+
+mul.lo.s32 %r335, %r672, %r193;
+cvt.u64.u32 %rd24, %r335;
+add.s64 %rd25, %rd24, %rd2;
+shl.b64 %rd26, %rd25, 2;
+add.s64 %rd23, %rd1, %rd26;
+
+	ld.global.nc.f32 %f92, [%rd23];
+
+
+$L__BB24_51:
+@%p89 bra $L__BB24_54;
+
+mov.b32 %r336, %f92;
+setp.lt.s32 %p91, %r336, 0;
+selp.b32 %r337, -1, -2147483648, %p91;
+xor.b32 %r338, %r337, %r336;
+setp.num.f32 %p92, %f92, %f92;
+selp.b32 %r339, %r338, -1, %p92;
+and.b32 %r340, %r339, %r702;
+setp.ne.s32 %p93, %r340, %r703;
+@%p93 bra $L__BB24_54;
+
+mov.u32 %r341, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r341;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f92;
+
+$L__BB24_54:
+bar.sync 0;
+ld.shared.f32 %f56, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p95, %f56, 0f00000000;
+add.s32 %r672, %r672, %r5;
+@%p95 bra $L__BB24_56;
+
+setp.lt.u32 %p97, %r672, %r56;
+mov.f32 %f105, 0f00000000;
+@%p97 bra $L__BB24_49;
+
+$L__BB24_56:
+not.pred %p98, %p255;
+@%p98 bra $L__BB24_146;
+
+setp.gt.s32 %p99, %r704, %r25;
+@%p99 bra $L__BB24_59;
+bra.uni $L__BB24_58;
+
+$L__BB24_59:
+sub.s32 %r704, %r704, %r25;
+mov.pred %p256, -1;
+bra.uni $L__BB24_60;
+
+$L__BB24_108:
+mov.u32 %r445, 1;
+mov.u32 %r453, 2;
+
+	bfi.b32 %r703, %r445, %r703, %r6, %r453;
+
+	mov.u32 %r450, 3;
+
+	bfi.b32 %r702, %r450, %r702, %r6, %r453;
+
+	mov.pred %p261, 0;
+
+$L__BB24_110:
+not.pred %p162, %p261;
+@%p162 bra $L__BB24_144;
+
+setp.ne.s32 %p164, %r26, 1;
+setp.ne.s32 %p165, %r704, 1;
+mov.pred %p262, -1;
+or.pred %p166, %p165, %p164;
+@%p166 bra $L__BB24_123;
+
+setp.gt.u32 %p167, %r714, 1;
+mov.u32 %r463, 2;
+
+	bfi.b32 %r703, %r463, %r703, %r6, %r463;
+
+	mov.u32 %r460, 3;
+
+	bfi.b32 %r702, %r460, %r702, %r6, %r463;
+
+	@%p167 bra $L__BB24_114;
+
+shl.b32 %r464, %r714, 2;
+mov.u32 %r465, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r466, %r465, %r464;
+mov.u32 %r467, 0;
+st.shared.u32 [%r466], %r467;
+
+$L__BB24_114:
+bar.sync 0;
+add.s32 %r468, %r5, %r191;
+add.s32 %r469, %r468, -1;
+rem.u32 %r470, %r469, %r5;
+sub.s32 %r105, %r469, %r470;
+setp.ge.u32 %p169, %r714, %r105;
+mov.pred %p262, 0;
+mov.f32 %f105, 0f00000000;
+@%p169 bra $L__BB24_123;
+
+mov.u32 %r693, %r714;
+
+$L__BB24_116:
+setp.ge.u32 %p170, %r693, %r191;
+mov.f32 %f100, 0f00000000;
+@%p170 bra $L__BB24_118;
+
+mul.lo.s32 %r471, %r693, %r193;
+cvt.u64.u32 %rd40, %r471;
+add.s64 %rd41, %rd40, %rd2;
+shl.b64 %rd42, %rd41, 2;
+add.s64 %rd39, %rd1, %rd42;
+
+	ld.global.nc.f32 %f100, [%rd39];
+
+
+$L__BB24_118:
+@%p170 bra $L__BB24_121;
+
+mov.b32 %r472, %f100;
+setp.lt.s32 %p172, %r472, 0;
+selp.b32 %r473, -1, -2147483648, %p172;
+xor.b32 %r474, %r473, %r472;
+setp.num.f32 %p173, %f100, %f100;
+selp.b32 %r475, %r474, -1, %p173;
+and.b32 %r476, %r475, %r702;
+setp.ne.s32 %p174, %r476, %r703;
+@%p174 bra $L__BB24_121;
+
+mov.u32 %r477, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r477;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f100;
+
+$L__BB24_121:
+bar.sync 0;
+ld.shared.f32 %f76, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p176, %f76, 0f00000000;
+add.s32 %r693, %r693, %r5;
+@%p176 bra $L__BB24_123;
+
+setp.lt.u32 %p178, %r693, %r105;
+mov.f32 %f105, 0f00000000;
+@%p178 bra $L__BB24_116;
+
+$L__BB24_123:
+not.pred %p179, %p262;
+@%p179 bra $L__BB24_146;
+
+setp.gt.s32 %p180, %r704, %r26;
+@%p180 bra $L__BB24_126;
+bra.uni $L__BB24_125;
+
+$L__BB24_126:
+sub.s32 %r704, %r704, %r26;
+mov.pred %p263, -1;
+bra.uni $L__BB24_127;
+
+$L__BB24_58:
+mov.u32 %r343, 1;
+mov.u32 %r351, 2;
+
+	bfi.b32 %r703, %r343, %r703, %r6, %r351;
+
+	mov.u32 %r348, 3;
+
+	bfi.b32 %r702, %r348, %r702, %r6, %r351;
+
+	mov.pred %p256, 0;
+
+$L__BB24_60:
+not.pred %p102, %p256;
+@%p102 bra $L__BB24_144;
+
+setp.ne.s32 %p104, %r24, 1;
+setp.ne.s32 %p105, %r704, 1;
+mov.pred %p257, -1;
+or.pred %p106, %p105, %p104;
+@%p106 bra $L__BB24_73;
+
+setp.gt.u32 %p107, %r714, 1;
+mov.u32 %r361, 2;
+mov.u32 %r353, 0;
+
+	bfi.b32 %r703, %r353, %r703, %r6, %r361;
+
+	mov.u32 %r358, 3;
+
+	bfi.b32 %r702, %r358, %r702, %r6, %r361;
+
+	@%p107 bra $L__BB24_64;
+
+shl.b32 %r362, %r714, 2;
+mov.u32 %r363, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r364, %r363, %r362;
+st.shared.u32 [%r364], %r353;
+
+$L__BB24_64:
+bar.sync 0;
+add.s32 %r366, %r5, %r191;
+add.s32 %r367, %r366, -1;
+rem.u32 %r368, %r367, %r5;
+sub.s32 %r69, %r367, %r368;
+setp.ge.u32 %p109, %r714, %r69;
+mov.pred %p257, 0;
+mov.f32 %f105, 0f00000000;
+@%p109 bra $L__BB24_73;
+
+mov.u32 %r678, %r714;
+
+$L__BB24_66:
+setp.ge.u32 %p110, %r678, %r191;
+mov.f32 %f94, 0f00000000;
+@%p110 bra $L__BB24_68;
+
+mul.lo.s32 %r369, %r678, %r193;
+cvt.u64.u32 %rd28, %r369;
+add.s64 %rd29, %rd28, %rd2;
+shl.b64 %rd30, %rd29, 2;
+add.s64 %rd27, %rd1, %rd30;
+
+	ld.global.nc.f32 %f94, [%rd27];
+
+
+$L__BB24_68:
+@%p110 bra $L__BB24_71;
+
+mov.b32 %r370, %f94;
+setp.lt.s32 %p112, %r370, 0;
+selp.b32 %r371, -1, -2147483648, %p112;
+xor.b32 %r372, %r371, %r370;
+setp.num.f32 %p113, %f94, %f94;
+selp.b32 %r373, %r372, -1, %p113;
+and.b32 %r374, %r373, %r702;
+setp.ne.s32 %p114, %r374, %r703;
+@%p114 bra $L__BB24_71;
+
+mov.u32 %r375, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r375;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f94;
+
+$L__BB24_71:
+bar.sync 0;
+ld.shared.f32 %f61, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p116, %f61, 0f00000000;
+add.s32 %r678, %r678, %r5;
+@%p116 bra $L__BB24_73;
+
+setp.lt.u32 %p118, %r678, %r69;
+mov.f32 %f105, 0f00000000;
+@%p118 bra $L__BB24_66;
+
+$L__BB24_73:
+not.pred %p119, %p257;
+@%p119 bra $L__BB24_146;
+
+setp.gt.s32 %p120, %r704, %r24;
+@%p120 bra $L__BB24_76;
+bra.uni $L__BB24_75;
+
+$L__BB24_76:
+sub.s32 %r704, %r704, %r24;
+bra.uni $L__BB24_144;
+
+$L__BB24_125:
+mov.u32 %r487, 2;
+
+	bfi.b32 %r703, %r487, %r703, %r6, %r487;
+
+	mov.u32 %r484, 3;
+
+	bfi.b32 %r702, %r484, %r702, %r6, %r487;
+
+	mov.pred %p263, 0;
+
+$L__BB24_127:
+not.pred %p183, %p263;
+@%p183 bra $L__BB24_144;
+
+setp.ne.s32 %p185, %r27, 1;
+setp.ne.s32 %p186, %r704, 1;
+mov.pred %p264, -1;
+or.pred %p187, %p186, %p185;
+@%p187 bra $L__BB24_140;
+
+setp.gt.u32 %p188, %r714, 1;
+mov.u32 %r497, 2;
+mov.u32 %r494, 3;
+
+	bfi.b32 %r703, %r494, %r703, %r6, %r497;
+
+
+	bfi.b32 %r702, %r494, %r702, %r6, %r497;
+
+	@%p188 bra $L__BB24_131;
+
+shl.b32 %r498, %r714, 2;
+mov.u32 %r499, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r500, %r499, %r498;
+mov.u32 %r501, 0;
+st.shared.u32 [%r500], %r501;
+
+$L__BB24_131:
+bar.sync 0;
+add.s32 %r502, %r5, %r191;
+add.s32 %r503, %r502, -1;
+rem.u32 %r504, %r503, %r5;
+sub.s32 %r118, %r503, %r504;
+setp.ge.u32 %p190, %r714, %r118;
+mov.pred %p264, 0;
+mov.f32 %f105, 0f00000000;
+@%p190 bra $L__BB24_140;
+
+mov.u32 %r699, %r714;
+
+$L__BB24_133:
+setp.ge.u32 %p191, %r699, %r191;
+mov.f32 %f102, 0f00000000;
+@%p191 bra $L__BB24_135;
+
+mul.lo.s32 %r505, %r699, %r193;
+cvt.u64.u32 %rd44, %r505;
+add.s64 %rd45, %rd44, %rd2;
+shl.b64 %rd46, %rd45, 2;
+add.s64 %rd43, %rd1, %rd46;
+
+	ld.global.nc.f32 %f102, [%rd43];
+
+
+$L__BB24_135:
+@%p191 bra $L__BB24_138;
+
+mov.b32 %r506, %f102;
+setp.lt.s32 %p193, %r506, 0;
+selp.b32 %r507, -1, -2147483648, %p193;
+xor.b32 %r508, %r507, %r506;
+setp.num.f32 %p194, %f102, %f102;
+selp.b32 %r509, %r508, -1, %p194;
+and.b32 %r510, %r509, %r702;
+setp.ne.s32 %p195, %r510, %r703;
+@%p195 bra $L__BB24_138;
+
+mov.u32 %r511, 1065353216;
+st.shared.u32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem], %r511;
+st.shared.f32 [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4], %f102;
+
+$L__BB24_138:
+bar.sync 0;
+ld.shared.f32 %f81, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem];
+ld.shared.f32 %f105, [_ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem+4];
+bar.sync 0;
+setp.neu.f32 %p197, %f81, 0f00000000;
+add.s32 %r699, %r699, %r5;
+@%p197 bra $L__BB24_140;
+
+setp.lt.u32 %p199, %r699, %r118;
+mov.f32 %f105, 0f00000000;
+@%p199 bra $L__BB24_133;
+
+$L__BB24_140:
+not.pred %p200, %p264;
+@%p200 bra $L__BB24_146;
+
+setp.gt.s32 %p201, %r704, %r27;
+@%p201 bra $L__BB24_143;
+bra.uni $L__BB24_142;
+
+$L__BB24_143:
+sub.s32 %r704, %r704, %r27;
+bra.uni $L__BB24_144;
+
+$L__BB24_75:
+mov.u32 %r377, 0;
+mov.u32 %r385, 2;
+
+	bfi.b32 %r703, %r377, %r703, %r6, %r385;
+
+	mov.u32 %r382, 3;
+
+	bfi.b32 %r702, %r382, %r702, %r6, %r385;
+
+	bra.uni $L__BB24_144;
+
+$L__BB24_142:
+mov.u32 %r518, 3;
+mov.u32 %r521, 2;
+
+	bfi.b32 %r703, %r518, %r703, %r6, %r521;
+
+
+	bfi.b32 %r702, %r518, %r702, %r6, %r521;
+
+
+$L__BB24_144:
+add.s32 %r647, %r6, -2;
+setp.gt.s32 %p202, %r6, 1;
+@%p202 bra $L__BB24_2;
+
+setp.lt.s32 %p203, %r703, 0;
+selp.b32 %r522, -2147483648, -1, %p203;
+xor.b32 %r523, %r522, %r703;
+mov.b32 %f105, %r523;
+
+$L__BB24_146:
+mov.b32 %r525, %f105;
+setp.lt.s32 %p204, %r525, 0;
+mov.u32 %r713, 0;
+selp.b32 %r526, -1, -2147483648, %p204;
+xor.b32 %r527, %r526, %r525;
+setp.num.f32 %p205, %f105, %f105;
+selp.b32 %r130, %r527, -1, %p205;
+add.s32 %r528, %r5, %r191;
+add.s32 %r529, %r528, -1;
+rem.u32 %r530, %r529, %r5;
+sub.s32 %r131, %r529, %r530;
+setp.ge.u32 %p206, %r714, %r131;
+shr.u32 %r132, %r714, 5;
+shl.b32 %r531, %r132, 2;
+mov.u32 %r532, _ZZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6_E4smem;
+add.s32 %r133, %r532, %r531;
+@%p206 bra $L__BB24_167;
+
+shr.u32 %r534, %r5, 5;
+setp.eq.s32 %p207, %r534, 0;
+add.s32 %r535, %r5, 31;
+shr.s32 %r536, %r535, 31;
+shr.u32 %r537, %r536, 27;
+add.s32 %r538, %r535, %r537;
+shr.s32 %r539, %r538, 5;
+shl.b32 %r540, %r539, 2;
+add.s32 %r542, %r532, %r540;
+add.s32 %r136, %r534, -1;
+setp.ne.s32 %p208, %r714, 0;
+or.pred %p15, %p208, %p207;
+and.b32 %r137, %r534, 3;
+sub.s32 %r138, %r534, %r137;
+
+	mov.u32 %r544, %lanemask_le;
+
+
+	mov.s32 %r545, %laneid;
+
+	cvta.to.global.u64 %rd61, %rd3;
+cvta.to.global.u64 %rd67, %rd4;
+mov.u64 %rd51, $str;
+cvta.global.u64 %rd52, %rd51;
+mov.u32 %r705, %r714;
+bra.uni $L__BB24_148;
+
+$L__BB24_164:
+mov.u64 %rd53, $str$1;
+cvta.global.u64 %rd54, %rd53;
+mov.u64 %rd55, __unnamed_25;
+cvta.global.u64 %rd56, %rd55;
+mov.u32 %r579, 128;
+mov.u64 %rd57, 1;
+{
+	.reg .b32 temp_param_reg;
+.param .b64 param0;
+st.param.b64 [param0+0], %rd52;
+.param .b64 param1;
+st.param.b64 [param1+0], %rd54;
+.param .b32 param2;
+st.param.b32 [param2+0], %r579;
+.param .b64 param3;
+st.param.b64 [param3+0], %rd56;
+.param .b64 param4;
+st.param.b64 [param4+0], %rd57;
+call.uni
+__assertfail,
+(
+param0,
+param1,
+param2,
+param3,
+param4
+);
+}
+	bra.uni $L__BB24_165;
+
+$L__BB24_148:
+setp.ge.u32 %p209, %r705, %r191;
+mov.f32 %f106, 0f00000000;
+@%p209 bra $L__BB24_150;
+
+mul.lo.s32 %r543, %r705, %r193;
+cvt.u64.u32 %rd48, %r543;
+add.s64 %rd49, %rd48, %rd2;
+shl.b64 %rd50, %rd49, 2;
+add.s64 %rd47, %rd1, %rd50;
+
+	ld.global.nc.f32 %f106, [%rd47];
+
+
+$L__BB24_150:
+mov.b32 %r546, %f106;
+setp.lt.s32 %p210, %r546, 0;
+selp.b32 %r547, -1, -2147483648, %p210;
+mov.u32 %r548, -1;
+xor.b32 %r549, %r547, %r546;
+setp.num.f32 %p211, %f106, %f106;
+selp.b32 %r550, %r549, -1, %p211;
+setp.gt.u32 %p212, %r550, %r130;
+setp.lt.u32 %p213, %r550, %r130;
+selp.u32 %r551, -1, 0, %p212;
+selp.u32 %r552, -1, 0, %p213;
+selp.b32 %r553, %r552, %r551, %p39;
+and.b32 %r554, %r553, 1;
+setp.eq.b32 %p215, %r554, 1;
+setp.lt.u32 %p216, %r705, %r191;
+and.pred %p16, %p216, %p215;
+vote.sync.ballot.b32 %r141, %p16, %r548;
+and.b32 %r555, %r544, %r141;
+popc.b32 %r712, %r555;
+setp.ne.s32 %p218, %r545, 0;
+@%p218 bra $L__BB24_152;
+
+popc.b32 %r556, %r141;
+st.shared.u32 [%r133], %r556;
+
+$L__BB24_152:
+bar.sync 0;
+@%p15 bra $L__BB24_160;
+
+setp.lt.u32 %p219, %r136, 3;
+mov.u32 %r710, 0;
+mov.u32 %r711, %r710;
+@%p219 bra $L__BB24_156;
+
+mov.u32 %r709, %r138;
+
+$L__BB24_155:
+shl.b32 %r561, %r710, 2;
+add.s32 %r563, %r532, %r561;
+ld.shared.u32 %r564, [%r563];
+add.s32 %r565, %r564, %r711;
+st.shared.u32 [%r563], %r565;
+ld.shared.u32 %r566, [%r563+4];
+add.s32 %r567, %r566, %r565;
+st.shared.u32 [%r563+4], %r567;
+ld.shared.u32 %r568, [%r563+8];
+add.s32 %r569, %r568, %r567;
+st.shared.u32 [%r563+8], %r569;
+ld.shared.u32 %r570, [%r563+12];
+add.s32 %r711, %r570, %r569;
+st.shared.u32 [%r563+12], %r711;
+add.s32 %r710, %r710, 4;
+add.s32 %r709, %r709, -4;
+setp.ne.s32 %p220, %r709, 0;
+@%p220 bra $L__BB24_155;
+
+$L__BB24_156:
+setp.eq.s32 %p221, %r137, 0;
+@%p221 bra $L__BB24_160;
+
+setp.eq.s32 %p222, %r137, 1;
+shl.b32 %r571, %r710, 2;
+add.s32 %r151, %r532, %r571;
+ld.shared.u32 %r573, [%r151];
+add.s32 %r152, %r573, %r711;
+st.shared.u32 [%r151], %r152;
+@%p222 bra $L__BB24_160;
+
+setp.eq.s32 %p223, %r137, 2;
+ld.shared.u32 %r574, [%r151+4];
+add.s32 %r153, %r574, %r152;
+st.shared.u32 [%r151+4], %r153;
+@%p223 bra $L__BB24_160;
+
+ld.shared.u32 %r575, [%r151+8];
+add.s32 %r576, %r575, %r153;
+st.shared.u32 [%r151+8], %r576;
+
+$L__BB24_160:
+setp.eq.s32 %p224, %r132, 0;
+bar.sync 0;
+@%p224 bra $L__BB24_162;
+
+ld.shared.u32 %r577, [%r133+-4];
+add.s32 %r712, %r577, %r712;
+
+$L__BB24_162:
+selp.u32 %r578, 1, 0, %p16;
+sub.s32 %r156, %r712, %r578;
+add.s32 %r645, %r542, -4;
+ld.shared.u32 %r157, [%r645];
+bar.sync 0;
+not.pred %p225, %p16;
+@%p225 bra $L__BB24_166;
+
+add.s32 %r158, %r156, %r713;
+setp.lt.u32 %p226, %r158, %r192;
+@%p226 bra $L__BB24_165;
+bra.uni $L__BB24_164;
+
+$L__BB24_165:
+mul.lo.s32 %r580, %r158, %r194;
+cvt.u64.u32 %rd58, %r580;
+mul.lo.s32 %r588, %r2, %r1;
+cvt.u64.u32 %rd59, %r588;
+add.s64 %rd60, %rd58, %rd59;
+shl.b64 %rd62, %rd60, 2;
+add.s64 %rd63, %rd61, %rd62;
+st.global.f32 [%rd63], %f106;
+mul.lo.s32 %r589, %r158, %r195;
+cvt.u64.u32 %rd64, %r589;
+mul.lo.s32 %r590, %r3, %r1;
+cvt.u64.u32 %rd65, %r590;
+add.s64 %rd66, %rd64, %rd65;
+shl.b64 %rd68, %rd66, 3;
+add.s64 %rd69, %rd67, %rd68;
+cvt.u64.u32 %rd70, %r705;
+st.global.u64 [%rd69], %rd70;
+
+$L__BB24_166:
+add.s32 %r713, %r157, %r713;
+add.s32 %r705, %r705, %r5;
+setp.lt.u32 %p227, %r705, %r131;
+@%p227 bra $L__BB24_148;
+
+$L__BB24_167:
+setp.le.u32 %p228, %r713, %r192;
+@%p228 bra $L__BB24_169;
+bra.uni $L__BB24_168;
+
+$L__BB24_169:
+@%p206 bra $L__BB24_191;
+
+setp.ne.s32 %p230, %r714, 0;
+shr.u32 %r592, %r5, 5;
+setp.eq.s32 %p231, %r592, 0;
+add.s32 %r593, %r5, 31;
+shr.s32 %r594, %r593, 31;
+shr.u32 %r595, %r594, 27;
+add.s32 %r596, %r593, %r595;
+shr.s32 %r597, %r596, 5;
+shl.b32 %r598, %r597, 2;
+add.s32 %r600, %r532, %r598;
+add.s32 %r163, %r592, -1;
+or.pred %p17, %p230, %p231;
+and.b32 %r164, %r592, 3;
+sub.s32 %r165, %r592, %r164;
+sub.s32 %r715, %r192, %r713;
+
+	mov.u32 %r602, %lanemask_le;
+
+
+	mov.s32 %r603, %laneid;
+
+	cvta.to.global.u64 %rd92, %rd3;
+cvta.to.global.u64 %rd98, %rd4;
+mov.u64 %rd82, $str;
+cvta.global.u64 %rd83, %rd82;
+
+$L__BB24_171:
+setp.ge.u32 %p232, %r714, %r191;
+mov.f32 %f107, 0f00000000;
+@%p232 bra $L__BB24_173;
+
+mul.lo.s32 %r601, %r714, %r193;
+cvt.u64.u32 %rd79, %r601;
+add.s64 %rd80, %rd79, %rd2;
+shl.b64 %rd81, %rd80, 2;
+add.s64 %rd78, %rd1, %rd81;
+
+	ld.global.nc.f32 %f107, [%rd78];
+
+
+$L__BB24_173:
+mov.b32 %r604, %f107;
+setp.lt.s32 %p233, %r604, 0;
+selp.b32 %r605, -1, -2147483648, %p233;
+mov.u32 %r606, -1;
+xor.b32 %r607, %r605, %r604;
+setp.num.f32 %p234, %f107, %f107;
+selp.b32 %r608, %r607, -1, %p234;
+setp.eq.s32 %p235, %r608, %r130;
+setp.lt.u32 %p236, %r714, %r191;
+and.pred %p18, %p236, %p235;
+vote.sync.ballot.b32 %r170, %p18, %r606;
+and.b32 %r609, %r602, %r170;
+popc.b32 %r722, %r609;
+setp.ne.s32 %p238, %r603, 0;
+@%p238 bra $L__BB24_175;
+
+popc.b32 %r610, %r170;
+st.shared.u32 [%r133], %r610;
+
+$L__BB24_175:
+bar.sync 0;
+@%p17 bra $L__BB24_183;
+
+setp.lt.u32 %p239, %r163, 3;
+mov.u32 %r720, 0;
+mov.u32 %r721, %r720;
+@%p239 bra $L__BB24_179;
+
+mov.u32 %r719, %r165;
+
+$L__BB24_178:
+shl.b32 %r615, %r720, 2;
+add.s32 %r617, %r532, %r615;
+ld.shared.u32 %r618, [%r617];
+add.s32 %r619, %r618, %r721;
+st.shared.u32 [%r617], %r619;
+ld.shared.u32 %r620, [%r617+4];
+add.s32 %r621, %r620, %r619;
+st.shared.u32 [%r617+4], %r621;
+ld.shared.u32 %r622, [%r617+8];
+add.s32 %r623, %r622, %r621;
+st.shared.u32 [%r617+8], %r623;
+ld.shared.u32 %r624, [%r617+12];
+add.s32 %r721, %r624, %r623;
+st.shared.u32 [%r617+12], %r721;
+add.s32 %r720, %r720, 4;
+add.s32 %r719, %r719, -4;
+setp.ne.s32 %p240, %r719, 0;
+@%p240 bra $L__BB24_178;
+
+$L__BB24_179:
+setp.eq.s32 %p241, %r164, 0;
+@%p241 bra $L__BB24_183;
+
+setp.eq.s32 %p242, %r164, 1;
+shl.b32 %r625, %r720, 2;
+add.s32 %r180, %r532, %r625;
+ld.shared.u32 %r627, [%r180];
+add.s32 %r181, %r627, %r721;
+st.shared.u32 [%r180], %r181;
+@%p242 bra $L__BB24_183;
+
+setp.eq.s32 %p243, %r164, 2;
+ld.shared.u32 %r628, [%r180+4];
+add.s32 %r182, %r628, %r181;
+st.shared.u32 [%r180+4], %r182;
+@%p243 bra $L__BB24_183;
+
+ld.shared.u32 %r629, [%r180+8];
+add.s32 %r630, %r629, %r182;
+st.shared.u32 [%r180+8], %r630;
+
+$L__BB24_183:
+setp.eq.s32 %p244, %r132, 0;
+bar.sync 0;
+@%p244 bra $L__BB24_185;
+
+ld.shared.u32 %r631, [%r133+-4];
+add.s32 %r722, %r631, %r722;
+
+$L__BB24_185:
+not.pred %p245, %p18;
+selp.u32 %r632, 1, 0, %p18;
+sub.s32 %r185, %r722, %r632;
+add.s32 %r646, %r600, -4;
+ld.shared.u32 %r186, [%r646];
+bar.sync 0;
+setp.ge.u32 %p246, %r185, %r715;
+or.pred %p247, %p245, %p246;
+@%p247 bra $L__BB24_189;
+
+add.s32 %r187, %r185, %r713;
+setp.lt.u32 %p248, %r187, %r192;
+@%p248 bra $L__BB24_188;
+bra.uni $L__BB24_187;
+
+$L__BB24_188:
+mul.lo.s32 %r634, %r187, %r194;
+cvt.u64.u32 %rd89, %r634;
+mul.lo.s32 %r642, %r2, %r1;
+cvt.u64.u32 %rd90, %r642;
+add.s64 %rd91, %rd89, %rd90;
+shl.b64 %rd93, %rd91, 2;
+add.s64 %rd94, %rd92, %rd93;
+st.global.f32 [%rd94], %f107;
+mul.lo.s32 %r643, %r187, %r195;
+cvt.u64.u32 %rd95, %r643;
+mul.lo.s32 %r644, %r3, %r1;
+cvt.u64.u32 %rd96, %r644;
+add.s64 %rd97, %rd95, %rd96;
+shl.b64 %rd99, %rd97, 3;
+add.s64 %rd100, %rd98, %rd99;
+cvt.u64.u32 %rd101, %r714;
+st.global.u64 [%rd100], %rd101;
+
+$L__BB24_189:
+setp.le.u32 %p249, %r715, %r186;
+@%p249 bra $L__BB24_191;
+
+sub.s32 %r715, %r715, %r186;
+add.s32 %r713, %r186, %r713;
+add.s32 %r714, %r714, %r5;
+setp.lt.u32 %p250, %r714, %r131;
+@%p250 bra $L__BB24_171;
+bra.uni $L__BB24_191;
+
+$L__BB24_187:
+mov.u64 %rd84, $str$1;
+cvta.global.u64 %rd85, %rd84;
+mov.u64 %rd86, __unnamed_25;
+cvta.global.u64 %rd87, %rd86;
+mov.u32 %r633, 162;
+mov.u64 %rd88, 1;
+{
+	.reg .b32 temp_param_reg;
+.param .b64 param0;
+st.param.b64 [param0+0], %rd83;
+.param .b64 param1;
+st.param.b64 [param1+0], %rd85;
+.param .b32 param2;
+st.param.b32 [param2+0], %r633;
+.param .b64 param3;
+st.param.b64 [param3+0], %rd87;
+.param .b64 param4;
+st.param.b64 [param4+0], %rd88;
+call.uni
+__assertfail,
+(
+param0,
+param1,
+param2,
+param3,
+param4
+);
+}
+	bra.uni $L__BB24_188;
+
+$L__BB24_191:
+ret;
+
+$L__BB24_168:
+mov.u64 %rd71, $str$2;
+cvta.global.u64 %rd72, %rd71;
+mov.u64 %rd73, $str$1;
+cvta.global.u64 %rd74, %rd73;
+mov.u64 %rd75, __unnamed_25;
+cvta.global.u64 %rd76, %rd75;
+mov.u32 %r591, 145;
+mov.u64 %rd77, 1;
+{
+	.reg .b32 temp_param_reg;
+.param .b64 param0;
+st.param.b64 [param0+0], %rd72;
+.param .b64 param1;
+st.param.b64 [param1+0], %rd74;
+.param .b32 param2;
+st.param.b32 [param2+0], %r591;
+.param .b64 param3;
+st.param.b64 [param3+0], %rd76;
+.param .b64 param4;
+st.param.b64 [param4+0], %rd77;
+call.uni
+__assertfail,
+(
+param0,
+param1,
+param2,
+param3,
+param4
+);
+}
+	bra.uni $L__BB24_169;
+
+}

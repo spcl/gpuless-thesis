@@ -625,6 +625,40 @@ TEST(PtxParser, BuggyPtx12) {
     }
 }
 
+TEST(PtxParser, BuggyPtx19) {
+    std::ifstream s(TEST_RESOURCE_DIR "/buggyPtx19");
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
+    PtxTreeParser::TreeParser parser(
+        {
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_0",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_1",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_2",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_3",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_4",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_5",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_6",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_7",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_8",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_9",
+            "_ZN2at6native6sbtopk10gatherTopKIfjLi1ELb0EEEvNS_4cuda6detail10TensorInfoIT_T0_EES7_S7_bS7_S7_S8_S7_NS5_IlS7_EES7_PS6__param_10"
+        });
+    auto trees = parser.parsePtxTrees(ptx_data);
+
+    for (const auto &tree : trees) {
+        tree.first->print();
+        auto first_eval = tree.first->eval(nullptr);
+        if (!first_eval) {
+            KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};
+            auto second_eval = tree.first->eval(&kLaunchConfig);
+            // Check if all tree actually collapse with a launchConfig
+            EXPECT_NE(second_eval, nullptr);
+        }
+        EXPECT_NE(first_eval, nullptr);
+    }
+}
+
 TEST(PtxParser, BuggyPtx13) {
     std::ifstream s(TEST_RESOURCE_DIR "/buggyPtx13");
     std::stringstream ss;
