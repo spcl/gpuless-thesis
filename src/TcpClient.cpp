@@ -1,9 +1,9 @@
-#include "TcpSocked.hpp"
+#include "TcpClient.hpp"
 #include "utils.hpp"
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>
 
-TcpSocked::TcpSocked(const sockaddr_in &addr) {
+TcpClient::TcpClient(const sockaddr_in &addr) {
     if ((m_sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         SPDLOG_ERROR("failed to open socket");
         throw "failed to open socket";
@@ -15,7 +15,7 @@ TcpSocked::TcpSocked(const sockaddr_in &addr) {
     }
 }
 
-TcpSocked::TcpSocked(const char *ip, const short port) {
+TcpClient::TcpClient(const char *ip, const short port) {
 
     sockaddr_in addr{};
     addr.sin_family = AF_INET;
@@ -36,10 +36,10 @@ TcpSocked::TcpSocked(const char *ip, const short port) {
     }
 }
 
-TcpSocked::~TcpSocked() { close(m_sockfd); }
+TcpClient::~TcpClient() { close(m_sockfd); }
 
-void TcpSocked::send(const uint8_t *buf, size_t len) {
+void TcpClient::send(const uint8_t *buf, size_t len) {
     send_buffer(m_sockfd, buf, len);
 }
 
-std::vector<uint8_t> TcpSocked::recv() { return recv_buffer(m_sockfd); }
+std::vector<uint8_t> TcpClient::recv() { return recv_buffer(m_sockfd); }

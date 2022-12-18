@@ -1,13 +1,13 @@
 #ifndef GPULESS_TCP_GPU_SESSION_H
 #define GPULESS_TCP_GPU_SESSION_H
 
-#include "../TcpSocked.hpp"
+#include "../TcpClient.hpp"
 #include <netinet/in.h>
 
 namespace gpuless {
 class TcpGpuSession {
   private:
-    TcpSocked m_socked;
+    TcpClient m_socked;
     int32_t m_session_id = -1;
 
   public:

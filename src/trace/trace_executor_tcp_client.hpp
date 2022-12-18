@@ -1,7 +1,7 @@
 #ifndef GPULESS_TRACE_EXECUTOR_TCP_H
 #define GPULESS_TRACE_EXECUTOR_TCP_H
 
-#include "../TcpSocked.hpp"
+#include "../TcpClient.hpp"
 #include "tcp_gpu_session.hpp"
 #include "trace_executor.hpp"
 

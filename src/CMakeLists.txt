@@ -69,7 +69,7 @@ add_executable(manager_trace
     trace/trace_executor_local.cpp
     trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
-    TcpSocked.cpp
+    TcpClient.cpp
     utils.cpp)
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
@@ -118,7 +118,7 @@ add_library(gpuless SHARED
     trace/trace_executor_local.cpp
     trace/trace_executor_tcp_client.cpp
     trace/dlsym_util.cpp
-    TcpSocked.cpp
+    TcpClient.cpp
     utils.cpp
     trace/cubin_analysis.cpp)
 target_link_libraries(gpuless

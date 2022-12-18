@@ -1,5 +1,5 @@
 #include "trace_executor_tcp_client.hpp"
-#include "../TcpSocked.hpp"
+#include "../TcpClient.hpp"
 #include "../schemas/allocation_protocol_generated.h"
 #include "cuda_trace_converter.hpp"
 #include <spdlog/spdlog.h>
@@ -37,7 +37,7 @@ TcpGpuSession
 TraceExecutorTcp::negotiateSession(const char *ip, const short port,
                                    gpuless::manager::instance_profile profile) {
 
-    TcpSocked tcp = TcpSocked(ip, port);
+    TcpClient tcp = TcpClient(ip, port);
 
     using namespace gpuless::manager;
     flatbuffers::FlatBufferBuilder builder;
@@ -89,7 +89,7 @@ TraceExecutorTcp::negotiateSession(const char *ip, const short port,
 
 bool TraceExecutorTcp::deallocate() {
 
-    TcpSocked tcp = TcpSocked(m_manager_addr);
+    TcpClient tcp = TcpClient(m_manager_addr);
 
     using namespace gpuless::manager;
     flatbuffers::FlatBufferBuilder builder;
