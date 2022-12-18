@@ -37,7 +37,7 @@ struct KParamInfo {
         : paramName(std::move(name)), type(par_type), typeSize(typesize),
           align(alignment), size(1), ptrOffsets(1) {
         ptrOffsets[0] = offset;
-    };
+    }
 };
 
 class CubinAnalyzer {

@@ -1277,14 +1277,13 @@ TEST(FinalTest, TheBigBoySerial) {
         }
         kLaunchConfigPar.paramInfos = &infos;
 
-        std::stringstream ser;
 
         for (auto &tree : trees) {
             ++cnt;
             try {
-                auto first_eval = tree.first->eval(nullptr);
-                first_eval ? first_eval->serialize(ser)
-                           : tree.first->serialize(ser);
+                std::stringstream ser;
+                tree.first->eval(nullptr);
+                tree.first->serialize(ser);
                 std::unique_ptr<PtxTree> unser = PtxTree::unserialize(ser);
                 EXPECT_NE(unser, nullptr);
                 std::stringstream second_ser;

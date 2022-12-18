@@ -14,8 +14,9 @@ static uint64_t nextCublasHandle() {
 }
 
 static uint64_t nextCublasLtHandle() {
-    // TODO this is here because a cublas handle can also be used as a cublasLtHandle
-    static uint64_t next = 20;
+    // TODO this is here because a cublas handle can also be used as a
+    // cublasLtHandle
+    static uint64_t next = 200000;
     return next++;
 }
 
@@ -25,6 +26,16 @@ static uint64_t nextCublasLtMatmulDesc() {
 }
 
 static uint64_t nextCublasLtMatrixLayout() {
+    static uint64_t next = 1;
+    return next++;
+}
+
+static uint64_t nextCublasLtMatmulPreferenceDesc() {
+    static uint64_t next = 1;
+    return next++;
+}
+
+static uint64_t nextCublasLtMatmulAlgo() {
     static uint64_t next = 1;
     return next++;
 }
@@ -121,13 +132,10 @@ cublasLtMatmul(cublasLtHandle_t lightHandle, cublasLtMatmulDesc_t computeDesc,
     std::memcpy(beta_vec.data(), beta, beta_vec.size());
 
     cublasLtMatmulAlgo_t algo_struct;
-    bool algo_is_null = true;
-    // TODO questionable solution
-    if (algo && ((*algo).data[0] != FAKE_HEURISTIC)) {
+    if(algo) {
         algo_struct = *algo;
-        algo_is_null = false;
-        SPDLOG_INFO("Using algo {}.", (*algo).data[0]);
     }
+    bool algo_is_null = (algo == nullptr);
 
     getCudaTrace().record(std::make_shared<CublasLtMatmul>(
         reinterpret_cast<uint64_t>(lightHandle),
@@ -188,40 +196,59 @@ cublasStatus_t cublasLtMatmulAlgoGetHeuristic(
     cublasLtMatmulPreference_t preference, int requestedAlgoCount,
     cublasLtMatmulHeuristicResult_t heuristicResultsArray[],
     int *returnAlgoCount) {
-    HIJACK_FN_PROLOGUE();
 
-    // TODO benchmark this vs. synchronizing vs. asynchronously obtaining heuristic results
-    cublasLtMatmulHeuristicResult_t pseudo_res;
-    pseudo_res.algo = {FAKE_HEURISTIC};
-    std::memcpy(heuristicResultsArray, &pseudo_res, sizeof(cublasLtMatmulHeuristicResult_t));
+    HIJACK_FN_PROLOGUE();
+    auto virtual_alg = nextCublasLtMatmulAlgo();
+
+    cublasLtMatmulHeuristicResult_t virtual_res{
+        {virtual_alg, 0, 0, 0, 0, 0, 0, 24242},
+        0,
+        CUBLAS_STATUS_SUCCESS,
+        0.2f,
+        {0, 0, 0, 0}};
+
+    heuristicResultsArray[0] = virtual_res;
     *returnAlgoCount = 1;
 
+    getCudaTrace().record(std::make_shared<CublasLtMatmulAlgoGetHeuristic>(
+        reinterpret_cast<uint64_t>(lightHandle),
+        reinterpret_cast<uint64_t>(operationDesc),
+        reinterpret_cast<uint64_t>(Adesc), reinterpret_cast<uint64_t>(Bdesc),
+        reinterpret_cast<uint64_t>(Cdesc), reinterpret_cast<uint64_t>(Ddesc),
+        reinterpret_cast<uint64_t>(preference), virtual_alg));
     return CUBLAS_STATUS_SUCCESS;
 }
 
-cublasStatus_t cublasLtMatmulPreferenceCreate(
-    cublasLtMatmulPreference_t *pref) {
-    // TODO nop
-    return CUBLAS_STATUS_SUCCESS;
-}
-
-cublasStatus_t cublasLtMatmulPreferenceSetAttribute(
-    cublasLtMatmulPreference_t pref,
-    cublasLtMatmulPreferenceAttributes_t attr,
-    const void *buf,
-    size_t sizeInBytes) {
+cublasStatus_t
+cublasLtMatmulPreferenceCreate(cublasLtMatmulPreference_t *pref) {
     HIJACK_FN_PROLOGUE();
-    // TODO nop
+    auto virtual_handle = nextCublasLtMatmulPreferenceDesc();
+    *pref = reinterpret_cast<cublasLtMatmulPreference_t>(virtual_handle);
+    getCudaTrace().record(
+        std::make_shared<CublasLtMatmulPreferenceCreate>(virtual_handle));
     return CUBLAS_STATUS_SUCCESS;
 }
 
-cublasStatus_t cublasLtMatmulPreferenceDestroy(
-    cublasLtMatmulPreference_t pref) {
+cublasStatus_t
+cublasLtMatmulPreferenceSetAttribute(cublasLtMatmulPreference_t pref,
+                                     cublasLtMatmulPreferenceAttributes_t attr,
+                                     const void *buf, size_t sizeInBytes) {
     HIJACK_FN_PROLOGUE();
-    // TODO nop
+    std::vector<uint8_t> attr_vec(sizeInBytes);
+    std::memcpy(attr_vec.data(), buf, sizeInBytes);
+    getCudaTrace().record(
+        std::make_shared<CublasLtMatmulPreferenceSetAttribute>(
+            reinterpret_cast<uint64_t>(pref), attr, attr_vec));
     return CUBLAS_STATUS_SUCCESS;
 }
 
+cublasStatus_t
+cublasLtMatmulPreferenceDestroy(cublasLtMatmulPreference_t pref) {
+    HIJACK_FN_PROLOGUE();
+    getCudaTrace().record(std::make_shared<CublasLtMatmulPreferenceDestroy>(
+        reinterpret_cast<uint64_t>(pref)));
+    return CUBLAS_STATUS_SUCCESS;
+}
 }
 
 } // namespace gpuless

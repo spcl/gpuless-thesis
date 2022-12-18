@@ -1112,6 +1112,7 @@ class ParameterPack final : public Node {
     }
 
   public:
+
     ParameterPack(NodeArray Data_) : Node(KParameterPack), Data(Data_) {
         ArrayCache = FunctionCache = RHSComponentCache = Cache::Unknown;
         if (std::all_of(Data.begin(), Data.end(), [](Node* P) {
@@ -1162,6 +1163,10 @@ class ParameterPack final : public Node {
         size_t Idx = S.CurrentPackIndex;
         if (Idx < Data.size())
             Data[Idx]->printRight(S);
+    }
+
+    const NodeArray* getPack() const {
+        return &Data;
     }
 };
 

@@ -176,8 +176,8 @@ class CudaLaunchKernel : public CudaRuntimeApiCall {
                      const void *fnPtr, const dim3 &gridDim,
                      const dim3 &blockDim, size_t sharedMem,
                      cudaStream_t stream,
-                     std::vector<std::vector<uint8_t>> &paramBuffers,
-                     std::vector<KParamInfo> &paramInfos);
+                     std::vector<std::vector<uint8_t>> paramBuffers,
+                     std::vector<KParamInfo> paramInfos);
     explicit CudaLaunchKernel(const FBCudaApiCall *fb_cuda_api_call);
 
     uint64_t executeNative(CudaVirtualDevice &vdev) override;

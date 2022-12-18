@@ -47,6 +47,10 @@ class CudaVirtualDevice {
     std::vector<cublasLtMatmulDesc_t> cublaslt_matmul_handle_virtual_to_real;
     std::vector<cublasLtMatrixLayout_t>
         cublaslt_matrix_layout_handle_virtual_to_real;
+    std::vector<cublasLtMatmulPreference_t>
+        cublaslt_matmul_pref_handle_virtual_to_real;
+    std::vector<cublasLtMatmulHeuristicResult_t >
+        cublaslt_matmul_alg_virtual_to_real;
 
     // stored device attributes
     size_t device_total_mem = 0;
@@ -59,7 +63,7 @@ class CudaVirtualDevice {
 
     void initRealDevice();
 
-    void* translate_memory(const void* virtual_addr);
+    void *translate_memory(const void *virtual_addr);
 
     void *get_scratch(size_t size);
     void free_scratch();

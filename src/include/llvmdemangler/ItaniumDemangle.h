@@ -1163,6 +1163,10 @@ class ParameterPack final : public Node {
         if (Idx < Data.size())
             Data[Idx]->printRight(S);
     }
+
+    const NodeArray* getPack() const {
+        return &Data;
+    }
 };
 
 /// A variadic template argument. This node represents an occurrence of

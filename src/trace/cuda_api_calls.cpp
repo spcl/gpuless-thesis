@@ -291,12 +291,12 @@ CudaLaunchKernel::CudaLaunchKernel(
     std::string symbol, std::vector<uint64_t> required_cuda_modules,
     std::vector<std::string> required_function_symbols, const void *fnPtr,
     const dim3 &gridDim, const dim3 &blockDim, size_t sharedMem,
-    cudaStream_t stream, std::vector<std::vector<uint8_t>> &paramBuffers,
-    std::vector<KParamInfo> &paramInfos)
+    cudaStream_t stream, std::vector<std::vector<uint8_t>> paramBuffers,
+    std::vector<KParamInfo> paramInfos)
     : symbol(symbol), required_cuda_modules_(required_cuda_modules),
       required_function_symbols_(required_function_symbols), fnPtr(fnPtr),
       gridDim(gridDim), blockDim(blockDim), sharedMem(sharedMem),
-      stream(stream), paramBuffers(paramBuffers), paramInfos(paramInfos) {}
+      stream(stream), paramBuffers(std::move(paramBuffers)), paramInfos(std::move(paramInfos)) {}
 
 uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cuLaunchKernel);
@@ -311,15 +311,6 @@ uint64_t CudaLaunchKernel::executeNative(CudaVirtualDevice &vdev) {
     for (unsigned i = 0; i < this->paramBuffers.size(); i++) {
         auto &b = this->paramBuffers[i];
         auto &infos = this->paramInfos[i];
-
-        // TODO Something is wrong with the vectors
-        std::sort(infos.ptrOffsets.begin(), infos.ptrOffsets.end() );
-        if(!infos.ptrOffsets.empty()) {
-            infos.ptrOffsets.erase(infos.ptrOffsets.begin());
-            infos.ptrOffsets.erase( std::unique( infos.ptrOffsets.begin(), infos.ptrOffsets.end() ), infos.ptrOffsets.end() );
-        }
-
-
 
         for (int offs : infos.ptrOffsets) {
             size_t ptr_size = sizeof(void *);
@@ -414,7 +405,8 @@ CudaLaunchKernel::CudaLaunchKernel(const FBCudaApiCall *fb_cuda_api_call) {
                         static_cast<PtxParameterType>(i->ptx_param_type()),
                         static_cast<int>(i->type_size()),
                         static_cast<int>(i->align()),
-                        static_cast<int>(i->size()), i->ptr_offsets()->size());
+                        static_cast<int>(i->size()),
+                        0);
 
         info.ptrOffsets.insert(info.ptrOffsets.begin(), i->ptr_offsets()->begin(),
                                i->ptr_offsets()->end());

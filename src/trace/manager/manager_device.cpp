@@ -100,7 +100,7 @@ void handle_execute_request(int socket_fd,
     unsigned i = 0; //DEBUG
     for (auto &apiCall : cuda_trace.callStack()) {
         SPDLOG_DEBUG("Executing: {}", apiCall->typeName());
-        if(i == 822) {
+        if(i == 858) {
             std::cout << "p" << std::endl;
         }
         uint64_t err = apiCall->executeNative(vdev);

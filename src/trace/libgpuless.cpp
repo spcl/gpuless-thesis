@@ -171,6 +171,10 @@ cudaError_t cudaMalloc(void **devPtr, size_t size) {
     HIJACK_FN_PROLOGUE();
 
     uint64_t idx = nextAddressIndex();
+    if(idx > ((1ULL << (64-CUDA_MEM_OFFSET_WIDTH))-1))
+        throw std::runtime_error("Idx to large, problem.");
+    if(size > (1ULL << CUDA_MEM_OFFSET_WIDTH)-1)
+        throw std::runtime_error("Size too large, problem.");
     uint64_t virtual_ptr = idx << CUDA_MEM_OFFSET_WIDTH;
 
     getCudaTrace().record(std::make_shared<CudaMalloc>(virtual_ptr, size));
@@ -337,6 +341,8 @@ cudaError_t cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim,
                     offsets.push_back(static_cast<int>(p));
             }
         }
+        std::sort(offsets.begin(), offsets.end() );
+        offsets.erase( std::unique( offsets.begin(), offsets.end() ), offsets.end() );
 
         collapsedParamInfos.emplace_back(paramInfo.paramName, paramInfo.type,
                                       paramInfo.typeSize, paramInfo.align,

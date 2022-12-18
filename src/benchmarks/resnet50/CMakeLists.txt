@@ -22,9 +22,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
 
 set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_ARCHITECTURES "80")
+#set(CMAKE_CUDA_ARCHITECTURES "80")
 set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O2")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -G")
 
 add_executable(image-recognition image-recognition.cpp)
 target_link_libraries(image-recognition "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")

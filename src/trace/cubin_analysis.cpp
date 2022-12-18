@@ -14,8 +14,6 @@
 #include "cubin_parser/parser_util.h"
 #include "cubin_parser/tree_parser.h"
 
-
-
 std::map<PtxParameterType, std::string> &getPtxParameterTypeToStr() {
     static std::map<PtxParameterType, std::string> map_ = {
         {s8, "s8"},     {s16, "s16"},     {s32, "s32"}, {s64, "s64"},
@@ -187,17 +185,13 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
     std::map<std::string, std::vector<UncollapsedKParamInfo>> tmp_map;
     std::ifstream in(cache_file);
 
-    size_t cnt = 0;
-
     while (true) {
         std::string symbol;
         int n_params;
         in >> symbol;
+        if (in.eof())
+            break;
         in >> n_params;
-        ++cnt;
-        if(cnt == 9115) {
-            cnt = 2;
-        }
         std::vector<UncollapsedKParamInfo> kparam_infos;
         for (int i = 0; i < n_params; i++) {
             UncollapsedKParamInfo kparam_info;
@@ -210,21 +204,18 @@ bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
             in >> kparam_info.size;
             size_t trees_size;
             in >> trees_size;
-            std::vector<std::pair<
-                std::unique_ptr<PtxTreeParser::PtxAbstractNode>, bool>>
-                trees;
             for (std::size_t k = 0; k < trees_size; ++k) {
                 std::unique_ptr<PtxTreeParser::PtxAbstractNode> tree =
                     PtxTreeParser::PtxAbstractNode::unserialize(in);
-                bool is_collapsed;
+                int is_collapsed;
                 in >> is_collapsed;
-                trees.emplace_back(std::move(tree), is_collapsed);
+                kparam_info.trees.emplace_back(std::move(tree), is_collapsed);
             }
             kparam_infos.push_back(std::move(kparam_info));
         }
 
         tmp_map.emplace(symbol, std::move(kparam_infos));
-        if (in.eof()) {
+        if (in.bad() || !in.is_open()) {
             break;
         }
     }
@@ -262,7 +253,7 @@ void CubinAnalyzer::storeAnalysisToCache(
             for (const auto &tree : p.trees) {
                 tree.first->serialize(out);
                 out << '\n';
-                out << tree.second << '\n';
+                out << static_cast<int>(tree.second) << std::endl;
             }
         }
     }
@@ -279,7 +270,7 @@ CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
     std::string line;
 
     while (getline(it, file_end, line)) {
-        if(line.empty())
+        if (line.empty())
             continue;
         if (line.find(".entry") == std::string::npos)
             continue;
@@ -287,14 +278,16 @@ CubinAnalyzer::analyzeTxt(std::string &ptx_data, int major_version,
         std::string entry = std::string(splitString(line, " ").back());
         entry.pop_back();
 
-        if(entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_18TensorIteratorBaseERKT_EUliE_EEviT1_") {
+        if (entry == "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_15gpu_"
+                     "kernel_implINS0_15CUDAFunctor_addIfEEEEvRNS_"
+                     "18TensorIteratorBaseERKT_EUliE_EEviT1_") {
             std::cout << "Found";
         }
         auto entry_beg = it;
         while (getline(it, file_end, line)) {
-            if(line.find(".entry") != std::string::npos) {
+            if (line.find(".entry") != std::string::npos) {
                 --it;
-                while(*(--it) != '\n')
+                while (*(--it) != '\n')
                     ;
                 break;
             }
