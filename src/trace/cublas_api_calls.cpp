@@ -310,6 +310,15 @@ CublasLtMatmulDescSetAttribute::CublasLtMatmulDescSetAttribute(
 uint64_t
 CublasLtMatmulDescSetAttribute::executeNative(CudaVirtualDevice &vdev) {
     static auto real = GET_REAL_FUNCTION(cublasLtMatmulDescSetAttribute);
+
+    if(this->attr == CUBLASLT_MATMUL_DESC_BIAS_POINTER ||
+        this->attr == CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_POINTER) {
+        void* addr;
+        std::memcpy(&addr, this->buf.data(), sizeof(void*));
+        addr = vdev.translate_memory(addr);
+        std::memcpy(this->buf.data(), &addr, sizeof(void*));
+    }
+
     return real(vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
                 this->attr, this->buf.data(), this->buf.size());
 }

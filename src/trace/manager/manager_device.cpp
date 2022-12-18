@@ -97,19 +97,14 @@ void handle_execute_request(int socket_fd,
     cuda_trace.setCallStack(call_stack);
     SPDLOG_INFO("Execution trace of size {}", call_stack.size());
 
-    unsigned i = 0; //DEBUG
     for (auto &apiCall : cuda_trace.callStack()) {
         SPDLOG_DEBUG("Executing: {}", apiCall->typeName());
-        if(i == 858) {
-            std::cout << "p" << std::endl;
-        }
         uint64_t err = apiCall->executeNative(vdev);
         if (err != 0) {
             SPDLOG_ERROR("Failed to execute call trace: {} ({})",
                           apiCall->nativeErrorToString(err), err);
             std::exit(EXIT_FAILURE);
         }
-        ++i;
     }
 
     cuda_trace.markSynchronized();
