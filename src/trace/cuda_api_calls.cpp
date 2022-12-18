@@ -267,6 +267,8 @@ CudaFree::CudaFree(void *devPtr) : devPtr(devPtr) {}
 uint64_t CudaFree::executeNative(CudaVirtualDevice &vdev) {
     static auto real = (decltype(&cudaFree))real_dlsym(RTLD_NEXT, "cudaFree");
     void *real_addr = vdev.translate_memory(this->devPtr);
+    auto idx = static_cast<unsigned>(reinterpret_cast<uint64_t>(this->devPtr) >> CUDA_MEM_OFFSET_WIDTH);
+    vdev.memory_virtual_to_real[idx] = nullptr;
     return real(real_addr);
 }
 

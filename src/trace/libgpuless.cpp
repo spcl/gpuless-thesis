@@ -360,7 +360,7 @@ cudaError_t cudaFree(void *devPtr) {
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaFree>(devPtr));
     // have to synchronize here until I find a way to hook the cuda exit handler
-    getTraceExecutor()->synchronize(getCudaTrace());
+    //getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 

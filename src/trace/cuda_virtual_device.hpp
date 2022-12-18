@@ -71,6 +71,11 @@ class CudaVirtualDevice {
     ~CudaVirtualDevice() {
         if (scratch_memory != nullptr)
             cudaFree(scratch_memory);
+
+        for(auto& ptr : memory_virtual_to_real) {
+            if(ptr)
+                cudaFree(ptr);
+        }
     }
 };
 
