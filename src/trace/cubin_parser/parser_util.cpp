@@ -51,3 +51,17 @@ std::string_view rgetline(const std::string_view::iterator &beg,
         }
     }
 }
+
+std::string_view getline(std::string_view::iterator &beg,
+                         const std::string_view::iterator &end) {
+
+    for(size_t len = 0; true ;++len) {
+        if(end == beg) {
+            return {beg, len};
+        }
+
+        if(*(++beg) == '\n') {
+            return {beg-1, len};
+        }
+    }
+}

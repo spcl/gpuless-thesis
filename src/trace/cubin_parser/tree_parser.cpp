@@ -61,11 +61,7 @@ TreeParser::parseOperation(const std::string_view &op, int64_t &vec_op) {
             (splitted_string[1] == "param" || splitted_string[1] == "global")) {
             PtxParameterType type =
                 getStrToPtxParameterType()[std::string(splitted_string[2])];
-
-            if (type == u64)
-                return {PtxNodeKind::MoveOp, u64};
-            else
-                return {PtxNodeKind::LdOp, type};
+            return {PtxNodeKind::LdOp, type};
         }
 
         return {it->second, s64};
@@ -139,6 +135,9 @@ void TreeParser::parseLine(const std::string_view &line) {
 
     if (op_kind == PtxNodeKind::InvalidOp)
         return;
+
+    if (op_kind == PtxNodeKind::LdOp && op_type == u64)
+        op_kind = PtxNodeKind::MoveOp;
 
     std::vector<PtxOperand> pars(splitted_line.size() - 1);
     for (size_t i = 1; i < splitted_line.size(); ++i) {
@@ -264,20 +263,68 @@ void TreeParser::parseLine(const std::string_view &line) {
     }
 }
 
+void TreeParser::secondParse(const std::string_view &line) {
+    auto splitted_line = splitString(line, " ");
+    int64_t vec_count = 1;
+    auto [op_kind, op_type] = parseOperation(splitted_line[0], vec_count);
+
+    if (op_kind == PtxNodeKind::InvalidOp)
+        return;
+
+    if (op_kind == PtxNodeKind::LdOp && op_type == u64 &&
+        splitString(splitted_line[0], ".")[1] == "param") { // Might be new ptr
+        PtxOperand src = parseArgument(std::string(splitted_line[1]));
+        PtxOperand dst = parseArgument(std::string(splitted_line[2]));
+        if (_ptr_regs.find(src.name) == _ptr_regs.end()) // Not yet found
+            _ld_regs[dst.name] = {src.name, src.kind};
+
+        return;
+    }
+
+    bool ptr_reg = false;
+    std::vector<std::string> ld_regs;
+    for (size_t i = 2; i < splitted_line.size(); ++i) {
+        PtxOperand par = parseArgument(std::string(splitted_line[i]));
+
+        if (par.kind == PtxOperandKind::Register &&
+            _ptr_regs.find(par.name) != _ptr_regs.end()) {
+            // One of the arguments is already a pointer, no other can be
+            ptr_reg = true;
+            ld_regs.clear();
+            break;
+        }
+
+        if(par.kind == Regis)
+
+    }
+}
+
 std::vector<std::pair<std::unique_ptr<PtxTree>, std::string>>
 TreeParser::parsePtxTrees(std::string_view ss) {
 
     const auto beg = ss.begin();
     auto end_it = ss.end();
 
-    for (std::string_view line = rgetline(beg, end_it); beg != end_it;
+    for (std::string_view line = rgetline(beg, end_it);;
          line = rgetline(beg, end_it)) {
         parseLine(line);
+        if (beg == end_it)
+            break;
     }
-    for(auto &tree : _trees)
+    for (auto &tree : _trees)
         tree.first->set_ptr_regs(_ptr_regs);
 
-    std::vector<std::pair<std::unique_ptr<PtxTree>, std::string>> ret = std::move(_trees);
+    auto it = ss.begin();
+    const auto end = ss.end();
+    for (std::string_view line = getline(it, end);; line = getline(it, end)) {
+        secondParse(line);
+
+        if (beg == end_it)
+            break;
+    }
+
+    std::vector<std::pair<std::unique_ptr<PtxTree>, std::string>> ret =
+        std::move(_trees);
     _trees = std::vector<std::pair<std::unique_ptr<PtxTree>, std::string>>(0);
     return ret;
 }

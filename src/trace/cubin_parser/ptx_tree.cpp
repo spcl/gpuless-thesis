@@ -209,17 +209,19 @@ setBinPtrRegs(std::unordered_set<std::string> &ptr_regs,
            const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                                     std::vector<std::string>> &leaf_to_reg,
            const L &l, const R &r, const T& cur) {
-    bool l_ptr = l->set_ptr_regs(ptr_regs, leaf_to_reg);
-    bool r_ptr = r->set_ptr_regs(ptr_regs, leaf_to_reg);
+    bool l_ptr = l && l->set_ptr_regs(ptr_regs, leaf_to_reg);
+    bool r_ptr = r && r->set_ptr_regs(ptr_regs, leaf_to_reg);
 
     if (l_ptr) {
-        for (auto &reg : leaf_to_reg.find({cur, 0})->second)
-            ptr_regs.insert(reg);
+        if(auto t = leaf_to_reg.find({cur, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
     }
 
     if (r_ptr) {
-        for (auto &reg : leaf_to_reg.find({cur, 1})->second)
-            ptr_regs.insert(reg);
+        if(auto t = leaf_to_reg.find({cur, 1}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
     }
 
     return l_ptr || r_ptr;
@@ -465,9 +467,10 @@ bool PtxMadNode::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
-        for (auto &reg : leaf_to_reg.find({this, 0})->second)
-            ptr_regs.insert(reg);
+    if (_child && _child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
         return true;
     } else {
         return false;
@@ -520,9 +523,10 @@ bool PtxSadNode::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
-        for (auto &reg : leaf_to_reg.find({this, 0})->second)
-            ptr_regs.insert(reg);
+    if (_child && _child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
         return true;
     } else {
         return false;
@@ -719,9 +723,10 @@ bool PtxAbsNode::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
-        for (auto &reg : leaf_to_reg.find({this, 0})->second)
-            ptr_regs.insert(reg);
+    if (_child && _child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
         return true;
     } else {
         return false;
@@ -778,9 +783,10 @@ bool PtxNegNode::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
-        for (auto &reg : leaf_to_reg.find({this, 0})->second)
-            ptr_regs.insert(reg);
+    if (_child && _child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
         return true;
     } else {
         return false;
@@ -1279,9 +1285,10 @@ bool PtxCvtaNode::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    if (_dst->set_ptr_regs(ptr_regs, leaf_to_reg)) {
-        for (auto &reg : leaf_to_reg.find({this, 0})->second)
-            ptr_regs.insert(reg);
+    if (_dst && _dst->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+            for (auto &reg : t->second)
+                ptr_regs.insert(reg);
         return true;
     } else {
         return false;
@@ -1387,9 +1394,11 @@ bool PtxLdOp::set_ptr_regs(
     std::unordered_set<std::string> &ptr_regs,
     const std::unordered_map<std::pair<PtxAbstractNode *, int>,
                              std::vector<std::string>> &leaf_to_reg) {
-    _child->set_ptr_regs(ptr_regs, leaf_to_reg);
-    for (auto &reg : leaf_to_reg.find({this, 0})->second)
-        ptr_regs.insert(reg);
+    if(_child)
+        _child->set_ptr_regs(ptr_regs, leaf_to_reg);
+    if(auto t = leaf_to_reg.find({this, 0}); t != leaf_to_reg.end())
+        for (auto &reg : t->second)
+            ptr_regs.insert(reg);
     return false;
 }
 

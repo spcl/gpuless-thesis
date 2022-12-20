@@ -17,5 +17,7 @@ bool startsWith(const std::string_view &str, const std::string_view &prefix);
 bool endsWith(const std::string_view &str, const std::string_view &suffix);
 std::string_view rgetline(const std::string_view::iterator &beg,
               std::string_view::iterator &end);
+std::string_view getline(std::string_view::iterator &beg,
+                         const std::string_view::iterator &end);
 
 #endif // GPULESS_PARSER_UTIL_H
