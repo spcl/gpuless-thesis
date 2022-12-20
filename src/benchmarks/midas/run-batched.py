@@ -6,8 +6,7 @@ import matplotlib.pyplot as plt
 from timeit import default_timer as timer
 import time
 
-model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
-
+model_type = "DPT_Large"  # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
 
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
 midas.eval()
@@ -23,6 +22,7 @@ else:
 
 img = cv2.imread('dog.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
 
 def inference():
     input_batch = transform(img).to(device)
@@ -61,4 +61,4 @@ for i in range(0, iterrations):
 
 total_time = sum(times)
 avg_time = total_time / float(iterrations)
-print("Avg time: {:}ms".format(round(avg_time,5)))
+print("Avg time: {:}ms".format(round(avg_time, 5)))

@@ -3,12 +3,14 @@ from PIL import Image
 from torchvision import transforms
 from timeit import default_timer as timer
 
-start = timer()
+
 
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
 # model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext101_32x8d', pretrained=True)
 # model = torch.load('resnext50_32x4d.pt')
 model.eval()
+
+start = timer()
 
 input_image = Image.open('dog.jpg')
 preprocess = transforms.Compose([

@@ -3,11 +3,9 @@ from PIL import Image
 from torchvision import transforms
 from timeit import default_timer as timer
 
-start = timer()
-
 model = torch.hub.load('pytorch/vision:v0.10.0', 'vgg19', pretrained=True)
 model.eval()
-
+start = timer()
 input_image = Image.open('dog.jpg')
 preprocess = transforms.Compose([
     transforms.Resize(256),
