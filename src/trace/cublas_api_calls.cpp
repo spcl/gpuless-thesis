@@ -367,7 +367,7 @@ CublasLtMatmul::CublasLtMatmul(const FBCudaApiCall *fb_cuda_api_call) {
     this->algo.data[6] = c->algo()->Get(6);
     this->algo.data[7] = c->algo()->Get(7);
 
-    this->algo_is_null = c->algo_is_null();
+    this->algo_is_null = c->algo_is_null() != 0;
     this->workspace = reinterpret_cast<void *>(c->workspace());
     this->workspace_size_in_bytes = c->workspace_size_in_bytes();
     this->stream = reinterpret_cast<cudaStream_t>(c->stream());
@@ -381,22 +381,44 @@ uint64_t CublasLtMatmul::executeNative(CudaVirtualDevice &vdev) {
         algo_ptr = &this->algo;
     }
 
-    return real(vdev.cublaslt_handle_virtual_to_real[this->virtual_handle],
-                vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
-                this->alpha.data(), this->A,
-                vdev.cublaslt_matrix_layout_handle_virtual_to_real
-                    [this->virtual_ml_a_desc],
-                this->B,
-                vdev.cublaslt_matrix_layout_handle_virtual_to_real
-                    [this->virtual_ml_b_desc],
-                this->beta.data(), this->C,
-                vdev.cublaslt_matrix_layout_handle_virtual_to_real
-                    [this->virtual_ml_c_desc],
-                this->D,
-                vdev.cublaslt_matrix_layout_handle_virtual_to_real
-                    [this->virtual_ml_d_desc],
-                algo_ptr, this->workspace, this->workspace_size_in_bytes,
-                this->stream);
+    void *ws = this->workspace;
+    std::size_t ws_size = this->workspace_size_in_bytes;
+
+    if (!this->algo_is_null && this->algo.data[7] == 24242) {
+        algo_ptr = &(
+            vdev.cublaslt_matmul_alg_virtual_to_real[this->algo.data[0]].algo);
+        std::size_t algo_sz =
+            vdev.cublaslt_matmul_alg_virtual_to_real[this->algo.data[0]]
+                .workspaceSize;
+        if (algo_sz > this->workspace_size_in_bytes) {
+            ws_size =
+                vdev.cublaslt_matmul_alg_virtual_to_real[this->algo.data[0]]
+                    .workspaceSize;
+            ws = vdev.get_scratch(ws_size);
+        } else {
+            ws = this->workspace;
+        }
+    }
+
+    auto err =
+        real(vdev.cublaslt_handle_virtual_to_real[this->virtual_handle],
+             vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
+             this->alpha.data(), this->A,
+             vdev.cublaslt_matrix_layout_handle_virtual_to_real
+                 [this->virtual_ml_a_desc],
+             this->B,
+             vdev.cublaslt_matrix_layout_handle_virtual_to_real
+                 [this->virtual_ml_b_desc],
+             this->beta.data(), this->C,
+             vdev.cublaslt_matrix_layout_handle_virtual_to_real
+                 [this->virtual_ml_c_desc],
+             this->D,
+             vdev.cublaslt_matrix_layout_handle_virtual_to_real
+                 [this->virtual_ml_d_desc],
+             algo_ptr, ws, ws_size, this->stream);
+
+    vdev.free_scratch();
+    return err;
 }
 
 flatbuffers::Offset<FBCudaApiCall>
@@ -412,6 +434,7 @@ CublasLtMatmul::fbSerialize(flatbuffers::FlatBufferBuilder &builder) {
         reinterpret_cast<uint64_t>(this->D), this->virtual_ml_a_desc,
         this->virtual_ml_b_desc, this->virtual_ml_c_desc,
         this->virtual_ml_d_desc, builder.CreateVector(algo_vec),
+        static_cast<uint64_t>(this->algo_is_null),
         reinterpret_cast<uint64_t>(this->workspace),
         this->workspace_size_in_bytes,
         reinterpret_cast<uint64_t>(this->stream));
@@ -585,6 +608,181 @@ flatbuffers::Offset<FBCudaApiCall> CublasSgemmStridedBatched::fbSerialize(
         this->batchCount);
     auto api_call_union = CreateFBCudaApiCall(
         builder, FBCudaApiCallUnion_FBCublasSgemmStridedBatched,
+        api_call.Union());
+    return api_call_union;
+}
+/*
+ * cublasLtMatmulPreferenceCreate
+ */
+CublasLtMatmulPreferenceCreate::CublasLtMatmulPreferenceCreate(
+    uint64_t virtualHandle)
+    : virtual_handle(virtualHandle) {}
+
+CublasLtMatmulPreferenceCreate::CublasLtMatmulPreferenceCreate(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCublasLtMatmulPreferenceCreate();
+    this->virtual_handle = c->virtual_mmp();
+}
+
+uint64_t
+CublasLtMatmulPreferenceCreate::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cublasLtMatmulPreferenceCreate);
+    if (vdev.cublaslt_matmul_pref_handle_virtual_to_real.size() <
+        this->virtual_handle + 1) {
+        vdev.cublaslt_matmul_pref_handle_virtual_to_real.resize(
+            this->virtual_handle + 1);
+    }
+    return real(&vdev.cublaslt_matmul_pref_handle_virtual_to_real
+                     [this->virtual_handle]);
+}
+
+flatbuffers::Offset<FBCudaApiCall> CublasLtMatmulPreferenceCreate::fbSerialize(
+    flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call =
+        CreateFBCublasLtMatmulPreferenceCreate(builder, this->virtual_handle);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate,
+        api_call.Union());
+    return api_call_union;
+}
+
+/*
+ * cublasLtMatmulPreferenceSetAttribute
+ */
+
+CublasLtMatmulPreferenceSetAttribute::CublasLtMatmulPreferenceSetAttribute(
+    uint64_t virtualMmp, cublasLtMatmulPreferenceAttributes_t attr,
+    std::vector<uint8_t> buf)
+    : virtual_mmp(virtualMmp), attr(attr), buf(std::move(buf)) {}
+
+CublasLtMatmulPreferenceSetAttribute::CublasLtMatmulPreferenceSetAttribute(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c =
+        fb_cuda_api_call->api_call_as_FBCublasLtMatmulPreferenceSetAttribute();
+    this->virtual_mmp = c->virtual_mmp();
+    this->attr = static_cast<cublasLtMatmulPreferenceAttributes_t>(c->attr());
+    this->buf.resize(c->buf()->size());
+    std::memcpy(this->buf.data(), c->buf()->data(), c->buf()->size());
+}
+
+uint64_t
+CublasLtMatmulPreferenceSetAttribute::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cublasLtMatmulPreferenceSetAttribute);
+    return real(
+        vdev.cublaslt_matmul_pref_handle_virtual_to_real[this->virtual_mmp],
+        this->attr, this->buf.data(), this->buf.size());
+}
+
+flatbuffers::Offset<FBCudaApiCall>
+CublasLtMatmulPreferenceSetAttribute::fbSerialize(
+    flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCublasLtMatmulPreferenceSetAttribute(
+        builder, this->virtual_mmp, this->attr,
+        builder.CreateVector(this->buf));
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute,
+        api_call.Union());
+    return api_call_union;
+}
+
+/*
+ * cublasLtMatmulPreferenceDestroy
+ */
+CublasLtMatmulPreferenceDestroy::CublasLtMatmulPreferenceDestroy(
+    uint64_t virtualMmp)
+    : virtual_mmp(virtualMmp) {}
+
+CublasLtMatmulPreferenceDestroy::CublasLtMatmulPreferenceDestroy(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCublasLtMatmulPreferenceDestroy();
+    this->virtual_mmp = c->virtual_mmp();
+}
+
+uint64_t
+CublasLtMatmulPreferenceDestroy::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cublasLtMatmulPreferenceDestroy);
+    return real(
+        vdev.cublaslt_matmul_pref_handle_virtual_to_real[this->virtual_mmp]);
+}
+
+flatbuffers::Offset<FBCudaApiCall> CublasLtMatmulPreferenceDestroy::fbSerialize(
+    flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call =
+        CreateFBCublasLtMatmulPreferenceDestroy(builder, this->virtual_mmp);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy,
+        api_call.Union());
+    return api_call_union;
+}
+
+/*
+ * cublasLtMatmulAlgoGetHeuristic
+ */
+CublasLtMatmulAlgoGetHeuristic::CublasLtMatmulAlgoGetHeuristic(
+    uint64_t virtualHandle, uint64_t virtualMmd, uint64_t virtualMlADesc,
+    uint64_t virtualMlBDesc, uint64_t virtualMlCDesc, uint64_t virtualMlDDesc,
+    uint64_t virtualMmp, uint64_t virtualAlg)
+    : virtual_handle(virtualHandle), virtual_mmd(virtualMmd),
+      virtual_ml_a_desc(virtualMlADesc), virtual_ml_b_desc(virtualMlBDesc),
+      virtual_ml_c_desc(virtualMlCDesc), virtual_ml_d_desc(virtualMlDDesc),
+      virtual_mmp(virtualMmp), virtual_alg(virtualAlg) {}
+
+CublasLtMatmulAlgoGetHeuristic::CublasLtMatmulAlgoGetHeuristic(
+    const FBCudaApiCall *fb_cuda_api_call) {
+    auto c = fb_cuda_api_call->api_call_as_FBCublasLtMatmulAlgoGetHeuristic();
+    this->virtual_handle = c->virtual_handle();
+    this->virtual_mmd = c->virtual_mmd();
+    this->virtual_ml_a_desc = c->virtual_ml_a_desc();
+    this->virtual_ml_b_desc = c->virtual_ml_b_desc();
+    this->virtual_ml_c_desc = c->virtual_ml_c_desc();
+    this->virtual_ml_d_desc = c->virtual_ml_d_desc();
+    this->virtual_mmp = c->virtual_mmp();
+    this->virtual_alg = c->virtual_alg();
+}
+
+uint64_t
+CublasLtMatmulAlgoGetHeuristic::executeNative(CudaVirtualDevice &vdev) {
+    static auto real = GET_REAL_FUNCTION(cublasLtMatmulAlgoGetHeuristic);
+
+    std::vector<cublasLtMatmulHeuristicResult_t> algs(6);
+    int returnedAlgs;
+
+    auto err = real(
+        vdev.cublaslt_handle_virtual_to_real[this->virtual_handle],
+        vdev.cublaslt_matmul_handle_virtual_to_real[this->virtual_mmd],
+        vdev.cublaslt_matrix_layout_handle_virtual_to_real
+            [this->virtual_ml_a_desc],
+        vdev.cublaslt_matrix_layout_handle_virtual_to_real
+            [this->virtual_ml_b_desc],
+        vdev.cublaslt_matrix_layout_handle_virtual_to_real
+            [this->virtual_ml_c_desc],
+        vdev.cublaslt_matrix_layout_handle_virtual_to_real
+            [this->virtual_ml_d_desc],
+        vdev.cublaslt_matmul_pref_handle_virtual_to_real[this->virtual_mmp], 6,
+        algs.data(), &returnedAlgs);
+
+    if (returnedAlgs < 1)
+        throw std::runtime_error("Matmul returned less than one algorithm");
+
+    if (vdev.cublaslt_matmul_alg_virtual_to_real.size() <
+        this->virtual_alg + 1) {
+        vdev.cublaslt_matmul_alg_virtual_to_real.resize(this->virtual_alg + 1);
+    }
+
+    vdev.cublaslt_matmul_alg_virtual_to_real[this->virtual_alg] = algs[0];
+
+    return err;
+}
+
+flatbuffers::Offset<FBCudaApiCall> CublasLtMatmulAlgoGetHeuristic::fbSerialize(
+    flatbuffers::FlatBufferBuilder &builder) {
+    auto api_call = CreateFBCublasLtMatmulAlgoGetHeuristic(
+        builder, this->virtual_handle, this->virtual_mmd,
+        this->virtual_ml_a_desc, this->virtual_ml_b_desc,
+        this->virtual_ml_c_desc, this->virtual_ml_d_desc, this->virtual_mmp,
+        this->virtual_alg);
+    auto api_call_union = CreateFBCudaApiCall(
+        builder, FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic,
         api_call.Union());
     return api_call_union;
 }
