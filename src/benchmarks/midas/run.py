@@ -9,10 +9,11 @@ model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest i
 #model_type = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
 #model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
 
-start = timer()
 
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
 midas.eval()
+
+start = timer()
 
 device = torch.device("cuda")
 midas.to(device)

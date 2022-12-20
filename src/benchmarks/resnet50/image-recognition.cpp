@@ -29,21 +29,7 @@ bool load_image(cv::Mat &image) {
     return true;
 }
 
-int recognition(cv::Mat &image) {
-    static torch::jit::script::Module mod;
-    static bool init = false;
-    if (!init) {
-        try {
-            // reuse model in warm functions
-            mod = torch::jit::load("./resnet50.pt");
-            init = true;
-        }
-        catch (const c10::Error& e) {
-            std::cerr << "error loading the model " << e.msg() << '\n';
-            return -1;
-        }
-    }
-
+int recognition(cv::Mat &image, torch::jit::script::Module &mod) {
     if (load_image(image)) {
         torch::Device device(torch::kCUDA);
         // torch::Device device(torch::kCPU);
@@ -67,15 +53,24 @@ int recognition(cv::Mat &image) {
         std::cout << indexs[0].item<int>() << " " << softmaxs[0].item<double>() << std::endl;
         return indexs[0].item<int>();
     }
-
     return -1;
 }
 
 int main() {
-    auto s = std::chrono::high_resolution_clock::now();
+    torch::jit::script::Module mod;
+    try {
+        // reuse model in warm functions
+        mod = torch::jit::load("./resnet50.pt");
+    }
+    catch (const c10::Error& e) {
+        std::cerr << "error loading the model " << e.msg() << '\n';
+        return -1;
+    }
 
     cv::Mat image;
-    if (recognition(image) < 0) {
+    auto s = std::chrono::high_resolution_clock::now();
+
+    if (recognition(image, mod) < 0) {
         std::cout << "image recognition failed" << std::endl;
     }
 

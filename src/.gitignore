@@ -6,6 +6,8 @@ compile_commands.
 debug
 .gdb_history
 cmake-build-debug
+cmake-build-release
+venv
 *.sql
 /compile_commands.old.json
 /benchmarks/vgg19/analysis/filter.log
