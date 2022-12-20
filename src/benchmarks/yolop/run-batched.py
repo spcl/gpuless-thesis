@@ -28,18 +28,25 @@ def inference():
     img = transform(img)
     img = img.unsqueeze(0).to('cuda')
     det_out, da_seg_out, ll_seg_out = model(img)
-    print(det_out[0], file=sys.stderr)
-    print(da_seg_out[0], file=sys.stderr)
-    print(ll_seg_out[0], file=sys.stderr)
 
 # warmup
 for i in range(0, 5):
     inference()
 
+total_time = 0
+start = torch.cuda.Event(enable_timing=True)
+end = torch.cuda.Event(enable_timing=True)
+times = []
+iterrations = 100
+
 # benchmark
-for i in range(0, 100):
-    start = timer()
+for i in range(0, iterrations):
+    start.record()
     inference()
-    end = timer()
-    print(end - start)
-    time.sleep(0.3)
+    end.record()
+    torch.cuda.synchronize()
+    times.append(start.elapsed_time(end))
+
+total_time = sum(times)
+avg_time = total_time / float(iterrations)
+print("Avg time: {:}ms".format(round(avg_time,5)))

@@ -34,7 +34,7 @@ cuLaunchKernel(kernel(int, float*, float*, float*, float*)) [time: 0.007 ms, acc
 
 cudaMemcpy(cudaMemcpyDeviceToHost, H5(0x556edb22d260) <- D1(0x7f4a66200200), 16c bytes) [time: 0.052 ms, acc_time: 0.225 ms]
 
-cudaMemcpy(cudaMemcpyDeviceToHost, H3(0x556edac6e300) <- D3(0x7f4a66200600), c bytes) [time: 0.006 ms, acc_time: 0.231 ms]
+cudaMemcpy(cudaMemcpyDeviceToHost, H3(0x556Reglement:  Rechnergestützte Wissenschaften BSc 27.03.2018edac6e300) <- D3(0x7f4a66200600), c bytes) [time: 0.006 ms, acc_time: 0.231 ms]
 
 cudaMemcpy(cudaMemcpyHostToDevice) D0(0x7f4a66200000) <- H0(0x556edb10c9c0), 16c bytes) [time: 0.002 ms, acc_time: 0.233 ms]
 

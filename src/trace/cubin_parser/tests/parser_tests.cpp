@@ -326,6 +326,7 @@ TEST(PtxParser, BuggyPtx2) {
     auto trees = parser.parsePtxTrees(ptx_data);
 
     for (const auto &tree : trees) {
+        tree.first->print();
         auto first_eval = tree.first->eval(nullptr);
         if (!first_eval) {
             KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};
@@ -614,6 +615,7 @@ TEST(PtxParser, BuggyPtx12) {
     auto trees = parser.parsePtxTrees(ptx_data);
 
     for (const auto &tree : trees) {
+        tree.first->print();
         auto first_eval = tree.first->eval(nullptr);
         if (!first_eval) {
             KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};

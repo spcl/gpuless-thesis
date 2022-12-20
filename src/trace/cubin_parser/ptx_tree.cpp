@@ -203,6 +203,28 @@ castToDerived(std::unique_ptr<PtxAbstractNode> ptr) {
     return std::unique_ptr<Derived>(static_cast<Derived *>(ptr.release()));
 }
 
+template <class L, class R, class T>
+inline bool
+setBinPtrRegs(std::unordered_set<std::string> &ptr_regs,
+           const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                                    std::vector<std::string>> &leaf_to_reg,
+           const L &l, const R &r, const T& cur) {
+    bool l_ptr = l->set_ptr_regs(ptr_regs, leaf_to_reg);
+    bool r_ptr = r->set_ptr_regs(ptr_regs, leaf_to_reg);
+
+    if (l_ptr) {
+        for (auto &reg : leaf_to_reg.find({cur, 0})->second)
+            ptr_regs.insert(reg);
+    }
+
+    if (r_ptr) {
+        for (auto &reg : leaf_to_reg.find({cur, 1})->second)
+            ptr_regs.insert(reg);
+    }
+
+    return l_ptr || r_ptr;
+}
+
 /*
  *  PTX NODES IMPLEMENTATIONS
  */
@@ -252,6 +274,12 @@ std::unique_ptr<PtxAbstractNode> PtxParameter::create(std::istream &is) {
     return std::make_unique<PtxParameter>(name, offsets, align,
                                           PtxParameterType(type_id));
 }
+bool PtxParameter::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return true;
+}
 
 // PtxAddNode implementation
 void PtxAddNode::print() const {
@@ -291,6 +319,12 @@ void PtxAddNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxAddNode::create(std::istream &is) {
     return createBinOp<PtxAddNode>(is);
+}
+bool PtxAddNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxSubNode implementation
@@ -332,6 +366,12 @@ void PtxSubNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxSubNode::create(std::istream &is) {
     return createBinOp<PtxSubNode>(is);
 }
+bool PtxSubNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
+}
 
 // PtxMulNode implementation
 void PtxMulNode::print() const {
@@ -371,6 +411,12 @@ void PtxMulNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxMulNode::create(std::istream &is) {
     return createBinOp<PtxMulNode>(is);
+}
+bool PtxMulNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxMadNode implementation
@@ -415,6 +461,18 @@ std::unique_ptr<PtxAbstractNode> PtxMadNode::create(std::istream &is) {
     return std::make_unique<PtxMadNode>(
         castToDerived<PtxAddNode>(PtxAddNode::create(is)));
 }
+bool PtxMadNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        for (auto &reg : leaf_to_reg.find({this, 0})->second)
+            ptr_regs.insert(reg);
+        return true;
+    } else {
+        return false;
+    };
+}
 
 // PtxSadNode implementation
 void PtxSadNode::print() const {
@@ -458,6 +516,18 @@ std::unique_ptr<PtxAbstractNode> PtxSadNode::create(std::istream &is) {
     return std::make_unique<PtxSadNode>(
         castToDerived<PtxAddNode>(PtxAddNode::create(is)));
 }
+bool PtxSadNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        for (auto &reg : leaf_to_reg.find({this, 0})->second)
+            ptr_regs.insert(reg);
+        return true;
+    } else {
+        return false;
+    };
+}
 
 // PtxDivNode implementation
 void PtxDivNode::print() const {
@@ -497,6 +567,12 @@ void PtxDivNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxDivNode::create(std::istream &is) {
     return createBinOp<PtxDivNode>(is);
+}
+bool PtxDivNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxRemNode implementation
@@ -538,6 +614,12 @@ void PtxRemNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxRemNode::create(std::istream &is) {
     return createBinOp<PtxRemNode>(is);
 }
+bool PtxRemNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
+}
 
 // PtxAbdNode implementation
 void PtxAbdNode::print() const {
@@ -578,6 +660,12 @@ void PtxAbdNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxAbdNode::create(std::istream &is) {
     return createBinOp<PtxAbdNode>(is);
+}
+bool PtxAbdNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxAbsNode implementation
@@ -627,6 +715,18 @@ std::unique_ptr<PtxAbstractNode> PtxAbsNode::create(std::istream &is) {
     std::unique_ptr<PtxAbstractNode> child = PtxAbstractNode::unserialize(is);
     return std::make_unique<PtxAbsNode>(std::move(child));
 }
+bool PtxAbsNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        for (auto &reg : leaf_to_reg.find({this, 0})->second)
+            ptr_regs.insert(reg);
+        return true;
+    } else {
+        return false;
+    };
+}
 
 // PtxNegNode implementation
 void PtxNegNode::print() const {
@@ -674,6 +774,18 @@ std::unique_ptr<PtxAbstractNode> PtxNegNode::create(std::istream &is) {
     std::unique_ptr<PtxAbstractNode> child = PtxAbstractNode::unserialize(is);
     return std::make_unique<PtxNegNode>(std::move(child));
 }
+bool PtxNegNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    if (_child->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        for (auto &reg : leaf_to_reg.find({this, 0})->second)
+            ptr_regs.insert(reg);
+        return true;
+    } else {
+        return false;
+    };
+}
 
 // PtxMinNode implementation
 void PtxMinNode::print() const {
@@ -714,6 +826,12 @@ void PtxMinNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxMinNode::create(std::istream &is) {
     return createBinOp<PtxMinNode>(is);
+}
+bool PtxMinNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxMaxNode implementation
@@ -756,6 +874,12 @@ void PtxMaxNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxMaxNode::create(std::istream &is) {
     return createBinOp<PtxMaxNode>(is);
 }
+bool PtxMaxNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
+}
 
 // PtxShlNode implementation
 void PtxShlNode::print() const {
@@ -796,6 +920,12 @@ void PtxShlNode::serialize(std::ostream &os) const {
 }
 std::unique_ptr<PtxAbstractNode> PtxShlNode::create(std::istream &is) {
     return createBinOp<PtxShlNode>(is);
+}
+bool PtxShlNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxShrNode implementation
@@ -838,6 +968,12 @@ void PtxShrNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxShrNode::create(std::istream &is) {
     return createBinOp<PtxShrNode>(is);
 }
+bool PtxShrNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
+}
 
 // PtxAndNode implementation
 void PtxAndNode::print() const {
@@ -879,6 +1015,12 @@ void PtxAndNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxAndNode::create(std::istream &is) {
     return createBinOp<PtxAndNode>(is);
 }
+bool PtxAndNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
+}
 
 // PtxBfiNode implementation
 void PtxBfiNode::print() const {
@@ -899,14 +1041,17 @@ std::unique_ptr<PtxAbstractNode> PtxBfiNode::eval(KLaunchConfig *config) {
     if (!_left || !_right || !_length || !_pos)
         throw std::runtime_error("Node has no leaf.");
 
-    if(_right->get_kind() != PtxNodeKind::LdOp || _left->get_kind() != PtxNodeKind::LdOp)
+    if (_right->get_kind() != PtxNodeKind::LdOp ||
+        _left->get_kind() != PtxNodeKind::LdOp)
         throw std::runtime_error("Children need to be LdOp.");
 
     auto &left_ld(static_cast<PtxLdOp &>(*_left));
     auto &right_ld(static_cast<PtxLdOp &>(*_right));
 
-    std::unique_ptr<PtxAbstractNode> left_eval(left_ld.get_child()->eval(config));
-    std::unique_ptr<PtxAbstractNode> right_eval(right_ld.get_child()->eval(config));
+    std::unique_ptr<PtxAbstractNode> left_eval(
+        left_ld.get_child()->eval(config));
+    std::unique_ptr<PtxAbstractNode> right_eval(
+        right_ld.get_child()->eval(config));
     std::unique_ptr<PtxAbstractNode> length_eval(_length->eval(config));
     std::unique_ptr<PtxAbstractNode> pos_eval(_pos->eval(config));
 
@@ -930,15 +1075,20 @@ std::unique_ptr<PtxAbstractNode> PtxBfiNode::eval(KLaunchConfig *config) {
     auto &length_imm(static_cast<PtxImmediate &>(*length_eval));
     auto &pos_imm(static_cast<PtxImmediate &>(*pos_eval));
 
-    if(length_imm.get_values().size() != 1 || length_imm.get_values()[0] != 32 ||
-        pos_imm.get_values().size() != 1 || pos_imm.get_values()[0] != 32)
-        throw std::runtime_error("BFI not implemented for these lengths/positions.");
+    if (length_imm.get_values().size() != 1 ||
+        length_imm.get_values()[0] != 32 || pos_imm.get_values().size() != 1 ||
+        pos_imm.get_values()[0] != 32)
+        throw std::runtime_error(
+            "BFI not implemented for these lengths/positions.");
 
-    if(left_par.get_name() != right_par.get_name() || left_par.get_offsets().size() != 1
-        || right_par.get_offsets().size() != 1 || left_par.get_offsets()[0] != right_par.get_offsets()[0]+4)
+    if (left_par.get_name() != right_par.get_name() ||
+        left_par.get_offsets().size() != 1 ||
+        right_par.get_offsets().size() != 1 ||
+        left_par.get_offsets()[0] != right_par.get_offsets()[0] + 4)
         throw std::runtime_error("Left/Right parameters are not consecutive.");
 
-    return std::make_unique<PtxParameter>(right_par.get_name(), right_par.get_offsets()[0]);
+    return std::make_unique<PtxParameter>(right_par.get_name(),
+                                          right_par.get_offsets()[0]);
 }
 void PtxBfiNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     if (idx == 0) {
@@ -947,10 +1097,10 @@ void PtxBfiNode::set_child(std::unique_ptr<PtxAbstractNode> child, int idx) {
     } else if (idx == 1) {
         _right.swap(child);
         return;
-    } else if(idx == 2) {
+    } else if (idx == 2) {
         _pos.swap(child);
         return;
-    } else if(idx == 3) {
+    } else if (idx == 3) {
         _length.swap(child);
         return;
     }
@@ -978,7 +1128,13 @@ std::unique_ptr<PtxAbstractNode> PtxBfiNode::create(std::istream &is) {
     length = PtxAbstractNode::unserialize(is);
 
     return std::make_unique<PtxBfiNode>(std::move(left), std::move(right),
-                               std::move(pos), std::move(length));
+                                        std::move(pos), std::move(length));
+}
+bool PtxBfiNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return setBinPtrRegs(ptr_regs, leaf_to_reg, _left, _right, this);
 }
 
 // PtxImmediate implementation
@@ -1014,6 +1170,12 @@ std::unique_ptr<PtxAbstractNode> PtxImmediate::create(std::istream &is) {
     is >> type_id;
 
     return std::make_unique<PtxImmediate>(values, PtxParameterType(type_id));
+}
+bool PtxImmediate::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return false;
 }
 
 // PtxSpecialRegister implementation
@@ -1081,6 +1243,12 @@ std::unique_ptr<PtxAbstractNode> PtxSpecialRegister::create(std::istream &is) {
     return std::make_unique<PtxSpecialRegister>(SpecialRegisterKind(kind_id),
                                                 dim, values);
 }
+bool PtxSpecialRegister::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    return false;
+}
 
 // PtxCvtaNode implementation
 void PtxCvtaNode::print() const {
@@ -1106,6 +1274,18 @@ void PtxCvtaNode::serialize(std::ostream &os) const {
 std::unique_ptr<PtxAbstractNode> PtxCvtaNode::create(std::istream &is) {
     std::unique_ptr<PtxAbstractNode> child = PtxAbstractNode::unserialize(is);
     return std::make_unique<PtxCvtaNode>(std::move(child));
+}
+bool PtxCvtaNode::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    if (_dst->set_ptr_regs(ptr_regs, leaf_to_reg)) {
+        for (auto &reg : leaf_to_reg.find({this, 0})->second)
+            ptr_regs.insert(reg);
+        return true;
+    } else {
+        return false;
+    };
 }
 
 // PtxLdOp implementation
@@ -1203,6 +1383,15 @@ std::unique_ptr<PtxAbstractNode> PtxLdOp::create(std::istream &is) {
     return std::make_unique<PtxLdOp>(std::move(child),
                                      PtxParameterType(type_id));
 }
+bool PtxLdOp::set_ptr_regs(
+    std::unordered_set<std::string> &ptr_regs,
+    const std::unordered_map<std::pair<PtxAbstractNode *, int>,
+                             std::vector<std::string>> &leaf_to_reg) {
+    _child->set_ptr_regs(ptr_regs, leaf_to_reg);
+    for (auto &reg : leaf_to_reg.find({this, 0})->second)
+        ptr_regs.insert(reg);
+    return false;
+}
 
 /*
  * PTX TREE IMPLEMENTATION
@@ -1228,6 +1417,9 @@ void PtxTree::replace_register(const std::string &old_register,
                                const std::string &new_register) {
     if (auto ret = _registers_to_leafs.find(old_register);
         ret != _registers_to_leafs.end()) {
+        for (auto &l : ret->second)
+            _leaf_to_reg[l].push_back(new_register);
+
         _registers_to_leafs[new_register] = ret->second;
         _registers_to_leafs.erase(ret);
     }
@@ -1319,6 +1511,7 @@ void PtxTree::add_node(PtxNodeKind kind,
                 case PtxOperandKind::Register:
                     _registers_to_leafs[operand.name].push_back(
                         {new_node.get(), i});
+                    _leaf_to_reg[{new_node.get(), i}].push_back(operand.name);
                     break;
                 case PtxOperandKind::Parameter:
                     new_node->set_child(std::make_unique<PtxParameter>(
@@ -1367,6 +1560,7 @@ void PtxTree::add_node(std::unique_ptr<PtxLdOp> new_node,
                 case PtxOperandKind::Register:
                     _registers_to_leafs[operand.name].push_back(
                         {node.get(), i});
+                    _leaf_to_reg[{node.get(), i}].push_back(operand.name);
                     break;
                 case PtxOperandKind::Parameter:
                     node->set_child(std::make_unique<PtxParameter>(

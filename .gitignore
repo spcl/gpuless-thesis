@@ -4,3 +4,4 @@
 .idea
 .cache
 /torch
+/src/trace/cubin_parser/tests/libtorch_cuda.380.sm_90.ptx

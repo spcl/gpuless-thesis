@@ -14,3 +14,5 @@ cmake-build-debug
 /benchmarks/vgg19/analysis/local.log
 /benchmarks/vgg19/vgcore.2905
 /compile_commands.json
+/trace/cubin_parser/tests/dumped_ptx
+/benchmarks/myocyte/myocyte.1.sm_52.ptx
