@@ -7,8 +7,6 @@ from timeit import default_timer as timer
 import time
 
 model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
-#model_type = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
-#model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
 
 
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
@@ -42,14 +40,25 @@ def inference():
     # plt.show()
     # plt.savefig('out.pdf')
 
+
+total_time = 0
+start = torch.cuda.Event(enable_timing=True)
+end = torch.cuda.Event(enable_timing=True)
+times = []
+
 # warmup
 for i in range(0, 5):
     inference()
 
+iterrations = 10
 # benchmark
-for i in range(0, 100):
-    start = timer()
+for i in range(0, iterrations):
+    start.record()
     inference()
-    end = timer()
-    print(end - start)
-    time.sleep(0.2)
+    end.record()
+    torch.cuda.synchronize()
+    times.append(start.elapsed_time(end))
+
+total_time = sum(times)
+avg_time = total_time / float(iterrations)
+print("Avg time: {:}ms".format(round(avg_time,5)))
