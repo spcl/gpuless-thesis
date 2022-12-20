@@ -50,9 +50,9 @@ times = []
 for i in range(0, 5):
     inference()
 
-iterrations = 10
+iterations = 10
 # benchmark
-for i in range(0, iterrations):
+for i in range(0, iterations):
     start.record()
     inference()
     end.record()
@@ -60,5 +60,5 @@ for i in range(0, iterrations):
     times.append(start.elapsed_time(end))
 
 total_time = sum(times)
-avg_time = total_time / float(iterrations)
+avg_time = total_time / float(iterations)
 print("Avg time: {:}ms".format(round(avg_time, 5)))

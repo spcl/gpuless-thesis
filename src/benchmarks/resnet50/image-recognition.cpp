@@ -30,27 +30,30 @@ bool load_image(cv::Mat &image) {
 }
 
 int recognition(cv::Mat &image, torch::jit::script::Module &mod) {
-    torch::Device device(torch::kCUDA);
-    // torch::Device device(torch::kCPU);
+    if (load_image(image)) {
+        torch::Device device(torch::kCUDA);
+        // torch::Device device(torch::kCPU);
 
-    mod.to(device);
+        mod.to(device);
 
-    auto input_tensor = torch::from_blob(
-            image.data, {1, kIMAGE_SIZE, kIMAGE_SIZE, kCHANNELS});
-    input_tensor = input_tensor.permute({0, 3, 1, 2});
-    input_tensor[0][0] = input_tensor[0][0].sub_(0.485).div_(0.229);
-    input_tensor[0][1] = input_tensor[0][1].sub_(0.456).div_(0.224);
-    input_tensor[0][2] = input_tensor[0][2].sub_(0.406).div_(0.225);
+        auto input_tensor = torch::from_blob(
+                image.data, {1, kIMAGE_SIZE, kIMAGE_SIZE, kCHANNELS});
+        input_tensor = input_tensor.permute({0, 3, 1, 2});
+        input_tensor[0][0] = input_tensor[0][0].sub_(0.485).div_(0.229);
+        input_tensor[0][1] = input_tensor[0][1].sub_(0.456).div_(0.224);
+        input_tensor[0][2] = input_tensor[0][2].sub_(0.406).div_(0.225);
 
-    input_tensor = input_tensor.to(device);
+        input_tensor = input_tensor.to(device);
 
-    torch::Tensor out_tensor = mod.forward({input_tensor}).toTensor();
-    auto results = out_tensor.sort(-1, true);
-    auto softmaxs = std::get<0>(results)[0].softmax(0);
-    auto indexs = std::get<1>(results)[0];
+        torch::Tensor out_tensor = mod.forward({input_tensor}).toTensor();
+        auto results = out_tensor.sort(-1, true);
+        auto softmaxs = std::get<0>(results)[0].softmax(0);
+        auto indexs = std::get<1>(results)[0];
 
-    std::cout << indexs[0].item<int>() << " " << softmaxs[0].item<double>() << std::endl;
-    return indexs[0].item<int>();
+        std::cout << indexs[0].item<int>() << " " << softmaxs[0].item<double>() << std::endl;
+        return indexs[0].item<int>();
+    }
+    return -1;
 }
 
 int main() {
@@ -65,11 +68,6 @@ int main() {
     }
 
     cv::Mat image;
-    if (!load_image(image)) {
-        std::cout << "image loading failed\n";
-        return 1;
-    }
-
     auto s = std::chrono::high_resolution_clock::now();
 
     if (recognition(image, mod) < 0) {
