@@ -1,8 +1,8 @@
 include make.config
 
-CC := $(CUDA_DIR)/bin/nvcc -cudart=shared -arch=$(CUDA_ARCH)
+CC := /opt/cuda/bin/nvcc -cudart=shared 
 
-INCLUDE := $(CUDA_DIR)/include
+INCLUDE := /opt/cuda/include
 
 # Example
 # target: dependencies

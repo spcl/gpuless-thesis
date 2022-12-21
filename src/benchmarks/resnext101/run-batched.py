@@ -18,9 +18,10 @@ model.to('cuda')
 
 input_image = Image.open('dog.jpg')
 
+
 def inference(model, image):
     input_tensor = preprocess(input_image)
-    input_batch = input_tensor.unsqueeze(0) # create a mini-batch as expected by the model
+    input_batch = input_tensor.unsqueeze(0)  # create a mini-batch as expected by the model
     input_batch = input_batch.to('cuda')
 
     with torch.no_grad():
@@ -29,15 +30,23 @@ def inference(model, image):
     top_prob, top_catid = torch.topk(probabilities, 1)
     print(top_catid[0].item(), file=sys.stderr)
 
+
+total_time = 0
+times = []
+
 # warmup
 for i in range(0, 5):
     inference(model, input_image)
 
+iterations = 10
 # benchmark
-for i in range(0, 100):
+for i in range(0, iterations):
     start = timer()
     inference(model, input_image)
     end = timer()
-    print(end - start)
-    time.sleep(0.5)
+    torch.cuda.synchronize()
+    times.append(end - start)
 
+total_time = sum(times)
+avg_time = total_time / float(iterations)
+print("Avg time: {:}ms".format(round(avg_time, 5)))
