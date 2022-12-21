@@ -32,8 +32,6 @@ def inference(model, image):
 
 
 total_time = 0
-start = torch.cuda.Event(enable_timing=True)
-end = torch.cuda.Event(enable_timing=True)
 times = []
 
 # warmup
@@ -43,11 +41,11 @@ for i in range(0, 5):
 iterations = 10
 # benchmark
 for i in range(0, iterations):
-    start.record()
+    start = timer()
     inference(model, input_image)
-    end.record()
+    end = timer()
     torch.cuda.synchronize()
-    times.append(start.elapsed_time(end))
+    times.append(end - start)
 
 total_time = sum(times)
 avg_time = total_time / float(iterations)

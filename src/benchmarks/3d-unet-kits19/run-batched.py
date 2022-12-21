@@ -75,8 +75,6 @@ def infer_single_query(query):
 iterations = 100
 
 total_time = 0
-start = torch.cuda.Event(enable_timing=True)
-end = torch.cuda.Event(enable_timing=True)
 times = []
 
 with open(input_file, 'rb') as f:
@@ -88,7 +86,7 @@ with open(input_file, 'rb') as f:
         result = infer_single_query(query)
 
     for i in range(0, iterations):
-        start.record()
+        start = timer()
 
         query = pickle.loads(input_bytes)[0]
         result = infer_single_query(query)
@@ -97,8 +95,8 @@ with open(input_file, 'rb') as f:
         # print(bi[0])
         # print(bi[1])
 
-        end.record()
-        times.append(start.elapsed_time(end))
+        end = timer()
+        times.append(end - start)
 
 total_time = sum(times)
 avg_time = total_time / float(iterations)
