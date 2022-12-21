@@ -71,6 +71,15 @@ static uint64_t incrementFatbinCount() {
     return ctr++;
 }
 
+static uint64_t incrementEventCount() {
+    static uint64_t ct = 1;
+    return ct++;
+}
+
+static std::map<uint64_t,
+                std::chrono::time_point<std::chrono::high_resolution_clock>>
+    event_times;
+
 std::shared_ptr<TraceExecutor> getTraceExecutor() {
     static std::shared_ptr<TraceExecutor> trace_executor;
     static bool te_initialized = false;
@@ -175,6 +184,70 @@ cudaError_t cudaMallocHost(void **devPtr, size_t size) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
     EXIT_NOT_IMPLEMENTED(__func__);
+}
+
+cudaError_t cudaEventCreate(cudaEvent_t *event) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    uint64_t event_id = incrementEventCount();
+    *event = reinterpret_cast<cudaEvent_t>(event_id);
+    event_times[event_id] = std::chrono::high_resolution_clock::now();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventCreateWithFlags(cudaEvent_t *event, unsigned int flags) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    uint64_t event_id = incrementEventCount();
+    *event = reinterpret_cast<cudaEvent_t>(incrementEventCount());
+    event_times[event_id] = std::chrono::high_resolution_clock::now();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventDestroy(cudaEvent_t event) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventElapsedTime(float *ms, cudaEvent_t start,
+                                 cudaEvent_t end) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    *ms = std::chrono::duration_cast<std::chrono::nanoseconds>(
+              event_times[reinterpret_cast<uint64_t>(end)] -
+              event_times[reinterpret_cast<uint64_t>(start)])
+              .count() /1000000;
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventQuery(cudaEvent_t event) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventRecord(cudaEvent_t event, cudaStream_t __dv) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    auto event_id = reinterpret_cast<uint64_t>(event);
+    getTraceExecutor()->synchronize(getCudaTrace());
+    event_times[event_id] = std::chrono::high_resolution_clock::now();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventRecordWithFlags(cudaEvent_t event, cudaStream_t stream, unsigned  int flags) {
+    hijackInit();
+    HIJACK_FN_PROLOGUE();
+    auto event_id = reinterpret_cast<uint64_t>(event);
+    getTraceExecutor()->synchronize(getCudaTrace());
+    event_times[event_id] = std::chrono::high_resolution_clock::now();
+    return cudaSuccess;
+}
+
+cudaError_t cudaEventSynchronize(cudaEvent_t event) {
+    getTraceExecutor()->synchronize(getCudaTrace());
+    return cudaSuccess;
 }
 
 cudaError_t cudaMemcpy(void *dst, const void *src, size_t count,
@@ -320,7 +393,7 @@ cudaError_t cudaStreamSynchronize(cudaStream_t stream) {
     hijackInit();
     HIJACK_FN_PROLOGUE();
     getCudaTrace().record(std::make_shared<CudaStreamSynchronize>(stream));
-    //    getTraceExecutor()->synchronize(getCudaTrace());
+    //getTraceExecutor()->synchronize(getCudaTrace());
     return cudaSuccess;
 }
 
