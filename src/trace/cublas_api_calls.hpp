@@ -259,6 +259,69 @@ class CublasSgemmStridedBatched : public CublasApiCAll {
     fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
 };
 
+class CublasLtMatmulPreferenceCreate : public CublasApiCAll {
+  public:
+    uint64_t virtual_handle;
+
+    explicit CublasLtMatmulPreferenceCreate(uint64_t virtualHandle);
+    explicit CublasLtMatmulPreferenceCreate(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmulPreferenceSetAttribute : public CublasApiCAll {
+  public:
+    uint64_t virtual_mmp;
+    cublasLtMatmulPreferenceAttributes_t attr;
+    std::vector<uint8_t> buf;
+
+    CublasLtMatmulPreferenceSetAttribute(uint64_t virtualMmp,
+                                         cublasLtMatmulPreferenceAttributes_t attr,
+                                   std::vector<uint8_t> buf);
+    explicit CublasLtMatmulPreferenceSetAttribute(
+        const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmulPreferenceDestroy : public CublasApiCAll {
+  public:
+    uint64_t virtual_mmp;
+
+    explicit CublasLtMatmulPreferenceDestroy(uint64_t virtualMmp);
+    explicit CublasLtMatmulPreferenceDestroy(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
+class CublasLtMatmulAlgoGetHeuristic : public CublasApiCAll {
+  public:
+    uint64_t virtual_handle;
+    uint64_t virtual_mmd;
+    uint64_t virtual_ml_a_desc;
+    uint64_t virtual_ml_b_desc;
+    uint64_t virtual_ml_c_desc;
+    uint64_t virtual_ml_d_desc;
+    uint64_t virtual_mmp;
+    uint64_t virtual_alg;
+
+    CublasLtMatmulAlgoGetHeuristic(uint64_t virtualHandle, uint64_t virtualMmd,
+                   uint64_t virtualMlADesc, uint64_t virtualMlBDesc,
+                   uint64_t virtualMlCDesc, uint64_t virtualMlDDesc,
+                   uint64_t virtual_mmp, uint64_t virtual_alg);
+    explicit CublasLtMatmulAlgoGetHeuristic(const FBCudaApiCall *fb_cuda_api_call);
+
+    uint64_t executeNative(CudaVirtualDevice &vdev) override;
+    flatbuffers::Offset<FBCudaApiCall>
+    fbSerialize(flatbuffers::FlatBufferBuilder &builder) override;
+};
+
 } // namespace gpuless
 
 #endif // GPULESS_CUBLAS_API_CALLS_HPP

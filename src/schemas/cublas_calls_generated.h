@@ -45,6 +45,18 @@ struct FBCublasLtMatrixLayoutSetAttributeBuilder;
 struct FBCublasSgemmStridedBatched;
 struct FBCublasSgemmStridedBatchedBuilder;
 
+struct FBCublasLtMatmulPreferenceCreate;
+struct FBCublasLtMatmulPreferenceCreateBuilder;
+
+struct FBCublasLtMatmulPreferenceDestroy;
+struct FBCublasLtMatmulPreferenceDestroyBuilder;
+
+struct FBCublasLtMatmulPreferenceSetAttribute;
+struct FBCublasLtMatmulPreferenceSetAttributeBuilder;
+
+struct FBCublasLtMatmulAlgoGetHeuristic;
+struct FBCublasLtMatmulAlgoGetHeuristicBuilder;
+
 struct FBCublasCreateV2 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   typedef FBCublasCreateV2Builder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -637,8 +649,8 @@ struct FBCublasLtMatmul FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const flatbuffers::Vector<uint64_t> *algo() const {
     return GetPointer<const flatbuffers::Vector<uint64_t> *>(VT_ALGO);
   }
-  bool algo_is_null() const {
-    return GetField<uint8_t>(VT_ALGO_IS_NULL, 0) != 0;
+  uint64_t algo_is_null() const {
+    return GetField<uint64_t>(VT_ALGO_IS_NULL, 0);
   }
   uint64_t workspace() const {
     return GetField<uint64_t>(VT_WORKSPACE, 0);
@@ -667,7 +679,7 @@ struct FBCublasLtMatmul FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyField<uint64_t>(verifier, VT_VIRTUAL_ML_D_DESC) &&
            VerifyOffset(verifier, VT_ALGO) &&
            verifier.VerifyVector(algo()) &&
-           VerifyField<uint8_t>(verifier, VT_ALGO_IS_NULL) &&
+           VerifyField<uint64_t>(verifier, VT_ALGO_IS_NULL) &&
            VerifyField<uint64_t>(verifier, VT_WORKSPACE) &&
            VerifyField<uint64_t>(verifier, VT_WORKSPACE_SIZE_IN_BYTES) &&
            VerifyField<uint64_t>(verifier, VT_STREAM) &&
@@ -718,8 +730,8 @@ struct FBCublasLtMatmulBuilder {
   void add_algo(flatbuffers::Offset<flatbuffers::Vector<uint64_t>> algo) {
     fbb_.AddOffset(FBCublasLtMatmul::VT_ALGO, algo);
   }
-  void add_algo_is_null(bool algo_is_null) {
-    fbb_.AddElement<uint8_t>(FBCublasLtMatmul::VT_ALGO_IS_NULL, static_cast<uint8_t>(algo_is_null), 0);
+  void add_algo_is_null(uint64_t algo_is_null) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmul::VT_ALGO_IS_NULL, algo_is_null, 0);
   }
   void add_workspace(uint64_t workspace) {
     fbb_.AddElement<uint64_t>(FBCublasLtMatmul::VT_WORKSPACE, workspace, 0);
@@ -756,7 +768,7 @@ inline flatbuffers::Offset<FBCublasLtMatmul> CreateFBCublasLtMatmul(
     uint64_t virtual_ml_c_desc = 0,
     uint64_t virtual_ml_d_desc = 0,
     flatbuffers::Offset<flatbuffers::Vector<uint64_t>> algo = 0,
-    bool algo_is_null = false,
+    uint64_t algo_is_null = 0,
     uint64_t workspace = 0,
     uint64_t workspace_size_in_bytes = 0,
     uint64_t stream = 0) {
@@ -764,6 +776,7 @@ inline flatbuffers::Offset<FBCublasLtMatmul> CreateFBCublasLtMatmul(
   builder_.add_stream(stream);
   builder_.add_workspace_size_in_bytes(workspace_size_in_bytes);
   builder_.add_workspace(workspace);
+  builder_.add_algo_is_null(algo_is_null);
   builder_.add_virtual_ml_d_desc(virtual_ml_d_desc);
   builder_.add_virtual_ml_c_desc(virtual_ml_c_desc);
   builder_.add_virtual_ml_b_desc(virtual_ml_b_desc);
@@ -777,7 +790,6 @@ inline flatbuffers::Offset<FBCublasLtMatmul> CreateFBCublasLtMatmul(
   builder_.add_algo(algo);
   builder_.add_beta(beta);
   builder_.add_alpha(alpha);
-  builder_.add_algo_is_null(algo_is_null);
   return builder_.Finish();
 }
 
@@ -796,7 +808,7 @@ inline flatbuffers::Offset<FBCublasLtMatmul> CreateFBCublasLtMatmulDirect(
     uint64_t virtual_ml_c_desc = 0,
     uint64_t virtual_ml_d_desc = 0,
     const std::vector<uint64_t> *algo = nullptr,
-    bool algo_is_null = false,
+    uint64_t algo_is_null = 0,
     uint64_t workspace = 0,
     uint64_t workspace_size_in_bytes = 0,
     uint64_t stream = 0) {
@@ -1229,6 +1241,274 @@ inline flatbuffers::Offset<FBCublasSgemmStridedBatched> CreateFBCublasSgemmStrid
   builder_.add_k(k);
   builder_.add_n(n);
   builder_.add_m(m);
+  return builder_.Finish();
+}
+
+struct FBCublasLtMatmulPreferenceCreate FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCublasLtMatmulPreferenceCreateBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_MMP = 4
+  };
+  uint64_t virtual_mmp() const {
+    return GetField<uint64_t>(VT_VIRTUAL_MMP, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_MMP) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCublasLtMatmulPreferenceCreateBuilder {
+  typedef FBCublasLtMatmulPreferenceCreate Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_mmp(uint64_t virtual_mmp) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulPreferenceCreate::VT_VIRTUAL_MMP, virtual_mmp, 0);
+  }
+  explicit FBCublasLtMatmulPreferenceCreateBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCublasLtMatmulPreferenceCreate> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCublasLtMatmulPreferenceCreate>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCublasLtMatmulPreferenceCreate> CreateFBCublasLtMatmulPreferenceCreate(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_mmp = 0) {
+  FBCublasLtMatmulPreferenceCreateBuilder builder_(_fbb);
+  builder_.add_virtual_mmp(virtual_mmp);
+  return builder_.Finish();
+}
+
+struct FBCublasLtMatmulPreferenceDestroy FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCublasLtMatmulPreferenceDestroyBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_MMP = 4
+  };
+  uint64_t virtual_mmp() const {
+    return GetField<uint64_t>(VT_VIRTUAL_MMP, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_MMP) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCublasLtMatmulPreferenceDestroyBuilder {
+  typedef FBCublasLtMatmulPreferenceDestroy Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_mmp(uint64_t virtual_mmp) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulPreferenceDestroy::VT_VIRTUAL_MMP, virtual_mmp, 0);
+  }
+  explicit FBCublasLtMatmulPreferenceDestroyBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCublasLtMatmulPreferenceDestroy> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCublasLtMatmulPreferenceDestroy>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCublasLtMatmulPreferenceDestroy> CreateFBCublasLtMatmulPreferenceDestroy(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_mmp = 0) {
+  FBCublasLtMatmulPreferenceDestroyBuilder builder_(_fbb);
+  builder_.add_virtual_mmp(virtual_mmp);
+  return builder_.Finish();
+}
+
+struct FBCublasLtMatmulPreferenceSetAttribute FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCublasLtMatmulPreferenceSetAttributeBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_MMP = 4,
+    VT_ATTR = 6,
+    VT_BUF = 8
+  };
+  uint64_t virtual_mmp() const {
+    return GetField<uint64_t>(VT_VIRTUAL_MMP, 0);
+  }
+  uint64_t attr() const {
+    return GetField<uint64_t>(VT_ATTR, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *buf() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_BUF);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_MMP) &&
+           VerifyField<uint64_t>(verifier, VT_ATTR) &&
+           VerifyOffset(verifier, VT_BUF) &&
+           verifier.VerifyVector(buf()) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCublasLtMatmulPreferenceSetAttributeBuilder {
+  typedef FBCublasLtMatmulPreferenceSetAttribute Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_mmp(uint64_t virtual_mmp) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulPreferenceSetAttribute::VT_VIRTUAL_MMP, virtual_mmp, 0);
+  }
+  void add_attr(uint64_t attr) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulPreferenceSetAttribute::VT_ATTR, attr, 0);
+  }
+  void add_buf(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buf) {
+    fbb_.AddOffset(FBCublasLtMatmulPreferenceSetAttribute::VT_BUF, buf);
+  }
+  explicit FBCublasLtMatmulPreferenceSetAttributeBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCublasLtMatmulPreferenceSetAttribute> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCublasLtMatmulPreferenceSetAttribute>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCublasLtMatmulPreferenceSetAttribute> CreateFBCublasLtMatmulPreferenceSetAttribute(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_mmp = 0,
+    uint64_t attr = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> buf = 0) {
+  FBCublasLtMatmulPreferenceSetAttributeBuilder builder_(_fbb);
+  builder_.add_attr(attr);
+  builder_.add_virtual_mmp(virtual_mmp);
+  builder_.add_buf(buf);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<FBCublasLtMatmulPreferenceSetAttribute> CreateFBCublasLtMatmulPreferenceSetAttributeDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_mmp = 0,
+    uint64_t attr = 0,
+    const std::vector<uint8_t> *buf = nullptr) {
+  auto buf__ = buf ? _fbb.CreateVector<uint8_t>(*buf) : 0;
+  return CreateFBCublasLtMatmulPreferenceSetAttribute(
+      _fbb,
+      virtual_mmp,
+      attr,
+      buf__);
+}
+
+struct FBCublasLtMatmulAlgoGetHeuristic FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef FBCublasLtMatmulAlgoGetHeuristicBuilder Builder;
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_VIRTUAL_HANDLE = 4,
+    VT_VIRTUAL_MMD = 6,
+    VT_VIRTUAL_ML_A_DESC = 8,
+    VT_VIRTUAL_ML_B_DESC = 10,
+    VT_VIRTUAL_ML_C_DESC = 12,
+    VT_VIRTUAL_ML_D_DESC = 14,
+    VT_VIRTUAL_MMP = 16,
+    VT_VIRTUAL_ALG = 18
+  };
+  uint64_t virtual_handle() const {
+    return GetField<uint64_t>(VT_VIRTUAL_HANDLE, 0);
+  }
+  uint64_t virtual_mmd() const {
+    return GetField<uint64_t>(VT_VIRTUAL_MMD, 0);
+  }
+  uint64_t virtual_ml_a_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_ML_A_DESC, 0);
+  }
+  uint64_t virtual_ml_b_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_ML_B_DESC, 0);
+  }
+  uint64_t virtual_ml_c_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_ML_C_DESC, 0);
+  }
+  uint64_t virtual_ml_d_desc() const {
+    return GetField<uint64_t>(VT_VIRTUAL_ML_D_DESC, 0);
+  }
+  uint64_t virtual_mmp() const {
+    return GetField<uint64_t>(VT_VIRTUAL_MMP, 0);
+  }
+  uint64_t virtual_alg() const {
+    return GetField<uint64_t>(VT_VIRTUAL_ALG, 0);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_HANDLE) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_MMD) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_ML_A_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_ML_B_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_ML_C_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_ML_D_DESC) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_MMP) &&
+           VerifyField<uint64_t>(verifier, VT_VIRTUAL_ALG) &&
+           verifier.EndTable();
+  }
+};
+
+struct FBCublasLtMatmulAlgoGetHeuristicBuilder {
+  typedef FBCublasLtMatmulAlgoGetHeuristic Table;
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_virtual_handle(uint64_t virtual_handle) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_HANDLE, virtual_handle, 0);
+  }
+  void add_virtual_mmd(uint64_t virtual_mmd) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_MMD, virtual_mmd, 0);
+  }
+  void add_virtual_ml_a_desc(uint64_t virtual_ml_a_desc) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_ML_A_DESC, virtual_ml_a_desc, 0);
+  }
+  void add_virtual_ml_b_desc(uint64_t virtual_ml_b_desc) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_ML_B_DESC, virtual_ml_b_desc, 0);
+  }
+  void add_virtual_ml_c_desc(uint64_t virtual_ml_c_desc) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_ML_C_DESC, virtual_ml_c_desc, 0);
+  }
+  void add_virtual_ml_d_desc(uint64_t virtual_ml_d_desc) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_ML_D_DESC, virtual_ml_d_desc, 0);
+  }
+  void add_virtual_mmp(uint64_t virtual_mmp) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_MMP, virtual_mmp, 0);
+  }
+  void add_virtual_alg(uint64_t virtual_alg) {
+    fbb_.AddElement<uint64_t>(FBCublasLtMatmulAlgoGetHeuristic::VT_VIRTUAL_ALG, virtual_alg, 0);
+  }
+  explicit FBCublasLtMatmulAlgoGetHeuristicBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  flatbuffers::Offset<FBCublasLtMatmulAlgoGetHeuristic> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<FBCublasLtMatmulAlgoGetHeuristic>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<FBCublasLtMatmulAlgoGetHeuristic> CreateFBCublasLtMatmulAlgoGetHeuristic(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    uint64_t virtual_handle = 0,
+    uint64_t virtual_mmd = 0,
+    uint64_t virtual_ml_a_desc = 0,
+    uint64_t virtual_ml_b_desc = 0,
+    uint64_t virtual_ml_c_desc = 0,
+    uint64_t virtual_ml_d_desc = 0,
+    uint64_t virtual_mmp = 0,
+    uint64_t virtual_alg = 0) {
+  FBCublasLtMatmulAlgoGetHeuristicBuilder builder_(_fbb);
+  builder_.add_virtual_alg(virtual_alg);
+  builder_.add_virtual_mmp(virtual_mmp);
+  builder_.add_virtual_ml_d_desc(virtual_ml_d_desc);
+  builder_.add_virtual_ml_c_desc(virtual_ml_c_desc);
+  builder_.add_virtual_ml_b_desc(virtual_ml_b_desc);
+  builder_.add_virtual_ml_a_desc(virtual_ml_a_desc);
+  builder_.add_virtual_mmd(virtual_mmd);
+  builder_.add_virtual_handle(virtual_handle);
   return builder_.Finish();
 }
 

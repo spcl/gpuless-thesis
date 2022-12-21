@@ -63,7 +63,7 @@ table FBCublasLtMatmul {
     virtual_ml_c_desc:uint64;
     virtual_ml_d_desc:uint64;
     algo:[uint64];
-    algo_is_null:bool;
+    algo_is_null:uint64;
     workspace:uint64;
     workspace_size_in_bytes:uint64;
     stream:uint64;
@@ -106,4 +106,29 @@ table FBCublasSgemmStridedBatched {
     ldc:int;
     stride_c:int64;
     batch_count:int;
+}
+
+table FBCublasLtMatmulPreferenceCreate {
+    virtual_mmp:uint64;
+}
+
+table FBCublasLtMatmulPreferenceDestroy {
+    virtual_mmp:uint64;
+}
+
+table FBCublasLtMatmulPreferenceSetAttribute {
+    virtual_mmp:uint64;
+    attr:uint64;
+    buf:[uint8];
+}
+
+table FBCublasLtMatmulAlgoGetHeuristic {
+    virtual_handle:uint64;
+    virtual_mmd:uint64;
+    virtual_ml_a_desc:uint64;
+    virtual_ml_b_desc:uint64;
+    virtual_ml_c_desc:uint64;
+    virtual_ml_d_desc:uint64;
+    virtual_mmp:uint64;
+    virtual_alg:uint64;
 }

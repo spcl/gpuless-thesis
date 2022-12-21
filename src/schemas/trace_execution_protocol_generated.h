@@ -6,10 +6,10 @@
 
 #include "flatbuffers/flatbuffers.h"
 
-#include "cudevice_attributes_generated.h"
-#include "cublas_calls_generated.h"
-#include "cudnn_calls_generated.h"
 #include "cuda_runtime_calls_generated.h"
+#include "cublas_calls_generated.h"
+#include "cudevice_attributes_generated.h"
+#include "cudnn_calls_generated.h"
 
 namespace gpuless {
 
@@ -95,32 +95,36 @@ enum FBCudaApiCallUnion : uint8_t {
   FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy = 24,
   FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute = 25,
   FBCudaApiCallUnion_FBCublasSgemmStridedBatched = 26,
-  FBCudaApiCallUnion_FBCudnnCreate = 27,
-  FBCudaApiCallUnion_FBCudnnSetStream = 28,
-  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 29,
-  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 30,
-  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 31,
-  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 32,
-  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 33,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 34,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 35,
-  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 36,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 37,
-  FBCudaApiCallUnion_FBCudnnConvolutionForward = 38,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 39,
-  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 40,
-  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 41,
-  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 42,
-  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 43,
-  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 44,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 45,
-  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 46,
-  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 47,
+  FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate = 27,
+  FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy = 28,
+  FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute = 29,
+  FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic = 30,
+  FBCudaApiCallUnion_FBCudnnCreate = 31,
+  FBCudaApiCallUnion_FBCudnnSetStream = 32,
+  FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor = 33,
+  FBCudaApiCallUnion_FBCudnnSetTensorNdDescriptor = 34,
+  FBCudaApiCallUnion_FBCudnnCreateFilterDescriptor = 35,
+  FBCudaApiCallUnion_FBCudnnSetFilterNdDescriptor = 36,
+  FBCudaApiCallUnion_FBCudnnCreateConvolutionDescriptor = 37,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionGroupCount = 38,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionMathType = 39,
+  FBCudaApiCallUnion_FBCudnnSetConvolutionNdDescriptor = 40,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionForwardAlgorithmV7 = 41,
+  FBCudaApiCallUnion_FBCudnnConvolutionForward = 42,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardInference = 43,
+  FBCudaApiCallUnion_FBCudnnDestroyConvolutionDescriptor = 44,
+  FBCudaApiCallUnion_FBCudnnDestroyFilterDescriptor = 45,
+  FBCudaApiCallUnion_FBCudnnDestroyTensorDescriptor = 46,
+  FBCudaApiCallUnion_FBCudnnConvolutionBackwardData = 47,
+  FBCudaApiCallUnion_FBCudnnGetConvolutionBackwardDataAlgorithmV7 = 48,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationForwardTrainingExWorkspaceSize = 49,
+  FBCudaApiCallUnion_FBCudnnGetBatchNormalizationTrainingExReserveSpaceSize = 50,
+  FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx = 51,
   FBCudaApiCallUnion_MIN = FBCudaApiCallUnion_NONE,
   FBCudaApiCallUnion_MAX = FBCudaApiCallUnion_FBCudnnBatchNormalizationForwardTrainingEx
 };
 
-inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[48] {
+inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[52] {
   static const FBCudaApiCallUnion values[] = {
     FBCudaApiCallUnion_NONE,
     FBCudaApiCallUnion_FBCudaMalloc,
@@ -149,6 +153,10 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[48] {
     FBCudaApiCallUnion_FBCublasLtMatrixLayoutDestroy,
     FBCudaApiCallUnion_FBCublasLtMatrixLayoutSetAttribute,
     FBCudaApiCallUnion_FBCublasSgemmStridedBatched,
+    FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate,
+    FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy,
+    FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute,
+    FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic,
     FBCudaApiCallUnion_FBCudnnCreate,
     FBCudaApiCallUnion_FBCudnnSetStream,
     FBCudaApiCallUnion_FBCudnnCreateTensorDescriptor,
@@ -175,7 +183,7 @@ inline const FBCudaApiCallUnion (&EnumValuesFBCudaApiCallUnion())[48] {
 }
 
 inline const char * const *EnumNamesFBCudaApiCallUnion() {
-  static const char * const names[49] = {
+  static const char * const names[53] = {
     "NONE",
     "FBCudaMalloc",
     "FBCudaMemcpyH2D",
@@ -203,6 +211,10 @@ inline const char * const *EnumNamesFBCudaApiCallUnion() {
     "FBCublasLtMatrixLayoutDestroy",
     "FBCublasLtMatrixLayoutSetAttribute",
     "FBCublasSgemmStridedBatched",
+    "FBCublasLtMatmulPreferenceCreate",
+    "FBCublasLtMatmulPreferenceDestroy",
+    "FBCublasLtMatmulPreferenceSetAttribute",
+    "FBCublasLtMatmulAlgoGetHeuristic",
     "FBCudnnCreate",
     "FBCudnnSetStream",
     "FBCudnnCreateTensorDescriptor",
@@ -341,6 +353,22 @@ template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatrixLayoutSetAttribute> {
 
 template<> struct FBCudaApiCallUnionTraits<FBCublasSgemmStridedBatched> {
   static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasSgemmStridedBatched;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulPreferenceCreate> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulPreferenceDestroy> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulPreferenceSetAttribute> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute;
+};
+
+template<> struct FBCudaApiCallUnionTraits<FBCublasLtMatmulAlgoGetHeuristic> {
+  static const FBCudaApiCallUnion enum_value = FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic;
 };
 
 template<> struct FBCudaApiCallUnionTraits<FBCudnnCreate> {
@@ -583,6 +611,18 @@ struct FBCudaApiCall FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const FBCublasSgemmStridedBatched *api_call_as_FBCublasSgemmStridedBatched() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasSgemmStridedBatched ? static_cast<const FBCublasSgemmStridedBatched *>(api_call()) : nullptr;
   }
+  const FBCublasLtMatmulPreferenceCreate *api_call_as_FBCublasLtMatmulPreferenceCreate() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate ? static_cast<const FBCublasLtMatmulPreferenceCreate *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulPreferenceDestroy *api_call_as_FBCublasLtMatmulPreferenceDestroy() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy ? static_cast<const FBCublasLtMatmulPreferenceDestroy *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulPreferenceSetAttribute *api_call_as_FBCublasLtMatmulPreferenceSetAttribute() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute ? static_cast<const FBCublasLtMatmulPreferenceSetAttribute *>(api_call()) : nullptr;
+  }
+  const FBCublasLtMatmulAlgoGetHeuristic *api_call_as_FBCublasLtMatmulAlgoGetHeuristic() const {
+    return api_call_type() == gpuless::FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic ? static_cast<const FBCublasLtMatmulAlgoGetHeuristic *>(api_call()) : nullptr;
+  }
   const FBCudnnCreate *api_call_as_FBCudnnCreate() const {
     return api_call_type() == gpuless::FBCudaApiCallUnion_FBCudnnCreate ? static_cast<const FBCudnnCreate *>(api_call()) : nullptr;
   }
@@ -757,6 +797,22 @@ template<> inline const FBCublasLtMatrixLayoutSetAttribute *FBCudaApiCall::api_c
 
 template<> inline const FBCublasSgemmStridedBatched *FBCudaApiCall::api_call_as<FBCublasSgemmStridedBatched>() const {
   return api_call_as_FBCublasSgemmStridedBatched();
+}
+
+template<> inline const FBCublasLtMatmulPreferenceCreate *FBCudaApiCall::api_call_as<FBCublasLtMatmulPreferenceCreate>() const {
+  return api_call_as_FBCublasLtMatmulPreferenceCreate();
+}
+
+template<> inline const FBCublasLtMatmulPreferenceDestroy *FBCudaApiCall::api_call_as<FBCublasLtMatmulPreferenceDestroy>() const {
+  return api_call_as_FBCublasLtMatmulPreferenceDestroy();
+}
+
+template<> inline const FBCublasLtMatmulPreferenceSetAttribute *FBCudaApiCall::api_call_as<FBCublasLtMatmulPreferenceSetAttribute>() const {
+  return api_call_as_FBCublasLtMatmulPreferenceSetAttribute();
+}
+
+template<> inline const FBCublasLtMatmulAlgoGetHeuristic *FBCudaApiCall::api_call_as<FBCublasLtMatmulAlgoGetHeuristic>() const {
+  return api_call_as_FBCublasLtMatmulAlgoGetHeuristic();
 }
 
 template<> inline const FBCudnnCreate *FBCudaApiCall::api_call_as<FBCudnnCreate>() const {
@@ -1427,6 +1483,22 @@ inline bool VerifyFBCudaApiCallUnion(flatbuffers::Verifier &verifier, const void
     }
     case FBCudaApiCallUnion_FBCublasSgemmStridedBatched: {
       auto ptr = reinterpret_cast<const FBCublasSgemmStridedBatched *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulPreferenceCreate *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulPreferenceDestroy *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulPreferenceSetAttribute *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic: {
+      auto ptr = reinterpret_cast<const FBCublasLtMatmulAlgoGetHeuristic *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case FBCudaApiCallUnion_FBCudnnCreate: {

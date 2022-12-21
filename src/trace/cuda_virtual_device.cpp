@@ -27,3 +27,18 @@ void CudaVirtualDevice::initRealDevice() {
 
     this->initialized = true;
 }
+void *CudaVirtualDevice::get_scratch(size_t size) {
+    if (scratch_used)
+        throw std::runtime_error("Scratch already in use.");
+    scratch_used = true;
+
+    if (size < scratch_size)
+        return scratch_memory;
+
+    if (scratch_memory != nullptr)
+        cudaFree(scratch_memory);
+
+    cudaMalloc(&scratch_memory, size);
+    return scratch_memory;
+}
+void CudaVirtualDevice::free_scratch() { scratch_used = false; }

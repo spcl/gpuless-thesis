@@ -8,7 +8,7 @@ objects = allocation_protocol_generated.h \
 all: $(objects)
 
 %_generated.h: %.fbs
-	flatc --cpp $<
+	./flatc-2 --cpp $<
 	sed -i 's/names\[122\]/names\[128\]/' cudevice_attributes_generated.h # temporary flatbuffer bugfix
 
 clean:
