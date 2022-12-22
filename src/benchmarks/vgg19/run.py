@@ -3,11 +3,16 @@ from PIL import Image
 from torchvision import transforms
 from timeit import default_timer as timer
 
-start = timer()
-
 model = torch.hub.load('pytorch/vision:v0.10.0', 'vgg19', pretrained=True)
+before = timer()
 model.eval()
+model.to('cuda')
+after = timer()
 
+print('model eval time:')
+print(after - before)
+
+start = timer()
 input_image = Image.open('dog.jpg')
 preprocess = transforms.Compose([
     transforms.Resize(256),
@@ -19,7 +24,6 @@ input_tensor = preprocess(input_image)
 input_batch = input_tensor.unsqueeze(0)
 
 input_batch = input_batch.to('cuda')
-model.to('cuda')
 
 with torch.no_grad():
     output = model(input_batch)
@@ -28,8 +32,6 @@ probabilities = torch.nn.functional.softmax(output[0], dim=0)
 top_prob, top_catid = torch.topk(probabilities, 1)
 top_catid = top_catid[0].item()
 top_prob = top_prob[0].item()
-
-print("Top id: {:}, Top prob: {:}".format(top_catid, top_prob))
 
 end = timer()
 print(end - start)

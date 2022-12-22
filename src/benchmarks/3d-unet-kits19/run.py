@@ -14,8 +14,12 @@ input_file = './samples/case_00000.pkl'
 start = timer()
 
 device = torch.device("cuda")
+before = timer()
 model = torch.jit.load(model_file, map_location=device)
 model.eval()
+after = timer()
+print('model eval time:')
+print(after - before)
 
 def to_tensor(arr):
     return torch.from_numpy(arr).float().to(device)
@@ -69,8 +73,8 @@ with open(input_file, 'rb') as f:
     result = infer_single_query(query)
     response_array = array.array("B", result.tobytes())
     bi = response_array.buffer_info()
-    print(bi[0])
-    print(bi[1])
+    # print(bi[0])
+    # print(bi[1])
 
 end = timer()
 print(end - start)
