@@ -13,8 +13,14 @@ preprocess = transforms.Compose([
 ])
 
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext101_32x8d', pretrained=True)
+
+before = timer()
 model.eval()
 model.to('cuda')
+after = timer()
+
+print('model eval time:')
+print(after - before)
 
 input_image = Image.open('dog.jpg')
 
@@ -28,7 +34,7 @@ def inference(model, image):
         output = model(input_batch)
     probabilities = torch.nn.functional.softmax(output[0], dim=0)
     top_prob, top_catid = torch.topk(probabilities, 1)
-    print(top_catid[0].item(), file=sys.stderr)
+    # print(top_catid[0].item(), file=sys.stderr)
 
 
 total_time = 0
@@ -47,6 +53,6 @@ for i in range(0, iterations):
     torch.cuda.synchronize()
     times.append(end - start)
 
-total_time = sum(times)
+total_time = sum(times) * 1000
 avg_time = total_time / float(iterations)
 print("Avg time: {:}ms".format(round(avg_time, 5)))

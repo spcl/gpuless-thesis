@@ -18,8 +18,8 @@ model.eval()
 m_end = timer()
 
 
-# print('model eval time:')
-# print(m_end - m_start)
+print('model eval time:')
+print(m_end - m_start)
 
 def to_tensor(arr):
     return torch.from_numpy(arr).float().to(device)
@@ -98,6 +98,6 @@ with open(input_file, 'rb') as f:
         end = timer()
         times.append(end - start)
 
-total_time = sum(times)
+total_time = sum(times)*1000
 avg_time = total_time / float(iterations)
 print("Avg time: {:}ms".format(round(avg_time, 5)))

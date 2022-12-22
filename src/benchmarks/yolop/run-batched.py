@@ -9,8 +9,13 @@ from lib.utils.augmentations import letterbox_for_img
 
 # load model
 model = torch.hub.load('hustvl/yolop', 'yolop', pretrained=True)
+before = timer()
 model.eval()
 model.to('cuda')
+after = timer()
+
+print('model eval time:')
+print(after - before)
 
 normalize = transforms.Normalize(
     mean=[0.485, 0.456, 0.406],
@@ -29,9 +34,9 @@ def inference():
     img = transform(img)
     img = img.unsqueeze(0).to('cuda')
     det_out, da_seg_out, ll_seg_out = model(img)
-    print(det_out[0], file=sys.stderr)
-    print(da_seg_out[0], file=sys.stderr)
-    print(ll_seg_out[0], file=sys.stderr)
+    # print(det_out[0], file=sys.stderr)
+    # print(da_seg_out[0], file=sys.stderr)
+    # print(ll_seg_out[0], file=sys.stderr)
 
 
 total_time = 0
@@ -50,6 +55,6 @@ for i in range(0, iterations):
     torch.cuda.synchronize()
     times.append(end - start)
 
-total_time = sum(times)
+total_time = sum(times) * 1000
 avg_time = total_time / float(iterations)
 print("Avg time: {:}ms".format(round(avg_time, 5)))

@@ -1,7 +1,12 @@
 from bert import QA
 from timeit import default_timer as timer
 
+before = timer()
 model = QA('model')
+after = timer()
+
+print('model eval time:')
+print(after - before)
 
 start = timer()
 
@@ -17,8 +22,8 @@ q = 'How many awards was Beyonce nominated for at the 52nd Grammy Awards?'
 
 answer = model.predict(doc,q)
 
-print(answer['answer'])
-print(answer.keys())
+# print(answer['answer'])
+# print(answer.keys())
 
 end = timer()
 print(end - start)

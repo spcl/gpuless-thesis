@@ -5,7 +5,14 @@ from timeit import default_timer as timer
 
 # model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext50_32x4d', pretrained=True)
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext101_32x8d', pretrained=True)
+
+before = timer()
 model.eval()
+model.to('cuda')
+after = timer()
+
+print('model eval time:')
+print(after - before)
 
 start = timer()
 
@@ -20,7 +27,6 @@ input_tensor = preprocess(input_image)
 input_batch = input_tensor.unsqueeze(0)  # create a mini-batch as expected by the model
 
 input_batch = input_batch.to('cuda')
-model.to('cuda')
 
 with torch.no_grad():
     output = model(input_batch)
