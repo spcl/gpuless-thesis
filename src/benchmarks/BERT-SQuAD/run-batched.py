@@ -1,7 +1,13 @@
 from bert import QA
 from timeit import default_timer as timer
 
+before = timer()
 model = QA('model')
+after = timer()
+
+print('model eval time:')
+print(after - before)
+
 
 docs = [
     "Victoria has a written constitution enacted in 1975, but based on the 1855 colonial constitution, passed by the "
@@ -39,6 +45,6 @@ for i in range(0, iterations):
     end = timer()
     times.append(end - start)
 
-total_time = sum(times)
+total_time = sum(times) * 1000
 avg_time = total_time / float(iterations)
 print("Avg time: {:}ms".format(round(avg_time, 5)))
