@@ -29,5 +29,7 @@ top_prob, top_catid = torch.topk(probabilities, 1)
 top_catid = top_catid[0].item()
 top_prob = top_prob[0].item()
 
+print("Top id: {:}, Top prob: {:}".format(top_catid, top_prob))
+
 end = timer()
 print(end - start)

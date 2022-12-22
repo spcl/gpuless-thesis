@@ -118,7 +118,7 @@ TEST(PtxTree, SubEvalParam) {
 }
 
 TEST(PtxParser, ParseSimpleCvta) {
-    std::string s = "mov %r2, [myPtr];\n"
+    std::string s = "mov.u64 %r2, [myPtr];\n"
                     "cvta.to.global.u64 %r1, %r2;";
     PtxTreeParser::TreeParser parser({"myPtr"});
     auto trees = parser.parsePtxTrees(s);
@@ -145,7 +145,7 @@ TEST(PtxParser, ParseAdd) {
 }
 
 TEST(PtxParser, ParseMovV2) {
-    std::string s = "mov.v2 {%r3, %r2}, [myPtr];\n"
+    std::string s = "mov.u32.v2 {%r3, %r2}, [myPtr];\n"
                     "cvta.to.global.u64 %r1, %r2;";
     PtxTreeParser::TreeParser parser({"myPtr"});
     auto trees = parser.parsePtxTrees(s);
@@ -154,7 +154,7 @@ TEST(PtxParser, ParseMovV2) {
 }
 
 TEST(PtxParser, ParseAddV2) {
-    std::string s = "add.v2 {%r3, %r2}, [myPtr+2], 4;\n"
+    std::string s = "add.u32.v2 {%r3, %r2}, [myPtr+2], 4;\n"
                     "cvta.to.global.u64 %r1, %r3;\n"
                     "cvta.to.global.u64 %r4, %r2;";
     PtxTreeParser::TreeParser parser({"myPtr"});
@@ -716,6 +716,68 @@ TEST(PtxParser, BuggyPtx13) {
     }
 }
 
+TEST(PtxParser, BuggyPtx20) {
+    std::ifstream s(TEST_RESOURCE_DIR "/buggyPtx20");
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string ptx_data = ss.str();
+    PtxTreeParser::TreeParser parser(
+        {"_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_0",
+         "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_1",
+         "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_2",
+         "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_3",
+         "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_4",
+        "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_5",
+        "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_6"});
+    auto trees = parser.parsePtxTrees(ptx_data);
+
+    for (const auto &tree : trees) {
+        auto first_eval = tree.first->eval(nullptr);
+        if (!first_eval) {
+            KLaunchConfig kLaunchConfig{{3, 3, 0}, {3, 3, 0}};
+            auto second_eval = tree.first->eval(&kLaunchConfig);
+            if (!second_eval) {
+                std::vector<std::vector<uint8_t>> vec;
+                vec.emplace_back(8, 0);
+                vec.emplace_back(8, 0);
+                vec.emplace_back(24, 0);
+                vec.emplace_back(4, 0);
+                vec.emplace_back(1, 0);
+                vec.emplace_back(1, 0);
+                vec.emplace_back(4, 0);
+
+                std::vector<UncollapsedKParamInfo> paramInfos;
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_0",
+                    b8, 1, 0, 8);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_1",
+                    b8, 1, 0, 8);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_2",
+                    b8, 1, 0, 24);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_3",
+                    b8, 1, 0, 4);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_4",
+                    b8, 1, 0, 1);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_5",
+                    b8, 1, 0, 1);
+                paramInfos.emplace_back(
+                    "_ZN14at_cuda_detail3cub16DeviceScanKernelINS0_16DeviceScanPolicyIN3c107complexIfEEE9Policy600EPS5_S8_NS0_13ScanTileStateIS5_Lb0EEESt10multipliesIS5_ENS0_8NullTypeEiEEvT0_T1_T2_iT3_T4_T5__param_6",
+                    b8, 1, 0, 4);
+
+                KLaunchConfig kLaunchConfigWithPar{
+                    {3, 3, 0}, {3, 3, 0}, &vec, &paramInfos};
+                auto third_eval = tree.first->eval(&kLaunchConfigWithPar);
+                EXPECT_NE(third_eval, nullptr);
+            }
+        }
+    }
+}
+
 TEST(PtxParser, BuggyPtx16) {
     std::ifstream s(TEST_RESOURCE_DIR "/buggyPtx16");
     std::stringstream ss;
@@ -1181,7 +1243,7 @@ TEST(FinalTest, TheBigBoy) {
                 } else {
                     ++instant_eval;
                 }
-            } catch (...) {
+            } catch (std::runtime_error err) {
                 ++error_cnt;
             }
         }
@@ -1517,7 +1579,7 @@ TEST(FinalTest, AnotherBigBoy) {
 
         for (auto &tree : trees) {
             ++cnt;
-            try {
+            {
                 auto first_eval = tree.first->eval(nullptr);
                 if (!first_eval) {
                     auto second_eval = tree.first->eval(&kLaunchConfig);
@@ -1529,8 +1591,6 @@ TEST(FinalTest, AnotherBigBoy) {
                 } else {
                     ++instant_eval;
                 }
-            } catch (...) {
-                ++error_cnt;
             }
         }
     }
