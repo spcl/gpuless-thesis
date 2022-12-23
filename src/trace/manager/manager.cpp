@@ -189,13 +189,29 @@ static std::string exec(const char *cmd) {
 void setup_devices() {
     std::string cmd = "nvidia-smi -L";
     std::string smi_string = exec(cmd.c_str());
-    std::vector<std::string> split_devices;
-    string_split(smi_string, '\n', split_devices);
-    for(const auto& d : split_devices) {
-        std::string::size_type GPU_idx = d.find("GPU-");
-        std::string GPU_ID = d.substr(GPU_idx, d.size() - GPU_idx - 1);
-        devices.emplace_back(GPU_ID, NO_MIG, NO_SESSION_ASSIGNED);
+    std::istringstream smistream(smi_string);
+
+    std::string line;
+    std::string last_gpu;
+    while(getline(smistream, line)) {
+        if(!last_gpu.empty())
+            devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
+
+        std::string::size_type GPU_idx = line.find("GPU-");
+        if(GPU_idx == std::string::npos) {
+            std::string::size_type MIG_idx = line.find("MIG-");
+            if(MIG_idx == std::string::npos)
+                throw std::runtime_error("Unexpected nvidia-smi output.");
+            std::string MIG_ID = line.substr(MIG_idx, line.size() - MIG_idx - 1);
+            devices.emplace_back(MIG_ID, NO_MIG, NO_SESSION_ASSIGNED);
+            last_gpu.clear();
+        } else {
+            last_gpu = line.substr(GPU_idx, line.size() - GPU_idx - 1);
+        }
     }
+
+    if(!last_gpu.empty())
+        devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
 }
 
 void sigint_handler(int signum) {
