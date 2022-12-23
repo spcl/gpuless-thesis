@@ -194,12 +194,14 @@ void setup_devices() {
     std::string line;
     std::string last_gpu;
     while(getline(smistream, line)) {
+        std::string::size_type MIG_idx = line.find("MIG-");
+        if(MIG_idx != std::string::npos)
+            last_gpu.clear();
         if(!last_gpu.empty())
             devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
 
         std::string::size_type GPU_idx = line.find("GPU-");
         if(GPU_idx == std::string::npos) {
-            std::string::size_type MIG_idx = line.find("MIG-");
             if(MIG_idx == std::string::npos)
                 throw std::runtime_error("Unexpected nvidia-smi output.");
             std::string MIG_ID = line.substr(MIG_idx, line.size() - MIG_idx - 1);
