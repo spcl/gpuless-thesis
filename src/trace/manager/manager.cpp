@@ -61,7 +61,7 @@ static void deallocate_session_devices(int32_t session_id) {
     pid_t new_pid = fork_device_manager(device, it->second.second);
     std::get<0>(it->second) = new_pid;
     SPDLOG_INFO("Device manager restarted for device={}, pid={}, port={}",
-                 device, new_pid, it->second.second);
+                device, new_pid, it->second.second);
 
     lock_devices.unlock();
 }
@@ -81,7 +81,7 @@ static std::vector<int32_t> available_profiles() {
 static std::string assign_device(int32_t profile, int32_t session_id) {
     lock_devices.lock();
     std::string assigned_device;
-    for(auto& dev : devices) {
+    for (auto &dev : devices) {
         if (std::get<2>(dev) == NO_SESSION_ASSIGNED &&
             profile == std::get<1>(dev)) {
             std::get<2>(dev) = session_id;
@@ -97,7 +97,7 @@ static std::string assign_device(int32_t profile, int32_t session_id) {
 void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
     int session_id = next_session_id++;
     SPDLOG_INFO("allocation request for {} (session_id={})\n",
-                 msg->message_as_AllocateRequest()->profile(), session_id);
+                msg->message_as_AllocateRequest()->profile(), session_id);
 
     flatbuffers::FlatBufferBuilder builder;
 
@@ -188,23 +188,25 @@ static std::string exec(const char *cmd) {
 
 void setup_devices() {
     std::string cmd = "nvidia-smi -L";
+
     std::string smi_string = exec(cmd.c_str());
     std::istringstream smistream(smi_string);
 
     std::string line;
     std::string last_gpu;
-    while(getline(smistream, line)) {
+    while (getline(smistream, line)) {
         std::string::size_type MIG_idx = line.find("MIG-");
-        if(MIG_idx != std::string::npos)
+        if (MIG_idx != std::string::npos)
             last_gpu.clear();
-        if(!last_gpu.empty())
+        if (!last_gpu.empty())
             devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
 
         std::string::size_type GPU_idx = line.find("GPU-");
-        if(GPU_idx == std::string::npos) {
-            if(MIG_idx == std::string::npos)
+        if (GPU_idx == std::string::npos) {
+            if (MIG_idx == std::string::npos)
                 throw std::runtime_error("Unexpected nvidia-smi output.");
-            std::string MIG_ID = line.substr(MIG_idx, line.size() - MIG_idx - 1);
+            std::string MIG_ID =
+                line.substr(MIG_idx, line.size() - MIG_idx - 1);
             devices.emplace_back(MIG_ID, NO_MIG, NO_SESSION_ASSIGNED);
             last_gpu.clear();
         } else {
@@ -212,7 +214,7 @@ void setup_devices() {
         }
     }
 
-    if(!last_gpu.empty())
+    if (!last_gpu.empty())
         devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
 }
 
@@ -289,7 +291,7 @@ int main(int argc, char **argv) {
     socklen_t remote_addrlen = sizeof(remote_addr);
     while ((s_new = accept(socket_fd, &remote_addr, &remote_addrlen))) {
         SPDLOG_INFO("manager: connection from {}",
-                     inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
+                    inet_ntoa(((sockaddr_in *)&remote_addr)->sin_addr));
 
         // handle connection in new thread
         int *s_new_alloc = new int;

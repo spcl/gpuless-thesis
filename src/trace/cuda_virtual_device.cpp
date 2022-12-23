@@ -21,7 +21,6 @@ CudaVirtualDevice::CudaVirtualDevice() {
     checkCudaErrors(cuDeviceTotalMem(&this->device_total_mem, this->device));
     SPDLOG_TRACE("Device TotalMem: {}", this->device_total_mem);
 
-    this->initialized = true;
 }
 void *CudaVirtualDevice::get_scratch(size_t size) {
     if (scratch_used)
