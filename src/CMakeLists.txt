@@ -4,6 +4,8 @@ project(gpuless)
 enable_language(CUDA)
 find_package(CUDAToolkit 11.4)
 
+option(BUILD_BENCHMARKS "Build the resnet50 benchmark" OFF)
+
 option(SPDLOG_LEVEL_INFO "Set the spdlog level to info" OFF)
 option(SPDLOG_LEVEL_DEBUG "Set the spdlog level to debug" OFF)
 option(SPDLOG_LEVEL_TRACE "Set the spdlog level to trace" OFF)
@@ -62,19 +64,21 @@ add_custom_target(
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/schemas)
 
 add_executable(manager_trace
-        trace/manager/manager.cpp
-        trace/manager/manager_device.cpp
-        trace/cuda_trace.cpp
-        trace/cuda_trace_converter.cpp
-        trace/cuda_api_calls.cpp
-        trace/cudnn_api_calls.cpp
-        trace/cublas_api_calls.cpp
-        trace/cuda_virtual_device.cpp
-        trace/cuda_virtual_device.cpp
-        trace/trace_executor_local.cpp
-        trace/trace_executor_tcp_client.cpp
-        trace/dlsym_util.cpp
-        utils.cpp)
+    trace/manager/manager.cpp
+    trace/manager/manager_device.cpp
+    trace/cuda_trace.cpp
+    trace/cuda_trace_converter.cpp
+    trace/cuda_api_calls.cpp
+    trace/cudnn_api_calls.cpp
+    trace/cublas_api_calls.cpp
+    trace/cuda_virtual_device.cpp
+    trace/cuda_virtual_device.cpp
+    trace/tcp_gpu_session.cpp
+    trace/trace_executor_local.cpp
+    trace/trace_executor_tcp_client.cpp
+    trace/dlsym_util.cpp
+    TcpClient.cpp
+    utils.cpp)
 add_dependencies(manager_trace flatbuffer)
 target_link_libraries(manager_trace
         iberty
@@ -85,6 +89,11 @@ target_link_libraries(manager_trace
         CUDA::cublas
         pthread)
 
+if(BUILD_BENCHMARKS)
+    add_subdirectory(
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
+        ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+endif()
 add_subdirectory(
         ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
         ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
@@ -116,12 +125,14 @@ add_library(gpuless SHARED
         trace/cublas_api_calls.cpp
         trace/cuda_virtual_device.cpp
         trace/cuda_virtual_device.cpp
+        trace/tcp_gpu_session.cpp
         trace/trace_executor_local.cpp
         trace/trace_executor_tcp_client.cpp
         trace/dlsym_util.cpp
         trace/cubin_parser/tree_parser.cpp
         trace/cubin_parser/ptx_tree.cpp
         trace/cubin_parser/parser_util.cpp
+        TcpClient.cpp
         utils.cpp
         trace/cubin_analysis.cpp)
 target_link_libraries(gpuless

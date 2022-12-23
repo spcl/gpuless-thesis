@@ -1,11 +1,7 @@
 #include "cuda_virtual_device.hpp"
 #include <spdlog/spdlog.h>
 
-void CudaVirtualDevice::initRealDevice() {
-    if (this->initialized) {
-        return;
-    }
-
+CudaVirtualDevice::CudaVirtualDevice() {
     SPDLOG_INFO("CudaVirtualDevice: initializing real device");
     checkCudaErrors(cuInit(0));
     checkCudaErrors(cuDeviceGet(&this->device, 0));

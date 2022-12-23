@@ -17,7 +17,6 @@
 
 class CudaVirtualDevice {
   private:
-    bool initialized = false;
     void *scratch_memory = nullptr;
     size_t scratch_size = 0;
     bool scratch_used = false;
@@ -61,7 +60,6 @@ class CudaVirtualDevice {
     CUdevice device;
     CUcontext context;
 
-    void initRealDevice();
 
     void *translate_memory(const void *virtual_addr);
 
@@ -77,6 +75,7 @@ class CudaVirtualDevice {
                 cudaFree(ptr);
         }
     }
+    CudaVirtualDevice();
 };
 
 #endif // GPULESS_CUDA_VDEV_H
