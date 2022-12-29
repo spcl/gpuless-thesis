@@ -3,14 +3,15 @@ project(image-recognition)
 
 cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
 if (${_hostname} MATCHES ".*\.cscs\.ch")
-    set(CMAKE_PREFIX_PATH "$ENV{HOME}/libtorch/share/cmake;$ENV{HOME}/opencv-4.5.4/build")
+    set(CMAKE_PREFIX_PATH "$ENV{HOME}/libtorch/share/cmake;$ENV{HOME}/opencv-4.x/build")
 
-    set(CUDNN_ROOT $ENV{HOME}/cudnn/cuda)
-    set(CUDNN_LIBRARY $ENV{HOME}/cudnn/cuda/lib64)
-    set(CUDNN_INCLUDE_DIR $ENV{HOME}/cudnn/cuda/include)
+    set(CUDNN_ROOT $ENV{HOME}/cudnn)
+    set(CUDNN_LIBRARY $ENV{HOME}/cudnn/lib64)
+    set(CUDNN_INCLUDE_DIR $ENV{HOME}/cudnn/include)
 
-    include_directories($ENV{HOME}/miniconda3/include)
-    link_directories($ENV{HOME}/miniconda3/lib)
+    include_directories($ENV{HOME}/conda/include)
+    #link_directories(/opt/intel/mkl/lib/intel64)
+    link_directories($ENV{HOME}/conda/lib)
 endif()
 
 find_package(Torch REQUIRED)
@@ -27,10 +28,10 @@ set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -G")
 
 add_executable(image-recognition image-recognition.cpp)
-target_link_libraries(image-recognition "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
+target_link_libraries(image-recognition "${OpenCV_LIBS}" "${TORCH_LIBRARIES}" iomp5)
 
 add_executable(image-recognition-batched image-recognition-batched.cpp)
-target_link_libraries(image-recognition-batched "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
+target_link_libraries(image-recognition-batched "${OpenCV_LIBS}" "${TORCH_LIBRARIES}" iomp5)
 
 add_executable(image-recognition-batched-total image-recognition-batched-total.cpp)
-target_link_libraries(image-recognition-batched-total "${OpenCV_LIBS}" "${TORCH_LIBRARIES}")
+target_link_libraries(image-recognition-batched-total "${OpenCV_LIBS}" "${TORCH_LIBRARIES}" iomp5)

@@ -29,8 +29,11 @@ link_directories(${CMAKE_SOURCE_DIR}/lib)
 # special options for compiling on the CSCS cluster
 cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
 if (${_hostname} MATCHES ".*\.cscs\.ch")
-    include_directories($ENV{HOME}/cudnn/cuda/include)
-    link_directories($ENV{HOME}/cudnn/cuda/lib64)
+	include_directories($ENV{HOME}/cudnn/include)
+	link_directories($ENV{HOME}/cudnn/lib64)
+	set(CUDNN_LIBRARY_PATH $ENV{HOME}/cudnn/lib64)
+	set(CUDNN_INCLUDE_PATH $ENV{HOME}/cudnn/include)
+	set(OpenCV_DIR $ENV{HOME}/opencv-4.x/build)
 endif ()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -95,15 +98,19 @@ add_library(analysis SHARED
         utils.cpp trace/trace_executor.hpp)
 target_link_libraries(analysis
         CUDA::cudart
-        CUDA::cuda_driver)
+        CUDA::cuda_driver
+	stdc++fs)
 
-add_library(argument_analysis SHARED
-        argument_analysis/libarganalysis.cpp
-        trace/cubin_analysis.cpp
-        utils.cpp trace/trace_executor.hpp)
-target_link_libraries(argument_analysis
-        CUDA::cudart
-        CUDA::cuda_driver)
+set(ARGUMENT_ANALYSIS OFF)
+if (ARGUMENT_ANALYSIS)
+	add_library(argument_analysis SHARED
+        	argument_analysis/libarganalysis.cpp
+        	trace/cubin_analysis.cpp
+        	utils.cpp trace/trace_executor.hpp)
+	target_link_libraries(argument_analysis
+        	CUDA::cudart
+	        CUDA::cuda_driver)
+endif ()
 
 add_library(gpuless SHARED
         trace/libgpuless.cpp
@@ -162,6 +169,7 @@ add_executable(
 target_link_libraries(
         analysis_tests
         GTest::gtest_main
+	stdc++fs
 )
 
 target_compile_definitions(parser_tests PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/trace/cubin_parser/tests/")
