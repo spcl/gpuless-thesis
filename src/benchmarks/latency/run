@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+EXECUTOR_TYPE=tcp \
+MANAGER_PORT=8002 \
+MANAGER_IP=127.0.0.1 \
+CUDA_BINARY=./latency \
+LD_PRELOAD=$HOME/gpuless/src/build/libgpuless.so \
+./latency

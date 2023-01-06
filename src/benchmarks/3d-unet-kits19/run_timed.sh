@@ -1,1 +1,1 @@
-python run.py | tail -n1
+python run.py 2>/dev/null | tail -n3

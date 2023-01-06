@@ -10,10 +10,10 @@
 # link objects(binaries) together
 myocyte.out:		main.o
 	nvcc	-cudart=shared -arch=$(CUDA_ARCH) main.o \
-				-I/usr/local/cuda/include \
-				-L/usr/local/cuda/lib \
+				-I$(CUDA_HOME)/include \
+				-L$(CUDA_HOME)/lib64 \
 				-lm -lcuda -lcudart \
-                                -o myocyte.out
+                                -o myocyte
 
 # compile main function file into object (binary)
 main.o:	define.c \

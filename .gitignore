@@ -5,4 +5,6 @@
 .cache
 /torch
 /src/trace/cubin_parser/tests/libtorch_cuda.380.sm_90.ptx
-*/__pycache__
+__pycache__/
+*.pkl
+*.zip

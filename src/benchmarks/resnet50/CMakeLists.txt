@@ -3,7 +3,7 @@ project(image-recognition)
 
 cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
 if (${_hostname} MATCHES ".*\.cscs\.ch")
-    set(CMAKE_PREFIX_PATH "$ENV{HOME}/libtorch/share/cmake;$ENV{HOME}/opencv-4.x/build")
+    set(CMAKE_PREFIX_PATH "$ENV{HOME}/libtorch/share/cmake;$ENV{HOME}/opencv-4.7.0/build")
 
     set(CUDNN_ROOT $ENV{HOME}/cudnn)
     set(CUDNN_LIBRARY $ENV{HOME}/cudnn/lib64)

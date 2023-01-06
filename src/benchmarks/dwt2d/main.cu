@@ -34,6 +34,7 @@
 #include <assert.h>
 #include <sys/time.h>
 #include <getopt.h>
+#include <time.h>
 
 #include "common.h"
 #include "components.h"
@@ -312,6 +313,8 @@ int main(int argc, char **argv)
         writeVisual = 0; //do not write visual when RDWT
     }
 
+    clock_t start = clock();
+
     // device init
     int devCount;
     cudaGetDeviceCount(&devCount);
@@ -393,6 +396,9 @@ int main(int argc, char **argv)
     //writeComponent(b_wave_cuda, componentSize, ".b");
     cudaFreeHost(d->srcImg);
     cudaCheckError("Cuda free host");
+
+    clock_t end = clock();
+    printf("%f\n", ((double) (end - start)) / CLOCKS_PER_SEC);
 
     return 0;
 }

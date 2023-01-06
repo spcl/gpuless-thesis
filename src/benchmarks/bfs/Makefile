@@ -1,6 +1,6 @@
 include make.config
 
-CC := /opt/cuda/bin/nvcc -cudart shared
+CC := $(CUDA_DIR)/bin/nvcc -cudart shared
 
 INCLUDE := /opt/cuda/include
 

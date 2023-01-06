@@ -33,7 +33,7 @@ if (${_hostname} MATCHES ".*\.cscs\.ch")
 	link_directories($ENV{HOME}/cudnn/lib64)
 	set(CUDNN_LIBRARY_PATH $ENV{HOME}/cudnn/lib64)
 	set(CUDNN_INCLUDE_PATH $ENV{HOME}/cudnn/include)
-	set(OpenCV_DIR $ENV{HOME}/opencv-4.x/build)
+	set(OpenCV_DIR $ENV{HOME}/opencv-4.7.0/build)
 endif ()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
