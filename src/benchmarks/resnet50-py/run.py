@@ -10,6 +10,7 @@ model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
 before = timer()
 model.eval()
 model.to('cuda')
+torch.cuda.get_device_properties('cuda')
 after = timer()
 
 print('model eval time:')

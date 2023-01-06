@@ -1,1 +1,1 @@
-./myocyte.out 100 1 0 | tail -n1 | cut -d' ' -f1
+./myocyte 100 1 0 | tail -n2 | cut -d' ' -f1

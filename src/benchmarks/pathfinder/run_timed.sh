@@ -1,1 +1,2 @@
-./pathfinder 100000 100 20 | tail -n1
+./pathfinder 100000 100 20 | tail -n2
+
