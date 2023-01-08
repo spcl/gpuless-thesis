@@ -11,8 +11,6 @@ from global_vars import *
 model_file = './3dunet_kits19_pytorch.ptc'
 input_file = './samples/case_00000.pkl'
 
-start = timer()
-
 device = torch.device("cuda")
 before = timer()
 model = torch.jit.load(model_file, map_location=device)
@@ -34,6 +32,8 @@ def do_infer(input_tensor):
 def infer_single_query(query):
     image = query[np.newaxis, ...]
     result, norm_map, norm_patch = infu.prepare_arrays(image, ROI_SHAPE)
+
+    start = timer()
     t_image = to_tensor(image)
     t_result = to_tensor(result)
     t_norm_map = to_tensor(norm_map)
@@ -66,6 +66,8 @@ def infer_single_query(query):
     result = from_tensor(t_result)
     norm_map = from_tensor(t_norm_map)
     final_result = infu.finalize(result, norm_map)
+    end = timer()
+    print(end - start)
     return final_result
 
 with open(input_file, 'rb') as f:
@@ -76,5 +78,3 @@ with open(input_file, 'rb') as f:
     # print(bi[0])
     # print(bi[1])
 
-end = timer()
-print(end - start)
