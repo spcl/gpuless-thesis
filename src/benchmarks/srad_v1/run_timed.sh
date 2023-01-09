@@ -1,2 +1,2 @@
 #!/bin/sh
-./srad 100 0.5 502 458 | tail -n1 | cut -d' ' -f1
+./srad_v1 100 0.5 502 458 | tail -n2 | cut -d' ' -f1

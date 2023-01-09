@@ -1,1 +1,1 @@
-./bfs ./graph1MW_6.txt | tail -n1
+./bfs ./graph1MW_6.txt | tail -n2

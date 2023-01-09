@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+ip='127.0.0.1'
+root=${1:-$HOME/gpuless}
+benchmarks=$root/src/benchmarks
+torch=$HOME/libtorch/lib/libtorch_cuda.so
+bench_type=native
+note="$bench_type-a100"
+
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo_colour () {
+        echo -e "${BLUE}$1${NC}"
+}
+
+bench=""
+#"latency
+#hotspot
+#srad_v1
+#pathfinder
+#bfs
+#myocyte"
+
+bench_torch="3d-unet-kits19
+vgg19
+yolop
+alexnet
+midas"
+#"resnet50
+#resnet50-py
+#resnext50
+#resnext101
+#"
+
+for b in $bench
+do
+	echo_colour $b
+	./benchmark.sh $root $benchmarks/$b $bench_type $b $ip $note
+done
+
+for b in $bench_torch
+do
+	echo_colour $b
+	./benchmark.sh $root $benchmarks/$b $bench_type $torch $ip $note
+done
