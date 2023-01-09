@@ -2,6 +2,6 @@
 
 EXECUTOR_TYPE=tcp \
 CUDA_BINARY=/usr/lib/libtorch_cuda.so \
-MANAGER_IP=192.168.1.109 \
-LD_PRELOAD=/home/luke/ethz/master/thesis/msc-lutobler-gpuless/src/build/libgpuless.so \
+MANAGER_IP=127.0.0.1 \
+LD_PRELOAD=/home/paul/ETH/HS22/DPHPC/gpuless/src/cmake-build-debug/libgpuless.so  \
 python run.py

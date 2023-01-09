@@ -29,17 +29,15 @@ link_directories(${CMAKE_SOURCE_DIR}/lib)
 # special options for compiling on the CSCS cluster
 cmake_host_system_information(RESULT _hostname QUERY HOSTNAME)
 if (${_hostname} MATCHES ".*\.cscs\.ch")
-	include_directories($ENV{HOME}/cudnn/include)
-	link_directories($ENV{HOME}/cudnn/lib64)
-	set(CUDNN_LIBRARY_PATH $ENV{HOME}/cudnn/lib64)
-	set(CUDNN_INCLUDE_PATH $ENV{HOME}/cudnn/include)
-	set(OpenCV_DIR $ENV{HOME}/opencv-4.7.0/build)
-endif ()
+    add_compile_options(-DCSCS)
+    include_directories($ENV{HOME}/cudnn/include)
+    link_directories($ENV{HOME}/cudnn/lib64)
+endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O2 -Wall -Wextra -Wno-unused-parameter")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O2 -Wall -Wextra -Wno-unused-parameter -ggdb")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -g -Wall -Wextra -Wno-unused-parameter -ggdb -fno-operator-names")
 
 set(CMAKE_CUDA_STANDARD 17)
@@ -88,9 +86,11 @@ target_link_libraries(manager_trace
         CUDA::cublas
         pthread)
 
-add_subdirectory(
+if(BUILD_BENCHMARKS)
+    add_subdirectory(
         ${CMAKE_SOURCE_DIR}/benchmarks/resnet50
         ${CMAKE_SOURCE_DIR}/benchmarks/resnet50)
+endif()
 
 add_library(analysis SHARED
         analysis/libcudaanalysis.cpp
