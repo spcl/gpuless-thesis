@@ -34,7 +34,7 @@ def inference(model, image):
         output = model(input_batch)
     probabilities = torch.nn.functional.softmax(output[0], dim=0)
     top_prob, top_catid = torch.topk(probabilities, 1)
-    # print(top_catid[0].item(), file=sys.stderr)
+    print(top_catid[0].item(), file=sys.stderr)
 
 
 total_time = 0
@@ -44,7 +44,7 @@ times = []
 for i in range(0, 5):
     inference(model, input_image)
 
-iterations = 10
+iterations = 100
 # benchmark
 for i in range(0, iterations):
     start = timer()
@@ -55,4 +55,4 @@ for i in range(0, iterations):
 
 total_time = sum(times) * 1000
 avg_time = total_time / float(iterations)
-print("Avg time: {:}ms".format(round(avg_time, 5)))
+print(*times, sep="\n")

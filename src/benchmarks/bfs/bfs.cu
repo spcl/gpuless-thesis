@@ -49,13 +49,6 @@ void BFSGraph(int argc, char** argv);
 ////////////////////////////////////////////////////////////////////////////////
 int main( int argc, char** argv) 
 {
-    const char* ITERATIONS = getenv("ITERATIONS");
-    unsigned iterations = 1;
-    if (ITERATIONS != nullptr) {
-        iterations = atoi(ITERATIONS);
-    }
-    std::vector<std::chrono::duration> times(iterations);
-    for (unsigned i = 0; i < iterations; ++i){
         auto s = std::chrono::high_resolution_clock::now();
 
         no_of_nodes=0;
@@ -63,11 +56,8 @@ int main( int argc, char** argv)
         BFSGraph( argc, argv);
 
         auto e = std::chrono::high_resolution_clock::now();
-        times.push_back(std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0);
-    }
-    for (auto d : times){
+	auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
         printf("%.8f\n", d);
-    }
 }
 
 void Usage(int argc, char**argv){

@@ -90,8 +90,8 @@ with open(input_file, 'rb') as f:
 
         query = pickle.loads(input_bytes)[0]
         result = infer_single_query(query)
-        # response_array = array.array("B", result.tobytes())
-        # bi = response_array.buffer_info()
+        response_array = array.array("B", result.tobytes())
+        bi = response_array.buffer_info()
         # print(bi[0])
         # print(bi[1])
 
@@ -100,4 +100,4 @@ with open(input_file, 'rb') as f:
 
 total_time = sum(times)*1000
 avg_time = total_time / float(iterations)
-print("Avg time: {:}ms".format(round(avg_time, 5)))
+print(*times, sep="\n")
