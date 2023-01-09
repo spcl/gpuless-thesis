@@ -193,12 +193,16 @@ void setup_devices() {
 
     std::string line;
     std::string last_gpu;
+
+    char* mig_only = std::getenv("MIG_ONLY");
+
     while(getline(smistream, line)) {
         std::string::size_type MIG_idx = line.find("MIG-");
         if(MIG_idx != std::string::npos)
             last_gpu.clear();
-        if(!last_gpu.empty())
+        if(!last_gpu.empty() && !mig_only)
             devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
+
 
         std::string::size_type GPU_idx = line.find("GPU-");
         if(GPU_idx == std::string::npos) {
@@ -208,11 +212,12 @@ void setup_devices() {
             devices.emplace_back(MIG_ID, NO_MIG, NO_SESSION_ASSIGNED);
             last_gpu.clear();
         } else {
-            last_gpu = line.substr(GPU_idx, line.size() - GPU_idx - 1);
+            if(!mig_only)
+                last_gpu = line.substr(GPU_idx, line.size() - GPU_idx - 1);
         }
     }
 
-    if(!last_gpu.empty())
+    if(!last_gpu.empty() && !mig_only)
         devices.emplace_back(last_gpu, NO_MIG, NO_SESSION_ASSIGNED);
 }
 
