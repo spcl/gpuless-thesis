@@ -1,0 +1,1 @@
+./bfs_batched ./graph1MW_6.txt

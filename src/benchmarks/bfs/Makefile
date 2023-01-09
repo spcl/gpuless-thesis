@@ -8,6 +8,11 @@ SRC = bfs.cu
 
 EXE = bfs
 
+all: release release_batched
+
+release_batched:
+	$(CC) -DITERATIONS="100" $(SRC) -o $(EXE)_batched -I$(INCLUDE) -L$(CUDA_LIB_DIR)
+
 release: $(SRC)
 	$(CC) $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR)
 

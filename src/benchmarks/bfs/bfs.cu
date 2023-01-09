@@ -21,7 +21,9 @@
 #include <math.h>
 #include <cuda.h>
 
+
 #include <chrono>
+#include <vector>
 #include <iostream>
 
 #define MAX_THREADS_PER_BLOCK 512
@@ -47,15 +49,25 @@ void BFSGraph(int argc, char** argv);
 ////////////////////////////////////////////////////////////////////////////////
 int main( int argc, char** argv) 
 {
-    auto s = std::chrono::high_resolution_clock::now();
+    const char* ITERATIONS = getenv("ITERATIONS");
+    unsigned iterations = 1;
+    if (ITERATIONS != nullptr) {
+        iterations = atoi(ITERATIONS);
+    }
+    std::vector<std::chrono::duration> times(iterations);
+    for (unsigned i = 0; i < iterations; ++i){
+        auto s = std::chrono::high_resolution_clock::now();
 
-	no_of_nodes=0;
-	edge_list_size=0;
-	BFSGraph( argc, argv);
+        no_of_nodes=0;
+        edge_list_size=0;
+        BFSGraph( argc, argv);
 
-    auto e = std::chrono::high_resolution_clock::now();
-    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
-    printf("%.8f\n", d);
+        auto e = std::chrono::high_resolution_clock::now();
+        times.push_back(std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0);
+    }
+    for (auto d : times){
+        printf("%.8f\n", d);
+    }
 }
 
 void Usage(int argc, char**argv){

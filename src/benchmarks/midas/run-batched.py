@@ -54,7 +54,7 @@ times = []
 for i in range(0, 5):
     inference()
 
-iterations = 10
+iterations = 100
 # benchmark
 for i in range(0, iterations):
     start = timer()
@@ -65,4 +65,4 @@ for i in range(0, iterations):
 
 total_time = sum(times) * 1000
 avg_time = total_time / float(iterations)
-print("Avg time: {:}ms".format(round(avg_time, 5)))
+print(*times, sep="\n")
