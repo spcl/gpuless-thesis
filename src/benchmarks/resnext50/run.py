@@ -3,7 +3,7 @@ from PIL import Image
 from torchvision import transforms
 from timeit import default_timer as timer
 
-start = timer()
+
 
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext50_32x4d', pretrained=True)
 # model = torch.hub.load('pytorch/vision:v0.10.0', 'resnext101_32x8d', pretrained=True)
@@ -16,7 +16,7 @@ after = timer()
 
 print('model eval time:')
 print(after - before)
-
+start = timer()
 input_image = Image.open('dog.jpg')
 preprocess = transforms.Compose([
     transforms.Resize(256),
