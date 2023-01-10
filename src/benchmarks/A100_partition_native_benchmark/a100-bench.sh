@@ -8,7 +8,7 @@ echo_colour () {
         echo -e "${BLUE}$1${NC}"
 }
 
-project_dir="${HOME}/gpuless/"
+project_dir="${HOME}/gpuless"
 
 mkdir -p results
 
@@ -25,31 +25,37 @@ result="results/a100-mig-partitions-${benchmark}"
 
 device=0
 
-sudo nvidia-smi -i ${device} -mig 1
-sudo nvidia-smi mig -i ${device} -dgi
+#sudo nvidia-smi -i ${device} -mig 1
+#sudo nvidia-smi mig -i ${device} -dgi
 
 bench(){
+	rm ${result}
 	n=$(echo $1 | awk -F"," '{print NF}')
-	sudo nvidia-smi mig -i ${device} -cgi $1 -C
-	SPDLOG_LEVEL=OFF $manager 
-	for i in {1..$n}
+	#sudo nvidia-smi mig -i ${device} -cgi $1 -C
+	SPDLOG_LEVEL=OFF $manager & 
+	i=1
+	while [ $i -le $n ]
 	do
-		$env $benchmark_run > "${result}-temp-$i" &
+		${env} ${benchmark_run} > ${result}-temp-$i &
+		((i++))
 	done
 	wait
-	for i in {1..$n}
+	i=1
+	while [ $i -le $n ]
 	do
-		cat "$1\n$result-temp-$i\n" >> "${result}"
+		printf "$p\nrun $i\n" >> "${result}"
+		cat $result-temp-$i >> "${result}"
+		((i++))
 	done
 	sleep 1.0
 	killall manager_trace
-	sudo nvidia-smi mig -i ${device} -dci
-	sudo nvidia-smi mig -i ${device} -dgi
+	#sudo nvidia-smi mig -i ${device} -dci
+	#sudo nvidia-smi mig -i ${device} -dgi
 }
 
 partitions="9,9"
 
-for p in $partitons
+for p in $partitions
 do 
 	echo_colour $p
 	bench $p	
