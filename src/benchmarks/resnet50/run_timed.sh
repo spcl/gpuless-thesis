@@ -1,1 +1,1 @@
-./image-recognition | tail -n1
+./image-recognition | tail -n2
