@@ -323,6 +323,8 @@ void run(int argc, char** argv)
     readinput(FilesavingTemp, grid_rows, grid_cols, tfile);
     readinput(FilesavingPower, grid_rows, grid_cols, pfile);
 
+    auto cs = std::chrono::high_resolution_clock::now();
+
     float *MatrixTemp[2], *MatrixPower;
     cudaMalloc((void**)&MatrixTemp[0], sizeof(float)*size);
     cudaMalloc((void**)&MatrixTemp[1], sizeof(float)*size);
@@ -336,6 +338,10 @@ void run(int argc, char** argv)
 	/* printf("Ending simulation\n"); */
     cudaMemcpy(MatrixOut, MatrixTemp[ret], sizeof(float)*size, cudaMemcpyDeviceToHost);
 
+    auto ce = std::chrono::high_resolution_clock::now();
+    auto cd = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+    printf("%.8f\n", cd);
+
     writeoutput(MatrixOut,grid_rows, grid_cols, ofile);
 
     cudaFree(MatrixPower);
@@ -345,5 +351,5 @@ void run(int argc, char** argv)
 
     auto e = std::chrono::high_resolution_clock::now();
     auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
-    printf("%.8f\n", d);
+    printf("total time: %.8f\n", d);
 }
