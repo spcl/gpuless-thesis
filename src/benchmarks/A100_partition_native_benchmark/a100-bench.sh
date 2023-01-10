@@ -29,7 +29,6 @@ device=0
 #sudo nvidia-smi mig -i ${device} -dgi
 
 bench(){
-	rm ${result}
 	n=$(echo $1 | awk -F"," '{print NF}')
 	#sudo nvidia-smi mig -i ${device} -cgi $1 -C
 	SPDLOG_LEVEL=OFF $manager & 
@@ -55,6 +54,7 @@ bench(){
 
 partitions="9,9"
 
+rm ${result}
 for p in $partitions
 do 
 	echo_colour $p
