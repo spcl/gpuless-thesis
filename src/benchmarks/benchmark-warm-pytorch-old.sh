@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-n_runs=100
+n_runs=1
 
 # command line arguments
 project_dir="$1"
@@ -22,7 +22,7 @@ run_bench_native() {
     printf '' > "$out_file" # clear output file
 
     for ((i=0; i<$n_runs; i++)); do
-        t=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$HOME/conda/lib ./run_timed.sh)
+        t=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$HOME/conda/lib ./run_batched.sh)
         printf "$t\n" >> "$out_file"
         echo "run ${i}: ${t}"
         sleep 1.0
@@ -40,7 +40,7 @@ run_bench_remote() {
     printf '' > "$out_file" # clear output file
 
     for ((i=0; i<$n_runs; i++)); do
-        t=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64 CUDA_VISIBLE_DEVICES=0 SPDLOG_LEVEL=OFF MANAGER_IP=${remote_ip} MANAGER_PORT=8002 CUDA_BINARY=${cuda_bin} EXECUTOR_TYPE=tcp LD_PRELOAD=${project_dir}/src/build_trace/libgpuless.so ./run_timed.sh)
+        t=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64 CUDA_VISIBLE_DEVICES=0 SPDLOG_LEVEL=OFF MANAGER_IP=${remote_ip} MANAGER_PORT=8002 CUDA_BINARY=${cuda_bin} EXECUTOR_TYPE=tcp LD_PRELOAD=${project_dir}/src/build_trace/libgpuless.so ./run_batched.sh)
         printf "$t\n" >> "$out_file"
         echo "run ${i}: ${t}"
         sleep 1.0

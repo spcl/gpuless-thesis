@@ -4,8 +4,8 @@ ip='127.0.0.1'
 root=${1:-$HOME/gpuless}
 benchmarks=$root/src/benchmarks
 torch=$HOME/libtorch/lib/libtorch_cuda.so
-bench_type=remote
-note="$bench_type-a100-cold-scientific"
+bench_type=native
+note="$bench_type-a100-warm-pytorch"
 
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
@@ -30,8 +30,6 @@ vgg19
 yolop
 resnet50-py"
 #midas
-
-rm ~/.cache/libgpuless -r
 
 for b in $bench
 do
