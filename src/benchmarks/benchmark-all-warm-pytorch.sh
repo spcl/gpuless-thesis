@@ -5,7 +5,7 @@ root=${1:-$HOME/gpuless}
 benchmarks=$root/src/benchmarks
 torch=$HOME/libtorch/lib/libtorch_cuda.so
 bench_type=remote
-note="$bench_type-a100-cold-scientific"
+note="$bench_type-a100-warm-pytorch"
 
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color

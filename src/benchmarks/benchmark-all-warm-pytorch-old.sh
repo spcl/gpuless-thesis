@@ -5,7 +5,7 @@ root=${1:-$HOME/gpuless}
 benchmarks=$root/src/benchmarks
 torch=$HOME/libtorch/lib/libtorch_cuda.so
 bench_type=remote
-note="$bench_type-a100-cold-scientific"
+note="$bench_type-a100-warm-pytorch-old"
 
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
@@ -36,11 +36,11 @@ rm ~/.cache/libgpuless -r
 for b in $bench
 do
 	echo_colour $b
-	./benchmark-warm-pytorch.sh $root $benchmarks/$b $bench_type $b $ip $note
+	./benchmark-warm-pytorch-old.sh $root $benchmarks/$b $bench_type $b $ip $note
 done
 
 for b in $bench_torch
 do
 	echo_colour $b
-	./benchmark-warm-pytorch.sh $root $benchmarks/$b $bench_type $torch $ip $note
+	./benchmark-warm-pytorch-old.sh $root $benchmarks/$b $bench_type $torch $ip $note
 done

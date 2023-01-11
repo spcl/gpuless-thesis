@@ -14,21 +14,21 @@ echo_colour () {
         echo -e "${BLUE}$1${NC}"
 }
 
-bench=""
-#myocyte
-#hotspot
-#srad_v1
-#pathfinder
-#bfs
-#myocyte"
+bench="myocyte
+hotspot
+srad_v1
+pathfinder
+bfs
+myocyte"
 
-bench_torch="alexnet
-resnext50
-resnext101
-3d-unet-kits19
-vgg19
-yolop
-resnet50-py"
+bench_torch=""
+#alexnet
+#resnext50
+#resnext101
+#3d-unet-kits19
+#vgg19
+#yolop
+#resnet50-py
 #midas
 
 rm ~/.cache/libgpuless -r
@@ -36,11 +36,11 @@ rm ~/.cache/libgpuless -r
 for b in $bench
 do
 	echo_colour $b
-	./benchmark-warm-pytorch.sh $root $benchmarks/$b $bench_type $b $ip $note
+	./benchmark-cold-scientific.sh $root $benchmarks/$b $bench_type $b $ip $note
 done
 
 for b in $bench_torch
 do
 	echo_colour $b
-	./benchmark-warm-pytorch.sh $root $benchmarks/$b $bench_type $torch $ip $note
+	./benchmark-cold-scientific.sh $root $benchmarks/$b $bench_type $torch $ip $note
 done
