@@ -1,0 +1,264 @@
+
+19
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001261000056 s, 0.001927081263 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.072075001895 s, 0.110146217048 % : READ DATA FROM FILES
+65.362220764160 s, 99.887641906738 % : RUN COMPUTATION
+0.000188999998 s, 0.000288832933 % : FREE MEMORY
+Total time:
+65.435745239258 s
+synchronize_time=59.2638s
+
+19,19
+node 1
+synchronize_time=0s
+
+19,19
+node 2
+synchronize_time=0s
+
+19,19,19
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001090000034 s, 0.001671627280 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.075044997036 s, 0.115089237690 % : READ DATA FROM FILES
+65.129585266113 s, 99.882926940918 % : RUN COMPUTATION
+0.000207000005 s, 0.000317455822 % : FREE MEMORY
+Total time:
+65.205924987793 s
+synchronize_time=58.6849s
+
+19,19,19
+node 2
+synchronize_time=0s
+
+19,19,19
+node 3
+synchronize_time=0s
+
+19,19,19,19
+node 1
+synchronize_time=0s
+
+19,19,19,19
+node 2
+synchronize_time=0s
+
+19,19,19,19
+node 3
+synchronize_time=0s
+
+19,19,19,19
+node 4
+synchronize_time=0s
+
+19,19,19,19,19
+node 1
+synchronize_time=0s
+
+19,19,19,19,19
+node 2
+synchronize_time=0s
+
+19,19,19,19,19
+node 3
+synchronize_time=0s
+
+19,19,19,19,19
+node 4
+synchronize_time=0s
+
+19,19,19,19,19
+node 5
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 1
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 2
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 3
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 4
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 5
+synchronize_time=0s
+
+19,19,19,19,19,19
+node 6
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 1
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 2
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 3
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 4
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 5
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 6
+synchronize_time=0s
+
+19,19,19,19,19,19,19
+node 7
+synchronize_time=0s
+
+14
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001283999998 s, 0.001974052517 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.070047996938 s, 0.107693485916 % : READ DATA FROM FILES
+64.972366333008 s, 99.890090942383 % : RUN COMPUTATION
+0.000161000004 s, 0.000247525284 % : FREE MEMORY
+Total time:
+65.043861389160 s
+synchronize_time=58.8528s
+
+14,14
+node 1
+synchronize_time=0s
+
+14,14
+node 2
+synchronize_time=0s
+
+14,14,14
+node 1
+synchronize_time=0s
+
+14,14,14
+node 2
+synchronize_time=0s
+
+14,14,14
+node 3
+synchronize_time=0s
+
+9
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001316000009 s, 0.002020508051 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.071604996920 s, 0.109938055277 % : READ DATA FROM FILES
+65.058998107910 s, 99.887702941895 % : RUN COMPUTATION
+0.000220999995 s, 0.000339310238 % : FREE MEMORY
+Total time:
+65.132133483887 s
+synchronize_time=58.7764s
+
+9,9
+node 1
+synchronize_time=0s
+
+9,9
+node 2
+synchronize_time=0s
+
+5
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001318000024 s, 0.002024880145 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.073761999607 s, 0.113322623074 % : READ DATA FROM FILES
+65.015007019043 s, 99.884368896484 % : RUN COMPUTATION
+0.000182000003 s, 0.000279611675 % : FREE MEMORY
+Total time:
+65.090270996094 s
+synchronize_time=58.6292s
+
+0
+node 1
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001287000021 s, 0.001960714580 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.070084996521 s, 0.106772869825 % : READ DATA FROM FILES
+65.567726135254 s, 99.890914916992 % : RUN COMPUTATION
+0.000230000005 s, 0.000350399670 % : FREE MEMORY
+Total time:
+65.639328002930 s
+synchronize_time=58.8384s
+
+19,14,5
+node 1
+synchronize_time=0s
+
+19,14,5
+node 2
+Time spent in different stages of the application:
+0.000001000000 s, 0.000001521204 % : SETUP VARIABLES
+0.001077000052 s, 0.001638337038 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.059096999466 s, 0.089898608625 % : READ DATA FROM FILES
+65.677001953125 s, 99.908134460449 % : RUN COMPUTATION
+0.000220000002 s, 0.000334664917 % : FREE MEMORY
+Total time:
+65.737388610840 s
+synchronize_time=58.6468s
+
+19,14,5
+node 3
+synchronize_time=0s
+
+19,14,9
+node 1
+synchronize_time=0s
+
+19,14,9
+node 2
+Time spent in different stages of the application:
+0.000000000000 s, 0.000000000000 % : SETUP VARIABLES
+0.001170999953 s, 0.001757174847 % : ALLOCATE CPU MEMORY AND GPU MEMORY
+0.079256996512 s, 0.118931181729 % : READ DATA FROM FILES
+66.560462951660 s, 99.879058837891 % : RUN COMPUTATION
+0.000167999999 s, 0.000252096826 % : FREE MEMORY
+Total time:
+66.641059875488 s
+synchronize_time=59.6099s
+
+19,14,9
+node 3
+synchronize_time=0s
+
+9,5
+node 1
+synchronize_time=0s
+
+9,5
+node 2
+synchronize_time=0s
+
+9,14,14
+node 1
+synchronize_time=0s
+
+9,14,14
+node 2
+synchronize_time=0s
+
+9,14,14
+node 3
+synchronize_time=0s
