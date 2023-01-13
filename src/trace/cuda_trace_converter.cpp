@@ -184,6 +184,22 @@ CudaTraceConverter::fbAbstractCudaApiCallDeserialize(
         cuda_api_call =
             std::make_shared<CublasSgemmStridedBatched>(fb_cuda_api_call);
         break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulAlgoGetHeuristic:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulAlgoGetHeuristic>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceDestroy:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulPreferenceDestroy>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceSetAttribute:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulPreferenceSetAttribute>(fb_cuda_api_call);
+        break;
+    case FBCudaApiCallUnion_FBCublasLtMatmulPreferenceCreate:
+        cuda_api_call =
+            std::make_shared<CublasLtMatmulPreferenceCreate>(fb_cuda_api_call);
+        break;
 
     // cuDNN
     case FBCudaApiCallUnion_FBCudnnCreate:

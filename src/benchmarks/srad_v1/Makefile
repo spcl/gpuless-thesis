@@ -1,8 +1,8 @@
 include make.config
 
-CC := $(CUDA_DIR)/bin/nvcc -cudart=shared -arch=$(CUDA_ARCH)
+CC := $(CUDA_DIR)/bin/nvcc -cudart=shared 
 
-INCLUDE := $(CUDA_DIR)/include
+INCLUDE := /opt/cuda/include
 
 # Example
 # target: dependencies
@@ -17,8 +17,8 @@ INCLUDE := $(CUDA_DIR)/include
 a.out:		main.o
 	$(CC)	main.o \
 				-I$(INCLUDE) \
-				-L$(CUDA_LIB_DIR)  \
-				-lm -lcuda -lcudart -o srad
+				-L$(CUDA_DIR)/lib64  \
+				-lm -lcuda -lcudart -o srad_v1
 
 # compile main function file into object (binary)
 main.o: 	main.cu \
@@ -31,8 +31,8 @@ main.o: 	main.cu \
 				srad2_kernel.cu \
 				compress_kernel.cu
 	nvcc	main.cu \
-				-c -O3 -cudart=shared -arch=all-major
+				-c -O3 -cudart=shared -arch=$(CUDA_ARCH)
 
 # delete all object files
 clean:
-	rm *.o srad
+	rm *.o srad_v1

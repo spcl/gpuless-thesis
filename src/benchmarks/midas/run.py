@@ -9,13 +9,19 @@ model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest i
 #model_type = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
 #model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
 
-start = timer()
 
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
+before = timer()
 midas.eval()
-
 device = torch.device("cuda")
 midas.to(device)
+after = timer()
+
+print('model eval time:')
+print(after - before)
+
+start = timer()
+
 
 midas_transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
 if model_type == "DPT_Large" or model_type == "DPT_Hybrid":

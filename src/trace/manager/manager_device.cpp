@@ -138,8 +138,8 @@ void handle_request(int socket_fd) {
     }
 }
 
-void manage_device(int device, uint16_t port) {
-    (void)device;
+void manage_device(const std::string& device, uint16_t port) {
+    setenv("CUDA_VISIBLE_DEVICES", device.c_str(), 1);
 
     // start server
     int s = socket(AF_INET, SOCK_STREAM, 0);

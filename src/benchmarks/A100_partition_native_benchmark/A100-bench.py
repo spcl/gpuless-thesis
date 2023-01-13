@@ -3,12 +3,15 @@
 import os
 import subprocess
 
+
 def cmd(command):
     o = os.popen(command)
     return o.read().rstrip()
 
+
 def cmd_prt(command):
     os.system(command)
+
 
 device = 3
 home = os.environ['HOME']
@@ -27,11 +30,13 @@ out = []
 filter_id1 = ' | head -n1 | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
 filter_ids = ' | grep "created GPU instance" | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
 
+
 def get_gpuid(dev):
     cmd = f'nvidia-smi -L | grep "GPU {dev}:" | sed -rn "s/.*GPU-([a-f0-9-]*).*/\\1/p"'
     p = subprocess.Popen(['bash', '-c', cmd], stdout=subprocess.PIPE)
     output, error = p.communicate()
     return output.decode('ascii').rstrip()
+
 
 def create_partitions(partitions):
     i = cmd(f'sudo nvidia-smi mig -i {device} -cgi {partitions} -C {filter_ids}')
@@ -40,12 +45,15 @@ def create_partitions(partitions):
         ids[k] = v.rstrip()
     return ids
 
+
 def cmd_async(command):
     return subprocess.Popen(['bash', '-c', command], stdout=subprocess.PIPE)
+
 
 def read_process(p):
     output, error = p.communicate()
     return output.decode('ascii')
+
 
 # bandwidth no MIG (full GPU)
 for _ in range(nruns):
