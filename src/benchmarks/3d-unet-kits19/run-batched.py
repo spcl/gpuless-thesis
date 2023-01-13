@@ -72,7 +72,7 @@ def infer_single_query(query):
     return final_result
 
 
-iterations = 100
+iterations = 10
 
 total_time = 0
 times = []

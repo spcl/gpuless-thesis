@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
@@ -18,15 +17,15 @@ benchmark_run="./../${benchmark}/run_batched.sh"
 
 build="${project_dir}/src/build_trace"
 cuda_bin="${build}/libgpuless.so"
-manager="${build}/manager_trace"
-manager_ip=$(ifconfig 2> /dev/null | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d:)
+manager="./../../build_trace/manager_trace"
+manager_ip="127.0.0.1"
 
 env="LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64 CUDA_VISIBLE_DEVICES=0 SPDLOG_LEVEL=OFF MANAGER_IP=${manager_ip} MANAGER_PORT=8002 CUDA_BINARY=${cuda_bin} EXECUTOR_TYPE=tcp LD_PRELOAD=${build}/libgpuless.so"
 
-result="results/a100-mig-partitions-remote-${benchmark}"
+result="results/a100-mig-partitions-${benchmark}"
 result_native="results/a100-mig-partitions-native-${benchmark}"
 
-node_list=(06 10)
+node_list=(1 2 3 4 5 6 7)
 
 device=0
 
@@ -36,9 +35,9 @@ bench(){
 
 	#remote benchmarks
 
-	#sudo nvidia-smi mig -i ${device} -cgi $1 -C
+	sudo nvidia-smi mig -i ${device} -cgi $1 -C
 	ids=($(nvidia-smi -L | grep "MIG " | sed -rn "s/.*MIG-([a-f0-9-]*).*/\\1/p"))
-	MANAGER_IP=$manager_ip SPDLOG_LEVEL=OFF $manager &
+	MANAGER_IP=${manager_ip} SPDLOG_LEVEL=OFF ${manager} &
 	printf "$manager_ip" | tee ${node_list[@]:0:$n}
 	for i in ${node_list[@]:0:$n}
 	do
@@ -51,8 +50,22 @@ bench(){
 	done
 	killall manager_trace
 	
-	#sudo nvidia-smi mig -i ${device} -dci
-	#sudo nvidia-smi mig -i ${device} -dgi
+	#native benchmarks:
+	set -- $ids
+	i=1
+	while [ $i -le $n ]
+	do 
+		CUDA_VISIBLE_DEVICES=MIG-${ids[$i]} LD_LIBRARY_PATH=$CUDA_HOME/lib64 $benchmark_run > $result_native-$i &
+	done	
+	wait
+	i=1
+	while [ $i -le $n ]
+	do
+		printf "$p\nrun $i\n" >> $result_native	
+		cat $result_native-$i >> $result_native
+	done	
+	sudo nvidia-smi mig -i ${device} -dci
+	sudo nvidia-smi mig -i ${device} -dgi
 }
 partitions="19
 19,19
@@ -75,8 +88,8 @@ partitions="19
 "
 
 
-#sudo nvidia-smi -i ${device} -mig 1
-#sudo nvidia-smi mig -i ${device} -dgi
+sudo nvidia-smi -i ${device} -mig 1
+sudo nvidia-smi mig -i ${device} -dgi
 
 
 rm $result $result_native
@@ -87,4 +100,4 @@ do
 done
 
 
-#sudo nvidia-smi -i $device -mig 0
+sudo nvidia-smi -i $device -mig 0

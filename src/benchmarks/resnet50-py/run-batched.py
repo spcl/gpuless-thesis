@@ -34,6 +34,8 @@ def inference(model, image):
         output = model(input_batch)
     probabilities = torch.nn.functional.softmax(output[0], dim=0)
     top_prob, top_catid = torch.topk(probabilities, 1)
+    top_prob.to("cpu")
+    top_catid.to("cpu")
     # print(top_catid[0].item(), file=sys.stderr)
 
 

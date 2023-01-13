@@ -37,7 +37,7 @@ times = []
 for i in range(0, 5):
     model.predict(docs[i % 2], qs[i % 2])
 
-iterations = 10
+iterations = 100
 # benchmark
 for i in range(0, iterations):
     start = timer()

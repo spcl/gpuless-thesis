@@ -22,14 +22,14 @@ bench=""
 #bfs
 #myocyte"
 
-bench_torch="alexnet
-resnext50
-resnext101
-3d-unet-kits19
-vgg19
-yolop
-resnet50-py"
-#midas
+bench_torch="midas"
+#alexnet
+#resnext50
+#resnext101
+#3d-unet-kits19
+#vgg19
+#yolop
+#resnet50-py"
 
 for b in $bench
 do

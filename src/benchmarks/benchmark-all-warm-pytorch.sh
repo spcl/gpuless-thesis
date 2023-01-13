@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-ip='127.0.0.1'
+ip='148.187.105.35'
 root=${1:-$HOME/gpuless}
 benchmarks=$root/src/benchmarks
 torch=$HOME/libtorch/lib/libtorch_cuda.so
 bench_type=remote
-note="$bench_type-a100-warm-pytorch"
+note="$bench_type-v100-calls-a100-warm-pytorch"
 
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
@@ -22,14 +22,15 @@ bench=""
 #bfs
 #myocyte"
 
-bench_torch="alexnet
-resnext50
-resnext101
-3d-unet-kits19
-vgg19
-yolop
-resnet50-py"
-#midas
+bench_torch="3d-unet-kits19"
+#alexnet
+#resnext50
+#resnext101
+#3d-unet-kits19
+#vgg19
+#resnet50-py
+#midas"
+#yolop
 
 rm ~/.cache/libgpuless -r
 

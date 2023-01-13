@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-n=$(hostname | sed "s/[^0-9]//g")
+n=$1
 file=$n
 touch $file
 
@@ -27,8 +27,10 @@ while [ 1 ]
 do
 	while [ $(wc -c $file | awk '{print $1}') -eq 0 ]
 	do
-        	sleep 0.1
+        	sleep 0.01
 	done
-	MANAGER_IP=$(cat $file) $env $benchmark_run > $result
+	ip=$(cat $file)
+	t=$(MANAGER_IP=${ip} ${env} ${benchmark_run})
+	printf "$t" > $result
 	> $file
 done
