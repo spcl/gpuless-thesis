@@ -2,7 +2,7 @@
 
 
 n=$1
-file=$n
+file="../A100_partition_native_benchmark/$n"
 touch $file
 
 
@@ -10,27 +10,35 @@ project_dir="${HOME}/gpuless"
 
 mkdir -p results
 
-benchmark="resnet50-py"
-benchmark_run="./../${benchmark}/run_batched.sh"
+benchmark="srad_v1"
+benchmark_run="./run_batched.sh"
 
 build="${project_dir}/src/build_trace"
-cuda_bin="${build}/libgpuless.so"
-manager="${build}/manager_trace"
+#cuda_bin="$HOME/libtorch/lib/libtorch_cuda.so"
+cuda_bin="./srad_v1"
 
-env="LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64 CUDA_VISIBLE_DEVICES=0 SPDLOG_LEVEL=OFF MANAGER_PORT=8002 CUDA_BINARY=${cuda_bin} EXECUTOR_TYPE=tcp LD_PRELOAD=${build}/libgpuless.so"
+export MANAGER_IP=127.0.0.1 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64 
+export CUDA_VISIBLE_DEVICES=0 
+export SPDLOG_LEVEL=OFF 
+export MANAGER_PORT=8002 
+export CUDA_BINARY=${cuda_bin} 
+export EXECUTOR_TYPE=tcp 
+export LD_PRELOAD=${build}/libgpuless.so
 
-result="results/a100-mig-partitions-${benchmark}-$n"
 
+result="../A100_partition_native_benchmark/results/a100-mig-partitions-${benchmark}-$n"
+
+cd ../$benchmark
 
 
 while [ 1 ]
 do
-	while [ $(wc -c $file | awk '{print $1}') -eq 0 ]
+	while [ ! -s $file ]
 	do
         	sleep 0.01
 	done
-	ip=$(cat $file)
-	t=$(MANAGER_IP=${ip} ${env} ${benchmark_run})
-	printf "$t" > $result
+	t=$(${benchmark_run})
+	echo "$t" > $result
 	> $file
 done
