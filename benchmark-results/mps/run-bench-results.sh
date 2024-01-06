@@ -1,6 +1,3 @@
-# sh run-bench-results.sh <folder> <cuda_program>
-# folder is a subdirectory inside ./bench-result
-
 # global variables
 current_idx=0
 

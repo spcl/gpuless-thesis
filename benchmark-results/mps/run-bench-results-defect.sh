@@ -1,6 +1,3 @@
-# sh run-bench-results.sh <folder> <cuda_program> <freq>
-# folder is a subdirectory inside ./bench-result
-
 current_idx=0
 
 # Function to convert nanoseconds to seconds
