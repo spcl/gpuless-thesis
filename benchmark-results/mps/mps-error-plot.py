@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+import seaborn as sns
+
+sns.set_style("whitegrid")
+
 def parse_out_file(file_path_list):
     res = []
     for file_path in file_path_list:
@@ -27,34 +31,39 @@ def plot_series_graph(x, y):
         for j in range(3):
             temp.append(y[j + 3 * i])
         data.append(temp)
-    
-    plt.figure(figsize=(6, 10))
+
+    plt.figure(figsize=(5, 3))
     
     num_entries = len(x)
     positions = np.arange(num_entries) * 4
     num_nested_plots = 3
     for i in range(num_entries):
+
         pos = positions[i] - 1 + np.array([0, 1, 2])  # Set positions for each nested group of boxplots
-        
+        print(pos)
+       
         plt.boxplot(data[i][0], positions=[pos[0]], widths=3 / num_nested_plots, patch_artist=True)
-        plt.text(pos[0], np.max(data[i][0]) + 0.3, f'no error', ha='center', va='center')
+        plt.text(pos[0], np.max(data[i][0]) + 0.5, f'No errors', ha='center', va='center')
         
         plt.boxplot(data[i][1], positions=[pos[1]], widths=3 / num_nested_plots, patch_artist=True)
-        plt.text(pos[1], np.max(data[i][1]) + 0.3, f'4 errors', ha='center', va='center')
+        plt.text(pos[1], np.max(data[i][1]) + 0.5, f'4 errors', ha='center', va='center')
         
         plt.boxplot(data[i][2], positions=[pos[2]], widths=3 / num_nested_plots, patch_artist=True)
-        plt.text(pos[2], np.max(data[i][2]) + 0.3, f'8 errors', ha='center', va='center')
+        plt.text(pos[2], np.max(data[i][2]) + 0.5, f'8 errors', ha='center', va='center')
     # Show plot
     plt.grid(True)
-    plt.title('makespan of 1000 invocations of stream benchmarks')  # Setting the title
-    plt.xlabel('Number of concurrent clients')
+    plt.title('STREAM benchmark, 1000 invocations')  # Setting the title
+    #plt.xlabel('Number of concurrent clients')
     plt.ylabel('Time [s]')  # Setting y-axis label
+    print(positions)
     plt.xticks(positions, ['2 clients', '3 clients'])
-    plt.show()
+    plt.ylim([13, 25.5])
+    plt.xlim([-2, 6])
+    #plt.show()
     # Save the plot as a PDF file
-    plt.savefig('bar_graph_stream_boxplot.pdf', format='pdf')
+    plt.savefig('bar_graph_stream_boxplot.pdf', bbox_inches='tight',pad_inches = 0, transparent=False)
 
-    plt.show()
+    #plt.show()
 
 y_values = []
 
