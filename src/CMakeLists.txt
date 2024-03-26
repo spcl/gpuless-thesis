@@ -38,6 +38,8 @@ if (${_hostname} MATCHES ".*\.cscs\.ch")
     include_directories($ENV{HOME}/cudnn/include)
     link_directories($ENV{HOME}/cudnn/lib64)
 endif()
+# fix for missing link `-lcudnn`
+link_directories(gpuless PUBLIC ${CUDAToolkit_LIBRARY_DIR})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
