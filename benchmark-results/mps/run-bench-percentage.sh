@@ -17,14 +17,13 @@ read_stream_output() {
 }
 
 # START MPS
-# program="bfs"
-# program_path="/users/pzhou/projects/gpuless/src/benchmarks/bfs/bfs"
-# input_path="/users/pzhou/projects/gpuless/src/benchmarks/bfs/graph1MW_6.txt"
+program="bfs"
+program_path="/users/pzhou/projects/gpuless/src/benchmarks/bfs/bfs-mig"
+input_path="/users/pzhou/projects/gpuless/src/benchmarks/bfs/graph1MW_6.txt"
 
-program="resnet50-py"
-program_path="/users/pzhou/lib/conda/bin/python3 /users/pzhou/projects/gpuless/src/benchmarks/resnet50-py/run.py"
-input_path=""
-NUM_RUNS=100
+# program="resnet50-py"
+# program_path="/users/pzhou/lib/conda/bin/python3 /users/pzhou/projects/gpuless/src/benchmarks/resnet50-py/run-mig.py"
+# input_path=""
 
 echo "start MPS on STREAM and $program"
 
@@ -34,39 +33,35 @@ export CUDA_MPS_LOG_DIRECTORY='/users/pzhou/projects/gpuless/src/mps_logs'
 echo quit | nvidia-cuda-mps-control
 
 echo "Limit SM to 3/7"
-export CUDA_MPS_ACTIVE_THREAD_PERCENTAGE=14
+export CUDA_MPS_ACTIVE_THREAD_PERCENTAGE=43
 
 echo "Start daemon in background process"
 nvidia-cuda-mps-control -d
 
 echo "Limit memory to 1/2 (40G)"
-echo set_default_device_pinned_mem_limit 0 5G | nvidia-cuda-mps-control
+echo set_default_device_pinned_mem_limit 0 20G | nvidia-cuda-mps-control
 
 echo "run $program isolated in mps"
-for ((i = 1; i <= NUM_RUNS; i++)); do
-    echo "Running single mps $i ================="
-    output_isolated="$($program_path $input_path)"
-    parsed_output_isolated=$(read_stream_output "" "$output_isolated")
-    echo "$parsed_output_isolated" >> "./bench-results/test-mps/mps-$program-isolated14.out"
-done
+echo "Running single mps $i ================="
+output_isolated="$($program_path $input_path)"
+parsed_output_isolated=$(read_stream_output "" "$output_isolated")
+echo "$parsed_output_isolated" >> "./bench-results/test-mps/mps-$program-isolated14.out"
 
 echo "run stream + $program in mps"
 
-for ((i = 1; i <= NUM_RUNS; i++)); do
-    echo "Running parallel mps $i ================="
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
-    output_isolated="$(CUDA_VISIBLE_DEVICES=0 $program_path $input_path &)"
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=0 $program_path $input_path
+echo "Running parallel mps $i ================="
+# CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
+output_isolated="$(CUDA_VISIBLE_DEVICES=0 $program_path $input_path &)"
+# CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=0 $program_path $input_path >/dev/null &
+CUDA_VISIBLE_DEVICES=0 $program_path $input_path
 
-    parsed_output_isolated=$(read_stream_output "" "$output_isolated")
-    echo "$parsed_output_isolated" >> "./bench-results/test-mps/mps-$program-shared14.out"
+parsed_output_isolated=$(read_stream_output "" "$output_isolated")
+echo "$parsed_output_isolated" >> "./bench-results/test-mps/mps-$program-shared14.out"
 
-    sleep 10
-done
+sleep 10
 
 echo set_default_device_pinned_mem_limit 0 40G | nvidia-cuda-mps-control # works
 echo quit | nvidia-cuda-mps-control
@@ -78,34 +73,29 @@ echo "enable mig on device 0"
 sudo nvidia-smi -i 0 -mig 1
 # config the partition into 1g. 5gb, we need config 5.
 echo "run $program isolated in mig"
-sudo nvidia-smi mig -i 0 -cgi 1g.5gb,1g.5gb,1g.5gb,1g.5gb,1g.5gb,1g.5gb,1g.5gb -C | grep "created GPU instance" | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"
+sudo nvidia-smi mig -i 0 -cgi 3g.20gb,3g.20gb -C | grep "created GPU instance" | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"
 gpu_uuid=$(nvidia-smi -L | grep "GPU 0:" | sed -rn "s/.*GPU-([a-f0-9-]*).*/\\1/p")
 
-for ((i = 1; i <= NUM_RUNS; i++)); do
-    echo "Running single mig $i ================="
-    output_isolated="$(CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/7/0 $program_path $input_path)"
-    parsed_output_isolated=$(read_stream_output "" "$output_isolated")
-    echo "$parsed_output_isolated" >> "./bench-results/test-mps/mig-$program-isolated1g.out"
-done
+echo "Running single mig $i ================="
+output_isolated="$(CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/2/0 $program_path $input_path)"
+parsed_output_isolated=$(read_stream_output "" "$output_isolated")
+echo "$parsed_output_isolated" >> "./bench-results/test-mps/mig-$program-isolated1g.out"
 
 echo "run stream + $program in mig"
 
+echo "Running parallel mig $i ================="
+# CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/5/0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/11/0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/12/0 $program_path $input_path >/dev/null &
+output_isolated="$(CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/2/0 $program_path $input_path &)"
+# CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/8/0 $program_path $input_path >/dev/null &
+# CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/9/0 $program_path $input_path >/dev/null &
+CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/1/0 $program_path $input_path 
 
-for ((i = 1; i <= NUM_RUNS; i++)); do
-    echo "Running parallel mig $i ================="
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/13/0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/11/0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/12/0 $program_path $input_path >/dev/null &
-    output_isolated="$(CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/7/0 $program_path $input_path &)"
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/8/0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/9/0 $program_path $input_path >/dev/null &
-    CUDA_VISIBLE_DEVICES=MIG-GPU-$gpu_uuid/10/0 $program_path $input_path 
+parsed_output_isolated=$(read_stream_output "" "$output_isolated")
+echo "$parsed_output_isolated" >> "./bench-results/test-mps/mig-$program-shared1g.out"
 
-    parsed_output_isolated=$(read_stream_output "" "$output_isolated")
-    echo "$parsed_output_isolated" >> "./bench-results/test-mps/mig-$program-shared1g.out"
-
-    sleep 10
-done
+sleep 10
 
 echo "delete ci and gi"
 sudo nvidia-smi mig -i 0 -dci
