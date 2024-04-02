@@ -102,10 +102,11 @@ std::shared_ptr<TraceExecutor> getTraceExecutor() {
         }
 
         if (useTcp) {
-            trace_executor = std::make_shared<TraceExecutorTcp>();
-            bool r = trace_executor->init(manager_ip, manager_port,
-                                          manager::instance_profile::NO_MIG);
-            if (!r) {
+            try {
+                trace_executor = std::make_shared<TraceExecutorTcp>(
+                    manager_ip, manager_port,
+                    manager::instance_profile::NO_MIG);
+            } catch (...) {
                 SPDLOG_ERROR("Failed to initialize TCP trace executor");
                 std::exit(EXIT_FAILURE);
             }
@@ -152,16 +153,6 @@ static void exitHandler() {
     std::cout << "synchronize_time="
               << getTraceExecutor()->getSynchronizeTotalTime() << "s"
               << std::endl;
-
-    // deallocate session
-    if (useTcp) {
-        auto success = getTraceExecutor()->deallocate();
-        if (!success) {
-            SPDLOG_ERROR("Failed to deallocate session");
-        } else {
-            SPDLOG_INFO("Deallocated session");
-        }
-    }
 }
 
 extern "C" {

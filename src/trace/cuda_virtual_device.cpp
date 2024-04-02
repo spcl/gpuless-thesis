@@ -1,11 +1,7 @@
 #include "cuda_virtual_device.hpp"
 #include <spdlog/spdlog.h>
 
-void CudaVirtualDevice::initRealDevice() {
-    if (this->initialized) {
-        return;
-    }
-
+CudaVirtualDevice::CudaVirtualDevice() {
     SPDLOG_INFO("CudaVirtualDevice: initializing real device");
     checkCudaErrors(cuInit(0));
     checkCudaErrors(cuDeviceGet(&this->device, 0));
@@ -24,9 +20,8 @@ void CudaVirtualDevice::initRealDevice() {
 
     checkCudaErrors(cuDeviceTotalMem(&this->device_total_mem, this->device));
     SPDLOG_TRACE("Device TotalMem: {}", this->device_total_mem);
-
-    this->initialized = true;
 }
+
 void *CudaVirtualDevice::get_scratch(size_t size) {
     if (scratch_used)
         throw std::runtime_error("Scratch already in use.");

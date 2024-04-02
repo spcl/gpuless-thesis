@@ -14,7 +14,6 @@
 
 class CudaVirtualDevice {
   private:
-    bool initialized = false;
     void *scratch_memory = nullptr;
     size_t scratch_size = 0;
     bool scratch_used = false;
@@ -41,6 +40,7 @@ class CudaVirtualDevice {
     std::vector<cublasLtMatmulDesc_t> cublaslt_matmul_handle_virtual_to_real;
     std::vector<cublasLtMatrixLayout_t>
         cublaslt_matrix_layout_handle_virtual_to_real;
+
     std::vector<cublasLtMatmulPreference_t>
         cublaslt_matmul_pref_handle_virtual_to_real;
     std::vector<cublasLtMatmulHeuristicResult_t >
@@ -55,7 +55,7 @@ class CudaVirtualDevice {
     CUdevice device;
     CUcontext context;
 
-    void initRealDevice();
+    CudaVirtualDevice();
 
     void *get_scratch(size_t size);
     void free_scratch();
