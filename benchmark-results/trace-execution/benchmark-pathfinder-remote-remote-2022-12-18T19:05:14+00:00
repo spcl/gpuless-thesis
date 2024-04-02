@@ -1,0 +1,122 @@
+[2022-12-18 19:05:15.009] [info] [libgpuless.cpp:43] MANAGER_PORT=8002
+[2022-12-18 19:05:15.009] [info] [libgpuless.cpp:49] MANAGER_IP=148.187.105.35
+[2022-12-18 19:05:15.009] [debug] [libgpuless.cpp:481] Recording Fatbin data [id=1, size=6024]
+[2022-12-18 19:05:15.009] [info] [libgpuless.cpp:131] Analyzing CUDA binaries (pathfinder)
+[2022-12-18 19:05:15.009] [debug] [cubin_analysis.cpp:259] Analyzing: pathfinder
+[2022-12-18 19:05:15.010] [info] [cubin_analysis.cpp:268] Loading analysis from cache for: pathfinder
+[2022-12-18 19:05:15.011] [info] [libgpuless.cpp:372] cudaGetDeviceCount() [pid=2625495]
+pyramidHeight: 20
+gridSize: [100000]
+border:[20]
+blockSize: 256
+blockGrid:[463]
+targetBlock:[216]
+[2022-12-18 19:05:15.099] [info] [libgpuless.cpp:166] cudaMalloc() [pid=2625495]
+[2022-12-18 19:05:15.099] [info] [libgpuless.cpp:83] Initializing trace executor
+[2022-12-18 19:05:15.100] [info] [utils.cpp:56] Bytes sent: 44
+[2022-12-18 19:05:15.100] [info] [utils.cpp:40] Bytes received: 56
+[2022-12-18 19:05:15.100] [info] [utils.cpp:56] Bytes sent: 92
+[2022-12-18 19:05:15.140] [info] [utils.cpp:40] Bytes received: 108
+[2022-12-18 19:05:15.141] [info] [trace_executor_tcp_client.cpp:177] TraceExecutorTcp::getDeviceAttributes()
+[2022-12-18 19:05:15.141] [info] [utils.cpp:56] Bytes sent: 124
+[2022-12-18 19:05:15.141] [debug] [trace_executor_tcp_client.cpp:195] FBTraceAttributeRequest sent
+[2022-12-18 19:05:15.291] [info] [utils.cpp:40] Bytes received: 2108
+[2022-12-18 19:05:15.291] [debug] [trace_executor_tcp_client.cpp:198] FBTraceAttributeResponse received
+[2022-12-18 19:05:15.291] [info] [trace_executor_tcp_client.cpp:86] Session with 148.187.105.35:8002 negotiated
+[2022-12-18 19:05:15.291] [info] [libgpuless.cpp:107] TCP executor enabled: true
+[2022-12-18 19:05:15.291] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=1, size=1]
+[2022-12-18 19:05:15.291] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless10CudaMallocE
+[2022-12-18 19:05:15.292] [info] [utils.cpp:56] Bytes sent: 236
+[2022-12-18 19:05:15.292] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.298] [info] [utils.cpp:40] Bytes received: 2188
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.298] [info] [cuda_trace.cpp:20] Cuda trace history size: 1
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.006529s, total_time=0.006529s]
+[2022-12-18 19:05:15.298] [info] [libgpuless.cpp:166] cudaMalloc() [pid=2625495]
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=2, size=1]
+[2022-12-18 19:05:15.298] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless10CudaMallocE
+[2022-12-18 19:05:15.298] [info] [utils.cpp:56] Bytes sent: 348
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.298] [info] [utils.cpp:40] Bytes received: 2268
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.298] [info] [cuda_trace.cpp:20] Cuda trace history size: 2
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000149s, total_time=0.006678s]
+[2022-12-18 19:05:15.298] [info] [libgpuless.cpp:183] cudaMemcpy() [pid=2625495]
+[2022-12-18 19:05:15.298] [info] [libgpuless.cpp:186] cudaMemcpy() [cudaMemcpyHostToDevice, 0x1554db200000 <- 0x155521b33010, pid=2625495]
+[2022-12-18 19:05:15.298] [info] [libgpuless.cpp:166] cudaMalloc() [pid=2625495]
+[2022-12-18 19:05:15.298] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=3, size=2]
+[2022-12-18 19:05:15.298] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless13CudaMemcpyH2DE
+[2022-12-18 19:05:15.299] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless10CudaMallocE
+[2022-12-18 19:05:15.299] [info] [utils.cpp:56] Bytes sent: 400524
+[2022-12-18 19:05:15.299] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.299] [info] [utils.cpp:40] Bytes received: 2348
+[2022-12-18 19:05:15.299] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.299] [info] [cuda_trace.cpp:20] Cuda trace history size: 4
+[2022-12-18 19:05:15.299] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000792s, total_time=0.00747s]
+[2022-12-18 19:05:15.299] [info] [libgpuless.cpp:183] cudaMemcpy() [pid=2625495]
+[2022-12-18 19:05:15.299] [info] [libgpuless.cpp:186] cudaMemcpy() [cudaMemcpyHostToDevice, 0x1554c2000000 <- 0x155521b94a90, pid=2625495]
+[2022-12-18 19:05:15.306] [info] [libgpuless.cpp:260] cudaLaunchKernel() [pid=2625495]
+[2022-12-18 19:05:15.306] [info] [libgpuless.cpp:267] cudaLaunchKernel(dynproc_kernel)
+[2022-12-18 19:05:15.306] [debug] [libgpuless.cpp:284] parameters: [u32[1], u64[1], u64[1], u64[1], u32[1], u32[1], u32[1], u32[1], ]
+[2022-12-18 19:05:15.306] [info] [libgpuless.cpp:260] cudaLaunchKernel() [pid=2625495]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:267] cudaLaunchKernel(dynproc_kernel)
+[2022-12-18 19:05:15.307] [debug] [libgpuless.cpp:284] parameters: [u32[1], u64[1], u64[1], u64[1], u32[1], u32[1], u32[1], u32[1], ]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:260] cudaLaunchKernel() [pid=2625495]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:267] cudaLaunchKernel(dynproc_kernel)
+[2022-12-18 19:05:15.307] [debug] [libgpuless.cpp:284] parameters: [u32[1], u64[1], u64[1], u64[1], u32[1], u32[1], u32[1], u32[1], ]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:260] cudaLaunchKernel() [pid=2625495]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:267] cudaLaunchKernel(dynproc_kernel)
+[2022-12-18 19:05:15.307] [debug] [libgpuless.cpp:284] parameters: [u32[1], u64[1], u64[1], u64[1], u32[1], u32[1], u32[1], u32[1], ]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:260] cudaLaunchKernel() [pid=2625495]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:267] cudaLaunchKernel(dynproc_kernel)
+[2022-12-18 19:05:15.307] [debug] [libgpuless.cpp:284] parameters: [u32[1], u64[1], u64[1], u64[1], u32[1], u32[1], u32[1], u32[1], ]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:183] cudaMemcpy() [pid=2625495]
+[2022-12-18 19:05:15.307] [info] [libgpuless.cpp:192] cudaMemcpy() [cudaMemcpyDeviceToHost, 0x1555554c6010 <- 0x1554db261c00, pid=2625495]
+[2022-12-18 19:05:15.307] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=4, size=7]
+[2022-12-18 19:05:15.307] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless13CudaMemcpyH2DE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless16CudaLaunchKernelE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless16CudaLaunchKernelE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless16CudaLaunchKernelE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless16CudaLaunchKernelE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless16CudaLaunchKernelE
+[2022-12-18 19:05:15.318] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless13CudaMemcpyD2HE
+[2022-12-18 19:05:15.329] [info] [utils.cpp:56] Bytes sent: 40411780
+[2022-12-18 19:05:15.329] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.342] [info] [utils.cpp:40] Bytes received: 402452
+[2022-12-18 19:05:15.342] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.342] [info] [cuda_trace.cpp:20] Cuda trace history size: 11
+[2022-12-18 19:05:15.342] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.035096s, total_time=0.042566s]
+[2022-12-18 19:05:15.342] [info] [libgpuless.cpp:312] cudaFree() [pid=2625495]
+[2022-12-18 19:05:15.342] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=5, size=1]
+[2022-12-18 19:05:15.342] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless8CudaFreeE
+[2022-12-18 19:05:15.342] [info] [utils.cpp:56] Bytes sent: 40411884
+[2022-12-18 19:05:15.342] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.343] [info] [utils.cpp:40] Bytes received: 402532
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.343] [info] [cuda_trace.cpp:20] Cuda trace history size: 12
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000567s, total_time=0.043133s]
+[2022-12-18 19:05:15.343] [info] [libgpuless.cpp:312] cudaFree() [pid=2625495]
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=6, size=1]
+[2022-12-18 19:05:15.343] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless8CudaFreeE
+[2022-12-18 19:05:15.343] [info] [utils.cpp:56] Bytes sent: 40411988
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.343] [info] [utils.cpp:40] Bytes received: 402612
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.343] [info] [cuda_trace.cpp:20] Cuda trace history size: 13
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000136s, total_time=0.043268999999999995s]
+[2022-12-18 19:05:15.343] [info] [libgpuless.cpp:312] cudaFree() [pid=2625495]
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=7, size=1]
+[2022-12-18 19:05:15.343] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless8CudaFreeE
+[2022-12-18 19:05:15.343] [info] [utils.cpp:56] Bytes sent: 40412092
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:15.343] [info] [utils.cpp:40] Bytes received: 402692
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:15.343] [info] [cuda_trace.cpp:20] Cuda trace history size: 14
+[2022-12-18 19:05:15.343] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000227s, total_time=0.04349599999999999s]
+0.33299900
+[2022-12-18 19:05:15.344] [debug] [libgpuless.cpp:140] std::atexit()
+synchronize_time=0.043496s
+[2022-12-18 19:05:15.344] [info] [utils.cpp:56] Bytes sent: 40412132
+[2022-12-18 19:05:15.344] [debug] [trace_executor_tcp_client.cpp:113] Deallocate request sent
+[2022-12-18 19:05:15.344] [info] [utils.cpp:40] Bytes received: 402732
+[2022-12-18 19:05:15.344] [info] [libgpuless.cpp:153] Deallocated session

@@ -1,0 +1,47 @@
+[2022-12-18 19:05:10.752] [info] [libgpuless.cpp:43] MANAGER_PORT=8002
+[2022-12-18 19:05:10.752] [info] [libgpuless.cpp:49] MANAGER_IP=148.187.105.35
+[2022-12-18 19:05:10.752] [debug] [libgpuless.cpp:481] Recording Fatbin data [id=1, size=1200]
+[2022-12-18 19:05:10.752] [info] [libgpuless.cpp:131] Analyzing CUDA binaries (latency)
+[2022-12-18 19:05:10.752] [debug] [cubin_analysis.cpp:259] Analyzing: latency
+[2022-12-18 19:05:10.752] [info] [cubin_analysis.cpp:268] Loading analysis from cache for: latency
+[2022-12-18 19:05:10.753] [info] [libgpuless.cpp:166] cudaMalloc() [pid=2625436]
+[2022-12-18 19:05:10.753] [info] [libgpuless.cpp:83] Initializing trace executor
+[2022-12-18 19:05:10.753] [info] [utils.cpp:56] Bytes sent: 44
+[2022-12-18 19:05:10.753] [info] [utils.cpp:40] Bytes received: 56
+[2022-12-18 19:05:10.753] [info] [utils.cpp:56] Bytes sent: 92
+[2022-12-18 19:05:10.793] [info] [utils.cpp:40] Bytes received: 108
+[2022-12-18 19:05:10.793] [info] [trace_executor_tcp_client.cpp:177] TraceExecutorTcp::getDeviceAttributes()
+[2022-12-18 19:05:10.793] [info] [utils.cpp:56] Bytes sent: 124
+[2022-12-18 19:05:10.794] [debug] [trace_executor_tcp_client.cpp:195] FBTraceAttributeRequest sent
+[2022-12-18 19:05:10.794] [info] [utils.cpp:40] Bytes received: 2108
+[2022-12-18 19:05:10.794] [debug] [trace_executor_tcp_client.cpp:198] FBTraceAttributeResponse received
+[2022-12-18 19:05:10.794] [info] [trace_executor_tcp_client.cpp:86] Session with 148.187.105.35:8002 negotiated
+[2022-12-18 19:05:10.794] [info] [libgpuless.cpp:107] TCP executor enabled: true
+[2022-12-18 19:05:10.794] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=1, size=1]
+[2022-12-18 19:05:10.794] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless10CudaMallocE
+[2022-12-18 19:05:10.794] [info] [utils.cpp:56] Bytes sent: 236
+[2022-12-18 19:05:10.794] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:10.801] [info] [utils.cpp:40] Bytes received: 2188
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:10.801] [info] [cuda_trace.cpp:20] Cuda trace history size: 1
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.007021s, total_time=0.007021s]
+[2022-12-18 19:05:10.801] [info] [libgpuless.cpp:183] cudaMemcpy() [pid=2625436]
+[2022-12-18 19:05:10.801] [info] [libgpuless.cpp:186] cudaMemcpy() [cudaMemcpyHostToDevice, 0x1554db200000 <- 0x7fffffffba4c, pid=2625436]
+[2022-12-18 19:05:10.801] [info] [libgpuless.cpp:183] cudaMemcpy() [pid=2625436]
+[2022-12-18 19:05:10.801] [info] [libgpuless.cpp:192] cudaMemcpy() [cudaMemcpyDeviceToHost, 0x7fffffffba4c <- 0x1554db200000, pid=2625436]
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:129] TraceExecutorTcp::synchronize() [synchronize_counter=2, size=2]
+[2022-12-18 19:05:10.801] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless13CudaMemcpyH2DE
+[2022-12-18 19:05:10.801] [debug] [cuda_trace_converter.cpp:13] Serializing api call: N7gpuless13CudaMemcpyD2HE
+[2022-12-18 19:05:10.801] [info] [utils.cpp:56] Bytes sent: 436
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:147] Trace execution request sent
+[2022-12-18 19:05:10.801] [info] [utils.cpp:40] Bytes received: 2292
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:151] Trace execution response received
+[2022-12-18 19:05:10.801] [info] [cuda_trace.cpp:20] Cuda trace history size: 3
+[2022-12-18 19:05:10.801] [info] [trace_executor_tcp_client.cpp:172] TraceExecutorTcp::synchronize() successful [t=0.000593s, total_time=0.007614s]
+0.0486360000
+[2022-12-18 19:05:10.801] [debug] [libgpuless.cpp:140] std::atexit()
+synchronize_time=0.007614s
+[2022-12-18 19:05:10.802] [info] [utils.cpp:56] Bytes sent: 476
+[2022-12-18 19:05:10.802] [debug] [trace_executor_tcp_client.cpp:113] Deallocate request sent
+[2022-12-18 19:05:10.802] [info] [utils.cpp:40] Bytes received: 2332
+[2022-12-18 19:05:10.802] [info] [libgpuless.cpp:153] Deallocated session

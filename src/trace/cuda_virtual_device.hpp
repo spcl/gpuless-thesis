@@ -13,6 +13,10 @@
 #include <string>
 
 class CudaVirtualDevice {
+  private:
+    void *scratch_memory = nullptr;
+    size_t scratch_size = 0;
+    bool scratch_used = false;
 
   public:
     // virtualization of cudnn handles to avoid costly synchronizations
@@ -24,12 +28,23 @@ class CudaVirtualDevice {
     std::vector<cudnnConvolutionDescriptor_t>
         cudnn_convolution_descriptor_virtual_to_real;
 
+    // virtualization of cudnn algorithms
+    std::vector<cudnnConvolutionFwdAlgoPerf_t>
+        cudnn_convolution_fwd_algo_perf_virtual_to_real;
+    std::vector<cudnnConvolutionBwdDataAlgoPerf_t>
+        cudnn_convolution_bwd_data_algo_perf_virtual_to_real;
+
     // virtualization of cublas handles to avoid costly synchronizations
     std::vector<cublasHandle_t> cublas_handle_virtual_to_real;
     std::vector<cublasLtHandle_t> cublaslt_handle_virtual_to_real;
     std::vector<cublasLtMatmulDesc_t> cublaslt_matmul_handle_virtual_to_real;
     std::vector<cublasLtMatrixLayout_t>
         cublaslt_matrix_layout_handle_virtual_to_real;
+
+    std::vector<cublasLtMatmulPreference_t>
+        cublaslt_matmul_pref_handle_virtual_to_real;
+    std::vector<cublasLtMatmulHeuristicResult_t >
+        cublaslt_matmul_alg_virtual_to_real;
 
     // stored device attributes
     size_t device_total_mem = 0;
@@ -41,6 +56,14 @@ class CudaVirtualDevice {
     CUcontext context;
 
     CudaVirtualDevice();
+
+    void *get_scratch(size_t size);
+    void free_scratch();
+
+    ~CudaVirtualDevice() {
+        if (scratch_memory != nullptr)
+            cudaFree(scratch_memory);
+    }
 };
 
 #endif // GPULESS_CUDA_VDEV_H

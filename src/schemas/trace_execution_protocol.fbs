@@ -40,6 +40,10 @@ union FBCudaApiCallUnion {
     FBCublasLtMatrixLayoutDestroy,
     FBCublasLtMatrixLayoutSetAttribute,
     FBCublasSgemmStridedBatched,
+    FBCublasLtMatmulPreferenceCreate,
+    FBCublasLtMatmulPreferenceDestroy,
+    FBCublasLtMatmulPreferenceSetAttribute,
+    FBCublasLtMatmulAlgoGetHeuristic,
 
     // cuDNN
     FBCudnnCreate,

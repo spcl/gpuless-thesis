@@ -5,6 +5,6 @@
 #include <string>
 #include <vector>
 
-void manage_device(int device, uint16_t port);
+void manage_device(const std::string& device, uint16_t port);
 
 #endif // __MANAGER_DEVICE_HPP__

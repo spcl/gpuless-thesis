@@ -21,7 +21,9 @@
 #include <math.h>
 #include <cuda.h>
 
+
 #include <chrono>
+#include <vector>
 #include <iostream>
 
 #define MAX_THREADS_PER_BLOCK 512
@@ -47,15 +49,16 @@ void BFSGraph(int argc, char** argv);
 ////////////////////////////////////////////////////////////////////////////////
 int main( int argc, char** argv) 
 {
-    auto s = std::chrono::high_resolution_clock::now();
 
-	no_of_nodes=0;
-	edge_list_size=0;
-	BFSGraph( argc, argv);
+        auto s = std::chrono::high_resolution_clock::now();
 
-    auto e = std::chrono::high_resolution_clock::now();
-    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
-    printf("%.8f\n", d);
+        no_of_nodes=0;
+        edge_list_size=0;
+        BFSGraph( argc, argv);
+
+        auto e = std::chrono::high_resolution_clock::now();
+	auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+        printf("%.8f\n", d);
 }
 
 void Usage(int argc, char**argv){
@@ -143,6 +146,8 @@ void BFSGraph( int argc, char** argv)
 	printf("Read File\n");
 
 	//Copy the Node list to device memory
+    auto s = std::chrono::high_resolution_clock::now();
+
 	Node* d_graph_nodes;
 	cudaMalloc( (void**) &d_graph_nodes, sizeof(Node)*no_of_nodes) ;
 	cudaMemcpy( d_graph_nodes, h_graph_nodes, sizeof(Node)*no_of_nodes, cudaMemcpyHostToDevice) ;
@@ -214,6 +219,10 @@ void BFSGraph( int argc, char** argv)
 
 	// copy result from device to host
 	cudaMemcpy( h_cost, d_cost, sizeof(int)*no_of_nodes, cudaMemcpyDeviceToHost) ;
+
+    auto e = std::chrono::high_resolution_clock::now();
+    auto d = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
+    printf("%.8f\n", d);
 
 	//Store the result into a file
 	FILE *fpo = fopen("result.txt","w");

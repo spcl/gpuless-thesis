@@ -1,7 +1,7 @@
 CMakeFiles
 ltrace.cudnn.log
 Makefile
-cmake_install.cmake
+*.cmake
 image-recognition
 CMakeCache.txt
 detect_cuda_compute_capabilities.cpp

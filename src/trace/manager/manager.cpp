@@ -18,16 +18,16 @@ const char *manager_ip = "127.0.0.1";
 
 // nvidia (mig) devices: [device, profile id, session assignment]
 static std::mutex lock_devices;
-static std::vector<std::tuple<int, int, int>> devices = {
-    {0, NO_MIG, NO_SESSION_ASSIGNED},
+static std::vector<std::tuple<std::string, int, int>> devices = {
+
 };
 
 static std::atomic<int> next_session_id(1);
 
 // device -> [pid, port]
-static std::map<int, std::pair<pid_t, short>> child_processes;
+static std::map<std::string, std::pair<pid_t, short>> child_processes;
 
-pid_t fork_device_manager(int device, int port) {
+pid_t fork_device_manager(std::string device, int port) {
     pid_t pid = fork();
     if (pid == 0) {
         manage_device(device, port);
@@ -37,7 +37,7 @@ pid_t fork_device_manager(int device, int port) {
 
 static void deallocate_session_devices(int32_t session_id) {
     lock_devices.lock();
-    int device = -1;
+    std::string device;
     for (auto &d : devices) {
         if (std::get<2>(d) == session_id) {
             device = std::get<0>(d);
@@ -56,7 +56,7 @@ static void deallocate_session_devices(int32_t session_id) {
     SPDLOG_DEBUG("Killing pid={}", it->second.first);
     kill(it->second.first, SIGTERM);
     int wstatus;
-    waitpid(it->first, &wstatus, 0);
+    waitpid(it->second.first, &wstatus, 0);
 
     pid_t new_pid = fork_device_manager(device, it->second.second);
     std::get<0>(it->second) = new_pid;
@@ -78,17 +78,18 @@ static std::vector<int32_t> available_profiles() {
     return r;
 }
 
-static int32_t assign_device(int32_t profile, int32_t session_id) {
+static std::string assign_device(int32_t profile, int32_t session_id) {
     lock_devices.lock();
-    int assigned_device = -1;
-    for (size_t i = 0; i < devices.size(); i++) {
-        if (std::get<2>(devices[i]) == NO_SESSION_ASSIGNED &&
-            profile == std::get<1>(devices[i])) {
-            std::get<2>(devices[i]) = session_id;
-            assigned_device = i;
+    std::string assigned_device;
+    for(auto& dev : devices) {
+        if (std::get<2>(dev) == NO_SESSION_ASSIGNED &&
+            profile == std::get<1>(dev)) {
+            std::get<2>(dev) = session_id;
+            assigned_device = std::get<0>(dev);
             break;
         }
     }
+
     lock_devices.unlock();
     return assigned_device;
 }
@@ -117,8 +118,8 @@ void handle_allocate_request(int socket_fd, const ProtocolMessage *msg) {
         allocate_select_msg->message_as_AllocateSelect()->profile();
 
     // send confirmation
-    int32_t assigned_device = assign_device(selected_profile, session_id);
-    auto status = assigned_device < 0 ? Status_FAILURE : Status_OK;
+    std::string assigned_device = assign_device(selected_profile, session_id);
+    auto status = assigned_device.empty() ? Status_FAILURE : Status_OK;
 
     uint32_t selected_ip;
     inet_pton(AF_INET, manager_ip, &selected_ip);
@@ -172,6 +173,31 @@ void *handle_request(void *arg) {
     return nullptr;
 }
 
+static std::string exec(const char *cmd) {
+    std::array<char, 128> buffer{};
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+        result += buffer.data();
+    }
+    return result;
+}
+
+void setup_devices() {
+    std::string cmd = "nvidia-smi -L";
+    std::string smi_string = exec(cmd.c_str());
+    std::vector<std::string> split_devices;
+    string_split(smi_string, '\n', split_devices);
+    for(const auto& d : split_devices) {
+        std::string::size_type GPU_idx = d.find("GPU-");
+        std::string GPU_ID = d.substr(GPU_idx, d.size() - GPU_idx - 1);
+        devices.emplace_back(GPU_ID, NO_MIG, NO_SESSION_ASSIGNED);
+    }
+}
+
 void sigint_handler(int signum) {
     for (const auto &p : child_processes) {
         kill(p.second.first, SIGTERM);
@@ -196,10 +222,13 @@ int main(int argc, char **argv) {
         SPDLOG_INFO("MANAGER_IP={}", manager_ip);
     }
 
+    // setup devices
+    setup_devices();
+
     // start device management processes
     short next_port = MANAGER_PORT + 1;
     for (const auto &t : devices) {
-        int device = std::get<0>(t);
+        std::string device = std::get<0>(t);
 
         pid_t pid = fork_device_manager(device, next_port);
         child_processes.emplace(device, std::make_pair(pid, next_port));

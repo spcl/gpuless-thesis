@@ -120,8 +120,11 @@ size_t CubinAnalyzer::pathToHash(const std::filesystem::path &path) {
 
 bool CubinAnalyzer::isCached(const std::filesystem::path &fname) {
     std::size_t fname_hash = this->pathToHash(fname);
-    std::filesystem::path home_dir(std::getenv("HOME"));
-    std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
+    std::filesystem::path base_dir(std::getenv("HOME"));
+    if (const char* scratch = std::getenv("SCRATCH")) {
+        base_dir = scratch;
+    }
+    std::filesystem::path cache_dir = base_dir / ".cache" / "libgpuless";
     if (!std::filesystem::is_directory(cache_dir)) {
         std::filesystem::create_directories(cache_dir);
     }
@@ -134,8 +137,11 @@ bool CubinAnalyzer::isCached(const std::filesystem::path &fname) {
 
 bool CubinAnalyzer::loadAnalysisFromCache(const std::filesystem::path &fname) {
     std::size_t fname_hash = this->pathToHash(fname);
-    std::filesystem::path home_dir(std::getenv("HOME"));
-    std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
+    std::filesystem::path base_dir(std::getenv("HOME"));
+    if (const char* scratch = std::getenv("SCRATCH")) {
+        base_dir = scratch;
+    }
+    std::filesystem::path cache_dir = base_dir / ".cache" / "libgpuless";
     std::filesystem::path cache_file = cache_dir / std::to_string(fname_hash);
     if (!std::filesystem::is_regular_file(cache_file)) {
         return false;
@@ -178,8 +184,11 @@ void CubinAnalyzer::storeAnalysisToCache(
     const std::map<std::string, std::vector<KParamInfo>> &data) {
     SPDLOG_INFO("Storing analysis to cache: {}", fname.string());
     std::size_t fname_hash = this->pathToHash(fname);
-    std::filesystem::path home_dir(std::getenv("HOME"));
-    std::filesystem::path cache_dir = home_dir / ".cache" / "libgpuless";
+    std::filesystem::path base_dir(std::getenv("HOME"));
+    if (const char* scratch = std::getenv("SCRATCH")) {
+        base_dir = scratch;
+    }
+    std::filesystem::path cache_dir = base_dir / ".cache" / "libgpuless";
     if (!std::filesystem::is_directory(cache_dir)) {
         std::filesystem::create_directories(cache_dir);
     }
