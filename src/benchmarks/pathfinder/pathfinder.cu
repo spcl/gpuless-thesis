@@ -217,11 +217,16 @@ void run(int argc, char **argv) {
     int *gpuWall, *gpuResult[2];
     int size = rows * cols;
 
+    // cudaMalloc starts here
     auto s = std::chrono::high_resolution_clock::now();
     cudaMalloc((void **)&gpuResult[0], sizeof(int) * cols);
     cudaMalloc((void **)&gpuResult[1], sizeof(int) * cols);
-    cudaMemcpy(gpuResult[0], data, sizeof(int) * cols, cudaMemcpyHostToDevice);
     cudaMalloc((void **)&gpuWall, sizeof(int) * (size - cols));
+    
+    // cudaMemcpy starts here
+    auto s_mm = std::chrono::high_resolution_clock::now();
+    
+    cudaMemcpy(gpuResult[0], data, sizeof(int) * cols, cudaMemcpyHostToDevice);
     cudaMemcpy(gpuWall, data + cols, sizeof(int) * (size - cols),
                cudaMemcpyHostToDevice);
 
@@ -230,9 +235,18 @@ void run(int argc, char **argv) {
 
     cudaMemcpy(result, gpuResult[final_ret], sizeof(int) * cols,
                cudaMemcpyDeviceToHost);
+    auto e_mm = std::chrono::high_resolution_clock::now();
+    
+    cudaFree(gpuWall);
+    cudaFree(gpuResult[0]);
+    cudaFree(gpuResult[1]);
+    
     auto e = std::chrono::high_resolution_clock::now();
+    auto d_mm = std::chrono::duration_cast<std::chrono::microseconds>(e_mm - s_mm).count() / 1000000.0;
     auto d = std::chrono::duration_cast<std::chrono::microseconds>(e - s).count() / 1000000.0;
-    printf("%.8f\n", d);
+
+    printf("kernel + memcpy: %.8f\n", d_mm);
+    printf("kernel + memcpy + cudaMalloc: %.8f\n", d);
 
 #ifdef BENCH_PRINT
 
@@ -249,10 +263,6 @@ void run(int argc, char **argv) {
     printf("\n");
 
 #endif
-
-    cudaFree(gpuWall);
-    cudaFree(gpuResult[0]);
-    cudaFree(gpuResult[1]);
 
     delete[] data;
     delete[] wall;

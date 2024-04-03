@@ -323,14 +323,18 @@ void run(int argc, char** argv)
     readinput(FilesavingTemp, grid_rows, grid_cols, tfile);
     readinput(FilesavingPower, grid_rows, grid_cols, pfile);
 
-    auto cs = std::chrono::high_resolution_clock::now();
-
     float *MatrixTemp[2], *MatrixPower;
+    
+    // cudaMalloc starts
+    auto start_malloc = std::chrono::high_resolution_clock::now();
     cudaMalloc((void**)&MatrixTemp[0], sizeof(float)*size);
     cudaMalloc((void**)&MatrixTemp[1], sizeof(float)*size);
+    cudaMalloc((void**)&MatrixPower, sizeof(float)*size);
+    
+    // cudaMemcpy starts
+    auto cs = std::chrono::high_resolution_clock::now();
     cudaMemcpy(MatrixTemp[0], FilesavingTemp, sizeof(float)*size, cudaMemcpyHostToDevice);
 
-    cudaMalloc((void**)&MatrixPower, sizeof(float)*size);
     cudaMemcpy(MatrixPower, FilesavingPower, sizeof(float)*size, cudaMemcpyHostToDevice);
     /* printf("Start computing the transient temperature\n"); */
     int ret = compute_tran_temp(MatrixPower,MatrixTemp,grid_cols,grid_rows, \
@@ -339,14 +343,19 @@ void run(int argc, char** argv)
     cudaMemcpy(MatrixOut, MatrixTemp[ret], sizeof(float)*size, cudaMemcpyDeviceToHost);
 
     auto ce = std::chrono::high_resolution_clock::now();
-    auto cd = std::chrono::duration_cast<std::chrono::microseconds>(e-s).count() / 1000000.0;
-    printf("%.8f\n", cd);
 
-    writeoutput(MatrixOut,grid_rows, grid_cols, ofile);
 
     cudaFree(MatrixPower);
     cudaFree(MatrixTemp[0]);
     cudaFree(MatrixTemp[1]);
+    auto ce_malloc = std::chrono::high_resolution_clock::now();
+    auto cd = std::chrono::duration_cast<std::chrono::microseconds>(ce-cs).count() / 1000000.0;
+    auto cd_malloc = std::chrono::duration_cast<std::chrono::microseconds>(ce_malloc-start_malloc).count() / 1000000.0;
+    printf("kernel + memcpy %.8f\n", cd);
+    printf("all cuda functions: %.8f\n", cd_malloc);
+    
+    writeoutput(MatrixOut,grid_rows, grid_cols, ofile);
+    
     free(MatrixOut);
 
     auto e = std::chrono::high_resolution_clock::now();
