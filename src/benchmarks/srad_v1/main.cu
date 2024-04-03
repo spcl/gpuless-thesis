@@ -189,7 +189,6 @@ int main(int argc, char *argv []){
 				Nc,
 				1);
 
-	time4 = get_time();
 
 	//================================================================================80
 	// 	SETUP
@@ -233,7 +232,8 @@ int main(int argc, char *argv []){
 
 	// allocate memory for entire IMAGE on DEVICE
 	mem_size = sizeof(fp) * Ne;																		// get the size of float representation of input IMAGE
-	cudaMalloc((void **)&d_I, mem_size);														//
+	time4 = get_time();
+    cudaMalloc((void **)&d_I, mem_size);														//
 
 	// allocate memory for coordinates on DEVICE
 	cudaMalloc((void **)&d_iN, mem_size_i);													//
@@ -449,13 +449,6 @@ int main(int argc, char *argv []){
 	//	DEALLOCATE
 	//================================================================================80
 
-	free(image_ori);
-	free(image);
-	free(iN); 
-	free(iS); 
-	free(jW); 
-	free(jE);
-
 	cudaFree(d_I);
 	cudaFree(d_c);
 	cudaFree(d_iN);
@@ -471,6 +464,14 @@ int main(int argc, char *argv []){
 
 	time12 = get_time();
 
+	free(image_ori);
+	free(image);
+	free(iN); 
+	free(iS); 
+	free(jW); 
+	free(jE);
+
+    
 	//================================================================================80
 	//	DISPLAY TIMING
 	//================================================================================80
