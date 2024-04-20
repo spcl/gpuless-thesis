@@ -14,17 +14,15 @@ INCLUDE := /opt/cuda/include
 	# command n
 
 # link objects(binaries) together
-a.out:		main.o
+a.out:		main.o main_reordered.o
 	$(CC)	main.o \
 				-I$(INCLUDE) \
 				-L$(CUDA_DIR)/lib64  \
 				-lm -lcuda -lcudart -o srad_v1
-
-srad_reordered:		main_reordered.o
 	$(CC)	main_reordered.o \
 				-I$(INCLUDE) \
 				-L$(CUDA_DIR)/lib64  \
-				-lm -lcuda -lcudart -o srad_v1
+				-lm -lcuda -lcudart -o srad_v1_reordered
 
 # compile main function file into object (binary)
 main.o: 	main.cu \
