@@ -9,6 +9,7 @@ EXE = pathfinder
 
 release:
 	$(CC) $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
+	$(CC) pathfinder_reordered.cu -o pathfinder_reordered -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
 
 enum:
 	$(CC) -deviceemu $(SRC) -o $(EXE) -I$(INCLUDE) -L$$(CUDA_LIB_DIR) 
