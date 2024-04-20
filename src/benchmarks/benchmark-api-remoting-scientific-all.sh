@@ -31,16 +31,16 @@ echo 'local TCP execution'
 echo
 
 echo 'bfs'
-./benchmark-api-remoting-scientific.sh $root $benchmarks/bfs remote bfs $ip local
+./benchmark-api-remoting-scientific.sh $root $benchmarks/bfs remote bfs $ip localtcp
 
 echo 'gaussian'
-./benchmark-api-remoting-scientific.sh $root $benchmarks/gaussian remote pathfinder $ip local
+./benchmark-api-remoting-scientific.sh $root $benchmarks/gaussian remote pathfinder $ip localtcp
 
 echo 'hotspot'
-./benchmark-api-remoting-scientific.sh $root $benchmarks/hotspot remote hotspot $ip local
+./benchmark-api-remoting-scientific.sh $root $benchmarks/hotspot remote hotspot $ip localtcp
 
 echo 'pathfinder'
-./benchmark-api-remoting-scientific.sh $root $benchmarks/pathfinder remote pathfinder $ip local
+./benchmark-api-remoting-scientific.sh $root $benchmarks/pathfinder remote pathfinder $ip localtcp
 
 echo 'srad_v1'
-./benchmark-api-remoting-scientific.sh $root $benchmarks/srad_v1 remote srad $ip local
+./benchmark-api-remoting-scientific.sh $root $benchmarks/srad_v1 remote srad $ip localtcp

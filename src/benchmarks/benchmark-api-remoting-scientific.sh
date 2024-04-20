@@ -14,6 +14,24 @@ bechmark_name=$(basename "$bench_dir")
 out_file="${project_dir}/benchmark-results/trace-execution/benchmark-${bechmark_name}-${bench_type}-${note}-$(date --iso-8601=seconds)"
 manager_bin=$project_dir/src/build/manager_trace
 
+run_bench_native() {
+    echo 'native performance'
+
+    pushd .
+    cd $bench_dir
+    printf '' > "$out_file" # clear output file
+
+    for ((i=0; i<$n_runs; i++)); do
+        t=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$HOME/conda/lib ./run_timed.sh)
+        echo "$t\n" >> "$out_file"
+        echo "run ${i}: ${t}"
+        sleep 1.0
+    done
+
+    popd
+    echo ''
+}
+
 run_bench_remote() {
     echo 'local network performance'
 
@@ -31,3 +49,15 @@ run_bench_remote() {
     popd
     echo ''
 }
+
+case $bench_type in
+    native)
+        run_bench_native
+        ;;
+    remote)
+        run_bench_remote
+        ;;
+    *)
+        echo 'unknown benchmark type' $bench_type
+        ;;
+esac
