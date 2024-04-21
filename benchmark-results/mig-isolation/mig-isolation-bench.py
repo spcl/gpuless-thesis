@@ -19,7 +19,7 @@ n = 1 << 27
 # program = f'./cuda-stream/stream -n {n}'
 # program = "/users/pzhou/lib/conda/bin/python3 /users/pzhou/projects/gpuless/src/benchmarks/resnet50-py/run-mig.py"
 # program = "/users/pzhou/projects/gpuless/src/benchmarks/bfs/bfs-mig /users/pzhou/projects/gpuless/src/benchmarks/bfs/graph1MW_6.txt"
-program = "/users/pzhou/lib/conda/bin/python3 /users/pzhou/projects/gpuless/src/benchmarks/BERT-SQuAD/test1.py"
+program = "/users/pzhou/lib/conda/bin/python3 /users/pzhou/projects/gpuless/src/benchmarks/BERT-SQuAD/test1-mig.py"
 out = []
 
 filter_id1 = ' | head -n1 | sed -rn "s/.*instance ID[ ]+([0-9]*).*/\\1/p"'
