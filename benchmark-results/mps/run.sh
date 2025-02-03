@@ -1,20 +1,14 @@
-# failed run
-# sh run-bench-results.sh test11 mps-stream  &
-# sh run-bench-results-defect.sh test11 mps-stream-defect
-t='test13'
-for i in $(seq 1 10); do
-    echo "start $i"
-    sh run-bench-results.sh $t mps-stream $i client1 &
-    sh run-bench-results.sh $t mps-stream $i client3 &
-    sh run-bench-results-defect.sh $t mps-stream-defect-8 $i
+#!/bin/bash
 
-    # 11 
-    sh run-bench-results.sh $t mps-stream $i client1 &
-    ./mps-stream 0 >> /dev/null &
-    # ./mps-stream 0 >> /dev/null
+# Number of times to run the script
+NUM_RUNS=50
+
+# Path to the shell script to run
+SCRIPT_TO_RUN="./run-bench-percentage.sh"
+
+# Loop to run the script multiple times
+for ((i = 1; i <= NUM_RUNS; i++)); do
+    echo "Running script iteration $i ================="
+    # Run the script
+    bash "$SCRIPT_TO_RUN"
 done
-
-
-# good run
-# sh run-bench-results.sh test12 mps-stream 0 &
-# ./mps-stream 0
